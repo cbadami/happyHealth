@@ -2,4 +2,29 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #{title}}
+    section.Form.my-4.mx-5
+      .container
+        .row.no-gutter
+          .col-lg-5
+            img.img-fluid(src="health.jpg" alt="")
+          .col-lg-7(px-5="" pt-5="")
+            h1.font-weight-bold.py-3 Logo
+            h4 Sign into your account
+            form
+              .form-row
+                .col-lg-7
+                  input.form-control.my-3.p-4(type="email" placeholder="E-mail-Address")
+              .form-row
+                .col-lg-7
+                  input.form-control.my-3.p-4(type="password" placeholder="***********")
+              .form-row
+                .col-lg-7
+                  button.btn1.mt-3.mb-5(type="button") Login
+              a(href="#") Forgot password
+              p
+                | Don't have an account? 
+                a(href="#") Register here
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous")
