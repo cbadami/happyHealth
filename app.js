@@ -8,6 +8,15 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+dotenv.config({ path: '.env' })
+const sql = require('mysql');
+const dev_db_url = process.env.connection-string;
+const sqlDB = process.env.sqlURI || dev_db_url;
+sql.connect(sqlDB, { useNewUrlParser: true  ,   useUnifiedTopology: true });
+sql.Promise = global.Promise;
+const db = sql.connection;
+db.on('error', console.error.bind(console, 'sql connection error:'));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
