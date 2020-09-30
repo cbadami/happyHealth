@@ -1,20 +1,32 @@
 doctype html
 head
+<<<<<<< HEAD
   //- h1 welcome to #{title}y
+=======
+  //h1 welcome to #{title}
+>>>>>>> 89c9fbc4882af8cc2337f518cc70abe0a2c64995
   // Required meta tags
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
   // Bootstrap CSS
   link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' integrity='sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z' crossorigin='anonymous')
-  title Hello, world!
+  title welcome to #{title}
   style.
     *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     }
-    body{
+    /**body{
     background: rgb(219, 226, 226);
+    }*/
+    .app-container-wrapper {
+      max-width: 450px;
+    }
+    .app-container-wrapper .row {
+      background: inher;
+      border-radius: none;
+      box-shadow: none;
     }
     .row{
     background: white;
@@ -41,28 +53,36 @@ head
     color: rgb(20, 102, 24);
     }
 body
-section.Form.my-4.mx-5
-  .container
+section.Form.my-4.mx-2
+  .container.app-container-wrapper
     .row.no-gutter
-      .col-lg-5
+      //.col-lg-5
         img.img-fluid(src='health.jpg' alt='')
-      .col-lg-7(px-5='' pt-5='')
-        h1.font-weight-bold.py-3 Logo
-        h4 Sign into your account
+      .col-lg-12(px-5='' pt-5='')
+        h1.font-weight-bold.py-3.mt-3 Happy Health
+        h2 Sign In
         form
           .form-row
-            .col-lg-7
-              input.form-control.my-3.p-4(type='email' placeholder='E-mail-Address')
+            .col-lg-12
+              input.form-control.my-3.p-4(type='email' placeholder='User Name')
           .form-row
-            .col-lg-7
+            .col-lg-12
               input.form-control.my-3.p-4(type='password' placeholder='***********')
           .form-row
-            .col-lg-7
-              button.btn1.mt-3.mb-5(type='button') Login
-          a(href='#') Forgot password
-          p
-            | Don&apos;t have an account? 
-            a(href='#') Register here
+          .col-lg-12
+            a.d-flex.justify-content-end(href='#') Forgot password?
+          .form-row
+            .col-lg-12
+              button.btn1.mt-3.mb-5(type='button') Sign in
+          p.col-lg-12.d-flex.justify-content-center or use one of your social profiles
+          .col-lg-12.d-flex.justify-content-between.mt-3.mb-4
+            a(href='https://en-gb.facebook.com/login/' target="_blank") F
+              //- .img(src='image.png')
+            a(href='https://twitter.com/login?lang=en' target="_blank") T
+            a(href='https://mail.google.com' target="_blank") G
+          .col-lg-12.d-flex.justify-content-between.mb-5
+            a(href='#') Admin
+            a(href='#') Sign Up!
 script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
 script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
 script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
