@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   //   console.log("connected ");
   //   console.log(data[0]['emailid']);
   //   var titleData = data[0]['emailid'];
-    res.render('userLogin',{title: 'user login'});
+    res.render('userLogin',{title: 'Happy Health'});
   // })
   
 });
