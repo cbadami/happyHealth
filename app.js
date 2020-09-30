@@ -4,13 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-// Setting up database connection
 // dotenv.config({ path: '.env' })
+
 // const sql = require('mysql');
 // const dev_db_url = process.env.connection-string;
 // const sqlDB = process.env.sqlURI || dev_db_url;
@@ -19,6 +20,29 @@ var app = express();
 // const db = sql.connection;
 // db.on('error', console.error.bind(console, 'sql connection error:'));
 
+//setting up database connection
+// var mysql = require('mysql');
+// var connection = mysql.createConnection({
+//   // socketPath: "exalted-legacy-290621:us-central1:happyhealth-test01",
+//   host: "35.194.21.170",
+//   user: "root",
+//   password: "123456",
+//   database: "happyhealth_MySQL"
+// })
+
+// //connect to database
+// connection.connect(function(err) {
+//   if(err){
+//     return console.log("Error connecting to database: "+err.message);
+//   }
+//   console.log("connected to Google cloud MySQL server");
+// });
+
+// // Query 
+// connection.query("SELECT * FROM User_Info", function (err, result, fields) {
+//   if (err) throw err;
+//   console.log(result);
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
