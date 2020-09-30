@@ -8,33 +8,17 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-dotenv.config({ path: '.env' })
-const sql = require('mysql');
-const dev_db_url = process.env.connection-string;
-const sqlDB = process.env.sqlURI || dev_db_url;
-sql.connect(sqlDB, { useNewUrlParser: true  ,   useUnifiedTopology: true });
-sql.Promise = global.Promise;
-const db = sql.connection;
-db.on('error', console.error.bind(console, 'sql connection error:'));
 
+// Setting up database connection
+// dotenv.config({ path: '.env' })
+// const sql = require('mysql');
+// const dev_db_url = process.env.connection-string;
+// const sqlDB = process.env.sqlURI || dev_db_url;
+// sql.connect(sqlDB, { useNewUrlParser: true  ,   useUnifiedTopology: true });
+// sql.Promise = global.Promise;
+// const db = sql.connection;
+// db.on('error', console.error.bind(console, 'sql connection error:'));
 
-var mysql = require('mysql')
-// var connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'dbuser',
-//   password: '',
-//   database: ''
-// })
-
-// connection.connect()
-
-// connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-//   if (err) throw err
-
-//   console.log('The solution is: ', rows[0].solution)
-// })
-
-// connection.end()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
