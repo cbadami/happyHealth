@@ -1,8 +1,8 @@
 // var mysql = require('mysql');
 // var conn = mysql.createConnection({
-//   // socketPath: "exalted-legacy-290621:us-central1:happyhealth-test01",
+// //   socketPath: "/cloudsql/exalted-legacy-290621:us-central1:happyhealth-test01",
 //   host: "35.194.21.170",
-//   user: "root",
+//   user: "master",
 //   password: "123456",
 //   database: "happyhealth_MySQL"
 // })
@@ -22,3 +22,25 @@
 // // });
 
 // module.exports = conn;
+
+
+
+
+// Google cloud database connection deployment
+var mysql = require("mysql");
+
+const config = {
+  user: process.env.SQL_USER,
+  password: process.env.SQL_PASSWORD,
+  database: process.env.SQL_DATABASE
+};
+
+if (
+  process.env.INSTANCE_CONNECTION_NAME &&
+  process.env.NODE_ENV === "production"
+) {
+  config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+}
+const connection = mysql.createConnection(config);
+
+module.exports = connection;
