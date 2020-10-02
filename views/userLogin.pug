@@ -1,6 +1,6 @@
 doctype html
 head
-  //- h1 welome user id #{logindata}
+  h1 welome user id #{logindata}
   // Required meta tags
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
@@ -60,16 +60,16 @@ section.Form.my-4.mx-2
         form
           .form-row
             .col-lg-12
-              input.form-control.my-3.p-4(type='email' placeholder='User Name')
+              input.form-control.my-3.p-4(type='email' placeholder='User Name' id ='email')
           .form-row
             .col-lg-12
-              input.form-control.my-3.p-4(type='password' placeholder='***********')
+              input.form-control.my-3.p-4(type='password' placeholder='***********' id = 'password')
           .form-row
           .col-lg-12
             a.d-flex.justify-content-end(href='#') Forgot password?
           .form-row
             .col-lg-12
-              button.btn1.mt-3.mb-5(type='button') Sign in
+              button.btn1.mt-3.mb-5(type='button' onclick='loginCheckValidation()') Sign in
           //- p.col-lg-12.d-flex.justify-content-center or use one of your social profiles
           .col-lg-12.d-flex.justify-content-between.mt-3.mb-4
             a(i class="fab fa-facebook-f" href='https://en-gb.facebook.com/login/' target="_blank") 
@@ -78,9 +78,36 @@ section.Form.my-4.mx-2
             a(i class="fab fa-google-plus-g" href='https://mail.google.com' target="_blank") 
           .col-lg-12.d-flex.justify-content-between.mb-5
             a(href='#') Admin
-            a(href='#') Sign Up!
+            a(href='userSignUp') Sign Up!
             
             //-<i class="fab fa-facebook-f"></i>
 script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
 script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
 script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' integrity='sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV' crossorigin='anonymous')
+//- script(src='loginCheck.js')
+script.
+  function loginCheckValidation() {
+
+    if (document.getElementById('email').value == "") {
+        alert('Please enter email Id');
+        //- return false
+    } else {
+        if !(re.test(x)) 
+            alert("Please enter valid email address");
+            return false
+        }
+    }
+    if (document.getElementById('password').value == "") {
+        alert('please fill the password');
+        return false
+    } 
+    else
+    {
+        if !(reg.test(y)) 
+        alert("password should contain atleast one number and one special character");
+        return false
+    }  
+    }
+
+    alert("login successful");
+  }
