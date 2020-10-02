@@ -1,3 +1,5 @@
+
+// // Locally database connection:
 // var mysql = require('mysql');
 // var conn = mysql.createConnection({
 // //   socketPath: "/cloudsql/exalted-legacy-290621:us-central1:happyhealth-test01",
@@ -14,13 +16,6 @@
 //   }
 //   console.log("connected to Google cloud MySQL server");
 // });
-
-// // Query 
-// // conn.query("select emailid from User_Info where username = 'abcd'", function (err, result, fields) {
-// //   if (err) throw err;
-// //   console.log(result);
-// // });
-
 // module.exports = conn;
 
 
