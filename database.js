@@ -5,10 +5,14 @@ var conn = mysql.createConnection({
   host: "35.194.21.170",
   user: "master",
   password: "123456",
-  database: "happyhealth_MySQL"
+  database: "happyhealth_MySQL",
+  //port: 3000
 })
 
 //connect to database
+
+// conn.connect();
+
 conn.connect(function(err) {
   if(err){
     return console.log("Error connecting to database: "+err.message);
