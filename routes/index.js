@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../database');
+// const db = require('../database');
 
 
 router.get('/', (req, res) => res.render('userLogin'));
@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
     });
   }
   else{
-    res.render('adminLogin');
+    res.send('Login sucessful');
   }
 
 });

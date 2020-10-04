@@ -61,11 +61,10 @@
   <section class="Form my-4 mx-2">
     <div class="container app-container-wrapper">
       <div class="row no-gutter">
-        <!-- <div class="col-md-6 m-auto"> -->
         <div class="col-lg-12" px-5="" pt-5="">
           <h1 class="font-weight-bold py-3 mt-3">Happy Health</h1>
           <h2>Sign In</h2>
-          <% include ./partials/messages %>
+          <%- include ('./partials/messages') %>
           <form action="/" method="POST">
             <div class="form-row">
               <label for="email">Email</label>
@@ -87,15 +86,14 @@
               </div>
             </div>
           </form>
-          <!-- <div class="col-lg-12 d-flex justify-content-between mt-3 mb-4"><a class="fab fa-facebook-f" i
+          <div class="col-lg-12 d-flex justify-content-between mt-3 mb-4"><a class="fab fa-facebook-f" i
               href="https://en-gb.facebook.com/login/" target="_blank"> </a><a class="fab fa-twitter" i
               href="https://twitter.com/login?lang=en" target="_blank"> </a><a class="fab fa-google-plus-g" i
-              href="https://mail.google.com" target="_blank"> </a></div> -->
+              href="https://mail.google.com" target="_blank"> </a></div>
           <div class="col-lg-12 d-flex justify-content-between mb-5">
             <a href="adminLogin">Admin</a>
-            <a href="userSignUp">Sign Up!</a></div>
-
-          <!-- </div> -->
+            <a href="userSignUp">Sign Up!</a>
+          </div>
         </div>
       </div>
     </div>
