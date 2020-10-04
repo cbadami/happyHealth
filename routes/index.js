@@ -78,44 +78,47 @@ router.post('/adminLogin', (req, res) => {
 router.get('/userSignup', (req, res) => res.render('userSignup'));
 
 
-// router.post('/userSignup', (req, res) => {
-//   const { email, password } = req.body;
-//   let errors = [];
-//   if (!email && !password) {
-//     errors.push({ msg: 'Please enter all fields' });
-//   }
-//   else if (password.length < 8) {
-//     errors.push({ msg: 'Password must be at least 8 characters' });
-//   }
-//   if (errors.length > 0) {
-//     res.render('userLogin', {
-//       errors,
-//       email,
-//       password
-//     });
-//   }
-//   else {
+router.post('/userSignup', (req, res) => {
+  const { name, email, password, password2 } = req.body;
+  let errors = [];
 
-//     var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' and Password = '${password}'`;
-//     db.query(queryString, function (err, result) {
-//       if (result.length > 0) {
-//         console.log(result[0]['UserName']);
-//         out = "Not implemented: Login Sucessful: " + result[0]['UserName'];
-//         res.send(out);
-//       } else {
-//         errors.push({ msg: 'Please enter correct email id or password' });
-//         res.render('userLogin', {
-//           errors,
-//           email,
-//           password
-//         });
-//       }
+  if (!name || !email || !password || !password2) {
+    errors.push({ msg: 'Please enter all fields' });
+  }
+  else if (password.length < 8) {
+    errors.push({ msg: 'Password must be at least 8 characters' });
+  }
+  else if (password != password2) {
+    errors.push({ msg: 'Passwords not matched' });
+  }
 
-//     });
+  if (errors.length > 0) {
+    res.render('userSignup', {
+      errors,
+      name,
+      email,
+      password,
+      password2
+    });
+  }
+  else {
 
-//   }
+    var queryString = `INSERT INTO  happyhealth_MySQL.USER values(
+      '${name}','${password}','No','No','No','Yes','${email}');`;
+    db.query(queryString, function (err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
+        errors.push({ msg: 'Login sucessful' });
+        var str1 = '';
+        var str2 ='';
+        res.render('userLogin', {
+          errors
+        });
+    });
 
-// });
+  }
+
+});
 
 router.get('/forgotPassword', (req, res) => res.render('forgotPassword'));
 

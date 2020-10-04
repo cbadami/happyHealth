@@ -12,14 +12,36 @@
   <title>User Login</title>
 </head>
 <style>
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  body {
+    background-color: dimgray;
+    width: 100%;
+    height: 100%;
+    background-size: 200%;
   }
 
+  h1 {
+    color: white;
+    text-align: center;
+    /* margin: auto; */
+  }
+
+  /* .form-container {
+            position: absolute;
+            width: 120%;
+            top: 2vh;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 12px 12px 22px;
+        } */
   .app-container-wrapper {
     max-width: 450px;
+    width: 120%;
+    top: 2vh;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 12px 12px 22px;
   }
 
   .app-container-wrapper .row {
@@ -59,13 +81,14 @@
 
 <body>
   <section class="Form my-4 mx-2">
+    <h1 class="font-weight-bold py-3 mt-3">Happy Health</h1>
     <div class="container app-container-wrapper">
       <div class="row no-gutter">
         <div class="col-lg-12" px-5="" pt-5="">
-          <h1 class="font-weight-bold py-3 mt-3">Happy Health</h1>
+
           <h2>Sign In</h2>
           <%- include ('./partials/messages') %>
-          <form action="/" method="POST">
+          <form action="/" method="POST" class="form-container">
             <div class="form-row">
               <label for="email">Email</label>
               <input type="email" id="email" name="email" class="form-control" placeholder="Email Id"
@@ -77,7 +100,8 @@
                 value="<%= typeof password != 'undefined' ? password : '' %>" />
             </div>
             <div class="form-row"></div>
-            <div class="col-lg-12"><a class="d-flex justify-content-end" href="/forgotPassword">Forgot password?</a></div>
+            <div class="col-lg-12"><a class="d-flex justify-content-end" href="/forgotPassword">Forgot password?</a>
+            </div>
             <div class="form-row">
               <div class="col-lg-12">
                 <button type="submit" class="btn1 mt-3 mb-5">
@@ -86,11 +110,11 @@
               </div>
             </div>
           </form>
-          <div class="col-lg-12 d-flex justify-content-between mt-3 mb-4"><a class="fab fa-facebook-f" i
+          <!-- <div class="col-lg-12 d-flex justify-content-between mt-3 mb-4"><a class="fab fa-facebook-f" i
               href="https://en-gb.facebook.com/login/" target="_blank"> </a><a class="fab fa-twitter" i
               href="https://twitter.com/login?lang=en" target="_blank"> </a><a class="fab fa-google-plus-g" i
-              href="https://mail.google.com" target="_blank"> </a></div>
-          <div class="col-lg-12 d-flex justify-content-between mb-5">
+              href="https://mail.google.com" target="_blank"> </a></div> -->
+          <div class="col-lg-12 d-flex justify-content-between mb-1">
             <a href="adminLogin">Admin</a>
             <a href="userSignUp">Sign Up!</a>
           </div>
