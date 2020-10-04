@@ -1,22 +1,55 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../database');
+const express = require('express');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  var sql = "select * from User_Info";
-  db.query(sql,function(err,data,fields){
-    if(err) throw err;
-    console.log("connected ");
-    console.log(data[0]['emailid']);
-    var titleData = data[0]['emailid'];
-    res.render('userLogin',{title: 'Happy Health',logindata: titleData});
-  })
-  
+router.get('/', (req, res) => res.render('userLogin'));
+
+router.post('/', (req, res) => {
+  const { email, password } = req.body;
+  let errors = [];
+  var em = email + ' Please enter all fields'
+  if (!email && !password) {
+    errors.push({ msg: em });
+  }
+  if (password.length < 8) {
+    errors.push({ msg: 'Password must be at least 8 characters' });
+  }
+  if (errors.length > 0) {
+    res.render('userLogin', {
+      errors,
+      email,
+      password
+    });
+  }
+  else{
+    res.render('adminLogin');
+  }
+
 });
 
-router.get('/userSignUp', function(req, res, next) {
-  res.render('userSignUp');
+router.get('/adminLogin', (req, res) => res.render('adminLogin'))
+
+router.post('/adminLogin', (req, res) => {
+
+  const { email, password } = req.body;
+  let errors = [];
+  var em = email + ' Please enter all fields'
+  if (!email && !password) {
+    errors.push({ msg: em });
+  }
+  if (password.length < 8) {
+    errors.push({ msg: 'Password must be at least 8 characters' });
+  }
+  if (errors.length > 0) {
+    res.render('adminLogin', {
+      errors,
+      email,
+      password
+    });
+  }
+  else{
+    res.render('userLogin');
+  }
+
 });
 
 module.exports = router;

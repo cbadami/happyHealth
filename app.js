@@ -1,76 +1,50 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
+const mysql = require('mysql');
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 
+const app = express();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Passport Config
+// require('./config/passport')(passport);
 
-var app = express();
+// EJS
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
 
-// dotenv.config({ path: '.env' })
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
 
-// const sql = require('mysql');
-// const dev_db_url = process.env.connection-string;
-// const sqlDB = process.env.sqlURI || dev_db_url;
-// sql.connect(sqlDB, { useNewUrlParser: true  ,   useUnifiedTopology: true });
-// sql.Promise = global.Promise;
-// const db = sql.connection;
-// db.on('error', console.error.bind(console, 'sql connection error:'));
+// Express session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
-//setting up database connection
-// var mysql = require('mysql');
-// var connection = mysql.createConnection({
-//   // socketPath: "exalted-legacy-290621:us-central1:happyhealth-test01",
-//   host: "35.194.21.170",
-//   user: "root",
-//   password: "123456",
-//   database: "happyhealth_MySQL"
-// })
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-// //connect to database
-// connection.connect(function(err) {
-//   if(err){
-//     return console.log("Error connecting to database: "+err.message);
-//   }
-//   console.log("connected to Google cloud MySQL server");
-// });
+// Connect flash
+app.use(flash());
 
-// // Query 
-// connection.query("SELECT * FROM User_Info", function (err, result, fields) {
-//   if (err) throw err;
-//   console.log(result);
-// });
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
+// Global variables
 app.use(function(req, res, next) {
-  next(createError(404));
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// Routes
+app.use('/', require('./routes/index.js'));
+app.use('/users', require('./routes/users.js'));
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+const PORT = process.env.PORT || 3000;
 
-module.exports = app;
+app.listen(PORT, console.log(`Server started on port ${PORT}`));
