@@ -18,13 +18,13 @@ const db = require('../database');
 
 router.get('/', (req, res) => res.render('userLogin'));
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { email, password } = req.body;
   let errors = [];
   if (!email && !password) {
     errors.push({ msg: 'Please enter all fields' });
   }
-  if (password.length < 8) {
+  else if (password.length < 8) {
     errors.push({ msg: 'Password must be at least 8 characters' });
   }
   if (errors.length > 0) {
@@ -36,18 +36,25 @@ router.post('/', (req, res) => {
   }
   else {
 
-    var sql = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' and Password = '${password}'`;
-    db.query(sql, function (err, data, fields) {
-      if (err){
-        res.send("Error");
-      }
-      else{
-      // console.log("connected ");
-      console.log(data[0]['UserName']);
-      out = "Hello user: " + data[0]['UserName'];
-      res.send(out);
-      }
-    });
+    var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' and Password = '${password}'`;
+    // var queryString = `SELECT * FROM happyhealth_MySQL.USER WHERE Email = 'james234@gmail.com' and Password = 'JamesBond'`;
+    try {
+     db.query({
+      sql: queryString, 
+      timeout: 10000,
+      }, function (err, data) {
+       
+        if(err) {
+          res.send("Not Implemented: Please enter correct email id and password");
+        }
+        console.log(data[0]['UserName']);
+        out = "Not implemented: Hello user: " + data[0]['UserName'];
+        res.send(out);
+
+      });
+    } catch (err) {
+      res.send("Not Implemented: Please enter correct email id and password");
+    }
   }
 
 });
@@ -61,9 +68,10 @@ router.post('/adminLogin', (req, res) => {
   if (!email && !password) {
     errors.push({ msg: 'Please enter all fields' });
   }
-  if (password.length < 8) {
+  else if (password.length < 8) {
     errors.push({ msg: 'Password must be at least 8 characters' });
   }
+
   if (errors.length > 0) {
     res.render('adminLogin', {
       errors,
