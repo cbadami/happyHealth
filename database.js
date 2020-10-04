@@ -8,11 +8,6 @@ var conn = mysql.createConnection({
   database: "happyhealth_MySQL",
   //port: 3000
 })
-
-//connect to database
-
-// conn.connect();
-
 conn.connect(function(err) {
   if(err){
     return console.log("Error connecting to database: "+err.message);
@@ -24,7 +19,7 @@ module.exports = conn;
 
 
 
-// // Google cloud database connection deployment
+// // Google cloud database connection"
 // var mysql = require("mysql");
 
 // const config = {

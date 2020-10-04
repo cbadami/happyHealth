@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../database');
+
 
 router.get('/', (req, res) => res.render('userLogin'));
 
@@ -51,5 +53,12 @@ router.post('/adminLogin', (req, res) => {
   }
 
 });
+
+router.get('/forgotPassword', (req, res) => res.render('forgotPassword'))
+
+router.get('/validationPage', (req, res) => res.render('validationPage'))
+
+router.get('/resetPassword', (req, res) => res.render('resetPassword'))
+
 
 module.exports = router;

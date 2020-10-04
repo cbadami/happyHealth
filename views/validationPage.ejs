@@ -2,13 +2,14 @@
 <html>
 <head>
       <title>
-          Admin Login
+          Validation Form
       </title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity=
       "sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-      <!-- <link rel = "stylesheet" type="text/css" href="css/admin.css"> -->
-      <style>
-          .bg{
+      <!-- <link rel = "stylesheet" type="text/css" href="css/verification.css">
+    < -->
+    <Style>
+        .bg{
     background-color: dimgray;
     width: 100%;
     height: 100vh;
@@ -31,6 +32,7 @@ h2{
     color: black;
     text-align: center;
 }
+
 a{
     display: block;
     text-align: right;
@@ -40,26 +42,22 @@ a{
     transition: .3s;
 }
 .btn{
-    border: none;
-    outline: none;
-    height: 50px;
-    width: 100%;
-    background-color: rgb(20, 102, 24);
+    background-color: darkgreen;
     color: white;
-    border-radius: 4px;
-    font-weight: bold;
+    vertical-align: middle;
+
 }
-.btn.hover{
-    background: white;
-    border: 1px solid;
-    color: rgb(20, 102, 24);
+bgm1{
+    vertical-align: middle;
 }
+
+
 @media only screen and (max-width: 678px) {
     .bg{
         background-size: 300%;
     }
 }
-      </style>
+    </Style>
 </head>
 <body>  
     <section class = "container-fluid bg">
@@ -67,31 +65,27 @@ a{
          
         <section class="row justify-content-center">    
         <section class = "col-12 col-sm-6 col-md-3">
-                                     
-            <form action="/adminLogin" method="POST" class="form-container">                
+                                       
+            <form class="form-container">                
                 <div class="form-group">
-                    <h2 class="font-weight-bold py-3">Welcome Admin</h2> 
-                    <% include ./partials/messages %>  
+                    <h4 class="font-weight-bold py-3">Verification</h4>
+                    <h5>Enter the verification code</h5>
+                <h5>It will be sent to your email</h5>
+                    
                 </div>
                 <div class="form-group">
-                    <h4>Sign In</h4>
-                </div>
-                <div class="form-group">
-                  <label for="email">Username</label>
-                  <input type="email" id="email" name="email" class="form-control" placeholder="Username" aria-describedby="emailHelp"
-                  value="<%= typeof email != 'undefined' ? email : '' %>" />                
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" name="password" class="form-control" placeholder="***************" id="exampleInputPassword1"
-                  value="<%= typeof password != 'undefined' ? password : '' %>" />
-                </div>
-                <div class="form-group">
-                    <a href="">Forgot Password </a>   
-                </div>                                       
-                <div>
-                    <button type="submit" class="btn">Sign In</button>
-                </div>
+                    <label for="exampleInputVerificationCode1">Verification Code</label>
+                    <input type="password" class="form-control" placeholder="000000" id="exampleInputVerificationCode1">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleTimer">Your code will expire in </label>
+                    <input type="time" class="form-control"  id="exampleTimer">
+                  </div>
+                <div class="container">
+                    <input type="button" class="btn bgm1" value="Submit" onclick="location.href = '/resetPassword';">
+                  </div>
+                  
               </form>
             </section>
         </section>
