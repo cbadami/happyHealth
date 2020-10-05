@@ -85,6 +85,9 @@ router.post('/userSignup', (req, res) => {
   if (!name || !email || !password || !password2) {
     errors.push({ msg: 'Please enter all fields' });
   }
+  else if(name.length >11){
+    errors.push({ msg: 'Username must be below 11 characters' });
+  }
   else if (password.length < 8) {
     errors.push({ msg: 'Password must be at least 8 characters' });
   }
@@ -106,14 +109,14 @@ router.post('/userSignup', (req, res) => {
     var queryString = `INSERT INTO  happyhealth_MySQL.USER values(
       '${name}','${password}','No','No','No','Yes','${email}');`;
     db.query(queryString, function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted");
-        errors.push({ msg: 'Login sucessful' });
-        var str1 = '';
-        var str2 ='';
-        res.render('userLogin', {
-          errors
-        });
+      if (err) throw err;
+      console.log("1 record inserted");
+      errors.push({ msg: 'Login sucessful' });
+      var str1 = '';
+      var str2 = '';
+      res.render('userLogin', {
+        errors
+      });
     });
 
   }
@@ -122,9 +125,76 @@ router.post('/userSignup', (req, res) => {
 
 router.get('/forgotPassword', (req, res) => res.render('forgotPassword'));
 
-router.get('/validationPage', (req, res) => res.render('validationPage'));
+router.post('/forgotPassword', (req, res) => {
+  const { email } = req.body;
+  let errors = [];
+  if (!email) {
+    errors.push({ msg: 'Please enter email id' });
+  }
+  if (errors.length > 0) {
+    res.render('forgotPassword', {
+      errors,
+      email
+    });
+  }
+  else {
 
-router.get('/resetPassword', (req, res) => res.render('resetPassword'));
+    var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' Limit 1 `;
+    db.query(queryString, function (err, result) {
+      if (result.length > 0) {
+        console.log(`under forgot password page ${result[0]['UserName']}`);
+        var UserName = result[0]['UserName'];
+        console.log(`post forgot page Hello user ${email}`);
+        // errors.push({ msg: `Email id: ${email}` })
+        res.render('validationPage',{email});
+      } else {
+        errors.push({ msg: 'Email id not registered' });
+        res.render('forgotPassword', {
+          errors,
+          email,
+        });
+      }
+
+    });
+
+  }
+
+});
+
+router.get('/validationPage', (req, res) =>{ 
+  // const errors = req.errors;
+  const email = req.body;
+  console.log(`under get validation page ${email}`);
+ res.render('validationPage',{email});
+});
+
+router.post('/validationPage', (req, res) => {
+
+  res.render('resetPassword');
+  // const {email,code} = req.body;
+  // console.log(`under post validation page ${email}`);
+  // let errors = [];
+  // if (code == '000000') {  
+  //   errors.push({ msg: `Hello user ${email}` });
+  //   res.render('resetPassword', {
+  //     errors,
+  //     email
+  //   });
+
+  // }
+  // else {
+  //   errors.push({ msg: 'Please enter correct verification code' });
+  //   res.render('validationPage' ,{errors,
+  //     email
+  //   });
+  // }
+
+
+});
+
+
+router.get('/resetPassword', (req, res) => res.render('resetPassword',{errors,
+  email}));
 
 
 

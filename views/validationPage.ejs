@@ -9,7 +9,7 @@
       <!-- <link rel = "stylesheet" type="text/css" href="css/verification.css">
     < -->
     <Style>
-        .bg{
+        body {
     background-color: dimgray;
     width: 100%;
     height: 100vh;
@@ -66,16 +66,25 @@ bgm1{
         <section class="row justify-content-center">    
         <section class = "col-12 col-sm-6 col-md-3">
                                        
-            <form class="form-container">                
+            <form action="/validationPage" method="POST" class="form-container">                
                 <div class="form-group">
+                    <%- include ('./partials/messages') %> 
                     <h4 class="font-weight-bold py-3">Verification</h4>
                     <h5>Enter the verification code</h5>
-                <h5>It will be sent to your email</h5>
+                <h5>It will be sent to your</h5>
                     
                 </div>
+                <!-- <div class="form-group">
+                    <label for="email">Email id</label>
+                    <input type="email" id="email" name="email" class="form-control" disabled="disabled"
+                    value="<%= typeof email != 'undefined' ? email : '' %>" />
+                   
+                  </div> -->
                 <div class="form-group">
-                    <label for="exampleInputVerificationCode1">Verification Code</label>
-                    <input type="password" class="form-control" placeholder="000000" id="exampleInputVerificationCode1">
+                    <label for="code">Verification Code</label>
+                    <input type="password" id="code" name="code" class="form-control" placeholder="000000"
+                    value="<%= typeof code != 'undefined' ? code : '' %>" />
+                   
                   </div>
                   
                   <div class="form-group">
@@ -83,7 +92,7 @@ bgm1{
                     <input type="time" class="form-control"  id="exampleTimer">
                   </div>
                 <div class="container">
-                    <input type="button" class="btn bgm1" value="Submit" onclick="location.href = '/resetPassword';">
+                    <input type="submit" class="btn bgm1" value="Submit">
                   </div>
                   
               </form>
