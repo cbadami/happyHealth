@@ -85,6 +85,32 @@ Source: https://www.websiteplanet.com/blog/best-free-cloud-hosting-services/
 6. HappyHealth
 7. ByeDegrees
 
+## Insights to other team updates:
+### Design UI/Themes
+#### Introduction to UI/UX Design Proposal
+UI / UX is a fast growing field that is quickly expanding across organizations and evolving into the development of new niches. User Experience Design, User Interface Design, Customer Experience, and Product Design all frame the larger landscape of building digital content.
+
+This article is a technical onboarding document that can help you write your own UX Plan. It captures the detailed structure and syntax that we use.
+
+#### Wireframes :
+
+- [Web UI](https://xd.adobe.com/view/1dfb8c5e-6714-428e-6813-ceed7f8de535-6bca/screen/2d4265b0-0c13-4b9d-ba94-4dd6701156f2)
+
+- [Mobile UI](https://xd.adobe.com/view/64cbfb4c-2c05-40eb-5c30-bae44fa3b9d4-12fa/screen/fab92490-6d21-4829-9a52-9728726feba3)
+
+[For more insights](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
+
+### Design Data
+#### Introduction to Design data:
+Design data complies with the app requirements to facilitate secure data transactions. You must design this dimension so that it can be rescaled over time as business needs change.
+
+#### ER diagram:  
+![image](https://github.com/annie0sc/gdp-happy-health/blob/master/Design%20Data/Updated/ER%20diagram/HAPPY_HEALTH_ERD.png)
+
+[For more insights](https://github.com/annie0sc/gdp-happy-health/tree/master/Design%20Data)
+### Sprint Planning and Userstories
+
+[For more insights](https://github.com/annie0sc/gdp-happy-health/tree/master/Sprint%20Planning%20and%20UserStories)
 ## General Queries:
 
 ### what back end languages and platforms will you test?  
