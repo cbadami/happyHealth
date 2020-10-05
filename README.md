@@ -98,7 +98,7 @@ This article is a technical onboarding document that can help you write your own
 
 - [Mobile UI](https://xd.adobe.com/view/64cbfb4c-2c05-40eb-5c30-bae44fa3b9d4-12fa/screen/fab92490-6d21-4829-9a52-9728726feba3)
 
-[For more insights](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
+[For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
 
 ### Design Data
 #### Introduction to Design data:
@@ -107,10 +107,10 @@ Design data complies with the app requirements to facilitate secure data transac
 #### ER diagram:  
 ![image](https://github.com/annie0sc/gdp-happy-health/blob/master/Design%20Data/Updated/ER%20diagram/HAPPY_HEALTH_ERD.png)
 
-[For more insights](https://github.com/annie0sc/gdp-happy-health/tree/master/Design%20Data)
+[For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design%20Data)
 ### Sprint Planning and Userstories
 
-[For more insights](https://github.com/annie0sc/gdp-happy-health/tree/master/Sprint%20Planning%20and%20UserStories)
+[For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Sprint%20Planning%20and%20UserStories)
 ## General Queries:
 
 ### what back end languages and platforms will you test?  
