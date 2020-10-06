@@ -13,6 +13,7 @@ router.get('/', (req, res) => res.render('userLogin'));
 router.post('/', (req, res) => {
   const { email, password } = req.body;
   let errors = [];
+  let success_msg;
   if (!email && !password) {
     errors.push({ msg: 'Please enter all fields' });
   }
@@ -33,9 +34,11 @@ router.post('/', (req, res) => {
     db.query(queryString, function (err, result) {
       console.log(result);
       if (result.length > 0) {
-        console.log(result[0]['UserName']);
+        success_msg = 'Login successful';
+        // console.log(result[0]['UserName']);
+        console.log(success_msg);
         out = "Welcome " + result[0]['UserName'] +"!";
-        res.render('userHome',{out})
+        res.render('userHome',{success_msg,out});
       } else {
         errors.push({ msg: 'Please enter correct email id or password' });
         res.render('userLogin', {
@@ -74,6 +77,7 @@ router.post('/adminLogin', (req, res) => {
     });
   }
   else {
+
     out ="Welcome Admin!";
     res.render('adminHome',{out});
   }
@@ -86,7 +90,7 @@ router.get('/userSignup', (req, res) => res.render('userSignup'));
 router.post('/userSignup', (req, res) => {
   const { name, email, password, password2 } = req.body;
   let errors = [];
-
+  let success_msg;
   if (!name || !email || !password || !password2) {
     errors.push({ msg: 'Please enter all fields' });
   }
@@ -116,11 +120,11 @@ router.post('/userSignup', (req, res) => {
     db.query(queryString, function (err, result) {
       if (err) throw err;
       console.log("1 record inserted");
-      errors.push({ msg: 'Register sucessful' });
+      success_msg = 'Register sucessful';
       var str1 = '';
       var str2 = '';
       res.render('userLogin', {
-        errors
+        success_msg
       });
     });
 
