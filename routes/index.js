@@ -111,7 +111,7 @@ router.post('/userSignup', (req, res) => {
     db.query(queryString, function (err, result) {
       if (err) throw err;
       console.log("1 record inserted");
-      errors.push({ msg: 'Login sucessful' });
+      errors.push({ msg: 'Register sucessful' });
       var str1 = '';
       var str2 = '';
       res.render('userLogin', {
