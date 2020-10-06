@@ -74,7 +74,8 @@ router.post('/adminLogin', (req, res) => {
     });
   }
   else {
-    res.send("Not implemented: Admin Home page")
+    out ="Welcome Admin!";
+    res.render('adminHome',{out});
   }
 
 });
