@@ -29,11 +29,13 @@ router.post('/', (req, res) => {
   else {
 
     var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' and Password = '${password}'`;
+
     db.query(queryString, function (err, result) {
+      console.log(result);
       if (result.length > 0) {
         console.log(result[0]['UserName']);
-        out = "Not implemented: Login Sucessful: " + result[0]['UserName'];
-        res.send(out);
+        out = "Welcome " + result[0]['UserName'] +"!";
+        res.render('userHome',{out})
       } else {
         errors.push({ msg: 'Please enter correct email id or password' });
         res.render('userLogin', {
@@ -48,6 +50,8 @@ router.post('/', (req, res) => {
   }
 
 });
+
+router.get('/userHome', (req, res) => res.render('userHome'));
 
 router.get('/adminLogin', (req, res) => res.render('adminLogin'));
 

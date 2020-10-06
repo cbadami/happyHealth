@@ -10,6 +10,9 @@ const app = express();
 // Passport Config
 // require('./config/passport')(passport);
 
+// css styles
+app.use("/public/stylesheets",express.static(__dirname + "/public/stylesheets"));
+
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
