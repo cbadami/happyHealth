@@ -17,9 +17,7 @@ router.post('/', (req, res) => {
   if (!email && !password) {
     errors.push({ msg: 'Please enter all fields' });
   }
-  else if (password.length < 8) {
-    errors.push({ msg: 'Password must be at least 8 characters' });
-  }
+
   if (errors.length > 0) {
     res.render('userLogin', {
       errors,
@@ -64,9 +62,6 @@ router.post('/adminLogin', (req, res) => {
   let errors = [];
   if (!email && !password) {
     errors.push({ msg: 'Please enter all fields' });
-  }
-  else if (password.length < 8) {
-    errors.push({ msg: 'Password must be at least 8 characters' });
   }
 
   if (errors.length > 0) {
