@@ -11,23 +11,23 @@ const async = require('async');
 router.get('/', (req, res) => res.render('userLogin'));
 
 router.post('/', (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   let errors = [];
   let success_msg;
-  if (!email && !password) {
+  if (!username || !password) {
     errors.push({ msg: 'Please enter all fields' });
   }
 
   if (errors.length > 0) {
     res.render('userLogin', {
       errors,
-      email,
+      username,
       password
     });
   }
   else {
-
-    var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' and Password = '${password}'`;
+    console.log(String(username).toLowerCase);
+    var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${username}' and Password = '${password}'`;
 
     db.query(queryString, function (err, result) {
       console.log(result);
@@ -35,13 +35,13 @@ router.post('/', (req, res) => {
         success_msg = 'Login successful';
         // console.log(result[0]['UserName']);
         console.log(success_msg);
-        out = "Welcome " + result[0]['UserName'] +"!";
-        res.render('userHome',{success_msg,out});
+        out = "Welcome " + result[0]['UserName'] + "!";
+        res.render('userHome', { success_msg, out });
       } else {
-        errors.push({ msg: 'Please enter correct email id or password' });
+        errors.push({ msg: 'Please enter correct username or password' });
         res.render('userLogin', {
           errors,
-          email,
+          username,
           password
         });
       }
@@ -60,7 +60,10 @@ router.post('/adminLogin', (req, res) => {
 
   const { email, password } = req.body;
   let errors = [];
-  if (!email && !password) {
+  if (!email) {
+    errors.push({ msg: 'Please enter all fields' });
+  }
+  else if (!password) {
     errors.push({ msg: 'Please enter all fields' });
   }
 
@@ -73,8 +76,8 @@ router.post('/adminLogin', (req, res) => {
   }
   else {
 
-    out ="Welcome Admin!";
-    res.render('adminHome',{out});
+    out = "Welcome Admin!";
+    res.render('adminHome', { out });
   }
 
 });
@@ -89,16 +92,17 @@ router.post('/userSignup', (req, res) => {
   if (!name || !email || !password || !password2) {
     errors.push({ msg: 'Please enter all fields' });
   }
-  else if(name.length >11){
-    errors.push({ msg: 'Username must be below 11 characters' });
+  else {
+    if (name.length > 12) {
+      errors.push({ msg: 'Username must be below 12 characters' });
+    }
+    else if (password.length < 8) {
+      errors.push({ msg: 'Password must be at least 8 characters' });
+    }
+    else if (password != password2) {
+      errors.push({ msg: 'Passwords not matched' });
+    }
   }
-  else if (password.length < 8) {
-    errors.push({ msg: 'Password must be at least 8 characters' });
-  }
-  else if (password != password2) {
-    errors.push({ msg: 'Passwords not matched' });
-  }
-
   if (errors.length > 0) {
     res.render('userSignup', {
       errors,
@@ -145,12 +149,13 @@ router.post('/forgotPassword', (req, res) => {
 
     var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' Limit 1 `;
     db.query(queryString, function (err, result) {
+      console.log(result)
       if (result.length > 0) {
         console.log(`under forgot password page ${result[0]['UserName']}`);
         var UserName = result[0]['UserName'];
         console.log(`post forgot page Hello user ${email}`);
         // errors.push({ msg: `Email id: ${email}` })
-        res.render('validationPage',{email});
+        res.render('validationPage', { email });
       } else {
         errors.push({ msg: 'Email id not registered' });
         res.render('forgotPassword', {
@@ -165,11 +170,11 @@ router.post('/forgotPassword', (req, res) => {
 
 });
 
-router.get('/validationPage', (req, res) =>{ 
+router.get('/validationPage', (req, res) => {
   // const errors = req.errors;
   const email = req.body;
   console.log(`under get validation page ${email}`);
- res.render('validationPage',{email});
+  res.render('validationPage', { email });
 });
 
 router.post('/validationPage', (req, res) => {
@@ -197,8 +202,10 @@ router.post('/validationPage', (req, res) => {
 });
 
 
-router.get('/resetPassword', (req, res) => res.render('resetPassword',{errors,
-  email}));
+router.get('/resetPassword', (req, res) => res.render('resetPassword', {
+  errors,
+  email
+}));
 
 
 
