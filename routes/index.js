@@ -104,6 +104,14 @@ router.post('/userSignup', (req, res) => {
         if (result.length > 0) {
           console.log('inside username result');
           errors.push({ msg: 'Username already taken' });
+          console.log(`inside erros ${errors} length: ${errors.length}`);
+          res.render('userSignup', {
+            errors,
+            name,
+            email,
+            password,
+            password2
+          });
         }
       });
     }
@@ -119,10 +127,17 @@ router.post('/userSignup', (req, res) => {
       errors.push({ msg: 'Email id must be below 30 characters' });
     }
     else{
-      var userQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE email = '${email}'`;
-      db.query(userQuery, function (err, result) {
+      var emailQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE email = '${email}'`;
+      db.query(emailQuery, function (err, result) {
         if (result.length > 0) {
           errors.push({ msg: 'Email id already registered' });
+          res.render('userSignup', {
+            errors,
+            name,
+            email,
+            password,
+            password2
+          });
         }
   
       });
@@ -132,7 +147,8 @@ router.post('/userSignup', (req, res) => {
       errors.push({ msg: 'Passwords not matched' });
     }
   }
-  console.log(errors);
+
+  console.log(`before errors ${errors} length: ${errors.length}`);
   if (errors.length > 0) {
     res.render('userSignup', {
       errors,
@@ -142,11 +158,11 @@ router.post('/userSignup', (req, res) => {
       password2
     });
   }
-  else {      
+  else if (!errors.length > 0) {      
     var queryString = `INSERT INTO  happyhealth_MySQL.USER values(
       '${name}','${password}','No','No','No','Yes','${email}');`;
     db.query(queryString, function (err, result) {
-      if (err) throw err;
+      if (err) console.log(`${err}`);
       console.log("1 record inserted");
       success_msg = 'Register sucessful';
       res.render('userLogin', {
