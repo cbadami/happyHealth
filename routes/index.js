@@ -26,14 +26,12 @@ router.post('/', (req, res) => {
     });
   }
   else {
-    console.log(String(username).toLowerCase);
     var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${username}' and Password = '${password}'`;
 
     db.query(queryString, function (err, result) {
       console.log(result);
       if (result.length > 0) {
         success_msg = 'Login successful';
-        // console.log(result[0]['UserName']);
         console.log(success_msg);
         out = "Welcome " + result[0]['UserName'] + "!";
         res.render('userHome', { success_msg, out });
@@ -96,13 +94,45 @@ router.post('/userSignup', (req, res) => {
     if (name.length > 12) {
       errors.push({ msg: 'Username must be below 12 characters' });
     }
+    else if (name.length < 6) {
+      errors.push({ msg: 'Username must be atleast 6 characters' });
+    }
+    else{
+      var userQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${name}'`;
+      db.query(userQuery, function (err, result) {
+        console.log(result);
+        if (result.length > 0) {
+          console.log('inside username result');
+          errors.push({ msg: 'Username already taken' });
+        }
+      });
+    }
+
+    if (password.length > 15) {
+      errors.push({ msg: 'Password must be below 15 characters' });
+    }
     else if (password.length < 8) {
       errors.push({ msg: 'Password must be at least 8 characters' });
     }
-    else if (password != password2) {
+
+    if(email.length>30){
+      errors.push({ msg: 'Email id must be below 30 characters' });
+    }
+    else{
+      var userQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE email = '${email}'`;
+      db.query(userQuery, function (err, result) {
+        if (result.length > 0) {
+          errors.push({ msg: 'Email id already registered' });
+        }
+  
+      });
+    }
+
+    if (password != password2) {
       errors.push({ msg: 'Passwords not matched' });
     }
   }
+  console.log(errors);
   if (errors.length > 0) {
     res.render('userSignup', {
       errors,
@@ -112,16 +142,13 @@ router.post('/userSignup', (req, res) => {
       password2
     });
   }
-  else {
-
+  else {      
     var queryString = `INSERT INTO  happyhealth_MySQL.USER values(
       '${name}','${password}','No','No','No','Yes','${email}');`;
     db.query(queryString, function (err, result) {
       if (err) throw err;
       console.log("1 record inserted");
       success_msg = 'Register sucessful';
-      var str1 = '';
-      var str2 = '';
       res.render('userLogin', {
         success_msg
       });
