@@ -1,6 +1,5 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
-const mysql = require('mysql');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -47,7 +46,6 @@ app.use(function (req, res, next) {
 
 // Routes
 app.use('/', require('./routes/index.js'));
-app.use('/users', require('./routes/users.js'));
 
 const PORT = process.env.PORT || 3000;
 
