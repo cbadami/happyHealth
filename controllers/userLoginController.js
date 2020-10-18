@@ -1,8 +1,10 @@
 const db = require('../database');
 
+
 exports.getUserLogin = (req, res) => {
     res.render('userLogin')
 }
+
 
 exports.postUserLogin = (req, res) => {
     const { username, password } = req.body;

@@ -4,6 +4,7 @@ const router = express.Router();
 var userLoginController = require('../controllers/userLoginController')
 var userHomeController = require('../controllers/userHomeController')
 var userSignupController = require('../controllers/userSignupController')
+var adminLoginController = require('../controllers/adminLoginController')
 
 // const async = require('async');
 
@@ -18,36 +19,11 @@ router.post('/',userLoginController.postUserLogin);
 
 router.get('/userHome', userHomeController.getUserHome);
 
-router.get('/adminLogin', (req, res) => res.render('adminLogin'));
+router.get('/adminLogin',adminLoginController.getAdminLogin );
 
-router.post('/adminLogin', (req, res) => {
-
-  const { email, password } = req.body;
-  let errors = [];
-  if (!email) {
-    errors.push({ msg: 'Please enter all fields' });
-  }
-  else if (!password) {
-    errors.push({ msg: 'Please enter all fields' });
-  }
-
-  if (errors.length > 0) {
-    res.render('adminLogin', {
-      errors,
-      email,
-      password
-    });
-  }
-  else {
-
-    out = "Welcome Admin!";
-    res.render('adminHome', { out });
-  }
-
-});
+router.post('/adminLogin', adminLoginController.postAdminLogin);
 
 router.get('/userSignup', userSignupController.getSignup);
-
 
 router.post('/userSignup', userSignupController.postSignup);
 

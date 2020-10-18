@@ -1,3 +1,6 @@
+const db = require('../database');
+
+
 exports.getSignup = (req, res) => {
     res.render('userSignup')
 }
