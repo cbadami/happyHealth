@@ -1,54 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../database');
-const async = require('async');
+
+var userLoginController = require('../controllers/userLoginController')
+
+// const async = require('async');
 
 // const email = 'james234@gmail.co';
 // const password = 'JamesBond';
 
 // var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' and Password = '${password}'`;
 
-router.get('/', (req, res) => res.render('userLogin'));
+router.get('/', userLoginController.getUserLogin);
 
-router.post('/', (req, res) => {
-  const { username, password } = req.body;
-  let errors = [];
-  let success_msg;
-  if (!username || !password) {
-    errors.push({ msg: 'Please enter all fields' });
-  }
-
-  if (errors.length > 0) {
-    res.render('userLogin', {
-      errors,
-      username,
-      password
-    });
-  }
-  else {
-    var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${username}' and Password = '${password}'`;
-
-    db.query(queryString, function (err, result) {
-      console.log(result);
-      if (result.length > 0) {
-        success_msg = 'Login successful';
-        console.log(success_msg);
-        out = "Welcome " + result[0]['UserName'] + "!";
-        res.render('userHome', { success_msg, out });
-      } else {
-        errors.push({ msg: 'Please enter correct username or password' });
-        res.render('userLogin', {
-          errors,
-          username,
-          password
-        });
-      }
-
-    });
-
-  }
-
-});
+router.post('/',userLoginController.postUserLogin);
 
 router.get('/userHome', (req, res) => res.render('userHome'));
 
