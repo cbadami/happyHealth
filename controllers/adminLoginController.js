@@ -4,19 +4,17 @@ exports.getAdminLogin = (req, res) => {
 
 exports.postAdminLogin = (req, res) => {
 
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     let errors = [];
-    if (!email) {
+    if (!username || !password) {
         errors.push({ msg: 'Please enter all fields' });
     }
-    else if (!password) {
-        errors.push({ msg: 'Please enter all fields' });
-    }
+
 
     if (errors.length > 0) {
         res.render('adminLogin', {
             errors,
-            email,
+            username,
             password
         });
     }
