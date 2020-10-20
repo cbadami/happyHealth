@@ -2,14 +2,15 @@
 <html lang="en">
 
 <head>
+    <!-- <h1>welome user id </h1> -->
+    <!-- Required meta tags-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Validation Form</title>
+    <title>Admin Login</title>
 </head>
-
 <style>
     body {
         background-color: dimgray;
@@ -17,19 +18,11 @@
         height: 100%;
         background-size: 200%;
     }
-
     h1 {
         color: white;
         text-align: center;
         margin-bottom: 10px;
-        margin-top: 5px;
     }
-
-    h2 {
-        color: black;
-        text-align: center;
-    }
-
     .app-container-wrapper {
         max-width: 400px;
         width: 100%;
@@ -39,48 +32,36 @@
         border-radius: 10px;
         box-shadow: 12px 12px 22px;
     }
-
     .app-container-wrapper .row {
         background: inher;
         border-radius: none;
         box-shadow: none;
     }
-
     .row {
         background: white;
         border-radius: 30px;
         box-shadow: 12px 12px 22px;
     }
-
     img {
         border-bottom-left-radius: 30px;
         border-top-left-radius: 30px;
     }
-
-    .btn {
-        background-color: darkgreen;
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: rgb(20, 102, 24);
         color: white;
-        vertical-align: middle;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-top: 10px;
     }
-
-    bgm1 {
-        vertical-align: middle;
-    }
-
-
     .btn1.hover {
         background: white;
         border: 1px solid;
         color: rgb(20, 102, 24);
-    }
-
-    a {
-        /* display: block; */
-        text-align: right;
-        text-decoration: none;
-        color: dodgerblue;
-        font-size: 1.0rem;
-        transition: .3s;
     }
 </style>
 
@@ -90,31 +71,33 @@
         <div class="container app-container-wrapper">
             <div class="row no-gutter">
                 <div class="col-lg-12" px-5="" pt-5="">
-
-                    <form action="/validationPage" method="POST" class="form-container">
+                    <form action="/adminLogin" method="POST" class="form-container">
                         <div class="form-group">
+                            <h2 class="font-weight-bold py-3">Welcome Administrator</h2>
                             <%- include ('./partials/messages') %>
-                            <h4 class="font-weight-bold py-3">Verification</h4>
-                            <h5>Enter the verification code</h5>
-                            <h5>It will be sent to your</h5>
-
                         </div>
-
-                        <div class="form-group">
-                            <label for="code">Verification Code</label>
-                            <input type="password" id="code" name="code" class="form-control" placeholder="000000"
-                                value="<%= typeof code != 'undefined' ? code : '' %>" />
-
+                        <div class="form-row">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                placeholder="username"
+                                value="<%= typeof username != 'undefined' ? username : '' %>" />
                         </div>
-
-                        <div class="form-group">
-                            <label for="exampleTimer">Your code will expire in </label>
-                            <input type="time" class="form-control" id="exampleTimer">
+                        <div class="form-row">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="**************"
+                                value="<%= typeof password != 'undefined' ? password : '' %>" />
                         </div>
-                        <div class="container">
-                            <input type="submit" class="btn bgm1" value="Submit">
+            <div class="form-row"></div>
+            <div class="col-lg-12"><a class="d-flex justify-content-end" href="/forgotPassword">Forgot password?</a>
+            </div>
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn1">
+                                    Sign in
+                                </button>
+                            </div>
                         </div>
-
                     </form>
                 </div>
             </div>

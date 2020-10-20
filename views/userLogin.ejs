@@ -24,7 +24,10 @@
     text-align: center;
     margin-bottom: 10px;
   }
-
+    h2 {
+        color: black;
+        text-align: center;
+    }
   /* .form-container {
             position: absolute;
             width: 120%;
@@ -93,12 +96,12 @@
           <form action="/" method="POST" class="form-container">
             <div class="form-row">
               <label for="username">Username</label>
-              <input type="text" id="username" name="username" class="form-control" placeholder="enter username"
+              <input type="text" id="username" name="username" class="form-control" placeholder="Username"
                 value="<%= typeof username != 'undefined' ? username : '' %>" />
             </div>
             <div class="form-row">
               <label for="password">Password</label>
-              <input type="password" id="password" name="password" class="form-control" placeholder="enter password"
+              <input type="password" id="password" name="password" class="form-control" placeholder="**************"
                 value="<%= typeof password != 'undefined' ? password : '' %>" />
             </div>
             <div class="form-row"></div>
