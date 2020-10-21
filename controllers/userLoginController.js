@@ -10,7 +10,7 @@ exports.postUserLogin = (req, res) => {
 
     const { username, password } = req.body;
     let errors = [];
-    let success_msg;
+    // let success_msg;
     if (!username || !password) {
         errors.push({ msg: 'Please enter all fields' });
     }
@@ -28,10 +28,10 @@ exports.postUserLogin = (req, res) => {
         db.query(queryString, function (err, result) {
             console.log(result);
             if (result.length > 0) {
-                success_msg = 'Login successful';
-                console.log(success_msg);
+                // success_msg = 'Login successful';
+                // console.log(success_msg);
                 out = "Welcome " + result[0]['UserName'] + "!";
-                res.render('userHome', { success_msg, out });
+                res.render('userHome', { out });
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
                 res.render('userLogin', {
