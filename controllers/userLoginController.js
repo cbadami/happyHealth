@@ -7,6 +7,7 @@ exports.getUserLogin = (req, res) => {
 
 
 exports.postUserLogin = (req, res) => {
+
     const { username, password } = req.body;
     let errors = [];
     let success_msg;
@@ -32,7 +33,7 @@ exports.postUserLogin = (req, res) => {
                 out = "Welcome " + result[0]['UserName'] + "!";
                 res.render('userHome', { success_msg, out });
             } else {
-                errors.push({ msg: 'Please enter correct username or password' });
+                errors.push({ msg: 'Enter correct username or password' });
                 res.render('userLogin', {
                     errors,
                     username,

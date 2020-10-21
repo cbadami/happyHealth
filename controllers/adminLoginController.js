@@ -1,3 +1,6 @@
+const db = require('../database');
+
+
 exports.getAdminLogin = (req, res) => {
     res.render('adminLogin')
 }
@@ -6,10 +9,10 @@ exports.postAdminLogin = (req, res) => {
 
     const { username, password } = req.body;
     let errors = [];
+
     if (!username || !password) {
         errors.push({ msg: 'Please enter all fields' });
     }
-
 
     if (errors.length > 0) {
         res.render('adminLogin', {
@@ -19,9 +22,25 @@ exports.postAdminLogin = (req, res) => {
         });
     }
     else {
+        var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${username}' and Password = '${password}' and Admin = 'Yes'`;
 
-        out = "Welcome Admin!";
-        res.render('adminHome', { out });
+        db.query(queryString, function (err, result) {
+            console.log(result);
+            if (result.length > 0) {
+                // success_msg = 'Login successful';
+                // console.log(success_msg);
+                out = "Welcome " + result[0]['UserName'] + "!";
+                res.render('userHome', { out });
+            } else {
+                errors.push({ msg: 'Enter correct username or password' });
+                res.render('adminLogin', {
+                    errors,
+                    username,
+                    password
+                });
+            }
+
+        });
+
     }
-
 }
