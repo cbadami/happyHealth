@@ -2,6 +2,7 @@ const db = require('../database');
 
 
 exports.getSignup = (req, res) => {
+    console.log(`inside get method of user signup`)
     res.render('userSignup')
 }
 
@@ -19,24 +20,25 @@ exports.postSignup = (req, res) => {
         else if (name.length < 6) {
             errors.push({ msg: 'Username must be atleast 6 characters' });
         }
-        else {
-            var userQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${name}'`;
-            db.query(userQuery, function (err, result) {
-                console.log(result);
-                if (result.length > 0) {
-                    console.log('inside username result');
-                    errors.push({ msg: 'Username already taken' });
-                    console.log(`inside erros ${errors} length: ${errors.length}`);
-                    res.render('userSignup', {
-                        errors,
-                        name,
-                        email,
-                        password,
-                        password2
-                    });
-                }
-            });
-        }
+        // else {
+        //     var userQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${name}'`;
+        //     db.query(userQuery, function (err, result) {
+        //         console.log(result);
+        //         if (result.length > 0) {
+        //             console.log('inside username result');
+        //             errors.push({ msg: 'Username already taken' });
+        //             console.log(`inside errors ${errors} length: ${errors.length}`);
+        //             // res.render('userSignup', {
+        //             //     errors,
+        //             //     name,
+        //             //     email,
+        //             //     password,
+        //             //     password2
+        //             // });
+        //         }
+        //     });
+        //     console.log(`after query errors ${errors} length ${errors.length}`)
+        // }
 
         if (password.length > 15) {
             errors.push({ msg: 'Password must be below 15 characters' });
@@ -48,22 +50,23 @@ exports.postSignup = (req, res) => {
         if (email.length > 30) {
             errors.push({ msg: 'Email id must be below 30 characters' });
         }
-        else {
-            var emailQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE email = '${email}'`;
-            db.query(emailQuery, function (err, result) {
-                if (result.length > 0) {
-                    errors.push({ msg: 'Email id already registered' });
-                    res.render('userSignup', {
-                        errors,
-                        name,
-                        email,
-                        password,
-                        password2
-                    });
-                }
+        // else {
+        //     var emailQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE email = '${email}'`;
+        //     db.query(emailQuery, function (err, result) {
+        //         if (result.length > 0) {
+        //             console.log('inside email id query check');
+        //             errors.push({ msg: 'Email id already registered' });
+        //             res.render('userSignup', {
+        //                 errors,
+        //                 name,
+        //                 email,
+        //                 password,
+        //                 password2
+        //             });
+        //         }
 
-            });
-        }
+        //     });
+        // }
 
         if (password != password2) {
             errors.push({ msg: 'Passwords not matched' });
@@ -80,15 +83,39 @@ exports.postSignup = (req, res) => {
             password2
         });
     }
-    else if (!errors.length > 0) {
+    else {
+        console.log(`errors in last query: ${errors[0]} length ${errors.length}`)
         var queryString = `INSERT INTO  happyhealth_MySQL.USER values(
         '${name}','${password}','No','No','No','Yes','${email}');`;
         db.query(queryString, function (err, result) {
-            if (err) console.log(`${err}`);
+            if (err) {
+                console.log(`${err}`)
+                let str = err.message
+                if(str.includes("UserName")){
+                    errors.push({ msg: 'Username already taken' });
+                    res.render('userSignup', {
+                        errors,
+                        name,
+                        email,
+                        password,
+                        password2
+                    }); 
+                }else if(str.includes("Email")){
+                    errors.push({ msg: 'Email id already registered' });
+                    res.render('userSignup', {
+                        errors,
+                        name,
+                        email,
+                        password,
+                        password2
+                    }); 
+                }
+            }else{
             console.log("1 record inserted");
             success_msg = 'Register sucessful';
             req.session.success_msg = success_msg;
             res.redirect('/')
+            }
         });
 
     }
