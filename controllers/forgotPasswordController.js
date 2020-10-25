@@ -23,11 +23,10 @@ exports.postForgotPassword = (req, res) => {
         console.log(result)
         if (result.length > 0) {
           console.log(`under forgot password page ${result[0]['UserName']}`);
-          var UserName = result[0]['UserName'];
-          console.log(`post forgot page Hello user ${UserName}`);
-          // errors.push({ msg: `Email id: ${email}` })
-          let urlvalidation= `/validationPage/${UserName}`
-          res.redirect(urlvalidation)
+          var userName = result[0]['UserName'];
+          console.log(`post forgot page Hello user ${userName}`);
+          req.session.userName = userName
+          res.redirect('validationPage')
         } else {
           errors.push({ msg: 'Email id not registered' });
           res.render('forgotPassword', {

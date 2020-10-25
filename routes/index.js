@@ -34,13 +34,13 @@ router.get('/forgotPassword', forgotPasswordController.getForgotPassword);
 
 router.post('/forgotPassword', forgotPasswordController.postForgotPassword);
 
-router.get('/validationPage/:userName',validationController.getValidation);
+router.get('/validationPage',validationController.getValidation);
 
-router.post('/validationPage/:userName',validationController.postValidation );
+router.post('/validationPage',validationController.postValidation );
 
-router.get('/resetPassword/:userName',resetPasswordController.getResetPassword );
+router.get('/resetPassword',resetPasswordController.getResetPassword );
 
-router.post('/resetPassword/:userName',resetPasswordController.postResetPassword )
+router.post('/resetPassword',resetPasswordController.postResetPassword )
 
 
 module.exports = router;

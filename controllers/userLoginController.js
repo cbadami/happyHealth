@@ -2,7 +2,14 @@ const db = require('../database');
 
 
 exports.getUserLogin = (req, res) => {
-    res.render('userLogin')
+    let success_msg = req.session.success_msg;
+    // console.log(`before session destroy ${success_msg}`)
+    req.session.destroy()
+    if(!success_msg){
+        res.render('userLogin')
+    }else{
+    res.render('userLogin',{success_msg})
+    }
 }
 
 

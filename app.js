@@ -3,8 +3,13 @@ const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+var cookieParser = require('cookie-parser')
+
 
 const app = express();
+
+// cookie parser
+app.use(cookieParser())
 
 // Passport Config
 // require('./config/passport')(passport);

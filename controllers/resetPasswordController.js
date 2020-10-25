@@ -1,13 +1,14 @@
+const db = require('../database');
 
 exports.getResetPassword = (req, res) => {
-    const userName = req.params.userName;
+    const userName = req.session.userName;
     console.log(`under get reset password ${userName}`);
-    res.render('resetPassword', { userName });
+    res.render('resetPassword');
 
 }
 
 exports.postResetPassword = (req,res) =>{
-    const userName = req.params.userName;
+    const userName = req.session.userName;
     const {password, password2 } = req.body;
     let errors = [];
     let success_msg;
@@ -30,16 +31,24 @@ exports.postResetPassword = (req,res) =>{
     if (errors.length > 0) {
         res.render('resetPassword', {
             errors,
-            userName,
             password,
             password2
         });
     }
     else{
-        success_msg = 'Password changed sucessfully';
-        res.render('userLogin', {
-            success_msg
-        });
+
+            var updateQuery = `UPDATE happyhealth_MySQL.USER
+            SET 
+                Password = '${password}'
+            WHERE
+                UserName = '${userName}';`
+            db.query(updateQuery, function (err, result) {
+                if (err) console.log(`${err}`);
+                console.log("1 record updated");
+                success_msg1 = 'Password changed sucessfully';
+                req.session.success_msg = success_msg1;
+                res.redirect('/')
+            });
     }
 
 }
