@@ -2,7 +2,10 @@
 This repo is created to implement progressive web app 
 
 Hosted app link:
-https://exalted-legacy-290621.uc.r.appspot.com/
+- User Login: https://exalted-legacy-290621.uc.r.appspot.com/
+- User SignUp: https://exalted-legacy-290621.uc.r.appspot.com/userSignUp
+- User ForgotPassword: https://exalted-legacy-290621.uc.r.appspot.com/forgotPassword
+- Admin login: https://exalted-legacy-290621.uc.r.appspot.com/adminLogin
 
 old app link:  
 Demo App link: https://happy-health-demo.herokuapp.com/  
