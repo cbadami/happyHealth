@@ -38,7 +38,9 @@ router.get('/validationPage/:userName',validationController.getValidation);
 
 router.post('/validationPage/:userName',validationController.postValidation );
 
-// router.get('/resetPassword',resetPasswordController.getResetPassword );
+router.get('/resetPassword/:userName',resetPasswordController.getResetPassword );
+
+router.post('/resetPassword/:userName',resetPasswordController.postResetPassword )
 
 
 module.exports = router;
