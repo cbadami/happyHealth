@@ -34,11 +34,11 @@ router.get('/forgotPassword', forgotPasswordController.getForgotPassword);
 
 router.post('/forgotPassword', forgotPasswordController.postForgotPassword);
 
-router.get('/validationPage',validationController.getValidation);
+router.get('/validationPage/:userName',validationController.getValidation);
 
-router.post('/validationPage',validationController.postValidation );
+router.post('/validationPage/:userName',validationController.postValidation );
 
-router.get('/resetPassword',resetPasswordController.getResetPassword );
+// router.get('/resetPassword',resetPasswordController.getResetPassword );
 
 
 module.exports = router;

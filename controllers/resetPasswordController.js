@@ -1,10 +1,9 @@
 
+// exports.getResetPassword = (req, res) => {
+//     res.render('resetPassword', { userName });
 
+// }
 
-exports.getResetPassword = (req, res) => {
-    res.render('resetPassword', {
-        errors,
-        email
-    })
-
+exports.postResetPassword = (req,res) =>{
+    
 }

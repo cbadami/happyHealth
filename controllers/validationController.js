@@ -1,19 +1,19 @@
 exports.getValidation =  (req, res) => {
     // const errors = req.errors;
-    const email = req.body;
-    console.log(`under get validation page ${email}`);
-    res.render('validationPage', { email });
+    const userName = req.params.userName;
+    console.log(`under get validation page ${userName}`);
+    res.render('validationPage', { userName });
   }
 
 
 
 exports.postValidation = (req, res) => {
 
-  const email = req.body.email;
+  const userName = req.params.userName;
   const code = req.body.code;
-    console.log(`under post validation page ${email}`);
+    console.log(`under post validation page ${userName}`);
     console.log(`under post validation page code: ${code}`);
-    res.render('resetPassword', { email });
+    res.render('resetPassword', { userName });
     // const {email,code} = req.body;
     // console.log(`under post validation page ${email}`);
     // let errors = [];
