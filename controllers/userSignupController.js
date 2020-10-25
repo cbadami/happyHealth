@@ -87,9 +87,8 @@ exports.postSignup = (req, res) => {
             if (err) console.log(`${err}`);
             console.log("1 record inserted");
             success_msg = 'Register sucessful';
-            res.render('userLogin', {
-                success_msg
-            });
+            req.session.success_msg = success_msg;
+            res.redirect('/')
         });
 
     }

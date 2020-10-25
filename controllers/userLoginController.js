@@ -35,8 +35,6 @@ exports.postUserLogin = (req, res) => {
         db.query(queryString, function (err, result) {
             console.log(result);
             if (result.length > 0) {
-                // success_msg = 'Login successful';
-                // console.log(success_msg);
                 out = "Welcome " + result[0]['UserName'] + "!";
                 res.render('userHome', { out });
             } else {
