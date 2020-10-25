@@ -9,7 +9,11 @@ exports.getValidation =  (req, res) => {
 
 exports.postValidation = (req, res) => {
 
-    res.render('resetPassword');
+  const email = req.body.email;
+  const code = req.body.code;
+    console.log(`under post validation page ${email}`);
+    console.log(`under post validation page code: ${code}`);
+    res.render('resetPassword', { email });
     // const {email,code} = req.body;
     // console.log(`under post validation page ${email}`);
     // let errors = [];

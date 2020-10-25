@@ -11,7 +11,7 @@ exports.postForgotPassword = (req, res) => {
       errors.push({ msg: 'Please enter email id' });
     }
     if (errors.length > 0) {
-      res.render('forgotPassword', {
+      res.redirect('/forgotPassword', {
         errors,
         email
       });
@@ -26,10 +26,10 @@ exports.postForgotPassword = (req, res) => {
           var UserName = result[0]['UserName'];
           console.log(`post forgot page Hello user ${email}`);
           // errors.push({ msg: `Email id: ${email}` })
-          res.render('validationPage', { email });
+          res.redirect('/validationPage', { email });
         } else {
           errors.push({ msg: 'Email id not registered' });
-          res.render('forgotPassword', {
+          res.redirect('/forgotPassword', {
             errors,
             email,
           });
