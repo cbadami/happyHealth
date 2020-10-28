@@ -21,6 +21,8 @@ app.use("/public/stylesheets",express.static(__dirname + "/public/stylesheets"))
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
+app.use( express.static( "views" ) );
+
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 
