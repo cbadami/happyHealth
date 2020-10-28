@@ -42,7 +42,9 @@ router.get('/resetPassword',resetPasswordController.getResetPassword );
 
 router.post('/resetPassword',resetPasswordController.postResetPassword );
 
-router.get('/')
+router.get('/userChallenges',userHomeController.getUserChallenges);
+
+router.get('/userMoreChallenges',userHomeController.getUserMoreChallenges)
 
 
 module.exports = router;
