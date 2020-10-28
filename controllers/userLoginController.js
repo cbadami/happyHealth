@@ -36,7 +36,7 @@ exports.postUserLogin = (req, res) => {
             console.log(result);
             if (result.length > 0) {
                 out = "Welcome " + result[0]['UserName'] + "!";
-                res.render('userHome', { out });
+                res.render('newuserHome', { out });
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
                 res.render('userLogin', {

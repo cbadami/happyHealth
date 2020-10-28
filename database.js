@@ -17,8 +17,6 @@ conn.connect(function(err) {
 module.exports = conn;
 
 
-
-
 // // Google cloud database connection"
 // var mysql = require("mysql");
 

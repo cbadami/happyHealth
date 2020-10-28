@@ -40,7 +40,9 @@ router.post('/validationPage',validationController.postValidation );
 
 router.get('/resetPassword',resetPasswordController.getResetPassword );
 
-router.post('/resetPassword',resetPasswordController.postResetPassword )
+router.post('/resetPassword',resetPasswordController.postResetPassword );
+
+router.get('/')
 
 
 module.exports = router;
