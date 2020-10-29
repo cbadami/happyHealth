@@ -2,7 +2,7 @@ const db = require('../database');
 
 
 exports.getAdminLogin = (req, res) => {
-    res.render('adminLogin')
+    res.render('adminLogin');
 }
 
 exports.postAdminLogin = (req, res) => {
@@ -30,7 +30,8 @@ exports.postAdminLogin = (req, res) => {
                 // success_msg = 'Login successful';
                 // console.log(success_msg);
                 out = "Welcome " + result[0]['UserName'] + "!";
-                res.render('userHome', { out });
+                // res.render('userHome', { out });
+                res.redirect('/adminHome')
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
                 res.render('adminLogin', {
@@ -43,4 +44,8 @@ exports.postAdminLogin = (req, res) => {
         });
 
     }
+}
+
+exports.getAdminHome = (req,res) => {
+    res.render('newAdminHome');
 }

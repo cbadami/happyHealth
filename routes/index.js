@@ -22,9 +22,6 @@ router.post('/',userLoginController.postUserLogin);
 
 router.get('/userHome', userHomeController.getUserHome);
 
-router.get('/adminLogin',adminLoginController.getAdminLogin );
-
-router.post('/adminLogin', adminLoginController.postAdminLogin);
 
 router.get('/userSignup', userSignupController.getSignup);
 
@@ -45,6 +42,13 @@ router.post('/resetPassword',resetPasswordController.postResetPassword );
 router.get('/userChallenges',userHomeController.getUserChallenges);
 
 router.get('/userMoreChallenges',userHomeController.getUserMoreChallenges)
+
+
+router.get('/adminLogin',adminLoginController.getAdminLogin );
+
+router.post('/adminLogin', adminLoginController.postAdminLogin);
+
+router.get('/adminHome',adminLoginController.getAdminHome);
 
 
 module.exports = router;
