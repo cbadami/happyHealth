@@ -29,8 +29,9 @@ exports.postAdminLogin = (req, res) => {
             if (result.length > 0) {
                 // success_msg = 'Login successful';
                 // console.log(success_msg);
-                out = "Welcome " + result[0]['UserName'] + "!";
+                out = result[0]['UserName'];
                 // res.render('userHome', { out });
+                req.session.username = out
                 res.redirect('/adminHome')
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
@@ -47,5 +48,7 @@ exports.postAdminLogin = (req, res) => {
 }
 
 exports.getAdminHome = (req,res) => {
-    res.render('newAdminHome');
+    let username = req.session.username
+    req.session.destroy()
+    res.render('newAdminHome',{username});
 }
