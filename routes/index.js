@@ -43,6 +43,12 @@ router.get('/userChallenges',userHomeController.getUserChallenges);
 
 router.get('/userMoreChallenges',userHomeController.getUserMoreChallenges)
 
+router.ger('/userStep',userHomeController.getUserStep)
+
+router.ger('/userSleep',userHomeController.getUserStep)
+
+router.ger('/userStep',userHomeController.getUserStep)
+
 
 router.get('/adminLogin',adminLoginController.getAdminLogin );
 
