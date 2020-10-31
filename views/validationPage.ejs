@@ -70,11 +70,11 @@
 
 
     .btn:hover {
-    background-color:white;
-    border-color: green;
-    border: 1px solid;
-    color: black;
-  }
+        background-color: white;
+        border-color: green;
+        border: 1px solid;
+        color: black;
+    }
 
     a {
         /* display: block; */
@@ -108,13 +108,15 @@
                                 value="<%= typeof code != 'undefined' ? code : '' %>" />
 
                         </div>
-
                         <div class="form-group">
+                            <div id="countdown"></div>
+                        </div>
+                        <!-- <div class="form-group">
                             <label for="exampleTimer">Your code will expire in </label>
                             <input type="time" class="form-control" id="exampleTimer">
-                        </div>
-                        <div class="container">
-                            <input type="submit" class="btn bgm1" value="Submit">
+                        </div> -->
+                        <div class="form-group">
+                            <input type="submit" class="btn bgm1" value="Submit" id="resend">
                         </div>
 
                     </form>
@@ -123,6 +125,19 @@
         </div>
     </section>
     <!-- JS files: jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        var timeleft = 60;
+        var downloadTimer = setInterval(function () {
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+                document.getElementById("countdown").innerHTML = "Code expired";
+                document.getElementById("resend").value = "Resend";
+            } else {
+                document.getElementById("countdown").innerHTML = "Code expires in "+timeleft +" seconds";
+            }
+            timeleft -= 1;
+        }, 1000);
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
