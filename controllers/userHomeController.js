@@ -3,7 +3,8 @@ exports.getUserHome = (req, res) => {
     // console.log(`before session destroy ${success_msg}`)
     req.session.destroy()
     res.render('newuserHome',{username})
-} 
+}
+ 
 
 exports.getUserChallenges = (req, res) => {
     res.render('user_challenges')

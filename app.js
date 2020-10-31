@@ -52,7 +52,7 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-app.use('/', require('./routes/index.js'));
+app.use('/', require('./routes/router.js'));
 
 const PORT = process.env.PORT || 3000;
 
