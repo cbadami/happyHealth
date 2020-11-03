@@ -3,7 +3,9 @@ const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
+// var MemoryStore = require('memorystore')(session)
+var cookieSession = require('cookie-session')
 
 
 const app = express();
@@ -26,15 +28,25 @@ app.use( express.static( "views" ) );
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 
-// Express session
-app.use(
-  session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true // prune expired entries every 24h
+// // Memory store session
+// app.use(session({
+//     cookie: { maxAge: 86400000 },
+//     store: new MemoryStore({
+//       checkPeriod: 86400000 // prune expired entries every 24h
+//     }),
+//     resave: false,
+//     secret: 'keyboard cat',
+//     saveUninitialized: true
+// }))
 
-  })
-);
+// Cookie-session use
+app.use(cookieSession({
+  name: 'session',
+  keys: ['tobo!'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 // Passport middleware
 app.use(passport.initialize());

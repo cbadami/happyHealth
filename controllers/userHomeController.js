@@ -1,8 +1,9 @@
 exports.getUserHome = (req, res) => {
     let username = req.session.username;
     // console.log(`before session destroy ${success_msg}`)
-    req.session.destroy()
-    res.render('newuserHome',{username})
+    console.log(`inside get user home ${username}`);
+    req.session = null
+    res.render('newuserHome', {username});
 }
  
 
