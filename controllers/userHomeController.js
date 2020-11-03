@@ -8,19 +8,23 @@ exports.getUserHome = (req, res) => {
  
 
 exports.getUserStep = (req,res) => {
+    console.log(`inside  get user step`)
     res.render('userStep')
 }
 
 exports.postUserStep = (req,res) =>{
     const { date, num_steps, goal } = req.body;
+    console.log(`inside post user step`)
     let errors = [];
+    console.log(`first ${errors.length}`);
     let success_msg;
     if (!date || !num_steps || !goal) {
+        console.log(`inside if statement ${num_steps}`);
         errors.push({ msg: 'Please enter all fields' });
+        success_msg = 'Please enter all fields'
+        console.log(`inside if ${errors.length}`);
     }
     else {
-
-        res.redirect('/');
         // if (name.length > 12) {
         //     errors.push({ msg: 'Username must be below 12 characters' });
         // }
@@ -43,6 +47,8 @@ exports.postUserStep = (req,res) =>{
         //     errors.push({ msg: 'Passwords not matched' });
         // }
     }
+    console.log(`outside if ${errors.length}`);
+    res.render('userStep', {success_msg});
 
     // console.log(`before errors ${errors} length: ${errors.length}`);
     // if (errors.length > 0) {

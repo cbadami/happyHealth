@@ -45,6 +45,8 @@ router.get('/userMoreChallenges',userHomeController.getUserMoreChallenges)
 
 router.get('/userStep',userHomeController.getUserStep)
 
+router.post('/userStep',userHomeController.postUserStep)
+
 router.get('/userSleep',userHomeController.getUserSleep)
 
 router.get('/userHydration',userHomeController.getUserHydration)
