@@ -122,9 +122,7 @@
                         <%- include ('./partials/messages') %>
                     </div>
                     <form action="/userStep" method="POST" class="form-container">
-                        <!-- <div class="form-group">
-                            <%- include ('./partials/messages') %>
-                        </div> -->
+
                         <div class="form-group">
                             <h2>Step Count</h2>
                             <img src="./icons/step_count.png"
@@ -134,7 +132,8 @@
                             <label for="username">Date:</label>
                             <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' name ="date" class="form-control"  value="<%= typeof date != 'undefined' ? date : '' %>" />
+                                <input type='text' name="date" class="form-control"
+                                    value="<%= typeof date != 'undefined' ? date : '' %>" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -147,14 +146,14 @@
                         </div>
                         <div class="form-row">
                             <label for="password">Personal Goal Setter</label>
-                            <input type="number" id="goal" name="goal" class="form-control" placeholder="0" 
-                            value="<%= typeof goal != 'undefined' ? goal : '' %>" />
+                            <input type="number" id="goal" name="goal" class="form-control" placeholder="0"
+                                value="<%= typeof goal != 'undefined' ? goal : '' %>" />
                         </div>
                         <!-- <div class="form-row">
                            <label for="password">Target</label>
                             <input type="number" id="target" name="target" class="form-control" placeholder="0"
                                 value="" />
-                        </div> --> 
+                        </div> -->
                         <div class="form-row"></div>
 
                         <div class="form-row">
