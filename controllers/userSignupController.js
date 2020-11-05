@@ -111,6 +111,8 @@ exports.postSignup = (req, res) => {
                     }); 
                 }
             }else{
+                // var stepQuery = `INSERT INTO  happyhealth_MySQL.USER values(
+                //     '${name}','${password}','No','No','No','Yes','${email}');`;
             console.log("1 record inserted");
             success_msg = 'Register sucessful';
             req.session.success_msg = success_msg;
