@@ -15,14 +15,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css"> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
     <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js">
+    </script>
 
 
     <title>User Step Count</title>
@@ -118,9 +118,6 @@
         <div class="container app-container-wrapper">
             <div class="row no-gutter">
                 <div class="col-lg-12" px-5="" pt-5="">
-                    <div class="form-group">
-                        <%- include ('./partials/messages') %>
-                    </div>
                     <form action="/userStep" method="POST" class="form-container">
 
                         <div class="form-group">
@@ -128,7 +125,10 @@
                             <img src="./icons/step_count.png"
                                 style='width:20%;margin-left: auto; margin-right: auto;  display: block;'>
                         </div>
+                        <p style='color: red;'> <%= errors %></p>
+                        <br>
                         <div class="form-row">
+
                             <label for="username">Date:</label>
                             <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
                             <div class='input-group date' id='datetimepicker1'>
@@ -184,8 +184,8 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script> -->
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        crossorigin="anonymous"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script> -->
 
 </body>
 
