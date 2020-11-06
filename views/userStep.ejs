@@ -35,6 +35,37 @@
         background-size: 200%;
     }
 
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: darkgreen;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #f1f1f1;
+        display: block;
+        transition: 0.3s;
+    }
+
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
     i {
         float: right;
     }
@@ -118,6 +149,25 @@
         <div class="container app-container-wrapper">
             <div class="row no-gutter">
                 <div class="col-lg-12" px-5="" pt-5="">
+                    <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a href="/userHome">Home</a>
+                        <a href="#">Profile</a>
+                        <a href="#">Active Challenges</a>
+                        <a href="#">History</a>
+                        <a href="#">Notifications</a>
+                        <a href="/">Logout</a>
+                    </div>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+                    <script>
+                        function openNav() {
+                            document.getElementById("mySidenav").style.width = "250px";
+                        }
+    
+                        function closeNav() {
+                            document.getElementById("mySidenav").style.width = "0";
+                        }
+                    </script>
                     <form action="/userStep" method="POST" class="form-container">
 
                         <div class="form-group">
