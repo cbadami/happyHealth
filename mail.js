@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer'); 
-// const code = 1234
-// const ht = "<h1>Happy Health</h1> <p>your otp is"+ code+"  </p>"
+
+var code = Math.floor((Math.random() * 100000) + 1)
+var email = "<h1>Happy Health</h1> <p>Your otp is "+ code+"  </p>"
   
 let mailTransporter = nodemailer.createTransport({ 
     service: 'gmail', 
@@ -13,9 +14,9 @@ let mailTransporter = nodemailer.createTransport({
 let mailDetails = { 
     from: 'happyhealthgdp@gmail.com', 
     to: 'harishthadkaus@gmail.com', 
-    subject: 'html mail', 
+    subject: 'Happy Health forgot Password!', 
     // text: 'Node.js testing mail for GeeksforGeeks'
-    html: "<h1>Happy Health</h1> <p>your otp is 1234 </p>"
+    html: email
 }; 
   
 mailTransporter.sendMail(mailDetails, function(err, data) { 
