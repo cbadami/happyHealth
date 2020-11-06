@@ -49,7 +49,6 @@ exports.postAdminLogin = (req, res) => {
 
 exports.getAdminHome = (req,res) => {
     let username = req.session.username;
-    req.session = null
     console.log(`inside get admin ${username}`);
     res.render('newAdminHome',{username});
 }
