@@ -9,12 +9,6 @@ var forgotPasswordController = require('../controllers/forgotPasswordController'
 var validationController = require('../controllers/validationController')
 var resetPasswordController = require('../controllers/resetPasswordController')
 
-// const async = require('async');
-
-// const email = 'james234@gmail.co';
-// const password = 'JamesBond';
-
-// var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE Email = '${email}' and Password = '${password}'`;
 
 router.get('/', userLoginController.getUserLogin);
 

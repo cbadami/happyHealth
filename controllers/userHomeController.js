@@ -5,7 +5,17 @@ exports.getUserHome = (req, res) => {
     // console.log(`before session destroy ${success_msg}`)
     console.log(`inside get user home ${username}`);
     // req.session = null
-    res.render('newuserHome', { username });
+    var stepQuery = `Select STEPCOUNT from happyhealth_MySQL.STEPCOUNT where username = '${username}';`;
+    db.query(stepQuery, function (err, result) {
+        if (err) {
+            console.log(err)
+        } else {
+            var stepCount = result[0]['STEPCOUNT']
+            res.render('newuserHome', { username, stepCount });
+        }
+    });
+
+
 }
 
 
