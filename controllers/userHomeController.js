@@ -1,18 +1,32 @@
 const db = require('../database');
+const async = require('async');
+const await = require('await');
 
 exports.getUserHome = (req, res) => {
     let username = req.session.username;
-    // console.log(`before session destroy ${success_msg}`)
     console.log(`inside get user home ${username}`);
-    // req.session = null
+
     var stepQuery = `Select STEPCOUNT from happyhealth_MySQL.stepcount where username = '${username}';`;
+    var sleepQuery = `Select SleepHoursCount from happyhealth_MySQL.sleepcount where username = '${username}';`;
+
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err)
+            stepCount = 0;
         } else {
-            var stepCount = result[0]['STEPCOUNT']
-            res.render('newuserHome', { username, stepCount });
+            stepCount = result[0]['STEPCOUNT'];
         }
+        console.log(`iniside db ${stepCount}`)
+        db.query(sleepQuery, function (err, result) {
+            if (err) {
+                console.log(err)
+                sleepHours = 0;
+            } else {
+                sleepHours = result[0]['SleepHoursCount']
+            }
+            res.render('userHome', { username, stepCount, sleepHours })
+        });
+
     });
 
 
@@ -47,11 +61,39 @@ exports.postUserStep = (req, res) => {
         }
     });
 
-
-
-
 }
 
+
+exports.getUserSleep = (req, res) => {
+    let errors;
+    console.log(`inside  get user sleep`)
+    res.render('userSleep', { errors })
+}
+
+
+exports.postUserSleep = (req, res) => {
+    let username = req.session.username;
+    console.log(username)
+    const { date, num_hours, goal } = req.body;
+    console.log(`inside post user sleep`)
+    let errors;
+    if (!date || !num_hours || !goal) {
+        console.log(`inside if statement ${num_hours}`);
+        errors = 'Please enter all fields';
+        res.render('userSleep', { errors });
+    }
+    var stepQuery = `UPDATE happyhealth_MySQL.sleepcount
+        SET SleepHoursCount = ${num_hours}, Goal = ${goal}, Date = '${date}'
+        WHERE UserName = '${username}';`;
+    db.query(stepQuery, function (err, result) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.redirect('/userHome')
+        }
+    });
+
+}
 
 
 exports.getUserChallenges = (req, res) => {
@@ -63,9 +105,7 @@ exports.getUserMoreChallenges = (req, res) => {
     res.render('user_more_challenges')
 }
 
-exports.getUserSleep = (req, res) => {
-    res.render('userSleep')
-}
+
 
 exports.getUserHydration = (req, res) => {
     res.render('userHydration')

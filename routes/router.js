@@ -43,6 +43,8 @@ router.post('/userStep',userHomeController.postUserStep)
 
 router.get('/userSleep',userHomeController.getUserSleep)
 
+router.post('/userSleep',userHomeController.postUserSleep)
+
 router.get('/userHydration',userHomeController.getUserHydration)
 
 
