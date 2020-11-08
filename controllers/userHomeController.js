@@ -5,7 +5,7 @@ exports.getUserHome = (req, res) => {
     // console.log(`before session destroy ${success_msg}`)
     console.log(`inside get user home ${username}`);
     // req.session = null
-    var stepQuery = `Select STEPCOUNT from happyhealth_MySQL.STEPCOUNT where username = '${username}';`;
+    var stepQuery = `Select STEPCOUNT from happyhealth_MySQL.stepcount where username = '${username}';`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err)
@@ -36,7 +36,7 @@ exports.postUserStep = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userStep', { errors });
     }
-    var stepQuery = `UPDATE happyhealth_MySQL.STEPCOUNT
+    var stepQuery = `UPDATE happyhealth_MySQL.stepcount
         SET StepCount = ${num_steps}, Goal = ${goal}, Date = '${date}'
         WHERE UserName = '${username}';`;
     db.query(stepQuery, function (err, result) {
