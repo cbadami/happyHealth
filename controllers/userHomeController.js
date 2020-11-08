@@ -8,11 +8,12 @@ exports.getUserHome = (req, res) => {
 
     var stepQuery = `Select STEPCOUNT from happyhealth_MySQL.stepcount where username = '${username}';`;
     var sleepQuery = `Select SleepHoursCount from happyhealth_MySQL.sleepcount where username = '${username}';`;
+    var waterQuery = `Select GlassCount from happyhealth_MySQL.watercount where username = '${username}';`;
 
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err)
-            stepCount = 0;
+            stepCount = -1;
         } else {
             stepCount = result[0]['STEPCOUNT'];
         }
@@ -20,11 +21,19 @@ exports.getUserHome = (req, res) => {
         db.query(sleepQuery, function (err, result) {
             if (err) {
                 console.log(err)
-                sleepHours = 0;
+                sleepHours = -1;
             } else {
                 sleepHours = result[0]['SleepHoursCount']
             }
-            res.render('userHome', { username, stepCount, sleepHours })
+            db.query(waterQuery, function (err, result) {
+                if (err) {
+                    console.log(err)
+                    waterCount = -1;
+                } else {
+                    waterCount = result[0]['GlassCount']
+                }
+                res.render('userHome', { username, stepCount, sleepHours, waterCount })
+            });
         });
 
     });
@@ -100,7 +109,7 @@ exports.postUserSleep = (req, res) => {
 exports.getUserHydration = (req, res) => {
     let errors;
     console.log(`inside  get user sleep`)
-    res.render('userHydration', {errors})
+    res.render('userHydration', { errors })
 }
 
 exports.postUserHydration = (req, res) => {
