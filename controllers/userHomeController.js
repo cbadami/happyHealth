@@ -96,6 +96,37 @@ exports.postUserSleep = (req, res) => {
 }
 
 
+
+exports.getUserHydration = (req, res) => {
+    let errors;
+    console.log(`inside  get user sleep`)
+    res.render('userHydration', {errors})
+}
+
+exports.postUserHydration = (req, res) => {
+    let username = req.session.username;
+    console.log(username)
+    const { date, num_glasses, goal } = req.body;
+    console.log(`inside post user hyration`)
+    let errors;
+    if (!date || !num_glasses || !goal) {
+        console.log(`inside if statement ${num_glasses}`);
+        errors = 'Please enter all fields';
+        res.render('userHydration', { errors });
+    }
+    var hydrationQuery = `UPDATE happyhealth_MySQL.watercount
+        SET GlassCount = ${num_glasses}, Goal = ${goal}, Date = '${date}'
+        WHERE UserName = '${username}';`;
+    db.query(hydrationQuery, function (err, result) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.redirect('/userHome')
+        }
+    });
+
+}
+
 exports.getUserChallenges = (req, res) => {
     res.render('user_challenges')
 }
@@ -106,8 +137,4 @@ exports.getUserMoreChallenges = (req, res) => {
 }
 
 
-
-exports.getUserHydration = (req, res) => {
-    res.render('userHydration')
-}
 
