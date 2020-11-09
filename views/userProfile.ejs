@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- Date picker -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js">
+    </script>
+
+
+  <title>User Profile</title>
+  <style>
+    body {
+      background-color: dimgray;
+      width: 100%;
+      height: 100%;
+      background-size: 200%;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: darkgreen;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #f1f1f1;
+      display: block;
+      transition: 0.3s;
+    }
+
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 10px;
+
+    }
+
+    h2 {
+      font-weight: 700 !important;
+      text-align: center;
+      margin: 0px;
+      padding-bottom: 1rem;
+    }
+
+    .app-container-wrapper {
+      max-width: 400px;
+      width: 100%;
+      top: 2vh;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 12px 12px 22px;
+    }
+
+    .app-container-wrapper .row {
+      background: inher;
+      border-radius: none;
+      box-shadow: none;
+    }
+
+    .row {
+      background: white;
+      border-radius: 30px;
+      box-shadow: 12px 12px 22px;
+    }
+
+    img {
+      border-bottom-left-radius: 30px;
+      border-top-left-radius: 30px;
+      /* float: right; */
+    }
+
+
+    .btn1 {
+      border: none;
+      outline: none;
+      height: 50px;
+      width: 100%;
+      background-color: rgb(20, 102, 24);
+      color: white;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 10px;
+
+      border: none;
+      outline: none;
+      transition-duration: 1s;
+    }
+
+    .btn1:hover {
+      background-color: white;
+      border-color: green;
+      border: 1px solid;
+      color: black;
+    }
+
+    #stepicon {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #dateText {
+      display: block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #myList {
+      border-radius: 4px;
+      size: auto;
+      padding: 1%;
+      height: 34px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="Form my-4 mx-2">
+    <h1>Happy Health</h1>
+    <div class="container app-container-wrapper">
+      <div class="row no-gutter">
+        <div class="col-lg-12" px-5="" pt-5="">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/userHome">Home</a>
+            <a href="#">Profile</a>
+            <a href="#">Active Challenges</a>
+            <a href="#">History</a>
+            <a href="#">Notifications</a>
+            <a href="/">Logout</a>
+          </div>
+          <span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776; User Profile </span>
+          <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+            }
+          </script>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="Name (Full name)"> Name</label>
+            <!-- <div class="col-md-4"> -->
+            <div class="input-group">
+              <div class="input-group-addon">&nbsp;</div>
+              <input id="Name (Full name)" class="form-control input-md" name="Name (Full name)" required="" type="text"
+                placeholder="Full Name" />
+            </div>
+            <!-- </div> -->
+          </div>
+          <!-- Multiple Radios (inline) -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="Gender">Gender</label>
+            <!-- <div class="col-md-4"> -->
+            <div class="input-group">
+              <div class="input-group-addon">&nbsp;</div>
+              <label class="radio-inline" for="Gender-0">
+                <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
+                Female
+              </label>
+              <div class="input-group-addon">&nbsp;</div>
+              <label class="radio-inline" for="Gender-1">
+                <input type="radio" name="Gender" id="Gender-1" value="2">
+                Male
+              </label>
+              <div class="input-group-addon">&nbsp;</div>
+              <label class="radio-inline" for="Gender-2">
+                <input type="radio" name="Gender" id="Gender-2" value="3">
+                Other
+              </label>
+            </div>
+            <!-- </div> -->
+          </div>
+          <!-- <div class="input-group-addon">&nbsp;</div> -->
+          <label for="username">Date of Birth</label>
+          <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+          <div class='input-group date' id='datetimepicker1'>
+            <input type='text' name="date" id="dateText" value="" />
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+
+          <div class="form-group">
+
+            <label for="exampleInputEmail1">Age</label>
+            <input id="dob" name="Date Of Birth" type="text" placeholder="Age" class="form-control input-md ">
+
+          </div>
+          <div class="form-group">
+            <i class="fa fa-envelope-o"></i>
+            <label for="exampleInputEmail1">Email Address</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Enter your email address" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Current Weight</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Current weight in lbs" required>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Desired Weight</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Desired weight in lbs" required>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Height</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Height in Ft/In" required>
+            <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
+          </div>
+          <div class="form-group">
+
+            <p>
+              <label>Daily Activity</label>
+              <select id="myList">
+                <option value="0">Choose</option>
+                <option value="1">Sedentary</option>
+                <option value="2">Lightly Active</option>
+                <option value="3">Moderately Active</option>
+                <option value="4">Very Active</option>
+              </select>
+              <small id="myList" class="form-text text-muted">Helps us understand your typical day.</small>
+            </p>
+            <table>
+              <tr>
+                <td>
+                  <p>
+                    <label>Country</label>
+                    <select id="myList">
+                      <option value="0">Choose</option>
+                      <option value="1">India</option>
+                      <option value="2">USA</option>
+                      <option value="3">Denmark</option>
+                      <option value="4">Canada</option>
+                    </select>
+                  </p>
+                  <!-- https://www.technicalkeeda.com/html-tutorials/all-countries-drop-down-list-in-html
+          refer to the above URL for dropdown code for countries -->
+                </td>
+                <td>
+                  <label>State</label>
+                  <input id="myList" class="form-control input-md" type=text placeholder=" State" required>
+                </td>
+          </div>
+          </tr>
+          </table>
+          <button type="button" class="btn1 mt-3 mb-5">Update</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- JS files: jQuery first, then Popper.js, then Bootstrap JS -->
+  <script type="text/javascript">
+    $(function () {
+      $('#datetimepicker1').datetimepicker({
+        format: 'MM/DD/YYYY'
+      });
+    });
+  </script>
+</body>
+
+</html>

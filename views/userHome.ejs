@@ -127,6 +127,13 @@
         color: black;
     }
 
+    .btn:hover {
+        background-color: white;
+        background-color: green;
+        border: 1px solid;
+        color:white;
+    }
+
     .container {
         display: flex;
         justify-content: center;
@@ -205,7 +212,7 @@
                     <div id="mySidenav" class="sidenav">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <a href="/userHome">Home</a>
-                        <a href="#">Profile</a>
+                        <a href="/userProfile">Profile</a>
                         <a href="#">Active Challenges</a>
                         <a href="#">History</a>
                         <a href="#">Notifications</a>
@@ -241,7 +248,7 @@
                             <div class="column">
                                 <img src="./icons/hydration_levels.png" alt="hydration_levels">
                                 <button type="submit" class="btn" onclick="location.href = '/userHydration';">Water 
-                                    Intake <%= waterCount %></button>
+                                    Intake: <%= waterCount %></button>
                             </div>
                         </div>
                         <div class="row">
