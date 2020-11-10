@@ -49,6 +49,8 @@ router.get('/userHydration',userHomeController.getUserHydration)
 
 router.post('/userHydration',userHomeController.postUserHydration)
 
+router.get('/userProfile',userHomeController.getUserProfile)
+
 
 router.get('/adminLogin',adminLoginController.getAdminLogin );
 

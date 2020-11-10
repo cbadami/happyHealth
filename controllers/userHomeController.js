@@ -145,5 +145,9 @@ exports.getUserMoreChallenges = (req, res) => {
     res.render('user_more_challenges')
 }
 
+exports.getUserProfile = (req,res) => {
+    res.render('userProfile')
+}
+
 
 
