@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
 
+const db = require('../database');
+
 var generateCode;
 
 
@@ -14,6 +16,7 @@ exports.getValidation = (req, res) => {
   console.log(`Generate code: ${generateCode}`)
   var email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>"
 
+  var userEmail = req.session.userEmail
   let mailTransporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -24,9 +27,8 @@ exports.getValidation = (req, res) => {
 
   let mailDetails = {
     from: 'happyhealthgdp@gmail.com',
-    to: 'harishthadkaus@gmail.com',
+    to: userEmail,
     subject: 'Happy Health forgot Password!',
-    // text: 'Node.js testing mail for GeeksforGeeks'
     html: email
   };
 
@@ -37,8 +39,8 @@ exports.getValidation = (req, res) => {
       console.log('Email sent successfully');
     }
   });
-
   res.render('validationPage');
+
 }
 
 
