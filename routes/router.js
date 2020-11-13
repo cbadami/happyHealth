@@ -7,7 +7,9 @@ var userSignupController = require('../controllers/userSignupController')
 var adminLoginController = require('../controllers/adminLoginController')
 var forgotPasswordController = require('../controllers/forgotPasswordController')
 var validationController = require('../controllers/validationController')
-var resetPasswordController = require('../controllers/resetPasswordController')
+var resetPasswordController = require('../controllers/resetPasswordController');
+var challengeManagement = require('../controllers/challengeManagement');
+
 
 
 router.get('/', userLoginController.getUserLogin);
@@ -57,6 +59,8 @@ router.get('/adminLogin',adminLoginController.getAdminLogin );
 router.post('/adminLogin', adminLoginController.postAdminLogin);
 
 router.get('/adminHome',adminLoginController.getAdminHome);
+
+router.get('/challengeManagement', challengeManagement.getChallengeManagement)
 
 
 module.exports = router;
