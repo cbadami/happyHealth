@@ -25,6 +25,7 @@
             color: blue;
 
         }
+
         /* #myInput {
             background-image: url('/css/searchicon.png');
             background-position: 10px 12px;
@@ -145,13 +146,13 @@
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu my-4">
                             <li>
-                                <a href="/adminHome" class="mm-active">
+                                <a href="adminHome" class="mm-active">
                                     <i class="fa fa-home" aria-hidden="true"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/userManagement" class="mm-active">
+                                <a href="userManagement" class="mm-active">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <span>Users</span>
                                 </a>
@@ -180,9 +181,9 @@
             </div>
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    
+
                     <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for users"> -->
-                    <h3 style="text-align: center;">User Management</h3>
+                    <!-- <h3 style="text-align: center;">User Management</h3> -->
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-dark">
@@ -197,44 +198,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% for (var i = 0; i < result.length;i++) { %>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>william</td>
-                                    <td>william123@gmail.com</td>
-                                    <td>
-                                        *******
-                                    </td>
+                                    <th scope="row"><%= i+1 %></th>
+                                    <td><%= result[i].UserName%></td>
+                                    <td><%= result[i].Email%></td>
+                                    <td><%= result[i].Password%></td>
                                     <td>
                                         <a href="">View</a>
-                                       
+
                                     </td>
                                     <td><a href="">
                                             Update
                                         </a>
                                     </td>
-                                    <td><a href="">
+                                    <td><a href="delete/<%= result[i].UserName%>">
                                             Delete
                                         </a></td>
                                 </tr>
-								                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Harish</td>
-                                    <td>harish24680@gmail.com</td>
-                                    <td>
-                                        *******
-                                    </td>
-                                    <td>
-                                        <a href="">View</a>
-                                       
-                                    </td>
-                                    <td><a href="">
-                                            Update
-                                        </a>
-                                    </td>
-                                    <td><a href="">
-                                            Delete
-                                        </a></td>
-                                </tr>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>

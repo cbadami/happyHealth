@@ -64,5 +64,7 @@ router.get('/challengeManagement', challengeManagement.getChallengeManagement)
 
 router.get('/userManagement',adminLoginController.getUserManagement)
 
+router.get('/delete/:userName',adminLoginController.deleteUser)
+
 
 module.exports = router;

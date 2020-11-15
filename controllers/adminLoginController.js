@@ -1,3 +1,4 @@
+const { reset } = require('nodemon');
 const db = require('../database');
 
 
@@ -47,12 +48,41 @@ exports.postAdminLogin = (req, res) => {
     }
 }
 
-exports.getAdminHome = (req,res) => {
+exports.getAdminHome = (req, res) => {
     let username = req.session.username;
     console.log(`inside get admin ${username}`);
-    res.render('adminHome',{username});
+    res.render('adminHome', { username });
 }
 
-exports.getUserManagement = (req,res) => {
-    res.render('userManagement');
+exports.getUserManagement = (req, res) => {
+    let username = req.session.username;
+    console.log(`inside get user management ${username}`);
+    var allUsersQuery = `SELECT * FROM happyhealth_MySQL.USER`;
+
+    db.query(allUsersQuery, function (err, result) {
+        // console.log(result);
+        if (err) {
+            throw err;
+        } else {
+            console.log(`length of result: ${result.length}`)
+            res.render('userManagement', { result });
+        }
+
+    });
+
+}
+
+exports.deleteUser =(req,res) => {
+    var username = req.params.userName;
+    console.log(username)
+    var deleteQuery = `Delete FROM happyhealth_MySQL.USER WHERE UserName = '${username}';`;
+
+    db.query(deleteQuery, function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            res.redirect('/userManagement')
+        }
+
+    });
 }
