@@ -62,5 +62,7 @@ router.get('/adminHome',adminLoginController.getAdminHome);
 
 router.get('/challengeManagement', challengeManagement.getChallengeManagement)
 
+router.get('/userManagement',adminLoginController.getUserManagement)
+
 
 module.exports = router;
