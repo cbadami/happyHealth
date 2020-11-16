@@ -68,12 +68,12 @@ router.get('/delete/:userName',adminLoginController.deleteUser)
 
 router.get('/adminAnalytics',adminLoginController.getAdminAnalytics)
 
-router.get('/adminAnalytics',adminLoginController.getAdminAnalyticsStep)
+router.get('/adminAnalyticsStep',adminLoginController.getAdminAnalyticsStep)
 
-router.get('/adminAnalytics',adminLoginController.getAdminAnalyticsSleep)
+router.get('/adminAnalyticsSleep',adminLoginController.getAdminAnalyticsSleep)
 
-router.get('/adminAnalytics',adminLoginController.getAdminAnalyticsWater)
+router.get('/adminAnalyticsWater',adminLoginController.getAdminAnalyticsWater)
 
-router.get('/adminAnalytics',adminLoginController.getAdminAnalyticsMediation)
+router.get('/adminAnalyticsMeditation',adminLoginController.getAdminAnalyticsMediation)
 
 module.exports = router;
