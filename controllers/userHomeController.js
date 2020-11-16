@@ -149,5 +149,9 @@ exports.getUserProfile = (req,res) => {
     res.render('userProfile')
 }
 
+exports.getUserFruits = (req,res)=>{
+    res.render("userFruits")
+}
+
 
 
