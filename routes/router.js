@@ -60,7 +60,7 @@ router.post('/adminLogin', adminLoginController.postAdminLogin);
 
 router.get('/adminHome',adminLoginController.getAdminHome);
 
-router.get('/challengeManagement', challengeManagement.getChallengeManagement)
+router.get('/challengeManagement', challengeManagement.getChallengeManagement);
 
 router.get('/userManagement',adminLoginController.getUserManagement)
 
