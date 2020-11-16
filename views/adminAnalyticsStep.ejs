@@ -11,8 +11,37 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="main.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Users', 'Andrew', 'Anthony', 'Charles', 'William', 'David', 'Daniel'],
+                ['11/13/2020', 1300, 1400, 1200, 1000, 1050, 1000],
+                ['11/12/2020', 1170, 460, 250, 1200, 1000, 900],
+                ['11/11/2020', 660, 1120, 300, 600, 890, 990],
+                ['11/10/2020', 1030, 540, 350, 1200, 960, 2000]
+            ]);
+
+            var options = {
+                chart: {
+                    // title: 'User step count Analytics',
+                    subtitle: 'User step counts as of: 11/13/2020',
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
     <style>
         .col-sm-4 {
             /* width: 250px; */
@@ -35,12 +64,14 @@
             height: 160px;
             padding: 5px;
         }
-        .btn{
+
+        .btn {
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
-        h4{
+
+        h4 {
             padding-top: 0.5rem;
             text-align: center;
         }
@@ -162,7 +193,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/adminAnalytics" class="mm-active">
+                                <a href="#" class="mm-active">
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
                                     <span>Analytics</span>
                                 </a>
@@ -185,76 +216,23 @@
             </div>
             <div class="app-main__outer">
                 <div class="app-main__inner">
-
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>User Management</h4>
-                                <img src="assets/images/happyHealth/userIcon.png" alt="user_stat">
-                                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userManagement';">Manage users</button>
-                            </div>
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Group Management</h4>
-                                <img src="assets/images/happyHealth/groupIcon4.png" alt="user_stat">
-                                <button type="submit" class="btn btn-outline-secondary">Manage Groups</button>     
-                            </div>
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Challenge Management</h4>
-                                <img src="assets/images/happyHealth/chMgmt.PNG" alt="challenge_mgmt">
-                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/challengeManagement';" >Challenge Management</button>
-                            </div>
-
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Analytics</h4>
-                                <img src="assets/images/happyHealth/statistics.png" alt="user_stat">
-                                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/adminAnalytics';">User analytics</button>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="columnchart_material" style="height: 450px; width: 100%;"></div>
+                    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                 </div>
-                <div class="app-wrapper-footer">
-                    <div class="app-footer">
-                        <div class="copyright text-center bg-white py-4">
-                            <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
-                        </div>
-                        <!-- <div class="app-footer__inner">
-                                <div class="app-footer-left">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 1
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 2
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="app-footer-right">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 3
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <div class="badge badge-success mr-1 ml-0">
-                                                    <small>NEW</small>
-                                                </div>
-                                                Footer Link 4
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> -->
+
+            </div>
+            <div class="app-wrapper-footer">
+                <div class="app-footer">
+                    <div class="copyright text-center bg-white py-4">
+                        <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
                     </div>
+
                 </div>
             </div>
-            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </div>
     </div>
     <script type="text/javascript" src="assets/scripts/main.js"></script>
 </body>

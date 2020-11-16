@@ -92,3 +92,19 @@ exports.deleteUser =(req,res) => {
 exports.getAdminAnalytics = (req,res) => {
     res.render('adminAnalytics');
 }
+
+exports.getAdminAnalyticsStep = (req,res) => {
+    res.render('adminAnalyticsStep');
+}
+
+exports.getAdminAnalyticsSleep = (req,res) => {
+    res.render('adminAnalyticsSleep');
+}
+
+exports.getAdminAnalyticsWater = (req,res) => {
+    res.render('adminAnalyticsWater');
+}
+
+exports.getAdminAnalyticsMediation = (req,res) => {
+    res.render('adminAnalyticsMeditation');
+}
