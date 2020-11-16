@@ -64,7 +64,8 @@ exports.getUserManagement = (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(`length of result: ${result.length}`)
+            console.log(`result: ${JSON.stringify(result)}`)
+            // console.log(`length of result: ${result.length}`)
             res.render('userManagement', { result });
         }
 
@@ -85,4 +86,9 @@ exports.deleteUser =(req,res) => {
         }
 
     });
+}
+
+
+exports.getAdminAnalytics = (req,res) => {
+    res.render('adminAnalytics');
 }
