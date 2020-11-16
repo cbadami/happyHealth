@@ -52,10 +52,10 @@ exports.postValidation = (req, res) => {
   var userEmail = req.session.userEmail
   const code = req.body.code;
   const resend = req.body.resend;
-  console.log(`code: ${code} generated code: ${generateCode}`)
+
   console.log(`under post validation page ${userName}`);
   console.log(`under post validation page code: ${code}`);
-  console.log(`under post validation page resend: ${resend}`);  
+  console.log(`under post validation page resend: ${resend}`);
   let errors = [];
 
   if (resend == "Resend") {
@@ -88,12 +88,10 @@ exports.postValidation = (req, res) => {
     });
     res.render('validationPage');
   } else {
-    console.log(`code: ${code} generated code: ${generateCode}`)
     if (!code) {
       errors.push({ msg: 'Enter verification code' });
     }
     else if (code != generateCode) {
-     
       errors.push({ msg: 'Invalid verification code' });
     }
     if (errors.length > 0) {
