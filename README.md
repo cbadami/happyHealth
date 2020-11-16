@@ -1,7 +1,9 @@
 # happyHealth
-This repo is created to implement progressive web app 
+
+##### This repo is created to implement progressive web app
 
 Hosted app link:
+
 - User Login: https://exalted-legacy-290621.uc.r.appspot.com/
 - User SignUp: https://exalted-legacy-290621.uc.r.appspot.com/userSignUp
 - User ForgotPassword: https://exalted-legacy-290621.uc.r.appspot.com/forgotPassword
@@ -12,15 +14,16 @@ Demo App link: https://happy-health-demo.herokuapp.com/
 User Sign up link: https://happy-health-demo.herokuapp.com/userSignUp
 
 ## App Design Architecture:
+
 ![](https://github.com/annie0sc/gdp_health_app/blob/master/design-architecture/App%20Design%20Architecture.PNG)
 
 ## Tasks we did as part of Agile
 
 ## Understanding the requirements :
- 
- Read RFP, understood and analyzed the requirements clearly to formulate the design of the application. Also we identified
- the stakeholders required to implement the project.
- 
+
+Read RFP, understood and analyzed the requirements clearly to formulate the design of the application. Also we identified
+the stakeholders required to implement the project.
+
 ## Formulating the design :
 
 Discussed on creating better solution which meets all the client requirements. Also we discussed on tools and technologies to be used which delivers most reliable and cost efficient project.
@@ -34,41 +37,46 @@ We planned to communicate our views to other designed units and ensure that ever
 ### Express FrameWork:
 
 **Advantages of express FrameWork**
+
 - Minimalistic and fast web framework
 - Easy to setup and straightforward to learn
 - Great routing API
 - Availability of large number of plugins for use
 - Offers numerous HTTP utility methods to build dynamic and perceptive APIs  
-Source: https://expressjs.com/
+  Source: https://expressjs.com/
 
 ### Connecting to different databases from express framework:
 
 - https://expressjs.com/en/guide/database-integration.html
 
 ### Appliation programming interfaces(API's):
+
 - Google Api:https://developers.google.com/identity/sign-in/web/sign-in
 - https://www.youtube.com/watch?v=KwOmVpd1DUA
 - Facebook Api: https://developers.facebook.com/docs/facebook-login/web/
 - Distance Travel Api: https://docs.microsoft.com/en-us/bingmaps/rest-services/routes/calculate-a-route?redirectedfrom=MSDN
-- TravelTime API http://docs.traveltimeplatform.com/reference/time-filter/ 
+- TravelTime API http://docs.traveltimeplatform.com/reference/time-filter/
 - Kintone API: https://developer.kintone.io/hc/en-us/articles/360019245194-Get-Records
 - Source: https://gis.stackexchange.com/questions/15199/looking-for-free-web-service-that-calculates-driving-distance-between-2-addresse
 
-### Heroku - Cloud Platform:  
+### Heroku - Cloud Platform:
 
 **Advantages of Heroku**
+
 - Free dyno: The free cloud instance is not always on, and you’ll have to turn it back on after 30 minutes of inactivity. This limits its functionality to situations like code and app presentations, as its availability can’t be counted on.
 - Easy to use: Using Heroku’s sleek user interface, dynos and any other extras can be easily and immediately added. Heroku lets you focus on the actual development, taking most of the infrastructure responsibility off your back.
 - Buildpacks: Heroku lets you immediately deploy development environments for PHP, Node.js, Python, and many other languages, pre-configured with all necessary settings and dependencies.
 - Add-ons: Many add-ons are available to install on your cloud account, some for free and others for a low monthly cost. Add-ons like Heroku Redis, Timber.io, and Mailgun all offer a free plan.  
-Source: https://www.websiteplanet.com/blog/best-free-cloud-hosting-services/
+  Source: https://www.websiteplanet.com/blog/best-free-cloud-hosting-services/
 
 ### Testing Tools:
 
 1. [Cypress](https://www.cypress.io/)
+
 - Advantages of Cypress: https://dzone.com/articles/why-should-you-switch-to-cypress-for-modern-web-te
--	https://docs.cypress.io/guides/overview/why-cypress.html#Cypress-ecosystem  
--	Tech Radar: https://www.thoughtworks.com/radar/tools/cypress 
+- https://docs.cypress.io/guides/overview/why-cypress.html#Cypress-ecosystem
+- Tech Radar: https://www.thoughtworks.com/radar/tools/cypress
+
 2. [Mochajs](https://mochajs.org/)
 
 ### Formatter & Linters:
@@ -89,8 +97,11 @@ Source: https://www.websiteplanet.com/blog/best-free-cloud-hosting-services/
 7. ByeDegrees
 
 ## Insights to other team updates:
+
 ### Design UI/Themes
+
 #### Introduction to UI/UX Design Proposal
+
 UI / UX is a fast growing field that is quickly expanding across organizations and evolving into the development of new niches. User Experience Design, User Interface Design, Customer Experience, and Product Design all frame the larger landscape of building digital content.
 
 This article is a technical onboarding document that can help you write your own UX Plan. It captures the detailed structure and syntax that we use.
@@ -104,47 +115,51 @@ This article is a technical onboarding document that can help you write your own
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
 
 ### Design Data
+
 #### Introduction to Design data:
+
 Design data complies with the app requirements to facilitate secure data transactions. You must design this dimension so that it can be rescaled over time as business needs change.
 
-#### ER diagram:  
+#### ER diagram:
+
 ![image](https://github.com/annie0sc/gdp-happy-health/blob/master/Design%20Data/Updated/ER%20diagram/HAPPY_HEALTH_ERD.png)
 
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design%20Data)
+
 ### Sprint Planning and Userstories
 
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Sprint%20Planning%20and%20UserStories)
+
 ## General Queries:
 
-### what back end languages and platforms will you test?  
-  
-  we have decided to use java Script as back end language and the frame work as express.js.
+### what back end languages and platforms will you test?
 
-### What formatters (e.g prettier (Links to an external site.)), what linters (e.g. ESLint (Links to an external site.) for JavaScript)?  
- 
-  we gonna use prettier in visual studio and JSLint for javaScript
+we have decided to use java Script as back end language and the frame work as express.js.
 
-### what devops tools (e.g. Husky (Links to an external site.) for GitHub) do you want to use? 
+### What formatters (e.g prettier (Links to an external site.)), what linters (e.g. ESLint (Links to an external site.) for JavaScript)?
 
-  We can implement the project using continuous integration and development tools like Jenkins for testing and packaging the application.
+we gonna use prettier in visual studio and JSLint for javaScript
 
-  For building or compiling the project, we can use Maven.
+### what devops tools (e.g. Husky (Links to an external site.) for GitHub) do you want to use?
 
-  We can deploy the application using Apache TomCat web server, which helps for implementation of the Java Servlet, JavaServer Pages, Java Expression.
+We can implement the project using continuous integration and development tools like Jenkins for testing and packaging the application.
 
-### What datastores will you test? Who will try each possible option?   You must have at least one industry standard implementation. (Java, C#, or Node on the back-end) - work with data team.
+For building or compiling the project, we can use Maven.
 
-   In order to keep up with the current technology pace we should learn and practice with more languages, technologies, libraries and platforms, not to mention the planning, architect, development, deploy and maintain an entire application and the stack it run by the whole project team be planned in making the architecture.
+We can deploy the application using Apache TomCat web server, which helps for implementation of the Java Servlet, JavaServer Pages, Java Expression.
 
-### what devops tools (e.g. Husky (Links to an external site.) for GitHub) do you want to use? 
+### What datastores will you test? Who will try each possible option? You must have at least one industry standard implementation. (Java, C#, or Node on the back-end) - work with data team.
 
-  We can implement the project using continuous integration and development tools like Jenkins for testing and packaging the application.
+In order to keep up with the current technology pace we should learn and practice with more languages, technologies, libraries and platforms, not to mention the planning, architect, development, deploy and maintain an entire application and the stack it run by the whole project team be planned in making the architecture.
 
-  For building or compiling the project, we can use Maven.
+### what devops tools (e.g. Husky (Links to an external site.) for GitHub) do you want to use?
 
-  We can deploy the application using Apache TomCat web server, which helps for implementation of the Java Servlet, JavaServer Pages, Java Expression.
+We can implement the project using continuous integration and development tools like Jenkins for testing and packaging the application.
 
+For building or compiling the project, we can use Maven.
 
-### What datastores will you test? Who will try each possible option?   You must have at least one industry standard implementation. (Java, C#, or Node on the back-end) - work with data team.
+We can deploy the application using Apache TomCat web server, which helps for implementation of the Java Servlet, JavaServer Pages, Java Expression.
 
-   In order to keep up with the current technology pace we should learn and practice with more languages, technologies, libraries and platforms, not to mention the planning, architect, development, deploy and maintain an entire application and the stack it run by the whole project team be planned in making the architecture
+### What datastores will you test? Who will try each possible option? You must have at least one industry standard implementation. (Java, C#, or Node on the back-end) - work with data team.
+
+In order to keep up with the current technology pace we should learn and practice with more languages, technologies, libraries and platforms, not to mention the planning, architect, development, deploy and maintain an entire application and the stack it run by the whole project team be planned in making the architecture
