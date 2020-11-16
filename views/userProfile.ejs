@@ -180,7 +180,7 @@
       <div class="app-main__outer">
         <div class="app-main__inner">
           <div class="form-group">
-            <label class="col-md-4 control-label" for="Name (Full name)"> Name</label>
+            <label class="col-md-4 control-label" for="Name (Full name)"> Name *</label>
             <!-- <div class="col-md-4"> -->
             <div class="input-group">
               <div class="input-group-addon">&nbsp;</div>
@@ -190,7 +190,7 @@
             <!-- </div> -->
           </div>
           <div class="form-group">
-            <label class="col-md-4 control-label" for="Gender">Gender</label>
+            <label class="col-md-4 control-label" for="Gender">Gender *</label>
             <!-- <div class="col-md-4"> -->
             <div class="input-group">
               <div class="input-group-addon">&nbsp;</div>
@@ -212,7 +212,7 @@
             <!-- </div> -->
           </div>
 
-          <label for="username">Date of Birth</label>
+          <label for="username">Date of Birth *</label>
           <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
           <div class='input-group date' id='datetimepicker1'>
             <input type='text' name="date" id="dateText" value="" />
@@ -223,39 +223,39 @@
 
           <div class="form-group">
 
-            <label for="exampleInputEmail1">Age</label>
+            <label for="exampleInputEmail1">Age *</label>
             <input id="dob" name="Date Of Birth" type="text" placeholder="Age" class="form-control input-md ">
 
           </div>
           <div class="form-group">
             <i class="fa fa-envelope-o"></i>
-            <label for="exampleInputEmail1">Email Address</label>
+            <label for="exampleInputEmail1">Email Address *</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
               placeholder="Enter your email address" required>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Current Weight</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Current weight in lbs" required>
+              placeholder="Current weight in lbs">
           </div>
 
           <div class="form-group">
             <label for="exampleInputEmail1">Desired Weight</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Desired weight in lbs" required>
+              placeholder="Desired weight in lbs">
           </div>
 
           <div class="form-group">
             <label for="exampleInputEmail1">Height</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Height in Ft/In" required>
+              placeholder="Height in Inches">
             <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
           </div>
 
           <div class="form-group">
 
             <p>
-              <label>Daily Activity</label>
+              <label>Average Activity Level *</label>
               <select id="myList">
                 <option value="0">Choose</option>
                 <option value="1">Sedentary</option>
@@ -269,7 +269,7 @@
               <tr>
                 <td>
                   <p>
-                    <label>Country</label>
+                    <label>Country *</label>
                     <select id="myList">
                       <option value="0">Choose</option>
                       <option value="1">India</option>
@@ -280,11 +280,12 @@
                   </p>
                   <!-- https://www.technicalkeeda.com/html-tutorials/all-countries-drop-down-list-in-html
           refer to the above URL for dropdown code for countries -->
-                </td>
-                <td>
-                  <label>State</label>
-                  <input id="myList" class="form-control input-md" type=text placeholder=" State" required>
-                </td>
+                  <label>State *</label>
+                    <input id="myList" class="form-control input-md" type=text placeholder=" State" required>
+                  
+                  
+                    <label>Note: <small>This data is optional and will be used internally by admins only.</small></label>
+                  </td>
           </div>
           </tr>
           </table>
