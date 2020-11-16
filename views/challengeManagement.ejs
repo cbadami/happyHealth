@@ -297,7 +297,7 @@
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form action="/addChallenge" method="POST">
                     <div class="modal-header">
                         <h4 class="modal-title">Add Challenge</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -305,31 +305,31 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" required></textarea>
+                            <textarea class="form-control" name="description" required></textarea>
                         </div>
                         <div class="form-group">
                             <label>Type</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="type" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="start">Start date:</label>
-                            <input type="date" id="start" name="Challenge-start" value="2020-07-20" >
+                            <input type="date" id="start" name="startDate" placeholder="2020-07-20" >
                         </div>
                         <div class="form-group">
                             <label for="start">End date:</label>
-                            <input type="date" id="end" name="Challenge-end" value="2020-07-22">
+                            <input type="date" id="end" name="endDate" placeholder="2020-07-22">
                         </div>
                         <div class="form-group">
                             <label>Participant Type</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="participantType" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Participant Count</label>
-                            <input type="text" class="form-control" required>
+                            <input type="number" name="participantCount" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
