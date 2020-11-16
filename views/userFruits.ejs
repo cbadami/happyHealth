@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- Date picker -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js">
+    </script>
+
+
+  <title>Fruits</title>
+  <style>
+    body {
+      background-color: dimgray;
+      width: 100%;
+      height: 100%;
+      background-size: 200%;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: darkgreen;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #f1f1f1;
+      display: block;
+      transition: 0.3s;
+    }
+
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 10px;
+
+    }
+
+    h2 {
+      font-weight: 700 !important;
+      text-align: center;
+      margin: 0px;
+      padding-bottom: 1rem;
+    }
+
+    .app-container-wrapper {
+      max-width: 400px;
+      width: 100%;
+      top: 2vh;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 12px 12px 22px;
+    }
+
+    .app-container-wrapper .row {
+      background: inher;
+      border-radius: none;
+      box-shadow: none;
+    }
+
+    .row {
+      background: white;
+      border-radius: 30px;
+      box-shadow: 12px 12px 22px;
+    }
+
+    img {
+      border-bottom-left-radius: 30px;
+      border-top-left-radius: 30px;
+      /* float: right; */
+    }
+
+
+    .btn1 {
+      border: none;
+      outline: none;
+      height: 50px;
+      width: 100%;
+      background-color: rgb(20, 102, 24);
+      color: white;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 10px;
+
+      border: none;
+      outline: none;
+      transition-duration: 1s;
+    }
+
+    .btn1:hover {
+      background-color: white;
+      border-color: green;
+      border: 1px solid;
+      color: black;
+    }
+
+    #stepicon {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #dateText {
+      display: block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #myList {
+      border-radius: 4px;
+      size: auto;
+      padding: 1%;
+      height: 34px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="Form my-4 mx-2">
+    <h1>Happy Health</h1>
+    <div class="container app-container-wrapper">
+      <div class="row no-gutter">
+        <div class="col-lg-12" px-5="" pt-5="">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/userHome">Home</a>
+            <a href="#">Profile</a>
+            <a href="#">Active Challenges</a>
+            <a href="#">History</a>
+            <a href="#">Notifications</a>
+            <a href="/">Logout</a>
+          </div>
+          <span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776; Fruits </span>
+          <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+            }
+          </script>
+          <div>
+            
+            <img src="icons/fruits.png"
+                style='width:20%;margin-left: auto; margin-right: auto;  display: block;'>
+          </div>
+
+
+<div class="form-row">
+    <label for="username">Date:</label>
+    <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <div class='input-group date' id='datetimepicker1'>
+        <input type='text' class="form-control" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label for="exampleInputEmail1">Number of fruits</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Calories Consumed</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Target</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+<div class="form-row"></div>
+
+<div class="form-row">
+    <div class="col-lg-12">
+        <button type="submit" class="btn1">
+            Update
+        </button>
+    </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- JS files: jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="text/javascript">
+$(function () {
+$('#datetimepicker1').datetimepicker({
+format: 'MM/DD/YYYY'
+});
+});
+</script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+crossorigin="anonymous"></script> -->
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+</body>
+
+
+</html>
