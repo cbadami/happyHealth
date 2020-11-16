@@ -154,4 +154,13 @@ exports.getUserFruits = (req,res)=>{
 }
 
 
+exports.getUserFruits = (req,res)=>{
+    res.render("userFruits")
+}
+
+
+exports.getUserVegetables = (req,res) => {
+    res.render("userVegetables")
+}
+
 

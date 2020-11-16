@@ -8,6 +8,7 @@ var adminLoginController = require('../controllers/adminLoginController')
 var forgotPasswordController = require('../controllers/forgotPasswordController')
 var validationController = require('../controllers/validationController')
 var resetPasswordController = require('../controllers/resetPasswordController');
+
 var challengeManagement = require('../controllers/challengeManagement');
 
 
@@ -54,6 +55,14 @@ router.post('/userHydration',userHomeController.postUserHydration)
 router.get('/userProfile',userHomeController.getUserProfile)
 
 
+
+router.get('/userFruits' , userHomeController.getUserFruits );
+
+router.get('/userVegetables', userHomeController.getUserVegetables );
+
+
+
+
 router.get('/adminLogin',adminLoginController.getAdminLogin );
 
 router.post('/adminLogin', adminLoginController.postAdminLogin);
@@ -61,6 +70,8 @@ router.post('/adminLogin', adminLoginController.postAdminLogin);
 router.get('/adminHome',adminLoginController.getAdminHome);
 
 router.get('/challengeManagement', challengeManagement.getChallengeManagement);
+
+router.get('/leaderboard', challengeManagement.getLeaderboard )
 
 router.get('/userManagement',adminLoginController.getUserManagement)
 
