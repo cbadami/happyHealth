@@ -75,8 +75,10 @@ exports.getUserManagement = (req, res) => {
 
 exports.editUser = (req,res) => {
     var username = req.params.userName;
+    var body = req.body;
     console.log(`inside edit username: ${username}`)
-    // var editQuery = `SELECT * FROM happyhealth_MySQL.USER WHERE UserName = '${username}'`;
+    console.log(`inside edit body: ${JSON.stringify(body)}`)
+    var editQuery = `SELECT * FROM happyhealth_MySQL.USER WHERE UserName = '${username}'`;
 
     // db.query(editQuery, function (err, result) {
     //     if (err) {

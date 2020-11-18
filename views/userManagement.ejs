@@ -208,13 +208,18 @@
                                         <a href="">View</a>
 
                                     </td> -->
-                                    <td><a href="editUser/<%= result[i].UserName%>">
-                                            Update
-                                        </a>
+                                    <td>
+                                        <form action="/editUser/<%= result[i].UserName%>" method="get">
+                                            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
+                                        </form>
                                     </td>
-                                    <td><a href="deleteUser/<%= result[i].UserName%>">
+                                    <td>
+                                        <form action="deleteUser/<%= result[i].UserName%>" method="get">
+                                            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Delete</button>
+                                        </form>
+                                        <!-- <a href="deleteUser/<%= result[i].UserName%>">
                                             Delete
-                                        </a></td>
+                                        </a></td> -->
                                 </tr>
                                 <% } %>
                             </tbody>
