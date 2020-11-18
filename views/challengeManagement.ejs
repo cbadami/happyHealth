@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>HappyHealth Dashboard</title>
+    <title>Challenge Management</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
@@ -296,7 +296,18 @@
                         </div>
                         <div class="form-group">
                             <label>Type</label>
-                            <input type="text" name="type" class="form-control" required>
+                            <!-- <input type="text" name="type" class="form-control" required> -->
+
+                            <select name="type">
+                                <option value="Step Count">Step Count</option>
+                                <option value="Sleep Count">Sleep Count</option>
+                                <option value="Water Level">Water Level</option>
+                                <option value="Fruits Consumed">Fruits Consumed</option>
+                                <option value="Vegetables Consumed">Vegetables Consumed</option>
+                                <option value="Water Level">Water Level</option>
+                              </select>
+
+
                         </div>
                         <div class="form-group">
                             <label for="start">Start date:</label>
@@ -308,11 +319,18 @@
                         </div>
                         <div class="form-group">
                             <label>Participant Type</label>
-                            <input type="text" name="participantType" class="form-control" required>
+                            <!-- <input type="text" name="participantType" class="form-control" > -->
+
+                            <select name="participantType">
+                                <option value="Group">Group</option>
+                                <option value="Individual">Individual</option>
+                              </select>
+
+
                         </div>
                         <div class="form-group">
                             <label>Participant Count</label>
-                            <input type="number" name="participantCount" class="form-control" required>
+                            <input type="number" name="participantCount" class="form-control" >
                         </div>
                     </div>
                     <div class="modal-footer">

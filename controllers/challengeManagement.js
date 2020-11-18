@@ -23,6 +23,8 @@ exports.postChallenge = (req, res) => {
     const { name, description, type, startDate, endDate, participantType, participantCount } = req.body
     //(id,challengeName,description,challengeType,startDate,endDate,partcipantType,participantCount)
 
+    console.log(req.body)
+
     const insert = `INSERT INTO happyhealth_MySQL.challengeManagement (challengeName, description, challengeType, startDate, endDate, participantType, participantCount) VALUES('${name}', '${description}', '${type}', '${startDate}', '${endDate}', '${participantType}', ${participantCount}); `
 
     db.query(insert, (err, results) => {
