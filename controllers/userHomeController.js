@@ -133,7 +133,6 @@ exports.postUserHydration = (req, res) => {
             res.redirect('/userHome')
         }
     });
-
 }
 
 exports.getUserChallenges = (req, res) => {
@@ -147,10 +146,6 @@ exports.getUserMoreChallenges = (req, res) => {
 
 exports.getUserProfile = (req,res) => {
     res.render('userProfile')
-}
-
-exports.getUserFruits = (req,res)=>{
-    res.render("userFruits")
 }
 
 

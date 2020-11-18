@@ -5,8 +5,8 @@ const flash = require('connect-flash');
 const session = require('express-session');
 var cookieParser = require('cookie-parser');
 // var MemoryStore = require('memorystore')(session)
-var cookieSession = require('cookie-session')
-
+var cookieSession = require('cookie-session');
+var bodyParser =  require('body-parser')
 
 const app = express();
 
@@ -17,16 +17,24 @@ app.use(cookieParser())
 // require('./config/passport')(passport);
 
 // css styles
-app.use("/public/stylesheets",express.static(__dirname + "/public/stylesheets"));
+app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
 
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
-app.use( express.static( "views" ) );
+app.use(express.static("views"));
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
+
+// accept url encoded
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+// accept json 
+app.use(bodyParser.json());
 
 // // Memory store session
 // app.use(session({

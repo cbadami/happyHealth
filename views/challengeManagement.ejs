@@ -7,13 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>HappyHealth Dashboard</title>
+    <title>Challenge Management</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
 
     <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="main.css" rel="stylesheet">
+    <link href="../main.css" rel="stylesheet">
+
     <!-- <link rel="stylesheet" href="table.css"> -->
     <!-- bootstrap -->
 
@@ -231,43 +232,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="counterCell"></td>
-                                    <td>  <a href="leaderboard"  >   10K Run </a>     </td>
-                                    <td>Registered particiapnts need to run 10 Kms</td>
-                                    <td>Running</td>
-                                    <td>11/15/2020</td>
-                                    <td>11/15/2020</td>
-                                    <td>Group</td>
-                                    <td>100</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
 
-                                 <tr>
-                                    <td class="counterCell"></td>
-                                    <td>  <a href="leaderboard"  >   Stepcount Challenge </a>     </td>
-                                    <td>Person who walks most of the time in a week is a winner </td>
-                                    <td>Walking</td>
-                                    <td>10/20/2020</td>
-                                    <td>11/07/2020</td>
-                                    <td>Individual</td>
-                                    <td>50</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
+                                <% for (var i = 0; i < result.length;i++) { %>
+                                    <tr>
+                                        <th scope="row"><%= i+1 %></th>
+                                        <td> <a href = '/leaderboard/<%= i+1 %>'> <%= result[i].challengeName %> </a> </td>
+                                        <td> <%= result[i].description  %></td>
+                                        <td><%= result[i].challengeType  %></td>
+                                        <td><%= result[i].startDate  %></td>
+                                        <td><%= result[i].endDate  %></td>
+                                        <td><%= result[i].participantType  %></td>
+                                        <td><%= result[i].participantCount  %></td>
+
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"> Edit </a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"> Delete </a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+
                             </tbody>
                         </table>
 
@@ -313,7 +296,18 @@
                         </div>
                         <div class="form-group">
                             <label>Type</label>
-                            <input type="text" name="type" class="form-control" required>
+                            <!-- <input type="text" name="type" class="form-control" required> -->
+
+                            <select name="type">
+                                <option value="Step Count">Step Count</option>
+                                <option value="Sleep Count">Sleep Count</option>
+                                <option value="Water Level">Water Level</option>
+                                <option value="Fruits Consumed">Fruits Consumed</option>
+                                <option value="Vegetables Consumed">Vegetables Consumed</option>
+                                <option value="Water Level">Water Level</option>
+                              </select>
+
+
                         </div>
                         <div class="form-group">
                             <label for="start">Start date:</label>
@@ -325,11 +319,18 @@
                         </div>
                         <div class="form-group">
                             <label>Participant Type</label>
-                            <input type="text" name="participantType" class="form-control" required>
+                            <!-- <input type="text" name="participantType" class="form-control" > -->
+
+                            <select name="participantType">
+                                <option value="Group">Group</option>
+                                <option value="Individual">Individual</option>
+                              </select>
+
+
                         </div>
                         <div class="form-group">
                             <label>Participant Count</label>
-                            <input type="number" name="participantCount" class="form-control" required>
+                            <input type="number" name="participantCount" class="form-control" >
                         </div>
                     </div>
                     <div class="modal-footer">

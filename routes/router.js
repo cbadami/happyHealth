@@ -75,7 +75,7 @@ router.get('/addChallenge')
 
 router.post('/addChallenge',challengeManagement.postChallenge );
 
-router.get('/leaderboard', challengeManagement.getLeaderboard )
+router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard )
 
 router.get('/userManagement',adminLoginController.getUserManagement)
 
