@@ -13,7 +13,8 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="main.css" rel="stylesheet">
+    <link href="./main.css" rel="stylesheet">
+
     <!-- <link rel="stylesheet" href="table.css"> -->
     <!-- bootstrap -->
 
@@ -252,7 +253,7 @@
 
                                  <tr>
                                     <td class="counterCell"></td>
-                                    <td>  <a href="leaderboard"  >   Stepcount Challenge </a>     </td>
+                                    <td>  <a onclick="location.href = '/leaderboard';">   Stepcount Challenge </a>     </td>
                                     <td>Person who walks most of the time in a week is a winner </td>
                                     <td>Walking</td>
                                     <td>10/20/2020</td>
@@ -268,6 +269,29 @@
                                                 title="Delete">&#xE872;</i></a>
                                     </td>
                                 </tr>
+
+                                <% for (var i = 0; i < result.length;i++) { %>
+                                    <tr>
+                                        <th scope="row"><%= i+1 %></th>
+                                        <td> <a href = '/leaderboard/<%= i+1 %>'> <%= result[i].challengeName %> </a> </td>
+                                        <td> <%= result[i].description  %></td>
+                                        <td><%= result[i].challengeType  %></td>
+                                        <td><%= result[i].startDate  %></td>
+                                        <td><%= result[i].endDate  %></td>
+                                        <td><%= result[i].participantType  %></td>
+                                        <td><%= result[i].participantCount  %></td>
+
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i
+                                                    class="material-icons" data-toggle="tooltip"
+                                                    title="Edit">&#xE254;</i></a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
+                                                    class="material-icons" data-toggle="tooltip"
+                                                    title="Delete">&#xE872;</i></a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+
                             </tbody>
                         </table>
 

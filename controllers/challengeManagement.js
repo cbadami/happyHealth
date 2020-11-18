@@ -1,16 +1,23 @@
 const db = require('../database');
 
-exports.getChallengeManagement = (req, res) => {
-    res.render('challengeManagement');
-    let query = `SELECT * FROM happyhealth_MySQL.challengeManagement;`
 
-    db.query(query, (err, results) => {
+let challengeNaam = '';
+
+exports.getChallengeManagement = (req, res) => {
+
+    var viewChallengesQuery = `SELECT * FROM happyhealth_MySQL.challengeManagement`;
+    db.query(viewChallengesQuery, function (err, result) {
+        // console.log(result);
         if (err) throw err;
         else {
-            // console.log(results)
+            //console.log(typeof(result))
+            res.render('challengeManagement', { result });
         }
-    })
+    });
 }
+
+
+
 
 exports.postChallenge = (req, res) => {
     const { name, description, type, startDate, endDate, participantType, participantCount } = req.body
@@ -21,28 +28,49 @@ exports.postChallenge = (req, res) => {
     db.query(insert, (err, results) => {
         if (err) throw err;
         else {
-             console.log("Successfully added challenge to db")
+            console.log("Successfully added challenge to db")
         }
     })
-
-    // const count = `SELECT COUNT FROM happyhealth_MySQL.challengeManagement`;
-
-    // db.query(count, (err,result)=>{
-    //     if(err) throw err;
-    //     else{
-    //         console.log("No. Of rows: "+result.length )
-    //     }
-    // })
-    
-
-    const select = `select * from happyhealth_MySQL.challengeManagement ` ;
-
     res.redirect('/challengeManagement');
-
 }
 
 
 exports.getLeaderboard = (req, res) => {
-    const chName = challengeMangemwnt.
-        res.render('leaderboard', { chName: chName });
+    console.log(req.params.challengeId)
+
+    let id = parseInt(req.params.challengeId);
+    console.log("id of selected challenge: " + id);
+    var viewChallengesQuery = `SELECT challengeName FROM happyhealth_MySQL.challengeManagement  where id = ${id}`
+    // "SELECT balance FROM members WHERE username = 'kappa'"
+
+
+    db.query(viewChallengesQuery, function (err, result) {
+
+        if (err) {
+            console.log(err);
+        }
+        else {
+            //check to see if the result is empty
+            if (result.length > 0) {
+
+                //console.log(`result: ${JSON.stringify(result)}`)
+                // console.log(`length of result: ${result.length}`)
+                // let strResult = JSON.stringify(result)
+                // const value = result[index].challengeName
+                //console.log(" Value :  " +(result[index].challengeName))
+                // value = result[index]['challengeName'];
+                // console.log(value);
+
+                challengeNaam = result[0].challengeName;
+
+                console.log(challengeNaam);
+
+                res.render('leaderboard', { challengeNaam });
+
+            }
+
+        }
+
+    });
+
 }
