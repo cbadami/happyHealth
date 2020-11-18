@@ -182,46 +182,50 @@
             <div class="app-main__outer">
                 <div class="app-main__inner">
 
-                    <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for users"> -->
-                    <!-- <h3 style="text-align: center;">User Management</h3> -->
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Password</th>
-                                    <!-- <th scope="col">Challenges</th> -->
-                                    <th scope="col">Profile</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% for (var i = 0; i < result.length;i++) { %>
-                                <tr>
-                                    <th scope="row"><%= i+1 %></th>
-                                    <td><%= result[i].UserName%></td>
-                                    <td><%= result[i].Email%></td>
-                                    <td><%= result[i].Password%></td>
-                                    <!-- <td>
-                                        <a href="">View</a>
-
-                                    </td> -->
-                                    <td><a href="">
-                                            Update
-                                        </a>
-                                    </td>
-                                    <td><a href="deleteGroup/<%= result[i].UserName%>">
-                                            Delete
-                                        </a></td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
+                    <form>
+                        <div class="form-row">
+                          <div class="col-md-4 mb-3">
+                            <label for="validationDefault01">First name</label>
+                            <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="validationDefault02">Last name</label>
+                            <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="validationDefaultUsername">Username</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                              </div>
+                              <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col-md-6 mb-3">
+                            <label for="validationDefault03">City</label>
+                            <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                          </div>
+                          <div class="col-md-3 mb-3">
+                            <label for="validationDefault04">State</label>
+                            <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+                          </div>
+                          <div class="col-md-3 mb-3">
+                            <label for="validationDefault05">Zip</label>
+                            <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                            <label class="form-check-label" for="invalidCheck2">
+                              Agree to terms and conditions
+                            </label>
+                          </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                      </form>
                 <div class="app-wrapper-footer">
                     <div class="app-footer">
                         <div class="copyright text-center bg-white py-4">
