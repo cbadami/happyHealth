@@ -81,6 +81,8 @@ router.get('/userManagement',adminLoginController.getUserManagement)
 
 router.get('/editUser/:userName',adminLoginController.editUser)
 
+router.post('/updateUser/:userName',adminLoginController.updateUser)
+
 router.get('/deleteUser/:userName',adminLoginController.deleteUser)
 
 router.get('/groupManagement',adminLoginController.getGroupManagement)

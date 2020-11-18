@@ -190,8 +190,18 @@
             <div class="app-main__outer">
                 <div class="app-main__inner">
 
-                    <form>
+                    <form action="/updateUser/<%= userName%>" method="post">
                         <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationDefaultUsername">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="validationDefaultUsername"
+                                        placeholder="Username" aria-describedby="inputGroupPrepend2" value="<%= userName %>" disabled>
+                                </div>
+                            </div>
                             <div class="col-md-4 mb-3">
                                 <label for="validationDefault01">First name</label>
                                 <input type="text" class="form-control" id="validationDefault01"
@@ -200,27 +210,18 @@
                             <div class="col-md-4 mb-3">
                                 <label for="validationDefault02">Last name</label>
                                 <input type="text" class="form-control" id="validationDefault02" placeholder=""
-                                    value="Otto" required>
+                                    value="" required>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="validationDefaultUsername">Username</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="validationDefaultUsername"
-                                        placeholder="Username" aria-describedby="inputGroupPrepend2" required>
-                                </div>
-                            </div>
+
                             <div class="col-md-4 mb-3">
                                 <label for="validationDefault03">Email</label>
-                                <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label"
-                                    required>
+                                <input type="email" name = "email"class="form-control" id="colFormLabel" placeholder="email"
+                                    value = "<%= email %>" required>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="validationDefault02">Password</label>
-                                <input type="password" class="form-control" id="validationDefault02" placeholder="Last name"
-                                    value="" required>
+                                <input type="password" name = "password" class="form-control" id="validationDefault02" placeholder="Last name"
+                                    value="<%= password%>" required>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Update</button>
