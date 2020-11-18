@@ -79,6 +79,8 @@ router.get('/leaderboard', challengeManagement.getLeaderboard )
 
 router.get('/userManagement',adminLoginController.getUserManagement)
 
+router.get('/editUser',adminLoginController.editUser)
+
 router.get('/deleteUser/:userName',adminLoginController.deleteUser)
 
 router.get('/groupManagement',adminLoginController.getGroupManagement)

@@ -73,19 +73,20 @@ exports.getUserManagement = (req, res) => {
 
 }
 
-exports.editUser =(req,res) => {
+exports.editUser = (req,res) => {
     var username = req.params.userName;
-    console.log(username)
-    var editQuery = `SELECT * FROM happyhealth_MySQL.USER WHERE UserName = '${username}'`;
+    console.log(`inside edit username: ${username}`)
+    // var editQuery = `SELECT * FROM happyhealth_MySQL.USER WHERE UserName = '${username}'`;
 
-    db.query(editQuery, function (err, result) {
-        if (err) {
-            throw err;
-        } else {
-            res.redirect('/userManagement')
-        }
+    // db.query(editQuery, function (err, result) {
+    //     if (err) {
+    //         throw err;
+    //     } else {
+    //         res.redirect('/userManagement')
+    //     }
 
-    });
+    // });
+    res.render('editProfile')
 }
 
 exports.deleteUser =(req,res) => {
