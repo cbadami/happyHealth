@@ -79,7 +79,15 @@ router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard )
 
 router.get('/userManagement',adminLoginController.getUserManagement)
 
-router.get('/delete/:userName',adminLoginController.deleteUser)
+router.get('/editUser/:userName',adminLoginController.editUser)
+
+router.post('/updateUser/:userName',adminLoginController.updateUser)
+
+router.get('/deleteUser/:userName',adminLoginController.deleteUser)
+
+router.get('/groupManagement',adminLoginController.getGroupManagement)
+
+router.get('/deleteGroup/:groupName',adminLoginController.deleteGroup)
 
 router.get('/adminAnalytics',adminLoginController.getAdminAnalytics)
 

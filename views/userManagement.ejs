@@ -158,15 +158,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/adminAnalytics" class="mm-active">
-                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                                    <span>Analytics</span>
+                                <a href="groupManagement" class="mm-active">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>Groups</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="mm-active">
-                                    <i class="fa fa-file-text" aria-hidden="true"></i>
-                                    <span>Logs</span>
+                                <a href="/adminAnalytics" class="mm-active">
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                    <span>Analytics</span>
                                 </a>
                             </li>
                             <li>
@@ -192,7 +192,7 @@
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Password</th>
-                                    <th scope="col">Challenges</th>
+                                    <!-- <th scope="col">Challenges</th> -->
                                     <th scope="col">Profile</th>
                                     <th scope="col">Delete</th>
                                 </tr>
@@ -204,17 +204,20 @@
                                     <td><%= result[i].UserName%></td>
                                     <td><%= result[i].Email%></td>
                                     <td><%= result[i].Password%></td>
-                                    <td>
+                                    <!-- <td>
                                         <a href="">View</a>
 
+                                    </td> -->
+                                    <td>
+                                        <form action="/editUser/<%= result[i].UserName%>" method="get">
+                                            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
+                                        </form>
                                     </td>
-                                    <td><a href="">
-                                            Update
-                                        </a>
+                                    <td>
+                                        <form action="deleteUser/<%= result[i].UserName%>" method="get">
+                                            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Delete</button>
+                                        </form>
                                     </td>
-                                    <td><a href="delete/<%= result[i].UserName%>">
-                                            Delete
-                                        </a></td>
                                 </tr>
                                 <% } %>
                             </tbody>
