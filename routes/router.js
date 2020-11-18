@@ -79,11 +79,11 @@ router.get('/leaderboard', challengeManagement.getLeaderboard )
 
 router.get('/userManagement',adminLoginController.getUserManagement)
 
-router.get('/delete/:userName',adminLoginController.deleteUser)
+router.get('/deleteUser/:userName',adminLoginController.deleteUser)
 
 router.get('/groupManagement',adminLoginController.getGroupManagement)
 
-router.get('/delete/:groupName',adminLoginController.deleteGroup)
+router.get('/deleteGroup/:groupName',adminLoginController.deleteGroup)
 
 router.get('/adminAnalytics',adminLoginController.getAdminAnalytics)
 

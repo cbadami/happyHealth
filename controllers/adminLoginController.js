@@ -108,15 +108,15 @@ exports.getGroupManagement = (req, res) => {
 }
 
 exports.deleteGroup =(req,res) => {
-    var username = req.params.userName;
-    console.log(username)
-    var deleteQuery = `Delete FROM happyhealth_MySQL.USER WHERE UserName = '${username}';`;
+    var groupName = req.params.groupName;
+    console.log(groupName)
+    var deleteQuery = `Delete FROM happyhealth_MySQL.group WHERE Group_Name = '${groupName}';`;
 
     db.query(deleteQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            res.redirect('/userManagement')
+            res.redirect('/groupManagement')
         }
 
     });
