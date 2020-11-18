@@ -40,6 +40,7 @@ exports.getLeaderboard = (req, res) => {
 
     let id = parseInt(req.params.challengeId);
     console.log("id of selected challenge: " + id);
+    
     var viewChallengesQuery = `SELECT challengeName FROM happyhealth_MySQL.challengeManagement  where id = ${id}`
     // "SELECT balance FROM members WHERE username = 'kappa'"
 
@@ -65,7 +66,7 @@ exports.getLeaderboard = (req, res) => {
 
                 console.log(challengeNaam);
 
-                res.render('leaderboard', { challengeNaam });
+                res.render('leaderboard', { challengeNaam : challengeNaam });
 
             }
 

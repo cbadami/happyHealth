@@ -13,7 +13,8 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="main.css" rel="stylesheet">
+    <link href="../main.css" rel="stylesheet">
+
     <!-- <link rel="stylesheet" href="table.css"> -->
     <!-- bootstrap -->
 
@@ -178,7 +179,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="mm-active">
+                                <a href="/adminAnalytics" class="mm-active">
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
                                     <span>Analytics</span>
                                 </a>
@@ -201,43 +202,56 @@
             </div>
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <h1>Leaderboard</h1>
 
-                    <h1> <%= challengeNaam %> </h1>
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div>
+                                    <h1> <b>Leaderboard</b> </h1>
+                                    <h2>Challenge Name :   <%= challengeNaam %>  </h2>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Rank</th>
-                                <th scope="col">User Name</th>
-                                <th scope="col">Score</th>
-                                <th scope="col">Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>1200</td>
-                                <td>4hr</td>
-                            </tr>
+                                    <th>Rank</th>
+                                    <th>Player Name</th>
+                                    <th>Score</th>
+                                    <th>Time</th>
 
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>John</td>
-                                <td>1100</td>
-                                <td>4hr: 10min</td>
-                            </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Tyler</td>
-                                <td>1000</td>
-                                <td>4hr: 12min</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <td class="counterCell"></td>
+                                    <td>Mark</td>
+                                    <td>1200</td>
+                                    <td>4hr</td>
+                                </tr>
+    
+                                <tr>
+                                    <td class="counterCell"></td>
+                                    <td>John</td>
+                                    <td>1100</td>
+                                    <td>4hr: 10min</td>
+                                </tr>
+    
+                                <tr>
+                                    <td class="counterCell"></td>
+                                    <td>Tyler</td>
+                                    <td>1000</td>
+                                    <td>4hr: 12min</td>
+                                </tr>
 
+
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
 
 
@@ -263,7 +277,7 @@
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form action="/addChallenge" method="POST">
                     <div class="modal-header">
                         <h4 class="modal-title">Add Challenge</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -271,31 +285,31 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" required></textarea>
+                            <textarea class="form-control" name="description" required></textarea>
                         </div>
                         <div class="form-group">
                             <label>Type</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="type" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="start">Start date:</label>
-                            <input type="date" id="start" name="Challenge-start" value="2020-07-20">
+                            <input type="date" id="start" name="startDate" placeholder="2020-07-20">
                         </div>
                         <div class="form-group">
                             <label for="start">End date:</label>
-                            <input type="date" id="end" name="Challenge-end" value="2020-07-22">
+                            <input type="date" id="end" name="endDate" placeholder="2020-07-22">
                         </div>
                         <div class="form-group">
                             <label>Participant Type</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="participantType" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Participant Count</label>
-                            <input type="text" class="form-control" required>
+                            <input type="number" name="participantCount" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">

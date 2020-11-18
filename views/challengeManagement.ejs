@@ -13,7 +13,7 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="./main.css" rel="stylesheet">
+    <link href="../main.css" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href="table.css"> -->
     <!-- bootstrap -->
@@ -232,43 +232,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="counterCell"></td>
-                                    <td>  <a href="leaderboard"  >   10K Run </a>     </td>
-                                    <td>Registered particiapnts need to run 10 Kms</td>
-                                    <td>Running</td>
-                                    <td>11/15/2020</td>
-                                    <td>11/15/2020</td>
-                                    <td>Group</td>
-                                    <td>100</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-
-                                 <tr>
-                                    <td class="counterCell"></td>
-                                    <td>  <a onclick="location.href = '/leaderboard';">   Stepcount Challenge </a>     </td>
-                                    <td>Person who walks most of the time in a week is a winner </td>
-                                    <td>Walking</td>
-                                    <td>10/20/2020</td>
-                                    <td>11/07/2020</td>
-                                    <td>Individual</td>
-                                    <td>50</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-                                                class="material-icons" data-toggle="tooltip"
-                                                title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
 
                                 <% for (var i = 0; i < result.length;i++) { %>
                                     <tr>
@@ -282,12 +245,8 @@
                                         <td><%= result[i].participantCount  %></td>
 
                                         <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i
-                                                    class="material-icons" data-toggle="tooltip"
-                                                    title="Edit">&#xE254;</i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-                                                    class="material-icons" data-toggle="tooltip"
-                                                    title="Delete">&#xE872;</i></a>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"> Edit </a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"> Delete </a>
                                         </td>
                                     </tr>
                                     <% } %>
