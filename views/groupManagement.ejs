@@ -191,10 +191,8 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Group Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Password</th>
-                                    <th scope="col">Challenges</th>
-                                    <th scope="col">Profile</th>
+                                    <th scope="col">Creator</th>
+                                    <th scope="col">Edit</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -202,18 +200,13 @@
                                 <% for (var i = 0; i < result.length;i++) { %>
                                 <tr>
                                     <th scope="row"><%= i+1 %></th>
-                                    <td><%= result[i].UserName%></td>
-                                    <td><%= result[i].Email%></td>
-                                    <td><%= result[i].Password%></td>
-                                    <td>
-                                        <a href="">View</a>
-
-                                    </td>
+                                    <td><%= result[i].Group_Name%></td>
+                                    <td><%= result[i].Creator%></td>
                                     <td><a href="">
-                                            Update
+                                            Edit
                                         </a>
                                     </td>
-                                    <td><a href="delete/<%= result[i].UserName%>">
+                                    <td><a href="delete/<%= result[i].Group_Name%>">
                                             Delete
                                         </a></td>
                                 </tr>
