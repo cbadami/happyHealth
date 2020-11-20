@@ -17,8 +17,6 @@ exports.getChallengeManagement = (req, res) => {
 }
 
 
-
-
 exports.postChallenge = (req, res) => {
     const { name, description, type, startDate, endDate, participantType, participantCount } = req.body
     //(id,challengeName,description,challengeType,startDate,endDate,partcipantType,participantCount)

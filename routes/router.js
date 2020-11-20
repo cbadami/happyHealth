@@ -63,7 +63,6 @@ router.get('/userVegetables', userHomeController.getUserVegetables );
 
 
 
-
 router.get('/adminLogin',adminLoginController.getAdminLogin );
 
 router.post('/adminLogin', adminLoginController.postAdminLogin);
