@@ -3,10 +3,10 @@
 ##### This repo is created to implement progressive web app
 
 ## Setup app in local machine
-Clone the repo
+Clone the repo  
 git clone https://github.com/harishThadka/happyHealth.git
 # For Installing dependencies
-npm install.
+npm install  
 npm install --dev.
 # To start the app
 npm start
