@@ -3,7 +3,12 @@
 ##### This repo is created to implement progressive web app
 
 ## Setup app in local machine
-Clone the repo  
+### Prerequisites
+Following must be downloaded, installed, and configured according to the product directions:  
+- Node.js (comes with npm)  
+- Git version control system  
+- VS Code light-weight, cross-platform code editor or other IDE  
+### Clone the repo to local machine
 git clone https://github.com/harishThadka/happyHealth.git
 ### Install dependencies
 npm install  
