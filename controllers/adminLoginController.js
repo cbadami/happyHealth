@@ -1,4 +1,4 @@
-const { reset } = require('nodemon');
+
 const db = require('../database');
 
 
@@ -139,39 +139,7 @@ exports.deleteUser = (req, res) => {
     });
 }
 
-exports.getGroupManagement = (req, res) => {
-    let username = req.session.username;
-    console.log(`inside get user management ${username}`);
-    var allGroupsQuery = `SELECT * FROM happyhealth_MySQL.group`;
 
-    db.query(allGroupsQuery, function (err, result) {
-        // console.log(result);
-        if (err) {
-            throw err;
-        } else {
-            // console.log(`result: ${JSON.stringify(result)}`)
-            // console.log(`length of result: ${result.length}`)
-            res.render('groupManagement', { result });
-        }
-
-    });
-
-}
-
-exports.deleteGroup = (req, res) => {
-    var groupName = req.params.groupName;
-    console.log(groupName)
-    var deleteQuery = `Delete FROM happyhealth_MySQL.group WHERE Group_Name = '${groupName}';`;
-
-    db.query(deleteQuery, function (err, result) {
-        if (err) {
-            throw err;
-        } else {
-            res.redirect('/groupManagement')
-        }
-
-    });
-}
 
 
 exports.getAdminAnalytics = (req, res) => {

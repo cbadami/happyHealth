@@ -8,6 +8,7 @@ var adminLoginController = require('../controllers/adminLoginController')
 var forgotPasswordController = require('../controllers/forgotPasswordController')
 var validationController = require('../controllers/validationController')
 var resetPasswordController = require('../controllers/resetPasswordController');
+var userGroupController = require('../controllers/userGroupController')
 
 var challengeManagement = require('../controllers/challengeManagement');
 
@@ -85,9 +86,19 @@ router.post('/updateUser/:userName',adminLoginController.updateUser)
 
 router.get('/deleteUser/:userName',adminLoginController.deleteUser)
 
-router.get('/groupManagement',adminLoginController.getGroupManagement)
+/**
+ * User Group routes
+ */
 
-router.get('/deleteGroup/:groupName',adminLoginController.deleteGroup)
+router.get('/groupManagement',userGroupController.getGroup)
+
+router.get('/editGroup/:groupId',userGroupController.editGroup)
+
+router.post('/updateGroup/:groupId',userGroupController.updateGroup)
+
+router.get('/deleteGroup/:groupId',userGroupController.deleteGroup)
+
+
 
 router.get('/adminAnalytics',adminLoginController.getAdminAnalytics)
 
