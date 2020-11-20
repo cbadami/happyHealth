@@ -2,16 +2,23 @@
 
 ##### This repo is created to implement progressive web app
 
-Hosted app link:
+## Setup app in local machine
+Clone the repo
+git clone 
+# For Installing dependencies
+npm install.
+npm install --dev.
+# To start the app
+npm start
+# To run app in development
+npm run dev
+
+## Hosted app Links:
 
 - User Login: https://exalted-legacy-290621.uc.r.appspot.com/
 - User SignUp: https://exalted-legacy-290621.uc.r.appspot.com/userSignUp
 - User ForgotPassword: https://exalted-legacy-290621.uc.r.appspot.com/forgotPassword
 - Admin login: https://exalted-legacy-290621.uc.r.appspot.com/adminLogin
-
-old app link:  
-Demo App link: https://happy-health-demo.herokuapp.com/  
-User Sign up link: https://happy-health-demo.herokuapp.com/userSignUp
 
 ## App Design Architecture:
 
