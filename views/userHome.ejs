@@ -150,35 +150,41 @@
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu my-4">
                             <li>
-                                <a href="/adminHome" class="mm-active">
+                                <a href="..\userHome" class="mm-active">
                                     <i class="fa fa-home" aria-hidden="true"></i>
-                                    <span>Dashboard</span>
-                                </a>
+                                    <span>Home</span>
+                                  </a>
                             </li>
                             <li>
-                                <a href="/userManagement" class="mm-active">
+                                <a href="..\userProfile" class="mm-active">
                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span>Users</span>
-                                </a>
+                                    <span>Profile</span>
+                                  </a>
                             </li>
                             <li>
-                                <a href="groupManagement" class="mm-active">
-                                    <i class="fa fa-file-text" aria-hidden="true"></i>
-                                    <span>Groups</span>
+                                <a href="..\user_challenges" class="mm-active">
+                                  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                  <span>Active Challenges</span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="/adminAnalytics" class="mm-active">
-                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                                    <span>Analytics</span>
-                                </a>
-                            </li>
-                            <li>
+                              </li>
+                              <li>
                                 <a href="#" class="mm-active">
-                                    <i class="fa fa-bell" aria-hidden="true"></i>
-                                    <span>Notifications</span>
+                                  <i class="fa fa-file-text" aria-hidden="true"></i>
+                                  <span>History</span>
                                 </a>
-                            </li>
+                              </li>
+                              <li>
+                                <a href="#" class="mm-active">
+                                  <i class="fa fa-bell" aria-hidden="true"></i>
+                                  <span>Notifications</span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="\" class="mm-active">
+                                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                  <span>Logout</span>
+                                </a>
+                              </li>
                         </ul>
                     </div>
                 </div>
@@ -201,15 +207,27 @@
                                     Intake: <%= waterCount %></button>     
                             </div>
                             <div class="col-sm-4" style="background-color:white;">
-                                <h4>Challenge Management</h4>
-                                <img src="assets/images/happyHealth/chMgmt.PNG" alt="challenge_mgmt">
-                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/challengeManagement';" >Challenge Management</button>
+                                <h4>Sleep Count</h4>
+                                <img src="assets/images/happyHealth/sleep.jpg" alt="challenge_mgmt">
+                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/userSleep';" >Sleep
+                                    Hours: <%= sleepHours %></button>
                             </div>
-
                             <div class="col-sm-4" style="background-color:white;">
-                                <h4>Analytics</h4>
-                                <img src="assets/images/happyHealth/statistics.png" alt="user_stat">
-                                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/adminAnalytics';">User analytics</button>
+                                <h4>Track Me Time</h4>
+                                <img src="assets/images/happyHealth/meditation.png" alt="user_stat">
+                                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '#';">Track Me Time</button>
+                            </div>
+                            <div class="col-sm-4" style="background-color:white;">
+                                <h4>Fruits Intake</h4>
+                                <img src="assets/images/happyHealth/fruits.png" alt="user_fruits">
+                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/userFruits';" >Fruits
+                                    Intake</button>
+                            </div>
+                            <div class="col-sm-4" style="background-color:white;">
+                                <h4>Vegetables Intake</h4>
+                                <img src="assets/images/happyHealth/vegetable.png" alt="challenge_mgmt">
+                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/userVegetables';" >Vegetables
+                                    Intake</button>
                             </div>
                         </div>
                     </div>
