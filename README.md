@@ -5,7 +5,7 @@
 ## Setup app in local machine
 Clone the repo  
 git clone https://github.com/harishThadka/happyHealth.git
-### For Installing dependencies
+### Install dependencies
 npm install  
 npm install --dev.
 ### To start the app
