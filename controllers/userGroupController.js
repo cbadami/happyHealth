@@ -46,16 +46,14 @@ exports.editGroup = (req, res) => {
 
 exports.updateGroup = (req, res) => {
 
-    console.log(req.body)
+    console.log('------updateGroup controller')
 
-    const userName = req.params.userName;
-    const email = req.body.email;
-    const password = req.body.password;
+    var groupId = req.params.groupId;
+    var groupName = req.body.groupName
+    var creator = req.body.creator
+    var createdDate = req.body.createdDate
 
-    console.log(`inside update user ${userName}`)
-    console.log(`inside update user ${email}`)
-
-    var updateQuery = `UPDATE happyhealth_MySQL.USER SET Password = '${password}', Email = '${email}' WHERE UserName = '${userName}';`
+    var updateQuery = `UPDATE happyhealth_MySQL.group SET Group_Name = '${groupName}', Creator = '${creator}' WHERE Group_Id = ${groupId}`
 
     db.query(updateQuery, function (err, result) {
         // console.log(result);
@@ -65,7 +63,7 @@ exports.updateGroup = (req, res) => {
         }
         // console.log(`result: ${JSON.stringify(result)}`)
         // console.log(`length of result: ${result.length}`)
-        res.redirect('../userManagement');
+        res.redirect('../groupManagement');
 
     });
 
