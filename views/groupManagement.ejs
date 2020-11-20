@@ -192,6 +192,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Group Name</th>
                                     <th scope="col">Creator</th>
+                                    <th scope="col">Created Date</th>
                                     <th scope="col">Edit</th>
                                     <th scope="col">Delete</th>
                                 </tr>
@@ -202,6 +203,7 @@
                                     <th scope="row"><%= i+1 %></th>
                                     <td><%= result[i].Group_Name%></td>
                                     <td><%= result[i].Creator%></td>
+                                    <td><%= JSON.stringify(result[i].Created_Date).slice(1,11) %></td>
                                     <td>
                                         <form action="/editGroup/<%= result[i].Group_Name%>" method="get">
                                             <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
