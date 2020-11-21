@@ -12,7 +12,7 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
 
-    <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="../main.css" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href="table.css"> -->
@@ -73,7 +73,7 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <img class="logo-src" src="./assets/images/happyHealth/Artboard.png" alt="">
+                <img class="logo-src" src="../assets/images/happyHealth/Artboard.png" alt="">
                 <div class="h3 m-0 ml-2">HappyHealth</div>
                 <div class="header__pane ml-auto">
                     <div>
@@ -142,7 +142,7 @@
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
-                    <img class="logo-src" src="./assets/images/happyHealth/Artboard.png" alt="">
+                    <img class="logo-src" src="../assets/images/happyHealth/Artboard.png" alt="">
                     <div class="header__pane ml-auto">
                         <div>
                             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -179,9 +179,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/adminAnalytics" class="mm-active">
+                                <a href="/groupManagement" class="mm-active">
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                                    <span>Analytics</span>
+                                    <span>Groups</span>
                                 </a>
                             </li>
                             <li>
@@ -206,56 +206,69 @@
                     <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
-                                <h2>Group Name: <%= groupName %></h2>
+                                <div class="col-sm-6">
+                                    <h2> <b>Group Name: </b> </h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                                            class="material-icons">&#xE147;</i> <span>Add User</span></a>
+                                </div>
                             </div>
                         </div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>Username</th>
+                                    <th>Joined Date</th>
+                                    <th>Remove user</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i = 0; i < result.length;i++) { %>
+                                <tr>
+                                    <td class="counterCell"><%= i+1%></td>
+                                    <td><%= result[i].UserName%></td>
+                                    <td><%= result[i].Date_Accepted_Invite%></td>
+                                    <td>
+                                        <form action="deleteUserGroup/<%= result[i].UserName%>" method="get">
+                                            <button type="submit" id="PopoverCustomT-1"
+                                                class="btn btn-primary btn-sm">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+
+                        </table>
+
                     </div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Sl.No</th>
-                                <th>Username</th>
-                                <th>Joined Date</th>
-                                <th>Remove user</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for (var i = 0; i < result.length;i++) { %>
-                            <tr>
-                                <td class="counterCell"><%= i+1%></td>
-                                <td><%= result[i].UserName%></td>
-                                <td><%= result[i].Date_Accepted_Invite%></td>
-                                <td>
-                                    <form action="deleteUserGroup/<%= result[i].UserName%>" method="get">
-                                        <button type="submit" id="PopoverCustomT-1"
-                                            class="btn btn-primary btn-sm">Remove</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-
                 </div>
-            </div>
-
-        </div>
 
 
-        <div class="app-wrapper-footer">
-            <div class="app-footer">
-                <div class="copyright text-center bg-white py-4">
-                    <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
+
+
+            <div class="app-wrapper-footer">
+                <div class="app-footer">
+                    <div class="copyright text-center bg-white py-4">
+                        <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
+                    </div>
                 </div>
             </div>
         </div>
 
-        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    </div>
+
+
+
+
+            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        </div>
     </div>
 
 
-    <script type="text/javascript" src="assets/scripts/main.js"></script>
+
+
+    <script type="text/javascript" src="../assets/scripts/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
