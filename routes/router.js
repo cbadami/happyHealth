@@ -101,6 +101,8 @@ router.get('/getGroupMembers/:groupId',userGroupController.getGroupMembers)
 
 router.get('/removeUser/:groupId/:userName',userGroupController.removeUserGroup)
 
+router.get('/addUser/:groupId/:userName',userGroupController.addUserGroup)
+
 
 router.get('/adminAnalytics',adminLoginController.getAdminAnalytics)
 
