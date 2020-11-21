@@ -100,8 +100,24 @@ exports.getGroupMembers = (req, res) => {
             return
         } else {
             console.log(result, "----result")
-            res.render("groupMembers", { groupName, result })
+            res.render("groupMembers", { groupId,groupName, result })
         }
     });
 
+}
+
+exports.removeUserGroup = (req,res) =>{
+    console.log("--------remove user group members controller")
+    let groupId = req.params.groupId;
+    let userName = req.params.userName;
+    let removeQuery = `Delete FROM happyhealth_MySQL.group_member WHERE UserName = '${userName}' AND groupId = ${groupId};`;
+    db.query(removeQuery, function (err, result) {
+        if (err) {
+            throw err;
+            return
+        } else {
+            console.log(result, "----result")
+            res.redirect(`/getGroupMembers/${groupId}`);
+        }
+    });
 }

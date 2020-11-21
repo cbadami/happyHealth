@@ -99,6 +99,8 @@ router.get('/deleteGroup/:groupId',userGroupController.deleteGroup)
 
 router.get('/getGroupMembers/:groupId',userGroupController.getGroupMembers)
 
+router.get('/removeUser/:groupId/:userName',userGroupController.removeUserGroup)
+
 
 router.get('/adminAnalytics',adminLoginController.getAdminAnalytics)
 
