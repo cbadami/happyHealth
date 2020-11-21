@@ -28,7 +28,7 @@ exports.postChallenge = (req, res) => {
     db.query(insert, (err, results) => {
         if (err) throw err;
         else {
-            console.log("Successfully added challenge to db")
+            console.log("Successfully added challenge to db") 
         }
     })
     res.redirect('/challengeManagement');
