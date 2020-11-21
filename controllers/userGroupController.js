@@ -87,22 +87,21 @@ exports.deleteGroup = (req, res) => {
     });
 }
 
-exports.getGroupMembers = async (req, res) => {
+exports.getGroupMembers = (req, res) => {
     console.log("-------group memebers controller")
     let groupId = req.params.groupId;
+    let groupName = req.body.groupName;
     let groupQuery = `SELECT * FROM happyhealth_MySQL.group_member WHERE groupId = ${groupId}`
+
 
     db.query(groupQuery, function (err, result) {
         if (err) {
             throw err;
             return
         } else {
-            console.log(result)
-            // console.log("---delete group sucessfully executed")
-            // res.redirect('/groupManagement')
+            console.log(result, "----result")
+            res.render("groupMembers", { groupName, result })
         }
     });
-
-    console.log(result)
 
 }

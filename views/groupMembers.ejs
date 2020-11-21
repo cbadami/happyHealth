@@ -95,9 +95,9 @@
                     <button type="button" class="btn btn-transparent mobile-toggle-nav">
                         <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
                     </button>
-                    <form action="">
+                    <!-- <form action="">
                         <input type="date">
-                    </form>
+                    </form> -->
                 </div>
             </div>
             <div class="app-header__menu">
@@ -116,9 +116,9 @@
             </div>
             <div class="app-header__content">
                 <div class="app-header-left">
-                    <form action="">
+                    <!-- <form action="">
                         <input type="date">
-                    </form>
+                    </form> -->
                 </div>
                 <div class="app-header-center h2">
                     HappyHealth
@@ -206,54 +206,55 @@
                     <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
-                                    <h2>Group Name: <%= groupName %></h2>
-                                </div>                               
+                                <h2>Group Name: <%= groupName %></h2>
                             </div>
                         </div>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Sl.No</th>
-                                    <th>Username</th>
-                                    <th>Joined Date</th>
-                                    <th>Remove user</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td class="counterCell"> </td>
-                                    <td>Mark</td>
-                                    <td>1200</td>
-                                    <td>4hr</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-
                     </div>
-                </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Username</th>
+                                <th>Joined Date</th>
+                                <th>Remove user</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (var i = 0; i < result.length;i++) { %>
+                            <tr>
+                                <td class="counterCell"><%= i+1%></td>
+                                <td><%= result[i].UserName%></td>
+                                <td><%= result[i].Date_Accepted_Invite%></td>
+                                <td>
+                                    <form action="deleteUserGroup/<%= result[i].UserName%>" method="get">
+                                        <button type="submit" id="PopoverCustomT-1"
+                                            class="btn btn-primary btn-sm">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
 
-
-
-
-                <div class="app-wrapper-footer">
-                    <div class="app-footer">
-                        <div class="copyright text-center bg-white py-4">
-                            <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
-                        </div>
-                    </div>
                 </div>
             </div>
 
-
-
-
-            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>
+
+
+        <div class="app-wrapper-footer">
+            <div class="app-footer">
+                <div class="copyright text-center bg-white py-4">
+                    <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
+                </div>
+            </div>
+        </div>
+
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </div>
     </div>
 
-    
+
     <script type="text/javascript" src="assets/scripts/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
