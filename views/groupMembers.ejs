@@ -207,10 +207,18 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h2> <b>Group Name: </b> </h2>
+                                    <h2> <b>Group Name: Best of the Best </b> </h2>
                                 </div>
-                                <div class="col-sm-6">
-                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">Add User</a>
+                                <div class="form-group col-sm-3">
+                                    <select id="inputState" class="form-control">
+                                        <!-- <option selected></option> -->
+                                        <% for (var i = 0; i < 10;i++) { %>
+                                        <option><%= i %></option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button class="btn btn-success">Add User</button>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +234,7 @@
                             <tbody>
                                 <% for (var i = 0; i < result.length;i++) { %>
                                 <tr>
-                                    <td class="counterCell"><%= i+1%></td>
+                                    <th scope="row"><%= i+1 %></th>
                                     <td><%= result[i].UserName%></td>
                                     <td><%= result[i].Date_Accepted_Invite%></td>
                                     <td>
