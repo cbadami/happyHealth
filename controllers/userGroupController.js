@@ -71,16 +71,18 @@ exports.updateGroup = (req, res) => {
 }
 
 exports.deleteGroup = (req, res) => {
-    var groupName = req.params.groupName;
-    console.log(groupName)
-    var deleteQuery = `Delete FROM happyhealth_MySQL.group WHERE Group_Name = '${groupName}';`;
+
+    console.log("---delete Group")
+    var groupId = req.params.groupId;
+
+    var deleteQuery = `Delete FROM happyhealth_MySQL.group WHERE Group_Id = ${groupId};`;
 
     db.query(deleteQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
+            console.log("---delete group sucessfully executed")
             res.redirect('/groupManagement')
         }
-
     });
 }
