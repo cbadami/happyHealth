@@ -36,8 +36,8 @@ exports.editGroup = (req, res) => {
             console.log(result)
             var groupName = result[0].Group_Name
             var creator = result[0].Creator
-            var createdDate = JSON.stringify(result[0].Created_Date).slice(1,11)
-            res.render('editGroup', { groupId,groupName,creator,createdDate });
+            var createdDate = JSON.stringify(result[0].Created_Date).slice(1, 11)
+            res.render('editGroup', { groupId, groupName, creator, createdDate });
         }
 
     });
@@ -85,4 +85,24 @@ exports.deleteGroup = (req, res) => {
             res.redirect('/groupManagement')
         }
     });
+}
+
+exports.getGroupMembers = async (req, res) => {
+    console.log("-------group memebers controller")
+    let groupId = req.params.groupId;
+    let groupQuery = `SELECT * FROM happyhealth_MySQL.group_member WHERE groupId = ${groupId}`
+
+    db.query(groupQuery, function (err, result) {
+        if (err) {
+            throw err;
+            return
+        } else {
+            console.log(result)
+            // console.log("---delete group sucessfully executed")
+            // res.redirect('/groupManagement')
+        }
+    });
+
+    console.log(result)
+
 }

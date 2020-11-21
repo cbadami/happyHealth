@@ -201,7 +201,7 @@
                                 <% for (var i = 0; i < result.length;i++) { %>
                                 <tr>
                                     <th scope="row"><%= result[i].Group_Id %></th>
-                                    <td><%= result[i].Group_Name%></td>
+                                    <td><a href="/getGroupMembers/<%= result[i].Group_Id%>"><%= result[i].Group_Name%></a></td>
                                     <td><%= result[i].Creator%></td>
                                     <td><%= JSON.stringify(result[i].Created_Date).slice(1,11) %></td>
                                     <td>

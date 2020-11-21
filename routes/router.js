@@ -97,6 +97,7 @@ router.post('/updateGroup/:groupId',userGroupController.updateGroup)
 
 router.get('/deleteGroup/:groupId',userGroupController.deleteGroup)
 
+router.get('/getGroupMembers/:groupId',userGroupController.getGroupMembers)
 
 
 router.get('/adminAnalytics',adminLoginController.getAdminAnalytics)
