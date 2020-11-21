@@ -210,8 +210,7 @@
                                     <h2> <b>Group Name: </b> </h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
-                                            class="material-icons">&#xE147;</i> <span>Add User</span></a>
+                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">Add User</a>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +230,7 @@
                                     <td><%= result[i].UserName%></td>
                                     <td><%= result[i].Date_Accepted_Invite%></td>
                                     <td>
-                                        <form action="deleteUserGroup/<%= result[i].UserName%>" method="get">
+                                        <form action="removeUserGroup/<%= result[i].UserName%>" method="get">
                                             <button type="submit" id="PopoverCustomT-1"
                                                 class="btn btn-primary btn-sm">Remove</button>
                                         </form>
