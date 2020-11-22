@@ -95,30 +95,40 @@ exports.getGroupMembers = (req, res) => {
 
     let userQuery = `SELECT * FROM happyhealth_MySQL.USER`
     let groupQuery = `SELECT * FROM happyhealth_MySQL.group_member WHERE groupId = ${groupId}`
+    var groupNameQuery = `SELECT * FROM happyhealth_MySQL.group WHERE Group_Id = '${groupId}'`;
 
-
-    db.query(userQuery, function (err, result) {
+    db.query(groupNameQuery, function (err, result) {
         if (err) {
             throw err;
-            return
         } else {
-            let userResults = result;
-            db.query(groupQuery, function (err, result) {
+            var groupName = result[0].Group_Name
+            db.query(userQuery, function (err, result) {
                 if (err) {
                     throw err;
                     return
                 } else {
-                    console.log(result, "----result")
-                    res.render("groupMembers", { groupId,groupName,userResults, result })
+                    let userResults = result;
+                    db.query(groupQuery, function (err, result) {
+                        if (err) {
+                            throw err;
+                            return
+                        } else {
+                            console.log(result, "----result")
+                            res.render("groupMembers", { groupId, groupName, userResults, result })
+                        }
+                    });
+
                 }
             });
-
         }
+
     });
+
+
 
 }
 
-exports.addUserGroup = (req,res) =>{
+exports.addUserGroup = (req, res) => {
     console.log("-------add user group member controller")
     let groupId = req.params.groupId;
     let userName = req.params.userName;
@@ -134,7 +144,7 @@ exports.addUserGroup = (req,res) =>{
     });
 }
 
-exports.removeUserGroup = (req,res) =>{
+exports.removeUserGroup = (req, res) => {
     console.log("--------remove user group members controller")
     let groupId = req.params.groupId;
     let userName = req.params.userName;
