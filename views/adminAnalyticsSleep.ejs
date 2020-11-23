@@ -12,8 +12,8 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="main.css" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -23,7 +23,7 @@
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Users', 'Andrew', 'Anthony', 'Charles', 'William', 'David', 'Daniel'],
+            ['Users', 'Andrew', 'Anthony', 'Charles', 'William', 'David', 'Daniel'],
                 ['11/13/2020', 6, 4, 7, 10, 5, 6],
                 ['11/12/2020', 7, 8, 4, 2, 8, 3],
                 ['11/11/2020', 8, 5, 3, 4, 9, 10],
@@ -31,15 +31,12 @@
             ]);
 
             var options = {
-                chart: {
-                    title: 'User sleep count Analytics',
-                    subtitle: 'User sleep hours as of: 11/13/2020',
-                    vAxis: { title: 'Number of hours of sleep' },
-                    hAxis: { title: 'Dates' },
-                    seriesType: 'bars',
-                    series: { 5: { type: 'line' } }
-                }
-            };
+          title : 'Daily analytics of user sleep count in hours.',
+          vAxis: {title: 'sleep hours '},
+          hAxis: {title: 'Dates'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
 
             var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
@@ -196,6 +193,8 @@
                                     <span>Users</span>
                                 </a>
                             </li>
+
+                            
                             <li>
                                 <a href="/adminAnalytics" class="mm-active">
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
@@ -221,22 +220,22 @@
             <div class="app-main__outer">
                 <div class="app-main__inner">
                     <div class="container-fluid">
-                        <div id="columnchart_material" style="height: 450px; width: 100%;"></div>
-                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                    </div>
-
+                    <div id="columnchart_material" style="height: 450px; width: 100%;"></div>
+                    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                 </div>
-                <div class="app-wrapper-footer">
-                    <div class="app-footer">
-                        <div class="copyright text-center bg-white py-4">
-                            <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
-                        </div>
 
+            </div>
+            <div class="app-wrapper-footer">
+                <div class="app-footer">
+                    <div class="copyright text-center bg-white py-4">
+                        <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
                     </div>
+
                 </div>
             </div>
-            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </div>
     </div>
     <script type="text/javascript" src="assets/scripts/main.js"></script>
 </body>
