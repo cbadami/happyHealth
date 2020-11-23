@@ -114,4 +114,8 @@ router.get('/adminAnalyticsWater',adminLoginController.getAdminAnalyticsWater)
 
 router.get('/adminAnalyticsMeditation',adminLoginController.getAdminAnalyticsMediation)
 
+router.get('/adminAnalyticsFruits',adminLoginController.getAdminAnalyticsFruits)
+
+router.get('/adminAnalyticsVegetables',adminLoginController.getAdminAnalyticsVegetables)
+
 module.exports = router;
