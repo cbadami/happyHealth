@@ -161,3 +161,11 @@ exports.getAdminAnalyticsWater = (req, res) => {
 exports.getAdminAnalyticsMediation = (req, res) => {
     res.render('adminAnalyticsMeditation');
 }
+
+exports.getAdminAnalyticsWater = (req, res) => {
+    res.render('adminAnalyticsFruits');
+}
+
+exports.getAdminAnalyticsMediation = (req, res) => {
+    res.render('adminAnalyticsVegetables');
+}
