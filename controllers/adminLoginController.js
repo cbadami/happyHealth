@@ -162,10 +162,10 @@ exports.getAdminAnalyticsMediation = (req, res) => {
     res.render('adminAnalyticsMeditation');
 }
 
-exports.getAdminAnalyticsWater = (req, res) => {
+exports.getAdminAnalyticsFruits = (req, res) => {
     res.render('adminAnalyticsFruits');
 }
 
-exports.getAdminAnalyticsMediation = (req, res) => {
+exports.getAdminAnalyticsVegetables = (req, res) => {
     res.render('adminAnalyticsVegetables');
 }
