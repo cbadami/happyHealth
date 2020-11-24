@@ -7,8 +7,12 @@ var cookieParser = require('cookie-parser');
 // var MemoryStore = require('memorystore')(session)
 var cookieSession = require('cookie-session');
 var bodyParser =  require('body-parser')
+var dotenv = require('dotenv')
 
 const app = express();
+
+//.env setup
+dotenv.config({ path: '.env' })
 
 // cookie parser
 app.use(cookieParser())

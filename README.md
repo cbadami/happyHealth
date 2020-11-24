@@ -9,15 +9,28 @@ Following must be downloaded, installed, and configured according to the product
 - Git version control system  
 - VS Code light-weight, cross-platform code editor or other IDE  
 ### Clone the repo to local machine
+```
 git clone https://github.com/harishThadka/happyHealth.git
+```
+### .env Setup
+- Create .env file in root directory
+- copy data from .env-example to .env file
+- Enter your sql user,password
 ### Install dependencies
-npm install  
-npm install --dev.
+``` 
+npm install
+```
+```
+npm install --dev
+```
 ### To start the app
+```
 npm start
+```
 ### To run app in development
+```
 npm run dev
-
+```
 ## Hosted app Links:
 
 - User Login: https://exalted-legacy-290621.uc.r.appspot.com/
