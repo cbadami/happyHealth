@@ -1,19 +1,18 @@
-const { concatSeries } = require('async');
 const db = require('../database');
 
 
 exports.getGroup = (req, res) => {
-    let username = req.session.username;
-    console.log(`inside get user management ${username}`);
-    var allGroupsQuery = `SELECT * FROM happyhealth_MySQL.group`;
+
+    console.log('------get group')
+
+    var allGroupsQuery = `SELECT * FROM happyhealth.group`;
 
     db.query(allGroupsQuery, function (err, result) {
-        // console.log(result);
         if (err) {
             throw err;
         } else {
-            // console.log(`result: ${JSON.stringify(result)}`)
-            // console.log(`length of result: ${result.length}`)
+            console.log(result, "-----get group")
+            console.log("executed successfully");
             res.render('groupManagement', { result });
         }
 
@@ -27,17 +26,15 @@ exports.editGroup = (req, res) => {
 
     var groupId = req.params.groupId;
 
-    var editQuery = `SELECT * FROM happyhealth_MySQL.group WHERE Group_Id = '${groupId}'`;
+    var editQuery = `SELECT * FROM happyhealth.group WHERE GroupId = '${groupId}'`;
 
     db.query(editQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            console.log(result)
-            var groupName = result[0].Group_Name
-            var creator = result[0].Creator
-            var createdDate = JSON.stringify(result[0].Created_Date).slice(1, 11)
-            res.render('editGroup', { groupId, groupName, creator, createdDate });
+            console.log(result, "-----edit group")
+            console.log("executed successfully");
+            res.render('editGroup', { result });
         }
 
     });
@@ -53,17 +50,16 @@ exports.updateGroup = (req, res) => {
     var creator = req.body.creator
     var createdDate = req.body.createdDate
 
-    var updateQuery = `UPDATE happyhealth_MySQL.group SET Group_Name = '${groupName}', Creator = '${creator}' WHERE Group_Id = ${groupId}`
+    var updateQuery = `UPDATE happyhealth.group SET GroupName = '${groupName}', Creator = '${creator}', CreatedDate = '${createdDate}' WHERE GroupId = ${groupId}`
 
     db.query(updateQuery, function (err, result) {
-        // console.log(result);
         if (err) {
             throw err;
-            return
+        } else {
+            console.log(result, '------update group');
+            console.log("executed successfully");
+            res.redirect('../groupManagement');
         }
-        // console.log(`result: ${JSON.stringify(result)}`)
-        // console.log(`length of result: ${result.length}`)
-        res.redirect('../groupManagement');
 
     });
 
@@ -75,7 +71,7 @@ exports.deleteGroup = (req, res) => {
     console.log("---delete Group")
     var groupId = req.params.groupId;
 
-    var deleteQuery = `Delete FROM happyhealth_MySQL.group WHERE Group_Id = ${groupId};`;
+    var deleteQuery = `Delete FROM happyhealth.group WHERE GroupId = ${groupId};`;
 
     db.query(deleteQuery, function (err, result) {
         if (err) {
@@ -88,30 +84,27 @@ exports.deleteGroup = (req, res) => {
 }
 
 exports.getGroupMembers = (req, res) => {
+
     console.log("-------group memebers controller")
     let groupId = req.params.groupId;
-    let groupName = req.body.groupName;
 
-
-    let userQuery = `SELECT * FROM happyhealth_MySQL.USER`
-    let groupQuery = `SELECT * FROM happyhealth_MySQL.group_member WHERE groupId = ${groupId}`
-    var groupNameQuery = `SELECT * FROM happyhealth_MySQL.group WHERE Group_Id = '${groupId}'`;
+    let userQuery = `SELECT * FROM happyhealth.user`
+    let groupQuery = `SELECT * FROM happyhealth.groupmember WHERE GroupId = ${groupId}`
+    let groupNameQuery = `SELECT * FROM happyhealth.group WHERE GroupId = '${groupId}'`;
 
     db.query(groupNameQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            var groupName = result[0].Group_Name
+            var groupName = result[0].GroupName
             db.query(userQuery, function (err, result) {
                 if (err) {
                     throw err;
-                    return
                 } else {
                     let userResults = result;
                     db.query(groupQuery, function (err, result) {
                         if (err) {
                             throw err;
-                            return
                         } else {
                             console.log(result, "----result")
                             res.render("groupMembers", { groupId, groupName, userResults, result })
@@ -129,16 +122,17 @@ exports.getGroupMembers = (req, res) => {
 }
 
 exports.addUserGroup = (req, res) => {
+
     console.log("-------add user group member controller")
     let groupId = req.params.groupId;
-    let userName = req.params.userName;
-    let addQuery = `INSERT INTO happyhealth_MySQL.group_member values('${userName}',null,null,null,null,${groupId});`;
+    let userId = req.params.userId;
+    let addQuery = `INSERT INTO happyhealth.groupmember values(${userId},'11/24/2020',${groupId});`;
     db.query(addQuery, function (err, result) {
         if (err) {
             throw err;
             return
         } else {
-            console.log(result, "----add user group sucessfully executed")
+            console.log(result, "----add user group successfully executed")
             res.redirect(`/getGroupMembers/${groupId}`);
         }
     });

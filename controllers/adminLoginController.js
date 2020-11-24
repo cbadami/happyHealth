@@ -23,17 +23,18 @@ exports.postAdminLogin = (req, res) => {
         });
     }
     else {
-        var queryString = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${username}' and Password = '${password}' and Admin = 'Yes'`;
+
+        var queryString = `SELECT Username FROM happyhealth.user WHERE Username = '${username}' and Password = '${password}' and Admin = 1`;
 
         db.query(queryString, function (err, result) {
             console.log(result);
             if (result.length > 0) {
                 // success_msg = 'Login successful';
                 // console.log(success_msg);
-                out = result[0]['UserName'];
+                out = result[0]['Username'];
                 // res.render('userHome', { out });
                 req.session.username = out
-                res.redirect('/adminHome')
+                res.redirect('/adminHome');
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
                 res.render('adminLogin', {
@@ -57,7 +58,7 @@ exports.getAdminHome = (req, res) => {
 exports.getUserManagement = (req, res) => {
     let username = req.session.username;
     console.log(`inside get user management ${username}`);
-    var allUsersQuery = `SELECT * FROM happyhealth_MySQL.USER`;
+    var allUsersQuery = `SELECT * FROM happyhealth.user`;
 
     db.query(allUsersQuery, function (err, result) {
         // console.log(result);
@@ -74,22 +75,21 @@ exports.getUserManagement = (req, res) => {
 }
 
 exports.editUser = (req, res) => {
-    var username = req.params.userName;
+    var userId = req.params.userId;
     var body = req.body;
-    console.log(`inside edit username: ${username}`)
     // console.log(`inside edit body: ${JSON.stringify(body)}`)
-    var editQuery = `SELECT * FROM happyhealth_MySQL.USER WHERE UserName = '${username}'`;
+    var editQuery = `SELECT * FROM happyhealth.user WHERE UserId = ${userId}`;
 
     db.query(editQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            // console.log(result)
-            var userName = result[0].UserName
-            var email = result[0].Email
-            var password = result[0].Password
+            console.log(result)
+            // var userName = result[0].UserName
+            // var email = result[0].Email
+            // var password = result[0].Password
             // console.log(`email ${email}`)
-            res.render('editProfile', { userName, email, password });
+            res.render('editProfile', { result });
         }
 
     });
@@ -100,14 +100,15 @@ exports.updateUser = (req, res) => {
 
     console.log(req.body)
 
-    const userName = req.params.userName;
+    const userId = req.params.userId
+    const userName = req.body.userName;
     const email = req.body.email;
     const password = req.body.password;
 
     console.log(`inside update user ${userName}`)
     console.log(`inside update user ${email}`)
 
-    var updateQuery = `UPDATE happyhealth_MySQL.USER SET Password = '${password}', Email = '${email}' WHERE UserName = '${userName}';`
+    var updateQuery = `UPDATE happyhealth.user SET Password = '${password}', Email = '${email}', Username = '${userName}' WHERE UserId = ${userId};`
 
     db.query(updateQuery, function (err, result) {
         // console.log(result);
@@ -125,9 +126,9 @@ exports.updateUser = (req, res) => {
 }
 
 exports.deleteUser = (req, res) => {
-    var username = req.params.userName;
-    console.log(username)
-    var deleteQuery = `Delete FROM happyhealth_MySQL.USER WHERE UserName = '${username}';`;
+
+    var userId = req.params.userId;
+    var deleteQuery = `Delete FROM happyhealth.USER WHERE UserId = '${userId}';`;
 
     db.query(deleteQuery, function (err, result) {
         if (err) {

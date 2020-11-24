@@ -213,7 +213,7 @@
                                     <select id="inputState" class="form-control">
                                         <!-- <option selected></option> -->
                                         <% for (var i = 0; i < userResults.length;i++) { %>
-                                        <option><%= userResults[i].UserName %></option>
+                                        <option><%= userResults[i].Username %></option>
                                         <% } %>
                                     </select>
                                 </div>
@@ -235,10 +235,10 @@
                                 <% for (var i = 0; i < result.length;i++) { %>
                                 <tr>
                                     <th scope="row"><%= i+1 %></th>
-                                    <td><%= result[i].UserName%></td>
-                                    <td><%= result[i].Date_Accepted_Invite%></td>
+                                    <td><%= result[i].Username%></td>
+                                    <td><%= result[i].JoinedDate%></td>
                                     <td>
-                                        <form action="../removeUser/<%= groupId %>/<%= result[i].UserName%>"
+                                        <form action="../removeUser/<%= groupId %>/<%= result[i].UserId%>"
                                             method="get">
                                             <button type="submit" id="PopoverCustomT-1"
                                                 class="btn btn-primary btn-sm">Remove</button>
@@ -274,9 +274,9 @@
     </div>
     <script>
         function myFunction() {
-            var userName = document.getElementById("inputState").value;
+            var username = document.getElementById("inputState").value;
             var groupId = <%= groupId %>;
-            location.href=`/addUser/${groupId}/${userName}`;
+            location.href=`/addUser/${groupId}/${username}`;
         }
     </script>
 

@@ -190,23 +190,23 @@
             <div class="app-main__outer">
                 <div class="app-main__inner">
 
-                    <form action="/updateGroup/<%= groupId%>" method="post">
+                    <form action="/updateGroup/<%= result[0].GroupId%>" method="post">
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="validationDefault01">Group name</label>
                                 <input type="text" name="groupName" class="form-control" id="validationDefault01"
-                                    placeholder="Group name" value="<%= groupName%>" required>
+                                    placeholder="Group name" value="<%= result[0].GroupName%>" required>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="validationDefault02">Creator</label>
                                 <input type="text" name = "creator" class="form-control" id="validationDefault02" placeholder=""
-                                    value="<%= creator%>" required>
+                                    value="<%= result[0].Creator%>" required>
                             </div>
 
                             <div class="col-md-4 mb-3">
                                 <label for="validationDefault03">Created_Date</label>
                                 <input type="text" name = "createdDate"class="form-control" id="colFormLabel" placeholder="email"
-                                    value = "<%= createdDate %>" required>
+                                    value = "<%= result[0].CreatedDate %>" required>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Update Group</button>

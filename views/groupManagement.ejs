@@ -201,26 +201,19 @@
                                 <% for (var i = 0; i < result.length;i++) { %>
                                 <tr>
                                     <th scope="row"><%= i+1 %></th>
-                                    <td><a href="/getGroupMembers/<%= result[i].Group_Id%>"><%= result[i].Group_Name%></a></td>
+                                    <td><a href="/getGroupMembers/<%= result[i].GroupId%>"><%= result[i].GroupName%></a></td>
                                     <td><%= result[i].Creator%></td>
-                                    <td><%= JSON.stringify(result[i].Created_Date).slice(1,11) %></td>
+                                    <td><%= result[i].CreatedDate %></td>
                                     <td>
-                                        <form action="/editGroup/<%= result[i].Group_Id%>" method="get">
+                                        <form action="/editGroup/<%= result[i].GroupId%>" method="get">
                                             <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="deleteGroup/<%= result[i].Group_Id%>" method="get">
+                                        <form action="deleteGroup/<%= result[i].GroupId%>" method="get">
                                             <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Delete</button>
                                         </form>
                                     </td>
-                                    <!-- <td><a href="">
-                                            Edit
-                                        </a>
-                                    </td>
-                                    <td><a href="deleteGroup/<%= result[i].Group_Name%>">
-                                            Delete
-                                        </a></td> -->
                                 </tr>
                                 <% } %>
                             </tbody>
