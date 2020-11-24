@@ -12,7 +12,7 @@ Following must be downloaded, installed, and configured according to the product
 ```
 git clone https://github.com/harishThadka/happyHealth.git
 ```
-### .env Setup
+### Local database Setup
 - Create .env file in root directory
 - copy data from .env-example to .env file
 - Enter your sql user,password
