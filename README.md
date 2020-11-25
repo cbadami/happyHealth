@@ -5,17 +5,21 @@
 ## Setup app in local machine
 ### Prerequisites
 Following must be downloaded, installed, and configured according to the product directions:  
-- Node.js (comes with npm)  
-- Git version control system  
-- VS Code light-weight, cross-platform code editor or other IDE  
+1. Node.js (comes with npm)  
+1. Git version control system  
+1. VS Code light-weight, cross-platform code editor or other IDE  
+1. MySQL workbench
 ### Clone the repo to local machine
 ```
 git clone https://github.com/harishThadka/happyHealth.git
 ```
 ### Local database Setup
+#### Database creation:
+- Open happyhealthScript.sql in Mysql workbench and run script(It creates database and tables in workbench).
+#### .env setup:
 - Create .env file in root directory
 - copy data from .env-example to .env file
-- Enter your sql user,password
+- Enter your sql username and password
 ### Install dependencies
 ``` 
 npm install
