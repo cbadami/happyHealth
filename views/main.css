@@ -8,7 +8,7 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
-.border-primary {
+ .border-primary {
     border-color: #3f6ad8
 }
 
@@ -10999,6 +10999,15 @@ button,
     vertical-align: middle
 }
 
+.app-header.page {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    z-index: 10;
+    transition: all .2s
+}
 .app-header {
     height: 60px;
     display: flex;
@@ -11056,6 +11065,10 @@ button,
     font-size: .8rem
 }
 
+.app-header.page .app-header__logo {
+    width: 100% !important;
+}
+
 .app-header__logo {
     padding: 0 1.5rem;
     height: 60px;
@@ -11071,9 +11084,9 @@ button,
     /* background: url(assets/images/happyHealth/Artboard.png) */
 }
 
-.app-header .app-header__logo .h3 {
+/* .app-header .app-header__logo .h3 {
     display: none;
-}
+} */
 
 .app-header__menu,
 .app-header__mobile-menu {
@@ -11664,7 +11677,7 @@ button,
     position: fixed;
     height: 100vh
 }
-
+.fixed-sidebar .app-main .app-main__outer
 .fixed-sidebar .app-main .app-main__outer {
     z-index: 9;
     padding-left: 280px
@@ -19635,7 +19648,7 @@ a.fc-more:hover {
 
     .sidebar-mobile-open .app-sidebar .app-sidebar__inner ul li a {
         text-indent: initial;
-        /* padding: .5em 1.5rem .5em 45px */
+        padding: .5em 1.5rem .5em 45px
     }
 
     .sidebar-mobile-open .app-sidebar .app-sidebar__inner .metismenu-icon {
@@ -19692,7 +19705,7 @@ a.fc-more:hover {
     }
 
     .app-header .app-header__logo {
-        display: none;
+        /* display: none; */
         order: 2;
         background: transparent !important;
         border: 0 !important
