@@ -15,7 +15,7 @@ git clone https://github.com/harishThadka/happyHealth.git
 ```
 ### Local database Setup
 #### Database creation:
-- Open happyhealthScript.sql in Mysql workbench and run script(It creates database and tables in workbench).
+- Open happyhealthScript.sql in Mysql workbench and run script (It creates database and tables in workbench).
 #### .env setup:
 - Create .env file in root directory
 - copy data from .env-example to .env file
