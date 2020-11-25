@@ -1,21 +1,20 @@
 const db = require('../database');
-const async = require('async');
-const await = require('await');
 
 exports.getUserHome = (req, res) => {
+    let userId = req.session.userId;
     let username = req.session.username;
     console.log(`inside get user home ${username}`);
 
-    var stepQuery = `Select STEPCOUNT from happyhealth_MySQL.stepcount where username = '${username}';`;
-    var sleepQuery = `Select SleepHoursCount from happyhealth_MySQL.sleepcount where username = '${username}';`;
-    var waterQuery = `Select GlassCount from happyhealth_MySQL.watercount where username = '${username}';`;
+    var stepQuery = `Select StepCount from happyhealth.stepcount where UserId = ${userId};`;
+    var sleepQuery = `Select SleepCount from happyhealth.sleepcount where UserId = ${userId};`;
+    var waterQuery = `Select GlassCount from happyhealth.watercount where UserId = ${userId};`;
 
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err)
             stepCount = -1;
         } else {
-            stepCount = result[0]['STEPCOUNT'];
+            stepCount = result[0]['StepCount'];
         }
         console.log(`iniside db ${stepCount}`)
         db.query(sleepQuery, function (err, result) {
@@ -23,7 +22,7 @@ exports.getUserHome = (req, res) => {
                 console.log(err)
                 sleepHours = -1;
             } else {
-                sleepHours = result[0]['SleepHoursCount']
+                sleepHours = result[0]['SleepCount']
             }
             db.query(waterQuery, function (err, result) {
                 if (err) {
