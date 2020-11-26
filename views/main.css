@@ -11677,10 +11677,13 @@ button,
     position: fixed;
     height: 100vh
 }
-.fixed-sidebar .app-main .app-main__outer
+.fixed-sidebar .app-main.page .app-main__outer {
+    padding-left: 0 !important;
+}
+
 .fixed-sidebar .app-main .app-main__outer {
     z-index: 9;
-    padding-left: 280px
+    padding-left: 280px;
 }
 
 .fixed-sidebar.fixed-header .app-sidebar .app-header__logo {
