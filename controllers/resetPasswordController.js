@@ -5,18 +5,18 @@ exports.getResetPassword = (req, res) => {
     console.log(`under get reset password ${userName}`);
     res.render('resetPassword');
 
-}
+};
 
-exports.postResetPassword = (req,res) =>{
+exports.postResetPassword = (req, res) => {
     const userName = req.session.userName;
-    const {password, password2 } = req.body;
+    const { password, password2 } = req.body;
     let errors = [];
     let success_msg;
     if (!password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
-    else{
-        
+    else {
+
         if (password.length > 15) {
             errors.push({ msg: 'Password must be below 15 characters' });
         }
@@ -35,20 +35,20 @@ exports.postResetPassword = (req,res) =>{
             password2
         });
     }
-    else{
+    else {
 
-            var updateQuery = `UPDATE happyhealth_MySQL.USER
+        var updateQuery = `UPDATE happyhealth.user
             SET 
                 Password = '${password}'
             WHERE
-                UserName = '${userName}';`
-            db.query(updateQuery, function (err, result) {
-                if (err) console.log(`${err}`);
-                console.log("1 record updated");
-                success_msg1 = 'Password changed sucessfully';
-                req.session.success_msg = success_msg1;
-                res.redirect('/')
-            });
+                Username = '${userName}';`;
+        db.query(updateQuery, function (err, result) {
+            if (err) console.log(`${err}`);
+            console.log("1 record updated");
+            success_msg1 = 'Password changed sucessfully';
+            req.session.success_msg = success_msg1;
+            res.redirect('/');
+        });
     }
 
-}
+};

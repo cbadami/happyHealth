@@ -4,7 +4,7 @@ const db = require('../database');
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminLogin');
-}
+};
 
 exports.postAdminLogin = (req, res) => {
 
@@ -33,7 +33,7 @@ exports.postAdminLogin = (req, res) => {
                 // console.log(success_msg);
                 out = result[0]['Username'];
                 // res.render('userHome', { out });
-                req.session.username = out
+                req.session.username = out;
                 res.redirect('/adminHome');
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
@@ -47,13 +47,13 @@ exports.postAdminLogin = (req, res) => {
         });
 
     }
-}
+};
 
 exports.getAdminHome = (req, res) => {
     let username = req.session.username;
     console.log(`inside get admin ${username}`);
     res.render('adminHome', { username });
-}
+};
 
 exports.getUserManagement = (req, res) => {
     let username = req.session.username;
@@ -72,7 +72,7 @@ exports.getUserManagement = (req, res) => {
 
     });
 
-}
+};
 
 exports.editUser = (req, res) => {
     var userId = req.params.userId;
@@ -84,7 +84,7 @@ exports.editUser = (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(result)
+            console.log(result);
             // var userName = result[0].UserName
             // var email = result[0].Email
             // var password = result[0].Password
@@ -94,27 +94,27 @@ exports.editUser = (req, res) => {
 
     });
 
-}
+};
 
 exports.updateUser = (req, res) => {
 
-    console.log(req.body)
+    console.log(req.body);
 
-    const userId = req.params.userId
+    const userId = req.params.userId;
     const userName = req.body.userName;
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(`inside update user ${userName}`)
-    console.log(`inside update user ${email}`)
+    console.log(`inside update user ${userName}`);
+    console.log(`inside update user ${email}`);
 
-    var updateQuery = `UPDATE happyhealth.user SET Password = '${password}', Email = '${email}', Username = '${userName}' WHERE UserId = ${userId};`
+    var updateQuery = `UPDATE happyhealth.user SET Password = '${password}', Email = '${email}', Username = '${userName}' WHERE UserId = ${userId};`;
 
     db.query(updateQuery, function (err, result) {
         // console.log(result);
         if (err) {
             throw err;
-            return
+            return;
         }
         // console.log(`result: ${JSON.stringify(result)}`)
         // console.log(`length of result: ${result.length}`)
@@ -123,7 +123,7 @@ exports.updateUser = (req, res) => {
     });
 
 
-}
+};
 
 exports.deleteUser = (req, res) => {
 
@@ -134,39 +134,39 @@ exports.deleteUser = (req, res) => {
         if (err) {
             throw err;
         } else {
-            res.redirect('/userManagement')
+            res.redirect('/userManagement');
         }
 
     });
-}
+};
 
 
 
 
 exports.getAdminAnalytics = (req, res) => {
     res.render('adminAnalytics');
-}
+};
 
 exports.getAdminAnalyticsStep = (req, res) => {
     res.render('adminAnalyticsStep');
-}
+};
 
 exports.getAdminAnalyticsSleep = (req, res) => {
     res.render('adminAnalyticsSleep');
-}
+};
 
 exports.getAdminAnalyticsWater = (req, res) => {
     res.render('adminAnalyticsWater');
-}
+};
 
 exports.getAdminAnalyticsMediation = (req, res) => {
     res.render('adminAnalyticsMeditation');
-}
+};
 
 exports.getAdminAnalyticsFruits = (req, res) => {
     res.render('adminAnalyticsFruits');
-}
+};
 
 exports.getAdminAnalyticsVegetables = (req, res) => {
     res.render('adminAnalyticsVegetables');
-}
+};

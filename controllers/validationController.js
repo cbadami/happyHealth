@@ -5,17 +5,15 @@ const db = require('../database');
 var generateCode;
 
 
-
-
 exports.getValidation = (req, res) => {
   // const errors = req.errors;
   const userName = req.session.userName;
-  var userEmail = req.session.userEmail
+  var userEmail = req.session.userEmail;
   console.log(`under get validation page ${userName}`);
 
   generateCode = Math.floor(((Math.random() + 1) * 100000));
-  console.log(`Generate code: ${generateCode}`)
-  var email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>"
+  console.log(`Generate code: ${generateCode}`);
+  var email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
 
 
   let mailTransporter = nodemailer.createTransport({
@@ -42,14 +40,14 @@ exports.getValidation = (req, res) => {
   });
   res.render('validationPage');
 
-}
+};
 
 
 
 exports.postValidation = (req, res) => {
 
   const userName = req.session.userName;
-  var userEmail = req.session.userEmail
+  var userEmail = req.session.userEmail;
   const code = req.body.code;
   const resend = req.body.resend;
 
@@ -60,8 +58,8 @@ exports.postValidation = (req, res) => {
 
   if (resend == "Resend") {
     generateCode = Math.floor(((Math.random() + 1) * 100000));
-    console.log(`Generate code: ${generateCode}`)
-    var email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>"
+    console.log(`Generate code: ${generateCode}`);
+    var email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
 
 
     let mailTransporter = nodemailer.createTransport({
@@ -100,8 +98,8 @@ exports.postValidation = (req, res) => {
       });
     }
     else {
-      res.redirect('/resetPassword')
+      res.redirect('/resetPassword');
     }
   }
 
-}
+};

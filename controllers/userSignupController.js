@@ -2,9 +2,9 @@ const db = require('../database');
 
 
 exports.getSignup = (req, res) => {
-    console.log(`inside get method of user signup`)
-    res.render('userSignup')
-}
+    console.log(`inside get method of user signup`);
+    res.render('userSignup');
+};
 
 exports.postSignup = (req, res) => {
     const { name, email, password, password2 } = req.body;
@@ -84,14 +84,14 @@ exports.postSignup = (req, res) => {
         });
     }
     else {
-        console.log(`errors in last query: ${errors[0]} length ${errors.length}`)
+        console.log(`errors in last query: ${errors[0]} length ${errors.length}`);
         var queryString = `INSERT INTO  happyhealth_MySQL.USER values(
         '${name}','${password}','No','No','No','Yes','${email}');`;
         db.query(queryString, function (err, result) {
             if (err) {
-                console.log(`${err}`)
-                let str = err.message
-                if(str.includes("UserName")){
+                console.log(`${err}`);
+                let str = err.message;
+                if (str.includes("UserName")) {
                     errors.push({ msg: 'Username already taken' });
                     res.render('userSignup', {
                         errors,
@@ -99,8 +99,8 @@ exports.postSignup = (req, res) => {
                         email,
                         password,
                         password2
-                    }); 
-                }else if(str.includes("Email")){
+                    });
+                } else if (str.includes("Email")) {
                     errors.push({ msg: 'Email id already registered' });
                     res.render('userSignup', {
                         errors,
@@ -108,18 +108,18 @@ exports.postSignup = (req, res) => {
                         email,
                         password,
                         password2
-                    }); 
+                    });
                 }
-            }else{
+            } else {
                 // var stepQuery = `INSERT INTO  happyhealth_MySQL.USER values(
                 //     '${name}','${password}','No','No','No','Yes','${email}');`;
-            console.log("1 record inserted");
-            success_msg = 'Register sucessful';
-            req.session.success_msg = success_msg;
-            res.redirect('/')
+                console.log("1 record inserted");
+                success_msg = 'Register sucessful';
+                req.session.success_msg = success_msg;
+                res.redirect('/');
             }
         });
 
     }
 
-}
+};

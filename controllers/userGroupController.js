@@ -133,7 +133,7 @@ exports.addUserGroup = (req, res) => {
             throw err;
             return;
         } else {
-            console.log(result)
+            console.log(result);
             let userId = result[0].UserId;
             let addQuery = `INSERT INTO happyhealth.groupmember values(${userId},'${username}','11/24/2020',${groupId});`;
             db.query(addQuery, function (err, result) {

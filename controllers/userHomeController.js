@@ -11,47 +11,47 @@ exports.getUserHome = (req, res) => {
 
     db.query(stepQuery, function (err, result) {
         if (err) {
-            console.log(err)
+            console.log(err);
             stepCount = -1;
         } else {
             stepCount = result[0]['StepCount'];
         }
-        console.log(`iniside db ${stepCount}`)
+        console.log(`iniside db ${stepCount}`);
         db.query(sleepQuery, function (err, result) {
             if (err) {
-                console.log(err)
+                console.log(err);
                 sleepHours = -1;
             } else {
-                sleepHours = result[0]['SleepCount']
+                sleepHours = result[0]['SleepCount'];
             }
             db.query(waterQuery, function (err, result) {
                 if (err) {
-                    console.log(err)
+                    console.log(err);
                     waterCount = -1;
                 } else {
-                    waterCount = result[0]['GlassCount']
+                    waterCount = result[0]['GlassCount'];
                 }
-                res.render('userHome', { username, stepCount, sleepHours, waterCount })
+                res.render('userHome', { username, stepCount, sleepHours, waterCount });
             });
         });
 
     });
 
 
-}
+};
 
 
 exports.getUserStep = (req, res) => {
     let errors;
-    console.log(`inside  get user step`)
-    res.render('userStep', { errors })
-}
+    console.log(`inside  get user step`);
+    res.render('userStep', { errors });
+};
 
 exports.postUserStep = (req, res) => {
     let username = req.session.username;
-    console.log(username)
+    console.log(username);
     const { date, num_steps, goal } = req.body;
-    console.log(`inside post user step`)
+    console.log(`inside post user step`);
     let errors;
     if (!date || !num_steps || !goal) {
         console.log(`inside if statement ${num_steps}`);
@@ -63,27 +63,27 @@ exports.postUserStep = (req, res) => {
         WHERE UserName = '${username}';`;
     db.query(stepQuery, function (err, result) {
         if (err) {
-            console.log(err)
+            console.log(err);
         } else {
-            res.redirect('/userHome')
+            res.redirect('/userHome');
         }
     });
 
-}
+};
 
 
 exports.getUserSleep = (req, res) => {
     let errors;
-    console.log(`inside  get user sleep`)
-    res.render('userSleep', { errors })
-}
+    console.log(`inside  get user sleep`);
+    res.render('userSleep', { errors });
+};
 
 
 exports.postUserSleep = (req, res) => {
     let username = req.session.username;
-    console.log(username)
+    console.log(username);
     const { date, num_hours, goal } = req.body;
-    console.log(`inside post user sleep`)
+    console.log(`inside post user sleep`);
     let errors;
     if (!date || !num_hours || !goal) {
         console.log(`inside if statement ${num_hours}`);
@@ -95,27 +95,27 @@ exports.postUserSleep = (req, res) => {
         WHERE UserName = '${username}';`;
     db.query(stepQuery, function (err, result) {
         if (err) {
-            console.log(err)
+            console.log(err);
         } else {
-            res.redirect('/userHome')
+            res.redirect('/userHome');
         }
     });
 
-}
+};
 
 
 
 exports.getUserHydration = (req, res) => {
     let errors;
-    console.log(`inside  get user sleep`)
-    res.render('userHydration', { errors })
-}
+    console.log(`inside  get user sleep`);
+    res.render('userHydration', { errors });
+};
 
 exports.postUserHydration = (req, res) => {
     let username = req.session.username;
-    console.log(username)
+    console.log(username);
     const { date, num_glasses, goal } = req.body;
-    console.log(`inside post user hyration`)
+    console.log(`inside post user hyration`);
     let errors;
     if (!date || !num_glasses || !goal) {
         console.log(`inside if statement ${num_glasses}`);
@@ -127,34 +127,34 @@ exports.postUserHydration = (req, res) => {
         WHERE UserName = '${username}';`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
-            console.log(err)
+            console.log(err);
         } else {
-            res.redirect('/userHome')
+            res.redirect('/userHome');
         }
     });
-}
+};
 
 exports.getUserChallenges = (req, res) => {
-    res.render('user_challenges')
-}
+    res.render('user_challenges');
+};
 
 
 exports.getUserMoreChallenges = (req, res) => {
-    res.render('user_more_challenges')
-}
+    res.render('user_more_challenges');
+};
 
-exports.getUserProfile = (req,res) => {
-    res.render('userProfile')
-}
-
-
-exports.getUserFruits = (req,res)=>{
-    res.render("userFruits")
-}
+exports.getUserProfile = (req, res) => {
+    res.render('userProfile');
+};
 
 
-exports.getUserVegetables = (req,res) => {
-    res.render("userVegetables")
-}
+exports.getUserFruits = (req, res) => {
+    res.render("userFruits");
+};
+
+
+exports.getUserVegetables = (req, res) => {
+    res.render("userVegetables");
+};
 
 
