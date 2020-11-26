@@ -24,7 +24,7 @@ exports.postAdminLogin = (req, res) => {
     }
     else {
 
-        var queryString = `SELECT Username FROM happyhealth.user WHERE Username = '${username}' and Password = '${password}' and Admin = 1`;
+        var queryString = `SELECT Username FROM happyhealth.user WHERE Username = '${username}' and Password = '${password}' and Admin = 'Yes'`;
 
         db.query(queryString, function (err, result) {
             console.log(result);

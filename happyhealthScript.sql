@@ -135,7 +135,7 @@ CREATE TABLE `challenge` (
   `ChallengeId` int NOT NULL,
   `ChallengeName` varchar(25) DEFAULT NULL,
   `Creator` varchar(12) DEFAULT NULL,
-  `Created_Date` varchar(12) DEFAULT NULL,
+  `CreatedDate` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`ChallengeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

@@ -18,7 +18,7 @@ exports.postForgotPassword = (req, res) => {
     }
     else {
   
-      var queryString = `SELECT UserName,Email FROM happyhealth_MySQL.USER WHERE Email = '${email}' Limit 1 `;
+      var queryString = `SELECT UserName,Email FROM happyhealth.user WHERE Email = '${email}' Limit 1 `;
       db.query(queryString, function (err, result) {
         console.log(`forgot password ${result}`)
         if (result.length > 0) {

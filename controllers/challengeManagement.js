@@ -5,7 +5,7 @@ let challengeNaam = '';
 
 exports.getChallengeManagement = (req, res) => {
 
-    var viewChallengesQuery = `SELECT * FROM happyhealth_MySQL.challengeManagement`;
+    var viewChallengesQuery = `SELECT * FROM happyhealth.challengeManagement`;
     db.query(viewChallengesQuery, function (err, result) {
         // console.log(result);
         if (err) throw err;

@@ -85,7 +85,7 @@ router.post('/updateGroup/:groupId',userGroupController.updateGroup)
 router.get('/deleteGroup/:groupId',userGroupController.deleteGroup)
 router.get('/getGroupMembers/:groupId',userGroupController.getGroupMembers)
 router.get('/removeUser/:groupId/:userId',userGroupController.removeUserGroup)
-router.get('/addUser/:groupId/:userId',userGroupController.addUserGroup)
+router.get('/addUser/:groupId/:username',userGroupController.addUserGroup)
 
 
 /**

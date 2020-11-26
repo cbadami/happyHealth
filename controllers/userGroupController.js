@@ -3,7 +3,7 @@ const db = require('../database');
 
 exports.getGroup = (req, res) => {
 
-    console.log('------get group')
+    console.log('------get group');
 
     var allGroupsQuery = `SELECT * FROM happyhealth.group`;
 
@@ -11,18 +11,18 @@ exports.getGroup = (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(result, "-----get group")
+            console.log(result, "-----get group");
             console.log("executed successfully");
             res.render('groupManagement', { result });
         }
 
     });
 
-}
+};
 
 exports.editGroup = (req, res) => {
 
-    console.log('------editGroup controller')
+    console.log('------editGroup controller');
 
     var groupId = req.params.groupId;
 
@@ -32,25 +32,25 @@ exports.editGroup = (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(result, "-----edit group")
+            console.log(result, "-----edit group");
             console.log("executed successfully");
             res.render('editGroup', { result });
         }
 
     });
 
-}
+};
 
 exports.updateGroup = (req, res) => {
 
-    console.log('------updateGroup controller')
+    console.log('------updateGroup controller');
 
     var groupId = req.params.groupId;
-    var groupName = req.body.groupName
-    var creator = req.body.creator
-    var createdDate = req.body.createdDate
+    var groupName = req.body.groupName;
+    var creator = req.body.creator;
+    var createdDate = req.body.createdDate;
 
-    var updateQuery = `UPDATE happyhealth.group SET GroupName = '${groupName}', Creator = '${creator}', CreatedDate = '${createdDate}' WHERE GroupId = ${groupId}`
+    var updateQuery = `UPDATE happyhealth.group SET GroupName = '${groupName}', Creator = '${creator}', CreatedDate = '${createdDate}' WHERE GroupId = ${groupId}`;
 
     db.query(updateQuery, function (err, result) {
         if (err) {
@@ -64,11 +64,11 @@ exports.updateGroup = (req, res) => {
     });
 
 
-}
+};
 
 exports.deleteGroup = (req, res) => {
 
-    console.log("---delete Group")
+    console.log("---delete Group");
     var groupId = req.params.groupId;
 
     var deleteQuery = `Delete FROM happyhealth.group WHERE GroupId = ${groupId};`;
@@ -77,37 +77,38 @@ exports.deleteGroup = (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log("---delete group sucessfully executed")
-            res.redirect('/groupManagement')
+            console.log("---delete group sucessfully executed");
+            res.redirect('/groupManagement');
         }
     });
-}
+};
 
 exports.getGroupMembers = (req, res) => {
 
-    console.log("-------group memebers controller")
+    console.log("-------group memebers controller");
     let groupId = req.params.groupId;
 
-    let userQuery = `SELECT * FROM happyhealth.user`
-    let groupQuery = `SELECT * FROM happyhealth.groupmember WHERE GroupId = ${groupId}`
+    let userQuery = `SELECT * FROM happyhealth.user`;
+    let groupQuery = `SELECT * FROM happyhealth.groupmember WHERE GroupId = ${groupId}`;
     let groupNameQuery = `SELECT * FROM happyhealth.group WHERE GroupId = '${groupId}'`;
 
     db.query(groupNameQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            var groupName = result[0].GroupName
+            var groupName = result[0].GroupName;
             db.query(userQuery, function (err, result) {
                 if (err) {
                     throw err;
                 } else {
                     let userResults = result;
+                    console.log(userResults, '-----------userResults');
                     db.query(groupQuery, function (err, result) {
                         if (err) {
                             throw err;
                         } else {
-                            console.log(result, "----result")
-                            res.render("groupMembers", { groupId, groupName, userResults, result })
+                            console.log(result, "----result");
+                            res.render("groupMembers", { groupId, groupName, userResults, result });
                         }
                     });
 
@@ -119,37 +120,48 @@ exports.getGroupMembers = (req, res) => {
 
 
 
-}
+};
 
 exports.addUserGroup = (req, res) => {
 
-    console.log("-------add user group member controller")
+    console.log("-------add user group member controller");
     let groupId = req.params.groupId;
-    let userId = req.params.userId;
-    let addQuery = `INSERT INTO happyhealth.groupmember values(${userId},'11/24/2020',${groupId});`;
-    db.query(addQuery, function (err, result) {
+    let username = req.params.username;
+    let userQuery = `SELECT * FROM happyhealth.user WHERE Username = '${username}'`;
+    db.query(userQuery, function (err, result) {
         if (err) {
             throw err;
-            return
+            return;
         } else {
-            console.log(result, "----add user group successfully executed")
-            res.redirect(`/getGroupMembers/${groupId}`);
+            console.log(result)
+            let userId = result[0].UserId;
+            let addQuery = `INSERT INTO happyhealth.groupmember values(${userId},'${username}','11/24/2020',${groupId});`;
+            db.query(addQuery, function (err, result) {
+                if (err) {
+                    throw err;
+                    return;
+                } else {
+                    console.log(result, "----add user group successfully executed");
+                    res.redirect(`/getGroupMembers/${groupId}`);
+                }
+            });
         }
     });
-}
+
+};
 
 exports.removeUserGroup = (req, res) => {
-    console.log("--------remove user group members controller")
+    console.log("--------remove user group members controller");
     let groupId = req.params.groupId;
-    let userName = req.params.userName;
-    let removeQuery = `Delete FROM happyhealth_MySQL.group_member WHERE UserName = '${userName}' AND groupId = ${groupId};`;
+    let userId = req.params.userId;
+    let removeQuery = `Delete FROM happyhealth.groupmember WHERE UserId = '${userId}' AND groupId = ${groupId};`;
     db.query(removeQuery, function (err, result) {
         if (err) {
             throw err;
-            return
+            return;
         } else {
-            console.log(result, "----result")
+            console.log(result, "----result");
             res.redirect(`/getGroupMembers/${groupId}`);
         }
     });
-}
+};
