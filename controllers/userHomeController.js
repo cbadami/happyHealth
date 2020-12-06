@@ -48,8 +48,7 @@ exports.getUserStep = (req, res) => {
 };
 
 exports.postUserStep = (req, res) => {
-    let username = req.session.username;
-    console.log(username);
+    let userId = req.session.userId;
     const { date, num_steps, goal } = req.body;
     console.log(`inside post user step`);
     let errors;
@@ -58,9 +57,9 @@ exports.postUserStep = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userStep', { errors });
     }
-    var stepQuery = `UPDATE happyhealth_MySQL.stepcount
+    var stepQuery = `UPDATE happyhealth.stepcount
         SET StepCount = ${num_steps}, Goal = ${goal}, Date = '${date}'
-        WHERE UserName = '${username}';`;
+        WHERE userId = '${userId}';`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -80,8 +79,7 @@ exports.getUserSleep = (req, res) => {
 
 
 exports.postUserSleep = (req, res) => {
-    let username = req.session.username;
-    console.log(username);
+    let userId = req.session.userId;
     const { date, num_hours, goal } = req.body;
     console.log(`inside post user sleep`);
     let errors;
@@ -90,9 +88,9 @@ exports.postUserSleep = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userSleep', { errors });
     }
-    var stepQuery = `UPDATE happyhealth_MySQL.sleepcount
-        SET SleepHoursCount = ${num_hours}, Goal = ${goal}, Date = '${date}'
-        WHERE UserName = '${username}';`;
+    var stepQuery = `UPDATE happyhealth.sleepcount
+        SET SleepCount = ${num_hours}, Goal = ${goal}, Date = '${date}'
+        WHERE userId = '${userId}';`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -112,8 +110,7 @@ exports.getUserHydration = (req, res) => {
 };
 
 exports.postUserHydration = (req, res) => {
-    let username = req.session.username;
-    console.log(username);
+    let userId = req.session.userId;
     const { date, num_glasses, goal } = req.body;
     console.log(`inside post user hyration`);
     let errors;
@@ -122,9 +119,9 @@ exports.postUserHydration = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userHydration', { errors });
     }
-    var hydrationQuery = `UPDATE happyhealth_MySQL.watercount
+    var hydrationQuery = `UPDATE happyhealth.watercount
         SET GlassCount = ${num_glasses}, Goal = ${goal}, Date = '${date}'
-        WHERE UserName = '${username}';`;
+        WHERE userId = '${userId}';`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
             console.log(err);

@@ -7,17 +7,18 @@ exports.getSignup = (req, res) => {
 };
 
 exports.postSignup = (req, res) => {
-    const { name, email, password, password2 } = req.body;
+    let userId = Math.floor(((Math.random() + 1) * 100000));
+    const { username, email, password, password2 } = req.body;
     let errors = [];
     let success_msg;
-    if (!name || !email || !password || !password2) {
+    if (!username || !email || !password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
     else {
-        if (name.length > 12) {
+        if (username.length > 12) {
             errors.push({ msg: 'Username must be below 12 characters' });
         }
-        else if (name.length < 6) {
+        else if (username.length < 6) {
             errors.push({ msg: 'Username must be atleast 6 characters' });
         }
         // else {
@@ -77,7 +78,7 @@ exports.postSignup = (req, res) => {
     if (errors.length > 0) {
         res.render('userSignup', {
             errors,
-            name,
+            username,
             email,
             password,
             password2
@@ -85,8 +86,8 @@ exports.postSignup = (req, res) => {
     }
     else {
         console.log(`errors in last query: ${errors[0]} length ${errors.length}`);
-        var queryString = `INSERT INTO  happyhealth_MySQL.USER values(
-        '${name}','${password}','No','No','No','Yes','${email}');`;
+        var queryString = `INSERT INTO  happyhealth.user values(${userId},
+        '${username}','${password}','Yes','${email}');`;
         db.query(queryString, function (err, result) {
             if (err) {
                 console.log(`${err}`);
@@ -95,7 +96,7 @@ exports.postSignup = (req, res) => {
                     errors.push({ msg: 'Username already taken' });
                     res.render('userSignup', {
                         errors,
-                        name,
+                        name: username,
                         email,
                         password,
                         password2
@@ -104,7 +105,7 @@ exports.postSignup = (req, res) => {
                     errors.push({ msg: 'Email id already registered' });
                     res.render('userSignup', {
                         errors,
-                        name,
+                        name: username,
                         email,
                         password,
                         password2
