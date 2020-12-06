@@ -19,7 +19,7 @@ git clone https://github.com/harishThadka/happyHealth.git
 #### .env setup:
 - Create .env file in root directory
 - copy data from .env-example to .env file
-- Enter your sql username and password
+- Enter your Local SQL username and password
 ### Install dependencies
 ``` 
 npm install
