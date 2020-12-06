@@ -73,12 +73,12 @@
             <div class="app-header__menu">
                 <ul class="header-menu nav">
                     <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link">
+                        <a href="userProfile" class="nav-link">
                             <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li class="btn-group nav-item">
-                        <a href="javascript:void(0);" class="nav-link">
+                        <a href="adminLogin" class="nav-link">
                             <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
                         </a>
                     </li>
@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
+                            <a href="adminLogin" class="nav-link">
                                 <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
                             </a>
                         </li>
@@ -133,15 +133,6 @@
                         </button>
                     </div>
                 </div>
-                <!-- <div class="app-header__menu">
-                        <span>
-                            <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                                <span class="btn-icon-wrapper">
-                                    <i class="fa fa-ellipsis-v fa-w-6"></i>
-                                </span>
-                            </button>
-                        </span>
-                    </div>     -->
                 <div class="scrollbar-sidebar">
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu my-4">
@@ -159,8 +150,14 @@
                             </li>
                             <li>
                                 <a href="groupManagement" class="mm-active">
-                                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                                    <i class="fa fa-users" aria-hidden="true"></i>
                                     <span>Groups</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="mm-active">
+                                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                                    <span>Challenges</span>
                                 </a>
                             </li>
                             <li>
@@ -169,9 +166,8 @@
                                     <span>Analytics</span>
                                 </a>
                             </li>
-
                             <li>
-                                <a href="#" class="mm-active">
+                                <a href="" class="mm-active">
                                     <i class="fa fa-bell" aria-hidden="true"></i>
                                     <span>Notifications</span>
                                 </a>
@@ -201,17 +197,20 @@
                                 <% for (var i = 0; i < result.length;i++) { %>
                                 <tr>
                                     <th scope="row"><%= i+1 %></th>
-                                    <td><a href="/getGroupMembers/<%= result[i].GroupId%>"><%= result[i].GroupName%></a></td>
+                                    <!-- <td><a href="/getGroupMembers/<%= result[i].GroupId%>"><%= result[i].GroupName%></a></td> -->
+                                    <td><a href=""><%= result[i].GroupName%></a></td>
                                     <td><%= result[i].Creator%></td>
                                     <td><%= result[i].CreatedDate %></td>
                                     <td>
                                         <form action="/editGroup/<%= result[i].GroupId%>" method="get">
-                                            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
+                                            <button type="submit" id="PopoverCustomT-1"
+                                                class="btn btn-primary btn-sm">Edit</button>
                                         </form>
                                     </td>
                                     <td>
                                         <form action="deleteGroup/<%= result[i].GroupId%>" method="get">
-                                            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Delete</button>
+                                            <button type="submit" id="PopoverCustomT-1"
+                                                class="btn btn-primary btn-sm">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
