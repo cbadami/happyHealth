@@ -13,7 +13,7 @@ db.connect(function (err) {
   if (err) {
     return console.log("Error connecting to database: " + err.message);
   }
-  console.log("connected to Google cloud MySQL server");
+  console.log("connected to MySQL server");
 });
 
 module.exports = db;
