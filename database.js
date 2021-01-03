@@ -1,7 +1,7 @@
 const fs = require('fs');
 var mysql = require('mysql');
 
-var db = process.env.MYSQLCONNSTR_MyDBConnString;
+eval(process.env.MYSQLCONNSTR_MyDBConnString);
 
 /* var db = mysql.createConnection({
   host: process.env.DB_HOST,
