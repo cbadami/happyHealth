@@ -1,2 +1,5 @@
 .env
 node_modules
+DigiCertGlobalRootG2.crt.pem
+DigiCertGlobalRootG2.crt
+BaltimoreCyberTrustRoot.crt
