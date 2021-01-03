@@ -31,6 +31,6 @@
     "nodemon": "^2.0.6"
   },
   "engines": {
-    "node": "9.x"
+    "node": "12.x"
   }
 }
