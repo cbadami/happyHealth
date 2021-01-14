@@ -24,14 +24,14 @@ exports.postAdminLogin = (req, res) => {
     }
     else {
 
-        var queryString = `SELECT Username FROM happyhealth.user WHERE Username = '${username}' and Password = '${password}' and Admin = 'Yes'`;
+        var queryString = `SELECT userName FROM happyhealth.usertbl WHERE Username = '${username}' and Password = '${password}' and Admin = 'Yes'`;
 
         db.query(queryString, function (err, result) {
             console.log(result);
             if (result.length > 0) {
                 // success_msg = 'Login successful';
                 // console.log(success_msg);
-                out = result[0]['Username'];
+                out = result[0]['userName'];
                 // res.render('userHome', { out });
                 req.session.username = out;
                 res.redirect('/adminHome');
@@ -58,7 +58,7 @@ exports.getAdminHome = (req, res) => {
 exports.getUserManagement = (req, res) => {
     let username = req.session.username;
     console.log(`inside get user management ${username}`);
-    var allUsersQuery = `SELECT * FROM happyhealth.user`;
+    var allUsersQuery = `SELECT * FROM happyhealth.userTbl`;
 
     db.query(allUsersQuery, function (err, result) {
         // console.log(result);
