@@ -11,13 +11,15 @@ Following must be downloaded, installed, and configured according to the product
 1. MySQL workbench
 ### GitHub branch commands:
 - https://gist.github.com/nanusdad/7e516743e5e709073f7e
+- https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
+
 ### Clone the repo to local machine
 ```
 git clone https://github.com/harishThadka/happyHealth.git
 ```
 ### Local database Setup
 #### Database creation:
-- Open happyhealthScript.sql in Mysql workbench and run script (It creates database and tables in workbench).
+- Open latest version of happyhealthScript.sql in Mysql workbench and run script (It creates database and tables in workbench).
 #### .env setup:
 - Create .env file in root directory
 - copy data from .env-example to .env file
