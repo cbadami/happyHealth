@@ -44,7 +44,7 @@ height,averageActivityLevel, country,state) VALUES
 ('Richard','Richard456','No','Richard456@gmail.com','Richard Hoot','Male','11/04/1999',28,123,129,63,'Moderatley Active','United States','Kansas'),
 ('Joseph','Joseph123','No','Joseph123@gmail.com','Joseph Thompson','Male','08/23/1995',29,101,93,67,'Very Active','India','Maharastra'),
 ('Thomas','Thomasedison','No','Thomasedison@gmail.com','Thomas Edison','Male','10/12/1986',25,131,121,64,'Sedentary','Canada','Nova Scotia'),
-('amanda','amanda12345','No','amandabynes@gmail.com','amanda bynes','Female','11/11/1993',28,100,120,60,'Sedentary','United States','Texas');
+('harish24680','harish1234','Yes','harish24680@gmail.com','harish thadka','male','11/04/1995',28,100,120,60,'Sedentary','India','Telangana');
 
 
 --
