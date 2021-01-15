@@ -5,16 +5,16 @@ exports.getUserHome = (req, res) => {
     let username = req.session.username;
     console.log(`inside get user home ${username}`);
 
-    var stepQuery = `Select StepCount from happyhealth.stepcount where UserId = ${userId};`;
-    var sleepQuery = `Select SleepCount from happyhealth.sleepcount where UserId = ${userId};`;
-    var waterQuery = `Select GlassCount from happyhealth.watercount where UserId = ${userId};`;
+    var stepQuery = `Select stepCount from happyhealth.usermetricstbl where UserId = ${userId};`;
+    var sleepQuery = `Select sleepHours from happyhealth.usermetricstbl where UserId = ${userId};`;
+    var waterQuery = `Select water from happyhealth.usermetricstbl where UserId = ${userId};`;
 
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
             stepCount = -1;
         } else {
-            stepCount = result[0]['StepCount'];
+            stepCount = result[0]['stepCount'];
         }
         console.log(`iniside db ${stepCount}`);
         db.query(sleepQuery, function (err, result) {
@@ -22,14 +22,14 @@ exports.getUserHome = (req, res) => {
                 console.log(err);
                 sleepHours = -1;
             } else {
-                sleepHours = result[0]['SleepCount'];
+                sleepHours = result[0]['sleepHours'];
             }
             db.query(waterQuery, function (err, result) {
                 if (err) {
                     console.log(err);
                     waterCount = -1;
                 } else {
-                    waterCount = result[0]['GlassCount'];
+                    waterCount = result[0]['water'];
                 }
                 res.render('userHome', { username, stepCount, sleepHours, waterCount });
             });
@@ -57,8 +57,8 @@ exports.postUserStep = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userStep', { errors });
     }
-    var stepQuery = `UPDATE happyhealth.stepcount
-        SET StepCount = ${num_steps}, Goal = ${goal}, Date = '${date}'
+    var stepQuery = `UPDATE happyhealth.usermetricstbl
+        SET stepCount = ${num_steps}, stepGoal = ${goal}, date = '${date}'
         WHERE userId = '${userId}';`;
     db.query(stepQuery, function (err, result) {
         if (err) {
@@ -88,8 +88,8 @@ exports.postUserSleep = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userSleep', { errors });
     }
-    var stepQuery = `UPDATE happyhealth.sleepcount
-        SET SleepCount = ${num_hours}, Goal = ${goal}, Date = '${date}'
+    var stepQuery = `UPDATE happyhealth.usermetricstbl
+        SET sleepHours = ${num_hours}, sleepGoal = ${goal}, date = '${date}'
         WHERE userId = '${userId}';`;
     db.query(stepQuery, function (err, result) {
         if (err) {
@@ -119,8 +119,8 @@ exports.postUserHydration = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userHydration', { errors });
     }
-    var hydrationQuery = `UPDATE happyhealth.watercount
-        SET GlassCount = ${num_glasses}, Goal = ${goal}, Date = '${date}'
+    var hydrationQuery = `UPDATE happyhealth.usermetricstbl
+        SET water = ${num_glasses}, waterGoal = ${goal}, date = '${date}'
         WHERE userId = '${userId}';`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
