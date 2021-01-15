@@ -1,14 +1,14 @@
 const db = require('../database');
 
 exports.getResetPassword = (req, res) => {
-    const userName = req.session.userName;
-    console.log(`under get reset password ${userName}`);
+    const userId = req.session.userId;
+    console.log(`under get reset password ${userId}`);
     res.render('resetPassword');
 
 };
 
 exports.postResetPassword = (req, res) => {
-    const userName = req.session.userName;
+    const userId = req.session.userId;
     const { password, password2 } = req.body;
     let errors = [];
     let success_msg;
@@ -37,11 +37,11 @@ exports.postResetPassword = (req, res) => {
     }
     else {
 
-        var updateQuery = `UPDATE happyhealth.user
+        const updateQuery = `UPDATE happyhealth.usertbl
             SET 
-                Password = '${password}'
+                password = '${password}'
             WHERE
-                Username = '${userName}';`;
+                userId = '${userId}';`;
         db.query(updateQuery, function (err, result) {
             if (err) console.log(`${err}`);
             console.log("1 record updated");

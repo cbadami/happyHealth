@@ -45,12 +45,12 @@ exports.getValidation = (req, res) => {
 
 exports.postValidation = (req, res) => {
 
-  const userName = req.session.userName;
+  const userId = req.session.userId;
   var userEmail = req.session.userEmail;
   const code = req.body.code;
   const resend = req.body.resend;
 
-  console.log(`under post validation page ${userName}`);
+  console.log(`under post validation page ${userId}`);
   console.log(`under post validation page code: ${code}`);
   console.log(`under post validation page resend: ${resend}`);
   let errors = [];
