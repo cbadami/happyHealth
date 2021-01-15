@@ -1,30 +1,19 @@
 const nodemailer = require('nodemailer');
-
 const db = require('../database');
 
 var generateCode;
 
+const sendEmail = (userEmail, generateCode) => {
 
-exports.getValidation = (req, res) => {
-  // const errors = req.errors;
-  const userName = req.session.userName;
-  var userEmail = req.session.userEmail;
-  console.log(`under get validation page ${userName}`);
-
-  generateCode = Math.floor(((Math.random() + 1) * 100000));
-  console.log(`Generate code: ${generateCode}`);
-  var email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
-
-
-  let mailTransporter = nodemailer.createTransport({
+  const mailTransporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'happyhealthgdp@gmail.com',
       pass: 'Happyhealth123'
     }
   });
-
-  let mailDetails = {
+  const email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
+  const mailDetails = {
     from: 'happyhealthgdp@gmail.com',
     to: userEmail,
     subject: 'Happy Health forgot Password!',
@@ -38,8 +27,18 @@ exports.getValidation = (req, res) => {
       console.log('Email sent successfully');
     }
   });
-  res.render('validationPage');
+};
 
+
+exports.getValidation = (req, res) => {
+  // const errors = req.errors;
+  const userId = req.session.userId;
+  const userEmail = req.session.userEmail;
+  console.log(`under get validation page ${userEmail}`);
+  generateCode = Math.floor(((Math.random() + 1) * 100000));
+  console.log(`Generated code: ${generateCode}`);
+  sendEmail(userEmail,generateCode) 
+  res.render('validationPage'); 
 };
 
 
@@ -58,32 +57,8 @@ exports.postValidation = (req, res) => {
 
   if (resend == "Resend") {
     generateCode = Math.floor(((Math.random() + 1) * 100000));
-    console.log(`Generate code: ${generateCode}`);
-    var email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
-
-
-    let mailTransporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'happyhealthgdp@gmail.com',
-        pass: 'Happyhealth123'
-      }
-    });
-
-    let mailDetails = {
-      from: 'happyhealthgdp@gmail.com',
-      to: userEmail,
-      subject: 'Happy Health forgot Password!',
-      html: email
-    };
-
-    mailTransporter.sendMail(mailDetails, function (err, data) {
-      if (err) {
-        console.log('Error Occurs ' + err);
-      } else {
-        console.log('Email sent successfully');
-      }
-    });
+    console.log(`Generated code: ${generateCode}`);
+    sendEmail(userEmail,generateCode) 
     res.render('validationPage');
   } else {
     if (!code) {
