@@ -5,12 +5,14 @@ let challengeNaam = '';
 
 exports.getChallengeManagement = (req, res) => {
 
-    var viewChallengesQuery = `SELECT * FROM happyhealth.challengeManagement`;
+    var viewChallengesQuery = `SELECT * FROM happyhealth.challengetbl`;
+
     db.query(viewChallengesQuery, function (err, result) {
         // console.log(result);
         if (err) throw err;
         else {
-            //console.log(typeof(result))
+            // console.log(typeof(result))
+            // console.log(result);
             res.render('challengeManagement', { result });
         }
     });
@@ -18,12 +20,13 @@ exports.getChallengeManagement = (req, res) => {
 
 
 exports.postChallenge = (req, res) => {
-    const { name, description, type, startDate, endDate, participantType, participantCount } = req.body;
+    const { name,description, type, startDate, endDate, participantType, participantCount } = req.body;
+
     //(id,challengeName,description,challengeType,startDate,endDate,partcipantType,participantCount)
 
     console.log(req.body);
 
-    const insert = `INSERT INTO happyhealth_MySQL.challengeManagement (challengeName, description, challengeType, startDate, endDate, participantType, participantCount) VALUES('${name}', '${description}', '${type}', '${startDate}', '${endDate}', '${participantType}', ${participantCount}); `;
+    const insert = `INSERT INTO happyhealth_MySQL.challengetbl (challengeName, challengeDescription, challengeType, startDate, endDate, participantType, participantCount) VALUES('${name}', '${description}', '${type}', '${startDate}', '${endDate}', '${participantType}', ${participantCount}); `;
 
     db.query(insert, (err, results) => {
         if (err) throw err;
@@ -41,7 +44,7 @@ exports.getLeaderboard = (req, res) => {
     let id = parseInt(req.params.challengeId);
     console.log("id of selected challenge: " + id);
 
-    var viewChallengesQuery = `SELECT challengeName FROM happyhealth_MySQL.challengeManagement  where id = ${id}`;
+    var viewChallengesQuery = `SELECT challengeName FROM happyhealth_MySQL.challengetbl  where id = ${id}`;
     // "SELECT balance FROM members WHERE username = 'kappa'"
 
 

@@ -1,6 +1,4 @@
-
 const db = require('../database');
-
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminLogin');
@@ -24,14 +22,16 @@ exports.postAdminLogin = (req, res) => {
     }
     else {
 
-        var queryString = `SELECT userName FROM happyhealth.usertbl WHERE Username = '${username}' and Password = '${password}' and Admin = 'Yes'`;
+        var queryString = `SELECT userName FROM happyhealth.usertbl WHERE userName = '${username}' and Password = '${password}' and Admin = 'Yes'`;
 
         db.query(queryString, function (err, result) {
             console.log(result);
             if (result.length > 0) {
                 // success_msg = 'Login successful';
                 // console.log(success_msg);
-                out = result[0]['userName'];
+                out = result[0]['Username'];
+               // console.log(out)
+
                 // res.render('userHome', { out });
                 req.session.username = out;
                 res.redirect('/adminHome');
@@ -51,14 +51,15 @@ exports.postAdminLogin = (req, res) => {
 
 exports.getAdminHome = (req, res) => {
     let username = req.session.username;
-    console.log(`inside get admin ${username}`);
+    console.log(username);
+  //  console.log(`inside get admin ${username}`);
     res.render('adminHome', { username });
 };
 
 exports.getUserManagement = (req, res) => {
     let username = req.session.username;
     console.log(`inside get user management ${username}`);
-    var allUsersQuery = `SELECT * FROM happyhealth.userTbl`;
+    var allUsersQuery = `SELECT * FROM happyhealth.usertbl`;
 
     db.query(allUsersQuery, function (err, result) {
         // console.log(result);
@@ -78,7 +79,7 @@ exports.editUser = (req, res) => {
     var userId = req.params.userId;
     var body = req.body;
     // console.log(`inside edit body: ${JSON.stringify(body)}`)
-    var editQuery = `SELECT * FROM happyhealth.user WHERE UserId = ${userId}`;
+    var editQuery = `SELECT * FROM happyhealth.usertbl WHERE UserId = ${userId}`;
 
     db.query(editQuery, function (err, result) {
         if (err) {
@@ -108,7 +109,7 @@ exports.updateUser = (req, res) => {
     console.log(`inside update user ${userName}`);
     console.log(`inside update user ${email}`);
 
-    var updateQuery = `UPDATE happyhealth.user SET Password = '${password}', Email = '${email}', Username = '${userName}' WHERE UserId = ${userId};`;
+    var updateQuery = `UPDATE happyhealth.usertbl SET Password = '${password}', Email = '${email}', Username = '${userName}' WHERE UserId = ${userId};`;
 
     db.query(updateQuery, function (err, result) {
         // console.log(result);
@@ -128,7 +129,7 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
 
     var userId = req.params.userId;
-    var deleteQuery = `Delete FROM happyhealth.USER WHERE UserId = '${userId}';`;
+    var deleteQuery = `Delete FROM happyhealth.USERtbl WHERE UserId = '${userId}';`;
 
     db.query(deleteQuery, function (err, result) {
         if (err) {

@@ -11,7 +11,9 @@ exports.getGroup = (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(result, "-----get group");
+           // console.log(result, "-----get group");
+
+            console.log(result);
             console.log("executed successfully");
             res.render('groupManagement', { result });
         }
