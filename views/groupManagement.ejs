@@ -198,9 +198,9 @@
                                 <tr>
                                     <th scope="row"><%= i+1 %></th>
                                     <!-- <td><a href="/getGroupMembers/<%= result[i].GroupId%>"><%= result[i].GroupName%></a></td> -->
-                                    <td><a href=""><%= result[i].GroupName%></a></td>
-                                    <td><%= result[i].Creator%></td>
-                                    <td><%= result[i].CreatedDate %></td>
+                                    <td><a href=""><%= result[i].groupName%></a></td>
+                                    <td><%= result[i].creator%></td>
+                                    <td><%= result[i].createdDate %></td>
                                     <td>
                                         <form action="/editGroup/<%= result[i].GroupId%>" method="get">
                                             <button type="submit" id="PopoverCustomT-1"
