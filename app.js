@@ -23,7 +23,8 @@ app.use(cookieParser())
 // require('./config/passport')(passport);
 
 // css styles
-app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
+//app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
+app.use(express.static('public'));
 
 // EJS
 app.use(expressLayouts);
