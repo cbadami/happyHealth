@@ -22,7 +22,7 @@ git clone https://github.com/harishThadka/happyHealth.git
 - Open latest version of happyhealthScript.sql in Mysql workbench and run script (It creates database and tables in workbench).
 #### .env setup:
 - Create .env file in root directory
-- copy data from .env-example to .env file
+- Copy data from .env-example to .env file
 - Enter your Local SQL username and password
 ### Install dependencies
 ``` 
@@ -39,12 +39,8 @@ npm start
 ```
 npm run dev
 ```
-## Hosted app Links:
-
-- User Login: https://exalted-legacy-290621.uc.r.appspot.com/
-- User SignUp: https://exalted-legacy-290621.uc.r.appspot.com/userSignUp
-- User ForgotPassword: https://exalted-legacy-290621.uc.r.appspot.com/forgotPassword
-- Admin login: https://exalted-legacy-290621.uc.r.appspot.com/adminLogin
+## Useful Resources:
+- https://expressjs.com/2x/guide.html
 
 ## App Design Architecture:
 
