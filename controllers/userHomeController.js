@@ -11,10 +11,6 @@ exports.getUserHome = (req, res) => {
             console.log(err);
         } else {
             console.log(result,'--------db userMetrics table result');
-        //     stepCount = result[0]['stepCount'];
-        //     sleepHours = result[0]['sleepHours'];
-        //     waterCount = result[0]['water'];
-        //     waterCount = result[0]['water'];
             const { stepCount, sleepHours, water, meTime, fruits, veggies } = result[0];
             res.render('userHome', { stepCount, sleepHours, water, meTime, fruits, veggies});
         }

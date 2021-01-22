@@ -21,19 +21,12 @@ exports.postAdminLogin = (req, res) => {
         });
     }
     else {
-
-        var queryString = `SELECT userName FROM happyhealth.usertbl WHERE userName = '${username}' and Password = '${password}' and Admin = 'Yes'`;
+        const queryString = `SELECT * FROM happyhealth.usertbl WHERE userName = '${username}' and Password = '${password}' and Admin = 'Yes'`;
 
         db.query(queryString, function (err, result) {
-            console.log(result);
             if (result.length > 0) {
-                // success_msg = 'Login successful';
-                // console.log(success_msg);
-                out = result[0]['Username'];
-               // console.log(out)
-
-                // res.render('userHome', { out });
-                req.session.username = out;
+                const userId = result[0]['userId'];
+                req.session.userId = userId;
                 res.redirect('/adminHome');
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
@@ -50,34 +43,28 @@ exports.postAdminLogin = (req, res) => {
 };
 
 exports.getAdminHome = (req, res) => {
-    let username = req.session.username;
-    console.log(username);
-  //  console.log(`inside get admin ${username}`);
-    res.render('adminHome', { username });
+    const userId = req.session.userId;
+    res.render('adminHome');
 };
 
 exports.getUserManagement = (req, res) => {
-    let username = req.session.username;
-    console.log(`inside get user management ${username}`);
-    var allUsersQuery = `SELECT * FROM happyhealth.usertbl`;
-
+    const userId = req.session.userId;
+    console.log(`User ID: ${userId}`, '--------getUserManagement controller');
+    const allUsersQuery = `SELECT * FROM happyhealth.usertbl WHERE userId <> ${userId}`;
     db.query(allUsersQuery, function (err, result) {
-        // console.log(result);
         if (err) {
             throw err;
         } else {
-            // console.log(`result: ${JSON.stringify(result)}`)
-            // console.log(`length of result: ${result.length}`)
+            console.log(`${JSON.stringify(result)}`, '------------db users result');
             res.render('userManagement', { result });
+            console.log('***********getUserManagement executed successfully*********');
         }
-
     });
-
 };
 
 exports.editUser = (req, res) => {
-    var userId = req.params.userId;
-    var body = req.body;
+    const userId = req.params.userId;
+    const body = req.body;
     // console.log(`inside edit body: ${JSON.stringify(body)}`)
     var editQuery = `SELECT * FROM happyhealth.usertbl WHERE UserId = ${userId}`;
 
