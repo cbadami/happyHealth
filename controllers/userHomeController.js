@@ -52,11 +52,11 @@ exports.postUserStep = (req, res) => {
 };
 
 
-exports.getUserSleep = (req, res) => {
-    let errors;
-    console.log(`inside  get user sleep`);
-    res.render('userSleep', { errors });
-};
+// exports.getUserSleep = (req, res) => {
+//     let errors;
+//     console.log(`inside  get user sleep`);
+//     res.render('userSleep', { errors });
+// };
 
 
 exports.postUserSleep = (req, res) => {
@@ -99,6 +99,15 @@ exports.getUserFruits = (req, res) => {
     //res.render("userFruits");
 };
 
+exports.getUserSleep = (req, res) => {
+    res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep'});
+   
+};
+
+exports.getUserVegetables = (req, res) => {
+    res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables'});
+};
+
 exports.postUserHydration = (req, res) => {
     let userId = req.session.userId;
     const { date, num_glasses, goal } = req.body;
@@ -136,8 +145,8 @@ exports.getUserMoreChallenges = (req, res) => {
 
 
 
-exports.getUserVegetables = (req, res) => {
-    res.render("userVegetables");
-};
+// exports.getUserVegetables = (req, res) => {
+//     res.render("userVegetables");
+// };
 
 
