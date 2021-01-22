@@ -1,7 +1,7 @@
 const db = require('../database');
 
 exports.getAdminLogin = (req, res) => {
-    res.render('adminLogin');
+    res.render('adminViews/adminLogin',{layout: 'layouts/mainLayout', title: 'admin Login' });
 };
 
 exports.postAdminLogin = (req, res) => {
@@ -14,7 +14,7 @@ exports.postAdminLogin = (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render('adminLogin', {
+        res.render('adminViews/adminLogin',{layout: 'layouts/mainLayout', title: 'admin Login',
             errors,
             username,
             password
@@ -31,7 +31,7 @@ exports.postAdminLogin = (req, res) => {
                 console.log('************Admin Login successfully**************');
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
-                res.render('adminLogin', {
+                res.render('adminViews/adminLogin',{layout: 'layouts/mainLayout', title: 'admin Login',
                     errors,
                     username,
                     password
@@ -45,7 +45,7 @@ exports.postAdminLogin = (req, res) => {
 
 exports.getAdminHome = (req, res) => {
     const userId = req.session.userId;
-    res.render('adminHome');
+    res.render('adminViews/adminHome',{layout: 'layouts/adminLayout', title: 'admin Home'});
 };
 
 exports.getUserManagement = (req, res) => {
