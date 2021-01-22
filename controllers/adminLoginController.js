@@ -57,7 +57,7 @@ exports.getUserManagement = (req, res) => {
             throw err;
         } else {
             console.log(`${JSON.stringify(result)}`, '------------db users result');
-            res.render('userManagement', { result });
+            res.render('adminViews/userManagement',{layout: 'layouts/adminLayout', title: 'User Management', result})
             console.log('***********getUserManagement executed successfully*********');
         }
     });

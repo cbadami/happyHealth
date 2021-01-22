@@ -3,17 +3,15 @@ const db = require('../database');
 
 exports.getGroup = (req, res) => {
 
-    console.log('------get group');
-
-    var allGroupsQuery = `SELECT * FROM happyhealth.groupTbl`;
+    const allGroupsQuery = `SELECT * FROM happyhealth.groupTbl`;
 
     db.query(allGroupsQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            console.log(result, "-----get group");
-            console.log("executed successfully");
-            res.render('groupManagement', { result });
+            console.log(result, "------------db group result");
+            res.render('adminViews/groupManagement', {Layout: 'adminLayout', title: 'Group Management', result });
+            console.log("***************getGroup executed successfully******************");
         }
 
     });

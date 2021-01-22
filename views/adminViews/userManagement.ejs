@@ -7,10 +7,11 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Group Name</th>
-                    <th scope="col">Creator</th>
-                    <th scope="col">Created Date</th>
-                    <th scope="col">Edit</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <!-- <th scope="col">Challenges</th> -->
+                    <th scope="col">Profile</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -20,23 +21,25 @@
                         <th scope="row">
                             <%= i+1 %>
                         </th>
-                        <!-- <td><a href="/getGroupMembers/<%= result[i].GroupId%>"><%= result[i].GroupName%></a></td> -->
-                        <td><a href="">
-                                <%= result[i].GroupName%>
-                            </a></td>
                         <td>
-                            <%= result[i].Creator%>
+                            <%= result[i].userName%>
                         </td>
                         <td>
-                            <%= result[i].CreatedDate %>
+                            <%= result[i].email%>
                         </td>
                         <td>
-                            <form action="/editGroup/<%= result[i].GroupId%>" method="get">
+                            <%= result[i].password%>
+                        </td>
+                        <!-- <td>
+                        <a href="">View</a>
+                    </td> -->
+                        <td>
+                            <form action="/editUser/<%= result[i].UserId%>" method="get">
                                 <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
                             </form>
                         </td>
                         <td>
-                            <form action="deleteGroup/<%= result[i].GroupId%>" method="get">
+                            <form action="deleteUser/<%= result[i].UserId%>" method="get">
                                 <button type="submit" id="PopoverCustomT-1"
                                     class="btn btn-primary btn-sm">Delete</button>
                             </form>
@@ -46,4 +49,5 @@
             </tbody>
         </table>
     </div>
+
 </div>
