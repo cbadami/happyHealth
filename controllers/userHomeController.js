@@ -84,10 +84,14 @@ exports.postUserSleep = (req, res) => {
 
 
 
+// exports.getUserHydration = (req, res) => {
+//     let errors;
+//     console.log(`inside  get user sleep`);
+//     res.render('userViews/userHydration', { errors });
+// };
+
 exports.getUserHydration = (req, res) => {
-    let errors;
-    console.log(`inside  get user sleep`);
-    res.render('userHydration', { errors });
+    res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration'});
 };
 
 exports.postUserHydration = (req, res) => {
