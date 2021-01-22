@@ -23,9 +23,7 @@ exports.getUserHome = (req, res) => {
 
 
 exports.getUserStep = (req, res) => {
-    let errors;
-    console.log(`inside  get user step`);
-    res.render('userStep', { errors });
+    res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step'});
 };
 
 exports.postUserStep = (req, res) => {

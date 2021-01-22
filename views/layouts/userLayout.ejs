@@ -21,6 +21,7 @@
             box-shadow: 12px 12px 12px;
             margin: 10px;
         }
+
         img {
             display: block;
             margin-left: auto;
@@ -34,12 +35,14 @@
             height: 160px;
             padding: 5px;
         }
-        .btn{
+
+        .btn {
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
-        h4{
+
+        h4 {
             padding-top: 0.5rem;
             text-align: center;
         }
@@ -152,38 +155,32 @@
                                 <a href="..\userHome" class="mm-active">
                                     <i class="fa fa-home" aria-hidden="true"></i>
                                     <span>Home</span>
-                                  </a>
+                                </a>
                             </li>
                             <li>
                                 <a href="..\userProfile" class="mm-active">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <span>Profile</span>
-                                  </a>
+                                </a>
                             </li>
                             <li>
                                 <a href="../userChallenges" class="mm-active">
-                                  <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                                  <span>Active Challenges</span>
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                    <span>Active Challenges</span>
                                 </a>
-                              </li>
-                              <li>
+                            </li>
+                            <li>
                                 <a href="#" class="mm-active">
-                                  <i class="fa fa-file-text" aria-hidden="true"></i>
-                                  <span>History</span>
+                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                    <span>Notifications</span>
                                 </a>
-                              </li>
-                              <li>
-                                <a href="#" class="mm-active">
-                                  <i class="fa fa-bell" aria-hidden="true"></i>
-                                  <span>Notifications</span>
-                                </a>
-                              </li>
-                              <li>
+                            </li>
+                            <li>
                                 <a href="\" class="mm-active">
-                                  <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                  <span>Logout</span>
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    <span>Logout</span>
                                 </a>
-                              </li>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -192,69 +189,17 @@
                 <main>
                     <%- body %>
                 </main>
-
-<<<<<<< HEAD:views/layouts/userLayout.ejs
             </div>
-            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        </div>
-        <div class="app-wrapper-footer">
-            <div class="app-footer">
-                <div class="copyright text-center bg-white py-4">
-                    <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
-                </div>
+            <div class="app-wrapper-footer">
+                <div class="app-footer">
+                    <div class="copyright text-center bg-white py-4">
+                        <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
+                    </div>
 
-=======
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Step Count</h4>
-                                <img src="assets/images/happyHealth/step.png" alt="user_stat">
-                                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userStep';">Step
-                                Count: <%= stepCount %></button>
-                            </div>
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Water Intake</h4>
-                                <img src="assets/images/happyHealth/water.png" alt="user_stat">
-                                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userHydration';">Water 
-                                    Intake: <%= waterCount %></button>     
-                            </div>
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Sleep Count</h4>
-                                <img src="assets/images/happyHealth/sleep.jpg" alt="challenge_mgmt">
-                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/userSleep';" >Sleep
-                                    Hours: <%= sleepHours %></button>
-                            </div>
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Track Me Time</h4>
-                                <img src="assets/images/happyHealth/meditation.png" alt="user_stat">
-                                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '#';">Track Me Time</button>
-                            </div>
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Fruits Intake</h4>
-                                <img src="assets/images/happyHealth/fruits.png" alt="user_fruits">
-                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/userFruits';" >Fruits
-                                    Intake: </button>
-                            </div>
-                            <div class="col-sm-4" style="background-color:white;">
-                                <h4>Vegetables Intake</h4>
-                                <img src="assets/images/happyHealth/vegetable.png" alt="user_vegetables">
-                                <button type="submit" class="btn btn-outline-secondary"  onclick="location.href = '/userVegetables';" >Vegetables
-                                    Intake: </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="app-wrapper-footer">
-                    <div class="app-footer">
-                        <div class="copyright text-center bg-white py-4">
-                            <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
-                        </div>
-                        
-                    </div>
-                </div>
->>>>>>> b5e209ea0d6ac7e6bd61553f5883784d40e3fc3f:views/userHome.ejs
             </div>
         </div>
+    </div>
     </div>
     <script type="text/javascript" src="assets/scripts/main.js"></script>
 </body>

@@ -36,7 +36,6 @@ exports.postUserLogin = (req, res) => {
             if (result.length > 0) {
                 req.session.userId = result[0]['userId'];
                 req.session.username = result[0]['username'];
-
                 res.redirect('userHome');
 
             } else {
