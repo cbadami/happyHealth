@@ -11,8 +11,6 @@ var dotenv = require('dotenv')
 
 const app = express();
 
-
-
 //.env setup
 dotenv.config({ path: '.env' })
 
@@ -23,8 +21,7 @@ app.use(cookieParser())
 // require('./config/passport')(passport);
 
 // css styles
-//app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
-app.use(express.static('public'));
+app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
 
 // Setting template engine
 app.use(expressLayouts);

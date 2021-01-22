@@ -2,10 +2,9 @@ const db = require('../database');
 
 exports.getUserHome = (req, res) => {
     let userId = req.session.userId;
-    console.log(`${userId}`, '---------------getUserHome');
+    console.log(`inside get user home ${username}`);
 
-    var homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
-
+    const homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
     db.query(homeQuery, function (err, result) {
         if (err) {
             console.log(err);
