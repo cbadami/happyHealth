@@ -29,13 +29,13 @@ exports.postUserLogin = (req, res) => {
     }
     else {
 
-        let queryString = `SELECT * FROM happyhealth.user WHERE Username = '${username}' and Password = '${password}'`;
+        let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}' and password = '${password}'`;
 
         db.query(queryString, function (err, result) {
             console.log(result);
             if (result.length > 0) {
-                req.session.userId = result[0]['UserId'];
-                req.session.username = result[0]['Username'];
+                req.session.userId = result[0]['userId'];
+                req.session.username = result[0]['username'];
 
                 res.redirect('userHome');
 
