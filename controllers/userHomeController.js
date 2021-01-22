@@ -30,14 +30,13 @@ exports.getUserStep = (req, res) => {
 };
 
 exports.postUserStep = (req, res) => {
-    let userId = req.session.userId;
+    const userId = req.session.userId;
     const { date, num_steps, goal } = req.body;
-    console.log(`inside post user step`);
     let errors;
     if (!date || !num_steps || !goal) {
         console.log(`inside if statement ${num_steps}`);
         errors = 'Please enter all fields';
-        res.render('userStep', { errors });
+        res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step', errors });
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
         SET stepCount = ${num_steps}, stepGoal = ${goal}, date = '${date}'
