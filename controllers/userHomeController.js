@@ -2,39 +2,22 @@ const db = require('../database');
 
 exports.getUserHome = (req, res) => {
     let userId = req.session.userId;
-    let username = req.session.username;
-    console.log(`inside get user home ${username}`);
+    console.log(`${userId}`, '---------------getUserHome');
 
-    var stepQuery = `Select stepCount from happyhealth.usermetricstbl where UserId = ${userId};`;
-    var sleepQuery = `Select sleepHours from happyhealth.usermetricstbl where UserId = ${userId};`;
-    var waterQuery = `Select water from happyhealth.usermetricstbl where UserId = ${userId};`;
+    var homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
 
-    db.query(stepQuery, function (err, result) {
+    db.query(homeQuery, function (err, result) {
         if (err) {
             console.log(err);
-            stepCount = -1;
         } else {
-            stepCount = result[0]['stepCount'];
+            console.log(result,'--------db userMetrics table result');
+        //     stepCount = result[0]['stepCount'];
+        //     sleepHours = result[0]['sleepHours'];
+        //     waterCount = result[0]['water'];
+        //     waterCount = result[0]['water'];
+            const { stepCount, sleepHours, water, meTime, fruits, veggies } = result[0];
+            res.render('userHome', { stepCount, sleepHours, water, meTime, fruits, veggies});
         }
-        console.log(`iniside db ${stepCount}`);
-        db.query(sleepQuery, function (err, result) {
-            if (err) {
-                console.log(err);
-                sleepHours = -1;
-            } else {
-                sleepHours = result[0]['sleepHours'];
-            }
-            db.query(waterQuery, function (err, result) {
-                if (err) {
-                    console.log(err);
-                    waterCount = -1;
-                } else {
-                    waterCount = result[0]['water'];
-                }
-                res.render('userHome', { username, stepCount, sleepHours, waterCount });
-            });
-        });
-
     });
 
 
