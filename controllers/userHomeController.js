@@ -94,6 +94,11 @@ exports.getUserHydration = (req, res) => {
     res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration'});
 };
 
+exports.getUserFruits = (req, res) => {
+    res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits'});
+    //res.render("userFruits");
+};
+
 exports.postUserHydration = (req, res) => {
     let userId = req.session.userId;
     const { date, num_glasses, goal } = req.body;
@@ -128,9 +133,7 @@ exports.getUserMoreChallenges = (req, res) => {
 
 
 
-exports.getUserFruits = (req, res) => {
-    res.render("userFruits");
-};
+
 
 
 exports.getUserVegetables = (req, res) => {
