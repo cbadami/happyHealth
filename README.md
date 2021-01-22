@@ -21,14 +21,14 @@ git clone https://github.com/harishThadka/happyHealth.git
 - Open latest version of happyhealthScript.sql in Mysql workbench and run script (It creates database and tables in workbench).
 #### .env setup:
 - Create .env file in root directory
-- copy data from .env-example to .env file
+- Copy data from .env-example to .env file
 - Enter your Local SQL username and password
 ### Install dependencies
 ``` 
 npm install
 ```
 ```
-npm install --dev
+npm install --only=dev
 ```
 ### To start the app
 ```
