@@ -26,8 +26,11 @@ app.use(cookieParser())
 //app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
 app.use(express.static('public'));
 
-// EJS
+// Setting template engine
 app.use(expressLayouts);
+app.set('view options', {
+  layout: false
+});
 app.set('view engine', 'ejs');
 
 app.use(express.static("views"));
@@ -43,16 +46,6 @@ app.use(bodyParser.urlencoded({
 // accept json 
 app.use(bodyParser.json());
 
-// // Memory store session
-// app.use(session({
-//     cookie: { maxAge: 86400000 },
-//     store: new MemoryStore({
-//       checkPeriod: 86400000 // prune expired entries every 24h
-//     }),
-//     resave: false,
-//     secret: 'keyboard cat',
-//     saveUninitialized: true
-// }))
 
 // Cookie-session use
 app.use(cookieSession({

@@ -1,0 +1,44 @@
+<div class="app-main__inner">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4" style="background-color:white;">
+                <h4>Step Count</h4>
+                <img src="assets/images/happyHealth/step.png" alt="user_stat">
+                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userStep';">Step
+                    Count: <%= stepCount %></button>
+            </div>
+            <div class="col-sm-4" style="background-color:white;">
+                <h4>Water Intake</h4>
+                <img src="assets/images/happyHealth/water.png" alt="user_stat">
+                <button type="submit" class="btn btn-outline-secondary"
+                    onclick="location.href = '/userHydration';">Water
+                    Intake: <%= water %></button>
+            </div>
+            <div class="col-sm-4" style="background-color:white;">
+                <h4>Sleep Count</h4>
+                <img src="assets/images/happyHealth/sleep.jpg" alt="challenge_mgmt">
+                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userSleep';">Sleep
+                    Hours: <%= sleepHours %></button>
+            </div>
+            <div class="col-sm-4" style="background-color:white;">
+                <h4>Track Me Time</h4>
+                <img src="assets/images/happyHealth/meditation.png" alt="user_stat">
+                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '#';">Track Me Time <%=
+                        meTime %></button>
+            </div>
+            <div class="col-sm-4" style="background-color:white;">
+                <h4>Fruits Intake</h4>
+                <img src="assets/images/happyHealth/fruits.png" alt="user_fruits">
+                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userFruits';">Fruits
+                    Intake: <%= fruits %> </button>
+            </div>
+            <div class="col-sm-4" style="background-color:white;">
+                <h4>Vegetables Intake</h4>
+                <img src="assets/images/happyHealth/vegetable.png" alt="user_vegetables">
+                <button type="submit" class="btn btn-outline-secondary"
+                    onclick="location.href = '/userVegetables';">Vegetables
+                    Intake: <%= veggies %> </button>
+            </div>
+        </div>
+    </div>
+</div>

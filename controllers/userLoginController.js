@@ -4,9 +4,9 @@ const db = require('../database');
 exports.getUserLogin = (req, res) => {
     let success_msg = req.session.success_msg;
     if (!success_msg) {
-        res.render('userLogin');
+        res.render('userViews/userLogin', { layout: 'layouts/loginLayout', title: 'User Login' });
     } else {
-        res.render('userLogin', { success_msg });
+        res.render('userViews/userLogin', { layout: 'layouts/loginLayout', title: 'User Login', success_msg });
     }
 };
 
@@ -21,7 +21,7 @@ exports.postUserLogin = (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render('userLogin', {
+        res.render('userViews/userLogin', { layout: 'layouts/loginLayout', title: 'User Login',
             errors,
             username,
             password
@@ -41,7 +41,7 @@ exports.postUserLogin = (req, res) => {
 
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
-                res.render('userLogin', {
+                res.render('userViews/userLogin', { layout: 'layouts/loginLayout', title: 'User Login',
                     errors,
                     username,
                     password
