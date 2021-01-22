@@ -3,7 +3,7 @@ const db = require('../database');
 
 exports.getSignup = (req, res) => {
     console.log(`inside get method of user signup`);
-    res.render('userSignup');
+    res.render('userViews/userSignup',{layout: 'layouts/mainLayout', title: 'User Signup'});
 };
 
 exports.postSignup = (req, res) => {
@@ -21,25 +21,6 @@ exports.postSignup = (req, res) => {
         else if (username.length < 6) {
             errors.push({ msg: 'Username must be atleast 6 characters' });
         }
-        // else {
-        //     var userQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE UserName = '${name}'`;
-        //     db.query(userQuery, function (err, result) {
-        //         console.log(result);
-        //         if (result.length > 0) {
-        //             console.log('inside username result');
-        //             errors.push({ msg: 'Username already taken' });
-        //             console.log(`inside errors ${errors} length: ${errors.length}`);
-        //             // res.render('userSignup', {
-        //             //     errors,
-        //             //     name,
-        //             //     email,
-        //             //     password,
-        //             //     password2
-        //             // });
-        //         }
-        //     });
-        //     console.log(`after query errors ${errors} length ${errors.length}`)
-        // }
 
         if (password.length > 15) {
             errors.push({ msg: 'Password must be below 15 characters' });
@@ -51,23 +32,6 @@ exports.postSignup = (req, res) => {
         if (email.length > 30) {
             errors.push({ msg: 'Email id must be below 30 characters' });
         }
-        // else {
-        //     var emailQuery = `SELECT UserName FROM happyhealth_MySQL.USER WHERE email = '${email}'`;
-        //     db.query(emailQuery, function (err, result) {
-        //         if (result.length > 0) {
-        //             console.log('inside email id query check');
-        //             errors.push({ msg: 'Email id already registered' });
-        //             res.render('userSignup', {
-        //                 errors,
-        //                 name,
-        //                 email,
-        //                 password,
-        //                 password2
-        //             });
-        //         }
-
-        //     });
-        // }
 
         if (password != password2) {
             errors.push({ msg: 'Passwords not matched' });
@@ -76,7 +40,7 @@ exports.postSignup = (req, res) => {
 
     console.log(`before errors ${errors} length: ${errors.length}`);
     if (errors.length > 0) {
-        res.render('userSignup', {
+        res.render('userViews/userSignup',{layout: 'layouts/mainLayout', title: 'User Signup',
             errors,
             username,
             email,
@@ -94,7 +58,7 @@ exports.postSignup = (req, res) => {
                 let str = err.message;
                 if (str.includes("UserName")) {
                     errors.push({ msg: 'Username already taken' });
-                    res.render('userSignup', {
+                    res.render('userViews/userSignup',{layout: 'layouts/mainLayout', title: 'User Signup',
                         errors,
                         name: username,
                         email,
@@ -103,7 +67,7 @@ exports.postSignup = (req, res) => {
                     });
                 } else if (str.includes("Email")) {
                     errors.push({ msg: 'Email id already registered' });
-                    res.render('userSignup', {
+                    res.render('userViews/userSignup',{layout: 'layouts/mainLayout', title: 'User Signup',
                         errors,
                         name: username,
                         email,
@@ -112,8 +76,6 @@ exports.postSignup = (req, res) => {
                     });
                 }
             } else {
-                // var stepQuery = `INSERT INTO  happyhealth_MySQL.USER values(
-                //     '${name}','${password}','No','No','No','Yes','${email}');`;
                 console.log("1 record inserted");
                 success_msg = 'Register sucessful';
                 req.session.success_msg = success_msg;

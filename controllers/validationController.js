@@ -37,8 +37,8 @@ exports.getValidation = (req, res) => {
   console.log(`under get validation page ${userEmail}`);
   generateCode = Math.floor(((Math.random() + 1) * 100000));
   console.log(`Generated code: ${generateCode}`);
-  sendEmail(userEmail,generateCode) 
-  res.render('validationPage'); 
+  sendEmail(userEmail, generateCode);
+  res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
 };
 
 
@@ -58,8 +58,8 @@ exports.postValidation = (req, res) => {
   if (resend == "Resend") {
     generateCode = Math.floor(((Math.random() + 1) * 100000));
     console.log(`Generated code: ${generateCode}`);
-    sendEmail(userEmail,generateCode) 
-    res.render('validationPage');
+    sendEmail(userEmail, generateCode);
+    res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
   } else {
     if (!code) {
       errors.push({ msg: 'Enter verification code' });
@@ -69,6 +69,7 @@ exports.postValidation = (req, res) => {
     }
     if (errors.length > 0) {
       res.render('validationPage', {
+        layout: 'layouts/mainLayout', title: 'Validation User',
         errors
       });
     }

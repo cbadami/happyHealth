@@ -3,7 +3,7 @@ const db = require('../database');
 exports.getResetPassword = (req, res) => {
     const userId = req.session.userId;
     console.log(`under get reset password ${userId}`);
-    res.render('resetPassword');
+    res.render('resetPassword',{layout:'layouts/mainLayout', title:'Reset Password'});
 
 };
 
@@ -29,7 +29,7 @@ exports.postResetPassword = (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render('resetPassword', {
+        res.render('resetPassword',{layout:'layouts/mainLayout', title:'Reset Password',
             errors,
             password,
             password2
