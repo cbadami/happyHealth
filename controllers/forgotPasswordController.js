@@ -1,7 +1,9 @@
 const db = require('../database');
 
 exports.getForgotPassword = (req, res) => {
-  res.render('forgotPassword');
+  res.render('forgotPassword', {
+    layout: 'layouts/mainLayout', title: 'Forgot Password'
+  });
 };
 
 exports.postForgotPassword = (req, res) => {
@@ -12,6 +14,7 @@ exports.postForgotPassword = (req, res) => {
   }
   if (errors.length > 0) {
     res.render('forgotPassword', {
+      layout: 'layouts/mainLayout', title: 'Forgot Password',
       errors,
       email,
     });
@@ -32,6 +35,7 @@ exports.postForgotPassword = (req, res) => {
       } else {
         errors.push({ msg: 'Email id not registered' });
         res.render('forgotPassword', {
+          layout: 'layouts/mainLayout', title: 'Forgot Password',
           errors,
           email,
         });

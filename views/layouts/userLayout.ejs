@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>HappyHealth Home</title>
+    <title>
+        <%= title %>
+    </title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
@@ -57,7 +59,7 @@
                 <!-- <div class="h3 m-0 ml-2">HappyHealth</div> -->
                 <div class="header__pane ml-auto">
                     <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic is-active"
                             data-class="closed-sidebar">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
@@ -189,15 +191,16 @@
                 <main>
                     <%- body %>
                 </main>
-            </div>
-            <div class="app-wrapper-footer">
-                <div class="app-footer">
-                    <div class="copyright text-center bg-white py-4">
-                        <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
-                    </div>
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                        <div class="copyright text-center bg-white py-4">
+                            <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
+                        </div>
 
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
     </div>

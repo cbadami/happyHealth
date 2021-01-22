@@ -2,8 +2,6 @@ const db = require('../database');
 
 exports.getUserHome = (req, res) => {
     let userId = req.session.userId;
-    console.log(`inside get user home ${username}`);
-
     const homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
     db.query(homeQuery, function (err, result) {
         if (err) {
@@ -19,6 +17,11 @@ exports.getUserHome = (req, res) => {
     });
 
 
+};
+
+exports.getUserProfile = (req, res) => {
+    res.render('userViews/userProfile', {
+        layout: 'layouts/userLayout', title: 'User Profile'});
 };
 
 
@@ -119,9 +122,7 @@ exports.getUserMoreChallenges = (req, res) => {
     res.render('user_more_challenges');
 };
 
-exports.getUserProfile = (req, res) => {
-    res.render('userProfile');
-};
+
 
 
 exports.getUserFruits = (req, res) => {
