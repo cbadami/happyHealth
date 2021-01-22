@@ -29,8 +29,8 @@ exports.postSignup = (req, res) => {
             errors.push({ msg: 'Password must be at least 8 characters' });
         }
 
-        if (email.length > 30) {
-            errors.push({ msg: 'Email id must be below 30 characters' });
+        if (email.length > 50) {
+            errors.push({ msg: 'Email id must be below 50 characters' });
         }
 
         if (password != password2) {
