@@ -28,6 +28,7 @@ exports.postAdminLogin = (req, res) => {
                 const userId = result[0]['userId'];
                 req.session.userId = userId;
                 res.redirect('/adminHome');
+                console.log('************Admin Login successfully**************');
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
                 res.render('adminLogin', {
@@ -65,19 +66,14 @@ exports.getUserManagement = (req, res) => {
 exports.editUser = (req, res) => {
     const userId = req.params.userId;
     const body = req.body;
-    // console.log(`inside edit body: ${JSON.stringify(body)}`)
     var editQuery = `SELECT * FROM happyhealth.usertbl WHERE UserId = ${userId}`;
-
     db.query(editQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
             console.log(result);
-            // var userName = result[0].UserName
-            // var email = result[0].Email
-            // var password = result[0].Password
-            // console.log(`email ${email}`)
             res.render('editProfile', { result });
+            console.log('***********editUser executed successfully*********');
         }
 
     });
@@ -93,20 +89,15 @@ exports.updateUser = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(`inside update user ${userName}`);
-    console.log(`inside update user ${email}`);
-
-    var updateQuery = `UPDATE happyhealth.usertbl SET Password = '${password}', Email = '${email}', Username = '${userName}' WHERE UserId = ${userId};`;
+    const updateQuery = `UPDATE happyhealth.usertbl SET Password = '${password}', Email = '${email}', Username = '${userName}' WHERE UserId = ${userId};`;
 
     db.query(updateQuery, function (err, result) {
-        // console.log(result);
         if (err) {
             throw err;
             return;
         }
-        // console.log(`result: ${JSON.stringify(result)}`)
-        // console.log(`length of result: ${result.length}`)
         res.redirect('../userManagement');
+        console.log("*************updateUser executed successfully***********");
 
     });
 
@@ -115,10 +106,10 @@ exports.updateUser = (req, res) => {
 
 exports.deleteUser = (req, res) => {
 
-    var userId = req.params.userId;
-    var deleteQuery = `Delete FROM happyhealth.USERtbl WHERE UserId = '${userId}';`;
+    const userId = req.params.userId;
+    const deleteQuery = `Delete FROM happyhealth.USERtbl WHERE UserId = '${userId}';`;
 
-    db.query(deleteQuery, function (err, result) {
+    db.query(deleteQuery, function (err) {
         if (err) {
             throw err;
         } else {
