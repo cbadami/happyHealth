@@ -4,16 +4,17 @@ const db = require('../database');
 let challengeNaam = '';
 
 exports.getChallengeManagement = (req, res) => {
-
-    var viewChallengesQuery = `SELECT * FROM happyhealth.challengeManagement`;
-    db.query(viewChallengesQuery, function (err, result) {
-        // console.log(result);
-        if (err) throw err;
-        else {
-            //console.log(typeof(result))
-            res.render('challengeManagement', { result });
-        }
-    });
+  const viewChallengesQuery = `SELECT * FROM happyhealth.challengeTbl`;
+  return db.query(viewChallengesQuery, function (err, result) {
+    if (err) throw err;
+    else {
+      return res.render("adminViews/challengeManagement", {
+        layout: "layouts/adminLayout",
+        result,
+        title: "Challenge Management",
+      });
+    }
+  });
 };
 
 
