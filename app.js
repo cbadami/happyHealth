@@ -21,8 +21,9 @@ app.use(cookieParser())
 // require('./config/passport')(passport);
 
 // css styles
-app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
-
+//app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
+app.use('/css', express.static(path.join(_dirname, 'node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(_dirname, 'node_modules/bootstrap/dist/js')))
 // Setting template engine
 app.use(expressLayouts);
 app.set('view options', {
