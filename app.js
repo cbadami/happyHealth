@@ -6,8 +6,9 @@ const session = require('express-session');
 var cookieParser = require('cookie-parser');
 // var MemoryStore = require('memorystore')(session)
 var cookieSession = require('cookie-session');
-var bodyParser =  require('body-parser')
-var dotenv = require('dotenv')
+var bodyParser =  require('body-parser');
+var dotenv = require('dotenv');
+const path = require('path');
 
 const app = express();
 
@@ -22,8 +23,8 @@ app.use(cookieParser())
 
 // css styles
 //app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
-app.use('/css', express.static(path.join(_dirname, 'node_modules/bootstrap/dist/css')))
-app.use('/js', express.static(path.join(_dirname, 'node_modules/bootstrap/dist/js')))
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 // Setting template engine
 app.use(expressLayouts);
 app.set('view options', {
