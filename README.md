@@ -9,13 +9,9 @@ Following must be downloaded, installed, and configured according to the product
 1. Git version control system  
 1. VS Code light-weight, cross-platform code editor or other IDE  
 1. MySQL workbench
-### GitHub branch commands:
-- https://gist.github.com/nanusdad/7e516743e5e709073f7e
-- https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
-
 ### Clone the repo to local machine
 ```
-git clone https://github.com/harishThadka/happyHealth.git
+git clone https://github.com/cbadami/happyHealth.git
 ```
 ### Local database Setup
 #### Database creation:
@@ -41,6 +37,10 @@ npm run dev
 ```
 ## Useful Resources:
 - https://expressjs.com/2x/guide.html
+- https://www.voidcanvas.com/make-console-log-output-colorful-and-stylish-in-browser-node/
+### GitHub branch commands:
+- https://gist.github.com/nanusdad/7e516743e5e709073f7e
+- https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
 
 ## App Design Architecture:
 

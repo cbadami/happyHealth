@@ -9,6 +9,7 @@ var cookieSession = require('cookie-session');
 var bodyParser =  require('body-parser');
 var dotenv = require('dotenv');
 const path = require('path');
+const colors = require('colors')
 
 const app = express();
 
@@ -75,4 +76,4 @@ app.use('/', require('./routes/router.js'));
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
+app.listen(PORT, console.log(`Successfully app running local at: `.yellow, `http://localhost:${PORT}`.cyan.underline));

@@ -7,9 +7,9 @@ eval(process.env.MYSQLCONNSTR_MyDBConnString);
 
 db.connect(function (err) {
   if (err) {
-    return console.log("Error connecting to database: " + err.message);
+    return console.log(`Error connecting to database: ${err.message}`.red);
   }
-  console.log("connected to your Local MySQL server");
+  console.log(`connected to your Local MySQL server`.yellow);
 });
 
 module.exports = db;
