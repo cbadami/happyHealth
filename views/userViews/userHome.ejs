@@ -1,42 +1,42 @@
 <div class="app-main__inner">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-4 card" style="background-color:white;">
+            <div class="col-sm-4 card" style="background-color:white;" onclick="location.href = '/userStep';">
                 <h4>Step Count</h4>
                 <img src="assets/images/happyHealth/step.png" alt="user_stat">
-                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userStep';">Step
+                <button type="submit" class="btn btn-outline-secondary" >Step
                     Count: <%= stepCount %></button>
             </div>
-            <div class="col-sm-4 card" style="background-color:white;">
+            <div class="col-sm-4 card" style="background-color:white;" onclick="location.href = '/userHydration';">
                 <h4>Water Intake</h4>
                 <img src="assets/images/happyHealth/water.png" alt="user_stat">
                 <button type="submit" class="btn btn-outline-secondary"
-                    onclick="location.href = '/userHydration';">Water
+                    >Water
                     Intake: <%= water %></button>
             </div>
-            <div class="col-sm-4 card" style="background-color:white;">
+            <div class="col-sm-4 card" style="background-color:white;" onclick="location.href = '/userSleep';">
                 <h4>Sleep Count</h4>
                 <img src="assets/images/happyHealth/sleep.jpg" alt="challenge_mgmt">
-                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userSleep';">Sleep
+                <button type="submit" class="btn btn-outline-secondary" >Sleep
                     Hours: <%= sleepHours %></button>
             </div>
-            <div class="col-sm-4 card" style="background-color:white;">
+            <div class="col-sm-4 card" style="background-color:white;" onclick="location.href = '#';">
                 <h4>Me Time</h4>
                 <img src="assets/images/happyHealth/meditation.png" alt="user_stat">
-                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '#';">Track Me Time <%=
+                <button type="submit" class="btn btn-outline-secondary" >Track Me Time <%=
                         meTime %></button>
             </div>
-            <div class="col-sm-4 card" style="background-color:white;">
+            <div class="col-sm-4 card" style="background-color:white;" onclick="location.href = '/userFruits';">
                 <h4>Fruits Intake</h4>
                 <img src="assets/images/happyHealth/fruits.png" alt="user_fruits">
-                <button type="submit" class="btn btn-outline-secondary" onclick="location.href = '/userFruits';">Fruits
+                <button type="submit" class="btn btn-outline-secondary" >Fruits
                     Intake: <%= fruits %> </button>
             </div>
-            <div class="col-sm-4 card" style="background-color:white;">
+            <div class="col-sm-4 card" style="background-color:white;"  onclick="location.href = '/userVegetables';">
                 <h4>Vegetables Intake</h4>
                 <img src="assets/images/happyHealth/vegetable.png" alt="user_vegetables">
                 <button type="submit" class="btn btn-outline-secondary"
-                    onclick="location.href = '/userVegetables';">Vegetables
+                   >Vegetables
                     Intake: <%= veggies %> </button>
             </div>
         </div>
