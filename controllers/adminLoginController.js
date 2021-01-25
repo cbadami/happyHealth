@@ -124,7 +124,7 @@ exports.deleteUser = (req, res) => {
 
 exports.getAdminAnalytics = (req, res) => {
 
-    res.render('adminAnalytics');
+    res.render('adminViews/adminAnalytics',{ layout: 'layouts/adminLayout', title: 'Admin Analytics'});
 };
 
 exports.getAdminAnalyticsStep = (req, res) => {
@@ -136,14 +136,14 @@ exports.getAdminAnalyticsSleep = (req, res) => {
  //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
 
 
- var query = `select usertbl.userId, usertbl.userName, usermetricstbl.sleepHours, usermetricstbl.sleepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+ var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.sleepHours, usermetricstbl.sleepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
 
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
             console.log(result);
 
-            res.render('adminAnalyticsSleep', { obj : result }   );
+            res.render('adminViews/adminAnalyticsSleep', { layout: 'layouts/adminLayout', title: 'Admin Analytics',obj : result }   );
         }
     });
 };

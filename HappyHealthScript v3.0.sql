@@ -1,4 +1,4 @@
---- Happy Health Database Creation
+-- Happy Health Database Creation
 
 UNLOCK TABLES;
 DROP DATABASE IF EXISTS happyHealth;
