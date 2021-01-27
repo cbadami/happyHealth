@@ -2,6 +2,9 @@
 
 ##### This repo is created to implement progressive web app
 
+#### Hosted App link:
+- https://cb-test-health-app-dev-test.azurewebsites.net/
+
 ## Setup app in local machine
 ### Prerequisites
 Following must be downloaded, installed, and configured according to the product directions:  
