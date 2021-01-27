@@ -1,0 +1,42 @@
+<div class="app-main__inner">
+
+    <!-- Adding a New Challenge -->
+
+
+    <div class="container-fluid col-md-6">
+        <form action="/addChallenge" method="POST">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Type</label>
+                <input type="text" name="type" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="start">Start date:</label>
+                <input type="date" id="start" name="startDate" placeholder="2020-07-20">
+            </div>
+            <div class="form-group">
+                <label for="start">End date:</label>
+                <input type="date" id="end" name="endDate" placeholder="2020-07-22">
+            </div>
+            <div class="form-group">
+                <label>Participant Type</label>
+                <input type="text" name="participantType" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Participant Count</label>
+                <input type="number" name="participantCount" class="form-control" required>
+            </div>
+            <div>
+                <input type="submit" vlaue="submit" name="Submit" class="btn btn-primary btn-sm" >
+              </div>
+        </form>
+      </div>
+   
+</div>
