@@ -17,6 +17,9 @@ exports.getChallengeManagement = (req, res) => {
   });
 };
 
+exports.addChallenge =(req,res)=>{
+  res.render('adminViews/addChallenge',{layout:"layouts/adminLayout"})
+}
 
 exports.postChallenge = (req, res) => {
     const { name, description, type, startDate, endDate, participantType, participantCount } = req.body;
@@ -24,7 +27,7 @@ exports.postChallenge = (req, res) => {
 
     console.log(req.body);
 
-    const insert = `INSERT INTO happyhealth_MySQL.challengeManagement (challengeName, description, challengeType, startDate, endDate, participantType, participantCount) VALUES('${name}', '${description}', '${type}', '${startDate}', '${endDate}', '${participantType}', ${participantCount}); `;
+    const insert = `INSERT INTO happyhealth.challengeTbl (challengeName, challengeDescription, challengeType, startDate, endDate, participantType, participantCount) VALUES('${name}', '${description}', '${type}', '${startDate}', '${endDate}', '${participantType}', ${participantCount}); `;
 
     db.query(insert, (err, results) => {
         if (err) throw err;

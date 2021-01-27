@@ -1,54 +1,52 @@
 <div class="app-main__inner">
-  <div class="table-wrapper">
-    <div class="table-title">
-      <div class="row">
-        <div class="col-sm-6">
-          <h2><b>Challenge Management</b></h2>
-        </div>
-        <div class="col-sm-6">
-          <a href="#" class="btn btn-success" data-toggle="modal"
-            ><i class="material-icons">&#xE147;</i>
-            <span>Add New Challenge</span></a
-          >
-        </div>
+  <div class="table-title">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2><b>Challenge Management</b></h2>
+      </div>
+      <div class="col-sm-4">
+        <button type="button" class="btn btn-primary" onclick="location.href = '/addChallenge'">Add New Challenge</button>
       </div>
     </div>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Sl.No</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Type</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Participant Type</th>
-          <th>Participants count</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (var i = 0; i < result.length;i++) { %>
-        <tr>
-          <th scope="row"><%= i+1 %></th>
-          <td>
-            <a href="/leaderboard/<%= i+1 %>">
-              <%= result[i].challengeName %>
-            </a>
-          </td>
-          <td><%= result[i].challengeDescription %></td>
-          <td><%= result[i].challengeType %></td>
-          <td><%= result[i].startDate %></td>
-          <td><%= result[i].endDate %></td>
-          <td><%= result[i].participantType %></td>
-          <td><%= result[i].participantCount %></td>
-          <td>
-            <a href="#" class="edit" data-toggle="modal"> Edit </a>
-            <a href="#" class="delete" data-toggle="modal"> Delete </a>
-          </td>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
   </div>
-</div>
+
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Sl.No</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Participant Type</th>
+        <th>Participants count</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% for (var i = 0; i < result.length;i++) { %>
+      <tr>
+        <th scope="row"><%= i+1 %></th>
+        <td>
+          <a href="/leaderboard/<%= i+1 %>">
+            <%= result[i].challengeName %>
+          </a>
+        </td>
+        <td><%= result[i].challengeDescription %></td>
+        <td><%= result[i].challengeType %></td>
+        <td><%= result[i].startDate %></td>
+        <td><%= result[i].endDate %></td>
+        <td><%= result[i].participantType %></td>
+        <td><%= result[i].participantCount %></td>
+        <td> <a href="#"> Edit </a> </td>
+        <td> <a href="#"> Delete </a> </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+

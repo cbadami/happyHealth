@@ -39,6 +39,7 @@ router.get('/userFruits', userHomeController.getUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 
 
+
 /**
  * user forgot password routes
  */
@@ -62,9 +63,9 @@ router.get('/adminHome', adminLoginController.getAdminHome);
  * Admin challenge management routes
  */
 router.get('/challengeManagement', challengeManagement.getChallengeManagement);
-router.get('/addChallenge');
+router.get('/addChallenge', challengeManagement.addChallenge);
 router.post('/addChallenge', challengeManagement.postChallenge);
-router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard);
+//router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard);
 
 
 /**
