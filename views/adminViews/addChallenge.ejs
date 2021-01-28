@@ -14,10 +14,6 @@
                 <textarea class="form-control" name="description" required></textarea>
             </div>
             <div class="form-group">
-                <label>Type</label>
-                <input type="text" name="type" class="form-control" required>
-            </div>
-            <div class="form-group">
                 <label for="start">Start date:</label>
                 <input type="date" id="start" name="startDate" placeholder="2020-07-20">
             </div>
@@ -31,23 +27,38 @@
             </div>
 
             <div class="form-group">
-                <label>Average Activity Level *</label><br>      
-                <select id="myList">
-                  <option value="Sedentary">Sedentary</option>
-                  <option value="Lightly Active">Lightly Active</option>
-                  <option value="Moderately Active">Moderately Active</option>
-                  <option value="Very Active">Very Active</option>
+                <label for="challengeType"> Challenge Type  </label>
+                <select class="form-select" >
+                    <option value="Running Challenges">  Running Challenges </option>
+                    <option value="Cycling Challenges"> Cycling Challenges </option>
+                    <option value="Calories Burned Challenge"> Calories Burned Challenge</option>
+                    <option value="Weight Loss Challenge "> Weight Loss Challenge </option>
+                    <option value="Swimming Challenge"> Swimming Challenge </option>
+                    <option value="Cardio Challenge"> Cardio Challenge </option>
+                    <option value="Walking Challenge"> Walking Challenge </option>
                 </select>
-              </div>
+            </div>
+
+
+            <div class="form-group">
+                <Label>Choose Level</Label>
+                <select class="form-select" >
+                    <option value="Sedentary">Sedentary</option>
+                    <option value="Lightly Active">Lightly Active</option>
+                    <option value="Moderately Active">Moderately Active</option>
+                    <option value="Very Active">Very Active</option>
+                </select>
+            </div>
+            
 
             <div class="form-group">
                 <label>Participant Count</label>
                 <input type="number" name="participantCount" class="form-control" required>
             </div>
             <div>
-                <input type="submit" vlaue="submit" name="Submit" class="btn btn-primary btn-sm" >
-              </div>
+                <input type="submit" vlaue="submit" name="Submit" class="btn btn-primary btn-sm">
+            </div>
         </form>
-      </div>
-   
+    </div>
+
 </div>
