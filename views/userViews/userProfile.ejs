@@ -1,9 +1,7 @@
 <html>
-  <head>
-    
-  
 
-<meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
@@ -24,136 +22,119 @@
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js">
     </script>
-    </head>
+</head>
+
 <body>
-<div class="app-main__inner">
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="Name (Full name)"> Name *</label>
-    <!-- <div class="col-md-4"> -->
-    <div class="input-group">
-      
-      <input id="Name (Full name)" class="form-control input-md" name="Name (Full name)" required="" type="text"
-        placeholder="Full Name" />
-    </div>
-    <!-- </div> -->
-  </div>
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="Gender">Gender *</label>
-    <!-- <div class="col-md-4"> -->
-    <div class="input-group">
-      <!-- <div class="input-group-addon">&nbsp;</div> -->
-      <label class="radio-inline" for="Gender-0">
-        <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
-        Female
-      </label>
-      <!-- <div class="input-group-addon">&nbsp;</div> -->
-      <label class="radio-inline" for="Gender-1">
-        <input type="radio" name="Gender" id="Gender-1" value="2">
-        Male
-      </label>
-      <!-- <div class="input-group-addon">&nbsp;</div> -->
-      <label class="radio-inline" for="Gender-2">
-        <input type="radio" name="Gender" id="Gender-2" value="3">
-        Other
-      </label>
-    </div>
-    <!-- </div> -->
-  </div>
+  <div class="app-main__inner">
 
-  <label for="username">Date of Birth *</label>
-  <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <div class='input-group date' id='datetimepicker1'>
-    <input type='text' name="date" id="dateText" value="" />
-    <span class="input-group-addon">
-      <span class="glyphicon glyphicon-calendar"></span>
-    </span>
-  </div>
+    <div class="container-fluid col-md-6" >
+      <form action="" method="POST">
 
-  <div class="form-group">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" placeholder="Enter Full Name" required>
+        </div>
 
-    <label for="exampleInputEmail1">Age *</label>
-    <input id="dob" name="Date Of Birth" type="text" placeholder="Age" class="form-control input-md ">
+        <div class="form-group">
+          <label>Gender</label>
 
-  </div>
-  <div class="form-group">
-    <i class="fa fa-envelope-o"></i>
-    <label for="exampleInputEmail1">Email Address *</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-      placeholder="Enter your email address" required>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Current Weight</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-      placeholder="Current weight in lbs">
-  </div>
+          <div class="input-group">
+            <!-- <div class="input-group-addon">&nbsp;</div> -->
+            <label class="radio-inline" for="Gender-0">
+              <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
+              Female
+            </label>
+            <!-- <div class="input-group-addon">&nbsp;</div> -->
+            <label class="radio-inline" for="Gender-1">
+              <input type="radio" name="Gender" id="Gender-1" value="2">
+              Male
+            </label>
+            <!-- <div class="input-group-addon">&nbsp;</div> -->
+            <label class="radio-inline" for="Gender-2">
+              <input type="radio" name="Gender" id="Gender-2" value="3">
+              Other
+            </label>
+          </div>
+        </div>
 
-  <div class="form-group">
-    <label for="exampleInputEmail1">Desired Weight</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-      placeholder="Desired weight in lbs">
-  </div>
+        <div class="form-group">
+          <label for="start">Date of Birth</label>
+          <input type="date" id="end" name="dob" placeholder="2020-07-22">
+        </div>
 
-  <div class="form-group">
-    <label for="exampleInputEmail1">Height</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-      placeholder="Height in Inches">
-    <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
-  </div>
 
-  <div class="form-group">
+        <div class="form-group">
+          <label>Age</label>
+          <input type="text" name="age" class="form-control" required>
+        </div>
 
-    <p>
-      <label>Average Activity Level *</label>
-      <select id="myList">
-        <option value="0">Choose</option>
-        <option value="1">Sedentary</option>
-        <option value="2">Lightly Active</option>
-        <option value="3">Moderately Active</option>
-        <option value="4">Very Active</option>
-      </select>
-      <small id="myList" class="form-text text-muted">Helps us understand your typical day.</small>
-    </p>
-    <table>
-      <tr>
-        <td>
-          <p>
-            <label>Country *</label>
-            <select id="myList">
-              <option value="0">Choose</option>
-              <option value="1">India</option>
-              <option value="2">USA</option>
-              <option value="3">Denmark</option>
-              <option value="4">Canada</option>
-            </select>
-          </p>
-          <!-- https://www.technicalkeeda.com/html-tutorials/all-countries-drop-down-list-in-html
-  refer to the above URL for dropdown code for countries -->
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label>Current Weight</label>
+          <input type="number" step="0.1" name="currentWeight" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label>Desired Weight</label>
+          <input type="number" step="0.1" name="desiredWeight" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label>Height</label>
+          <input type="number" step="0.1" name="height" class="form-control" required>
+          <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
+        </div>
+
+        <div class="form-group">
+          <label>Average Activity Level *</label>
+          <select id="myList">
+            <option value="Sedentary">Sedentary</option>
+            <option value="Lightly Active">Lightly Active</option>
+            <option value="Moderately Active">Moderately Active</option>
+            <option value="Very Active">Very Active</option>
+          </select>
+          <small id="myList" class="form-text text-muted">Helps us understand your typical day.</small>
+        </div>
+
+        <div class="form-group">
+          <label>Country *</label>
+          <select>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Canada">Canada</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>State *</label>
-          <input id="myList" class="form-control input-md" type=text placeholder=" State" required>
-
+          <input class="form-control input-md" type=text placeholder="State" required>
 
           <label>Note: <small>This data is optional and will be used internally by admins only.</small></label>
-        </td>
+        </div>
 
-  </div>
-  </tr>
-  </table>
-  <div class="form-row">
-    <button type="submit" class="btn1">
-      Update
-    </button>
-  </div>
-</div>
+        <div class="form-group">
+          <input type="submit" value="Update" name="update" class="btn btn-primary" >
+        </div>
+    </form>
 
-<script type="text/javascript">
-  $(function () {
-  $('#datetimepicker1').datetimepicker({
-  format: 'MM/DD/YYYY'
-  });
-  });
-  </script>
-  
-  
+
+
+
+  <!-- <script type="text/javascript">
+    $(function () {
+      $('#datetimepicker1').datetimepicker({
+        format: 'MM/DD/YYYY'
+      });
+    });
+  </script> -->
+
+
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </body>
-  </html>
+
+</html>
