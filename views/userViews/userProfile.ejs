@@ -1,9 +1,37 @@
+<html>
+  <head>
+    
+  
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- Date picker -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js">
+    </script>
+    </head>
+<body>
 <div class="app-main__inner">
   <div class="form-group">
     <label class="col-md-4 control-label" for="Name (Full name)"> Name *</label>
     <!-- <div class="col-md-4"> -->
     <div class="input-group">
-      <div class="input-group-addon">&nbsp;</div>
+      
       <input id="Name (Full name)" class="form-control input-md" name="Name (Full name)" required="" type="text"
         placeholder="Full Name" />
     </div>
@@ -13,17 +41,17 @@
     <label class="col-md-4 control-label" for="Gender">Gender *</label>
     <!-- <div class="col-md-4"> -->
     <div class="input-group">
-      <div class="input-group-addon">&nbsp;</div>
+      <!-- <div class="input-group-addon">&nbsp;</div> -->
       <label class="radio-inline" for="Gender-0">
         <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
         Female
       </label>
-      <div class="input-group-addon">&nbsp;</div>
+      <!-- <div class="input-group-addon">&nbsp;</div> -->
       <label class="radio-inline" for="Gender-1">
         <input type="radio" name="Gender" id="Gender-1" value="2">
         Male
       </label>
-      <div class="input-group-addon">&nbsp;</div>
+      <!-- <div class="input-group-addon">&nbsp;</div> -->
       <label class="radio-inline" for="Gender-2">
         <input type="radio" name="Gender" id="Gender-2" value="3">
         Other
@@ -117,3 +145,15 @@
   </div>
 </div>
 
+<script type="text/javascript">
+  $(function () {
+  $('#datetimepicker1').datetimepicker({
+  format: 'MM/DD/YYYY'
+  });
+  });
+  </script>
+  
+  
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</body>
+  </html>
