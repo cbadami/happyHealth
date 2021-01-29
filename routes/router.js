@@ -67,6 +67,7 @@ router.post('/addChallenge', challengeManagement.postChallenge);
 
 // router.get('/editChallenge/', challengeManagement.ed);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
+router.post('/editChallenge/:cid', challengeManagement.updateChallenge);
 
 //router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard);
 
