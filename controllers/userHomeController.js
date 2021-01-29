@@ -164,9 +164,16 @@ exports.getUserChallenges = (req, res) => {
 
 exports.getUserMoreChallenges = (req, res) => {
     res.render('userViews/user_more_challenges',{
+<<<<<<< HEAD
+
+    layout: "layouts/userLayout",
+    title: "User Management"
+     });
+=======
     layout: "layouts/userLayout",
         title: "User Management"
 });
+>>>>>>> 7fdf58aef7944cc1d5f287e7c079f8188a181cfb
 };
 
 
