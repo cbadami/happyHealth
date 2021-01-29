@@ -28,7 +28,7 @@
   <div class="app-main__inner">
 
     <div class="container-fluid col-md-6" >
-      <form action="" method="POST">
+      <form action="/userProfile" method="POST">
 
         <div class="form-group">
           <label>Name</label>
@@ -92,7 +92,7 @@
         <div class="form-group">
           <label>Average Activity Level *</label><br>
 
-          <select id="myList">
+          <select id="myList" name="myList">
             <option value="Sedentary">Sedentary</option>
             <option value="Lightly Active">Lightly Active</option>
             <option value="Moderately Active">Moderately Active</option>
@@ -365,7 +365,7 @@
 
         <div class="form-group">
           <label>State *</label>
-          <input class="form-control input-md" type=text placeholder="State" required>
+          <input class="form-control input-md" name="state" type=text placeholder="State" required>
 
           <label>Note: <small>This data is optional and will be used internally by admins only.</small></label>
         </div>
