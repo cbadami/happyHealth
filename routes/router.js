@@ -10,7 +10,11 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
+<<<<<<< HEAD
 
+=======
+// const userChallengesController = require('../controllers/userChallenges');
+>>>>>>> 735d9ec837e4541459918ba738cb949384c2368e
 
 
 
@@ -37,6 +41,7 @@ router.post('/userSleep', userHomeController.postUserSleep);
 router.get('/userHydration', userHomeController.getUserHydration);
 router.post('/userHydration', userHomeController.postUserHydration);
 router.get('/userProfile', userHomeController.getUserProfile);
+router.post('/userProfile', userHomeController.postUserProfile);
 router.get('/userFruits', userHomeController.getUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 
