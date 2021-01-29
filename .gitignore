@@ -1,3 +1,6 @@
 .env
 node_modules
 .vscode
+DigiCertGlobalRootG2.crt.pem
+DigiCertGlobalRootG2.crt
+
