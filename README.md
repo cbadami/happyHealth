@@ -38,6 +38,13 @@ npm start
 ```
 npm run dev
 ```
+
+### Instructions to merge branch:
+```
+git checkout prod
+git merge master
+```
+- https://stackoverflow.com/questions/26751970/how-to-push-changes-from-one-branch-to-another
 ## Useful Resources:
 - https://expressjs.com/2x/guide.html
 - https://www.voidcanvas.com/make-console-log-output-colorful-and-stylish-in-browser-node/

@@ -1,7 +1,7 @@
     <div class="app-main__inner">
 
                <div class="container-fluid col-md-6">
-            <form action="/" method="">
+            <form action="/editChallenge/<%= result[0].challengeId %>" method="POST">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="name" value="<%= result[0].challengeName %>"  class="form-control" required>
@@ -21,15 +21,15 @@
                         <option value="Swimming Challenge"> Swimming Challenge </option>
                         <option value="Cardio Challenge"> Cardio Challenge </option>
                         <option value="Walking Challenge"> Walking Challenge </option>
-                        <option value="Basketball"> Sports Challenge </option>
+                        <option value="Sports Challenge"> Sports Challenge </option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="partcipantType"> Participant Type </label>
                     <select class="form-select" name="participantType" value="<%= result[0].participantType %>">
-                        <option value="Running Challenges"> Group </option>
-                        <option value="Cycling Challenges"> Individual </option>
+                        <option value="Group"> Group </option>
+                        <option value="Individual"> Individual </option>
                     </select>
                 </div>
 
@@ -50,7 +50,7 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="submit" class="btn btn-primary btn-sm">
+                    <input type="submit" value="Update" class="btn btn-primary btn-sm">
                 </div>
             </form>
         </div>
