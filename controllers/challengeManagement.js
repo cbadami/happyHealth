@@ -64,7 +64,7 @@ exports.updateChallenge = (req, res) => {
 
 }
 
-exports.deleteChallenge = async (req, res) => {
+exports.deleteChallenge =  (req, res) => {
   let cid = req.params.cid;
 
   const deleteQuery = `DELETE from happyhealth.challengeTbl where challengeId = ${cid} `;
@@ -77,7 +77,7 @@ exports.deleteChallenge = async (req, res) => {
 
     //Viewing All challenges
     const viewChallengesQuery = `SELECT * FROM happyhealth.challengeTbl`;
-    return await db.query(viewChallengesQuery, function (err, result) {
+    return db.query(viewChallengesQuery, function (err, result) {
       if (err) throw err;
       else {
         return res.render("adminViews/challengeManagement", {
