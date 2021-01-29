@@ -21,13 +21,29 @@ exports.addChallenge =(req,res)=>{
   res.render('adminViews/addChallenge',{layout:"layouts/adminLayout"})
 }
 
+
+exports.editChallenge = (req,res)=>{
+    let cid= req.params.cid;
+  
+    const viewChallengesQuery = `SELECT * FROM happyhealth.challengeTbl WHERE challengeId =  ${cid}`;
+    return db.query(viewChallengesQuery, function (err, result) {
+      if (err) throw err;
+      else {
+        console.log(result);
+        return res.render('adminViews/editChallenge', { result, layout:"layouts/adminLayout"  })
+      }
+    });
+    }
+
+
+
 exports.postChallenge = (req, res) => {
-    const { name, description, type, startDate, endDate, participantType, participantCount } = req.body;
+    const { name, description, challengeType, participantCount, participantType, startDate, endDate } = req.body;
     //(id,challengeName,description,challengeType,startDate,endDate,partcipantType,participantCount)
 
     console.log(req.body);
 
-    const insert = `INSERT INTO happyhealth.challengeTbl (challengeName, challengeDescription, challengeType, startDate, endDate, participantType, participantCount) VALUES('${name}', '${description}', '${type}', '${startDate}', '${endDate}', '${participantType}', ${participantCount}); `;
+    const insert = `INSERT INTO happyhealth.challengeTbl (challengeName, challengeDescription, challengeType, participantType, participantCount , startDate, endDate) VALUES('${name}', '${description}', '${challengeType}', '${participantType}', ${participantCount}, '${startDate}', '${endDate}'); `;
 
     db.query(insert, (err, results) => {
         if (err) throw err;
