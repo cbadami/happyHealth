@@ -3,7 +3,6 @@ const router = express.Router();
 
 const userLoginController = require('../controllers/userLoginController');
 const userHomeController = require('../controllers/userHomeController');
-const userChallengesController = require('../controllers/userChallenges');
 const userSignupController = require('../controllers/userSignupController');
 const adminLoginController = require('../controllers/adminLoginController');
 const forgotPasswordController = require('../controllers/forgotPasswordController');
@@ -11,6 +10,7 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
+const userChallengesController = require('../controllers/userChallenges');
 
 
 
