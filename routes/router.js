@@ -10,6 +10,7 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
+const userChallengesController = require('../controllers/userChallenges');
 
 
 
@@ -19,6 +20,7 @@ const challengeManagement = require('../controllers/challengeManagement');
 router.get('/', userLoginController.getUserLogin);
 router.post('/', userLoginController.postUserLogin);
 router.get('/userHome', userHomeController.getUserHome);
+
 router.get('/userSignup', userSignupController.getSignup);
 router.post('/userSignup', userSignupController.postSignup);
 
