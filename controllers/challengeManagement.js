@@ -44,7 +44,7 @@ exports.updateChallenge = (req, res) => {
   return db.query(updateQuery, function (err, result) {
     if (err) throw err;
     else {
-      console.log(result);
+      console.log("Successfully updated");
       // return res.render('adminViews/challengeManagement', {result, layout: "layouts/adminLayout" })
     }
   });
@@ -62,10 +62,35 @@ exports.updateChallenge = (req, res) => {
     }
   });
 
+}
+
+exports.deleteChallenge = async (req, res) => {
+  let cid = req.params.cid;
+
+  const deleteQuery = `DELETE from happyhealth.challengeTbl where challengeId = ${cid} `;
+  return db.query(deleteQuery, function (err, result) {
+    if (err) throw err;
+    else {
+      console.log("Successfully deleted");
+    }
+  });
+
+    //Viewing All challenges
+    const viewChallengesQuery = `SELECT * FROM happyhealth.challengeTbl`;
+    return await db.query(viewChallengesQuery, function (err, result) {
+      if (err) throw err;
+      else {
+        return res.render("adminViews/challengeManagement", {
+          layout: "layouts/adminLayout",
+          result,
+          title: "Challenge Management",
+        });
+      }
+    });
+
 
 
 }
-
 
 
 exports.postChallenge = (req, res) => {

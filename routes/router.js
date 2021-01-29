@@ -64,10 +64,9 @@ router.get('/adminHome', adminLoginController.getAdminHome);
 router.get('/challengeManagement', challengeManagement.getChallengeManagement);
 router.get('/addChallenge', challengeManagement.addChallenge);
 router.post('/addChallenge', challengeManagement.postChallenge);
-
-// router.get('/editChallenge/', challengeManagement.ed);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge);
+router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge);
 
 //router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard);
 
