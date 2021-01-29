@@ -27,16 +27,15 @@ exports.getUserStep = (req, res) => {
 
 exports.postUserStep = (req, res) => {
     const userId = req.session.userId;
-    const { date, num_steps, goal } = req.body;
+    const { num_steps, goal } = req.body;
     let errors;
-    if (!date || !num_steps || !goal) {
+    if (!num_steps || !goal) {
         console.log(`inside if statement ${num_steps}`);
         errors = 'Please enter all fields';
         res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step', errors });
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET stepCount = ${num_steps}, stepGoal = ${goal}, date = '${date}'
-        WHERE userId = '${userId}';`;
+        SET stepCount = ${num_steps}, stepGoal = ${goal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -123,25 +122,22 @@ exports.getUserFruits = (req, res) => {
     //res.render("userFruits");
 };
 
-
-
 exports.getUserVegetables = (req, res) => {
     res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
 };
 
 exports.postUserHydration = (req, res) => {
     let userId = req.session.userId;
-    const { date, num_glasses, goal } = req.body;
+    const { num_glasses, goal } = req.body;
     console.log(`inside post user hyration`);
     let errors;
-    if (!date || !num_glasses || !goal) {
+    if (!num_glasses || !goal) {
         console.log(`inside if statement ${num_glasses}`);
         errors = 'Please enter all fields';
         res.render('userHydration', { errors });
     }
     var hydrationQuery = `UPDATE happyhealth.usermetricstbl
-        SET water = ${num_glasses}, waterGoal = ${goal}, date = '${date}'
-        WHERE userId = '${userId}';`;
+        SET water = ${num_glasses}, waterGoal = ${goal} WHERE userId = ${userId} ;`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -167,9 +163,32 @@ exports.getUserMoreChallenges = (req, res) => {
 };
 
 
+exports.getUserTrack = (req, res) => {
+    res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track'});
+};
 
+/*exports.postUserTrack = (req, res) => {
+    let userId = req.session.userId;
+    const { meditation, goal } = req.body;
+    console.log(`inside post user track`);
+    let errors;
+    console.log(meditation, goal);
+    if (!meditation || !goal) {
+        console.log(`inside if statement ${meditation}`);
+        errors = 'Please enter all fields';
+        res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track'});
+    }
+    var stepQuery = `UPDATE happyhealth.usermetricstbl
+        SET meTime = ${meditation}, meTimeGoal = ${goal} WHERE userId = ${userId};`;
+    db.query(stepQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/userHome');
+        }
+    });
 
-
+}; */
 
 
 // exports.getUserVegetables = (req, res) => {

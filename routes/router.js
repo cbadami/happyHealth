@@ -34,8 +34,10 @@ router.post('/userHydration', userHomeController.postUserHydration);
 router.get('/userProfile', userHomeController.getUserProfile);
 router.post('/userProfile', userHomeController.postUserProfile);
 router.get('/userFruits', userHomeController.getUserFruits);
+//router.get('/userFruits', userHomeController.postUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
-
+router.get('/userTrack', userHomeController.getUserTrack);
+router.get('/userTrack', userHomeController.postUserTrack);
 
 
 
