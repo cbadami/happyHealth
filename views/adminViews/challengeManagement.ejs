@@ -42,8 +42,10 @@
         <td><%= result[i].endDate %></td>
         <td><%= result[i].participantType %></td>
         <td><%= result[i].participantCount %></td>
-        <td> <a href="#"> Edit </a> </td>
-        <td> <a href="#"> Delete </a> </td>
+
+        <td> <a href="/editChallenge/<%= result[i].challengeId %>" > Edit </a> </td>
+        <td> <a href="/deleteChallenge"> Delete </a> </td>
+
       </tr>
       <% } %>
     </tbody>
