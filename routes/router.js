@@ -80,7 +80,7 @@ router.post('/addChallenge', challengeManagement.postChallenge);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge)
 
-router.post('/delteChallenge/:cid',challengeManagement.deleteChallenge  )
+router.post('/deleteChallenge/:cid',challengeManagement.deleteChallenge  )
 
 //router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard);
 

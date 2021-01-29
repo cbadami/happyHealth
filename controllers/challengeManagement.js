@@ -65,24 +65,6 @@ exports.deleteChallenge =  (req, res) => {
     }
   });
 
-<<<<<<< HEAD
-    //Viewing All challenges
-    const viewChallengesQuery = `SELECT * FROM happyhealth.challengeTbl`;
-    return db.query(viewChallengesQuery, function (err, result) {
-      if (err) throw err;
-      else {
-        return res.render("adminViews/challengeManagement", {
-          layout: "layouts/adminLayout",
-          result,
-          title: "Challenge Management",
-        });
-      }
-    });
-
-
-
-=======
->>>>>>> 76a67a380472b9f0f4d07298da07dc49ef8c5a7d
 }
 
 
