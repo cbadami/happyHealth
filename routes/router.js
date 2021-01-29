@@ -65,6 +65,10 @@ router.get('/adminHome', adminLoginController.getAdminHome);
 router.get('/challengeManagement', challengeManagement.getChallengeManagement);
 router.get('/addChallenge', challengeManagement.addChallenge);
 router.post('/addChallenge', challengeManagement.postChallenge);
+
+// router.get('/editChallenge/', challengeManagement.ed);
+router.get('/editChallenge/:cid', challengeManagement.editChallenge);
+
 //router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard);
 
 
