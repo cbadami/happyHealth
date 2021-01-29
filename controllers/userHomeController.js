@@ -19,14 +19,10 @@ exports.getUserHome = (req, res) => {
 
 };
 
-exports.getUserProfile = (req, res) => {
-    res.render('userViews/userProfile', {
-        layout: 'layouts/userLayout', title: 'User Profile'});
-};
 
 
 exports.getUserStep = (req, res) => {
-    res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step'});
+    res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step' });
 };
 
 exports.postUserStep = (req, res) => {
@@ -82,21 +78,28 @@ exports.postUserSleep = (req, res) => {
 
 };
 
-exports.postUserProfile= (req, res) => {
+exports.getUserProfile = (req, res) => {
+    res.render('userViews/userProfile', {
+        layout: 'layouts/userLayout', title: 'User Profile'
+    });
+};
+
+exports.postUserProfile = (req, res) => {
     let userId = req.session.userId;
-    console.log("profile details " +req.body)
-    const { name, Gender, dob,age,email,currentWeight,desiredWeight,height,myList,country,state } = req.body;
-    console.log(`details`+ name);
+    console.log("profile details " + req.body);
+    const { name, Gender, dob, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
+    console.log(`details` + name);
     let errors;
-    if (!name || !Gender || !dob ||!age || !email || !currentWeight || !desiredWeight || !height || !myList ||!country || !state ) {
+    if (!name || !Gender || !dob || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
         console.log(`inside if statement ${currentWeight}`);
         errors = 'Please enter all fields';
         res.render('userSleep', { errors });
     }
-    var stepQuery = `UPDATE happyhealth.usertbl
-        SET email = '${email}', fullName = '${name}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dob}',age='${age}',currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
+    const profileQuery = `UPDATE happyhealth.usertbl
+        SET email = '${email}', fullName = '${name}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dob}',age='${age}',
+        currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
         WHERE userId = '${userId}';`;
-    db.query(stepQuery, function (err, result) {
+    db.query(profileQuery, function (err, result) {
         if (err) {
             console.log(err);
         } else {
@@ -115,21 +118,21 @@ exports.postUserProfile= (req, res) => {
 // };
 
 exports.getUserHydration = (req, res) => {
-    res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration'});
+    res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration' });
 };
 
 exports.getUserFruits = (req, res) => {
-    res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits'});
+    res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
     //res.render("userFruits");
 };
 
 exports.getUserSleep = (req, res) => {
-    res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep'});
-   
+    res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep' });
+
 };
 
 exports.getUserVegetables = (req, res) => {
-    res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables'});
+    res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
 };
 
 exports.postUserHydration = (req, res) => {
@@ -163,10 +166,10 @@ exports.getUserChallenges = (req, res) => {
 
 
 exports.getUserMoreChallenges = (req, res) => {
-    res.render('userViews/user_more_challenges',{
-    layout: "layouts/userLayout",
-    title: "User Management"
-     });
+    res.render('userViews/user_more_challenges', {
+        layout: "layouts/userLayout",
+        title: "User Management"
+    });
 };
 
 
