@@ -10,7 +10,7 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
-const userProfileController = require('../controllers/userProfileController');
+// const userProfileController = require('../controllers/userProfileController');
 
 router.get('/', userLoginController.getUserLogin);
 router.post('/', userLoginController.postUserLogin);
