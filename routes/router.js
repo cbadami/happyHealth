@@ -3,6 +3,7 @@ const router = express.Router();
 
 const userLoginController = require('../controllers/userLoginController');
 const userHomeController = require('../controllers/userHomeController');
+const userChallengesController = require('../controllers/userChallenges');
 const userSignupController = require('../controllers/userSignupController');
 const adminLoginController = require('../controllers/adminLoginController');
 const forgotPasswordController = require('../controllers/forgotPasswordController');
@@ -19,6 +20,7 @@ const challengeManagement = require('../controllers/challengeManagement');
 router.get('/', userLoginController.getUserLogin);
 router.post('/', userLoginController.postUserLogin);
 router.get('/userHome', userHomeController.getUserHome);
+
 router.get('/userSignup', userSignupController.getSignup);
 router.post('/userSignup', userSignupController.postSignup);
 
