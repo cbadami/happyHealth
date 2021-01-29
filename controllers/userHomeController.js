@@ -48,26 +48,23 @@ exports.postUserStep = (req, res) => {
 };
 
 
-// exports.getUserSleep = (req, res) => {
-//     let errors;
-//     console.log(`inside  get user sleep`);
-//     res.render('userSleep', { errors });
-// };
+exports.getUserSleep = (req, res) => {
+    res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep' });
 
+};
 
 exports.postUserSleep = (req, res) => {
     let userId = req.session.userId;
-    const { date, num_hours, goal } = req.body;
+    const { num_hours, goal } = req.body;
     console.log(`inside post user sleep`);
     let errors;
-    if (!date || !num_hours || !goal) {
+    if (!num_hours || !goal) {
         console.log(`inside if statement ${num_hours}`);
         errors = 'Please enter all fields';
-        res.render('userSleep', { errors });
+        res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep' });
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET sleepHours = ${num_hours}, sleepGoal = ${goal}, date = '${date}'
-        WHERE userId = '${userId}';`;
+        SET sleepHours = ${num_hours}, sleepGoal = ${goal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -126,10 +123,7 @@ exports.getUserFruits = (req, res) => {
     //res.render("userFruits");
 };
 
-exports.getUserSleep = (req, res) => {
-    res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep' });
 
-};
 
 exports.getUserVegetables = (req, res) => {
     res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
