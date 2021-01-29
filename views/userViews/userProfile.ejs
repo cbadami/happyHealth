@@ -1,3 +1,5 @@
+
+
 <html>
 
 <head>
@@ -28,7 +30,7 @@
   <div class="app-main__inner">
 
     <div class="container-fluid col-md-6" >
-      <form action="/userProfile" method="POST">
+      <form action="" method="POST">
 
         <div class="form-group">
           <label>Name</label>
@@ -56,14 +58,21 @@
             </label>
           </div>
         </div>
+<br>
 
-        <div class="form-group">
-          <label for="start">Date of Birth</label>
-          <input type="date" id="end" name="dob" placeholder="mm/dd/yyyy">
-        </div>
+<label for="username">Date of Birth *</label>
+<!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+<div class='input-group date' id='datetimepicker1'>
+  <input type="text" name="date" id="dateText" value="" placeholder="mm/dd/yyyy" />
+  <span class="input-group-addon">
+    <span class="glyphicon glyphicon-calendar"></span>
+  </span>
+</div>
 
 
-        <div class="form-group">
+        
+
+         <div class="form-group">
           <label>Age</label>
           <input type="text" name="age" placeholder="Age" class="form-control" required>
         </div>
@@ -92,7 +101,7 @@
         <div class="form-group">
           <label>Average Activity Level *</label><br>
 
-          <select id="myList" name="myList">
+          <select id="myList">
             <option value="Sedentary">Sedentary</option>
             <option value="Lightly Active">Lightly Active</option>
             <option value="Moderately Active">Moderately Active</option>
@@ -365,7 +374,7 @@
 
         <div class="form-group">
           <label>State *</label>
-          <input class="form-control input-md" name="state" type=text placeholder="State" required>
+          <input class="form-control input-md" type=text placeholder="State" required>
 
           <label>Note: <small>This data is optional and will be used internally by admins only.</small></label>
         </div>
@@ -384,7 +393,20 @@
         format: 'MM/DD/YYYY'
       });
     });
-  </script> -->
+  </script>  -->
+  
+  <!-- <script>
+    (function () {
+        var country_select = document.getElementById("country");
+        var result = document.getElementById("selected_country");
+    
+        country_select.addEventListener('change', function (event) {
+            var selected_value = this.value;
+            var selected_text = this.options[this.selectedIndex].text;
+            result.innerText = selected_value ;
+        });
+    })();
+    </script> -->
 
     
 
