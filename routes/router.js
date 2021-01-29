@@ -36,7 +36,7 @@ router.post('/userProfile', userHomeController.postUserProfile);
 router.get('/userFruits', userHomeController.getUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 router.get('/userTrack', userHomeController.getUserTrack);
-//router.get('/userTrack', userHomeController.postUserTrack);
+router.get('/userTrack', userHomeController.postUserTrack);
 
 
 

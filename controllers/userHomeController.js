@@ -167,12 +167,11 @@ exports.getUserTrack = (req, res) => {
     res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track'});
 };
 
-/*exports.postUserTrack = (req, res) => {
+exports.postUserTrack = (req, res) => {
     let userId = req.session.userId;
     const { meditation, goal } = req.body;
     console.log(`inside post user track`);
     let errors;
-    console.log(meditation, goal);
     if (!meditation || !goal) {
         console.log(`inside if statement ${meditation}`);
         errors = 'Please enter all fields';
@@ -188,7 +187,8 @@ exports.getUserTrack = (req, res) => {
         }
     });
 
-}; */
+}; 
+
 
 
 // exports.getUserVegetables = (req, res) => {
