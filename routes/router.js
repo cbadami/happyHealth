@@ -10,17 +10,7 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
-<<<<<<< HEAD
 
-=======
-// const userChallengesController = require('../controllers/userChallenges');
->>>>>>> 735d9ec837e4541459918ba738cb949384c2368e
-
-
-
-/**
- * User Signup, login routes
- */
 router.get('/', userLoginController.getUserLogin);
 router.post('/', userLoginController.postUserLogin);
 router.get('/userHome', userHomeController.getUserHome);
