@@ -11076,12 +11076,13 @@ button,
     display: flex;
     align-items: center;
     transition: width .2s
+    
 }
 
 .app-header__logo .logo-src {
     height: 25px;
     width: 25px;
-    /* background: url(assets/images/happyHealth/Artboard.png) */
+    cursor: pointer;
 }
 
 /* .app-header .app-header__logo .h3 {
