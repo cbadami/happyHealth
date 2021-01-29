@@ -10,15 +10,12 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
+// const userProfileController = require('../controllers/userProfileController');
 
-
-
-/**
- * User Signup, login routes
- */
 router.get('/', userLoginController.getUserLogin);
 router.post('/', userLoginController.postUserLogin);
 router.get('/userHome', userHomeController.getUserHome);
+
 router.get('/userSignup', userSignupController.getSignup);
 router.post('/userSignup', userSignupController.postSignup);
 
@@ -35,8 +32,10 @@ router.post('/userSleep', userHomeController.postUserSleep);
 router.get('/userHydration', userHomeController.getUserHydration);
 router.post('/userHydration', userHomeController.postUserHydration);
 router.get('/userProfile', userHomeController.getUserProfile);
+router.post('/userProfile', userHomeController.postUserProfile);
 router.get('/userFruits', userHomeController.getUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
+
 
 
 

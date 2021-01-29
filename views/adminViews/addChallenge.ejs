@@ -28,7 +28,7 @@
 
      <div class="form-group">
         <label for="partcipantType"> Participant Type </label>
-        <select class="form-select" name="participantType" value="<%= result[0].participantType %>">
+        <select class="form-select" name="participantType" >
             <option value="Running Challenges"> Group </option>
             <option value="Cycling Challenges"> Individual </option>
         </select>
@@ -36,7 +36,7 @@
 
     <div class="form-group">
         <label>Participant Count</label>
-        <input type="number" name="participantCount" value="<%= result[0].participantCount %>" class="form-control" required>
+        <input type="number" name="participantCount"  class="form-control" required>
     </div>
 
 

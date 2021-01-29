@@ -20,15 +20,12 @@
                         <th scope="row">
                             <%= i+1 %>
                         </th>
-                        <!-- <td><a href="/getGroupMembers/<%= result[i].GroupId%>"><%= result[i].GroupName%></a></td> -->
-                        <td><a href="">
-                                <%= result[i].GroupName%>
-                            </a></td>
+                        <td><a href="/getGroupMembers/<%= result[i].groupId%>"><%= result[i].groupName%></a></td>
                         <td>
-                            <%= result[i].Creator%>
+                            <%= result[i].creator%>
                         </td>
                         <td>
-                            <%= result[i].CreatedDate %>
+                            <%= result[i].createdDate %>
                         </td>
                         <td>
                             <form action="/editGroup/<%= result[i].GroupId%>" method="get">
