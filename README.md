@@ -43,6 +43,7 @@ npm run dev
 ```
 git checkout prod
 git merge master
+git push origin prod
 ```
 - https://stackoverflow.com/questions/26751970/how-to-push-changes-from-one-branch-to-another
 ## Useful Resources:
