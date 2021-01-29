@@ -10,7 +10,7 @@ exports.getGroup = (req, res) => {
             throw err;
         } else {
             console.log(result, "------------db group result");
-            res.render('adminViews/groupManagement', {layout: 'layouts/adminLayout', title: 'Group Management', result });
+            res.render('adminViews/groupManagement', {Layout: 'adminLayout', title: 'Group Management', result });
             console.log("***************getGroup executed successfully******************");
         }
 
@@ -94,7 +94,7 @@ exports.getGroupMembers = (req, res) => {
         if (err) {
             throw err;
         } else {
-            var groupName = result[0].groupName;
+            var groupName = result[0].GroupName;
             db.query(userQuery, function (err, result) {
                 if (err) {
                     throw err;
@@ -106,7 +106,7 @@ exports.getGroupMembers = (req, res) => {
                             throw err;
                         } else {
                             console.log(result, "----result");
-                            res.render('adminViews/groupMembers', {layout: 'layouts/adminLayout', title: 'Group Members', result, groupId, groupName, userResults, result });
+                            res.render("groupMembers", { groupId, groupName, userResults, result });
                         }
                     });
 

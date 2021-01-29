@@ -11,7 +11,6 @@ var dotenv = require('dotenv');
 const path = require('path');
 const colors = require('colors')
 
-
 const app = express();
 
 //.env setup
@@ -25,10 +24,8 @@ app.use(cookieParser())
 
 // css styles
 //app.use("/public/stylesheets", express.static(__dirname + "/public/stylesheets"));
-// app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
-// app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
-// app.use(express.static('public'))
-app.use('/static', express.static(__dirname + "/public"))
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 // Setting template engine
 app.use(expressLayouts);
 app.set('view options', {
