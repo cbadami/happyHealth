@@ -1,67 +1,62 @@
+
 <div class="app-main__inner">
-
-    <!-- Adding a New Challenge -->
-
 
     <div class="container-fluid col-md-6">
         <form action="/addChallenge" method="POST">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" name="name" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea class="form-control" name="description" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="start">Start date:</label>
-                <input type="date" id="start" name="startDate" placeholder="2020-07-20">
-            </div>
-            <div class="form-group">
-                <label for="start">End date:</label>
-                <input type="date" id="end" name="endDate" placeholder="2020-07-22">
-            </div>
-            <div class="form-group">
-                <label for="partcipantType"> Participant Type  </label>
-                <select class="form-select" name="participantType" >
-                    <option value="Running Challenges"> Group </option>
-                    <option value="Cycling Challenges"> Individual </option>
-                </select>
-            </div>
+         <label>Name</label>
+         <input type="text" name="name"  class="form-control" required>
+     </div>
+     <div class="form-group">
+         <label>Description</label>
+         <input type="text" class="form-control" name="description"  required></input>
+     </div>
 
-            <div class="form-group">
-                <label for="challengeType"> Challenge Type  </label>
-                <select class="form-select" name="challengeType" >
-                    <option value="Running Challenges">  Running Challenges </option>
-                    <option value="Cycling Challenges"> Cycling Challenges </option>
-                    <option value="Calories Burned Challenge"> Calories Burned Challenge</option>
-                    <option value="Weight Loss Challenge "> Weight Loss Challenge </option>
-                    <option value="Swimming Challenge"> Swimming Challenge </option>
-                    <option value="Cardio Challenge"> Cardio Challenge </option>
-                    <option value="Walking Challenge"> Walking Challenge </option>
-                </select>
-            </div>
+     <div class="form-group">
+         <label for="challengeType"> Challenge Type </label>
+         <select class="form-select" name="challengeType" >
+             <option value="Running Challenges"> Running Challenges </option>
+             <option value="Cycling Challenges"> Cycling Challenges </option>
+             <option value="Calories Burned Challenge"> Calories Burned Challenge</option>
+             <option value="Weight Loss Challenge "> Weight Loss Challenge </option>
+             <option value="Swimming Challenge"> Swimming Challenge </option>
+             <option value="Cardio Challenge"> Cardio Challenge </option>
+             <option value="Walking Challenge"> Walking Challenge </option>
+             <option value="Basketball"> Sports Challenge </option>
+         </select>
+     </div>
 
-
-            <div class="form-group">
-                <Label>Choose Level</Label>
-                <select class="form-select" name="level"  >
-                    <option value="Sedentary">Sedentary</option>
-                    <option value="Lightly Active">Lightly Active</option>
-                    <option value="Moderately Active">Moderately Active</option>
-                    <option value="Very Active">Very Active</option>
-                </select>
-            </div>
-            
-
-            <div class="form-group">
-                <label>Participant Count</label>
-                <input type="number" name="participantCount" class="form-control" required>
-            </div>
-            <div>
-                <input type="submit" vlaue="submit" name="Submit" class="btn btn-primary btn-sm">
-            </div>
-        </form>
+     <div class="form-group">
+        <label for="partcipantType"> Participant Type </label>
+        <select class="form-select" name="participantType" value="<%= result[0].participantType %>">
+            <option value="Running Challenges"> Group </option>
+            <option value="Cycling Challenges"> Individual </option>
+        </select>
     </div>
 
+    <div class="form-group">
+        <label>Participant Count</label>
+        <input type="number" name="participantCount" value="<%= result[0].participantCount %>" class="form-control" required>
+    </div>
+
+
+     <div class="form-group">
+         <label for="start">Start date:</label>
+         <input type="date" id="start" name="startDate"  placeholder="2020-07-20">
+     </div>
+
+     <div class="form-group">
+         <label for="start">End date:</label>
+         <input type="date" id="end" name="endDate" placeholder="2020-07-22">
+     </div>
+
+     <div>
+         <input type="submit" value="submit" class="btn btn-primary btn-sm">
+     </div>
+ </form>
 </div>
+
+</div>
+
+
+
