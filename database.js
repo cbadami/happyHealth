@@ -1,6 +1,6 @@
 // Locally database connection:
 const fs = require('fs');
-var db = require('mysql');
+var mysql = require('mysql');
 
 eval(process.env.MYSQLCONNSTR_MyDBConnString);
 
