@@ -6,28 +6,19 @@
                     <form method="POST" class="my-5">
                         <div class="form-group">
                             <%- include ('../partials/messages') %>
-                            <h2 class="d-flex justify-content-center py-3">&#9776; Fruits Consumed</h2>
+                            <h2 class="d-flex justify-content-center py-3">Fruits Consumed</h2>
 
                         </div>
-                        <!-- <div class="form-row">
-                            <label for="username">Date:</label>
-                            Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ 
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' name="date" id="dateText"
-                                    value="<%= typeof date != 'undefined' ? date : '' %>" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div> -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Number of fruits</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Target</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          </div>
+                        <div class="form-row">
+                            <label for="username">Number of fruits</label>
+                            <input type="number" id="numFruits" name="numFruits" class="form-control" placeholder="0"
+                                value="<%= typeof numFruits != 'undefined' ? numFruits : '' %>" />
+                        </div>
+                        <div class="form-row">
+                            <label for="password">Goal</label>
+                            <input type="number" id="goal" name="goal" class="form-control" placeholder="0"
+                                value="<%= typeof goal != 'undefined' ? goal : '' %>" />
+                        </div>
                         <div class="form-row"></div>
 
                         <div class="form-row">

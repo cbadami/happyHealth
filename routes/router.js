@@ -23,20 +23,30 @@ router.post('/userSignup', userSignupController.postSignup);
 /**
  * User Home routes
  */
-router.get('/userChallenges', userHomeController.getUserChallenges);
-router.get('/userMoreChallenges', userHomeController.getUserMoreChallenges);
-router.get('/userStep', userHomeController.getUserStep);
-router.post('/userStep', userHomeController.postUserStep);
-router.get('/userSleep', userHomeController.getUserSleep);
-router.post('/userSleep', userHomeController.postUserSleep);
-router.get('/userHydration', userHomeController.getUserHydration);
-router.post('/userHydration', userHomeController.postUserHydration);
 router.get('/userProfile', userHomeController.getUserProfile);
 router.post('/userProfile', userHomeController.postUserProfile);
-router.get('/userFruits', userHomeController.getUserFruits);
-router.get('/userVegetables', userHomeController.getUserVegetables);
+
+router.get('/userChallenges', userHomeController.getUserChallenges);
+router.get('/userMoreChallenges', userHomeController.getUserMoreChallenges);
+
+router.get('/userStep', userHomeController.getUserStep);
+router.post('/userStep', userHomeController.postUserStep);
+
+router.get('/userSleep', userHomeController.getUserSleep);
+router.post('/userSleep', userHomeController.postUserSleep);
+
 router.get('/userTrack', userHomeController.getUserTrack);
-router.get('/userTrack', userHomeController.postUserTrack);
+router.post('/userTrack', userHomeController.postUserTrack);
+
+router.get('/userHydration', userHomeController.getUserHydration);
+router.post('/userHydration', userHomeController.postUserHydration);
+
+router.get('/userFruits', userHomeController.getUserFruits);
+router.post('/userFruits', userHomeController.postUserFruits);
+
+router.get('/userVegetables', userHomeController.getUserVegetables);
+router.post('/userVegetables', userHomeController.postUserVegetables);
+
 
 
 
