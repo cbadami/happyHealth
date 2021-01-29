@@ -82,6 +82,30 @@ exports.postUserSleep = (req, res) => {
 
 };
 
+exports.postUserProfile= (req, res) => {
+    let userId = req.session.userId;
+    console.log("profile details " +req.body)
+    const { name, Gender, dob,age,email,currentWeight,desiredWeight,height,myList,country,state } = req.body;
+    console.log(`details`+ name);
+    let errors;
+    if (!name || !Gender || !dob ||!age || !email || !currentWeight || !desiredWeight || !height || !myList ||!country || !state ) {
+        console.log(`inside if statement ${currentWeight}`);
+        errors = 'Please enter all fields';
+        res.render('userSleep', { errors });
+    }
+    var stepQuery = `UPDATE happyhealth.usertbl
+        SET email = '${email}', fullName = '${name}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dob}',age='${age}',currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
+        WHERE userId = '${userId}';`;
+    db.query(stepQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/userHome');
+        }
+    });
+
+};
+
 
 
 // exports.getUserHydration = (req, res) => {
@@ -131,7 +155,7 @@ exports.postUserHydration = (req, res) => {
 };
 
 exports.getUserChallenges = (req, res) => {
-    res.render('userViews/user_challenges', {
+    res.render('userViews/userChallenges', {
         layout: "layouts/userLayout",
         title: "User Management"
     });
@@ -139,7 +163,10 @@ exports.getUserChallenges = (req, res) => {
 
 
 exports.getUserMoreChallenges = (req, res) => {
-    res.render('user_more_challenges');
+    res.render('userViews/user_more_challenges',{
+    layout: "layouts/userLayout",
+    title: "User Management"
+     });
 };
 
 

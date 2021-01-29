@@ -1,3 +1,5 @@
+
+
 <html>
 
 <head>
@@ -56,14 +58,21 @@
             </label>
           </div>
         </div>
+<br>
 
-        <div class="form-group">
-          <label for="start">Date of Birth</label>
-          <input type="date" id="end" name="dob" placeholder="2020-07-22">
-        </div>
+<label for="username">Date of Birth *</label>
+<!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+<div class='input-group date' id='datetimepicker1'>
+  <input type="text" name="date" id="dateText" value="" placeholder="mm/dd/yyyy" />
+  <span class="input-group-addon">
+    <span class="glyphicon glyphicon-calendar"></span>
+  </span>
+</div>
 
 
-        <div class="form-group">
+        
+
+         <div class="form-group">
           <label>Age</label>
           <input type="text" name="age" placeholder="Age" class="form-control" required>
         </div>
@@ -384,7 +393,20 @@
         format: 'MM/DD/YYYY'
       });
     });
-  </script> -->
+  </script>  -->
+  
+  <!-- <script>
+    (function () {
+        var country_select = document.getElementById("country");
+        var result = document.getElementById("selected_country");
+    
+        country_select.addEventListener('change', function (event) {
+            var selected_value = this.value;
+            var selected_text = this.options[this.selectedIndex].text;
+            result.innerText = selected_value ;
+        });
+    })();
+    </script> -->
 
     
 
