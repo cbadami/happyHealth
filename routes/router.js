@@ -34,10 +34,9 @@ router.post('/userHydration', userHomeController.postUserHydration);
 router.get('/userProfile', userHomeController.getUserProfile);
 router.post('/userProfile', userHomeController.postUserProfile);
 router.get('/userFruits', userHomeController.getUserFruits);
-//router.get('/userFruits', userHomeController.postUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 router.get('/userTrack', userHomeController.getUserTrack);
-router.get('/userTrack', userHomeController.postUserTrack);
+//router.get('/userTrack', userHomeController.postUserTrack);
 
 
 
@@ -66,9 +65,9 @@ router.get('/adminHome', adminLoginController.getAdminHome);
 router.get('/challengeManagement', challengeManagement.getChallengeManagement);
 router.get('/addChallenge', challengeManagement.addChallenge);
 router.post('/addChallenge', challengeManagement.postChallenge);
+
+// router.get('/editChallenge/', challengeManagement.ed);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
-router.post('/editChallenge/:cid', challengeManagement.updateChallenge);
-router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge);
 
 //router.get('/leaderboard/:challengeId', challengeManagement.getLeaderboard);
 
