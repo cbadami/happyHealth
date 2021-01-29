@@ -20,7 +20,6 @@ exports.getUserHome = (req, res) => {
 };
 
 
-
 exports.getUserStep = (req, res) => {
     res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step' });
 };
@@ -34,8 +33,7 @@ exports.postUserStep = (req, res) => {
         errors = 'Please enter all fields';
         res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step', errors });
     }
-    var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET stepCount = ${num_steps}, stepGoal = ${goal} WHERE userId = ${userId};`;
+    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${num_steps}, stepGoal = ${goal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -106,24 +104,8 @@ exports.postUserProfile = (req, res) => {
 };
 
 
-
-// exports.getUserHydration = (req, res) => {
-//     let errors;
-//     console.log(`inside  get user sleep`);
-//     res.render('userViews/userHydration', { errors });
-// };
-
 exports.getUserHydration = (req, res) => {
     res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration' });
-};
-
-exports.getUserFruits = (req, res) => {
-    res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
-    //res.render("userFruits");
-};
-
-exports.getUserVegetables = (req, res) => {
-    res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
 };
 
 exports.postUserHydration = (req, res) => {
@@ -146,6 +128,16 @@ exports.postUserHydration = (req, res) => {
         }
     });
 };
+exports.getUserFruits = (req, res) => {
+    res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
+    //res.render("userFruits");
+};
+
+exports.getUserVegetables = (req, res) => {
+    res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
+};
+
+
 
 exports.getUserChallenges = (req, res) => {
     res.render('userViews/userChallenges', {
@@ -164,7 +156,7 @@ exports.getUserMoreChallenges = (req, res) => {
 
 
 exports.getUserTrack = (req, res) => {
-    res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track'});
+    res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
 };
 
 /*exports.postUserTrack = (req, res) => {
