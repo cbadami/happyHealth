@@ -131,7 +131,7 @@ exports.postUserHydration = (req, res) => {
 };
 
 exports.getUserChallenges = (req, res) => {
-    res.render('userViews/user_challenges', {
+    res.render('userViews/userChallenges', {
         layout: "layouts/userLayout",
         title: "User Management"
     });
