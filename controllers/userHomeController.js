@@ -1,5 +1,36 @@
 const db = require('../database');
 
+exports.getUserProfile = (req, res) => {
+    res.render('userViews/userProfile', {
+        layout: 'layouts/userLayout', title: 'User Profile'
+    });
+};
+
+exports.postUserProfile = (req, res) => {
+    let userId = req.session.userId;
+    console.log("profile details " + req.body);
+    const { name, Gender, dob, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
+    console.log(`details` + name);
+    let errors;
+    if (!name || !Gender || !dob || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
+        console.log(`inside if statement ${currentWeight}`);
+        errors = 'Please enter all fields';
+        res.render('userSleep', { errors });
+    }
+    const profileQuery = `UPDATE happyhealth.usertbl
+        SET email = '${email}', fullName = '${name}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dob}',age='${age}',
+        currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
+        WHERE userId = '${userId}';`;
+    db.query(profileQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/userHome');
+        }
+    });
+
+};
+
 exports.getUserHome = (req, res) => {
     let userId = req.session.userId;
     const homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
@@ -72,37 +103,6 @@ exports.postUserSleep = (req, res) => {
 
 };
 
-exports.getUserProfile = (req, res) => {
-    res.render('userViews/userProfile', {
-        layout: 'layouts/userLayout', title: 'User Profile'
-    });
-};
-
-exports.postUserProfile = (req, res) => {
-    let userId = req.session.userId;
-    console.log("profile details " + req.body);
-    const { name, Gender, dob, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
-    console.log(`details` + name);
-    let errors;
-    if (!name || !Gender || !dob || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
-        console.log(`inside if statement ${currentWeight}`);
-        errors = 'Please enter all fields';
-        res.render('userSleep', { errors });
-    }
-    const profileQuery = `UPDATE happyhealth.usertbl
-        SET email = '${email}', fullName = '${name}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dob}',age='${age}',
-        currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
-        WHERE userId = '${userId}';`;
-    db.query(profileQuery, function (err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/userHome');
-        }
-    });
-
-};
-
 
 exports.getUserHydration = (req, res) => {
     res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration' });
@@ -128,14 +128,83 @@ exports.postUserHydration = (req, res) => {
         }
     });
 };
+
+exports.getUserTrack = (req, res) => {
+    res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
+};
+
+exports.postUserTrack = (req, res) => {
+    let userId = req.session.userId;
+    const { meditation, goal } = req.body;
+    console.log(`inside post user track`);
+    let errors;
+    if (!meditation || !goal) {
+        console.log(`inside if statement ${meditation}`);
+        errors = 'Please enter all fields';
+        res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
+    }
+    var stepQuery = `UPDATE happyhealth.usermetricstbl
+        SET meTime = ${meditation}, meTimeGoal = ${goal} WHERE userId = ${userId};`;
+    db.query(stepQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/userHome');
+        }
+    });
+
+};
+
 exports.getUserFruits = (req, res) => {
     res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
-    //res.render("userFruits");
+};
+
+exports.postUserFruits = (req, res) => {
+    let userId = req.session.userId;
+    const { numFruits, goal } = req.body;
+    console.log("-------post user Fruits controller");
+    let errors;
+    if (!numFruits || !goal) {
+        errors = 'Please enter all fields';
+        res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
+    }
+    var fruitQuery = `UPDATE happyhealth.usermetricstbl
+        SET fruits = ${numFruits}, fruitGoal = ${goal} WHERE userId = ${userId};`;
+    db.query(fruitQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/userHome');
+        }
+    });
+
 };
 
 exports.getUserVegetables = (req, res) => {
     res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
 };
+
+
+exports.postUserVegetables = (req, res) => {
+    let userId = req.session.userId;
+    const { numVegetables, goal } = req.body;
+    console.log("-------post user Vegetables controller");
+    let errors;
+    if (!numVegetables || !goal) {
+        errors = 'Please enter all fields';
+        res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
+    }
+    var vegQuery = `UPDATE happyhealth.usermetricstbl SET veggies = ${numVegetables}, veggieGoal = ${goal} WHERE userId = ${userId};`;
+    db.query(vegQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/userHome');
+        }
+    });
+
+};
+
 
 
 
@@ -153,38 +222,4 @@ exports.getUserMoreChallenges = (req, res) => {
         title: "User Management"
     });
 };
-
-
-exports.getUserTrack = (req, res) => {
-    res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
-};
-
-exports.postUserTrack = (req, res) => {
-    let userId = req.session.userId;
-    const { meditation, goal } = req.body;
-    console.log(`inside post user track`);
-    let errors;
-    if (!meditation || !goal) {
-        console.log(`inside if statement ${meditation}`);
-        errors = 'Please enter all fields';
-        res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track'});
-    }
-    var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET meTime = ${meditation}, meTimeGoal = ${goal} WHERE userId = ${userId};`;
-    db.query(stepQuery, function (err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/userHome');
-        }
-    });
-
-}; 
-
-
-
-// exports.getUserVegetables = (req, res) => {
-//     res.render("userVegetables");
-// };
-
 
