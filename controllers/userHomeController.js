@@ -32,7 +32,7 @@ exports.getUserProfile = (req, res) => {
 //     res.render('userStep', { errors });
 // };
 
-exports.getUserStep = (req, res) => {
+exports.getUserStep = (req, res) => { 
     res.render('/userStep', { layout: '/userLayout', title: 'User Step'});
     //res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step'});
 };
