@@ -5,7 +5,8 @@
         <h2><b>Challenge Management</b></h2>
       </div>
       <div class="col-sm-4">
-        <button type="button" class="btn btn-primary" onclick="location.href = '/addChallenge'">Add New Challenge</button>
+        <button type="button" class="btn btn-primary" onclick="location.href = '/addChallenge'">Add New
+          Challenge</button>
       </div>
     </div>
   </div>
@@ -26,7 +27,7 @@
         <th>Delete</th>
       </tr>
     </thead>
-    
+
     <tbody>
       <% for (var i = 0; i < result.length;i++) { %>
       <tr>
@@ -42,11 +43,34 @@
         <td><%= result[i].endDate %></td>
         <td><%= result[i].participantType %></td>
         <td><%= result[i].participantCount %></td>
-        <td> <a href="#"> Edit </a> </td>
-        <td> <a href="#"> Delete </a> </td>
+
+
+        <td>
+          <form action="/editChallenge/<%= result[i].challengeId %>" method="get">
+            <a href="/editChallenge/<%= result[i].challengeId %>" > Edit </a> 
+          </form> 
+        </td>
+
+
+        <td>
+          <form action="/deleteChallenge/<%= result[i].challengeId %>" method="post">
+            <input type="submit" onclick="startCount()" value="Delete" class="btn btn-danger"></input>
+          </form>
+        </td>
+
+        <script>
+
+          function startCount() {
+            const desiredTimeInMilliSeconds = 200;
+            setTimeout(function () {
+              window.location = window.location;
+            }, desiredTimeInMilliSeconds)
+          }
+
+
+        </script>
+
       </tr>
       <% } %>
     </tbody>
   </table>
-
-

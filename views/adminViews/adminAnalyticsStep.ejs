@@ -1,46 +1,240 @@
-<div class="app-main__inner">
+<!doctype html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-    <h1> Step statistics </h1>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HappyHealth Dashboard</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="main.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
 
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Users', 'Andrew', 'Anthony', 'Charles', 'William', 'David', 'Daniel'],
+                ['11/13/2020', 1300, 1400, 1200, 1000, 1050, 1000],
+                ['11/12/2020', 1170, 460, 250, 1200, 1000, 900],
+                ['11/11/2020', 660, 1120, 300, 600, 890, 990],
+                ['11/10/2020', 1030, 540, 350, 1200, 960, 2000]
+            ]);
 
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-            <tr>
-                <th scope="col">User ID</th>
-                <th scope="col">User Name </th>
-                <th scope="col">Step count</th>
-                <th scope="col"> Date </th>
-                <th scope="col">Target step count</th>
-            </tr>
-            </tr>
-        </thead>
-        <tbody>
-        <tbody>
-            <% for(var i=0; i < obj.length; i++) { %>
+            var options = {
+          title : 'Daily analytics of user steps count in number.',
+          vAxis: {title: 'Step count'},
+          hAxis: {title: 'Dates'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
 
-            <tr>
-                <td>
-                    <%= obj[i].userId %>
-                </td>
-                <td>
-                    <%= obj[i].fullName %>
-                </td>
-                <td>
-                    <%= obj[i].stepCount %>
-                </td>
-                <td>
-                    <%= obj[i].date %>
-                </td>
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-                <td>
-                    <%= obj[i].stepGoal %>
-                </td>
-            </tr>
-            <% } %>
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+    <style>
+        .col-sm-4 {
+            /* width: 250px; */
+            height: 250px;
+            border-radius: 20px;
+            box-shadow: 12px 12px 12px;
+            margin: 10px;
+        }
 
-        </tbody>
-        </tbody>
-    </table>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            /* width: 50%; */
+            border-bottom-left-radius: 30px;
+            border-top-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            border-top-right-radius: 20px;
+            width: 160px;
+            height: 160px;
+            padding: 5px;
+        }
 
-</div>
+        .btn {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h4 {
+            padding-top: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">
+                <img class="logo-src" src="./assets/images/happyHealth/Artboard.png" alt="">
+                <!-- <div class="h3 m-0 ml-2">HappyHealth</div> -->
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                            data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div class="d-flex app-header__menu">
+                    <button type="button" class="btn btn-transparent mobile-toggle-nav">
+                        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+                    </button>
+                    <!-- <form action="">
+                        <input type="date">
+                    </form> -->
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <ul class="header-menu nav">
+                    <li class="nav-item">
+                        <a href="userProfile" class="nav-link">
+                            <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="btn-group nav-item">
+                        <a href="adminLogin" class="nav-link">
+                            <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="app-header__content">
+                <div class="app-header-left">
+                    <!-- <form action="">
+                        <input type="date">
+                    </form> -->
+                </div>
+                <div class="app-header-center h2">
+                    HappyHealth
+                </div>
+                <div class="app-header-right">
+                    <ul class="header-menu nav">
+                        <li class="nav-item">
+                            <a href="javascript:void(0);" class="nav-link">
+                                <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="btn-group nav-item">
+                            <a href="adminLogin" class="nav-link">
+                                <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="app-main">
+            <div class="app-sidebar sidebar-shadow">
+                <div class="app-header__logo">
+                    <img class="logo-src" src="./assets/images/happyHealth/Artboard.png" alt="">
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                                data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-header__mobile-menu">
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu my-4">
+                            <li>
+                                <a href="adminHome" class="mm-active">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="userManagement" class="mm-active">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="groupManagement" class="mm-active">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                    <span>Groups</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="mm-active">
+                                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                                    <span>Challenges</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="adminAnalytics" class="mm-active">
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                    <span>Analytics</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="mm-active">
+                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                    <span>Notifications</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="container-fluid">
+                    <div id="columnchart_material" style="height: 450px; width: 100%;"></div>
+                    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                </div>
+
+            </div>
+            <div class="app-wrapper-footer">
+                <div class="app-footer">
+                    <div class="copyright text-center bg-white py-4">
+                        <i class="fa fa-copyright"></i> Copyright 2020, made by HappyHealth
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </div>
+    </div>
+    <script type="text/javascript" src="assets/scripts/main.js"></script>
+</body>
+
+<!-- Mirrored from demo.dashboardpack.com/architectui-html-free/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Nov 2020 14:11:41 GMT -->
+
+</html>
