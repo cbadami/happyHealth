@@ -19,14 +19,22 @@ exports.getUserHome = (req, res) => {
 
 };
 
+
 exports.getUserProfile = (req, res) => {
     res.render('userViews/userProfile', {
         layout: 'layouts/userLayout', title: 'User Profile'});
 };
 
 
+// exports.getUserStep = (req, res) => {
+//     let errors;
+//     console.log(`inside  get user step`);
+//     res.render('userStep', { errors });
+// };
+
 exports.getUserStep = (req, res) => {
-    res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step'});
+    res.render('/userStep', { layout: '/userLayout', title: 'User Step'});
+    //res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step'});
 };
 
 exports.postUserStep = (req, res) => {
