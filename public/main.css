@@ -68,6 +68,10 @@
     border-radius: 34px;
   }
   
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
  .border-primary {
     border-color: #3f6ad8
 }
