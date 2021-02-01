@@ -141,10 +141,11 @@ exports.postUserTrack = (req, res) => {
     let userId = req.session.userId;
     const { meditation, goal } = req.body;
     console.log(`inside post user track`);
-    let errors;
+    let errors = [];
     if (!meditation || !goal) {
         console.log(`inside if statement ${meditation}`);
-        errors = 'Please enter all fields';
+        errors.push('Please enter all fields');
+        console.log(errors, "----------------errros");
         res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
@@ -167,9 +168,10 @@ exports.postUserFruits = (req, res) => {
     let userId = req.session.userId;
     const { numFruits, goal } = req.body;
     console.log("-------post user Fruits controller");
-    let errors;
+    let errors = [];
     if (!numFruits || !goal) {
-        errors = 'Please enter all fields';
+        errors.push('Please enter all fields');
+        console.log(errors, "----------------errros");
         res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
     }
     var fruitQuery = `UPDATE happyhealth.usermetricstbl
@@ -193,9 +195,10 @@ exports.postUserVegetables = (req, res) => {
     let userId = req.session.userId;
     const { numVegetables, goal } = req.body;
     console.log("-------post user Vegetables controller");
-    let errors;
+    let errors = [];
     if (!numVegetables || !goal) {
-        errors = 'Please enter all fields';
+        errors.push('Please enter all fields');
+        console.log(errors, "----------------errros");
         res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
     }
     var vegQuery = `UPDATE happyhealth.usermetricstbl SET veggies = ${numVegetables}, veggieGoal = ${goal} WHERE userId = ${userId};`;
