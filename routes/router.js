@@ -113,7 +113,7 @@ router.get('/adminAnalytics', adminLoginController.getAdminAnalytics);
 router.get('/adminAnalyticsStep', adminLoginController.getAdminAnalyticsStep);
 router.get('/adminAnalyticsSleep', adminLoginController.getAdminAnalyticsSleep);
 router.get('/adminAnalyticsWater', adminLoginController.getAdminAnalyticsWater);
-router.get('/adminAnalyticsMeditation', adminLoginController.getAdminAnalyticsMediation);
+router.get('/adminAnalyticsMeditation', adminLoginController.getAdminAnalyticsMeditation);
 router.get('/adminAnalyticsFruits', adminLoginController.getAdminAnalyticsFruits);
 router.get('/adminAnalyticsVegetables', adminLoginController.getAdminAnalyticsVegetables);
 

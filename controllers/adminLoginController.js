@@ -128,8 +128,21 @@ exports.getAdminAnalytics = (req, res) => {
 };
 
 exports.getAdminAnalyticsStep = (req, res) => {
-    res.render('adminAnalyticsStep');
-};
+
+    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
+   
+   
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+   
+       db.query(query, function (err, result) {
+           if (err) throw err;
+           else {
+               console.log(result);
+   
+               res.render('adminViews/adminAnalyticsStep', { layout: 'layouts/adminLayout', title: 'Admin Analytics',obj : result }   );
+           }
+       });
+   };
 
 exports.getAdminAnalyticsSleep = (req, res) => {
 
@@ -150,17 +163,69 @@ exports.getAdminAnalyticsSleep = (req, res) => {
 
 
 exports.getAdminAnalyticsWater = (req, res) => {
-    res.render('adminAnalyticsWater');
-};
 
-exports.getAdminAnalyticsMediation = (req, res) => {
-    res.render('adminAnalyticsMeditation');
-};
+    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
+   
+   
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.water, usermetricstbl.waterGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+   
+       db.query(query, function (err, result) {
+           if (err) throw err;
+           else {
+               console.log(result);
+   
+               res.render('adminViews/adminAnalyticsWater', { layout: 'layouts/adminLayout', title: 'Admin Analytics',obj : result }   );
+           }
+       });
+   };
 
-exports.getAdminAnalyticsFruits = (req, res) => {
-    res.render('adminAnalyticsFruits');
-};
+   exports.getAdminAnalyticsMeditation = (req, res) => {
 
-exports.getAdminAnalyticsVegetables = (req, res) => {
-    res.render('adminAnalyticsVegetables');
-};
+    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
+   
+   
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.meTime, usermetricstbl.meTimeGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+   
+       db.query(query, function (err, result) {
+           if (err) throw err;
+           else {
+               console.log(result);
+   
+               res.render('adminViews/adminAnalyticsMeditation', { layout: 'layouts/adminLayout', title: 'Admin Analytics',obj : result }   );
+           }
+       });
+   };
+
+   exports.getAdminAnalyticsFruits = (req, res) => {
+
+    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
+   
+   
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.fruits, usermetricstbl.fruitGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+   
+       db.query(query, function (err, result) {
+           if (err) throw err;
+           else {
+               console.log(result);
+   
+               res.render('adminViews/adminAnalyticsFruits', { layout: 'layouts/adminLayout', title: 'Admin Analytics',obj : result }   );
+           }
+       });
+   };
+
+   exports.getAdminAnalyticsVegetables = (req, res) => {
+
+    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
+   
+   
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.veggies, usermetricstbl.veggieGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+   
+       db.query(query, function (err, result) {
+           if (err) throw err;
+           else {
+               console.log(result);
+   
+               res.render('adminViews/adminAnalyticsVegetables', { layout: 'layouts/adminLayout', title: 'Admin Analytics',obj : result }   );
+           }
+       });
+   };
