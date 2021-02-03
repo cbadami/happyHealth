@@ -184,7 +184,7 @@ exports.getAdminAnalyticsWater = (req, res) => {
     //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
    
    
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.meTime, usermetricstbl.meTimeGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.meTime, usermetricstbl.meTimeGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId and usertbl.date = usermetrictbl.date;`
    
        db.query(query, function (err, result) {
            if (err) throw err;
@@ -201,7 +201,7 @@ exports.getAdminAnalyticsWater = (req, res) => {
     //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
    
    
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.fruits, usermetricstbl.fruitGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.fruits, usermetricstbl.fruitGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId and usertbl.date = usermetrictbl.date;`
    
        db.query(query, function (err, result) {
            if (err) throw err;
@@ -218,7 +218,7 @@ exports.getAdminAnalyticsWater = (req, res) => {
     //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
    
    
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.veggies, usermetricstbl.veggieGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.veggies, usermetricstbl.veggieGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId and usertbl.date = usermetrictbl.date;`
    
        db.query(query, function (err, result) {
            if (err) throw err;
