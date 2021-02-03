@@ -28,7 +28,7 @@ exports.postAdminLogin = (req, res) => {
                 const userId = result[0]['userId'];
                 req.session.userId = userId;
                 res.redirect('/adminHome');
-                console.log('************Admin Login successfully**************');
+                console.log('*****Admin Login successfully*****');
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
                 res.render('adminViews/adminLogin',{layout: 'layouts/mainLayout', title: 'admin Login',
@@ -58,7 +58,7 @@ exports.getUserManagement = (req, res) => {
         } else {
             console.log(`${JSON.stringify(result)}`, '------------db users result');
             res.render('adminViews/userManagement',{layout: 'layouts/adminLayout', title: 'User Management', result})
-            console.log('***********getUserManagement executed successfully*********');
+            console.log('****getUserManagement executed successfully****');
         }
     });
 };
@@ -73,7 +73,7 @@ exports.editUser = (req, res) => {
         } else {
             console.log(result);
             res.render('editProfile', { result });
-            console.log('***********editUser executed successfully*********');
+            console.log('****editUser executed successfully****');
         }
 
     });
@@ -97,7 +97,7 @@ exports.updateUser = (req, res) => {
             return;
         }
         res.redirect('../userManagement');
-        console.log("*************updateUser executed successfully***********");
+        console.log("****updateUser executed successfully****");
 
     });
 
@@ -132,7 +132,7 @@ exports.getAdminAnalyticsStep = (req, res) => {
     //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
    
    
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId and usertbl.date = usermetrictbl.date;`
    
        db.query(query, function (err, result) {
            if (err) throw err;
@@ -149,7 +149,7 @@ exports.getAdminAnalyticsSleep = (req, res) => {
  //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
 
 
- var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.sleepHours, usermetricstbl.sleepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+ var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.sleepHours, usermetricstbl.sleepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId and usertbl.date = usermetrictbl.date;`
 
     db.query(query, function (err, result) {
         if (err) throw err;
@@ -167,7 +167,7 @@ exports.getAdminAnalyticsWater = (req, res) => {
     //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
    
    
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.water, usermetricstbl.waterGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.water, usermetricstbl.waterGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId and usertbl.date = usermetrictbl.date;`
    
        db.query(query, function (err, result) {
            if (err) throw err;
