@@ -228,4 +228,19 @@ exports.getAdminAnalyticsWater = (req, res) => {
                res.render('adminViews/adminAnalyticsVegetables', { layout: 'layouts/adminLayout', title: 'Admin Analytics',obj : result }   );
            }
        });
+
+       exports.getAdminUserName = (req, res) => {
+        const userName = req.session.userName;
+        console.log(`User Name: ${userName}`, '--------getAdminUserName controller');
+        const userQuery = `SELECT usertbl.userId, usertbl.userName, usertbl.password, usertbl.admin, usertbl.email, usertbl.fullName, usertbl.gender, usertbl.dateOfBirth, usertbl.age, usertbl.currentWeight, usertbl.desiredWeight, usertbl.height, usertbl.averageActivityLevel, usertbl.country, usertbl.state FROM happyhealth.usertbl WHERE userName <> ${userName}`;
+        db.query(userQuery, function (err, result) {
+            if (err) {
+                throw err;
+            } else {
+                console.log(`${JSON.stringify(result)}`, '------------db users result');
+                res.render('adminViews/adminUserName',{layout: 'layouts/adminLayout', title: 'User Profile', result})
+                console.log('****getAdminUserName executed successfully****');
+            }
+        });
+    };
    };
