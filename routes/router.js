@@ -48,6 +48,7 @@ router.get('/userVegetables', userHomeController.getUserVegetables);
 router.post('/userVegetables', userHomeController.postUserVegetables);
 
 
+router.get('/notifications',userHomeController.getNotifications)
 
 
 /**
