@@ -10,6 +10,8 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
+
+
 // const userProfileController = require('../controllers/userProfileController');
 
 router.get('/', userLoginController.getUserLogin);
@@ -47,7 +49,7 @@ router.post('/userFruits', userHomeController.postUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 router.post('/userVegetables', userHomeController.postUserVegetables);
 
-
+router.get('/notifications',userHomeController.getNotifications);
 
 
 /**
@@ -92,6 +94,7 @@ router.get('/userManagement', adminLoginController.getUserManagement);
 router.get('/editUser/:userId', adminLoginController.editUser);
 router.post('/updateUser/:userId', adminLoginController.updateUser);
 router.get('/deleteUser/:userId', adminLoginController.deleteUser);
+// router.get('/getAdminUserName/:userName', adminLoginController.getAdminUserName);
 
 
 /**

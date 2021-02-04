@@ -25,15 +25,16 @@ exports.getUserProfile = (req, res) => {
 };
 
 exports.postUserProfile = (req, res) => {
+    console.log('HERE')
     let userId = req.session.userId;
     console.log("profile details " + req.body);
     const { name, Gender, dob, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
-    console.log(`details` + name);
+    console.log(`details ` +  Gender);
     let errors;
     if (!name || !Gender || !dob || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
         console.log(`inside if statement ${currentWeight}`);
         errors = 'Please enter all fields';
-        res.render('userSleep', { errors });
+        res.render('userProfile', { errors });
     }
     const profileQuery = `UPDATE happyhealth.usertbl
         SET email = '${email}', fullName = '${name}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dob}',age='${age}',
@@ -48,6 +49,7 @@ exports.postUserProfile = (req, res) => {
     });
 
 };
+
 
 exports.getUserStep = (req, res) => {
     res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step' });
@@ -230,3 +232,10 @@ exports.getUserMoreChallenges = (req, res) => {
     });
 };
 
+exports.getNotifications = (req, res) => {
+    res.render('userViews/notifications',{
+        layout: 'layouts/userLayout',
+        title: 'User Management'
+
+    });
+};
