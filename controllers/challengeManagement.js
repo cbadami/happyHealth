@@ -53,7 +53,7 @@ exports.updateChallenge = (req, res) => {
 
 }
 
-exports.deleteChallenge =  (req, res) => {
+exports.deleteChallenge = (req, res) => {
   let cid = req.params.cid;
 
   const deleteQuery = `DELETE from happyhealth.challengeTbl where challengeId = ${cid} `;
@@ -73,9 +73,7 @@ exports.postChallenge = (req, res) => {
   //(id,challengeName,description,challengeType,startDate,endDate,partcipantType,participantCount)
 
   console.log(req.body);
-
   const insert = `INSERT INTO happyhealth.challengeTbl (challengeName, challengeDescription, challengeType, participantType, participantCount , startDate, endDate) VALUES('${name}', '${description}', '${challengeType}', '${participantType}', ${participantCount}, '${startDate}', '${endDate}'); `;
-
   db.query(insert, (err, results) => {
     if (err) throw err;
     else {
@@ -86,43 +84,48 @@ exports.postChallenge = (req, res) => {
 };
 
 
-// exports.getLeaderboard = (req, res) => {
-//   console.log(req.params.challengeId);
+exports.getLeaderboard = (req, res) => {
+  let id = req.params.challengeId;
+  //var viewChallengesQuery = `SELECT challengeName FROM happyhealth.challengetbl  where challengeId = ${id};`
 
-//   let id = parseInt(req.params.challengeId);
-//   console.log("id of selected challenge: " + id);
-
-//   var viewChallengesQuery = `SELECT challengeName FROM happyhealth_MySQL.challengeManagement  where id = ${id}`;
-//   // "SELECT balance FROM members WHERE username = 'kappa'"
+  var sql = `SELECT challengeName FROM happyhealth.challengetbl  where challengeId = ${id} ; SELECT userId,userName FROM happyhealth.usertbl; SELECT * FROM happyhealth.userchallengestbl; `;
 
 
-//   db.query(viewChallengesQuery, function (err, result) {
+  db.query(sql, [2, 1], function (error, results, fields) {
+    if (error) {
+      throw error;
+    }
+    console.log(results[0]);
+    console.log(results[1]);
+    console.log(results[2]);
 
-//     if (err) {
-//       console.log(err);
-//     }
-//     else {
-//       //check to see if the result is empty
-//       if (result.length > 0) {
+    let challengeData = results[0];
+    let userData = results[1];
+    let joinedUsers = results[2];
 
-//         //console.log(`result: ${JSON.stringify(result)}`)
-//         // console.log(`length of result: ${result.length}`)
-//         // let strResult = JSON.stringify(result)
-//         // const value = result[index].challengeName
-//         //console.log(" Value :  " +(result[index].challengeName))
-//         // value = result[index]['challengeName'];
-//         // console.log(value);
 
-//         challengeNaam = result[0].challengeName;
+    res.render('adminViews/manageChallengeUsers', { challengeData, userData, joinedUsers, layout: "layouts/adminLayout" });
+    
+  });
 
-//         console.log(challengeNaam);
 
-//         res.render('leaderboard', { challengeNaam: challengeNaam });
+  // db.query(viewChallengesQuery, function (err, result) {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  //   else {
+  //     if (result.length > 0) {
+  //       challengeNaam = result[0].challengeName;
+  //       console.log(challengeNaam);
+  //       res.render('adminViews/leaderboard', { challengeNaam, layout: "layouts/adminLayout" });
+  //     }
+  //   }
+  // });
+};
 
-//       }
 
-//     }
+exports.addUser = (req, res) => {
 
-//   });
 
-// };
+
+}

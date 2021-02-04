@@ -3,7 +3,7 @@ const fs = require('fs');
 var mysql = require('mysql');
 
 eval(process.env.MYSQLCONNSTR_MyDBConnString);
-
+// mysql.createConnection({multipleStatements: true});
 
 db.connect(function (err) {
   if (err) {
