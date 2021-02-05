@@ -104,11 +104,3 @@ exports.getLeaderboard = (req, res) => {
   });
 };
 
-exports.manageGroups = (req,res)=>{
-  
-
-}
-
-
-exports.addUser = (req, res) => {
-}
