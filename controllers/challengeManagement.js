@@ -87,10 +87,7 @@ exports.postChallenge = (req, res) => {
 exports.getLeaderboard = (req, res) => {
   let id = req.params.challengeId;
   //var viewChallengesQuery = `SELECT challengeName FROM happyhealth.challengetbl  where challengeId = ${id};`
-
-  var sql = `SELECT challengeName FROM happyhealth.challengetbl  where challengeId = ${id} ; SELECT userId,userName FROM happyhealth.usertbl; SELECT * FROM happyhealth.userchallengestbl; `;
-
-
+  var sql = `SELECT challengeName, participantType FROM happyhealth.challengetbl  where challengeId = ${id} ; SELECT userId,userName FROM happyhealth.usertbl; SELECT * FROM happyhealth.userchallengestbl; `;
   db.query(sql, [2, 1], function (error, results, fields) {
     if (error) {
       throw error;
@@ -103,29 +100,15 @@ exports.getLeaderboard = (req, res) => {
     let userData = results[1];
     let joinedUsers = results[2];
 
-
     res.render('adminViews/manageChallengeUsers', { challengeData, userData, joinedUsers, layout: "layouts/adminLayout" });
-    
   });
-
-
-  // db.query(viewChallengesQuery, function (err, result) {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  //   else {
-  //     if (result.length > 0) {
-  //       challengeNaam = result[0].challengeName;
-  //       console.log(challengeNaam);
-  //       res.render('adminViews/leaderboard', { challengeNaam, layout: "layouts/adminLayout" });
-  //     }
-  //   }
-  // });
 };
+
+exports.manageGroups = (req,res)=>{
+  
+
+}
 
 
 exports.addUser = (req, res) => {
-
-
-
 }
