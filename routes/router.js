@@ -91,7 +91,7 @@ router.post('/editChallenge/:cid', challengeManagement.updateChallenge)
 router.post('/deleteChallenge/:cid',challengeManagement.deleteChallenge  )
 
 router.get('/manageChallengeUsers/:challengeId', challengeManagement.getLeaderboard);
-router.get('/addUser', challengeManagement.addUser);
+// router.get('/addUser', challengeManagement.addUser);
 
 
 /**
