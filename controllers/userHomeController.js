@@ -19,9 +19,27 @@ exports.getUserHome = (req, res) => {
 };
 
 exports.getUserProfile = (req, res) => {
-    res.render('userViews/userProfile', {
-        layout: 'layouts/userLayout', title: 'User Profile'
+    let userId = req.session.userId;
+    const homeQuery = `Select userName, admin, email, fullName, gender, dateOfBirth,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state from happyhealth.usertbl where UserId = ${userId};`;
+    db.query(homeQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            //console.log("result "+result[0]);
+            const { userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state } = result[0];
+            //console.log("ddd   "+userName+ admin+ email+ fullName+ gender+ dateOfBirth+age+currentWeight+desiredWeight+height+averageActivityLevel+country+state)
+            res.render('userViews/userProfile', {
+                layout: 'layouts/userLayout', title: 'User Profile',
+                userName, admin, email, fullName, gender, dateOfBirth,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state
+            });
+        }
     });
+
+
+    // res.render('userViews/userProfile', {
+    //     layout: 'layouts/userLayout', title: 'User Profile'
+    // });
 };
 
 exports.postUserProfile = (req, res) => {
