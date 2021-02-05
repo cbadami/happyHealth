@@ -187,6 +187,16 @@ INSERT INTO userMetricsTbl VALUES
 (9,'12/20/2020',1500,2000,5,10,8,10,7,8,5,8,6,10),
 (10,'12/20/2020',800,2000,10,10,5,10,7,8,7,8,8,10);
 
+--
+-- ********************************** Trigger befor insert into usertbl *************************
+--
+CREATE TRIGGER before_user_update 
+    AFTER INSERT ON usertbl
+    FOR EACH ROW 
+ INSERT INTO usermetricstbl
+ SET usermetricstbl.userId = new.userId,
+	date = DATE_FORMAT(NOW(), '%m/%d/%Y');
+
 
 
 
