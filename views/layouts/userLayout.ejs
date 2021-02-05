@@ -15,6 +15,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <link rel="stylesheet" href="static/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="static/main.css" rel="stylesheet">
+    <link href="static/tabContent.css" rel="stylesheet">
     <style>
         .card {
             /* width: 150px; */
@@ -211,6 +212,12 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="\userGroups" class="mm-active">
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                    <span>Groups</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="\userChallenges" class="mm-active">
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
                                     <span>Challenges</span>
@@ -248,6 +255,34 @@
         </div>
     </div>
     </div>
+
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+<!--User Groups User side-->
+    <script type="text/javascript">
+        $(document).ready(function(){
+        
+          $(".tabs-list li a").click(function(e){
+             e.preventDefault();
+          });
+        
+          $(".tabs-list li").click(function(){
+             var tabid = $(this).find("a").attr("href");
+             $(".tabs-list li,.tabs div.tab").removeClass("active");   // removing active class from tab
+        
+             $(".tab").hide();   // hiding open tab
+             $(tabid).show();    // show tab
+             $(this).addClass("active"); //  adding active class to clicked tab
+        
+          });
+        
+        });
+        </script>
+
+
+
     <script type="text/javascript" src="static/assets/scripts/main.js"></script>
 </body>
 
