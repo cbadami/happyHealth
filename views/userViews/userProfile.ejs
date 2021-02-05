@@ -47,18 +47,24 @@
           <label>Gender</label>
       
           <div class="input-group">
+            <%- include ('../partials/messages') %>
+
             <!-- <div class="input-group-addon">&nbsp;</div> -->
             <label class="radio-inline" for="Gender-0">
-              <input type="radio" name="Gender" id="Gender-0" value="Female" checked="checked">
-              Female
-            </label>
-            <!-- <div class="input-group-addon">&nbsp;</div> -->
-            <label class="radio-inline" for="Gender-1">
-              <input type="radio" name="Gender" id="Gender-1" value="Male">
+              <input type="radio" name="Gender" id="Gender-0" value="Male" checked="checked">
               Male
             </label>
             <!-- <div class="input-group-addon">&nbsp;</div> -->
+            <label class="radio-inline" for="Gender-1">
+              <%- include ('../partials/messages') %>
+
+              <input type="radio" name="Gender" id="Gender-1" value="Female">
+              Female
+            </label>
+            <!-- <div class="input-group-addon">&nbsp;</div> -->
             <label class="radio-inline" for="Gender-2">
+              <%- include ('../partials/messages') %>
+
               <input type="radio" name="Gender" id="Gender-2" value="Other">
               Other
             </label>
@@ -68,12 +74,12 @@
       
         <label for="username">Date of Birth *</label>
         <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-        <div class='input-group date' id='datetimepicker1'>
+        <div class='input-group date' >
           <%- include ('../partials/messages') %>
-          <input type="text" name="dateOfBirth" id="dateText" value="<%= typeof dateOfBirth != 'undefined' ? dateOfBirth : '' %>" placeholder="mm/dd/yyyy"  />
-          <span class="input-group-addon">
+          <input type="date" name="dateOfBirth" id="dateText" value="<%= typeof dateOfBirth != 'undefined' ? dateOfBirth : '' %>" placeholder="mm-dd-yyyy"  />
+          <!-- <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
-          </span>
+          </span> -->
         </div>
       
       
