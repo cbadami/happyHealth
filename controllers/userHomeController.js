@@ -240,3 +240,8 @@ exports.getNotifications = (req, res) => {
 
     });
 };
+
+
+exports.getUserGroups = (req,res) =>{
+    res.render('userViews/userGroups',{layout:'layouts/userLayout', title:'Groups '})
+}
