@@ -40,7 +40,7 @@
         <div class="form-group"><br>
           <%- include ('../partials/messages') %>
           <label>Name</label>
-          <input type="text"  name="userName" id="userName" class="form-control" placeholder="Enter Full Name" value="<%= typeof userName != 'undefined' ? userName : '' %>" >
+          <input type="text"  name="userName" id="userName" class="form-control" placeholder="Enter Full Name" value="<%= typeof userName != 'undefined' ? userName : '' %>" required >
         </div>
       
         <div class="form-group">
@@ -69,7 +69,8 @@
         <label for="username">Date of Birth *</label>
         <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
         <div class='input-group date' id='datetimepicker1'>
-          <input type="text" name="dob" id="dateText" value="" placeholder="mm/dd/yyyy"  />
+          <%- include ('../partials/messages') %>
+          <input type="text" name="dob" id="dateText" value="<%= typeof dateOfBirth != 'undefined' ? dateOfBirth : '' %>" placeholder="mm/dd/yyyy"  />
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -78,36 +79,37 @@
       
         <div class="form-group">
           <label>Age</label>
-          <input type="text" name="age" placeholder="Age" class="form-control" required>
+          <input type="text" name="age" placeholder="Age" class="form-control" value="<%= typeof age != 'undefined' ? age : '' %>" required>
         </div>
       
         <div class="form-group">
+          <%- include ('../partials/messages') %>
           <label>Email Address</label>
-          <input type="email" name="email" placeholder="Enter your email address" class="form-control" required>
+          <input type="email" name="email" placeholder="Enter your email address" class="form-control" value="<%= typeof email != 'undefined' ? email : '' %>" required>
         </div>
       
         <div class="form-group">
           <label>Current Weight</label>
           <input type="number" step="0.1" name="currentWeight" placeholder="Current weight in lbs" class="form-control"
-            required>
+          value="<%= typeof currentWeight != 'undefined' ? currentWeight : '' %>" required>
         </div>
       
         <div class="form-group">
           <label>Desired Weight</label>
-          <input type="number" step="0.1" name="desiredWeight" placeholder="Desired weight in lbs" class="form-control"
+          <input type="number" step="0.1" name="desiredWeight" placeholder="Desired weight in lbs" class="form-control" value="<%= typeof desiredWeight != 'undefined' ? desiredWeight : '' %>"
             required>
         </div>
       
         <div class="form-group">
           <label>Height</label>
-          <input type="number" step="0.1" name="height" placeholder="Height in inches" class="form-control" required>
+          <input type="number" step="0.1" name="height" placeholder="Height in inches" class="form-control" value="<%= typeof height != 'undefined' ? height : '' %>" required>
           <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
         </div>
       
         <div class="form-group">
           <label>Average Activity Level *</label><br>
-      
-          <select id="myList" name="myList">
+          <%- include ('../partials/messages') %>
+          <select id="myList" name="myList" value="<%= typeof averageActivityLevel != 'undefined' ? averageActivityLevel : '' %>" >
             <option value="Sedentary">Sedentary</option>
             <option value="Lightly Active">Lightly Active</option>
             <option value="Moderately Active">Moderately Active</option>
@@ -121,8 +123,10 @@
       
         <div class="form-group">
           <label>Country *</label>
+          <%- include ('../partials/messages') %>
+
           <br>
-          <select id="country" name="country">
+          <select id="country" name="country" value="<%= typeof country != 'undefined' ? country : '' %>">
             <option value="0">select country</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Aland Islands">Aland Islands</option>
@@ -383,8 +387,9 @@
       
       
         <div class="form-group">
+          <%- include ('../partials/messages') %>
           <label>State *</label>
-          <input class="form-control input-md" type=text name="state" placeholder="State" required>
+          <input class="form-control input-md" type=text name="state" placeholder="State" value="<%= typeof state != 'undefined' ? state : '' %>"required>
       
           <label>Note: <small>This data is optional and will be used internally by admins only.</small></label>
         </div>
