@@ -70,7 +70,7 @@
         <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
         <div class='input-group date' id='datetimepicker1'>
           <%- include ('../partials/messages') %>
-          <input type="text" name="dob" id="dateText" value="<%= typeof dateOfBirth != 'undefined' ? dateOfBirth : '' %>" placeholder="mm/dd/yyyy"  />
+          <input type="text" name="dateOfBirth" id="dateText" value="<%= typeof dateOfBirth != 'undefined' ? dateOfBirth : '' %>" placeholder="mm/dd/yyyy"  />
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>

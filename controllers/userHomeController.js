@@ -28,7 +28,7 @@ exports.getUserProfile = (req, res) => {
             console.log(result, '--------db user table result');
             //console.log("result "+result[0]);
             const { userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state } = result[0];
-            //console.log("ddd   "+userName+ admin+ email+ fullName+ gender+ dateOfBirth+age+currentWeight+desiredWeight+height+averageActivityLevel+country+state)
+            console.log("ddd   "+userName+ admin+ email+ fullName+ gender+ dateOfBirth+age+currentWeight+desiredWeight+height+averageActivityLevel+country+state)
             res.render('userViews/userProfile', {
                 layout: 'layouts/userLayout', title: 'User Profile',
                 userName, admin, email, fullName, gender, dateOfBirth,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state
@@ -46,16 +46,16 @@ exports.postUserProfile = (req, res) => {
     console.log('HERE')
     let userId = req.session.userId;
     console.log("profile details " + req.body);
-    const { name, Gender, dob, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
-    console.log(`details ` +  Gender);
+    const { userName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
+    console.log(`details ` +  userName+ Gender+ dateOfBirth+ age+ email+ currentWeight+ desiredWeight+ height+ myList+ country+ state);
     let errors;
-    if (!name || !Gender || !dob || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
+    if (!userName || !Gender || !dateOfBirth || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
         console.log(`inside if statement ${currentWeight}`);
         errors = 'Please enter all fields';
-        res.render('userProfile', { errors });
+        res.render('userHome', { errors });
     }
     const profileQuery = `UPDATE happyhealth.usertbl
-        SET email = '${email}', fullName = '${name}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dob}',age='${age}',
+        SET email = '${email}', fullName = '${userName}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dateOfBirth}',age='${age}',
         currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
         WHERE userId = '${userId}';`;
     db.query(profileQuery, function (err, result) {
@@ -63,7 +63,7 @@ exports.postUserProfile = (req, res) => {
             console.log(err);
         } else {
             
-            res.redirect('/userProfile');
+            res.redirect('/userHome');
         }
     });
 
