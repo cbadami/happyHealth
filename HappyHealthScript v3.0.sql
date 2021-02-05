@@ -6,16 +6,16 @@ CREATE DATABASE happyHealth;
 USE happyHealth;
 
 
---
+
 -- ********************************** Table structure for table userTbl *****************************
 --
 DROP TABLE IF EXISTS userTbl;
 CREATE TABLE userTbl (
   userId int AUTO_INCREMENT,
-  userName varchar(12) DEFAULT NULL,
+  userName varchar(12) DEFAULT NULL UNIQUE,
   password varchar(25) DEFAULT NULL,
   admin varchar(3) DEFAULT NULL,
-  email varchar(25) DEFAULT NULL,
+  email varchar(25) DEFAULT NULL UNIQUE,
   fullName varchar(25) DEFAULT NULL,
   gender varchar(12) DEFAULT NULL,
   dateOfBirth varchar(12) DEFAULT NULL,
