@@ -71,6 +71,13 @@ router.post('/adminLogin', adminLoginController.postAdminLogin);
 router.get('/adminHome', adminLoginController.getAdminHome);
 
 
+
+/**
+ * User Groups 
+ */
+
+ router.get('/userGroups', userHomeController.getUserGroups)
+
 /**
  * Admin challenge management routes
  */
