@@ -161,8 +161,7 @@ exports.getUserHydration = (req, res) => {
     });
     
     };
-  //  res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration' });
-//};
+
 
 exports.postUserHydration = (req, res) => {
     let userId = req.session.userId;
@@ -215,8 +214,24 @@ exports.postUserTrack = (req, res) => {
 };
 
 exports.getUserFruits = (req, res) => {
-    res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
+    let userId = req.session.userId;
+    const stetpQuery = `Select fruits from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            //console.log("result "+result[0]);
+            const { fruits } = result[0];
+            //console.log("ddd   "+fruits)
+            res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits',
+            fruits
+            });
+        }
+    });
+
 };
+
 
 exports.postUserFruits = (req, res) => {
     let userId = req.session.userId;
@@ -241,7 +256,22 @@ exports.postUserFruits = (req, res) => {
 };
 
 exports.getUserVegetables = (req, res) => {
-    res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
+    let userId = req.session.userId;
+    const stetpQuery = `Select veggies from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            //console.log("result "+result[0]);
+            const { veggies } = result[0];
+            //console.log("ddd   "+veggies)
+            res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables',
+            veggies
+            });
+        }
+    });
+
 };
 
 
