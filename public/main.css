@@ -8,6 +8,9 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
+
+
+
  .button {
     border: none;
     color: white;
@@ -49,6 +52,7 @@
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+    text-align:center;
   }
   
  .switch {
