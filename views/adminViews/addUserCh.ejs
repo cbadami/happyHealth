@@ -3,9 +3,9 @@
 
 <form action="/addUser" method="post">
 
-    <label for="user"> Select User </label>
+    <label for="addingUser"> Select User </label>
 
-    <select name="user">
+    <select name="addingUser">
         <% for(var i=0; i < result.length; i++) { %>
             <option value=" <%= result[i].userId %> ">
                 <%= result[i].userName %>
