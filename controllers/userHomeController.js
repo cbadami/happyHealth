@@ -70,8 +70,24 @@ exports.postUserProfile = (req, res) => {
 };
 
 
+
 exports.getUserStep = (req, res) => {
-    res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step' });
+    let userId = req.session.userId;
+const stetpQuery = `Select stepCount from happyhealth.usermetricstbl where UserId = ${userId};`;
+db.query(stetpQuery, function (err, result) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log(result, '--------db user table result');
+        //console.log("result "+result[0]);
+        const { stepCount } = result[0];
+        //console.log("ddd   "+stepCount)
+        res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step',
+        stepCount
+        });
+    }
+});
+
 };
 
 exports.postUserStep = (req, res) => {
