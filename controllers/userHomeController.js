@@ -114,10 +114,24 @@ exports.postUserStep = (req, res) => {
 
 
 exports.getUserSleep = (req, res) => {
-    res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep' });
-
-};
-
+    let userId = req.session.userId;
+    const stetpQuery = `Select sleepHours from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            //console.log("result "+result[0]);
+            const { sleepHours } = result[0];
+            //console.log("ddd   "+sleepHours)
+            res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep',
+            sleepHours
+            });
+        }
+    });
+    
+    };
+    
 exports.postUserSleep = (req, res) => {
     let userId = req.session.userId;
     const { num_hours, goal } = req.body;
@@ -187,8 +201,24 @@ exports.postUserHydration = (req, res) => {
 };
 
 exports.getUserTrack = (req, res) => {
-    res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
-};
+    let userId = req.session.userId;
+    const stetpQuery = `Select meTime from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            //console.log("result "+result[0]);
+            const { meTime } = result[0];
+            //console.log("ddd   "+meTime)
+            res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track',
+            meTime
+            });
+        }
+    });
+    
+    };
+
 
 exports.postUserTrack = (req, res) => {
     let userId = req.session.userId;
