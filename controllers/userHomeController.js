@@ -263,7 +263,6 @@ exports.getUserVegetables = (req, res) => {
             console.log(err);
         } else {
             console.log(result, '--------db user table result');
-            //console.log("result "+result[0]);
             const { veggies } = result[0];
             //console.log("ddd   "+veggies)
             res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables',
