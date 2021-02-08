@@ -180,18 +180,18 @@ exports.getUserHydration = (req, res) => {
 
 exports.postUserHydration = (req, res) => {
     let userId = req.session.userId;
-    const { num_glasses, goal } = req.body;
+    const { water, goal } = req.body;
     console.log(`inside post user hyration`);
     let errors = [];
-    if (!num_glasses || !goal) {
-        console.log(`inside if statement ${num_glasses}`);
+    if (!water || !goal) {
+        console.log(`inside if statement ${water}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration', errors });
         return 
     }
     var hydrationQuery = `UPDATE happyhealth.usermetricstbl
-        SET water = ${num_glasses}, waterGoal = ${goal} WHERE userId = ${userId} ;`;
+        SET water = ${water}, waterGoal = ${goal} WHERE userId = ${userId} ;`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -223,17 +223,17 @@ exports.getUserTrack = (req, res) => {
 
 exports.postUserTrack = (req, res) => {
     let userId = req.session.userId;
-    const { meditation, goal } = req.body;
+    const { meTime, goal } = req.body;
     console.log(`inside post user track`);
     let errors = [];
-    if (!meditation || !goal) {
-        console.log(`inside if statement ${meditation}`);
+    if (!meTime || !goal) {
+        console.log(`inside if statement ${meTime}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET meTime = ${meditation}, meTimeGoal = ${goal} WHERE userId = ${userId};`;
+        SET meTime = ${meTime}, meTimeGoal = ${goal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -266,16 +266,16 @@ exports.getUserFruits = (req, res) => {
 
 exports.postUserFruits = (req, res) => {
     let userId = req.session.userId;
-    const { numFruits, goal } = req.body;
+    const { fruits, goal } = req.body;
     console.log("-------post user Fruits controller");
     let errors = [];
-    if (!numFruits || !goal) {
+    if (!fruits || !goal) {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
     }
     var fruitQuery = `UPDATE happyhealth.usermetricstbl
-        SET fruits = ${numFruits}, fruitGoal = ${goal} WHERE userId = ${userId};`;
+        SET fruits = ${fruits}, fruitGoal = ${goal} WHERE userId = ${userId};`;
     db.query(fruitQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -307,15 +307,15 @@ exports.getUserVegetables = (req, res) => {
 
 exports.postUserVegetables = (req, res) => {
     let userId = req.session.userId;
-    const { numVegetables, goal } = req.body;
+    const { veggies, goal } = req.body;
     console.log("-------post user Vegetables controller");
     let errors = [];
-    if (!numVegetables || !goal) {
+    if (!veggies || !goal) {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
     }
-    var vegQuery = `UPDATE happyhealth.usermetricstbl SET veggies = ${numVegetables}, veggieGoal = ${goal} WHERE userId = ${userId};`;
+    var vegQuery = `UPDATE happyhealth.usermetricstbl SET veggies = ${veggies}, veggieGoal = ${goal} WHERE userId = ${userId};`;
     db.query(vegQuery, function (err, result) {
         if (err) {
             console.log(err);
