@@ -266,16 +266,16 @@ exports.getUserFruits = (req, res) => {
 
 exports.postUserFruits = (req, res) => {
     let userId = req.session.userId;
-    const { numFruits, goal } = req.body;
+    const { fruits, goal } = req.body;
     console.log("-------post user Fruits controller");
     let errors = [];
-    if (!numFruits || !goal) {
+    if (!fruits || !goal) {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits' });
     }
     var fruitQuery = `UPDATE happyhealth.usermetricstbl
-        SET fruits = ${numFruits}, fruitGoal = ${goal} WHERE userId = ${userId};`;
+        SET fruits = ${fruits}, fruitGoal = ${goal} WHERE userId = ${userId};`;
     db.query(fruitQuery, function (err, result) {
         if (err) {
             console.log(err);
