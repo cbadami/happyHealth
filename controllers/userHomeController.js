@@ -307,15 +307,15 @@ exports.getUserVegetables = (req, res) => {
 
 exports.postUserVegetables = (req, res) => {
     let userId = req.session.userId;
-    const { numVegetables, goal } = req.body;
+    const { veggies, goal } = req.body;
     console.log("-------post user Vegetables controller");
     let errors = [];
-    if (!numVegetables || !goal) {
+    if (!veggies || !goal) {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables' });
     }
-    var vegQuery = `UPDATE happyhealth.usermetricstbl SET veggies = ${numVegetables}, veggieGoal = ${goal} WHERE userId = ${userId};`;
+    var vegQuery = `UPDATE happyhealth.usermetricstbl SET veggies = ${veggies}, veggieGoal = ${goal} WHERE userId = ${userId};`;
     db.query(vegQuery, function (err, result) {
         if (err) {
             console.log(err);
