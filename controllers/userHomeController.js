@@ -135,7 +135,8 @@ exports.getUserSleep = (req, res) => {
 exports.postUserSleep = (req, res) => {
     let userId = req.session.userId;
     const { num_hours, goal } = req.body;
-    console.log(`inside post user sleep`);
+
+    console.log(`inside post user sleep: ${num_hours}  ${goal}`);
     let errors = [];
     if (!num_hours || !goal) {
         console.log(`inside if statement ${num_hours}`);

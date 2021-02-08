@@ -5,8 +5,12 @@ exports.getUserLogin = (req, res) => {
     let success_msg = req.session.success_msg;
     if (!success_msg) {
         res.render('userViews/userLogin', { layout: 'layouts/mainLayout', title: 'User Login' });
+        req.session.success_msg = null;
+        return
     } else {
-        res.render('userViews/userLogin', { layout: 'layouts/mainLayout', title: 'User Login', success_msg });
+        res.render('userViews/userLogin', { layout: 'layouts/mainLayout', title: 'User Login' });
+        req.session.success_msg = null;
+        return;
     }
 };
 
@@ -21,7 +25,8 @@ exports.postUserLogin = (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render('userViews/userLogin', { layout: 'layouts/mainLayout', title: 'User Login',
+        res.render('userViews/userLogin', {
+            layout: 'layouts/mainLayout', title: 'User Login',
             errors,
             username,
             password
@@ -39,7 +44,8 @@ exports.postUserLogin = (req, res) => {
 
             } else {
                 errors.push({ msg: 'Enter correct username or password' });
-                res.render('userViews/userLogin', { layout: 'layouts/mainLayout', title: 'User Login',
+                res.render('userViews/userLogin', {
+                    layout: 'layouts/mainLayout', title: 'User Login',
                     errors,
                     username,
                     password

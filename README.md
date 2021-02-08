@@ -144,6 +144,7 @@ This article is a technical onboarding document that can help you write your own
 
 - [Mobile UI](https://xd.adobe.com/view/64cbfb4c-2c05-40eb-5c30-bae44fa3b9d4-12fa/screen/fab92490-6d21-4829-9a52-9728726feba3)
 
+- [History UI Screens](https://app.moqups.com/aMyjQCLOHf/view/page/a477474a4)
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
 
 ### Design Data
