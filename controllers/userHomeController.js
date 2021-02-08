@@ -92,16 +92,16 @@ db.query(stetpQuery, function (err, result) {
 
 exports.postUserStep = (req, res) => {
     const userId = req.session.userId;
-    const { num_steps, goal } = req.body;
+    const { stepCount, goal } = req.body;
     let errors = [];
-    if (!num_steps || !goal) {
-        console.log(`inside if statement ${num_steps}`);
+    if (!stepCount || !goal) {
+        console.log(`inside if statement ${stepCount}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step', errors });
         return
     }
-    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${num_steps}, stepGoal = ${goal} WHERE userId = ${userId};`;
+    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${goal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
