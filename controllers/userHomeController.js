@@ -180,18 +180,18 @@ exports.getUserHydration = (req, res) => {
 
 exports.postUserHydration = (req, res) => {
     let userId = req.session.userId;
-    const { num_glasses, goal } = req.body;
+    const { water, goal } = req.body;
     console.log(`inside post user hyration`);
     let errors = [];
-    if (!num_glasses || !goal) {
-        console.log(`inside if statement ${num_glasses}`);
+    if (!water || !goal) {
+        console.log(`inside if statement ${water}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration', errors });
         return 
     }
     var hydrationQuery = `UPDATE happyhealth.usermetricstbl
-        SET water = ${num_glasses}, waterGoal = ${goal} WHERE userId = ${userId} ;`;
+        SET water = ${water}, waterGoal = ${goal} WHERE userId = ${userId} ;`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
             console.log(err);
