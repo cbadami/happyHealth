@@ -78,7 +78,7 @@ router.get('/adminHome', adminLoginController.getAdminHome);
 
 router.get('/activeChallenges', userChallengeController.getActiveChallenges );
 router.get('/availableChallenges', userChallengeController.getAvailableChallenges );
- 
+router.get('/completedChallenges', userChallengeController.getCompletedChallenges );
 
 /**
  * User Groups 
