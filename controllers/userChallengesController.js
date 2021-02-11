@@ -21,8 +21,7 @@ exports.getActiveChallenges = (req, res) => {
 
 exports.getAvailableChallenges = (req, res) => {
 
-    res.send('test')
-
+    res.render('userViews/availableChallenges', {layout: 'layouts/userLayout', title: 'Available Challenges' });
     // const allGroupsQuery = `SELECT * FROM happyhealth.groupTbl`;
 
     // db.query(allGroupsQuery, function (err, result) {
