@@ -32,20 +32,13 @@
             <div id="tab2" class="tab">
               <h3>Available Groups</h3>
 
-
               <ul class="list-group col-md-6 ">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Avengers
-                  <button type="submit" class="badge badge-success badge-pill" >  Join </button>
+                <% for( let i = 0; i < result.length; i++ ) { %>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <%=  result[i].groupName %>
+                    <input type="submit" class="btn btn-success" value="Join"> </input>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Champions
-                  <button type="submit" class="badge badge-success badge-pill" >  Join </button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Legends
-                  <button type="submit" class="badge badge-success badge-pill" >  Join </button>
-                </li>
+                <% } %>
               </ul>
 
 
@@ -74,7 +67,6 @@
 
                     <div class="form-group">
                       <label >Add Users to the group: </label>
-
                       <select class="selectpicker form-control"  >
                         <option selected>Adam</option>
                         <option>Evan</option>
@@ -83,7 +75,6 @@
                         <option>Bob</option>
                         <option>Rogers</option>
                       </select>
-                      
                     </div>
 
 
