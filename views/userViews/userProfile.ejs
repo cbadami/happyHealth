@@ -1,53 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <!-- Date picker -->
+<div class="app-main__inner">
+  <div class="container-fluid col-md-6"></div>
+  <%- include ('../partials/messages') %>
+    <form action="/userProfile" method="POST">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js">
-    </script>
-    <style>
-    .form-control{
-      width: 500px;
-
-    }
-    .input-group {
-      width: 500px;
-    }
-    </style>
-
-</head>
-<body>
-  <div class="app-main__inner">
-      <div class="container-fluid col-md-6" ></div>
-      <%- include ('../partials/messages') %>
-      <form action="/userProfile" method="POST">
-  
-        <div class="form-group"><br>
-          <%- include ('../partials/messages') %>
+      <div class="form-group"><br>
+        <%- include ('../partials/messages') %>
           <label>Name</label>
-          <input type="text"  name="userName" id="userName" class="form-control" placeholder="Enter Full Name" value="<%= typeof userName != 'undefined' ? userName : '' %>" required >
-        </div>
-      
-        <div class="form-group">
-          <label>Gender</label>
-      
-          <div class="input-group">
-            <%- include ('../partials/messages') %>
+          <input type="text" name="fullName" id="fullName" class="form-control" placeholder="Enter Full Name"
+            value="<%= typeof fullName != 'undefined' ? fullName : '' %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+
+        <div class="input-group">
+          <%- include ('../partials/messages') %>
 
             <!-- <div class="input-group-addon">&nbsp;</div> -->
             <label class="radio-inline" for="Gender-0">
@@ -58,82 +25,85 @@
             <label class="radio-inline" for="Gender-1">
               <%- include ('../partials/messages') %>
 
-              <input type="radio" name="Gender" id="Gender-1" value="Female">
-              Female
+                <input type="radio" name="Gender" id="Gender-1" value="Female">
+                Female
             </label>
             <!-- <div class="input-group-addon">&nbsp;</div> -->
             <label class="radio-inline" for="Gender-2">
               <%- include ('../partials/messages') %>
 
-              <input type="radio" name="Gender" id="Gender-2" value="Other">
-              Other
+                <input type="radio" name="Gender" id="Gender-2" value="Other">
+                Other
             </label>
-          </div>
         </div>
-        <br>
-      
-        <label for="username">Date of Birth *</label>
-        <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-        <div class='input-group date' >
-          <%- include ('../partials/messages') %>
-          <input type="date" name="dateOfBirth" id="dateText" value="<%= typeof dateOfBirth != 'undefined' ? dateOfBirth : '' %>" placeholder="mm-dd-yyyy"  />
+      </div>
+
+      <label for="username">Date of Birth *</label>
+      <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+      <div class='input-group date'>
+        <%- include ('../partials/messages') %>
+          <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy" />
           <!-- <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span> -->
-        </div>
-      
-      
-        <div class="form-group">
-          <label>Age</label>
-          <input type="text" name="age" placeholder="Age" class="form-control" value="<%= typeof age != 'undefined' ? age : '' %>" required>
-        </div>
-      
-        <div class="form-group">
-          <%- include ('../partials/messages') %>
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span> -->
+      </div>
+
+
+      <div class="form-group">
+        <label>Age</label>
+        <input type="text" name="age" placeholder="Age" class="form-control"
+          value="<%= typeof age != 'undefined' ? age : '' %>" required>
+      </div>
+
+      <div class="form-group">
+        <%- include ('../partials/messages') %>
           <label>Email Address</label>
-          <input type="email" name="email" placeholder="Enter your email address" class="form-control" value="<%= typeof email != 'undefined' ? email : '' %>" required>
-        </div>
-      
-        <div class="form-group">
-          <label>Current Weight</label>
-          <input type="number" step="0.1" name="currentWeight" placeholder="Current weight in lbs" class="form-control"
+          <input type="email" name="email" placeholder="Enter your email address" class="form-control"
+            value="<%= typeof email != 'undefined' ? email : '' %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Current Weight</label>
+        <input type="number" step="0.1" name="currentWeight" placeholder="Current weight in lbs" class="form-control"
           value="<%= typeof currentWeight != 'undefined' ? currentWeight : '' %>" required>
-        </div>
-      
-        <div class="form-group">
-          <label>Desired Weight</label>
-          <input type="number" step="0.1" name="desiredWeight" placeholder="Desired weight in lbs" class="form-control" value="<%= typeof desiredWeight != 'undefined' ? desiredWeight : '' %>"
-            required>
-        </div>
-      
-        <div class="form-group">
-          <label>Height</label>
-          <input type="number" step="0.1" name="height" placeholder="Height in inches" class="form-control" value="<%= typeof height != 'undefined' ? height : '' %>" required>
-          <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
-        </div>
-      
-        <div class="form-group">
-          <label>Average Activity Level *</label><br>
-          <%- include ('../partials/messages') %>
-          <select id="myList" name="myList" value="<%= typeof averageActivityLevel != 'undefined' ? averageActivityLevel : '' %>" >
+      </div>
+
+      <div class="form-group">
+        <label>Desired Weight</label>
+        <input type="number" step="0.1" name="desiredWeight" placeholder="Desired weight in lbs" class="form-control"
+          value="<%= typeof desiredWeight != 'undefined' ? desiredWeight : '' %>" required>
+      </div>
+
+      <div class="form-group">
+        <label>Height</label>
+        <input type="number" step="0.1" name="height" placeholder="Height in inches" class="form-control"
+          value="<%= typeof height != 'undefined' ? height : '' %>" required>
+        <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
+      </div>
+
+      <div class="form-group">
+        <label>Average Activity Level *</label><br>
+        <%- include ('../partials/messages') %>
+          <select id="myList" name="myList"
+            value="<%= typeof averageActivityLevel != 'undefined' ? averageActivityLevel : '' %>">
             <option value="Sedentary">Sedentary</option>
             <option value="Lightly Active">Lightly Active</option>
             <option value="Moderately Active">Moderately Active</option>
             <option value="Very Active">Very Active</option>
           </select>
           <small id="myList" class="form-text text-muted">Helps us understand your typical day.</small>
-        </div>
+      </div>
       <style>
 
       </style>
-      
-        <div class="form-group">
-          <label>Country *</label>
-          <%- include ('../partials/messages') %>
+
+      <div class="form-group">
+        <label>Country *</label>
+        <%- include ('../partials/messages') %>
 
           <br>
-          <select id="country" name="country" value="<%= typeof country != 'undefined' ? country : '' %>">
-            <option value="0">select country</option>
+          <select id="country" name="country">
+            <!-- <option value="<%= country %>"><%= country %></option> -->
             <option value="Afghanistan">Afghanistan</option>
             <option value="Aland Islands">Aland Islands</option>
             <option value="Albania">Albania</option>
@@ -389,33 +359,93 @@
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
           </select>
-        </div>
-      
-      
-        <div class="form-group">
-          <%- include ('../partials/messages') %>
+      </div>
+
+
+      <div class="form-group">
+        <%- include ('../partials/messages') %>
           <label>State *</label>
-          <input class="form-control input-md" type=text name="state" placeholder="State" value="<%= typeof state != 'undefined' ? state : '' %>"required>
-      
-          <label>Note: <small>This data is optional and will be used internally by admins only.</small></label>
-        </div>
-      
-        <div class="form-group">
-          <input type="submit" value="Update" name="update" class="btn btn-primary">
-        </div>
-      </form>
-    </div>
-  </div>
+          <input class="form-control input-md" type=text name="state" placeholder="State"
+            value="<%= typeof state != 'undefined' ? state : '' %>" required>
+
+          <!-- <label>Note: <small>This data is optional and will be used internally by admins only.</small></label> -->
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Update" name="update" class="btn btn-primary">
+      </div>
+    </form>
+</div>
+</div>
+
+<style>
+  .form-control {
+    width: 400px;
+    text-align: left;
+
+  }
+
+  .form-group {
+    width: 400px;
+    text-align: left;
+
+  }
+
+  .input-group {
+    width: 400px;
+  }
+
+  .app-main__inner-center {
+    margin: 0 auto !important;
+    max-width: 500px;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    
+  input[type=text] {
+    width: 230px;
+    /* padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    text-align:center; */
+  }
+
+  .form-control {
+    width: 230px;
+
+  }
+
+  .form-group {
+    width: 230px;
+
+  }
+
+  .input-group {
+    width: 230px;
+  }
   
-  <script type="text/javascript">
-    $(function () {
-      $('#datetimepicker1').datetimepicker({
-        format: 'MM/DD/YYYY'
-      });
-    });
-  </script> 
-  
-  
-  
-</body>
-</html>
+
+    }
+</style>
+
+
+<script type="text/javascript">
+
+ const country = "<%= country %>"
+ const averageActivityLevel = "<%= averageActivityLevel %>"
+ const dateOfBirth = "<%= dateOfBirth %>"
+ console.log(country, averageActivityLevel,dateOfBirth)
+ const [month, date, year] = dateOfBirth.split("/")
+ console.log(month,date,year)
+ const dateFormat = year+'-'+month+'-'+date
+ console.log(dateFormat)
+ $('#dateText').val(dateFormat)
+  $('#country').val(country)
+  $('#myList').val(averageActivityLevel)
+  // $(function () {
+  //   $('#datetimepicker1').datetimepicker({
+  //     format: 'MM/DD/YYYY'
+  //   });
+  // });
+</script>

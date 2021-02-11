@@ -10,6 +10,8 @@ const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
 const userGroupController = require('../controllers/userGroupController');
 const challengeManagement = require('../controllers/challengeManagement');
+const userChallengeController = require('../controllers/userChallengesController');
+
 
 
 // const userProfileController = require('../controllers/userProfileController');
@@ -70,7 +72,13 @@ router.get('/adminLogin', adminLoginController.getAdminLogin);
 router.post('/adminLogin', adminLoginController.postAdminLogin);
 router.get('/adminHome', adminLoginController.getAdminHome);
 
+/**
+ * User Challenges
+ */
 
+router.get('/activeChallenges', userChallengeController.getActiveChallenges );
+router.get('/availableChallenges', userChallengeController.getAvailableChallenges );
+ 
 
 /**
  * User Groups 
