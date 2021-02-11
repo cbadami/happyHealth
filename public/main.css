@@ -23,6 +23,9 @@
     width: 60px;
     height: 34px;
   }
+  div {
+    text-align: left;
+  }
   
   /* Hide default HTML checkbox */
   .switch input {

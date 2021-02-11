@@ -6,8 +6,8 @@
       <div class="form-group"><br>
         <%- include ('../partials/messages') %>
           <label>Name</label>
-          <input type="text" name="userName" id="userName" class="form-control" placeholder="Enter Full Name"
-            value="<%= typeof userName != 'undefined' ? userName : '' %>" required>
+          <input type="text" name="fullName" id="fullName" class="form-control" placeholder="Enter Full Name"
+            value="<%= typeof fullName != 'undefined' ? fullName : '' %>" required>
       </div>
 
       <div class="form-group">
@@ -42,8 +42,7 @@
       <!-- Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
       <div class='input-group date'>
         <%- include ('../partials/messages') %>
-          <input type="date" name="dateOfBirth" id="dateText"
-            value="<%= typeof dateOfBirth != 'undefined' ? dateOfBirth : '' %>" placeholder="mm-dd-yyyy" />
+          <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy" />
           <!-- <span class="input-group-addon">
           <span class="glyphicon glyphicon-calendar"></span>
         </span> -->
@@ -103,8 +102,8 @@
         <%- include ('../partials/messages') %>
 
           <br>
-          <select id="country" name="country" value="<%= typeof country != 'undefined' ? country : '' %>">
-            <option value="0">select country</option>
+          <select id="country" name="country">
+            <!-- <option value="<%= country %>"><%= country %></option> -->
             <option value="Afghanistan">Afghanistan</option>
             <option value="Aland Islands">Aland Islands</option>
             <option value="Albania">Albania</option>
@@ -432,9 +431,21 @@
 
 
 <script type="text/javascript">
-  $(function () {
-    $('#datetimepicker1').datetimepicker({
-      format: 'MM/DD/YYYY'
-    });
-  });
+
+ const country = "<%= country %>"
+ const averageActivityLevel = "<%= averageActivityLevel %>"
+ const dateOfBirth = "<%= dateOfBirth %>"
+ console.log(country, averageActivityLevel,dateOfBirth)
+ const [month, date, year] = dateOfBirth.split("/")
+ console.log(month,date,year)
+ const dateFormat = year+'-'+month+'-'+date
+ console.log(dateFormat)
+ $('#dateText').val(dateFormat)
+  $('#country').val(country)
+  $('#myList').val(averageActivityLevel)
+  // $(function () {
+  //   $('#datetimepicker1').datetimepicker({
+  //     format: 'MM/DD/YYYY'
+  //   });
+  // });
 </script>
