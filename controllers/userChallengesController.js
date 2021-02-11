@@ -36,3 +36,9 @@ exports.getAvailableChallenges = (req, res) => {
     // });
 
 };
+
+exports.getCompletedChallenges = (req, res) => {
+
+    res.render('userViews/completedChallenges', {layout: 'layouts/userLayout', title: 'Completed Challenges' });
+    
+};
