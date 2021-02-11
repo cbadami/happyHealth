@@ -85,38 +85,24 @@ exports.getGroupMembers = (req, res) => {
 
     console.log("-------group memebers controller");
     let groupId = req.params.groupId;
+    let groupName = req.params.groupName;
 
-    let userQuery = `SELECT * FROM happyhealth.userTbl`;
-    let groupQuery = `SELECT * FROM happyhealth.groupmemberTbl WHERE GroupId = ${groupId}`;
-    let groupNameQuery = `SELECT * FROM happyhealth.groupTbl WHERE GroupId = '${groupId}'`;
+    let q = `SELECT t1.userId, t1.userName ,  t2.groupId, t2.joinedDate,  t3.groupName FROM happyhealth.usertbl as t1
+    LEFT JOIN happyhealth.groupmembertbl as t2 ON t1.userId = t2.userId    LEFT JOIN happyhealth.grouptbl as t3 
+    ON t2.groupId = t3.groupId where t3.groupId=${groupId}`
 
-    db.query(groupNameQuery, function (err, result) {
-        if (err) {
-            throw err;
-        } else {
-            var groupName = result[0].groupName;
-            db.query(userQuery, function (err, result) {
-                if (err) {
-                    throw err;
-                } else {
-                    let userResults = result;
-                    console.log(userResults, '-----------userResults');
-                    db.query(groupQuery, function (err, result) {
-                        if (err) {
-                            throw err;
-                        } else {
-                            console.log(result, "----result");
-                            res.render('adminViews/groupMembers', {layout: 'layouts/adminLayout', title: 'Group Members', result, groupId, groupName, userResults, result });
-                        }
-                    });
+    db.query(q, (err,result)=>{
+        if(err)throw err;
+        else{
+            console.log(result)
+        } 
 
-                }
-            });
+        if(result.length > 0){
+            res.render('adminViews/groupMembers', {layout: 'layouts/adminLayout', title: 'Group Members', result }); 
+        }else{
+            req.render('adminViews/groupMembers',{layout: 'layouts/adminLayout', title: 'Group Members', msg: 'No Users in this group'})
         }
-
     });
-
-
 
 };
 
