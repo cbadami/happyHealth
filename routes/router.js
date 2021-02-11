@@ -134,6 +134,6 @@ router.get('/adminAnalyticsWater', adminLoginController.getAdminAnalyticsWater);
 router.get('/adminAnalyticsMeditation', adminLoginController.getAdminAnalyticsMeditation);
 router.get('/adminAnalyticsFruits', adminLoginController.getAdminAnalyticsFruits);
 router.get('/adminAnalyticsVegetables', adminLoginController.getAdminAnalyticsVegetables);
-
+router.get('/adminAnalyticsOverAll', adminLoginController.getAdminAnalyticsOverAll);
 
 module.exports = router;
