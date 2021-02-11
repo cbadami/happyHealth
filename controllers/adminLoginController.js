@@ -238,9 +238,15 @@ exports.getAdminAnalyticsWater = (req, res) => {
                 throw err;
             } else {
                 console.log(`${JSON.stringify(result)}`, '------------db users result');
-                res.render('adminViews/adminUserName',{layout: 'layouts/adminLayout', title: 'User Profile', result})
+                res.render('adminViews/adminUserName',{layout: 'layouts/adminLayout', title: 'User Profile',obj: result})
                 console.log('****getAdminUserName executed successfully****');
             }
         });
     };
+
+    // exports.getAdminUserName = (req, res) => {
+    //     console.log('****getAdminUserName executed successfully****');
+    //     res.render('adminViews/adminUserName',{layout: 'layouts/adminLayout', title: 'User Profile', result})
+    // };
+
    };

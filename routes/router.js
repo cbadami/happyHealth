@@ -101,7 +101,7 @@ router.get('/userManagement', adminLoginController.getUserManagement);
 router.get('/editUser/:userId', adminLoginController.editUser);
 router.post('/updateUser/:userId', adminLoginController.updateUser);
 router.get('/deleteUser/:userId', adminLoginController.deleteUser);
-// router.get('/getAdminUserName/:userName', adminLoginController.getAdminUserName);
+router.get('/getAdminUserName/:userId', function(req, res){adminLoginController.getAdminUserName});
 
 
 /**
