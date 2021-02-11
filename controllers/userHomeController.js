@@ -353,6 +353,16 @@ exports.getNotifications = (req, res) => {
 };
 
 
+
 exports.getUserGroups = (req,res) =>{
-    res.render('userViews/userGroups',{layout:'layouts/userLayout', title:'Groups '})
+    const q = `SELECT * FROM happyhealth.grouptbl;`
+
+    db.query(q, function (err,result) {
+        if(err) throw err;
+        else{
+            console.log(result)
+        }
+        res.render('userViews/userGroups', { result, layout:'layouts/userLayout', title:'Groups '})
+
+    })
 }
