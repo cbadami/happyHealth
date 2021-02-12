@@ -9,9 +9,9 @@ exports.getGroup = (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(result, "------------db group result");
+            // console.log(result, "------------db group result");
             res.render('adminViews/groupManagement', {layout: 'layouts/adminLayout', title: 'Group Management', result });
-            console.log("***************getGroup executed successfully******************");
+            // console.log("***************getGroup executed successfully******************");
         }
 
     });
@@ -19,24 +19,17 @@ exports.getGroup = (req, res) => {
 };
 
 exports.editGroup = (req, res) => {
-
-    console.log('------editGroup controller');
-
+    console.log('**************Inside editGroup controller*********************');
     var groupId = req.params.groupId;
-
     var editQuery = `SELECT * FROM happyhealth.groupTbl WHERE GroupId = '${groupId}'`;
-
     db.query(editQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            console.log(result, "-----edit group");
-            console.log("executed successfully");
-            res.render('editGroup', { result });
+            console.log(result, "-----edit group----------");
+            res.render('adminViews/editGroup', {layout: 'layouts/adminLayout', title: 'Edit Group', result });
         }
-
     });
-
 };
 
 exports.updateGroup = (req, res) => {
@@ -65,7 +58,6 @@ exports.updateGroup = (req, res) => {
 };
 
 exports.deleteGroup = (req, res) => {
-
     console.log("---delete Group");
     var groupId = req.params.groupId;
 
@@ -82,8 +74,6 @@ exports.deleteGroup = (req, res) => {
 };
 
 exports.getGroupMembers = (req, res) => {
-
-    console.log("-------group memebers controller");
     let groupId = req.params.groupId;
 
     let q = `SELECT t1.userId, t1.userName ,  t2.groupId, t2.joinedDate,  t3.groupName FROM happyhealth.usertbl as t1
@@ -96,8 +86,8 @@ exports.getGroupMembers = (req, res) => {
     db.query(q, (err,result)=>{
         if(err)throw err;
         else{
-            console.log('******  joined users *****')
-            console.log(result)
+            // console.log('******  joined users *****')
+            // console.log(result)
         } 
         if(result.length > 0){
             res.render('adminViews/groupMembers', {layout: 'layouts/adminLayout', title: 'Group Members', result }); 
@@ -106,8 +96,8 @@ exports.getGroupMembers = (req, res) => {
             db.query(groupName, (err,result)=>{
                 if(err) throw err;
                 else{
-                    console.log('******  No users in this group *****')
-                    console.log(result);
+                    // console.log('******  No users in this group *****')
+                    // console.log(result);
                     res.render('adminViews/groupMembers',{layout: 'layouts/adminLayout', title: 'Group Members', result,msg: 'No Users in this group'})
                 }
             })
