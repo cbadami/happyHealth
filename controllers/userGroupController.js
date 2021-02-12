@@ -1,4 +1,5 @@
 const db = require('../database');
+var moment = require('moment');
 
 
 exports.getGroup = (req, res) => {
@@ -31,7 +32,7 @@ exports.editGroup = (req, res) => {
             throw err;
         } else {
             console.log(result, "-----edit group----------");
-            res.render('adminViews/editGroup', { layout: 'layouts/adminLayout', title: 'Edit Group', result });
+            res.render('adminViews/editGroup', { layout: 'layouts/adminLayout', title: 'Edit Group', result , moment});
         }
     });
 };

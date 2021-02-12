@@ -4,8 +4,8 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="validationDefault01">Group name</label>
-                <input type="text" name="groupName" class="form-control" id="groupName"
-                    placeholder="Group name" value="<%= result[0].groupName%>" required>
+                <input type="text" name="groupName" class="form-control" id="groupName" placeholder="Group name"
+                    value="<%= result[0].groupName%>" required>
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationDefault02">Creator</label>
@@ -15,9 +15,12 @@
 
             <div class="col-md-4 mb-3">
                 <label for="validationDefault03">Created Date</label>
-                <input type="date" name="createdDate" class="form-control" id="createdDate" placeholder="<%= result[0].createdDate %>"
-                    value="<%= result[0].createdDate %>" required>
+                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="createdDate"
+                    class="form-control" placeholder="<%= result[0].createdDate  %>"
+                    value="<%= result[0].createdDate  %>" required>
             </div>
+
+
         </div>
         <button class="btn btn-primary" type="submit">Update Group</button>
     </form>
