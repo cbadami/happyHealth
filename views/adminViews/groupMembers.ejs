@@ -1,8 +1,9 @@
 <div class="app-main__inner">
 
+    <% if (result.length> 0) { %>
+
     <div class="table-wrapper">
 
-        <% if (result.length> 0) { %>
             <div class="col-sm-6">
                 <h2> <b>Group Name: <%= result[0].groupName%> </b> </h2>
             </div>
@@ -47,12 +48,12 @@
 
             </table>
 
-            <% } else{ %>
-                <div class="col-sm-6">
-                    <h2> <b>Group Name: <%= result[0].groupName%> </b> </h2>
-                </div>
-
-                <% } %>
-
     </div>
+
+
+    <% } else{ %>
+        <div class="col-sm-6">
+            <h2> <b>Group Name: <%= result[0].groupName%> </b> </h2>
+        </div>
+        <% } %>
 </div>
