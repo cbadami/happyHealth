@@ -4,11 +4,17 @@ const db = require('../database');
 exports.getUserLogin = (req, res) => {
     let success_msg = req.session.success_msg;
     if (!success_msg) {
-        res.render('userViews/userLogin', { layout: 'layouts/mainLayout', title: 'User Login' });
+        res.render('userViews/userLogin', {
+            layout: 'layouts/mainLayout',
+            title: 'User Login'
+        });
         req.session.success_msg = null;
         return;
     } else {
-        res.render('userViews/userLogin', { layout: 'layouts/mainLayout', title: 'User Login' });
+        res.render('userViews/userLogin', {
+            layout: 'layouts/mainLayout',
+            title: 'User Login'
+        });
         req.session.success_msg = null;
         return;
     }
@@ -17,22 +23,27 @@ exports.getUserLogin = (req, res) => {
 
 exports.postUserLogin = (req, res) => {
 
-    const { username, password } = req.body;
+    const {
+        username,
+        password
+    } = req.body;
     let errors = [];
 
     if (!username || !password) {
-        errors.push({ msg: 'Please enter all fields' });
+        errors.push({
+            msg: 'Please enter all fields'
+        });
     }
 
     if (errors.length > 0) {
         res.render('userViews/userLogin', {
-            layout: 'layouts/mainLayout', title: 'User Login',
+            layout: 'layouts/mainLayout',
+            title: 'User Login',
             errors,
             username,
             password
         });
-    }
-    else {
+    } else {
 
         let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'`;
 
@@ -44,9 +55,12 @@ exports.postUserLogin = (req, res) => {
                     req.session.userId = result[0]['userId'];
                     res.redirect('userHome');
                 } else {
-                    errors.push({ msg: 'Enter correct username or password' });
+                    errors.push({
+                        msg: 'Enter correct username or password'
+                    });
                     res.render('userViews/userLogin', {
-                        layout: 'layouts/mainLayout', title: 'User Login',
+                        layout: 'layouts/mainLayout',
+                        title: 'User Login',
                         errors,
                         username,
                         password
@@ -56,9 +70,12 @@ exports.postUserLogin = (req, res) => {
 
 
             } else {
-                errors.push({ msg: 'Enter correct username or password' });
+                errors.push({
+                    msg: 'Enter correct username or password'
+                });
                 res.render('userViews/userLogin', {
-                    layout: 'layouts/mainLayout', title: 'User Login',
+                    layout: 'layouts/mainLayout',
+                    title: 'User Login',
                     errors,
                     username,
                     password
