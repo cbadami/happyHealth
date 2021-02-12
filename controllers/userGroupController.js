@@ -43,7 +43,7 @@ exports.updateGroup = (req, res) => {
     var groupName = req.body.groupName;
     var creator = req.body.creator;
     var createdDate = req.body.createdDate;
-    
+
     console.log(groupId, groupName, creator, createdDate);
 
     var updateQuery = `UPDATE happyhealth.groupTbl SET GroupName = '${groupName}', Creator = '${creator}', CreatedDate = '${createdDate}' WHERE GroupId = ${groupId}`;
@@ -66,7 +66,7 @@ exports.deleteGroup = (req, res) => {
     console.log("---delete Group");
     var groupId = req.params.groupId;
 
-    var deleteQuery = `Delete FROM happyhealth.groupTbl WHERE GroupId = ${groupId};`;
+    var deleteQuery = `Delete FROM happyhealth.groupTbl WHERE groupId = ${groupId};`;
 
     db.query(deleteQuery, function (err, result) {
         if (err) {
