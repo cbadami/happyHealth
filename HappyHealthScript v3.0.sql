@@ -57,7 +57,7 @@ CREATE TABLE groupTbl (
   groupName varchar(25) DEFAULT NULL,
   creator varchar(25) DEFAULT NULL,
   createdDate varchar(12) DEFAULT NULL,
-  PRIMARY KEY (groupId)  
+  PRIMARY KEY (groupId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Sets the start number 1001 for group Table:
@@ -92,7 +92,7 @@ CREATE TABLE groupmemberTbl (
   groupId int NOT NULL,
   PRIMARY KEY (userId,groupId),
   FOREIGN KEY (userId) REFERENCES userTbl(userId),
-  FOREIGN KEY (groupId) REFERENCES groupTbl(groupId)
+  FOREIGN KEY (groupId) REFERENCES groupTbl(groupId) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
