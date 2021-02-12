@@ -3,45 +3,65 @@ const db = require('../database');
 
 exports.getSignup = (req, res) => {
     console.log(`inside get method of user signup`);
-    res.render('userViews/userSignup', { layout: 'layouts/mainLayout', title: 'User Signup' });
+    res.render('userViews/userSignup', {
+        layout: 'layouts/mainLayout',
+        title: 'User Signup'
+    });
 };
 
 exports.postSignup = (req, res) => {
 
-    const { username, email, password, password2 } = req.body;
+    const {
+        username,
+        email,
+        password,
+        password2
+    } = req.body;
     let errors = [];
     let success_msg;
     if (!username || !email || !password || !password2) {
-        errors.push({ msg: 'Please enter all fields' });
-    }
-    else {
+        errors.push({
+            msg: 'Please enter all fields'
+        });
+    } else {
         if (username.length > 12) {
-            errors.push({ msg: 'Username must be below 12 characters' });
-        }
-        else if (username.length < 6) {
-            errors.push({ msg: 'Username must be atleast 6 characters' });
+            errors.push({
+                msg: 'Username must be below 12 characters'
+            });
+        } else if (username.length < 6) {
+            errors.push({
+                msg: 'Username must be atleast 6 characters'
+            });
         }
 
         if (password.length > 15) {
-            errors.push({ msg: 'Password must be below 15 characters' });
-        }
-        else if (password.length < 8) {
-            errors.push({ msg: 'Password must be at least 8 characters' });
+            errors.push({
+                msg: 'Password must be below 15 characters'
+            });
+        } else if (password.length < 8) {
+            errors.push({
+                msg: 'Password must be at least 8 characters'
+            });
         }
 
         if (email.length > 50) {
-            errors.push({ msg: 'Email id must be below 50 characters' });
+            errors.push({
+                msg: 'Email id must be below 50 characters'
+            });
         }
 
         if (password != password2) {
-            errors.push({ msg: 'Passwords not matched' });
+            errors.push({
+                msg: 'Passwords not matched'
+            });
         }
     }
 
     console.log(`before errors ${errors} length: ${errors.length}`);
     if (errors.length > 0) {
         res.render('userViews/userSignup', {
-            layout: 'layouts/mainLayout', title: 'User Signup',
+            layout: 'layouts/mainLayout',
+            title: 'User Signup',
             errors,
             username,
             email,
@@ -60,9 +80,12 @@ exports.postSignup = (req, res) => {
             console.log(`${err}`);
             let str = err.message;
             if (str.includes("userName")) {
-                errors.push({ msg: 'Username already taken' });
+                errors.push({
+                    msg: 'Username already taken'
+                });
                 res.render('userViews/userSignup', {
-                    layout: 'layouts/mainLayout', title: 'User Signup',
+                    layout: 'layouts/mainLayout',
+                    title: 'User Signup',
                     errors,
                     username,
                     email,
@@ -71,9 +94,12 @@ exports.postSignup = (req, res) => {
                 });
                 return;
             } else if (str.includes("email")) {
-                errors.push({ msg: 'Email id already registered' });
+                errors.push({
+                    msg: 'Email id already registered'
+                });
                 res.render('userViews/userSignup', {
-                    layout: 'layouts/mainLayout', title: 'User Signup',
+                    layout: 'layouts/mainLayout',
+                    title: 'User Signup',
                     errors,
                     username,
                     email,
