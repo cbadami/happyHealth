@@ -38,13 +38,13 @@ exports.editGroup = (req, res) => {
 };
 
 exports.updateGroup = (req, res) => {
-
     console.log('------updateGroup controller');
-
     var groupId = req.params.groupId;
     var groupName = req.body.groupName;
     var creator = req.body.creator;
     var createdDate = req.body.createdDate;
+    
+    console.log(groupId, groupName, creator, createdDate);
 
     var updateQuery = `UPDATE happyhealth.groupTbl SET GroupName = '${groupName}', Creator = '${creator}', CreatedDate = '${createdDate}' WHERE GroupId = ${groupId}`;
 

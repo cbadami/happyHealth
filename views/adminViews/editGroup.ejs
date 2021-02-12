@@ -1,6 +1,6 @@
 <div class="app-main__inner">
 
-    <form action="/updateGroup/<%= result[0].GroupId%>" method="post">
+    <form action="/updateGroup/<%= result[0].groupId%>" method="post">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="validationDefault01">Group name</label>
@@ -15,9 +15,8 @@
 
             <div class="col-md-4 mb-3">
                 <label for="validationDefault03">Created Date</label>
-                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="createdDate"
-                    class="form-control" placeholder="<%= result[0].createdDate  %>"
-                    value="<%= result[0].createdDate  %>" required>
+                <input type="text" name="createdDate"  onfocus="(this.type='date')" onblur="(this.type='text')" 
+                    class="form-control" value="<%= result[0].createdDate  %>" required>
             </div>
 
 
