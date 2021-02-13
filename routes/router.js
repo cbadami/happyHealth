@@ -122,8 +122,6 @@ router.get('/deleteGroup/:groupId', userGroupController.deleteGroup);
 router.get('/getGroupMembers/:groupId', userGroupController.getGroupMembers);
 router.get('/removeUser/:groupId/:userId', userGroupController.removeUserGroup);
 router.get('/addUser/:groupId/:username', userGroupController.addUserGroup);
-router.post('/addUser/:groupId', userGroupController.addUserGroup);
-
 
 
 /**

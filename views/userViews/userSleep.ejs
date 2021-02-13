@@ -1,15 +1,14 @@
 <div class="app-main__inner">
-    <section>
-        <div class="container app-container-wrapper">
-            <div class="row justify-content-center">
-                <div class="col-lg-4">
-                    <form method="POST" class="my-5">
-                        <div class="form-group">
-                            <%- include ('../partials/messages') %>
-                            <h2 class="d-flex justify-content-center py-3">Sleep Hours</h2>
-
-                        </div>
-                        <!-- <div class="form-row">
+  <section>
+    <div class="container app-container-wrapper">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <form method="POST" class="my-5">
+            <div class="form-group">
+              <%- include ('../partials/messages') %>
+              <h2 class="d-flex justify-content-center py-3">Sleep Hours</h2>
+            </div>
+            <!-- <div class="form-row">
                             <label for="username">Date:</label>
                             Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ 
                             <div class='input-group date' id='datetimepicker1'>
@@ -20,27 +19,52 @@
                                 </span>
                             </div>
                         </div> -->
-                        <div class="form-row">
-                            <label for="username">Number of Hours slept</label>
-                            <input type="number" id="num_hours" name="num_hours" class="form-control" placeholder="0"
-                                value="<%= typeof num_hours != 'undefined' ? num_hours : '' %>" />
-                        </div>
-                        <div class="form-row">
-                            <label for="password">Goal</label>
-                            <input type="number" id="goal" name="goal" class="form-control" placeholder="0"
-                                value="<%= typeof goal != 'undefined' ? goal : '' %>" />
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
-                                    Update
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-row">
+              <label for="dateText">Current Date:</label>
+              <p id="demo"></p>
             </div>
+
+            <script>
+              var d = new Date();
+              document.getElementById("demo").innerHTML = d;
+            </script>
+            <div class="form-row">
+              <label for="username">Number of Hours slept</label>
+              <input
+                type="number"
+                id="num_hours"
+                name="num_hours"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof num_hours != 'undefined' ? num_hours : '' %>"
+              />
+            </div>
+            <div class="form-row">
+              <label for="password">Goal</label>
+              <input
+                type="number"
+                id="goal"
+                name="goal"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof goal != 'undefined' ? goal : '' %>"
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="col-lg-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="margin-top: 10px"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-    </section>
-</div>   
+      </div>
+    </div>
+  </section>
+</div>

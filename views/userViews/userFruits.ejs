@@ -1,36 +1,63 @@
 <div class="app-main__inner">
-    <section>
-        <div class="container app-container-wrapper">
-            <div class="row justify-content-center">
-                <div class="col-lg-4">
-                    <form method="POST" class="my-5">
-                        <div class="form-group">
-                            <%- include ('../partials/messages') %>
-                            <h2 class="d-flex justify-content-center py-3">Fruits Consumed</h2>
-
-                        </div>
-                        <div class="form-row">
-                            <label for="username">Grams of fruit consumed</label>
-                            <input type="number" id="fruits" name="fruits" class="form-control" placeholder="0"
-                                value="<%= typeof fruits != 'undefined' ? fruits : '' %>" />
-                        </div>
-                        <div class="form-row">
-                            <label for="password">Goal</label>
-                            <input type="number" id="goal" name="goal" class="form-control" placeholder="0"
-                                value="<%= typeof goal != 'undefined' ? goal : '' %>" />
-                        </div>
-                        <div class="form-row"></div>
-
-                        <div class="form-row">
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
-                                    Update
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+  <section>
+    <div class="container app-container-wrapper">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <form method="POST" class="my-5">
+            <div class="form-group">
+              <%- include ('../partials/messages') %>
+              <h2 class="d-flex justify-content-center py-3">
+                Fruits Consumed
+              </h2>
             </div>
+            <div class="form-row">
+              <label for="dateText">Current Date:</label>
+              <p id="demo"></p>
+              <!-- <input  id="demo" class="form-control" /> -->
+            </div>
+
+            <script>
+              var d = new Date();
+              document.getElementById("demo").innerHTML = d;
+            </script>
+            <div class="form-row">
+              <label for="username">Grams of fruit consumed</label>
+              <input
+                type="number"
+                id="fruits"
+                name="fruits"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof fruits != 'undefined' ? fruits : '' %>"
+              />
+            </div>
+            <div class="form-row">
+              <label for="password">Goal</label>
+              <input
+                type="number"
+                id="goal"
+                name="goal"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof goal != 'undefined' ? goal : '' %>"
+              />
+            </div>
+            <div class="form-row"></div>
+
+            <div class="form-row">
+              <div class="col-lg-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="margin-top: 10px"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-    </section>
-</div>   
+      </div>
+    </div>
+  </section>
+</div>

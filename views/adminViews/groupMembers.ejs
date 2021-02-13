@@ -1,72 +1,54 @@
 <div class="app-main__inner">
 
 
-    <% if (!groupData[0].userName) { %>
-        <div class="col-sm-6 row">
-            <h2> <b>Group Name: <%= groupName[0].groupName%> </b> </h2>
-            <form action="/addUser/<%= groupData[0].groupId %> %>" method="post">
-                <label for="user"> Select User </label>
-                <select name="userId">
-                    <% for(var i=0; i < userData.length; i++) { %>
-                        <option name="userName" value="<%= userData[i].userId %>">
-                            <%= userData[i].userName %>
-                        </option>
-                        <% } %>
-                </select>
-                <input type="submit" class="btn btn-success" value="Add User"> </input>
-            </form>
-        </div>
-        <% } else{ %>
-            <div class="table-wrapper">
-                <div class="col-sm-12 row">
-                    <h2> <b>Group Name: <%= groupData[0].groupName%> </b> </h2>
-                    <% console.log( groupData[0].groupId ) %>
-
-                        <form action="/addUser/<%= groupData[0].groupId %> %>" method="post">
-                            <label for="user"> Select User </label>
-                            <select name="userId">
-                                <% for(var i=0; i < userData.length; i++) { %>
-                                    <option name="userName" value="<%= userData[i].userId %>">
-                                        <%= userData[i].userName %>
-                                    </option>
-                                    <% } %>
-                            </select>
-                            <input type="submit" class="btn btn-success" value="Add User"> </input>
-                        </form>
-
+        <% if (!result[0].userName) { %>
+            <div class="col-sm-12 row">
+                <h2> <b>Group Name: <%= result[0].groupName%> </b> </h2>
+                <div class="col-sm-3">
+                    <button class="btn btn-success" onclick="myFunction()">Add User</button>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Sl.No</th>
-                            <th>Username</th>
-                            <th>Joined Date</th>
-                            <th>Remove user</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for (var i=0; i < groupData.length;i++) { %>
-                            <tr>
-                                <th scope="row">
-                                    <%= i+1 %>
-                                </th>
-                                <td>
-                                    <%= groupData[i].userName%>
-                                </td>
-                                <td>
-                                    <%= groupData[i].joinedDate%>
-                                </td>
-                                <td>
-                                    <form action="../removeUser/<%= groupData[0].groupId %>/<%= groupData[i].userId%>"
-                                        method="get">
-                                        <button type="submit" id="PopoverCustomT-1"
-                                            class="btn btn-primary btn-sm">Remove</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <% } %>
-                    </tbody>
-                </table>
             </div>
-            <% } %>
+            <% } else{ %>
+                <div class="table-wrapper">
+                    <div class="col-sm-12 row">
+                        <h2> <b>Group Name: <%= result[0].groupName%> </b> </h2>
+                        <div class="col-sm-3">
+                            <button class="btn btn-success" onclick="myFunction()">Add User</button>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Username</th>
+                                <th>Joined Date</th>
+                                <th>Remove user</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (var i=0; i < result.length;i++) { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= i+1 %>
+                                    </th>
+                                    <td>
+                                        <%= result[i].userName%>
+                                    </td>
+                                    <td>
+                                        <%= result[i].joinedDate%>
+                                    </td>
+                                    <td>
+                                        <form action="../removeUser/<%= result[0].groupId %>/<%= result[i].userId%>"
+                                            method="get">
+                                            <button type="submit" id="PopoverCustomT-1"
+                                                class="btn btn-primary btn-sm">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } %>
 </div>
