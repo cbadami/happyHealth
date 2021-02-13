@@ -27,10 +27,11 @@ exports.getUserProfile = (req, res) => {
         } else {
             console.log(result, '--------db user table result');
             const { userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state } = result[0];
-            console.log(userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state )
+            let dateFormat1=dateOfBirth
+            console.log(userName, admin, email, fullName, gender, dateFormat1, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state )
             res.render('userViews/userProfile', {
                 layout: 'layouts/userLayout', title: 'User Profile',
-                userName, admin, email, fullName, gender, dateOfBirth,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state
+                userName, admin, email, fullName, gender, dateFormat1,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state
             });
         }
     });
@@ -41,22 +42,26 @@ exports.postUserProfile = (req, res) => {
 
     console.log("****post user profile *********")
     let userId = req.session.userId;
+    let dateFormat1="";
     console.log(req.body,"---------req.body");
     const { fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
     console.log(fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state )
-    const [year, month, date] = dateOfBirth.split("-")
-    const dateFormat = month+'/'+date+'/'+year
+    if(dateOfBirth!=null && dateOfBirth!=undefined && dateOfBirth!=""){
+        console.log("inside null check")
+        const [year, month, date] = dateOfBirth.split("-")
+        dateFormat1 = month+'/'+date+'/'+year
+    }
     let errors = [];
-    if (!fullName || !Gender || !dateFormat || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
+    if (!fullName || !Gender || !dateFormat1 || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
         const averageActivityLevel = myList
         errors.push("Please enter all fields")
         res.render('userViews/userProfile', {
             layout: 'layouts/userLayout', title: 'User Profile',
-            fullName, email, fullName, gender, dateFormat,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state, errors
+            fullName, email, fullName, Gender, dateFormat1,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state, errors
         });
     }
     const profileQuery = `UPDATE happyhealth.usertbl
-        SET email = '${email}', fullName = '${fullName}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dateFormat}',age='${age}',
+        SET email = '${email}', fullName = '${fullName}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dateFormat1}',age='${age}',
         currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
         WHERE userId = '${userId}';`;
     db.query(profileQuery, function (err, result) {
