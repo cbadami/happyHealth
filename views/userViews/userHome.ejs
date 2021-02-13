@@ -1,13 +1,13 @@
 <div class="app-main__inner">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-4 card" style="background-color:white;" onclick="location.href = '/userStep';">
+            <div class="col-sm-4 card" style="background-color:hsla(0, 100%, 90%, 0.3);;" onclick="location.href = '/userStep';">
                 <h4>Step Count</h4>
                 <!-- <img src="/static/assets/images/happyHealth/step.png" alt="user_stat"> -->
                 <img src="/static/gifs/running2.gif" alt="this slowpoke moves" width="100" class="gif"/>
                 <br>
-                <button type="submit" class="btn btn-outline-secondary" >Step
-                    Count: <%= stepCount %></button>
+                <button type="submit" class="btn btn-outline-secondary" ><b>Step
+                    Count: <%= stepCount %></b></button>
             </div>
             <div class="col-sm-4 card" style="background-color:#C2DFFF;" onclick="location.href = '/userHydration';">
                 <h4>Water Intake</h4>
@@ -27,8 +27,8 @@
             <div class="col-sm-4 card" style="background-color:	#ffd17a;" onclick="location.href = '/userTrack';">
                 <h4>Me Time</h4>
                 <img src="/static/gifs/meditation.gif" alt="user_stat" width="150" class="gif">
-                <button type="submit" class="btn btn-outline-secondary" >Track Me Time <%=
-                        meTime %></button>
+                <button type="submit" class="btn btn-outline-secondary" ><b>Track Me Time <%=
+                        meTime %></b></button>
             </div>
             <div class="col-sm-4 card" style="background-color:#E5FFCC;" onclick="location.href = '/userFruits';">
                 <h4>Fruits Intake</h4>
