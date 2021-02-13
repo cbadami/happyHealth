@@ -3,15 +3,56 @@
     <div class="container app-container-wrapper">
       <div class="row justify-content-center">
         <div class="col-lg-4">
-          <div class="wrap">
-            <div class="search">
-              <input type="text" class="searchTerm" placeholder="Search Information">
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
+          <div>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <div class="example" >
+            <input type="text" placeholder="Search.." name="search2">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          
           </div>
-          <div></div><br><br>
+          <style>
+            body {
+              font-family: Arial;
+            }
+            
+            * {
+              box-sizing: border-box;
+            }
+            
+            .example input[type=text] {
+              padding: 10px;
+              font-size: 17px;
+              border: 1px solid grey;
+              float: left;
+              width: 75%;
+              background: #f1f1f1;
+            }
+            
+            .example button {
+              float: left;
+              width: 20%;
+              padding: 10px;
+              background: #2196F3;
+              color: white;
+              font-size: 17px;
+              border: 1px solid grey;
+              border-left: none;
+              cursor: pointer;
+              
+            }
+            
+            .example button:hover {
+              background: #0b7dda;
+            }
+            
+            .example::after {
+              content: "";
+              clear: both;
+              display: table;
+            }
+            </style>
+            <br>
+
           <b>Push Notifications:</b>					
             <!--Rounded switch -->
             <label class="switch">
@@ -42,4 +83,5 @@
       </div>
     </div>
   </section>
+ 
 </div>
