@@ -34,9 +34,9 @@
 
               <ul class="list-group col-md-6 ">
                 <% for( let i = 0; i < result.length; i++ ) { %>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <%=  result[i].groupName %>
-                    <input type="submit" class="btn btn-success" value="Join"> </input>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <%=  result[i].groupName %>&nbsp;&nbsp;
+                    <input type="submit" class="btn-primary btn-success" value="Join"> </input>
                 </li>
                 <% } %>
               </ul>
