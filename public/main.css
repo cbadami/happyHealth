@@ -113,7 +113,7 @@
     width: 40px;
     height: 36px;
     border: 1px green;
-    background: #00B4CC;
+    background:green;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -133,7 +133,7 @@
 
 
  .border-primary {
-    border-color: #3f6ad8
+    border-color:green
 }
 
 .border-secondary {
