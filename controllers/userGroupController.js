@@ -32,7 +32,7 @@ exports.editGroup = (req, res) => {
             throw err;
         } else {
             console.log(result, "-----edit group----------");
-            res.render('adminViews/editGroup', { layout: 'layouts/adminLayout', title: 'Edit Group', result , moment});
+            res.render('adminViews/editGroup', { layout: 'layouts/adminLayout', title: 'Edit Group', result, moment });
         }
     });
 };
@@ -78,66 +78,88 @@ exports.deleteGroup = (req, res) => {
     });
 };
 
-exports.getGroupMembers = (req, res) => {
+exports.getGroupMembers =  (req, res) => {
+
+    console.log("*************   Inside getGroupMembers     **************")
+
     let groupId = req.params.groupId;
 
-    let q = `SELECT t1.userId, t1.userName ,  t2.groupId, t2.joinedDate,  t3.groupName FROM happyhealth.usertbl as t1
+     let q = `SELECT t1.userId, t1.userName ,  t2.groupId, t2.joinedDate,  t3.groupName FROM happyhealth.usertbl as t1
     LEFT JOIN happyhealth.groupmembertbl as t2 ON t1.userId = t2.userId    LEFT JOIN happyhealth.grouptbl as t3 
-    ON t2.groupId = t3.groupId where t3.groupId=${groupId}`
+    ON t2.groupId = t3.groupId where t3.groupId=${groupId} ;
+     select groupName from happyhealth.grouptbl where groupId =${groupId} ;
+     select * from happyhealth.usertbl `
 
-    const groupName = `select groupName from happyhealth.grouptbl where groupId =${groupId}`
+    // const groupName = `select groupName from happyhealth.grouptbl where groupId =${groupId}`
 
+    // const users = `select * from userstbl`;
 
-    db.query(q, (err, result) => {
+    db.query(q, [2, 1], function (err, result) {
+
         if (err) throw err;
         else {
-            // console.log('******  joined users *****')
-            // console.log(result)
-        }
-        if (result.length > 0) {
-            res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', result });
-        } else {
+            let groupData = result[0];
+            let groupName = result[1];
+            let userData = result[2];
 
-            db.query(groupName, (err, result) => {
-                if (err) throw err;
-                else {
-                    // console.log('******  No users in this group *****')
-                    // console.log(result);
-                    res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', result, msg: 'No Users in this group' })
-                }
-            })
+            // console.log(groupData)
+            // console.log(groupName)
+           // console.log(userData)
+
+            if (result[0].length > 0) {
+                res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', groupData, userData });
+            } else {
+                db.query(groupName, (err, result) => {
+                    if (err) throw err;
+                    else {
+                        // console.log('******  No users in this group *****')
+                        // console.log(result);
+                        res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', groupName, userData, msg: 'No Users in this group' })
+                    }
+                })
+            }
         }
     });
-
-    db
-
 };
 
 exports.addUserGroup = (req, res) => {
-
-    console.log("-------add user group member controller");
     let groupId = req.params.groupId;
-    let username = req.params.username;
-    let userQuery = `SELECT * FROM happyhealth.userTbl WHERE Username = '${username}'`;
-    db.query(userQuery, function (err, result) {
-        if (err) {
-            throw err;
-            return;
-        } else {
+    let userId = req.body.userId;
+    let today = new Date().toLocaleDateString().toString()
+
+    const insertQuery = `insert into happyhealth.groupmembertbl(userId, joinedDate, groupId) values( ${userId}, '${today}', ${groupId});`
+
+    db.query(insertQuery,(err,result)=>{
+        if(err) throw err;
+        else{
             console.log(result);
-            let userId = result[0].UserId;
-            let addQuery = `INSERT INTO happyhealth.groupmemberTbl values(${userId},'${username}','11/24/2020',${groupId});`;
-            db.query(addQuery, function (err, result) {
-                if (err) {
-                    throw err;
-                    return;
-                } else {
-                    console.log(result, "----add user group successfully executed");
-                    res.redirect(`/getGroupMembers/${groupId}`);
-                }
-            });
+            res.redirect(`/getGroupMembers/${groupId}`)
         }
-    });
+    })
+
+    // console.log("-------add user group member controller");
+    // let groupId = req.params.groupId;
+    // let username = req.params.username;
+    // let userQuery = `SELECT * FROM happyhealth.userTbl WHERE Username = '${username}'`;
+    // db.query(userQuery, function (err, result) {
+    //     if (err) {
+    //         throw err;
+    //         return;
+    //     } else {
+    //         console.log(result);
+    //         let userId = result[0].UserId;
+    //         let addQuery = `INSERT INTO happyhealth.groupmemberTbl values(${userId},'${username}','11/24/2020',${groupId});`;
+    //         db.query(addQuery, function (err, result) {
+    //             if (err) {
+    //                 throw err;
+    //                 return;
+    //             } else {
+    //                 console.log(result, "----add user group successfully executed");
+    //                 res.redirect(`/getGroupMembers/${groupId}`);
+    //             }
+    //         });
+    //     }
+    // });
 
 };
 
