@@ -112,7 +112,7 @@
   .searchButton {
     width: 40px;
     height: 36px;
-    border: 1px solid #00B4CC;
+    border: 1px green;
     background: #00B4CC;
     text-align: center;
     color: #fff;
