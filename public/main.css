@@ -20,8 +20,8 @@
  .switch {
     position: relative;
     display: inline-block;
-    width: 52px;
-    height: 28px;
+    width: 60px;
+    height: 34px;
   }
   div {
     text-align: left;
@@ -50,8 +50,8 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 20px;
-    width: 20px;
+    height: 26px;
+    width: 26px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -60,11 +60,11 @@
   }
     
   input:checked + .slider {
-    background-color:green;
+    background-color: #2196F3;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px green;
+    box-shadow: 0 0 1px #2196F3;
   }
   
   input:checked + .slider:before {
@@ -112,8 +112,8 @@
   .searchButton {
     width: 40px;
     height: 36px;
-    border: 1px green;
-    background:green;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -133,7 +133,7 @@
 
 
  .border-primary {
-    border-color:green
+    border-color: #3f6ad8
 }
 
 .border-secondary {
@@ -2412,12 +2412,6 @@ pre code {
 }
 
 @media (max-width: 991.98px) {
-    .app-container .app-header.header-shadow .app-header__logo .header__pane {
-        display: none;
-    }
-    .app-header .app-header__menu ul.header-menu.nav {
-        flex-wrap: nowrap;
-    }
     .table-responsive-lg {
         display: block;
         width: 100%;
@@ -11591,7 +11585,7 @@ button,
 
 .vertical-nav-menu li a.mm-active {
     color: #343a40;
-    background: #70caa5;
+    background: #e0f3ff;
     font-weight: bold
 }
 
@@ -11874,26 +11868,10 @@ button,
 }
 
 .closed-sidebar .app-sidebar .app-sidebar__inner ul li a {
-    text-indent: 0rem;
-    padding: 0.35em;
+    text-indent: -99rem;
+    padding: 0
 }
 
-.closed-sidebar .app-sidebar .app-sidebar__inner ul li a span {
-    /* display: none; */
-    visibility: hidden;
-    opacity: 0;
-}
-
-.closed-sidebar .app-sidebar:hover .app-sidebar__inner ul li a span {
-    /* display: inline; */
-    visibility: initial;
-    opacity: 1;
-}
-.closed-sidebar.sidebar-mobile-open .app-sidebar .app-sidebar__inner ul li a span {
-    /* display: inline; */
-    visibility: initial;
-    opacity: 1;
-}
 .closed-sidebar .app-sidebar .app-sidebar__inner .metismenu-icon {
     text-indent: 0;
     left: 50%;
@@ -11935,7 +11913,7 @@ button,
 
 .closed-sidebar .app-sidebar:hover .app-sidebar__inner ul li a {
     text-indent: initial;
-    padding: .5em 1.5rem .5em 45px;
+    padding: 0 1.5rem 0 45px
 }
 
 .closed-sidebar .app-sidebar:hover .app-sidebar__inner .metismenu-icon {
