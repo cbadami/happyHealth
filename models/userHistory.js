@@ -1,11 +1,11 @@
 /**
- *  admin login page model
- *  explains each attribute in a admin page.
- *
- * @author Sowmya Thogiti
- * 
- *
- */
+*  admin login page model
+*  explains each attribute in a admin page.
+*
+* @author Soujanya Janapatla
+* 
+*
+*/
 'use strict';
 var admin = {};
 module.exports = (sequelize, DataTypes) => {

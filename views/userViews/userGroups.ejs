@@ -4,13 +4,28 @@
         <div class="tabs">
             <ul class="tabs-list">
                <li class="active">
-                   <a href="#tab1">Joined Groups</a></li>
-               <li ><a href="#tab2">Available Groups</a></li>
-               <li ><a href="#tab3">Create Group<a/></li>
+                   <a href="#tab1">Available Groups</a></li>
+               <li ><a href="#tab2">Joined Groups</a></li>
+               <li ><a href="#tab3">Create Group</a></li>
             </ul>
           
-            <div id="tab1" class="tab active">
+            <div id="tab1" class="tab">
+              <h3>Available Groups</h3>
+
+              <ul class="list-group col-md-6 ">
+                <% for( let i = 0; i < result.length; i++ ) { %>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <%=  result[i].groupName %>
+                    <input type="submit" class="btn btn-success" value="Join"> </input>
+                </li>
+                <% } %>
+              </ul>
+
+
+            </div>
+            <div id="tab2" class="tab active">
                <h3>Joined Groups</h3>
+               
 
                <ul class="list-group col-md-6 ">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -34,9 +49,9 @@
 
               <ul class="list-group col-md-6 ">
                 <% for( let i = 0; i < result.length; i++ ) { %>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <%=  result[i].groupName %>
-                    <input type="submit" class="btn btn-success" value="Join"> </input>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <%=  result[i].groupName %>&nbsp;&nbsp;
+                    <input type="submit" class="btn-primary btn-success" value="Join"> </input>
                 </li>
                 <% } %>
               </ul>

@@ -40,6 +40,18 @@
               />
             </div>
             <div class="form-row">
+              <label for="username">Total Walking Distance:</label>
+              <input
+                type="number"
+                id="stepDistance"
+                name="stepDistance"
+                placeholder="In meters"
+                class="form-control"
+                value="<%= typeof stepDistance != 'undefined' ? stepDistance : '' %>"
+                
+              />
+            </div>
+            <div class="form-row">
               <label for="password">Goal:</label>
               <input
                 type="number"

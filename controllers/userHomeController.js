@@ -73,17 +73,17 @@ exports.postUserProfile = (req, res) => {
 
 exports.getUserStep = (req, res) => {
     let userId = req.session.userId;
-const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
+const stetpQuery = `Select stepCount, stepDistance, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
 db.query(stetpQuery, function (err, result) {
     if (err) {
         console.log(err);
     } else {
         console.log(result, '--------db user table result');
         //console.log("result "+result[0]);
-        const { stepCount, stepGoal } = result[0];
+        const { stepCount, stepDistance,stepGoal } = result[0];
         //console.log("ddd   "+stepCount)
         res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step',
-        stepCount, stepGoal
+        stepCount, stepDistance, stepGoal
         });
     }
 });
@@ -92,16 +92,16 @@ db.query(stetpQuery, function (err, result) {
 
 exports.postUserStep = (req, res) => {
     const userId = req.session.userId;
-    const { stepCount, stepGoal } = req.body;
+    const { stepCount, stepDistance, stepGoal } = req.body;
     let errors = [];
-    if (!stepCount || !stepGoal) {
-        console.log(`inside if statement ${stepCount}`);
+    if (!stepCount || !stepDistance || !stepGoal) {
+        console.log(`inside if statement ${stepCount}, ${stepDistance}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step', errors });
         return
     }
-    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${stepGoal} WHERE userId = ${userId};`;
+    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepDistance = ${stepDistance}, stepGoal = ${stepGoal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);

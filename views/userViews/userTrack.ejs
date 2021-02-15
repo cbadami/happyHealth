@@ -6,7 +6,7 @@
                     <form method="POST" class="my-5">
                         <div class="form-group">
                             <%- include ('../partials/messages') %>
-                            <h2 class="d-flex justify-content-center py-3">Meditation Time</h2>
+                            <h2 class="d-flex justify-content-center py-3">Me Time</h2>
 
                         </div>
                         <!-- <div class="form-row">
@@ -21,16 +21,7 @@
                             </div>
                         </div>  -->
                         <div class="form-row">
-              <label for="dateText">Current Date:</label>
-              <p id="demo"></p>
-            </div>
-
-            <script>
-              var d = new Date();
-              document.getElementById("demo").innerHTML = d;
-            </script>
-                        <div class="form-row">
-                            <label for="username">Meditation Time</label>
+                            <label for="username">Me Time</label>
                             <input type="number" id="meTime" name="meTime" class="form-control" placeholder="0"
                                 value="<%= typeof meTime != 'undefined' ? meTime : '' %>" />
                         </div>
