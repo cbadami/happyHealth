@@ -1,5 +1,5 @@
 const db = require('../database');
-var moment = require('moment');
+const moment = require('moment');
 
 
 exports.getGroup = (req, res) => {
