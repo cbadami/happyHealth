@@ -43,6 +43,7 @@ npm run dev
 ```
 git checkout prod
 git merge master
+git push origin prod
 ```
 ## Useful Resources:
 - https://expressjs.com/2x/guide.html
