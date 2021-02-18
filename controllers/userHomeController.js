@@ -115,8 +115,8 @@ exports.postUserStep = (req, res) => {
 
 exports.getUserSleep = (req, res) => {
     let userId = req.session.userId;
-    const stetpQuery = `Select sleepHours from happyhealth.usermetricstbl where UserId = ${userId};`;
-    db.query(stetpQuery, function (err, result) {
+    const sleepHours = `Select sleepHours from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(sleepHours, function (err, result) {
         if (err) {
             console.log(err);
         } else {
@@ -134,19 +134,19 @@ exports.getUserSleep = (req, res) => {
     
 exports.postUserSleep = (req, res) => {
     let userId = req.session.userId;
-    const { num_hours, goal } = req.body;
+    const { sleepHours, goal } = req.body;
 
-    console.log(`inside post user sleep: ${num_hours}  ${goal}`);
+    console.log(`inside post user sleep: ${sleepHours}  ${goal}`);
     let errors = [];
-    if (!num_hours || !goal) {
-        console.log(`inside if statement ${num_hours}`);
+    if (!sleepHours || !goal) {
+        console.log(`inside if statement ${sleepHours}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep', errors });
         return;
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET sleepHours = ${num_hours}, sleepGoal = ${goal} WHERE userId = ${userId};`;
+        SET sleepHours = ${sleepHours}, sleepGoal = ${goal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
