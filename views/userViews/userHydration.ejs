@@ -36,7 +36,23 @@
               <label>Ounces</label>
               <input id="inputOunce" class="form-control" type="number" placeholder="0" oninput="weightConverter(this.id,this.value)" onchange="weightConverter(this.id,this.value)">
             </div>
-          
+            <script>
+              function weightConverter(source,valNum) {
+              valNum = parseFloat(valNum);
+              
+               
+              var inputGrams = document.getElementById("Glass");
+              var inputStones = document.getElementById("inputOunce");
+              if (source=="Glass") {
+               
+                inputStones.value=(valNum*8).toFixed(2);
+              }
+              if (source=="inputOunce") {
+              
+                inputGrams.value=(valNum*0.125).toFixed(2);
+              }
+              }
+                        </script>
             <div class="form-row">
               <label for="password">Goal</label>
               <input
