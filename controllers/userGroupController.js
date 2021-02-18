@@ -95,7 +95,7 @@ exports.getGroupMembers = (req, res) => {
             // console.log(result)
         }
         if (result.length > 0) {
-            res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', result });
+            res.render('adminViews/groupMembers', { layout: false, title: 'Group Members', result });
         } else {
 
             db.query(groupName, (err, result) => {
