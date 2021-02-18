@@ -23,7 +23,7 @@
           
             <div class="form-row">
               <label for="username">Number of Glasses</label>
-              <input id="Glass" class="form-control" type="number" placeholder="0" oninput="weightConverter(this.id,this.value)" onchange="weightConverter(this.id,this.value)">
+              <input id="water" class="form-control" type="number" placeholder="0" oninput="weightConverter(this.id,this.value)" onchange="weightConverter(this.id,this.value)">
             </div>
             <div class="form-row">
               <label>Ounces</label>
@@ -34,9 +34,9 @@
               valNum = parseFloat(valNum);
               
                
-              var inputGrams = document.getElementById("Glass");
+              var inputGrams = document.getElementById("water");
               var inputStones = document.getElementById("inputOunce");
-              if (source=="Glass") {
+              if (source=="water") {
                
                 inputStones.value=(valNum*8).toFixed(2);
               }
