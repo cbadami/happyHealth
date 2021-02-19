@@ -1,0 +1,48 @@
+<div class="app-main__inner">
+
+    <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for users"> -->
+    <!-- <h3 style="text-align: center;">User Management</h3> -->
+   
+    <div class="table-responsive">
+        
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    
+                    <th scope="col">UserID</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Total count</th>
+                    <th scope="col">Average count</th> 
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i < result.length;i++) { %>
+                    <tr>
+                      
+                        <td>
+                            <%= result[i].userId%>
+                        </td>
+                        
+                        <td>
+                            <%= result[i].fullName%>
+                        </td>
+
+                        <td>
+                            <%= result[i].total%>
+                        </td>
+                       
+                        <td>
+                            <%= result[i].average%>
+                        </td>
+                        <!-- <td>
+                        <a href="">View</a>
+                    </td> -->
+                        
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</div>
