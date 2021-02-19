@@ -10,10 +10,11 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Username</th>
+                    <th scope="col">Full Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <!-- <th scope="col">Challenges</th> -->
-                    <th scope="col">Profile</th>
+                    <!-- <th scope="col">Profile</th> -->
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -24,7 +25,9 @@
                             <%= i+1 %>
                         </th>
                         <td><a href="/getAdminUserName/<%= result[i].userId%>"><%= result[i].userName%></a></td>
-                        
+                        <td>
+                            <%= result[i].fullName%>
+                        </td>
                         <td>
                             <%= result[i].email%>
                         </td>
@@ -34,11 +37,11 @@
                         <!-- <td>
                         <a href="">View</a>
                     </td> -->
-                        <td>
-                            <form action="/editUser/<%= result[i].userId%>" method="get">
+                        <!-- <td>
+                            <form action="editUser/<%= result[i].userId%>" method="get">
                                 <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
                             </form>
-                        </td>
+                        </td> -->
                         <td>
                             <form action="deleteUser/<%= result[i].userId%>" method="get">
                                 <button type="submit" id="PopoverCustomT-1"
