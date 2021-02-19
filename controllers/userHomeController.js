@@ -115,17 +115,17 @@ exports.postUserStep = (req, res) => {
 
 exports.getUserSleep = (req, res) => {
     let userId = req.session.userId;
-    const sleepHours = `Select sleepHours from happyhealth.usermetricstbl where UserId = ${userId};`;
+    const sleepHours = `Select sleepHours,sleepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
     db.query(sleepHours, function (err, result) {
         if (err) {
             console.log(err);
         } else {
             console.log(result, '--------db user table result');
             //console.log("result "+result[0]);
-            const { sleepHours } = result[0];
+            const { sleepHours,sleepGoal } = result[0];
             //console.log("ddd   "+sleepHours)
             res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep',
-            sleepHours
+            sleepHours,sleepGoal
             });
         }
     });
@@ -134,11 +134,11 @@ exports.getUserSleep = (req, res) => {
     
 exports.postUserSleep = (req, res) => {
     let userId = req.session.userId;
-    const { sleepHours, goal } = req.body;
+    const { sleepHours, sleepGoal } = req.body;
 
-    console.log(`inside post user sleep: ${sleepHours}  ${goal}`);
+    console.log(`inside post user sleep: ${sleepHours}  ${sleepGoal}`);
     let errors = [];
-    if (!sleepHours || !goal) {
+    if (!sleepHours || !sleepGoal) {
         console.log(`inside if statement ${sleepHours}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
@@ -146,7 +146,7 @@ exports.postUserSleep = (req, res) => {
         return;
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET sleepHours = ${sleepHours}, sleepGoal = ${goal} WHERE userId = ${userId};`;
+        SET sleepHours = ${sleepHours}, sleepGoal = ${sleepGoal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
