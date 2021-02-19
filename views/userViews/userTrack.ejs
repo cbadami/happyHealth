@@ -21,6 +21,16 @@
                             </div>
                         </div>  -->
                         <div class="form-row">
+                            <label for="dateText">Current Date:</label>
+                            <p id="demo"></p>
+                            <!-- <input  id="demo" class="form-control" /> -->
+                          </div>
+              
+                          <script>
+                            var d = new Date();
+                            document.getElementById("demo").innerHTML = d;
+                          </script>
+                        <div class="form-row">
                             <label for="username">Me Time</label>
                             <input type="number" id="meTime" name="meTime" class="form-control" placeholder="0"
                                 value="<%= typeof meTime != 'undefined' ? meTime : '' %>" />
