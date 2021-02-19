@@ -83,6 +83,26 @@ exports.getUserManagement = (req, res) => {
     });
 };
 
+
+exports.getUserTotalMetrics = (req, res) => {
+
+    const userId = req.params.userId;
+    const allMetricsQuery = `SELECT usermetricstbl.userId, usertbl.fullName, SUM(DISTINCT usermetricstbl.stepCount) as total, AVG(DISTINCT usermetricstbl.stepCount) as average from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId  AND usertbl.userId = ${userId} group by usermetricstbl.userId`;
+    db.query(allMetricsQuery, function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            console.log(`${JSON.stringify(result)}`, '------------db users result');
+            res.render('adminViews/adminTotalMetrics', {
+                layout: 'layouts/adminLayout',
+                title: 'User Management',
+                result
+            })
+            console.log('****getUserManagement executed successfully****');
+        }
+    });
+}
+
 exports.editUser = (req, res) => {
     const userId = req.params.userId;
     const body = req.body;
