@@ -160,17 +160,17 @@ exports.postUserSleep = (req, res) => {
 
 exports.getUserHydration = (req, res) => {
     let userId = req.session.userId;
-    const stetpQuery = `Select water from happyhealth.usermetricstbl where UserId = ${userId};`;
+    const stetpQuery = `Select water,waterGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
     db.query(stetpQuery, function (err, result) {
         if (err) {
             console.log(err);
         } else {
             console.log(result, '--------db user table result');
             //console.log("result "+result[0]);
-            const { water } = result[0];
+            const { water,waterGoal } = result[0];
             //console.log("ddd   "+water)
             res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration',
-            water
+            water,waterGoal
             });
         }
     });
@@ -180,10 +180,10 @@ exports.getUserHydration = (req, res) => {
 
 exports.postUserHydration = (req, res) => {
     let userId = req.session.userId;
-    const { water, goal } = req.body;
+    const { water, waterGoal } = req.body;
     console.log(`inside post user hyration`);
     let errors = [];
-    if (!water || !goal) {
+    if (!water || !waterGoal) {
         console.log(`inside if statement ${water}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
@@ -191,7 +191,7 @@ exports.postUserHydration = (req, res) => {
         return 
     }
     var hydrationQuery = `UPDATE happyhealth.usermetricstbl
-        SET water = ${water}, waterGoal = ${goal} WHERE userId = ${userId} ;`;
+        SET water = ${water}, waterGoal = ${waterGoal} WHERE userId = ${userId} ;`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
             console.log(err);
