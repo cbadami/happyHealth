@@ -203,17 +203,17 @@ exports.postUserHydration = (req, res) => {
 
 exports.getUserTrack = (req, res) => {
     let userId = req.session.userId;
-    const stetpQuery = `Select meTime from happyhealth.usermetricstbl where UserId = ${userId};`;
+    const stetpQuery = `Select meTime,meTimeGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
     db.query(stetpQuery, function (err, result) {
         if (err) {
             console.log(err);
         } else {
             console.log(result, '--------db user table result');
             //console.log("result "+result[0]);
-            const { meTime } = result[0];
+            const { meTime,meTimeGoal } = result[0];
             //console.log("ddd   "+meTime)
             res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track',
-            meTime
+            meTime,meTimeGoal
             });
         }
     });
@@ -223,17 +223,17 @@ exports.getUserTrack = (req, res) => {
 
 exports.postUserTrack = (req, res) => {
     let userId = req.session.userId;
-    const { meTime, goal } = req.body;
+    const { meTime, meTimeGoal } = req.body;
     console.log(`inside post user track`);
     let errors = [];
-    if (!meTime || !goal) {
+    if (!meTime || !meTimeGoal) {
         console.log(`inside if statement ${meTime}`);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track' });
     }
     var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET meTime = ${meTime}, meTimeGoal = ${goal} WHERE userId = ${userId};`;
+        SET meTime = ${meTime}, meTimeGoal = ${meTimeGoal} WHERE userId = ${userId};`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
