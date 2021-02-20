@@ -156,6 +156,28 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <div class="col-md-4">
+                      <label>Exercise *</label><br>
+                      <%- include ('../partials/messages') %>
+                    </div>
+                    <div class="col-md-8">
+
+                  <select id="myList" name="myList" class="form-control"
+                  value="<%= typeof Exercise != 'undefined' ? Exercise : '' %>">
+                    <option value="Step Count">Step Count</option>
+                    <option value="Water"> Water</option>
+                    <option value="Sleep Hours">Sleep Hours</option>
+                    <option value="Me Time">Me Time</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Vegetables">Vegetables</option>
+                  </select>
+                  <small id="myList" class="form-text text-muted">Helps us to understand Exercise type.</small>
+                </div>
+              </div>
+            </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
         
                       <label>Country *</label>
                       <%- include ('../partials/messages') %>
