@@ -19,52 +19,43 @@
                                 </span>
                             </div>
                         </div> -->
-            <div class="form-row">
-              <label for="dateText">Today's Date and Time : &nbsp; </label>
-              <p id="demo"></p>
-              <!-- <input  id="demo" class="form-control" /> -->
-            </div>
-
-            <script>
-              let d = new Date();
-              const months = [
-                "JAN",
-                "FEB",
-                "MAR",
-                "APR",
-                "MAY",
-                "JUN",
-                "JUL",
-                "AUG",
-                "SEP",
-                "OCT",
-                "NOV",
-                "DEC",
-              ];
-              let formatted_date =
-                months[d.getMonth()] +
-                "-" +
-                d.getDate() +
-                "-" +
-                d.getFullYear() +
-                "  " +
-                d.getHours() +
-                ":" +
-                d.getMinutes() +
-                ":" +
-                d.getSeconds();
-              document.getElementById("demo").innerHTML = formatted_date;
-            </script>
-            <div class="form-row">
-              <label for="username">Number of Steps:</label>
-              <input
-                type="number"
-                id="stepCount"
-                name="stepCount"
-                class="form-control"
-                value="<%= typeof stepCount != 'undefined' ? stepCount : '' %>"
-              />
-            </div>
+                        <div class="form-row">
+                          <label for="dateText">Today's Date and Time : &nbsp; </label>
+                          <p id="demo"></p>
+                          <!-- <input  id="demo" class="form-control" /> -->
+                        </div>
+            
+                        <script>
+                          let d = new Date();
+                          const months = [
+                            "JAN",
+                            "FEB",
+                            "MAR",
+                            "APR",
+                            "MAY",
+                            "JUN",
+                            "JUL",
+                            "AUG",
+                            "SEP",
+                            "OCT",
+                            "NOV",
+                            "DEC",
+                          ];
+                          let formatted_date =
+                            months[d.getMonth()] +
+                            "-" +
+                            d.getDate() +
+                            "-" +
+                            d.getFullYear() +
+                            "  " +
+                            d.getHours() +
+                            ":" +
+                            d.getMinutes() +
+                            ":" +
+                            d.getSeconds();
+                          document.getElementById("demo").innerHTML = formatted_date;
+                        </script>
+            
             <div class="form-row">
               <label for="username">Number of Steps:</label>
               <input
@@ -90,6 +81,35 @@
                 onchange="weightConverter(this.id,this.value)"
                 value="<%= typeof stepDistance != 'undefined' ? stepDistance : '' %>"
                     
+              />
+              <script>
+                function weightConverter(source,valNum) {
+                valNum = parseFloat(valNum);
+                
+                 
+                var inputGrams = document.getElementById("stepCount");
+                var inputStones = document.getElementById("stepDistance");
+                if (source=="stepCount") {
+                 
+                  inputStones.value=(valNum*2000).toFixed(3);
+                }
+                if (source=="stepDistance") {
+                
+                  inputGrams.value=(valNum*0.002).toFixed(3);
+                }
+                }
+                          </script>
+    
+            </div>
+            <div class="form-row">
+              <label for="password">Goal:</label>
+              <input
+                type="number"
+                id="stepGoal"
+                name="stepGoal"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof stepGoal != 'undefined' ? stepGoal : '' %>"
               />
             </div>
             <div class="form-row">
