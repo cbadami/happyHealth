@@ -66,6 +66,19 @@
               />
             </div>
             <div class="form-row">
+              <label for="username">Number of Steps:</label>
+              <input
+                type="number"
+                id="stepCount"
+                name="stepCount"
+                class="form-control"
+                oninput="weightConverter(this.id,this.value)" 
+                onchange="weightConverter(this.id,this.value)"
+                value="<%= typeof stepCount != 'undefined' ? stepCount : '' %>"
+                
+              />
+            </div>
+            <div class="form-row">
               <label for="username">Total Walking Distance:</label>
               <input
                 type="number"
@@ -73,18 +86,10 @@
                 name="stepDistance"
                 placeholder="In meters"
                 class="form-control"
+                oninput="weightConverter(this.id,this.value)" 
+                onchange="weightConverter(this.id,this.value)"
                 value="<%= typeof stepDistance != 'undefined' ? stepDistance : '' %>"
-              />
-            </div>
-            <div class="form-row">
-              <label for="password">Goal:</label>
-              <input
-                type="number"
-                id="stepGoal"
-                name="stepGoal"
-                class="form-control"
-                placeholder="0"
-                value="<%= typeof stepGoal != 'undefined' ? stepGoal : '' %>"
+                    
               />
             </div>
             <div class="form-row">
