@@ -12,7 +12,8 @@
                 <th scope="col">User Name </th>
                 <th scope="col">Step Count</th>
                 <th scope="col"> Date </th>
-                <th scope="col">Target Step count</th>
+                <th scope="col">Target Step Count</th>
+                <th scope="col">Average Step Count</th>
             </tr>
             </tr>
         </thead>
@@ -37,6 +38,7 @@
                 <td>
                     <%= obj[i].stepGoal %>
                 </td>
+                <td><%= obj[i].stepCount %></td>
 
             </tr>
             <% } %>

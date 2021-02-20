@@ -1,11 +1,10 @@
 const db = require('../database');
 const moment = require('moment');
+const { compose } = require('async');
 
 
 exports.getGroup = (req, res) => {
-
     const allGroupsQuery = `SELECT * FROM happyhealth.groupTbl`;
-
     db.query(allGroupsQuery, function (err, result) {
         if (err) {
             throw err;
@@ -18,10 +17,10 @@ exports.getGroup = (req, res) => {
             });
             console.log("***************getGroup executed successfully******************");
         }
-
     });
-
 };
+
+
 
 exports.editGroup = (req, res) => {
     console.log('**************Inside editGroup controller*********************');
@@ -31,10 +30,23 @@ exports.editGroup = (req, res) => {
         if (err) {
             throw err;
         } else {
+
+            let groupId = result[0].groupId;
+            let groupName = result[0].groupName;
+            let creator = result[0].creator;
+            let createdDate = moment(result[0].createdDate).format('MM/DD/YYYY').toString();
+
+            const resss = { groupId, groupName, creator, createdDate };
             console.log(result, "-----edit group----------");
-            res.render('adminViews/editGroup', { layout: 'layouts/adminLayout', title: 'Edit Group', result , moment});
+
+
+            res.render('adminViews/editGroup', { layout: 'layouts/adminLayout', title: 'Edit Group', resss, moment });
         }
     });
+};
+
+exports.addUsers = (req, res) => {
+    console.log("************** Adding users   *****************");
 };
 
 exports.updateGroup = (req, res) => {
@@ -78,38 +90,36 @@ exports.deleteGroup = (req, res) => {
     });
 };
 
-exports.getGroupMembers = (req, res) => {
+exports.getGroupMembers = async (req, res) => {
     let groupId = req.params.groupId;
-
-    let q = `SELECT t1.userId, t1.userName ,  t2.groupId, t2.joinedDate,  t3.groupName FROM happyhealth.usertbl as t1
-    LEFT JOIN happyhealth.groupmembertbl as t2 ON t1.userId = t2.userId    LEFT JOIN happyhealth.grouptbl as t3 
-    ON t2.groupId = t3.groupId where t3.groupId=${groupId}`
-
-    const groupName = `select groupName from happyhealth.grouptbl where groupId =${groupId}`
-
-
-    db.query(q, (err, result) => {
+    let joinedUsers = notJoinedUsers = groupDetails = "";
+    const usersQuery = `SELECT userId, userName FROM happyhealth.usertbl where userId IN (SELECT userId FROM happyhealth.groupmembertbl where groupId=${groupId});`;
+    await db.query(usersQuery, (err, result) => {
         if (err) throw err;
         else {
-            // console.log('******  joined users *****')
-            // console.log(result)
+            console.log(result, "----------------userQuery result");
+            joinedUsers = result;
         }
-        if (result.length > 0) {
-            res.render('adminViews/groupMembers', { layout: false, title: 'Group Members', result });
-        } else {
-
-            db.query(groupName, (err, result) => {
-                if (err) throw err;
-                else {
-                    // console.log('******  No users in this group *****')
-                    // console.log(result);
-                    res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', result, msg: 'No Users in this group' })
-                }
-            })
+    });
+    const notUsersQuery = `SELECT userId, userName FROM happyhealth.usertbl where userId NOT IN (SELECT userId FROM happyhealth.groupmembertbl where groupId=${groupId});`;
+    await db.query(notUsersQuery, (err, result) => {
+        if (err) throw err;
+        else {
+            console.log(result, "------------notUsersQuery result");
+            notJoinedUsers = result;
         }
     });
 
-    db
+    const groupQuery = `select * from happyhealth.grouptbl where groupId =${groupId}`;
+    await db.query(groupQuery, (err, result) => {
+        if (err) throw err;
+        else {
+            console.log(result, "------------groupQuery result");
+            groupDetails = result;
+            res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', joinedUsers, notJoinedUsers, groupDetails });
+
+        }
+    });
 
 };
 
@@ -126,7 +136,7 @@ exports.addUserGroup = (req, res) => {
         } else {
             console.log(result);
             let userId = result[0].UserId;
-            let addQuery = `INSERT INTO happyhealth.groupmemberTbl values(${userId},'${username}','11/24/2020',${groupId});`;
+            let addQuery = `INSERT INTO happyhealth.groupmemberTbl values(${userId},'${username}','${Date.now()}',${groupId});`;
             db.query(addQuery, function (err, result) {
                 if (err) {
                     throw err;
@@ -140,6 +150,7 @@ exports.addUserGroup = (req, res) => {
     });
 
 };
+
 
 exports.removeUserGroup = (req, res) => {
     console.log("--------remove user group members controller");
@@ -155,4 +166,49 @@ exports.removeUserGroup = (req, res) => {
             res.redirect(`/getGroupMembers/${groupId}`);
         }
     });
+};
+
+
+
+exports.addUserAdmin = (req, res) => {
+
+    console.log(req.body,"-------add user group member controller");
+    let groupId = req.params.groupId;
+    let userId = req.body.userId;
+    console.log(groupId, userId, "----------groupmember");
+    const date = new Date();
+    const dateStr = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
+    console.log(dateStr);
+    let addQuery = `INSERT INTO happyhealth.groupmemberTbl values(${userId},'${dateStr}',${groupId});`;
+    db.query(addQuery, function (err, result) {
+        if (err) {
+            console.log(err, "--------error");
+            return;
+        } else {
+            console.log(result, "--------result");
+            res.redirect(`/getGroupMembers/${groupId}`);
+        }
+    });
+
+};
+
+
+
+exports.removeUserAdmin = (req, res) => {
+
+    console.log(req.body,"-------add user group member controller");
+    let groupId = req.params.groupId;
+    let userId = req.params.userId;
+    console.log(groupId, userId, "----------groupmember");
+    let deleteQuery = `DELETE FROM happyhealth.groupmemberTbl WHERE userId = ${userId} AND groupId =${groupId};`;
+    db.query(deleteQuery, function (err, result) {
+        if (err) {
+            console.log(err, "--------error");
+            return;
+        } else {
+            console.log(result, "--------result");
+            res.redirect(`/getGroupMembers/${groupId}`);
+        }
+    });
+
 };

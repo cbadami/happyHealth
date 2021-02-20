@@ -54,7 +54,7 @@ height,averageActivityLevel, country,state) VALUES
 DROP TABLE IF EXISTS groupTbl;
 CREATE TABLE groupTbl (
   groupId int AUTO_INCREMENT,
-  groupName varchar(25) DEFAULT NULL,
+  groupName varchar(25)  UNIQUE DEFAULT NULL,
   creator varchar(25) DEFAULT NULL,
   createdDate varchar(12) DEFAULT NULL,
   PRIMARY KEY (groupId)
