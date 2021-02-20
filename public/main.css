@@ -82,7 +82,6 @@
     border-radius: 50%;
   }
 
-
   body{
     background: #f2f2f2;
     font-family: 'Open Sans', sans-serif;
@@ -129,9 +128,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
-
-
  .border-primary {
     border-color:green
 }
