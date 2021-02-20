@@ -1,4 +1,6 @@
 const db = require('../database');
+const moment = require('moment');
+
 
 exports.getUserHome = (req, res) => {
     let userId = req.session.userId;
@@ -30,7 +32,7 @@ exports.getUserProfile = (req, res) => {
             console.log(userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state )
             res.render('userViews/userProfile', {
                 layout: 'layouts/userLayout', title: 'User Profile',
-                userName, admin, email, fullName, gender, dateOfBirth,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state
+                userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state
             });
         }
     });
@@ -41,18 +43,18 @@ exports.postUserProfile = (req, res) => {
 
     console.log("****post user profile *********")
     let userId = req.session.userId;
-    console.log(req.body,"---------req.body");
+    console.log(req.body, "---------req.body");
     const { fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
-    console.log(fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state )
+    console.log(fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state)
     const [year, month, date] = dateOfBirth.split("-")
-    const dateFormat = month+'/'+date+'/'+year
+    const dateFormat = month + '/' + date + '/' + year
     let errors = [];
     if (!fullName || !Gender || !dateFormat || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
         const averageActivityLevel = myList
         errors.push("Please enter all fields")
         res.render('userViews/userProfile', {
             layout: 'layouts/userLayout', title: 'User Profile',
-            fullName, email, fullName, gender, dateFormat,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state, errors
+            fullName, email, fullName, gender, dateFormat, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state, errors
         });
     }
     const profileQuery = `UPDATE happyhealth.usertbl
@@ -61,8 +63,8 @@ exports.postUserProfile = (req, res) => {
         WHERE userId = '${userId}';`;
     db.query(profileQuery, function (err, result) {
         if (err) {
-            console.log(err,"------profile update error");
-        } else { 
+            console.log(err, "------profile update error");
+        } else {
             res.redirect('/userHome');
         }
     });
@@ -73,20 +75,21 @@ exports.postUserProfile = (req, res) => {
 
 exports.getUserStep = (req, res) => {
     let userId = req.session.userId;
-const stetpQuery = `Select stepCount, stepDistance, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
-db.query(stetpQuery, function (err, result) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log(result, '--------db user table result');
-        //console.log("result "+result[0]);
-        const { stepCount, stepDistance,stepGoal } = result[0];
-        //console.log("ddd   "+stepCount)
-        res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step',
-        stepCount, stepDistance, stepGoal
-        });
-    }
-});
+    const stetpQuery = `Select stepCount, stepDistance, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            //console.log("result "+result[0]);
+            const { stepCount, stepDistance, stepGoal } = result[0];
+            //console.log("ddd   "+stepCount)
+            res.render('userViews/userStep', {
+                layout: 'layouts/userLayout', title: 'User Step',
+                stepCount, stepDistance, stepGoal
+            });
+        }
+    });
 
 };
 
@@ -124,14 +127,15 @@ exports.getUserSleep = (req, res) => {
             //console.log("result "+result[0]);
             const { sleepHours } = result[0];
             //console.log("ddd   "+sleepHours)
-            res.render('userViews/userSleep', { layout: 'layouts/userLayout', title: 'User Sleep',
-            sleepHours
+            res.render('userViews/userSleep', {
+                layout: 'layouts/userLayout', title: 'User Sleep',
+                sleepHours
             });
         }
     });
-    
-    };
-    
+
+};
+
 exports.postUserSleep = (req, res) => {
     let userId = req.session.userId;
     const { num_hours, goal } = req.body;
@@ -169,13 +173,14 @@ exports.getUserHydration = (req, res) => {
             //console.log("result "+result[0]);
             const { water } = result[0];
             //console.log("ddd   "+water)
-            res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration',
-            water
+            res.render('userViews/userHydration', {
+                layout: 'layouts/userLayout', title: 'User Hydration',
+                water
             });
         }
     });
-    
-    };
+
+};
 
 
 exports.postUserHydration = (req, res) => {
@@ -188,7 +193,7 @@ exports.postUserHydration = (req, res) => {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration', errors });
-        return 
+        return
     }
     var hydrationQuery = `UPDATE happyhealth.usermetricstbl
         SET water = ${water}, waterGoal = ${goal} WHERE userId = ${userId} ;`;
@@ -212,13 +217,14 @@ exports.getUserTrack = (req, res) => {
             //console.log("result "+result[0]);
             const { meTime } = result[0];
             //console.log("ddd   "+meTime)
-            res.render('userViews/userTrack', { layout: 'layouts/userLayout', title: 'User Track',
-            meTime
+            res.render('userViews/userTrack', {
+                layout: 'layouts/userLayout', title: 'User Track',
+                meTime
             });
         }
     });
-    
-    };
+
+};
 
 
 exports.postUserTrack = (req, res) => {
@@ -255,8 +261,9 @@ exports.getUserFruits = (req, res) => {
             //console.log("result "+result[0]);
             const { fruits } = result[0];
             //console.log("ddd   "+fruits)
-            res.render('userViews/userFruits', { layout: 'layouts/userLayout', title: 'User Fruits',
-            fruits
+            res.render('userViews/userFruits', {
+                layout: 'layouts/userLayout', title: 'User Fruits',
+                fruits
             });
         }
     });
@@ -296,8 +303,9 @@ exports.getUserVegetables = (req, res) => {
             console.log(result, '--------db user table result');
             const { veggies } = result[0];
             //console.log("ddd   "+veggies)
-            res.render('userViews/userVegetables', { layout: 'layouts/userLayout', title: 'User Vegetables',
-            veggies
+            res.render('userViews/userVegetables', {
+                layout: 'layouts/userLayout', title: 'User Vegetables',
+                veggies
             });
         }
     });
@@ -345,7 +353,7 @@ exports.getUserMoreChallenges = (req, res) => {
 };
 
 exports.getNotifications = (req, res) => {
-    res.render('userViews/notifications',{
+    res.render('userViews/notifications', {
         layout: 'layouts/userLayout',
         title: 'User Management'
 
@@ -354,15 +362,18 @@ exports.getNotifications = (req, res) => {
 
 
 
-exports.getUserGroups = (req,res) =>{
-    const q = `SELECT * FROM happyhealth.grouptbl;`
+exports.getAvailableGroups = (req, res) => {
+    let userId = req.session.userId;
+    const availgroups = `SELECT groupId, groupName FROM happyhealth.grouptbl where groupId NOT IN
+    (SELECT groupId FROM happyhealth.groupmembertbl where userId=${userId});`
 
-    db.query(q, function (err,result) {
-        if(err) throw err;
-        else{
-            console.log(result)
+    db.query(availgroups, function (err, result) {
+        if (err) throw err;
+        else {
+            // console.log(result, "available groups")
+            const availableGroups = result;
+            res.render('userViews/us_AvailableGroups', { availableGroups, layout: 'layouts/userLayout', title: 'Available Groups ' })
         }
-        res.render('userViews/userGroups', { result, layout:'layouts/userLayout', title:'Groups '})
 
     })
 }
