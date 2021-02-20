@@ -394,3 +394,20 @@ exports.getJoinedGroups = (req, res) => {
         }
     })
 }
+
+exports.joinGroup = (req, res) => {
+    console.log("Joining new group")
+
+    let groupId = req.params.groupId;
+
+    console.log(groupId);
+
+    let userId = req.session.userId;
+    const date = moment(Date.now()).format('MM/DD/YYYY').toString();
+    const joinQuery = `insert into happyhealth.groupmembertbl (userId, joinedDate, groupId) values (${userId}, '${date}', ${groupId});`
+
+    db.query(joinQuery, (err, result) => {
+        console.log(result, "Joined SUccessfully");
+        res.redirect("/availableGroups")
+    })
+}
