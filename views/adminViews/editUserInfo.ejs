@@ -1,0 +1,282 @@
+<div class="container">
+  <div style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <div class="app-main__inner">
+          <div class="container-fluid">
+            <div class="row">
+              <%- include ('../partials/messages') %>
+              <form action="/userProfile" method="POST">
+                <div class="col-md-12">
+                  <div class="form-group"><br>
+                    <%- include ('../partials/messages') %>
+                    <div class="col-md-4">
+                      <label>Name:<span class="text-danger"></span></label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="input-md  textinput textInput form-control"
+                        value="<%= typeof fullName != 'undefined' ? fullName : '' %>" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <label>Gender</label>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="input-group">
+                        <%- include ('../partials/messages') %>
+
+                        <!-- <div class="input-group-addon">&nbsp;</div> -->
+                        <label class="radio-inline" for="Gender-0">
+                          <input type="radio" name="gender" id="gender-0" value="Male" checked="checked">
+                          Male
+                        </label>
+                        <!-- <div class="input-group-addon">&nbsp;</div> -->
+                        <label class="radio-inline" for="Gender-1">
+                          <%- include ('../partials/messages') %>
+
+                          <input type="radio" name="gender" id="Gender-1" value="Female">
+                          Female
+                        </label>
+                        <!-- <div class="input-group-addon">&nbsp;</div> -->
+                        <label class="radio-inline" for="Gender-2">
+                          <%- include ('../partials/messages') %>
+
+                          <input type="radio" name="gender" id="Gender-2" value="Other">
+                          Other
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <label for="username">Date of Birth *</label>
+                    </div>
+                    <div class="col-md-8">
+                      <div class='input-group date'>
+                        <%- include ('../partials/messages') %>
+                        <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <label>Age</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input name="age" placeholder="Age" class="input-md  textinput textInput form-control"
+                        value="<%= typeof age != 'undefined' ? age : '' %>" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <%- include ('../partials/messages') %>
+                    <div class="col-md-4">
+                      <label>Email Address</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input type="email" name="email" placeholder="Enter your email address" class="form-control"
+                        value="<%= typeof email != 'undefined' ? email : '' %>" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+
+                  <div class="form-group">
+                    <div class="col-md-4">
+
+                      <label>Current Weight</label>
+                    </div>
+                    <div class="col-md-8">
+
+                      <input type="number" step="0.1" name="currentWeight" placeholder="Current weight in lbs"
+                        class="form-control" value="<%= typeof currentWeight != 'undefined' ? currentWeight : '' %>"
+                        required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <label>Desired Weight</label>
+                    </div>
+
+                    <div class="col-md-8">
+                      <input type="number" step="0.1" name="desiredWeight" placeholder="Desired weight in lbs"
+                        class="form-control" value="<%= typeof desiredWeight != 'undefined' ? desiredWeight : '' %>"
+                        required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <label>Height</label>
+                    </div>
+                    <div class="col-md-8">
+
+                      <input type="number" step="0.1" name="height" placeholder="Height in inches" class="form-control"
+                        value="<%= typeof height != 'undefined' ? height : '' %>" required>
+                      <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <label>Average Activity Level *</label><br>
+                      <%- include ('../partials/messages') %>
+                    </div>
+                    <div class="col-md-8">
+
+                      <select id="myList" name="myList" class="form-control"
+                        value="<%= typeof averageActivityLevel != 'undefined' ? averageActivityLevel : '' %>">
+                        <option value="Sedentary">Sedentary</option>
+                        <option value="Lightly Active">Lightly Active</option>
+                        <option value="Moderately Active">Moderately Active</option>
+                        <option value="Very Active">Very Active</option>
+                      </select>
+                      <small id="myList" class="form-text text-muted">Helps us understand your typical day.</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <label>Exercise *</label><br>
+                      <%- include ('../partials/messages') %>
+                    </div>
+                    <div class="col-md-8">
+
+                      <select id="myList" name="myList" class="form-control"
+                        value="<%= typeof Exercise != 'undefined' ? Exercise : '' %>">
+                        <option value="Step Count">Step Count</option>
+                        <option value="Water"> Water</option>
+                        <option value="Sleep Hours">Sleep Hours</option>
+                        <option value="Me Time">Me Time</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Vegetables">Vegetables</option>
+                      </select>
+                      <small id="myList" class="form-text text-muted">Helps us to understand Exercise type.</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="col-md-4">
+
+                      <label>Country *</label>
+                      <%- include ('../partials/messages') %>
+                    </div>
+                    <div class="col-md-8">
+
+                      <br>
+                      <input value=" value="<%= typeof country != 'undefined' ? country : '' %>" ">
+                      
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-12">
+
+                  <div class="form-group">
+                    <%- include ('../partials/messages') %>
+                    <div class="col-md-4">
+
+                      <label>State *</label>
+                    </div>
+                    <div class="col-md-8">
+
+                      <input class="form-control " name="state" placeholder="State"
+                        value="<%= typeof state != 'undefined' ? state : '' %>">
+
+                      <!-- <label>Note: <small>This data is optional and will be used internally by admins only.</small></label> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div calss="form-group">
+                    <input type="submit" value="Update" name="update" class="btn btn-lg btn-primary">
+                  </div>
+                </div>
+
+
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .form-control {
+    width: 400px;
+    text-align: left;
+
+  }
+
+  .form-group {
+    width: 400px;
+    text-align: left;
+
+  }
+
+  .input-group {
+    width: 400px;
+  }
+
+  .app-main__inner-center {
+    margin: 0 auto !important;
+    max-width: 500px;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+
+    input[type=text] {
+      width: 230px;
+      /* padding: 12px 20px;
+                    margin: 8px 0;
+                    box-sizing: border-box;
+                    text-align:center; */
+    }
+
+    .form-control {
+      width: 230px;
+
+    }
+
+    .form-group {
+      width: 230px;
+
+    }
+
+    .input-group {
+      width: 230px;
+    }
+
+
+  }
+</style>
+
+
