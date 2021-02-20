@@ -1,0 +1,45 @@
+<div class="app-main__inner">
+
+    <div>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" onclick="location.href = '/availableGroups';" class="btn btn-secondary">Available
+                Groups</button>
+            <button type="button" onclick="location.href = '/joinedGroups';" class="btn btn-secondary">Joined
+                Groups</button>
+            <button type="button" onclick="location.href = '/createNewGroup';"  class="btn btn-secondary">Create Group</button>
+        </div>
+
+
+        <div>
+            <h3>Create Group</h3>
+
+            <form class="col-md-6" action="/createNewGroup" method="POST">
+                <div class="form-group">
+                    <label>Group Name</label>
+                    <input type="text" name="groupName" class="form-control" placeholder="Enter Group Name" required>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label>Add Users to the group: </label>
+                    <select class="selectpicker form-control">
+                        <option selected>Adam</option>
+                        <option>Evan</option>
+                        <option>Skyler</option>
+                        <option>Tyler</option>
+                        <option>Bob</option>
+                        <option>Rogers</option>
+                    </select>
+                </div> -->
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
