@@ -20,13 +20,40 @@
                             </div>
                         </div> -->
             <div class="form-row">
-              <label for="dateText">Current Date:</label>
+              <label for="dateText">Today's Date and Time : &nbsp; </label>
               <p id="demo"></p>
+              <!-- <input  id="demo" class="form-control" /> -->
             </div>
 
             <script>
-              var d = new Date();
-              document.getElementById("demo").innerHTML = d;
+              let d = new Date();
+              const months = [
+                "JAN",
+                "FEB",
+                "MAR",
+                "APR",
+                "MAY",
+                "JUN",
+                "JUL",
+                "AUG",
+                "SEP",
+                "OCT",
+                "NOV",
+                "DEC",
+              ];
+              let formatted_date =
+                months[d.getMonth()] +
+                "-" +
+                d.getDate() +
+                "-" +
+                d.getFullYear() +
+                "  " +
+                d.getHours() +
+                ":" +
+                d.getMinutes() +
+                ":" +
+                d.getSeconds();
+              document.getElementById("demo").innerHTML = formatted_date;
             </script>
             <div class="form-row">
               <label for="username">Number of Hours slept</label>
