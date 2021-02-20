@@ -416,3 +416,21 @@ exports.joinGroup = (req, res) => {
 exports.getCreateGroupPage = (req, res) => {
     res.render("userViews/us_CreateGroup", { layout: 'layouts/userLayout', title: " " })
 }
+
+exports.leaveGroup = (req, res) => {
+
+    const userId = req.session.userId;
+    const groupId = req.params.groupId;
+    console.log(`${userId} is leaving  ${groupId}`)
+
+    const leaveQuery = `DELETE FROM happyhealth.groupmembertbl WHERE userId = ${userId} and groupId=${groupId};`
+
+    db.query(leaveQuery, (err, result) => {
+        if (err) throw err;
+        else {
+            console.log(result, "Left the group");
+            res.redirect("/availableGroups");
+        }
+
+    })
+}
