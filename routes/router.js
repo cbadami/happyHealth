@@ -111,7 +111,7 @@ router.post('/updateUser/:userId', adminLoginController.updateUser);
 router.get('/deleteUser/:userId', adminLoginController.deleteUser);
 router.get('/getAdminUserName/:userId', adminLoginController.getAdminUserName);
 router.get('/getUserTotalMetrics/:userId', adminLoginController.getUserTotalMetrics);
-
+router.get('/CSVManagement', adminLoginController.getCSV);
 
 /**
  *  Admin user group management routes
