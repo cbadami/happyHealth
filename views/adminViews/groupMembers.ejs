@@ -3,6 +3,7 @@
 
         <div class="col-sm-12 row">
             <div class="col-sm-12">
+                <h3>Group Name</h3>
                 <div class="form-group col-sm-3">
                     <select id="inputState" class="form-control">
                         <!-- <option selected></option> -->
@@ -24,18 +25,18 @@
             <div class="table-wrapper">
                 <div class="col-sm-12 row">
                     <div class="col-sm-12">
-
+                        <h3>Group Name: <%= groupDetails[0].groupName %></h3>
                         <form action="<%= groupDetails[0].groupId%>/addUserAdmin" method="POST">
                             <div>
-                                <label for="addUser"> Select User from dropdown to add: </label>
-                                <select name="userId">
+                                <label for="addUser"><strong>Select User: </strong> </label>
+                                <select name="userId" class="form-control addUser">
                                     <% for (var i=0; i < notJoinedUsers.length;i++) { %>
                                         <option value="<%= notJoinedUsers[i].userId %>">
                                             <%= notJoinedUsers[i].userName %>
                                         </option>
                                         <% } %>
                                 </select>
-                                <input type="submit" value="Add User"></input>
+                                <button type="submit" class="btn btn-primary">Add User</button>
                             </div>
 
                         </form>
@@ -65,7 +66,7 @@
                                 </td> -->
                                 <td>
                                     <form action="<%= groupDetails[0].groupId%>/removeUserAdmin/<%= joinedUsers[i].userId%>" method="POST">
-                                        <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">
+                                        <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger">
                                             Remove</button>
                                     </form>
                                 </td>
@@ -76,3 +77,13 @@
             </div>
             <% } %>
 </div>
+<style>
+    .addUser{
+        width: 250px;
+        display: inline-flex;
+    }
+    .btn{
+        display: inline-flex;
+    }
+</style>
+
