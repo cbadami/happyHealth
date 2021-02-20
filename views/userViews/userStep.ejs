@@ -66,14 +66,16 @@
               />
             </div>
             <div class="form-row">
-              <label for="username">Total Walking Distance:</label>
+              <label for="username">Number of Steps:</label>
               <input
                 type="number"
-                id="stepDistance"
-                name="stepDistance"
-                placeholder="In meters"
+                id="stepCount"
+                name="stepCount"
                 class="form-control"
-                value="<%= typeof stepDistance != 'undefined' ? stepDistance : '' %>"
+                oninput="weightConverter(this.id,this.value)" 
+                onchange="weightConverter(this.id,this.value)"
+                value="<%= typeof stepCount != 'undefined' ? stepCount : '' %>"
+                
               />
             </div>
             <div class="form-row">
