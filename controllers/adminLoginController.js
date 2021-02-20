@@ -1,4 +1,7 @@
 const db = require('../database');
+const fastcsv = require("fast-csv");
+const fs = require("fs");
+const ws = fs.createWriteStream("usermetrics_mysql_fastcsv.csv");
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminViews/adminLogin', {
@@ -175,8 +178,23 @@ exports.deleteUser = (req, res) => {
     });
 };
 
+exports.getCSV = (req, res) => {
 
-
+    
+    res.render("CSVManagement");
+    db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
+    
+       const jsonData = JSON.parse(JSON.stringify(data));
+       console.log("jsonData", jsonData);
+     
+       fastcsv
+          .write(jsonData, { headers: true })
+          .on("finish", function() {
+             console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
+           })
+           .pipe(ws);
+        });
+}
 
 exports.getAdminAnalytics = (req, res) => {
 
