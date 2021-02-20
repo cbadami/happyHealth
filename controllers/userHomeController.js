@@ -44,12 +44,12 @@ exports.postUserProfile = (req, res) => {
     console.log("****post user profile *********")
     let userId = req.session.userId;
     console.log(req.body, "---------req.body");
-    const { fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
-    console.log(fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state)
+    const { fullName, gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
+    console.log(fullName, gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state)
     const [year, month, date] = dateOfBirth.split("-")
     const dateFormat = month + '/' + date + '/' + year
     let errors = [];
-    if (!fullName || !Gender || !dateFormat || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
+    if (!fullName || !gender || !dateFormat || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
         const averageActivityLevel = myList
         errors.push("Please enter all fields")
         res.render('userViews/userProfile', {
@@ -58,7 +58,7 @@ exports.postUserProfile = (req, res) => {
         });
     }
     const profileQuery = `UPDATE happyhealth.usertbl
-        SET email = '${email}', fullName = '${fullName}',averageActivityLevel='${myList}',gender='${Gender}',dateOfBirth='${dateFormat}',age='${age}',
+        SET email = '${email}', fullName = '${fullName}',averageActivityLevel='${myList}',gender='${gender}',dateOfBirth='${dateFormat}',age='${age}',
         currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
         WHERE userId = '${userId}';`;
     db.query(profileQuery, function (err, result) {
