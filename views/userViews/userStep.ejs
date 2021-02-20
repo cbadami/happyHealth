@@ -75,7 +75,7 @@
                 type="number"
                 id="stepDistance"
                 name="stepDistance"
-                placeholder="In meters"
+                placeholder="In miles"
                 class="form-control"
                 oninput="weightConverter(this.id,this.value)" 
                 onchange="weightConverter(this.id,this.value)"
@@ -91,11 +91,11 @@
                 var inputStones = document.getElementById("stepDistance");
                 if (source=="stepCount") {
                  
-                  inputStones.value=(valNum*2000).toFixed(3);
+                  inputStones.value=(valNum*0.0005).toFixed(2);
                 }
                 if (source=="stepDistance") {
                 
-                  inputGrams.value=(valNum*0.002).toFixed(3);
+                  inputGrams.value=(valNum*2000).toFixed(2);
                 }
                 }
                           </script>
