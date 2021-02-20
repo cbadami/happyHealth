@@ -1,6 +1,4 @@
 <div class="app-main__inner">
-
-
     <% if (!joinedUsers[0]) { %>
 
         <div class="col-sm-12 row">
@@ -27,7 +25,7 @@
                 <div class="col-sm-12 row">
                     <div class="col-sm-12">
 
-                        <form action="">
+                        <form action="<%= groupDetails[0].groupId%>/addUserAdmin" method="POST">
                             <div>
                                 <label for="addUser"> Select User from dropdown to add: </label>
                                 <select name="userId">
@@ -66,9 +64,9 @@
                                     <%= joinedUsers[i].joinedDate%>
                                 </td> -->
                                 <td>
-                                    <form>
-                                     <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">
-                                        Remove</button>
+                                    <form action="<%= groupDetails[0].groupId%>/removeUserAdmin/<%= joinedUsers[i].userId%>" method="POST">
+                                        <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">
+                                            Remove</button>
                                     </form>
                                 </td>
                             </tr>

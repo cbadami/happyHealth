@@ -131,9 +131,11 @@ router.get('/editGroup/:groupId', userGroupController.editGroup);
 router.post('/updateGroup/:groupId', userGroupController.updateGroup);
 router.get('/deleteGroup/:groupId', userGroupController.deleteGroup);
 router.get('/getGroupMembers/:groupId', userGroupController.getGroupMembers);
+router.post('/getGroupMembers/:groupId/addUserAdmin' ,userGroupController.addUserAdmin)
+router.post('/getGroupMembers/:groupId/removeUserAdmin/:userId' ,userGroupController.removeUserAdmin)
 router.get('/removeUser/:groupId/:userId', userGroupController.removeUserGroup);
 router.get('/addUser/:groupId/:username', userGroupController.addUserGroup);
-router.post('/addUserFromAdminSide/:groupId' ,userGroupController.addUserFromAdminSide )
+
 
 
 /**
