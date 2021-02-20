@@ -25,7 +25,7 @@
                     <%= obj[i].userId %>
                 </td>
                 <td>
-                    <%= obj[i].fullName %>
+                    <a href="/getUserTotalMetrics/<%= obj[i].userId%>"><%= obj[i].fullName %></a>
                 </td>
                 <td>
                     <%= obj[i].stepCount %>
@@ -37,6 +37,7 @@
                 <td>
                     <%= obj[i].stepGoal %>
                 </td>
+
             </tr>
             <% } %>
 

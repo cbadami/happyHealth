@@ -1,6 +1,0 @@
-MYSQLCONNSTR_MyDBConnString= "var db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '1234',
-    database: 'happyhealth',
-    port: 3306});"
