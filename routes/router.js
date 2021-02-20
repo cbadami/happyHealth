@@ -84,7 +84,18 @@ router.get('/completedChallenges', userChallengeController.getCompletedChallenge
  * User Groups 
  */
 
- router.get('/userGroups', userHomeController.getUserGroups)
+ router.post('/userGroups/:groupId', userHomeController.joinGroup );  // TO join Group
+
+ router.get('/availableGroups', userHomeController.getAvailableGroups) 
+ router.get("/joinedGroups", userHomeController.getJoinedGroups);
+ router.get('/createNewGroup', userHomeController.getCreateGroupPage);
+ router.post('/createNewGroup', userHomeController.addNewUserGroup);
+ router.post('/leaveGroup/:groupId', userHomeController.leaveGroup )
+
+
+
+// router.get("/userGroups", userGroupController.getGroupNames );
+
 
 /**
  * Admin challenge management routes
@@ -97,7 +108,6 @@ router.post('/addChallenge', challengeManagement.postChallenge);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge)
 router.post('/deleteChallenge/:cid',challengeManagement.deleteChallenge  )
-
 router.get('/manageChallengeUsers/:challengeId', challengeManagement.getLeaderboard);
 // router.get('/addUser', challengeManagement.addUser);
 
@@ -122,6 +132,7 @@ router.get('/deleteGroup/:groupId', userGroupController.deleteGroup);
 router.get('/getGroupMembers/:groupId', userGroupController.getGroupMembers);
 router.get('/removeUser/:groupId/:userId', userGroupController.removeUserGroup);
 router.get('/addUser/:groupId/:username', userGroupController.addUserGroup);
+router.post('/addUserFromAdminSide/:groupId' ,userGroupController.addUserFromAdminSide )
 
 
 /**
