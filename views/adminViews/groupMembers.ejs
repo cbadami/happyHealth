@@ -1,18 +1,46 @@
 <div class="app-main__inner">
 
-    <% if (!result[0].userName) { %>
+
+    <% if (!joinedUsers[0]) { %>
+
         <div class="col-sm-12 row">
-            <h2> <b>Group Name: <%= result[0].groupName%> </b> </h2>
-            <div class="col-sm-3">
-                <button class="btn btn-success" onclick="myFunction()">Add User</button>
+            <div class="col-sm-12">
+                <div class="form-group col-sm-3">
+                    <select id="inputState" class="form-control">
+                        <!-- <option selected></option> -->
+                        <% for (var i=0; i < notJoinedUsers.length;i++) { %>
+                            <option>
+                                <%= notJoinedUsers[i].username %>
+                            </option>
+                            <% } %>
+                    </select>
+
+                    <input type="submit" name="Add User"></input>
+
+                </div>
+
             </div>
         </div>
+
         <% } else{ %>
             <div class="table-wrapper">
                 <div class="col-sm-12 row">
-                    <h2> <b>Group Name: <%= result[0].groupName%> </b> </h2>
-                    <div class="col-sm-3">
-                        <button class="btn btn-success" onclick="myFunction()">Add User</button>
+                    <div class="col-sm-12">
+
+                        <form action="">
+                            <div>
+                                <label for="addUser"> Select User from dropdown to add: </label>
+                                <select name="userId">
+                                    <% for (var i=0; i < notJoinedUsers.length;i++) { %>
+                                        <option value="<%= notJoinedUsers[i].userId %>">
+                                            <%= notJoinedUsers[i].userName %>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <input type="submit" value="Add User"></input>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
 
@@ -21,27 +49,26 @@
                         <tr>
                             <th>Sl.No</th>
                             <th>Username</th>
-                            <th>Joined Date</th>
+                            <!-- <th>Joined Date</th> -->
                             <th>Remove user</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (var i=0; i < result.length;i++) { %>
+                        <% for (var i=0; i < joinedUsers.length;i++) { %>
                             <tr>
                                 <th scope="row">
                                     <%= i+1 %>
                                 </th>
                                 <td>
-                                    <%= result[i].userName%>
+                                    <%= joinedUsers[i].userName%>
                                 </td>
+                                <!-- <td>
+                                    <%= joinedUsers[i].joinedDate%>
+                                </td> -->
                                 <td>
-                                    <%= result[i].joinedDate%>
-                                </td>
-                                <td>
-                                    <form action="../removeUser/<%= result[0].groupId %>/<%= result[i].userId%>"
-                                        method="get">
-                                        <button type="submit" id="PopoverCustomT-1"
-                                            class="btn btn-primary btn-sm">Remove</button>
+                                    <form>
+                                     <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">
+                                        Remove</button>
                                     </form>
                                 </td>
                             </tr>

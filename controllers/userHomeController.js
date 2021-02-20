@@ -1,4 +1,6 @@
 const db = require('../database');
+const moment = require('moment');
+
 
 exports.getUserHome = (req, res) => {
     let userId = req.session.userId;
@@ -30,7 +32,7 @@ exports.getUserProfile = (req, res) => {
             console.log(userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state )
             res.render('userViews/userProfile', {
                 layout: 'layouts/userLayout', title: 'User Profile',
-                userName, admin, email, fullName, gender, dateOfBirth,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state
+                userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state
             });
         }
     });
@@ -41,18 +43,18 @@ exports.postUserProfile = (req, res) => {
 
     console.log("****post user profile *********")
     let userId = req.session.userId;
-    console.log(req.body,"---------req.body");
+    console.log(req.body, "---------req.body");
     const { fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state } = req.body;
-    console.log(fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state )
+    console.log(fullName, Gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state)
     const [year, month, date] = dateOfBirth.split("-")
-    const dateFormat = month+'/'+date+'/'+year
+    const dateFormat = month + '/' + date + '/' + year
     let errors = [];
     if (!fullName || !Gender || !dateFormat || !age || !email || !currentWeight || !desiredWeight || !height || !myList || !country || !state) {
         const averageActivityLevel = myList
         errors.push("Please enter all fields")
         res.render('userViews/userProfile', {
             layout: 'layouts/userLayout', title: 'User Profile',
-            fullName, email, fullName, gender, dateFormat,age,currentWeight,desiredWeight,height,averageActivityLevel,country,state, errors
+            fullName, email, fullName, gender, dateFormat, age, currentWeight, desiredWeight, height, averageActivityLevel, country, state, errors
         });
     }
     const profileQuery = `UPDATE happyhealth.usertbl
@@ -61,8 +63,8 @@ exports.postUserProfile = (req, res) => {
         WHERE userId = '${userId}';`;
     db.query(profileQuery, function (err, result) {
         if (err) {
-            console.log(err,"------profile update error");
-        } else { 
+            console.log(err, "------profile update error");
+        } else {
             res.redirect('/userHome');
         }
     });
@@ -73,20 +75,21 @@ exports.postUserProfile = (req, res) => {
 
 exports.getUserStep = (req, res) => {
     let userId = req.session.userId;
-const stetpQuery = `Select stepCount, stepDistance, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
-db.query(stetpQuery, function (err, result) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log(result, '--------db user table result');
-        //console.log("result "+result[0]);
-        const { stepCount, stepDistance,stepGoal } = result[0];
-        //console.log("ddd   "+stepCount)
-        res.render('userViews/userStep', { layout: 'layouts/userLayout', title: 'User Step',
-        stepCount, stepDistance, stepGoal
-        });
-    }
-});
+    const stetpQuery = `Select stepCount, stepDistance, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            //console.log("result "+result[0]);
+            const { stepCount, stepDistance, stepGoal } = result[0];
+            //console.log("ddd   "+stepCount)
+            res.render('userViews/userStep', {
+                layout: 'layouts/userLayout', title: 'User Step',
+                stepCount, stepDistance, stepGoal
+            });
+        }
+    });
 
 };
 
@@ -129,9 +132,9 @@ exports.getUserSleep = (req, res) => {
             });
         }
     });
-    
-    };
-    
+
+};
+
 exports.postUserSleep = (req, res) => {
     let userId = req.session.userId;
     const { sleepHours, sleepGoal } = req.body;
@@ -174,8 +177,8 @@ exports.getUserHydration = (req, res) => {
             });
         }
     });
-    
-    };
+
+};
 
 
 exports.postUserHydration = (req, res) => {
@@ -188,7 +191,7 @@ exports.postUserHydration = (req, res) => {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userHydration', { layout: 'layouts/userLayout', title: 'User Hydration', errors });
-        return 
+        return
     }
     var hydrationQuery = `UPDATE happyhealth.usermetricstbl
         SET water = ${water}, waterGoal = ${waterGoal} WHERE userId = ${userId} ;`;
@@ -217,8 +220,8 @@ exports.getUserTrack = (req, res) => {
             });
         }
     });
-    
-    };
+
+};
 
 
 exports.postUserTrack = (req, res) => {
@@ -345,7 +348,7 @@ exports.getUserMoreChallenges = (req, res) => {
 };
 
 exports.getNotifications = (req, res) => {
-    res.render('userViews/notifications',{
+    res.render('userViews/notifications', {
         layout: 'layouts/userLayout',
         title: 'User Management'
 
@@ -354,15 +357,114 @@ exports.getNotifications = (req, res) => {
 
 
 
-exports.getUserGroups = (req,res) =>{
-    const q = `SELECT * FROM happyhealth.grouptbl;`
+exports.getAvailableGroups = (req, res) => {
+    let userId = req.session.userId;
+    const availgroups = `SELECT groupId, groupName FROM happyhealth.grouptbl where groupId NOT IN
+    (SELECT groupId FROM happyhealth.groupmembertbl where userId=${userId});`
 
-    db.query(q, function (err,result) {
-        if(err) throw err;
-        else{
-            console.log(result)
+    db.query(availgroups, function (err, result) {
+        if (err) throw err;
+        else {
+            // console.log(result, "available groups")
+            const availableGroups = result;
+            res.render('userViews/us_AvailableGroups', { availableGroups, layout: 'layouts/userLayout', title: 'Available Groups ' })
         }
-        res.render('userViews/userGroups', { result, layout:'layouts/userLayout', title:'Groups '})
 
     })
 }
+
+exports.getJoinedGroups = (req, res) => {
+    const userId = req.session.userId;
+    console.log("******  Inside joined users  *********")
+
+    const joinedG = `SELECT groupId, groupName FROM happyhealth.grouptbl where groupId IN
+   (SELECT groupId FROM happyhealth.groupmembertbl where userId=${userId});`
+
+    db.query(joinedG, (err, result) => {
+        if (err) throw err;
+        else {
+            // console.log(result, "joined groups")
+            const joinedGroups = result;
+            res.render('userViews/us_JoinedGroups', { layout: 'layouts/userLayout', joinedGroups, title: "Joined Groups" })
+        }
+    })
+}
+
+exports.joinGroup = (req, res) => {
+    console.log("Joining new group")
+
+    let groupId = req.params.groupId;
+
+    console.log(groupId);
+
+    let userId = req.session.userId;
+    const date = moment(Date.now()).format('MM/DD/YYYY').toString();
+    const joinQuery = `insert into happyhealth.groupmembertbl (userId, joinedDate, groupId) values (${userId}, '${date}', ${groupId});`
+
+    db.query(joinQuery, (err, result) => {
+        console.log(result, "Joined SUccessfully");
+        res.redirect("/availableGroups")
+    })
+}
+
+
+exports.getCreateGroupPage = (req, res) => {
+    res.render("userViews/us_CreateGroup", { layout: 'layouts/userLayout', title: " " })
+}
+
+exports.leaveGroup = (req, res) => {
+
+    const userId = req.session.userId;
+    const groupId = req.params.groupId;
+    console.log(`${userId} is leaving  ${groupId}`)
+
+    const leaveQuery = `DELETE FROM happyhealth.groupmembertbl WHERE userId = ${userId} and groupId=${groupId};`
+
+    db.query(leaveQuery, (err, result) => {
+        if (err) throw err;
+        else {
+            console.log(result, "Left the group");
+            res.redirect("/availableGroups");
+        }
+
+    })
+}
+
+
+exports.addNewUserGroup = (req, res) => {
+    console.log("*********  Creating new group   **********")
+
+    const creatorId = req.session.userId;
+    const groupName = req.body.groupName;
+    let creatorName = '';
+    const date = moment(Date.now()).format('MM/DD/YYYY').toString();
+
+    const userName = `SELECT userName FROM happyhealth.usertbl  where userId=${creatorId};`
+
+    db.query(userName, (err, result) => {
+        if (err) throw err;
+        else {
+            creatorName = result[0].userName;
+            const alreadyExists = `SELECT * FROM happyhealth.grouptbl WHERE groupName = '${groupName}'`
+            db.query(alreadyExists, (err, result) => {
+                if (err) throw err;
+                else {
+                    if (result.length > 0) {
+                        console.log("already exists")
+                    } else {
+                        const addNewGroup = `INSERT into happyhealth.grouptbl (groupName, creator, createdDate ) values( '${groupName}', '${creatorName}' , '${date}' );`
+                        db.query(addNewGroup, (err, result) => {
+                            if (err) throw err;
+                            else {
+                                // console.log(result);
+                                res.redirect('/availableGroups')
+                            }
+                        })
+
+                    }
+                }
+            })
+        }
+    })
+}
+
