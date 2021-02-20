@@ -1,5 +1,5 @@
 const db = require('../database');
-const fastcsv = require("fast-csv");
+//const fastcsv = require("fast-csv");
 const fs = require("fs");
 const ws = fs.createWriteStream("usermetrics_mysql_fastcsv.csv");
 
