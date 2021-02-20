@@ -434,3 +434,42 @@ exports.leaveGroup = (req, res) => {
 
     })
 }
+
+
+exports.addNewUserGroup = (req, res) => {
+    console.log("*********  Creating new group   **********")
+
+    const creatorId = req.session.userId;
+    const groupName = req.body.groupName;
+    let creatorName = '';
+    const date = moment(Date.now()).format('MM/DD/YYYY').toString();
+
+    const userName = `SELECT userName FROM happyhealth.usertbl  where userId=${creatorId};`
+
+    db.query(userName, (err, result) => {
+        if (err) throw err;
+        else {
+            creatorName = result[0].userName;
+            const alreadyExists = `SELECT * FROM happyhealth.grouptbl WHERE groupName = '${groupName}'`
+            db.query(alreadyExists, (err, result) => {
+                if (err) throw err;
+                else {
+                    if (result.length > 0) {
+                        console.log("already exists")
+                    } else {
+                        const addNewGroup = `INSERT into happyhealth.grouptbl (groupName, creator, createdDate ) values( '${groupName}', '${creatorName}' , '${date}' );`
+                        db.query(addNewGroup, (err, result) => {
+                            if (err) throw err;
+                            else {
+                                // console.log(result);
+                                res.redirect('/availableGroups')
+                            }
+                        })
+
+                    }
+                }
+            })
+        }
+    })
+}
+
