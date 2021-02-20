@@ -377,3 +377,20 @@ exports.getAvailableGroups = (req, res) => {
 
     })
 }
+
+exports.getJoinedGroups = (req, res) => {
+    const userId = req.session.userId;
+    console.log("******  Inside joined users  *********")
+
+    const joinedG = `SELECT groupId, groupName FROM happyhealth.grouptbl where groupId IN
+   (SELECT groupId FROM happyhealth.groupmembertbl where userId=${userId});`
+
+    db.query(joinedG, (err, result) => {
+        if (err) throw err;
+        else {
+            // console.log(result, "joined groups")
+            const joinedGroups = result;
+            res.render('userViews/us_JoinedGroups', { layout: 'layouts/userLayout', joinedGroups, title: "Joined Groups" })
+        }
+    })
+}
