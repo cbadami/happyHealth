@@ -917,7 +917,7 @@
 .fa-angle-down:before {
   content: "\f107";
 }
-.fa-desktop:before {
+/* .fa-desktop:before {
   content: "\f108";
 }
 .fa-laptop:before {
@@ -925,7 +925,7 @@
 }
 .fa-tablet:before {
   content: "\f10a";
-}
+} */
 .fa-mobile-phone:before,
 .fa-mobile:before {
   content: "\f10b";
