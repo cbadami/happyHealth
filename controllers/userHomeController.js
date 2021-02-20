@@ -411,3 +411,8 @@ exports.joinGroup = (req, res) => {
         res.redirect("/availableGroups")
     })
 }
+
+
+exports.getCreateGroupPage = (req, res) => {
+    res.render("userViews/us_CreateGroup", { layout: 'layouts/userLayout', title: " " })
+}
