@@ -1,3 +1,10 @@
+<script>
+let age="Age";
+
+function message(){
+  alert("User Details Updated")
+}
+</script> 
 <div class="container">
   <div style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-info">
@@ -61,7 +68,7 @@
                     <div class="col-md-8">
                       <div class='input-group date'>
                         <%- include ('../partials/messages') %>
-                        <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy" />
+                        <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy" onchange="calAge()"/>
                       </div>
                     </div>
                   </div>
@@ -73,8 +80,8 @@
                       <label>Age</label>
                     </div>
                     <div class="col-md-8">
-                      <input  name="age" placeholder="Age" class="input-md  textinput textInput form-control"
-                        value="<%= typeof age != 'undefined' ? age : '' %>" required>
+                      <input  name="age" id ="age" placeholder="Age" class="input-md  textinput textInput form-control"/>                      
+                      <!-- value="<%= typeof age != 'undefined' ? age : '' %>" required> -->
                     </div>
                   </div>
                 </div>
@@ -472,7 +479,7 @@
                 </div>
                 <div class="col-md-12">
                   <div calss="form-group">
-                    <input type="submit" value="Update" name="update" class="btn btn-lg btn-primary">
+                    <input type="submit" value="Update" name="update" onclick = "message()" class="btn btn-lg btn-primary">
                   </div>
                 </div>
                 
