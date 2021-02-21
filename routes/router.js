@@ -52,7 +52,7 @@ router.post('/userFruits', userHomeController.postUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 router.post('/userVegetables', userHomeController.postUserVegetables);
 
-router.get('/notifications',userHomeController.getNotifications);
+router.get('/notifications', userHomeController.getNotifications);
 
 
 /**
@@ -77,21 +77,21 @@ router.get('/adminHome', adminLoginController.getAdminHome);
  * User Challenges
  */
 
-router.get('/activeChallenges', userChallengeController.getActiveChallenges );
-router.get('/availableChallenges', userChallengeController.getAvailableChallenges );
-router.get('/completedChallenges', userChallengeController.getCompletedChallenges );
-
+router.get('/activeChallenges', userChallengeController.getActiveChallenges);
+router.get('/availableChallenges', userChallengeController.getAvailableChallenges);
+router.get('/completedChallenges', userChallengeController.getCompletedChallenges);
+router.post('/challengeAccepted/:challengeId', userChallengeController.setChallengesAccept);
 /**
  * User Groups 
  */
 
- router.post('/userGroups/:groupId', userHomeController.joinGroup );  // TO join Group
+router.post('/userGroups/:groupId', userHomeController.joinGroup); // TO join Group
 
- router.get('/availableGroups', userHomeController.getAvailableGroups) 
- router.get("/joinedGroups", userHomeController.getJoinedGroups);
- router.get('/createNewGroup', userHomeController.getCreateGroupPage);
- router.post('/createNewGroup', userHomeController.addNewUserGroup);
- router.post('/leaveGroup/:groupId', userHomeController.leaveGroup )
+router.get('/availableGroups', userHomeController.getAvailableGroups)
+router.get("/joinedGroups", userHomeController.getJoinedGroups);
+router.get('/createNewGroup', userHomeController.getCreateGroupPage);
+router.post('/createNewGroup', userHomeController.addNewUserGroup);
+router.post('/leaveGroup/:groupId', userHomeController.leaveGroup)
 
 
 
@@ -108,7 +108,7 @@ router.post('/addChallenge', challengeManagement.postChallenge);
 // router.get('/editChallenge/', challengeManagement.ed);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge)
-router.post('/deleteChallenge/:cid',challengeManagement.deleteChallenge  )
+router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge)
 router.get('/manageChallengeUsers/:challengeId', challengeManagement.getLeaderboard);
 // router.get('/addUser', challengeManagement.addUser);
 
@@ -117,13 +117,13 @@ router.get('/manageChallengeUsers/:challengeId', challengeManagement.getLeaderbo
  * Admin user management routes
  */
 router.get('/userManagement', adminLoginController.getUserManagement);
-router.get('/editUser/:userId', adminLoginController.editUser);
+//router.get('/editUser/:userId', adminLoginController.editUser);
 router.post('/updateUser/:userId', adminLoginController.updateUser);
 router.get('/deleteUser/:userId', adminLoginController.deleteUser);
 router.get('/getAdminUserName/:userId', adminLoginController.getAdminUserName);
 router.get('/getUserTotalMetrics/:userId', adminLoginController.getUserTotalMetrics);
 router.get('/CSVManagement', adminLoginController.getCSV);
-
+router.get('/editUserInfo/:userId', adminLoginController.getUserInfo);
 /**
  *  Admin user group management routes
  */
@@ -132,8 +132,8 @@ router.get('/editGroup/:groupId', userGroupController.editGroup);
 router.post('/updateGroup/:groupId', userGroupController.updateGroup);
 router.get('/deleteGroup/:groupId', userGroupController.deleteGroup);
 router.get('/getGroupMembers/:groupId', userGroupController.getGroupMembers);
-router.post('/getGroupMembers/:groupId/addUserAdmin' ,userGroupController.addUserAdmin)
-router.post('/getGroupMembers/:groupId/removeUserAdmin/:userId' ,userGroupController.removeUserAdmin)
+router.post('/getGroupMembers/:groupId/addUserAdmin', userGroupController.addUserAdmin)
+router.post('/getGroupMembers/:groupId/removeUserAdmin/:userId', userGroupController.removeUserAdmin)
 router.get('/removeUser/:groupId/:userId', userGroupController.removeUserGroup);
 router.get('/addUser/:groupId/:username', userGroupController.addUserGroup);
 
