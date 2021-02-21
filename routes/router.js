@@ -91,7 +91,7 @@ router.get("/joinedGroups", userHomeController.getJoinedGroups);
 router.get('/createNewGroup', userHomeController.getCreateGroupPage);
 router.post('/createNewGroup', userHomeController.addNewUserGroup);
 router.post('/leaveGroup/:groupId', userHomeController.leaveGroup)
-
+router.get('/joinedUsers/:groupId', userHomeController.getJoinedUsers );
 
 
 // router.get("/userGroups", userGroupController.getGroupNames );
