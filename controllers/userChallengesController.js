@@ -1,9 +1,14 @@
 const db = require('../database');
-
+exports.setChallengesAccept = (req, res) => {
+    console.log("Set active");
+    const userId = req.session.userId;
+    res.render('userViews/challengeAccepted', {
+        layout: 'layouts/userLayout',
+        title: 'Active Challenges'
+    });
+};
 
 exports.getActiveChallenges = (req, res) => {
-
-
     res.render('userViews/activeChallenges', {
         layout: 'layouts/userLayout',
         title: 'Active Challenges'
@@ -23,6 +28,7 @@ exports.getActiveChallenges = (req, res) => {
 };
 
 exports.getAvailableChallenges = (req, res) => {
+
     const allAvailableChallenges = `Select * from happyhealth.challengetbl`;
 
     db.query(allAvailableChallenges, function (err, result) {
@@ -35,7 +41,7 @@ exports.getAvailableChallenges = (req, res) => {
                 title: 'Available Challanges',
                 result
             });
-           
+            console.log(req.session.userId);
             console.log("***************Available challanges executed successfully******************");
         }
     });
