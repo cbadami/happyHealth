@@ -1,4 +1,7 @@
 const db = require('../database');
+//const fastcsv = require("fast-csv");
+const fs = require("fs");
+const ws = fs.createWriteStream("usermetrics_mysql_fastcsv.csv");
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminViews/adminLogin', {
@@ -104,6 +107,7 @@ exports.getUserTotalMetrics = (req, res) => {
 }
 
 exports.editUser = (req, res) => {
+    console.log("Get Edit data executed");
     const userId = req.params.userId;
     const body = req.body;
     var editQuery = `SELECT * FROM happyhealth.usertbl WHERE UserId = ${userId}`;
@@ -175,8 +179,23 @@ exports.deleteUser = (req, res) => {
     });
 };
 
+exports.getCSV = (req, res) => {
 
-
+    
+    res.render("CSVManagement");
+    db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
+    
+       const jsonData = JSON.parse(JSON.stringify(data));
+       console.log("jsonData", jsonData);
+     
+       fastcsv
+          .write(jsonData, { headers: true })
+          .on("finish", function() {
+             console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
+           })
+           .pipe(ws);
+        });
+}
 
 exports.getAdminAnalytics = (req, res) => {
 
@@ -337,6 +356,27 @@ exports.getAdminAnalyticsVegetables = (req, res) => {
     });
 };
 
+exports.getUserInfo = (req,res)=>{
+    const userId = req.params.userId;
+
+    console.log(`**********  ${userId}   ***********`)
+
+    const query = `SELECT * FROM happyhealth.usertbl where userId = ${userId};`
+
+    db.query(query, function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            console.log(result);
+            res.render('adminViews/editUserInfo', {
+                layout: 'layouts/adminLayout',
+                title: 'User Profile',
+                result
+            });
+            console.log('****getAdminUserName executed successfully****');
+        }
+    });
+};
 exports.getAdminUserName = (req, res) => {
     const userId = req.params.userId;
 
