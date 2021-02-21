@@ -29,6 +29,7 @@ router.post('/userSignup', userSignupController.postSignup);
  */
 router.get('/userProfile', userHomeController.getUserProfile);
 router.post('/userProfile', userHomeController.postUserProfile);
+router.get('/userInfo',userHomeController.getUserInfo);
 
 router.get('/userChallenges', userHomeController.getUserChallenges);
 router.get('/userMoreChallenges', userHomeController.getUserMoreChallenges);
