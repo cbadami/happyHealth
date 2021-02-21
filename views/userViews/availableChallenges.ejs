@@ -1,81 +1,31 @@
 <div class="app-main__inner">
-    <div class="table-title">
-      <div class="row">
-        <div class="col-sm-6">
-          <h2><b>Available Challenges</b></h2>
-        </div>
+  <div class="table-title">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2><b>Available Challenges</b></h2>
       </div>
     </div>
-  
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th>Sl.No</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Accept</th>
-       
-      </thead>
-      <tbody>    
-        <td> <span>1</span></td>
-        
-        <td> <span>Run 2 Miles </span></td>
-        
-        <td> <span>run 2 miles a day throughout the week</span></td>
-        
-        <td><button id="button">Accept</button> </li></td>
-        
-    <tr>
-        <td> <span>2</span></td>
-        
-        <td> <span>Only veg </span></td>
-        
-        <td> <span>eat only veg</span></td>
-        
-        <td><button id="button">Accept</button> </li></td>
-        
-    </tr>
-
-    <tr>
-        <td> <span>3</span></td>
-        
-        <td> <span>2 Gallons water </span></td>
-        
-        <td> <span>drink 2 gallons of water everyday</span></td>
-        
-        <td><button id="button">Accept</button> </li></td>
-        
-    </tr>
-
-    <tr>
-        <td> <span>4</span></td>
-       
-        <td> <span>Challenge 4 </span></td>
-        
-        <td> <span>description for challenege 4</span></td>
-       
-        <td><button id="button">Accept</button> </li></td>
-        
-    </tr>
-
-    </tbody>
-
-     
-</tr>
-    </table>
   </div>
-
-  <style>
-    button{
-    background-color:#03ac13;
-    text-decoration-color: black;
-    border-radius: 5px; 
-    cursor: pointer; 
-    padding: 0 20px; 
-    font-size: 15px;
-    margin-top: 5px;
-    border-spacing: 0;
-    border-color: #03ac13;
- }
-  </style>
-  
+  <table class="table table-hover ">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</td>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i=0; i < result.length;i++) { %>
+      <tr>
+        <th scope="row"><%=  i+1 %></th>
+        <td><%= result[i].challengeType %></td>
+        <td><%= result[i].challengeName%> </td>
+        <td><%= result[i].challengeDescription%></td>
+        <td><button class="btn btn-primary"><i class="fa fa-check"></i> Accept</button></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

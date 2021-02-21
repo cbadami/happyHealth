@@ -23,8 +23,8 @@ exports.getActiveChallenges = (req, res) => {
 };
 
 exports.getAvailableChallenges = (req, res) => {
-    const allAvailableChallenges = `Select challengeName, challengeDescription from happyhealth.challengetbl`;
-    
+    const allAvailableChallenges = `Select * from happyhealth.challengetbl`;
+
     db.query(allAvailableChallenges, function (err, result) {
         if (err) {
             throw err;
@@ -35,12 +35,10 @@ exports.getAvailableChallenges = (req, res) => {
                 title: 'Available Challanges',
                 result
             });
+           
             console.log("***************Available challanges executed successfully******************");
         }
     });
-
-   
-     
 };
 
 exports.getCompletedChallenges = (req, res) => {
