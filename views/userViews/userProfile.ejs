@@ -1,6 +1,18 @@
 <script>
 let age="Age";
 
+function calAge(){
+  console.log(Date.parse(document.getElementById("dateText").value))
+  let dob = Date.parse(document.getElementById("dateText").value)
+
+  let diff = Date.now() - dob;
+  var ageDate = new Date(diff); // miliseconds from epoch
+  age = Math.abs(ageDate.getUTCFullYear() - 1970)
+  console.log(age);
+  document.getElementById("age").value = age
+  return age
+}
+
 function message(){
   alert("User Details Updated")
 }
