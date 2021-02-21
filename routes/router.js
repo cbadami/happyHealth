@@ -81,6 +81,8 @@ router.get('/activeChallenges', userChallengeController.getActiveChallenges);
 router.get('/availableChallenges', userChallengeController.getAvailableChallenges);
 router.get('/completedChallenges', userChallengeController.getCompletedChallenges);
 router.post('/challengeAccepted/:challengeId', userChallengeController.setChallengesAccept);
+router.get('/personalGoals', userChallengeController.getPersonalGoals);
+
 /**
  * User Groups 
  */
