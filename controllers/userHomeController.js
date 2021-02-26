@@ -430,6 +430,22 @@ exports.leaveGroup = (req, res) => {
     })
 }
 
+exports.getJoinedUsers = (req,res)=>{
+    console.log("Getting joined users")
+
+    let groupId = req.params.groupId;
+    let joinedUsers = groupDetails = "";
+    const usersQuery = `SELECT userId, userName FROM happyhealth.usertbl where userId IN (SELECT userId FROM happyhealth.groupmembertbl where groupId=${groupId});`;
+    db.query(usersQuery, (err, result) => {
+        if (err) throw err;
+        else {
+            console.log(result, "----------------Joined Users");
+            joinedUsers = result;
+        }
+    });
+
+    res.render("userViews/us_joinedUsers.ejs",  { layout: 'layouts/userLayout', title: " " , joinedUsers}  )
+}
 
 exports.addNewUserGroup = (req, res) => {
     console.log("*********  Creating new group   **********")
