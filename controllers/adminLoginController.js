@@ -1,5 +1,5 @@
 const db = require('../database');
-//const fastcsv = require("fast-csv");
+const fastcsv = require("fast-csv");
 const fs = require("fs");
 const ws = fs.createWriteStream("usermetrics_mysql_fastcsv.csv");
 
@@ -316,7 +316,7 @@ exports.getAdminAnalyticsOverAll = (req, res) => {
     //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
 
 
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+    var query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
                  usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
                  usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
                  from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`

@@ -55,3 +55,13 @@ exports.getCompletedChallenges = (req, res) => {
     });
 
 };
+
+
+exports.getPersonalGoals = (req, res) => {
+
+    res.render('userViews/personalGoals', {
+        layout: 'layouts/userLayout',
+        title: 'Personal Goals'
+    });
+
+};

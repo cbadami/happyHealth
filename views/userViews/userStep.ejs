@@ -19,43 +19,43 @@
                                 </span>
                             </div>
                         </div> -->
-                        <div class="form-row">
-                          <label for="dateText">Today's Date and Time : &nbsp; </label>
-                          <p id="demo"></p>
-                          <!-- <input  id="demo" class="form-control" /> -->
-                        </div>
-            
-                        <script>
-                          let d = new Date();
-                          const months = [
-                            "JAN",
-                            "FEB",
-                            "MAR",
-                            "APR",
-                            "MAY",
-                            "JUN",
-                            "JUL",
-                            "AUG",
-                            "SEP",
-                            "OCT",
-                            "NOV",
-                            "DEC",
-                          ];
-                          let formatted_date =
-                            months[d.getMonth()] +
-                            "-" +
-                            d.getDate() +
-                            "-" +
-                            d.getFullYear() +
-                            "  " +
-                            d.getHours() +
-                            ":" +
-                            d.getMinutes() +
-                            ":" +
-                            d.getSeconds();
-                          document.getElementById("demo").innerHTML = formatted_date;
-                        </script>
-            
+            <div class="form-row">
+              <label for="dateText">Today's Date and Time : &nbsp; </label>
+              <p id="demo"></p>
+              <!-- <input  id="demo" class="form-control" /> -->
+            </div>
+
+            <script>
+              let d = new Date();
+              const months = [
+                "JAN",
+                "FEB",
+                "MAR",
+                "APR",
+                "MAY",
+                "JUN",
+                "JUL",
+                "AUG",
+                "SEP",
+                "OCT",
+                "NOV",
+                "DEC",
+              ];
+              let formatted_date =
+                months[d.getMonth()] +
+                "-" +
+                d.getDate() +
+                "-" +
+                d.getFullYear() +
+                "  " +
+                d.getHours() +
+                ":" +
+                d.getMinutes() +
+                ":" +
+                d.getSeconds();
+              document.getElementById("demo").innerHTML = formatted_date;
+            </script>
+
             <div class="form-row">
               <label for="username">Number of Steps:</label>
               <input
@@ -63,44 +63,38 @@
                 id="stepCount"
                 name="stepCount"
                 class="form-control"
-                oninput="weightConverter(this.id,this.value)" 
-                onchange="weightConverter(this.id,this.value)"
+                oninput="stepConverter(this.id,this.value)"
+                onchange="stepConverter(this.id,this.value)"
                 value="<%= typeof stepCount != 'undefined' ? stepCount : '' %>"
-                
               />
             </div>
             <div class="form-row">
-              <label for="username">Total Walking Distance:</label>
+              <label for="username">Total Walking Distance (in Miles):</label>
               <input
                 type="number"
                 id="stepDistance"
                 name="stepDistance"
                 placeholder="In miles"
                 class="form-control"
-                oninput="weightConverter(this.id,this.value)" 
-                onchange="weightConverter(this.id,this.value)"
+                oninput="stepConverter(this.id,this.value)"
+                onchange="stepConverter(this.id,this.value)"
                 value="<%= typeof stepDistance != 'undefined' ? stepDistance : '' %>"
-                    
               />
-              
+
               <script>
-                function weightConverter(source,valNum) {
-                valNum = parseFloat(valNum);
-                
-                 
-                var inputGrams = document.getElementById("stepCount");
-                var inputStones = document.getElementById("stepDistance");
-                if (source=="stepCount") {
-                 
-                  inputStones.value=(valNum*0.0005).toFixed(2);
+                function stepConverter(source, valNum) {
+                  valNum = parseFloat(valNum);
+
+                  var inputGrams = document.getElementById("stepCount");
+                  var inputStones = document.getElementById("stepDistance");
+                  if (source == "stepCount") {
+                    inputStones.value = (valNum * 0.0005).toFixed(2);
+                  }
+                  if (source == "stepDistance") {
+                    inputGrams.value = (valNum * 2000).toFixed(2);
+                  }
                 }
-                if (source=="stepDistance") {
-                
-                  inputGrams.value=(valNum*2000).toFixed(2);
-                }
-                }
-                          </script>
-    
+              </script>
             </div>
             <div class="form-row">
               <label for="password">Goal:</label>

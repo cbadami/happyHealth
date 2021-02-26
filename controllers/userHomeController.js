@@ -1,7 +1,6 @@
 const db = require('../database');
 const moment = require('moment');
 
-
 exports.getUserHome = (req, res) => {
     let userId = req.session.userId;
     const homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
@@ -18,6 +17,29 @@ exports.getUserHome = (req, res) => {
         }
     });
 
+};
+
+exports.getUserInfo=(req,res) => {
+    
+    const userId =req.session.userId;
+
+    console.log(`**********  ${userId}   ***********`)
+
+    const query = `SELECT * FROM happyhealth.usertbl where userId = ${userId};`
+
+    db.query(query, function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            console.log(result);
+            res.render('userViews/userInfo', {
+                layout: 'layouts/userLayout',
+                title: 'User Profile',
+                result
+            });
+            console.log('****user Info executed successfully****');
+        }
+    });
 };
 
 exports.getUserProfile = (req, res) => {

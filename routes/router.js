@@ -29,6 +29,7 @@ router.post('/userSignup', userSignupController.postSignup);
  */
 router.get('/userProfile', userHomeController.getUserProfile);
 router.post('/userProfile', userHomeController.postUserProfile);
+router.get('/userInfo',userHomeController.getUserInfo);
 
 router.get('/userChallenges', userHomeController.getUserChallenges);
 router.get('/userMoreChallenges', userHomeController.getUserMoreChallenges);
@@ -80,6 +81,8 @@ router.get('/activeChallenges', userChallengeController.getActiveChallenges);
 router.get('/availableChallenges', userChallengeController.getAvailableChallenges);
 router.get('/completedChallenges', userChallengeController.getCompletedChallenges);
 router.post('/challengeAccepted/:challengeId', userChallengeController.setChallengesAccept);
+router.get('/personalGoals', userChallengeController.getPersonalGoals);
+
 /**
  * User Groups 
  */
@@ -108,7 +111,7 @@ router.post('/addChallenge', challengeManagement.postChallenge);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge)
 router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge)
-router.get('/manageChallengeUsers/:challengeId', challengeManagement.getLeaderboard);
+router.get('/getChallengeUsers/:challengeId', challengeManagement.getChallengeUsers);
 // router.get('/addUser', challengeManagement.addUser);
 
 

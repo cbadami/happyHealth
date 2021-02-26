@@ -141,11 +141,39 @@ ALTER TABLE challengeTbl AUTO_INCREMENT=2001;
 
 INSERT INTO
  challengeTbl ( `challengeName`, `challengeDescription`, `challengeType`, `startDate`, `endDate`, `participantType`, `participantCount`) VALUES 
-('Run 2 Miles', 'User needs to run 2 miles a day throughout the week', 'Step Count', '09/21/2020','09/28/2020','Individual', 200),
-('Only veg', 'User needs to eat only veg', 'Vegetables Consumed', '01/11/2020','02/11/2020','Individual', 400),
-('2 Gallons water', 'User needs to drink 2 gallons of water everyday', 'Water Level','01/10/2020', '02/10/2020', 'Individual', 100);
+('Run 2 Miles', 'User needs to run 2 miles a day throughout the week', 'Walking Challenge', '09/21/2020','09/28/2020','Individual', 200),
+('Only veg', 'User needs to eat only veg', 'Calories Burned Challenge', '01/11/2020','02/11/2020','Individual', 400),
+('2 Gallons water', 'User needs to drink 2 gallons of water everyday', 'Sports Challenge','01/10/2020', '02/10/2020', 'Individual', 100);
 
 
+--
+-- ********************************** Table structure for table challengeMemberTbl *************************
+--
+
+DROP TABLE IF EXISTS challengeMemberTbl;
+CREATE TABLE challengeMemberTbl (
+  userId int NOT NULL,
+  joinedDate varchar(12) DEFAULT NULL,
+  challengeId int NOT NULL,
+  PRIMARY KEY (userId,challengeId),
+  FOREIGN KEY (userId) REFERENCES userTbl(userId),
+  FOREIGN KEY (challengeId) REFERENCES challengeTbl(challengeId) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table challengeMemberTbl
+--
+
+INSERT INTO challengeMemberTbl VALUES
+(1,'11/24/2020',2001),
+(2,'10/24/2020',2001),
+(3,'10/24/2020',2001),
+(1,'10/24/2018',2002),
+(2,'10/24/2019',2002),
+(3,'09/24/2019',2002),
+(4,'11/24/2019',2002),
+(5,'11/24/2020',2002),
+(6,'11/24/2020',2002);
 
 --
 -- ********************************** Table structure for table userMetricsTbl *************************
