@@ -69,10 +69,14 @@ exports.deleteChallenge = (req, res) => {
 
 
 exports.postChallenge = (req, res) => {
-  const { name, description, adminChallengeType, participantCount, participantType, startDate, endDate } = req.body;
+  console.log(req.body,"----------adding post challenge");
+  let { name, description, adminChallengeType, participantCount, participantType, startDate, endDate } = req.body;
   //(id,challengeName,description,challengeType,startDate,endDate,partcipantType,participantCount)
-
-  console.log(req.body);
+  let [year, month, date] = startDate.split("-")
+  startDate = month + '/' + date + '/' + year
+  let [y, m, d] = endDate.split("-")
+  endDate = m + '/' + d + '/' + y
+  console.log(startDate,endDate,"----------dates");
   const insert = `INSERT INTO happyhealth.challengeTbl (challengeName, challengeDescription, challengeType, participantType, participantCount , startDate, endDate) VALUES('${name}', '${description}', '${adminChallengeType}', '${participantType}', ${participantCount}, '${startDate}', '${endDate}'); `;
   db.query(insert, (err, results) => {
     if (err) throw err;
