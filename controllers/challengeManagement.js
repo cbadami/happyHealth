@@ -37,8 +37,12 @@ exports.editChallenge = (req, res) => {
 
 exports.updateChallenge = (req, res) => {
   let cid = req.params.cid;
-  const { name, description, challengeType, participantType, participantCount, startDate, endDate } = req.body;
-
+  let { name, description, challengeType, participantType, participantCount, startDate, endDate } = req.body;
+  let [year, month, date] = startDate.split("-")
+  startDate = month + '/' + date + '/' + year
+  let [y, m, d] = endDate.split("-")
+  endDate = m + '/' + d + '/' + y
+  console.log(startDate,endDate,"----------dates");
 
   const updateQuery = `UPDATE happyhealth.challengeTbl SET challengeName =  '${name}' , challengeDescription = '${description}', challengeType= '${challengeType}', participantType='${participantType}', participantCount=${participantCount},startDate='${startDate}', endDate= '${endDate}' where challengeId = ${cid}`;
   db.query(updateQuery, function (err, result) {
