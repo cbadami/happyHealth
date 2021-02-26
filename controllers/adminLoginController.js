@@ -182,7 +182,9 @@ exports.deleteUser = (req, res) => {
 exports.getCSV = (req, res) => {
 
     
-    res.render("CSVManagement");
+    //res.render("CSVManagement");
+
+    
     db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
     
        const jsonData = JSON.parse(JSON.stringify(data));
@@ -198,11 +200,29 @@ exports.getCSV = (req, res) => {
 }
 
 exports.getAdminAnalytics = (req, res) => {
+    var query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                 usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                 usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                 from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
 
-    res.render('adminViews/adminAnalytics', {
-        layout: 'layouts/adminLayout',
-        title: 'Admin Analytics'
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        else {
+            console.log(result);
+
+            res.render('adminViews/adminAnalyticsOverAll', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                obj: result
+            });
+        }
     });
+    // res.render('adminViews/adminAnalytics'
+    // , {
+    //     layout: 'layouts/adminLayout',
+    //     title: 'Admin Analytics'
+    // }
+    // );
 };
 
 exports.getAdminAnalyticsStep = (req, res) => {
