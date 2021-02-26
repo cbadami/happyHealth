@@ -17,7 +17,7 @@
                 <form action="/leaveGroup/<%= joinedGroups[i].groupId %>" method="post"></form>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <%= joinedGroups[i].groupName %>
+                   <a href="joinedUsers/<%= joinedGroups[i].groupId %>">  <%= joinedGroups[i].groupName %>  </a>  
                         <form action="/leaveGroup/<%= joinedGroups[i].groupId %> " method="post">
                             <input type="submit" class="btn btn-danger" value="Leave">
                 </li>
