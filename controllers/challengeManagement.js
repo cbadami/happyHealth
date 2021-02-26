@@ -92,10 +92,10 @@ exports.postChallenge = (req, res) => {
 };
 
 
-exports.getLeaderboard = (req, res) => {
-  let id = req.params.challengeId;
-  //var viewChallengesQuery = `SELECT challengeName FROM happyhealth.challengetbl  where challengeId = ${id};`
-  var sql = `SELECT challengeName, participantType FROM happyhealth.challengetbl  where challengeId = ${id} ; SELECT userId,userName FROM happyhealth.usertbl; SELECT * FROM happyhealth.userchallengestbl; `;
+exports.getChallengeUsers = (req, res) => {
+  let challengeId = req.params.challengeId;
+  console.log(challengeId,"--------challenge Id");
+  let sql = `SELECT challengeName, participantType FROM happyhealth.challengetbl  where challengeId = ${challengeId}; SELECT userId,userName FROM happyhealth.usertbl; SELECT * FROM happyhealth.userchallengestbl; `;
   db.query(sql, [2, 1], function (error, results, fields) {
     if (error) {
       throw error;
