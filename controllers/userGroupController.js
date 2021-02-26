@@ -116,7 +116,7 @@ exports.getGroupMembers = async (req, res) => {
         else {
             console.log(result, "------------groupQuery result");
             groupDetails = result;
-
+            res.render('adminViews/groupMembers', { layout: 'layouts/adminLayout', title: 'Group Members', joinedUsers, notJoinedUsers, groupDetails });
         }
     });
 

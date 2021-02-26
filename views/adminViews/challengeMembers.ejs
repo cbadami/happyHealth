@@ -1,14 +1,11 @@
 <div class="app-main__inner">
 
-
-
-
     <% if ( challengeData[0].participantType=='Group' ) { %>
         <div>
             <h1> <b>Manage Groups</b> </h1>
             <h2>Challenge Name : <%= challengeData[0].challengeName %>
             </h2>
-            <h3>Particiapnt Type: <%= challengeData[0].participantType %>
+            <h3>Participant Type: <%= challengeData[0].participantType %>
             </h3>
 
         </div>
@@ -68,63 +65,57 @@
         <% } else { %>
 
             <div>
-                <h1> <b>Manage Users</b> </h1>
-                <h2>Challenge Name : <%= challengeData[0].challengeName %>
-                </h2>
-                <h3>Particiapnt Type: <%= challengeData[0].participantType %>
+                <!-- <h1> <b>Manage Users</b> </h1> -->
+                <h3>Challenge Name : <%= challengeData[0].challengeName %>
                 </h3>
+                <h5>Participant Type: <%= challengeData[0].participantType %>
+                </h5>
             </div>
-
-            <form>
-                <label for="user"> Select Users: </label>
-
-                <div >
-                    
-                    <select class="form-control col-md-4">
-                        <option selected>Adam</option>
-                        <option>Evan</option>
-                        <option>Skyler</option>
-                        <option>Tyler</option>
-                        <option>Bob</option>
-                        <option>Rogers</option>
+            
+            <form action="<%= challengeData[0].challengeId%>/addUser" method="POST">
+                <div>
+                    <label for="addUser"><strong>Select User: </strong> </label>
+                    <select name="userId" class="form-control addUser">
+                        <% for (var i=0; i < notJoinedUsers.length;i++) { %>
+                            <option value="<%= notJoinedUsers[i].userId %>">
+                                <%= notJoinedUsers[i].userName %>
+                            </option>
+                            <% } %>
                     </select>
-                    <input type="submit" value="Add"> </input>
-
+                    <button type="submit" class="btn btn-primary">Add User</button>
                 </div>
+
             </form>
 
-            <table class="table">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">User Name</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-
+                        <th>Sl.No</th>
+                        <th>Username</th>
+                        <!-- <th>Joined Date</th> -->
+                        <th>Remove user</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Rajesh</td>
-                        <td> <button type="button" class="btn btn-primary">Edit</button></td>
-                        <td> <button type="button" class="btn btn-danger">Delete</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Suresh</td>
-                        <td> <button type="button" class="btn btn-primary">Edit</button></td>
-                        <td> <button type="button" class="btn btn-danger">Delete</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Himesh</td>
-                        <td> <button type="button" class="btn btn-primary">Edit</button></td>
-                        <td> <button type="button" class="btn btn-danger">Delete</button></td>
-                    </tr>
-
+                    <% for (var i=0; i < joinedUsers.length;i++) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= i+1 %>
+                            </th>
+                            <td>
+                                <%= joinedUsers[i].userName%>
+                            </td>
+                            <!-- <td>
+                                <%= joinedUsers[i].joinedDate%>
+                            </td> -->
+                            <td>
+                                <form action="<%= challengeData[0].challengeId%>/removeUser/<%= joinedUsers[i].userId%>" method="POST">
+                                    <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger">
+                                        Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
                 </tbody>
             </table>
 
@@ -132,3 +123,16 @@
 
 
 </div>
+<script>
+    const notJoinedUsers = "<%= notJoinedUsers[0].userName %>"
+    console.log(notJoinedUsers,"-----------not Joined user");
+</script>
+<style>
+    .addUser{
+        width: 250px;
+        display: inline-flex;
+    }
+    .btn{
+        display: inline-flex;
+    }
+</style>
