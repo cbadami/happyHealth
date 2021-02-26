@@ -36,7 +36,7 @@
                     <%= obj[i].userId %>
                 </td>
                 <td>
-                    <%= obj[i].UserName %>
+                    <a href="/getUserTotalMetrics/<%= obj[i].userId%>"><%= obj[i].UserName %></a>
                 </td>
                 <td>
                     <%= obj[i].fullName %>
@@ -87,4 +87,9 @@
         </tbody>
     </table>
 
+
+    <form action="/CSVManagement" method="get">
+        <button type="submit" onclick= "getCSV()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get CSV</button>
+    </form>
+    
 </div>
