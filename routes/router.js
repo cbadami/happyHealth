@@ -138,6 +138,7 @@ router.post('/getGroupMembers/:groupId/addUserAdmin', userGroupController.addUse
 router.post('/getGroupMembers/:groupId/removeUserAdmin/:userId', userGroupController.removeUserAdmin)
 router.get('/removeUser/:groupId/:userId', userGroupController.removeUserGroup);
 router.get('/addUser/:groupId/:username', userGroupController.addUserGroup);
+router.get('/addGroup', userGroupController.addGroup);
 
 
 
