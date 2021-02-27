@@ -20,7 +20,7 @@ exports.postForgotPassword = (req, res) => {
     });
   }
   else {
-
+    
     const queryString = `SELECT * FROM happyhealth.usertbl WHERE email = '${email}' Limit 1 `;
     db.query(queryString, function (err, result) {
       console.log(`forgot password ${JSON.stringify(result)}`);
