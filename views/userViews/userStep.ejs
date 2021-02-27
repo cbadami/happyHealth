@@ -61,6 +61,7 @@
               <input
                 type="number"
                 id="stepCount"
+                min="0"
                 name="stepCount"
                 class="form-control"
                 oninput="stepConverter(this.id,this.value)"
@@ -73,6 +74,7 @@
               <input
                 type="number"
                 id="stepDistance"
+                min="0"
                 name="stepDistance"
                 placeholder="In miles"
                 class="form-control"
@@ -102,6 +104,7 @@
                 type="number"
                 id="stepGoal"
                 name="stepGoal"
+                min="0"
                 class="form-control"
                 placeholder="0"
                 value="<%= typeof stepGoal != 'undefined' ? stepGoal : '' %>"
