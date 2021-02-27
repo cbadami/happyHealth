@@ -58,12 +58,12 @@
                           </script>
                         <div class="form-row">
                             <label for="username">Me Time</label>
-                            <input type="number" id="meTime" name="meTime" class="form-control" placeholder="0"
+                            <input type="number" id="meTime" min="0" name="meTime" class="form-control" placeholder="0"
                                 value="<%= typeof meTime != 'undefined' ? meTime : '' %>" />
                         </div>
                         <div class="form-row">
                             <label for="password">Goal</label>
-                            <input type="number" id="meTimeGoal" name="meTimeGoal" class="form-control" placeholder="0"
+                            <input type="number" id="meTimeGoal" min="0" name="meTimeGoal" class="form-control" placeholder="0"
                                 value="<%= typeof meTimeGoal != 'undefined' ? meTimeGoal : '' %>" />
                         </div>
                         <div class="form-row"></div>
