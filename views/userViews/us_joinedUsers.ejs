@@ -15,6 +15,39 @@
             <h1>Joined Users</h1>
         </div>
 
+        <div>
+
+
+                <table class="table col-md-4">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">UserId</th>
+                            <th scope="col">User Name</th>
+        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for( let i=0; i < joinedUsers.length; i++ ) { %>
+
+                        <tr>
+                            <th scope="row">
+                                <%= joinedUsers[i].userId %>
+                            </th>
+                            <td>
+                                <%= joinedUsers[i].userName %>
+                            </td>
+                        </tr>
+        
+                    </tbody>
+                    <% } %>
+
+                </table>
+
+        </div>
+
+
+
+
 
 
     </div>
