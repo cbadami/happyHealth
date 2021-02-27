@@ -49,6 +49,10 @@ exports.addUsers = (req, res) => {
     console.log("************** Adding users   *****************");
 };
 
+exports.addGroup = (req, res) => {
+    console.log("************** Adding Group   *****************");
+};
+
 exports.updateGroup = (req, res) => {
     console.log('------updateGroup controller');
     var groupId = req.params.groupId;
