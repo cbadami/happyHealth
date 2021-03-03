@@ -2578,6 +2578,7 @@ textarea.form-control {
 }
 
 .form-group {
+    background-image:  src="/static/gifs/fruitshome.gif";
     margin-bottom: 1rem
 }
 
