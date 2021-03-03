@@ -90,7 +90,7 @@ exports.getUserManagement = (req, res) => {
 exports.getUserTotalMetrics = (req, res) => {
 
     const userId = req.params.userId;
-    const allMetricsQuery = `SELECT usermetricstbl.userId, usertbl.fullName, SUM(DISTINCT usermetricstbl.stepCount) as total, AVG(DISTINCT usermetricstbl.stepCount) as average from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId  AND usertbl.userId = ${userId} group by usermetricstbl.userId`;
+    const allMetricsQuery = `SELECT usermetricstbl.userId, usertbl.fullName, SUM(DISTINCT usermetricstbl.stepCount) as total, AVG(DISTINCT usermetricstbl.stepCount) as average, SUM(DISTINCT usermetricstbl.sleepHours) as totalSleep, AVG(DISTINCT usermetricstbl.sleepHours) as avgSleep, SUM(DISTINCT usermetricstbl.meTime) as totalMe, AVG(DISTINCT usermetricstbl.meTime) as avgMe, SUM(DISTINCT usermetricstbl.fruits) as totalFruits, AVG(DISTINCT usermetricstbl.fruits) as avgFruits, SUM(DISTINCT usermetricstbl.veggies) as totalVeggies, AVG(DISTINCT usermetricstbl.veggies) as avgVeggies, SUM(DISTINCT usermetricstbl.water) as totalWater, AVG(DISTINCT usermetricstbl.water) as avgWater from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId  AND usertbl.userId = ${userId} group by usermetricstbl.userId`;
     db.query(allMetricsQuery, function (err, result) {
         if (err) {
             throw err;
