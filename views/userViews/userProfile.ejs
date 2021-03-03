@@ -14,9 +14,10 @@
                       type="text" 
                       value="<%= typeof fullName != 'undefined' ? fullName : '' %>" 
                       class="form-control" 
-                      id="userName" 
+                      id="full name" 
                       aria-describedby="userNameHelp" 
-                      placeholder="User Name">
+                      placeholder="Full Name"
+                      name="fullName">
                     <small id="userNameHelp" class="form-text text-muted"><%- include ('../partials/messages') %></small>
                   </div>
                   <div class="form-group">
@@ -67,7 +68,7 @@
                   </div>
                   <div class="form-group">
                     <label for="age" >Age</label>
-                    <input type="text" class="form-control col-md-6" id="age" placeholder="Age" name="age" value="<%= typeof age != 'undefined' ? age : '' %>" disabled>
+                    <input type="text" class="form-control col-md-6" id="age" placeholder="Age" name="age" value="<%= typeof age != 'undefined' ? age : '' %>">
                   </div>
                   <div class="form-group">
                     <%- include ('../partials/messages') %>
@@ -87,7 +88,6 @@
                           type="number" 
                           step="0.1" 
                           name="currentWeight" 
-                          min="0" value="112"
                           placeholder="Current weight in lbs"
                           class="form-control" 
                           value="<%= typeof currentWeight != 'undefined' ? currentWeight : '' %>" required>
@@ -95,12 +95,11 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="currentWeight">Desired Weight</label>
+                        <label for="desiredWeight">Desired Weight</label>
                         <input 
                           type="number" 
                           step="0.1" 
                           name="desiredWeight" 
-                          min="0" value="110"
                           placeholder="Desired weight in lbs"
                           class="form-control" 
                           value="<%= typeof desiredWeight != 'undefined' ? desiredWeight : '' %>" required>
@@ -123,7 +122,7 @@
                     <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
                 </div>
                 <div class="form-group">
-                  <label>Average Activity Level *</label><br>
+                  <label>Average Activity Level</label><br>
                     <%- include ('../partials/messages') %>
                   <select id="myList" name="myList" class="form-control col-md-6"
                     value="<%= typeof averageActivityLevel != 'undefined' ? averageActivityLevel : '' %>">
@@ -136,10 +135,10 @@
                 </div>
                 <div class="form-group">
   
-                  <label>Exercise *</label><br>
+                  <label>Exercise</label><br>
                     <%- include ('../partials/messages') %>
-                    <select id="myList" name="myList" class="form-control col-md-6"
-                    value="<%= typeof Exercise != 'undefined' ? Exercise : '' %>">
+                    <select id="myList" name="exercise" class="form-control col-md-6"
+                    value="<%= typeof exercise != 'undefined' ? exercise : '' %>">
                       <option value="Step Count">Step Count</option>
                       <option value="Water"> Water</option>
                       <option value="Sleep Hours">Sleep Hours</option>
@@ -147,10 +146,10 @@
                       <option value="Fruits">Fruits</option>
                       <option value="Vegetables">Vegetables</option>
                     </select>
-                    <small id="myList" class="form-text text-muted">Helps us to understand Exercise type.</small>
+                    <small class="form-text text-muted">Helps us to understand Exercise type.</small>
                 </div>
                 <div class="form-group">
-                  <label>Country *</label>
+                  <label>Country</label>
                     <%- include ('../partials/messages') %>
                   <select id="country" class="form-control" name="country">
                     <!-- <option value="<%= country %>"><%= country %></option> -->
@@ -418,7 +417,7 @@
               </div>
               <div class="form-group">
                 <%- include ('../partials/messages') %>
-                <label for="state">State *</label>
+                <label for="state">State</label>
                 <input 
                   class="form-control" 
                   id="state"
