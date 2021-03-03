@@ -540,6 +540,7 @@ h6 {
 
 p {
     margin-top: 0;
+    color: blue;
     margin-bottom: 1rem
 }
 
@@ -2589,7 +2590,6 @@ textarea.form-control {
     display: flex;
     flex-wrap: wrap;
     margin-right: -5px;
-    color: blue;
     margin-left: -5px
 }
 
