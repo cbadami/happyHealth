@@ -1,22 +1,3 @@
-<script>
-let age="Age";
-
-function calAge(){
-  console.log(Date.parse(document.getElementById("dateText").value))
-  let dob = Date.parse(document.getElementById("dateText").value)
-
-  let diff = Date.now() - dob;
-  var ageDate = new Date(diff); // miliseconds from epoch
-  age = Math.abs(ageDate.getUTCFullYear() - 1970)
-  console.log(age);
-  document.getElementById("age").value = age
-  return age
-}
-
-function message(){
-  alert("User Details Updated")
-}
-</script> 
 <div class="container">
   <%- include ('../partials/messages') %>
   <div class="row">
@@ -28,11 +9,10 @@ function message(){
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="userName">Name</label>
+                    <label for="userName">Full Name</label>
                     <input 
                       type="text" 
                       value="<%= typeof fullName != 'undefined' ? fullName : '' %>" 
-                      disabled
                       class="form-control" 
                       id="userName" 
                       aria-describedby="userNameHelp" 
@@ -76,15 +56,18 @@ function message(){
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="username">Date of Birth *</label>
+                    <label for="username">Date of Birth</label>
                     <div class='input-group date col-md-6 px-0'>
                       <%- include ('../partials/messages') %>
                       <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy" onchange="calAge()"/>
                     </div>
                   </div>
+                  <div>
+
+                  </div>
                   <div class="form-group">
                     <label for="age" >Age</label>
-                    <input type="text" min="0" class="form-control col-md-6" id="age" placeholder="Age">
+                    <input type="text" class="form-control col-md-6" id="age" placeholder="Age" name="age" value="<%= typeof age != 'undefined' ? age : '' %>" disabled>
                   </div>
                   <div class="form-group">
                     <%- include ('../partials/messages') %>
@@ -479,6 +462,8 @@ function message(){
 }
 </style>
 <script type="text/javascript">
+  let age = "<%= age %>"
+  console.log(age,"-----------age");
   const country = "<%= country %>"
   const averageActivityLevel = "<%= averageActivityLevel %>"
   const dateOfBirth = "<%= dateOfBirth %>"
@@ -490,9 +475,21 @@ function message(){
   $('#dateText').val(dateFormat)
   $('#country').val(country)
   $('#myList').val(averageActivityLevel)
-  // $(function () {
-  //   $('#datetimepicker1').datetimepicker({
-  //     format: 'MM/DD/YYYY'
-  //   });
-  // });
+  // let age="Age";
+
+function calAge(){
+  console.log(Date.parse(document.getElementById("dateText").value))
+  let dob = Date.parse(document.getElementById("dateText").value)
+
+  let diff = Date.now() - dob;
+  var ageDate = new Date(diff); // miliseconds from epoch
+  age = Math.abs(ageDate.getUTCFullYear() - 1970)
+  console.log(age);
+  document.getElementById("age").value = age
+  return age
+}
+
+function message(){
+  alert("User Details Updated")
+}
 </script>
