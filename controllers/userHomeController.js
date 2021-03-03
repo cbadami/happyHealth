@@ -195,6 +195,8 @@ exports.postUserStep = (req, res) => {
         stepGoal
     } = req.body;
     let errors = [];
+
+
     if (!stepCount || !stepDistance || !stepGoal) {
         console.log(`inside if statement ${stepCount}, ${stepDistance}`);
         errors.push('Please enter all fields');
@@ -206,28 +208,33 @@ exports.postUserStep = (req, res) => {
         });
         return
     }
-    const stetpQueryGet = `Select * from happyhealth.userSteptbl where UserId = ${userId} and date = GETDATE();`;
-    db.query(stetpQuery, function (err, result) {
+    const stetpQueryGet = `Select * from happyhealth.userSteptbl where UserId = ${userId};`;
+    db.query(stetpQueryGet, function (err, results) {
         if (err) {
             console.log(err);
         } else {
-            console.log(result, '--------Get User Steps For Day');
-            const {
-                stepCount,
-                stepDistance,
-                stepGoal
-            } = result[0];
-            if (result[0].length != 0) {
-                console.log(resulr[0]);
+            console.log(results, '--------Get User Steps For Day');
+            if (results[0] != null) {
+                console.log("Found Results");
+            } else {
+                var insrt_steps = `INSERT INTO happyHealth.userSteptbl (userId,date) VALUES  (${userId},'3/3/2021');`;
+                db.query(insrt_steps, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Value Inserted");
+                    }
+                });
+
             }
         }
     });
-    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepDistance = ${stepDistance}, stepGoal = ${stepGoal} WHERE userId = ${userId};`;
+    var stepQuery = `UPDATE happyhealth.userSteptbl SET noofSteps = ${stepCount}, miles = ${stepDistance}, enterGoal = ${stepGoal} WHERE userId = ${userId} and date = '3/3/2021' ;`;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/userHome');
+            res.redirect('/userStep');
         }
     });
 
