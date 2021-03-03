@@ -26,7 +26,7 @@
           </div>
           <div class="col-md-12">
             <div class="form-row">
-              <label for="username">Number of Steps:</label>
+              <label for="username">Percentage of goal attained so far:</label>
               <input type="number" id="stepCount" min="0" name="stepCount" class="form-control"
                 oninput="stepConverter(this.id,this.value)" onchange="stepConverter(this.id,this.value)"
                 value="<%= typeof stepCount != 'undefined' ? stepCount : '' %>" />
