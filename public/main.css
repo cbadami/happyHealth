@@ -2585,9 +2585,6 @@ textarea.form-control {
     display: block;
     margin-top: .25rem
 }
-.bar {
-    background-image:"\public\icons\fruitshome.jpg";
-}
 
 .form-row {
     display: flex;
