@@ -196,7 +196,17 @@ exports.getCSV = (req, res) => {
              console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
            })
            .pipe(ws);
+
+
+           res.render('adminViews/CSVManagement', {
+            layout: 'layouts/adminLayout',
+            title: 'Admin Analytics',
+            obj: data
+            });
         });
+
+
+        
 }
 
 exports.getAdminAnalytics = (req, res) => {
