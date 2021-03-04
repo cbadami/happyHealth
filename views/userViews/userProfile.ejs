@@ -136,7 +136,7 @@
                 <div class="form-group">
                     <label>Exercise</label><br>
                     <%- include ('../partials/messages') %>
-                    <input value="<%= typeof exercise != 'undefined' ? exercise : '' %>">
+                    <!-- <input value="<%= typeof exercise != 'undefined' ? exercise : '' %>"> -->
                     <!-- <select id="myList" name="exercise" class="form-control"> -->
                     
                       <!-- <option value="Step Count">Step Count</option> -->
@@ -145,7 +145,7 @@
                       <!-- <option value="Me Time">Mindful Minutes</option> -->
                       <!-- <option value="Fruits">Fruits</option> -->
                       <!-- <option value="Vegetables">Vegetables</option> -->
-                      <form action="/action_page.php">
+                      <form action="/action_page.php" value="<%= typeof exercise != 'undefined' ? exercise : '' %>">
                         <input type="checkbox" id="Step Count" name="Step Count" value="Step Count">
                         <label for="Step Count"> Step Count</label><br>
                         <input type="checkbox" id="Running" name="Running" value="Running">
