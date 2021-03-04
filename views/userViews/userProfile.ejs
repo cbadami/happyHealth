@@ -136,6 +136,7 @@
                 <div class="form-group">
                     <label>Exercise</label><br>
                     <%- include ('../partials/messages') %>
+                    value="<%= typeof exercise != 'undefined' ? exercise : '' %>">
                     <!-- <select id="myList" name="exercise" class="form-control"> -->
                     
                       <!-- <option value="Step Count">Step Count</option> -->
@@ -152,7 +153,7 @@
                         <input type="checkbox" id="Bicycling" name="Bicycling" value="Bicycling">
                         <label for="Bicycling"> Bicycling</label><br>
                         <input type="checkbox" id="Yoga" name="Yoga" value="Yoga">
-                        <label for="Yoga"> Yoga</label><br><br>
+                        <label for="Yoga"> Yoga</label><br>
 
                     </select>
                     <small class="form-text text-muted">Helps us to understand Exercise type.</small>
