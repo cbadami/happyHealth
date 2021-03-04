@@ -134,17 +134,26 @@
                   <small id="myList" class="form-text text-muted">Helps us understand your typical day.</small>
                 </div>
                 <div class="form-group">
-  
-                  <label>Exercise</label><br>
+                    <label>Exercise</label>
                     <%- include ('../partials/messages') %>
-                    <select id="myList" name="exercise" class="form-control col-md-6"
-                    value="<%= typeof exercise != 'undefined' ? exercise : '' %>">
-                      <option value="Step Count">Step Count</option>
-                      <option value="Water"> Water</option>
-                      <option value="Sleep Hours">Sleep Hours</option>
-                      <option value="Me Time">Mindful Minutes</option>
-                      <option value="Fruits">Fruits</option>
-                      <option value="Vegetables">Vegetables</option>
+                    <!-- <select id="myList" name="exercise" class="form-control"> -->
+                    
+                      <!-- <option value="Step Count">Step Count</option> -->
+                      <!-- <option value="Water"> Water</option> -->
+                      <!-- <option value="Sleep Hours">Sleep Hours</option> -->
+                      <!-- <option value="Me Time">Mindful Minutes</option> -->
+                      <!-- <option value="Fruits">Fruits</option> -->
+                      <!-- <option value="Vegetables">Vegetables</option> -->
+                      <form action="/action_page.php">
+                        <input type="checkbox" id="Step Count" name="Step Count" value="Step Count">
+                        <label for="Step Count"> Step Count</label><br>
+                        <input type="checkbox" id="Running" name="Running" value="Running">
+                        <label for="Running"> Running</label><br>
+                        <input type="checkbox" id="Bicycling" name="Bicycling" value="Bicycling">
+                        <label for="Bicycling"> Bicycling</label><br>
+                        <input type="checkbox" id="Yoga" name="Yoga" value="Yoga">
+                        <label for="Yoga"> Yoga</label><br><br>
+
                     </select>
                     <small class="form-text text-muted">Helps us to understand Exercise type.</small>
                 </div>
