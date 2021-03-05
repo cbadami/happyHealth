@@ -1,6 +1,17 @@
-<script>
+<script type="text/javascript">
 let age="Age";
+// window.onload = function() {
+//   alert("let's go!");
+//   console.log("load function")
+//   console.log(Date.parse(document.getElementById("dateText").value))
+//   let dob = Date.parse(document.getElementById("dateText").value)
 
+//   let diff = Date.now() - dob;
+//   var ageDate = new Date(diff); // miliseconds from epoch
+//   age = Math.abs(ageDate.getUTCFullYear() - 1970)
+//   console.log(age);
+//   document.getElementById("age").value = age
+// }
 function calAge(){
   console.log(Date.parse(document.getElementById("dateText").value))
   let dob = Date.parse(document.getElementById("dateText").value)
@@ -12,6 +23,20 @@ function calAge(){
   document.getElementById("age").value = age
   return age
 }
+
+function AgeMeth(){
+  alert("let's go!");
+  console.log("load function")
+  console.log(Date.parse(document.getElementById("dateText").value))
+  let dob = Date.parse(document.getElementById("dateText").value)
+
+  let diff = Date.now() - dob;
+  var ageDate = new Date(diff); // miliseconds from epoch
+  age = Math.abs(ageDate.getUTCFullYear() - 1970)
+  console.log(age);
+  document.getElementById("age").value = age
+}
+
 
 function message(){
   alert("User Details Updated")
@@ -84,7 +109,7 @@ function message(){
                   </div>
                   <div class="form-group">
                     <label for="age" >Age</label>
-                    <input type="text" min="0" class="form-control col-md-6" id="age" placeholder="Age">
+                    <input type="text" min="0" class="form-control col-md-6" id="age" placeholder="Age" onload="AgeMeth()">
                   </div>
                   <div class="form-group">
                     <%- include ('../partials/messages') %>
