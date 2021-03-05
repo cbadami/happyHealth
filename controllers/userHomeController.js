@@ -101,30 +101,78 @@ exports.getUserProfile = (req, res) => {
 
 };
 
+// exports.postUserProfile = (req, res) => {
+
+//     console.log("****post user profile *********")
+//     let userId = req.session.userId;
+//     console.log(req.body, "---------req.body");
+//     let {
+//         fullName,
+//         gender,
+//         dateOfBirth,
+//         age,
+//         email,
+//         currentWeight,
+//         desiredWeight,
+//         height,
+//         myList,
+//         country,
+//         state
+//     } = req.body;
+//     console.log(fullName, gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state)
+//     const [year, month, date] = dateOfBirth.split("-")
+//     dateOfBirth = month + '/' + date + '/' + year
+//     const averageActivityLevel = myList
+//     let errors = [];
+//     if (!fullName || !gender || !dateOfBirth || !age || !email || !currentWeight || !desiredWeight || !height || !averageActivityLevel || !country || !state) {
+//         errors.push("Please enter all fields")
+//         res.render('userViews/userProfile', {
+//             layout: 'layouts/userLayout',
+//             title: 'User Profile',
+//             fullName,
+//             email,
+//             fullName,
+//             gender,
+//             dateOfBirth,
+//             age,
+//             currentWeight,
+//             desiredWeight,
+//             height,
+//             averageActivityLevel,
+//             country,
+//             state,
+//             errors
+//         });
+//     }
+//     const profileQuery = `UPDATE happyhealth.usertbl
+//         SET email = '${email}', fullName = '${fullName}',gender='${gender}',dateOfBirth='${dateOfBirth}',age='${age}',
+//         currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',averageActivityLevel='${averageActivityLevel}',country='${country}',state='${state}'
+//         WHERE userId = '${userId}';`;
+//     db.query(profileQuery, function (err, result) {
+//         if (err) {
+//             console.log(err, "------profile update error");
+//         } else {
+//             res.redirect('/userInfo');
+//         }
+//     });
+
+// };
+
 exports.postUserProfile = (req, res) => {
 
     console.log("****post user profile *********")
     let userId = req.session.userId;
     console.log(req.body, "---------req.body");
     let {
-        fullName,
-        gender,
-        dateOfBirth,
-        age,
-        email,
-        currentWeight,
-        desiredWeight,
-        height,
-        myList,
-        country,
-        state
+        fullName,gender,dateOfBirth, age,
+        email,        currentWeight,        desiredWeight,
+        height,        country,        state
     } = req.body;
-    console.log(fullName, gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, myList, country, state)
+    console.log(fullName, gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, country, state);
     const [year, month, date] = dateOfBirth.split("-")
     dateOfBirth = month + '/' + date + '/' + year
-    const averageActivityLevel = myList
     let errors = [];
-    if (!fullName || !gender || !dateOfBirth || !age || !email || !currentWeight || !desiredWeight || !height || !averageActivityLevel || !country || !state) {
+    if (!fullName || !gender || !dateOfBirth || !age || !email || !currentWeight || !desiredWeight || !height || !country || !state) {
         errors.push("Please enter all fields")
         res.render('userViews/userProfile', {
             layout: 'layouts/userLayout',
@@ -138,7 +186,6 @@ exports.postUserProfile = (req, res) => {
             currentWeight,
             desiredWeight,
             height,
-            averageActivityLevel,
             country,
             state,
             errors
@@ -146,7 +193,7 @@ exports.postUserProfile = (req, res) => {
     }
     const profileQuery = `UPDATE happyhealth.usertbl
         SET email = '${email}', fullName = '${fullName}',gender='${gender}',dateOfBirth='${dateOfBirth}',age='${age}',
-        currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',averageActivityLevel='${averageActivityLevel}',country='${country}',state='${state}'
+        currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
         WHERE userId = '${userId}';`;
     db.query(profileQuery, function (err, result) {
         if (err) {
