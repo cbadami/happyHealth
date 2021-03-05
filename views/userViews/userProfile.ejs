@@ -88,6 +88,7 @@
                           type="number" 
                           step="0.1" 
                           name="currentWeight" 
+                          min="0.0"
                           placeholder="Current weight in lbs"
                           class="form-control" 
                           value="<%= typeof currentWeight != 'undefined' ? currentWeight : '' %>" required>
@@ -100,6 +101,7 @@
                           type="number" 
                           step="0.1" 
                           name="desiredWeight" 
+                          min="0.0"
                           placeholder="Desired weight in lbs"
                           class="form-control" 
                           value="<%= typeof desiredWeight != 'undefined' ? desiredWeight : '' %>" required>
