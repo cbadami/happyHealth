@@ -3,17 +3,21 @@
     <div class="row">
       <div
         class="col-sm-3 card"
-        style="background-color: hsla(0, 100%, 90%, 0.3) ;"
+        style="background-color: hsla(0, 100%, 90%, 0.3)"
         onclick="location.href = '/userStep';"
       >
         <h4>Step Count</h4>
-        <!-- <img src="/static/assets/images/happyHealth/step.png" alt="user_stat"> -->
         <img
+          src="/static/assets/images/happyHealth/stepp.jpg"
+          alt="user_stat"
+          width="200"
+        />
+        <!-- <img
           src="/static/gifs/running2.gif"
           alt="this slowpoke moves"
           width="100"
           class="gif"
-        />
+        /> -->
         <br />
         <button type="submit" class="btn btn-outline-secondary">
           <b>Step Count: <%= stepCount %></b>
@@ -26,11 +30,16 @@
       >
         <h4>Water</h4>
         <img
+          src="/static/assets/images/happyHealth/glass.png"
+          alt="user_stat"
+          width="200"
+        />
+        <!-- <img
           src="/static/gifs/drinkWhite.gif"
           alt="user_stat"
           width="180"
           class="gif"
-        />
+        /> -->
         <br />
         <button type="submit" class="btn btn-outline-secondary">
           <b>Water Consumed:</b> <b><%= water %></b>
@@ -43,11 +52,16 @@
       >
         <h4>Sleep Hours</h4>
         <img
+          src="/static/assets/images/happyHealth/sleepp.png"
+          alt="user_stat"
+          width="200"
+        />
+        <!-- <img
           src="/static/gifs/sleeping.gif"
           alt="challenge_mgmt"
           width="180"
           class="gif"
-        />
+        /> -->
         <br />
         <button type="submit" class="btn btn-outline-secondary">
           <b>Sleep Hours: <%= sleepHours %></b>
@@ -79,7 +93,6 @@
           src="/static/gifs/fruits.gif"
           alt="user_fruits"
           class="homeImage"
-          
         />
         <button type="submit" class="btn btn-outline-secondary">
           <b>Fruit Consumed: <%= fruits %> </b>
@@ -90,7 +103,7 @@
         style="background-color: #98ff98"
         onclick="location.href = '/userVegetables';"
       >
-        <h4>Vegetables </h4>
+        <h4>Vegetables</h4>
         <img
           src="/static/gifs/Vegetables.gif"
           alt="user_vegetables"
