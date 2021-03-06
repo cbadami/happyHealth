@@ -155,13 +155,12 @@ This article is a technical onboarding document that can help you write your own
 - [History UI Screens](https://app.moqups.com/aMyjQCLOHf/view/page/a477474a4)
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
 - [Me Time UI Screens Web and Mobile]()
-Show your mind some love
+- Show your mind some love
 
 - Self Healing
-    Calming Music
-	Session
+    Session
 	Science Behind it
-- Simple Meditation 
+- Calming Music 
 - Sleep Well
 	Relaxing music
 - Tips & Advice
