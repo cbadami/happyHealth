@@ -1,7 +1,8 @@
 const db = require('../database');
+// ../database
 const fastcsv = require("fast-csv");
 const fs = require("fs");
-const ws = fs.createWriteStream("usermetrics_mysql_fastcsv.csv");
+const ws = fs.createWriteStream("C:/Users/s538107/Downloads/usermetrics_mysql_fastcsv.csv");
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminViews/adminLogin', {
