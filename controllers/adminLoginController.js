@@ -236,27 +236,6 @@ exports.getAdminAnalytics = (req, res) => {
 };
 
 
-exports.getAdminAnalyticsWater = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
-
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.water, usermetricstbl.waterGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
-
-    db.query(query, function (err, result) {
-        if (err) throw err;
-        else {
-            console.log(result);
-
-            res.render('adminViews/adminAnalyticsWater', {
-                layout: 'layouts/adminLayout',
-                title: 'Admin Analytics',
-                obj: result
-            });
-        }
-    });
-};
-
 exports.getAdminAnalyticsMeditation = (req, res) => {
 
     //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
