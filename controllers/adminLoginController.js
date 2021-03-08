@@ -2,7 +2,7 @@ const db = require('../database');
 // ../database
 const fastcsv = require("fast-csv");
 const fs = require("fs");
-const ws = fs.createWriteStream("C:/Users/s538107/Downloads/usermetrics_mysql_fastcsv.csv");
+// const ws = fs.createWriteStream("C:/Users/s538107/Downloads/usermetrics_mysql_fastcsv.csv");
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminViews/adminLogin', {
@@ -180,35 +180,35 @@ exports.deleteUser = (req, res) => {
     });
 };
 
-exports.getCSV = (req, res) => {
+// exports.getCSV = (req, res) => {
 
     
-    //res.render("CSVManagement");
+//     //res.render("CSVManagement");
 
     
-    db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
+//     db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
     
-       const jsonData = JSON.parse(JSON.stringify(data));
-       console.log("jsonData", jsonData);
+//        const jsonData = JSON.parse(JSON.stringify(data));
+//        console.log("jsonData", jsonData);
      
-       fastcsv
-          .write(jsonData, { headers: true })
-          .on("finish", function() {
-             console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
-           })
-           .pipe(ws);
+//        fastcsv
+//           .write(jsonData, { headers: true })
+//           .on("finish", function() {
+//              console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
+//            })
+//            .pipe(ws);
 
 
-           res.render('adminViews/CSVManagement', {
-            layout: 'layouts/adminLayout',
-            title: 'Admin Analytics',
-            obj: data
-            });
-        });
+//            res.render('adminViews/CSVManagement', {
+//             layout: 'layouts/adminLayout',
+//             title: 'Admin Analytics',
+//             obj: data
+//             });
+//         });
 
 
         
-}
+// }
 
 exports.getAdminAnalytics = (req, res) => {
     var query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
