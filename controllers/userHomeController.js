@@ -112,6 +112,8 @@ exports.postUserProfile = (req, res) => {
         height,        country,        state
     } = req.body;
     console.log(fullName, gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, country, state);
+    height = +height
+    console.log(height,"--------int height");
     const [year, month, date] = dateOfBirth.split("-")
     dateOfBirth = month + '/' + date + '/' + year
     let errors = [];
