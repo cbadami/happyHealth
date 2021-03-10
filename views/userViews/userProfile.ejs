@@ -409,7 +409,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <div calss="form-group">
+                <div class="form-group">
                   <button type="submit" name="update" class="btn btn-primary btn-lg"><i class="fa fa-check-circle"></i>
                     Update</button>
                 </div>
@@ -465,4 +465,18 @@
       function message() {
         alert("User Details Updated")
       }
+
+
+      let countries = '';
+
+      axios.get('https://restcountries.eu/rest/v2/all')
+      .then((res) =>{
+        console.log(res,"-------response");
+      })
+      .catch((err)=>{
+        console.log(err,"--------error");
+      })
+
+
+
     </script>
