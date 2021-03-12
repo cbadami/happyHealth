@@ -469,38 +469,36 @@
 
       let countries = '';
 
-      // axios.get('https://www.universal-tutorial.com/api/getaccesstoken', {
-      //   headers: {
-      //     "Accept": "application/json",
-      //     "api-token": "251EU2VmhHl6dG7ARglhFpWFubQ9jWq41rsSnx_F0ZnN0TdQW-TdUqeva2DaFLRLGK0",
-      //     "user-email": "happyhealthgdp@gmail.com"
-      //   }
-      // })
-      //   .then((res) => {
-      //     // console.log(res,"-------response");
-      //     let auth_token = res.data.auth_token;
-      //     console.log(auth_token, "-----------auth_token");
-      //     axios.get('https://www.universal-tutorial.com/api/countries/', {
-      //       headers: {
-      //         "Authorization": `Bearer ${auth_token}`,
-      //         "Accept": "application/json"
-      //       }
-      //     })
-      //     .then((res)=>{
-      //       console.log(res.data,"------response data");
-      //     })
-      //     .catch((err)=>{
-      //       console.log(err,"--------getting countries error");
-      //     })
+      // async getCountriesAndStates(){
+      //   await axios.get('https://www.universal-tutorial.com/api/getaccesstoken', {
+      //     headers: {
+      //       "Accept": "application/json",
+      //       "api-token": "251EU2VmhHl6dG7ARglhFpWFubQ9jWq41rsSnx_F0ZnN0TdQW-TdUqeva2DaFLRLGK0",
+      //       "user-email": "happyhealthgdp@gmail.com"
+      //     }
       //   })
-      //   .catch((err) => {
-      //     console.log(err, "--------error");
-      //   })
+      //     .then((res) => {
+      //       // console.log(res,"-------response");
+      //       let auth_token = res.data.auth_token;
+      //       console.log(auth_token, "-----------auth_token");
+      //       axios.get('https://www.universal-tutorial.com/api/countries/', {
+      //         headers: {
+      //           "Authorization": `Bearer ${auth_token}`,
+      //           "Accept": "application/json"
+      //         }
+      //       })
+      //         .then((res) => {
+      //           console.log(res.data, "------response data");
+      //         })
+      //         .catch((err) => {
+      //           console.log(err, "--------getting countries error");
+      //         })
+      //     })
+      //     .catch((err) => {
+      //       console.log(err, "--------error");
+      //     })
 
-      axios.get('http://lab.iamrohit.in/php_ajax_country_state_city_dropdown/apiv1.php?type=getCountries')
-      .then(res =>{
-        console.log(res.data,"-----response data");
-      })
+      // }
 
 
 
