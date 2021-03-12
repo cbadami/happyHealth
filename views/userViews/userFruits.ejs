@@ -6,10 +6,7 @@
           <form method="POST" class="my-5">
             <div class="form-group">
               <%- include ('../partials/messages') %>
-              <h2 class="d-flex justify-content-center py-3">
-                Fruits Consumed
-
-              </h2>
+              <h2 class="d-flex justify-content-center py-3">Fruit Consumed</h2>
             </div>
             <div class="form-row">
               <label for="dateTime"> &nbsp; </label>
@@ -18,38 +15,70 @@
             </div>
             <script>
               let d = new Date();
-                          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-                          const dayNames =
-                            ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-                          let formatted_date =
-                            dayNames[d.getDay()] +
-                            ", " +
-                            months[d.getMonth()] +
-                            " " +
-                            d.getDate() +
-                            ", " +
-                            d.getFullYear();
+              const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ];
+              const dayNames = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ];
+              let formatted_date =
+                dayNames[d.getDay()] +
+                ", " +
+                months[d.getMonth()] +
+                " " +
+                d.getDate() +
+                ", " +
+                d.getFullYear();
               document.getElementById("demo").innerHTML = formatted_date;
             </script>
             <div class="form-row">
-              <label for="username">Number of fruits consumed</label>
+              <label for="username">Number of fruits eaten</label>
               <input
                 type="number"
                 id="fruits"
                 name="fruits"
-                min="0" 
+                min="0"
                 class="form-control"
                 placeholder="0"
                 value="<%= typeof fruits != 'undefined' ? fruits : '' %>"
               />
             </div>
             <div class="form-row">
-              <label for="password">Goal</label>
+              <label for="password">Daily Goal</label>
               <input
                 type="number"
                 id="fruitgoal"
                 name="fruitgoal"
-                min="0" 
+                min="0"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>"
+              />
+            </div>
+            <div class="form-row">
+              <label for="password">Monthly Goal</label>
+              <input
+                type="number"
+                id="fruitgoal"
+                name="fruitgoal"
+                min="0"
                 class="form-control"
                 placeholder="0"
                 value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>"

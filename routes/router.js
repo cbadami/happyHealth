@@ -124,7 +124,7 @@ router.post('/updateUser/:userId', adminLoginController.updateUser);
 router.get('/deleteUser/:userId', adminLoginController.deleteUser);
 router.get('/getAdminUserName/:userId', adminLoginController.getAdminUserName);
 router.get('/getUserTotalMetrics/:userId', adminLoginController.getUserTotalMetrics);
-router.get('/CSVManagement', adminLoginController.getCSV);
+// router.get('/CSVManagement', adminLoginController.getCSV);
 router.get('/editUserInfo/:userId', adminLoginController.getUserInfo);
 /**
  *  Admin user group management routes
@@ -146,12 +146,6 @@ router.get('/addGroup', userGroupController.addGroup);
  * Admin user analytics routes
  */
 router.get('/adminAnalytics', adminLoginController.getAdminAnalytics);
-router.get('/adminAnalyticsStep', adminLoginController.getAdminAnalyticsStep);
-router.get('/adminAnalyticsSleep', adminLoginController.getAdminAnalyticsSleep);
-router.get('/adminAnalyticsWater', adminLoginController.getAdminAnalyticsWater);
-router.get('/adminAnalyticsMeditation', adminLoginController.getAdminAnalyticsMeditation);
-router.get('/adminAnalyticsFruits', adminLoginController.getAdminAnalyticsFruits);
-router.get('/adminAnalyticsVegetables', adminLoginController.getAdminAnalyticsVegetables);
 router.get('/adminAnalyticsOverAll', adminLoginController.getAdminAnalyticsOverAll);
 
 module.exports = router;

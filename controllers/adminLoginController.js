@@ -1,7 +1,8 @@
 const db = require('../database');
+// ../database
 const fastcsv = require("fast-csv");
 const fs = require("fs");
-const ws = fs.createWriteStream("usermetrics_mysql_fastcsv.csv");
+// const ws = fs.createWriteStream("C:/Users/s538107/Downloads/usermetrics_mysql_fastcsv.csv");
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminViews/adminLogin', {
@@ -179,35 +180,35 @@ exports.deleteUser = (req, res) => {
     });
 };
 
-exports.getCSV = (req, res) => {
+// exports.getCSV = (req, res) => {
 
     
-    //res.render("CSVManagement");
+//     //res.render("CSVManagement");
 
     
-    db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
+//     db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
     
-       const jsonData = JSON.parse(JSON.stringify(data));
-       console.log("jsonData", jsonData);
+//        const jsonData = JSON.parse(JSON.stringify(data));
+//        console.log("jsonData", jsonData);
      
-       fastcsv
-          .write(jsonData, { headers: true })
-          .on("finish", function() {
-             console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
-           })
-           .pipe(ws);
+//        fastcsv
+//           .write(jsonData, { headers: true })
+//           .on("finish", function() {
+//              console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
+//            })
+//            .pipe(ws);
 
 
-           res.render('adminViews/CSVManagement', {
-            layout: 'layouts/adminLayout',
-            title: 'Admin Analytics',
-            obj: data
-            });
-        });
+//            res.render('adminViews/CSVManagement', {
+//             layout: 'layouts/adminLayout',
+//             title: 'Admin Analytics',
+//             obj: data
+//             });
+//         });
 
 
         
-}
+// }
 
 exports.getAdminAnalytics = (req, res) => {
     var query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
@@ -235,111 +236,6 @@ exports.getAdminAnalytics = (req, res) => {
     // );
 };
 
-exports.getAdminAnalyticsStep = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
-
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
-
-    db.query(query, function (err, result) {
-        if (err) throw err;
-        else {
-            console.log(result);
-
-            res.render('adminViews/adminAnalyticsStep', {
-                layout: 'layouts/adminLayout',
-                title: 'Admin Analytics',
-                obj: result
-            });
-        }
-    });
-};
-
-exports.getAdminAnalyticsSleep = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
-
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.sleepHours, usermetricstbl.sleepGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
-
-    db.query(query, function (err, result) {
-        if (err) throw err;
-        else {
-            console.log(result);
-
-            res.render('adminViews/adminAnalyticsSleep', {
-                layout: 'layouts/adminLayout',
-                title: 'Admin Analytics',
-                obj: result
-            });
-        }
-    });
-};
-
-
-exports.getAdminAnalyticsWater = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
-
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.water, usermetricstbl.waterGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
-
-    db.query(query, function (err, result) {
-        if (err) throw err;
-        else {
-            console.log(result);
-
-            res.render('adminViews/adminAnalyticsWater', {
-                layout: 'layouts/adminLayout',
-                title: 'Admin Analytics',
-                obj: result
-            });
-        }
-    });
-};
-
-exports.getAdminAnalyticsMeditation = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
-
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.meTime, usermetricstbl.meTimeGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
-
-    db.query(query, function (err, result) {
-        if (err) throw err;
-        else {
-            console.log(result);
-
-            res.render('adminViews/adminAnalyticsMeditation', {
-                layout: 'layouts/adminLayout',
-                title: 'Admin Analytics',
-                obj: result
-            });
-        }
-    });
-};
-
-exports.getAdminAnalyticsFruits = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
-
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.fruits, usermetricstbl.fruitGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
-
-    db.query(query, function (err, result) {
-        if (err) throw err;
-        else {
-            console.log(result);
-
-            res.render('adminViews/adminAnalyticsFruits', {
-                layout: 'layouts/adminLayout',
-                title: 'Admin Analytics',
-                obj: result
-            });
-        }
-    });
-};
 
 exports.getAdminAnalyticsOverAll = (req, res) => {
 
@@ -365,26 +261,6 @@ exports.getAdminAnalyticsOverAll = (req, res) => {
     });
 };
 
-exports.getAdminAnalyticsVegetables = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
-
-    var query = `select usertbl.userId, usertbl.fullName, usermetricstbl.date, usermetricstbl.veggies, usermetricstbl.veggieGoal from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
-
-    db.query(query, function (err, result) {
-        if (err) throw err;
-        else {
-            console.log(result);
-
-            res.render('adminViews/adminAnalyticsVegetables', {
-                layout: 'layouts/adminLayout',
-                title: 'Admin Analytics',
-                obj: result
-            });
-        }
-    });
-};
 
 exports.getUserInfo = (req,res)=>{
     const userId = req.params.userId;

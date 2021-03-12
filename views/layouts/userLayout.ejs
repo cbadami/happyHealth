@@ -20,6 +20,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
         .card {
             /* width: 150px; */
@@ -78,9 +79,9 @@
             height: 34px;
             padding: 6px 12px;
             font-size: 18px;
-            
+
             line-height: 1.42857143;
-            color:blue;
+            color: blue;
             background-color: #fff;
             background-image: none;
             border: 1px solid #ccc;
@@ -106,8 +107,8 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <img class="logo-src" src="static/assets/images/happyHealth/Artboard.png" alt=""
-                    onclick="window.location.href = '/userHome'">
+                <!-- <img class="logo-src" src="static/assets/images/happyHealth/Artboard.png" alt=""
+                    onclick="window.location.href = '/userHome'"> -->
                 <!-- <div class="h3 m-0 ml-2">HappyHealth</div> -->
                 <div class="header__pane ml-auto">
                     <div>
@@ -132,7 +133,7 @@
             </div>
             <div class="app-header__menu">
                 <ul class="header-menu nav">
-                    <li class="nav-item">
+                    <li class="nav-item" title="Profile">
                         <a href="javascript: window.location.href='/userProfile'" class="nav-link">
                             <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
                         </a>
@@ -217,12 +218,12 @@
                                     <span>Profile</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="javascript: window.location.href='/availableGroups'" class="mm-active">
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                     <span>Groups</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="javascript: window.location.href='/userChallenges'" class="mm-active">
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
@@ -232,15 +233,15 @@
                             <li>
                                 <a href="javascript: window.location.href='/notifications'" class="mm-active">
                                     <i class="fa fa-bell" aria-hidden="true"></i>
-                                    <span>Bulletins</span>
+                                    <span>Announcements</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="javascript: window.location.href='/'" class="mm-active">
                                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                                     <span>Logout</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>

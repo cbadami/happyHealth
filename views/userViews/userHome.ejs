@@ -1,19 +1,30 @@
+
+<style>
+	img{
+		margin: auto;
+	}
+</style>
+
 <div class="app-main__inner">
   <div class="container-fluid">
     <div class="row">
       <div
         class="col-sm-3 card"
-        style="background-color: hsla(0, 100%, 90%, 0.3) ;"
+        style="background-color: hsla(0, 100%, 90%, 0.3)"
         onclick="location.href = '/userStep';"
       >
         <h4>Step Count</h4>
-        <!-- <img src="/static/assets/images/happyHealth/step.png" alt="user_stat"> -->
-        <img
+        <img 
+          src="/static/assets/images/happyHealth/stepp.png"
+          alt="user_stat"
+          width="150"
+        />
+        <!-- <img
           src="/static/gifs/running2.gif"
           alt="this slowpoke moves"
           width="100"
           class="gif"
-        />
+        /> -->
         <br />
         <button type="submit" class="btn btn-outline-secondary">
           <b>Step Count: <%= stepCount %></b>
@@ -26,11 +37,16 @@
       >
         <h4>Water</h4>
         <img
+          src="/static/assets/images/happyHealth/glassw.png"
+          alt="user_stat"
+          width="150"
+        />
+        <!-- <img
           src="/static/gifs/drinkWhite.gif"
           alt="user_stat"
           width="180"
           class="gif"
-        />
+        /> -->
         <br />
         <button type="submit" class="btn btn-outline-secondary">
           <b>Water Consumed:</b> <b><%= water %></b>
@@ -43,11 +59,16 @@
       >
         <h4>Sleep Hours</h4>
         <img
+          src="/static/assets/images/happyHealth/sleeping.png"
+          alt="user_stat"
+          width="150"
+        />
+        <!-- <img
           src="/static/gifs/sleeping.gif"
           alt="challenge_mgmt"
           width="180"
           class="gif"
-        />
+        /> -->
         <br />
         <button type="submit" class="btn btn-outline-secondary">
           <b>Sleep Hours: <%= sleepHours %></b>
@@ -60,11 +81,16 @@
       >
         <h4>Mindful Minutes</h4>
         <img
+          src="/static/assets/images/happyHealth/booko.png"
+          alt="user_stat"
+          width="165"
+        />
+        <!-- <img
           src="/static/gifs/metime.gif"
           alt="user_stat"
           width="150"
           class="gif"
-        />
+        /> -->
         <button type="submit" class="btn btn-outline-secondary">
           <b>Mindful Minutes: <%= meTime %></b>
         </button>
@@ -74,15 +100,19 @@
         style="background-color: #e5ffcc"
         onclick="location.href = '/userFruits';"
       >
-        <h4>Fruits</h4>
+        <h4>Fruit</h4>
         <img
+          src="/static/assets/images/happyHealth/fruits.png"
+          alt="user_stat"
+          width="170"
+        />
+        <!-- <img
           src="/static/gifs/fruits.gif"
           alt="user_fruits"
           class="homeImage"
-          
-        />
+        /> -->
         <button type="submit" class="btn btn-outline-secondary">
-          <b>Fruits Consumed: <%= fruits %> </b>
+          <b>Fruit Consumed: <%= fruits %> </b>
         </button>
       </div>
       <div
@@ -90,12 +120,17 @@
         style="background-color: #98ff98"
         onclick="location.href = '/userVegetables';"
       >
-        <h4>Vegetables </h4>
+        <h4>Vegetables</h4>
         <img
+          src="/static/assets/images/happyHealth/vegetable.png"
+          alt="user_stat"
+          width="170"
+        />
+        <!-- <img
           src="/static/gifs/Vegetables.gif"
           alt="user_vegetables"
           class="homeImage"
-        />
+        /> -->
         <button type="submit" class="btn btn-outline-secondary">
           <b>Vegetables Consumed: <%= veggies %></b>
         </button>
