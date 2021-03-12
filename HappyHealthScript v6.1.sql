@@ -35,7 +35,7 @@ CREATE TABLE userTbl (
 INSERT INTO userTbl (userName,password,admin,email,fullName,gender,dateOfBirth,age,currentWeight,desiredWeight,
 height,country,state) VALUES 
 ('James234','Bond12345','No','james234@gmail.com','James Bond','Male','10/04/1993',29,136,134,66,'United States','Missouri'),
-('William','William123','Yes','William123@gmail.com','William Shakespeare','Male','11/24/1994',26,112,110,68,'India','Telangana'),
+('William','$2a$12$26RTgB.XNe39rWRIasRx0u0mPzvZP82jZK4cUBkDOFk1kkahJyVvK','Yes','William123@gmail.com','William Shakespeare','Male','11/24/1994',26,112,110,68,'India','Telangana'),
 ('John234','John234','No','John234@gmail.com','John Daniel','Male','9/4/1995',31,125,128,61,'Canada','Alberta'),
 ('Robert123','Robert123','No','Robert123@gmail.com','Robert Cart','Male','10/04/1996',27,134,138,66,'United States','Arizona'),
 ('Michael','Micky','No','Micky@gmail.com','Michael Jackson','Male','01/12/1997',25,102,108,67,'India','Andhra Pradesh'),

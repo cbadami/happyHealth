@@ -3,7 +3,7 @@ const db = require('../database');
 const fastcsv = require("fast-csv");
 const fs = require("fs");
 // const ws = fs.createWriteStream("C:/Users/s538107/Downloads/usermetrics_mysql_fastcsv.csv");
-
+const bcrypt = require('bcryptjs')
 exports.getAdminLogin = (req, res) => {
     res.render('adminViews/adminLogin', {
         layout: 'layouts/mainLayout',
@@ -11,7 +11,7 @@ exports.getAdminLogin = (req, res) => {
     });
 };
 
-exports.postAdminLogin = (req, res) => {
+exports.postAdminLogin = async (req, res) => {
 
     const {
         username,
@@ -34,14 +34,31 @@ exports.postAdminLogin = (req, res) => {
             password
         });
     } else {
-        const queryString = `SELECT * FROM happyhealth.usertbl WHERE userName = '${username}' and Password = '${password}' and Admin = 'Yes'`;
+        const queryString = `SELECT * FROM happyhealth.usertbl WHERE userName = '${username}' and Admin = 'Yes'`;
 
-        db.query(queryString, function (err, result) {
+        db.query(queryString, async function (err, result) {
             if (result.length > 0) {
-                const userId = result[0]['userId'];
-                req.session.userId = userId;
-                res.redirect('/adminHome');
-                console.log('*****Admin Login successfully*****');
+
+                const validPassword = await bcrypt.compare(password,result[0]['password'])
+
+                if(validPassword){
+                    const userId = result[0]['userId'];
+                    req.session.userId = userId;
+                    res.redirect('/adminHome');
+                    console.log('*****Admin Login successfully*****');
+                }else{
+                    errors.push({
+                        msg: 'Enter correct username or password'
+                    });
+                    res.render('adminViews/adminLogin', {
+                        layout: 'layouts/mainLayout',
+                        title: 'admin Login',
+                        errors,
+                        username,
+                        password
+                    });
+                }
+
             } else {
                 errors.push({
                     msg: 'Enter correct username or password'
