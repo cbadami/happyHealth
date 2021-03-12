@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS userTbl;
 CREATE TABLE userTbl (
   userId int AUTO_INCREMENT,
   userName varchar(12) DEFAULT NULL UNIQUE,
-  password varchar(25) DEFAULT NULL,
+  password varchar(100) DEFAULT NULL,
   admin varchar(3) DEFAULT NULL,
   email varchar(25) DEFAULT NULL UNIQUE,
   fullName varchar(25) DEFAULT NULL,
