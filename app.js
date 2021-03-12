@@ -77,6 +77,13 @@ app.use(function (req, res, next) {
 // Routes
 app.use('/', require('./routes/router.js'));
 
+app.use((req,res)=>{
+  res.status(404).send({
+    status: 404,
+    Error: 'Page Not Found'
+  })
+})
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, console.log(`Successfully app running local at: `.yellow, `http://localhost:${PORT}`.cyan.underline));
