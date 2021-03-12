@@ -11,39 +11,23 @@
                 </h2>
             </div>
             <div class="form-row">
-              <label for="dateText">Today's Date and Time : &nbsp; </label>
+              <label for="dateText"> &nbsp; </label>
               <p id="demo"></p>
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
-
             <script>
               let d = new Date();
-              const months = [
-                "JAN",
-                "FEB",
-                "MAR",
-                "APR",
-                "MAY",
-                "JUN",
-                "JUL",
-                "AUG",
-                "SEP",
-                "OCT",
-                "NOV",
-                "DEC",
-              ];
-              let formatted_date =
-                months[d.getMonth()] +
-                "-" +
-                d.getDate() +
-                "-" +
-                d.getFullYear() +
-                "  " +
-                d.getHours() +
-                ":" +
-                d.getMinutes() +
-                ":" +
-                d.getSeconds();
+                          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                          const dayNames =
+                            ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                          let formatted_date =
+                            dayNames[d.getDay()] +
+                            ", " +
+                            months[d.getMonth()] +
+                            " " +
+                            d.getDate() +
+                            ", " +
+                            d.getFullYear();
               document.getElementById("demo").innerHTML = formatted_date;
             </script>
 
@@ -84,7 +68,7 @@
               <input type="number" min="0" id="waterGoal" name="waterGoal" class="form-control" placeholder="0"
                 value="<%= typeof waterGoal != 'undefined' ? waterGoal : '' %>" />
             </div>
-          <p>note: 1 glass= 8 ounce</p>
+          <p>Note: 1 Glass= 8 Ounces on average</p>
             <div class="form-row"></div>
 
             <div class="form-row">

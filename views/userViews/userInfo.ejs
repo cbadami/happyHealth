@@ -26,15 +26,7 @@
                 <div class="col-md-8">
                     <div class="card mb-3" style="height:auto;">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">User ID:</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= result[0].userId%>
-                                </div>
-                            </div>
-                            <hr>
+                         
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">User Name: </h6>
@@ -112,9 +104,10 @@
                                     <h6 class="mb-0">Current Weight:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <%= result[0].cureentWeight%>
+                                    <%= result[0].currentWeight%>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Desired Weight:</h6>
@@ -139,6 +132,15 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <%= result[0].averageActivityLevel%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Exercises preferred/doing:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0].exercise%>
                                 </div>
                             </div>
                             <hr>

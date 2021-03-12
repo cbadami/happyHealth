@@ -179,6 +179,18 @@ INSERT INTO challengeMemberTbl VALUES
 -- ********************************** Table structure for table userMetricsTbl *************************
 --
 
+DROP TABLE IF EXISTS happyHealth.userSteptbl;
+CREATE TABLE happyHealth.userSteptbl (
+  id int NOT NULL AUTO_INCREMENT,
+  userId int NOT NULL,
+  date varchar(12) NOT NULL,
+  enterGoal int DEFAULT 0,
+  miles int DEFAULT 0,
+  noofSteps int DEFAULT 0,
+  PRIMARY KEY (id),
+  FOREIGN KEY (userId) REFERENCES userTbl(userId)
+);
+
 DROP TABLE IF EXISTS userMetricsTbl;
 CREATE TABLE userMetricsTbl (
   userId int NOT NULL,

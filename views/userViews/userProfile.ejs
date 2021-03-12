@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script type="text/javascript">
 let age="Age";
 // window.onload = function() {
@@ -42,6 +43,8 @@ function message(){
   alert("User Details Updated")
 }
 </script> 
+=======
+>>>>>>> 741a8c0ca08a751242c75a07c2e64731454b9d6a
 <div class="container">
   <%- include ('../partials/messages') %>
   <div class="row">
@@ -53,15 +56,15 @@ function message(){
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="userName">Name</label>
+                    <label for="userName">Full Name</label>
                     <input 
                       type="text" 
                       value="<%= typeof fullName != 'undefined' ? fullName : '' %>" 
-                      disabled
                       class="form-control" 
-                      id="userName" 
+                      id="full name" 
                       aria-describedby="userNameHelp" 
-                      placeholder="User Name">
+                      placeholder="Full Name"
+                      name="fullName">
                     <small id="userNameHelp" class="form-text text-muted"><%- include ('../partials/messages') %></small>
                   </div>
                   <div class="form-group">
@@ -85,7 +88,7 @@ function message(){
                           type="radio" 
                           name="gender" 
                           id="Gender-1" 
-                          value="option2">
+                          value="Female">
                         <label class="form-check-label" for="Gender-1">Female</label>
                       </div>
                       <div class="form-check form-check-inline">
@@ -101,15 +104,22 @@ function message(){
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="username">Date of Birth *</label>
+                    <label for="username">Date of Birth</label>
                     <div class='input-group date col-md-6 px-0'>
                       <%- include ('../partials/messages') %>
                       <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy" onchange="calAge()"/>
                     </div>
                   </div>
+                  <div>
+
+                  </div>
                   <div class="form-group">
                     <label for="age" >Age</label>
+<<<<<<< HEAD
                     <input type="text" min="0" class="form-control col-md-6" id="age" placeholder="Age" onload="AgeMeth()">
+=======
+                    <input type="text" class="form-control col-md-6" id="age" placeholder="Age" name="age" value="<%= typeof age != 'undefined' ? age : '' %>">
+>>>>>>> 741a8c0ca08a751242c75a07c2e64731454b9d6a
                   </div>
                   <div class="form-group">
                     <%- include ('../partials/messages') %>
@@ -129,7 +139,6 @@ function message(){
                           type="number" 
                           step="0.1" 
                           name="currentWeight" 
-                          min="0" value="112"
                           placeholder="Current weight in lbs"
                           class="form-control" 
                           value="<%= typeof currentWeight != 'undefined' ? currentWeight : '' %>" required>
@@ -137,12 +146,11 @@ function message(){
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="currentWeight">Desired Weight</label>
+                        <label for="desiredWeight">Desired Weight</label>
                         <input 
                           type="number" 
                           step="0.1" 
                           name="desiredWeight" 
-                          min="0" value="110"
                           placeholder="Desired weight in lbs"
                           class="form-control" 
                           value="<%= typeof desiredWeight != 'undefined' ? desiredWeight : '' %>" required>
@@ -165,7 +173,7 @@ function message(){
                     <small id="emailHelp" class="form-text text-muted">Is essential to calculate your BMI.</small>
                 </div>
                 <div class="form-group">
-                  <label>Average Activity Level *</label><br>
+                  <label>Average Activity Level</label><br>
                     <%- include ('../partials/messages') %>
                   <select id="myList" name="myList" class="form-control col-md-6"
                     value="<%= typeof averageActivityLevel != 'undefined' ? averageActivityLevel : '' %>">
@@ -177,22 +185,32 @@ function message(){
                   <small id="myList" class="form-text text-muted">Helps us understand your typical day.</small>
                 </div>
                 <div class="form-group">
-  
-                  <label>Exercise *</label><br>
+                    <label>Exercise</label><br>
                     <%- include ('../partials/messages') %>
-                    <select id="myList" name="myList" class="form-control col-md-6"
-                    value="<%= typeof Exercise != 'undefined' ? Exercise : '' %>">
-                      <option value="Step Count">Step Count</option>
-                      <option value="Water"> Water</option>
-                      <option value="Sleep Hours">Sleep Hours</option>
-                      <option value="Me Time">Me Time</option>
-                      <option value="Fruits">Fruits</option>
-                      <option value="Vegetables">Vegetables</option>
+                    <!-- <input value="<%= typeof exercise != 'undefined' ? exercise : '' %>"> -->
+                    <!-- <select id="myList" name="exercise" class="form-control"> -->
+                    
+                      <!-- <option value="Step Count">Step Count</option> -->
+                      <!-- <option value="Water"> Water</option> -->
+                      <!-- <option value="Sleep Hours">Sleep Hours</option> -->
+                      <!-- <option value="Me Time">Mindful Minutes</option> -->
+                      <!-- <option value="Fruits">Fruits</option> -->
+                      <!-- <option value="Vegetables">Vegetables</option> -->
+                      <form action="/action_page.php" value="<%= typeof exercise != 'undefined' ? exercise : '' %>">
+                        <input type="checkbox" id="Step Count" name="Step Count" value="Step Count">
+                        <label for="Step Count"> Step Count</label><br>
+                        <input type="checkbox" id="Running" name="Running" value="Running">
+                        <label for="Running"> Running</label><br>
+                        <input type="checkbox" id="Bicycling" name="Bicycling" value="Bicycling">
+                        <label for="Bicycling"> Bicycling</label><br>
+                        <input type="checkbox" id="Yoga" name="Yoga" value="Yoga">
+                        <label for="Yoga"> Yoga</label><br>
+
                     </select>
-                    <small id="myList" class="form-text text-muted">Helps us to understand Exercise type.</small>
+                    <small class="form-text text-muted">Helps us to understand Exercise type.</small>
                 </div>
                 <div class="form-group">
-                  <label>Country *</label>
+                  <label>Country</label>
                     <%- include ('../partials/messages') %>
                   <select id="country" class="form-control" name="country">
                     <!-- <option value="<%= country %>"><%= country %></option> -->
@@ -460,7 +478,7 @@ function message(){
               </div>
               <div class="form-group">
                 <%- include ('../partials/messages') %>
-                <label for="state">State *</label>
+                <label for="state">State</label>
                 <input 
                   class="form-control" 
                   id="state"
@@ -504,6 +522,8 @@ function message(){
 }
 </style>
 <script type="text/javascript">
+  let age = "<%= age %>"
+  console.log(age,"-----------age");
   const country = "<%= country %>"
   const averageActivityLevel = "<%= averageActivityLevel %>"
   const dateOfBirth = "<%= dateOfBirth %>"
@@ -515,9 +535,21 @@ function message(){
   $('#dateText').val(dateFormat)
   $('#country').val(country)
   $('#myList').val(averageActivityLevel)
-  // $(function () {
-  //   $('#datetimepicker1').datetimepicker({
-  //     format: 'MM/DD/YYYY'
-  //   });
-  // });
+  // let age="Age";
+
+function calAge(){
+  console.log(Date.parse(document.getElementById("dateText").value))
+  let dob = Date.parse(document.getElementById("dateText").value)
+
+  let diff = Date.now() - dob;
+  var ageDate = new Date(diff); // miliseconds from epoch
+  age = Math.abs(ageDate.getUTCFullYear() - 1970)
+  console.log(age);
+  document.getElementById("age").value = age
+  return age
+}
+
+function message(){
+  alert("User Details Updated")
+}
 </script>
