@@ -77,14 +77,16 @@ exports.getUserProfile = (req, res) => {
                 country,
                 state
             } = result[0];
-            console.log(userName, admin, email, fullName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, country, state)
+            let [firstName, lastName] = fullName.split(' ')
+            console.log(userName, admin, email, firstName,lastName, gender, dateOfBirth, age, currentWeight, desiredWeight, height, country, state)
             res.render('userViews/userProfile', {
                 layout: 'layouts/userLayout',
                 title: 'User Profile',
                 userName,
                 admin,
                 email,
-                fullName,
+                firstName,
+                lastName,
                 gender,
                 dateOfBirth,
                 age,
@@ -107,10 +109,11 @@ exports.postUserProfile = (req, res) => {
     let userId = req.session.userId;
     console.log(req.body, "---------req.body");
     let {
-        fullName,gender,dateOfBirth, age,
+        firstName,lastName,gender,dateOfBirth, age,
         email,        currentWeight,        desiredWeight,
         height,        country,        state
     } = req.body;
+    let fullName = firstName + ' ' + lastName
     console.log(fullName, gender, dateOfBirth, age, email, currentWeight, desiredWeight, height, country, state);
     height = +height
     console.log(height,"--------int height");

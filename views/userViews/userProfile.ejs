@@ -9,17 +9,16 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="userName">First Name</label>
-                      <input type="text" value="<%= typeof fullName != 'undefined' ? fullName : '' %>"
-                        class="form-control" id="full name" aria-describedby="userNameHelp" placeholder="Full Name"
-                        name="fullName">
-                      <small id="userNameHelp" class="form-text text-muted">
-                        <%- include ('../partials/messages') %>
-                      </small>
+                      <label for="firstName">First Name</label>
+                      <input type="text" value="<%= typeof firstName != 'undefined' ? firstName : '' %>"
+                        class="form-control" id="first name" aria-describedby="userNameHelp" placeholder="First Name"
+                        name="firstName">
                     </div>
                     <div class="form-group">
-                      <label for="userLastName">Last Name</label>
-                      <input type="text">
+                      <label for="lastName">First Name</label>
+                      <input type="text" value="<%= typeof lastName != 'undefined' ? lastName : '' %>"
+                        class="form-control" id="last name" aria-describedby="userNameHelp" placeholder="Last Name"
+                        name="lastName">
                     </div>
                     <div class="form-group">
                       <label for="userName">Gender</label>
