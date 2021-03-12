@@ -5,7 +5,7 @@
         <h2><b>Challenge Management</b></h2>
       </div>
       <div class="col-sm-6">
-        <button type="button" class="btn btn-primary" onclick="location.href = '/addChallenge'">Add New
+        <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/addChallenge'">Add New
           Challenge</button>
       </div>
     </div>
@@ -47,14 +47,14 @@
 
         <td>
           <form action="/editChallenge/<%= result[i].challengeId %>" method="get">
-            <a href="/editChallenge/<%= result[i].challengeId %>" > Edit </a> 
+            <a href="/editChallenge/<%= result[i].challengeId %>" class="btn btn-sm btn-md btn-info" > Edit </a> 
           </form> 
         </td>
 
 
         <td>
           <form action="/deleteChallenge/<%= result[i].challengeId %>" method="post">
-            <input type="submit" onclick="startCount()" value="Delete" class="btn btn-danger"></input>
+            <input type="submit" onclick="startCount()" value="Delete" class="btn btn-sm btn-md  btn-danger"></input>
           </form>
         </td>
 
