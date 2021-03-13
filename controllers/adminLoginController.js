@@ -1,8 +1,8 @@
 const db = require('../database');
 // ../database
-const fastcsv = require("fast-csv");
+//const fastcsv = require("fast-csv");
 const fs = require("fs");
-// const ws = fs.createWriteStream("C:/Users/s538107/Downloads/usermetrics_mysql_fastcsv.csv");
+//const ws = fs.createWriteStream("usermetrics_mysql_fastcsv.csv");
 
 exports.getAdminLogin = (req, res) => {
     res.render('adminViews/adminLogin', {
@@ -180,6 +180,76 @@ exports.deleteUser = (req, res) => {
     });
 };
 
+
+exports.monthly = (req, res) => {
+
+    var query = `select 
+                    usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                    usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                    usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                    from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where MONTH(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = MONTH(curdate());`
+
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        else {
+            //console.log(result);
+            //console.log("monthly");
+            res.render('adminViews/monthlyAnalytics', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                obj: result
+            });
+        }
+    });
+}
+
+exports.daily = (req, res) => {
+
+    var query = `select 
+                    usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                    usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                    usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                    from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`
+
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        else {
+            //console.log(result);
+            //console.log("daily");
+            res.render('adminViews/dailyAnalytics', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                obj: result
+            });
+        }
+    });
+}
+
+exports.weekely = (req, res) => {
+
+    var query = `select 
+                    usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                    usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                    usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                    from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where WEEK(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = WEEK(curdate());`
+
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        else {
+            // console.log(result);
+            // console.log("monthly");
+            res.render('adminViews/weekelyAnalytics', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                obj: result
+            });
+        }
+    });
+}
+
 // exports.getCSV = (req, res) => {
 
     
@@ -211,15 +281,17 @@ exports.deleteUser = (req, res) => {
 // }
 
 exports.getAdminAnalytics = (req, res) => {
-    var query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+    var query = `select 
+                 usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                 usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
                  usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
                  usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
-                 from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`
+                 from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId;`
 
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
-            console.log(result);
+            //console.log(result);
 
             res.render('adminViews/adminAnalyticsOverAll', {
                 layout: 'layouts/adminLayout',
@@ -250,7 +322,7 @@ exports.getAdminAnalyticsOverAll = (req, res) => {
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
-            console.log(result);
+            //console.log(result);
 
             res.render('adminViews/adminAnalyticsOverAll', {
                 layout: 'layouts/adminLayout',
@@ -264,6 +336,7 @@ exports.getAdminAnalyticsOverAll = (req, res) => {
 
 exports.getUserInfo = (req,res)=>{
     const userId = req.params.userId;
+    
 
     console.log(`**********  ${userId}   ***********`)
 

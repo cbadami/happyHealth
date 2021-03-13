@@ -1,33 +1,39 @@
 <div class="app-main__inner">
 
-  
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h2><b>OverAll Statistics Analytics</b></h2>
-                </div>
-                <div class="col-sm-1">
-                    <form action="/dailyAnalytics" method="get">
-                        <button type="submit" onclick="daily()" id="PopoverCustomT" class="btn btn-primary pull-left">daily</button>
-                    </form>
-                </div>
+    <!-- <div class="app-main__inner">
+        <h1> OverAll Statistics Weekely</h1>
 
-                <div class="col-sm-1">
-                    <form action="/weekelyAnalytics" method="get">
-                        <button type="submit" onclick="weekely()" id="PopoverCustomT" class="btn btn-primary pull-left">weekely</button>
-                    </form>
-                </div>
+        <form action="/monthlyAnalytics" method="get">
+            <button type="submit" onclick= "weekely()" id="PopoverCustomT" class="btn btn-primary btn-sm">Monthly</button>
+        </form>
 
-                <div class="col-sm-1">
-                    <form action="/monthlyAnalytics" method="get">
-                        <button type="submit" onclick="monthly()" id="PopoverCustomT" class="btn btn-primary pull-left">Monthly</button>
-                    </form>
-                </div>
+    </div> -->
+
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2><b>OverAll Statistics Analytics</b></h2>
+            </div>
+            <div class="col-sm-1">
+                <form action="/dailyAnalytics" method="get">
+                    <button type="submit" onclick="daily()" id="PopoverCustomT" class="btn btn-primary pull-left">daily</button>
+                </form>
+            </div>
+
+            <div class="col-sm-1">
+                <form action="/weekelyAnalytics" method="get">
+                    <button type="submit" onclick="weekely()" id="PopoverCustomT" class="btn btn-primary pull-left">weekely</button>
+                </form>
+            </div>
+
+            <div class="col-sm-1">
+                <form action="/monthlyAnalytics" method="get">
+                    <button type="submit" onclick="monthly()" id="PopoverCustomT" class="btn btn-primary pull-left">Monthly</button>
+                </form>
             </div>
         </div>
-        
-      
-   
+    </div>
+    
     </br>
     </br>
     <table class="table">
@@ -115,7 +121,7 @@
 
 
     <form action="/CSVManagement" method="get">
-        <button type="submit" onclick= "getCSV()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get CSV</button>
+        <button type="submit" onclick= "getCSV()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get CSV for this week</button>
     </form>
     
 </div>

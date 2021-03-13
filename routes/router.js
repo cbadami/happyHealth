@@ -125,6 +125,9 @@ router.get('/deleteUser/:userId', adminLoginController.deleteUser);
 router.get('/getAdminUserName/:userId', adminLoginController.getAdminUserName);
 router.get('/getUserTotalMetrics/:userId', adminLoginController.getUserTotalMetrics);
 // router.get('/CSVManagement', adminLoginController.getCSV);
+router.get('/monthlyAnalytics',adminLoginController.monthly);
+router.get('/dailyAnalytics',adminLoginController.daily);
+router.get('/weekelyAnalytics',adminLoginController.weekely);
 router.get('/editUserInfo/:userId', adminLoginController.getUserInfo);
 /**
  *  Admin user group management routes
