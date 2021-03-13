@@ -146,3 +146,23 @@ exports.addUserToChallenge = (req,res)=>{
 		}
 	})
 }
+
+
+exports.removeUser = (req,res)=>{
+	let userId = req.params.userId;
+	let challengeId = req.params.groupId;
+
+	console.log(userId, challengeId , " USER AND GROUP ID")
+
+	const deleteQuery = `DELETE from happyhealth.challengemembertbl where userId=${userId} and challengeId = ${challengeId}`;
+	db.query(deleteQuery, (err,result)=>{
+		if(err){
+			console.log(err, "-----------> Error while deleting")
+		}else{
+			console.log(result, "deleted successfully");
+			res.redirect(`/getChallengeUsers/${challengeId}`)
+		}
+	})
+
+}
+
