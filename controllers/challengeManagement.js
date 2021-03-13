@@ -1,4 +1,5 @@
 const db = require('../database');
+const moment = require('moment')
 
 
 let challengeNaam = '';
@@ -126,3 +127,22 @@ exports.getChallengeUsers = async (req, res) => {
 
 };
 
+
+exports.addUserToChallenge = (req,res)=>{
+	let userId = req.body.userId;
+	let challengeId = req.params.challengeId;
+	let joinedDate = moment(new Date()).format('L');
+	console.log(joinedDate)
+
+	let addUserQuery = 	`INSERT INTO happyhealth.challengemembertbl (userId, joinedDate, challengeId ) VALUES( ${userId}, '${joinedDate}' , ${challengeId} ); `
+
+	db.query(addUserQuery,(err,result)=>{
+		if(err){
+			console.log(err,"-------> error while adding user.")
+		}else{
+			console.log(result);
+			res.redirect(`/getChallengeUsers/${challengeId}`)
+
+		}
+	})
+}
