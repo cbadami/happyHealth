@@ -1,4 +1,5 @@
 const db = require('../database');
+const moment = require('moment')
 
 
 let challengeNaam = '';
@@ -125,4 +126,43 @@ exports.getChallengeUsers = async (req, res) => {
   });
 
 };
+
+
+exports.addUserToChallenge = (req,res)=>{
+	let userId = req.body.userId;
+	let challengeId = req.params.challengeId;
+	let joinedDate = moment(new Date()).format('L');
+	console.log(joinedDate)
+
+	let addUserQuery = 	`INSERT INTO happyhealth.challengemembertbl (userId, joinedDate, challengeId ) VALUES( ${userId}, '${joinedDate}' , ${challengeId} ); `
+
+	db.query(addUserQuery,(err,result)=>{
+		if(err){
+			console.log(err,"-------> error while adding user.")
+		}else{
+			console.log(result);
+			res.redirect(`/getChallengeUsers/${challengeId}`)
+
+		}
+	})
+}
+
+
+exports.removeUser = (req,res)=>{
+	let userId = req.params.userId;
+	let challengeId = req.params.groupId;
+
+	console.log(userId, challengeId , " USER AND GROUP ID")
+
+	const deleteQuery = `DELETE from happyhealth.challengemembertbl where userId=${userId} and challengeId = ${challengeId}`;
+	db.query(deleteQuery, (err,result)=>{
+		if(err){
+			console.log(err, "-----------> Error while deleting")
+		}else{
+			console.log(result, "deleted successfully");
+			res.redirect(`/getChallengeUsers/${challengeId}`)
+		}
+	})
+
+}
 
