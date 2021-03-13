@@ -24,22 +24,6 @@
               <p id="demo"></p>
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
-
-            <script>
-              let d = new Date();
-                          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-                          const dayNames =
-                            ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-                          let formatted_date =
-                            dayNames[d.getDay()] +
-                            ", " +
-                            months[d.getMonth()] +
-                            " " +
-                            d.getDate() +
-                            ", " +
-                            d.getFullYear();
-              document.getElementById("demo").innerHTML = formatted_date;
-            </script>
             <div class="form-row">
               <label for="username">Number of Hours </label>
               <input
