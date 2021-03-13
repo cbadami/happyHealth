@@ -3,11 +3,11 @@ const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 // var MemoryStore = require('memorystore')(session)
-var cookieSession = require('cookie-session');
-var bodyParser =  require('body-parser');
-var dotenv = require('dotenv');
+const cookieSession = require('cookie-session');
+const bodyParser =  require('body-parser');
+const dotenv = require('dotenv');
 const path = require('path');
 const colors = require('colors')
 
@@ -76,6 +76,13 @@ app.use(function (req, res, next) {
 
 // Routes
 app.use('/', require('./routes/router.js'));
+
+app.use((req,res)=>{
+  res.status(404).send({
+    status: 404,
+    Error: 'Page Not Found'
+  })
+})
 
 const PORT = process.env.PORT || 3000;
 

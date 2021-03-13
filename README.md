@@ -154,16 +154,31 @@ This article is a technical onboarding document that can help you write your own
 
 - [History UI Screens](https://app.moqups.com/aMyjQCLOHf/view/page/a477474a4)
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
-- [Me Time UI Screens Web and Mobile]()
+- [Mindful Minutes UI Screens Web and Mobile](https://app.moqups.com/aMyjQCLOHf/view/page/a185eb5d5)
 - Show your mind some love
 
-- Self Healing
-    Session
-	Science Behind it
-- Calming Music 
-- Sleep Well
-	Relaxing music
-- Tips & Advice
+- Mental Fitness
+	- Radical Self-Compassion(Tara Brach)
+	- The Confidence Series()
+	- Gratitude(Tamara Levitt)
+	- Creative Living Beyond Fear(Elizabeth Gilbert)
+	- Breaking Bad Habits(Dr. Judson Brewer)
+	- Discovering Happiness(Shawn Achor)
+
+- Sleep Stories
+
+- Music 
+	- Lake os Stars
+	- Skellig
+	- Alignment
+	- I am Home
+- Quick & Easy
+	- Calming Anxiety
+	- How are you feeling
+	- Mindful Walking
+	- Calm Light
+	- Deep Concentration
+- Love and Relationships
 
 ### Design Data
 

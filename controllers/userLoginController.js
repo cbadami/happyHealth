@@ -1,5 +1,5 @@
 const db = require('../database');
-
+const bcrypt = require('bcryptjs')
 
 exports.getUserLogin = (req, res) => {
     let success_msg = req.session.success_msg;
@@ -21,7 +21,7 @@ exports.getUserLogin = (req, res) => {
 };
 
 
-exports.postUserLogin = (req, res) => {
+exports.postUserLogin = async (req, res) => {
 
     const {
         username,
@@ -47,11 +47,15 @@ exports.postUserLogin = (req, res) => {
 
         let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'`;
 
-        db.query(queryString, function (err, result) {
+        db.query(queryString, async function (err, result) {
+
+            if(err){
+                console.log(err,"-----while login");
+            }
             console.log(result);
             if (result.length > 0) {
-
-                if (result[0]['password'] == password) {
+                const validPassword = await bcrypt.compare(password, result[0]['password']);
+                if (validPassword){
                     req.session.userId = result[0]['userId'];
                     res.redirect('userHome');
                 } else {
