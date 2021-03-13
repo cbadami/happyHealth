@@ -74,19 +74,7 @@
       </div>
 
 
-      <div class="form-group">
-        <label for="age">Age</label>
-        <input type="text" class="form-control col-md-6" id="age" placeholder="Age" name="age"
-          value="<%= typeof age != 'undefined' ? age : '' %>">
-      </div>
-      <div class="form-group">
-        <%- include ('../partials/messages') %>
-        <label for="email">Email Address</label>
-        <input type="email" name="email" placeholder="Enter your email address" class="form-control"
-          value="<%= typeof email != 'undefined' ? email : '' %>" required>
-      </div>
-    </div>
-    <div class="row">
+      <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <label for="currentWeight">Current Weight (lbs)</label>
