@@ -156,4 +156,9 @@ router.get('/addGroup', userGroupController.addGroup);
 router.get('/adminAnalytics', adminLoginController.getAdminAnalytics);
 router.get('/adminAnalyticsOverAll', adminLoginController.getAdminAnalyticsOverAll);
 
+/**
+ * Admin user announcement routes
+ */
+router.get('/adminAnnouncements', adminLoginController.getAdminAnnouncements);
+
 module.exports = router;
