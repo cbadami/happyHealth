@@ -112,6 +112,10 @@ router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge)
 router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge)
 router.get('/getChallengeUsers/:challengeId', challengeManagement.getChallengeUsers);
+
+router.post('/getChallengeUsers/:challengeId' , challengeManagement.addUserToChallenge);
+
+
 // router.get('/addUser', challengeManagement.addUser);
 
 
