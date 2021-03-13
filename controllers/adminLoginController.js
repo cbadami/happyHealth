@@ -368,6 +368,7 @@ exports.getUserInfo = (req,res)=>{
         }
     });
 };
+
 exports.getAdminUserName = (req, res) => {
     const userId = req.params.userId;
 
@@ -388,6 +389,14 @@ exports.getAdminUserName = (req, res) => {
             console.log('****getAdminUserName executed successfully****');
         }
     });
+};
+
+exports.getAdminAnnouncements = (req, res) => {
+        res.render('adminViews/adminAnnouncements', {
+            layout: 'layouts/adminLayout',
+            title: 'Admin Announcements'
+        });
+        console.log('****getAdminAnnouncements executed successfully****');
 };
 
 //     exports.getAdminUserName = (req, res) => {
