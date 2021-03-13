@@ -2,14 +2,14 @@
 
     <div class="table-title">
         <div class="row">
-          <div class="col-sm-6">
-            <h2><b>User Management</b></h2>
-          </div>
-          <!-- <div class="col-sm-6">
+            <div class="col-sm-6">
+                <h2><b>User Management</b></h2>
+            </div>
+            <!-- <div class="col-sm-6">
             <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/addUser'">Add New User</button>
           </div> -->
         </div>
-      </div>
+    </div>
     <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for users"> -->
     <!-- <h3 style="text-align: center;">User Management</h3> -->
     <!-- <div class="col-sm-12 col-md-12">
@@ -28,9 +28,9 @@
       
     </div>
     <br> -->
-   
+
     <div class="table-responsive">
-        
+
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -42,7 +42,7 @@
                     <!-- <th scope="col">Challenges</th> -->
                     <!-- <th scope="col">Profile</th> -->
                     <th scope="col" style="text-align:center">Actions</th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +51,9 @@
                         <th scope="row">
                             <%= i+1 %>
                         </th>
-                        <td><a href="/getAdminUserName/<%= result[i].userId%>"><%= result[i].userName%></a></td>
+                        <td><a href="/getAdminUserName/<%= result[i].userId%>">
+                                <%= result[i].userName%>
+                            </a></td>
                         <td>
                             <%= result[i].fullName%>
                         </td>
@@ -70,20 +72,20 @@
                             </form>
                         </td> -->
                         <td>
-                            <div class=row>
-                                <div class=col-md-6>
-                            <form action="editUserInfo/<%= result[i].userId%>" method="get">
-                                <button type="submit" id="PopoverCustomT-1"
-                                    class="btn btn-sm btn-md btn-info">Edit</button>
-                            </form>
-                        </div> 
-                        <div class=col-md-6>
-                                <form action="deleteUser/<%= result[i].userId%>" method="get">
+                            <!-- <div class=row> -->
+                            <!-- <div class=col-md-6>
+                                    <form action="editUserInfo/<%= result[i].userId%>" method="get">
+                                        <button type="submit" id="PopoverCustomT-1"
+                                            class="btn btn-sm btn-md btn-info">Edit</button>
+                                    </form>
+                                </div> -->
+                            <!-- <div class=col-md-6> -->
+                            <form action="deleteUser/<%= result[i].userId%>" method="get">
                                 <button type="submit" id="PopoverCustomT-1"
                                     class="btn btn-sm btn-md btn-danger">Delete</button>
                             </form>
-                        </div>
-                        </div>
+                            <!-- </div>
+                            </div> -->
                         </td>
                     </tr>
                     <% } %>

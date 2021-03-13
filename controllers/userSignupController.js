@@ -1,5 +1,5 @@
 const db = require('../database');
-
+const bcrypt = require('bcryptjs')
 
 exports.getSignup = (req, res) => {
     console.log(`inside get method of user signup`);
@@ -9,7 +9,7 @@ exports.getSignup = (req, res) => {
     });
 };
 
-exports.postSignup = (req, res) => {
+exports.postSignup = async (req, res) => {
 
     const {
         username,
@@ -72,8 +72,11 @@ exports.postSignup = (req, res) => {
     }
     console.log(`after errors fixed: ${errors} length ${errors.length}`);
 
+    const hashPassword = await bcrypt.hash(password, 12);
+    
+    console.log(hashPassword,"--------hashpassword");
     const insertQuery = `INSERT INTO  happyhealth.usertbl(userName,password,email) values(
-        '${username}','${password}','${email}');`;
+        '${username}','${hashPassword}','${email}');`;
 
     db.query(insertQuery, function (err, result) {
         if (err) {

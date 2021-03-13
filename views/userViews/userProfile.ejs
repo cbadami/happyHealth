@@ -65,6 +65,35 @@
                         <input type="email" name="email" placeholder="Enter your email address" class="form-control"
                           value="<%= typeof email != 'undefined' ? email : '' %>" required>
                     </div>
+                  </div>
+                  <div>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="age" >Age</label>
+                    <input type="text" class="form-control col-md-6" id="age" placeholder="Age" name="age" value="<%= typeof age != 'undefined' ? age : '' %>">
+                  </div>
+                  <div class="form-group">
+                    <%- include ('../partials/messages') %>
+                    <label for="email">Email Address</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      placeholder="Enter your email address" 
+                      class="form-control"
+                      value="<%= typeof email != 'undefined' ? email : '' %>" required>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="currentWeight">Current Weight</label>
+                        <input 
+                          type="number" 
+                          step="0.1" 
+                          name="currentWeight" 
+                          placeholder="Current weight in lbs"
+                          class="form-control" 
+                          value="<%= typeof currentWeight != 'undefined' ? currentWeight : '' %>" required>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">

@@ -1,28 +1,68 @@
 <div class="app-main__inner">
-    <div class="container-fluid">
-        
+    <div class="table-title">
         <div class="row">
-            
-            <div class="col-sm-4 card" style="background-color:rgb(226, 116, 116);" onclick="location.href = '/availableChallenges'">
-                <h4><strong>Available Challenges</strong></h4>
-                <img src="/static/assets//images/happyHealth/Available_Challenges.png" alt="user_stat" class="homeImage">
-            </div>
-            
-            <div class="col-sm-4 card" style="background-color:rgb(152, 120, 228);" onclick="location.href = '/activeChallenges'">
-                <h4><strong>Accepted Challenges</strong></h4>
-                <img src="/static/assets//images/happyHealth/bulb.png" alt="user_stat" class="homeImage">
-            </div>
-            
-            <div class="col-sm-4 card" style="background-color:rgb(159, 216, 112);" onclick="location.href = '/completedChallenges'">
-                <h4><strong>Completed Challenges</strong></h4>
-                <img src="/static/assets//images/happyHealth/success.png" alt="user_stat"  class="homeImage">
-            </div>
-
-            <div class="col-sm-4 card" style="background-color:rgb(110, 235, 224);" onclick="location.href = '/personalGoals'">
-                <h4><strong>Personal Goals</strong></h4>
-                <img src="/static/assets//images/happyHealth/personalGoal.png" alt="user_stat"  class="homeImage">
-            </div>
-    
+          <div class="col-sm-6">
+            <h2><b>Challenges</b></h2>
+          </div>
         </div>
+      </div>
+
+    <div class="table-responsive">
+         
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Sl.No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Metrics</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Accept</th>
+                    <th scope="col">Leave</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><span>1</span></td>
+                    <td><span>Run 2 Miles</span></td>
+                    <td><span>User needs to run 2 miles a day throughout the week</span></td>
+                    <td><span>Walking Challenge</span></td>
+                    <td><span>09/21/2020</span></td>
+                    <td><span>09/28/2020</span></td>
+                    <td><button type="button" class="btn btn-primary" id="button">Accept</button></td>
+                    <td><button type="button" class="btn btn-danger" id="button">Leave</button></td>
+                </tr>
+
+                <tr>
+                    <td><span>2</span></td>
+                    <td><span>Only Veg</span></td>
+                    <td><span>User needs to eat only veg</span></td>
+                    <td><span>Calories Burned Challenge</span></td>
+                    <td><span>01/11/2020</span></td>
+                    <td><span>02/11/2020</span></td>
+                    <td><button type="button" class="btn btn-primary" id="button">Accept</button></td>
+                    <td><button type="button" class="btn btn-danger" id="button">Leave</button></td>
+                </tr>
+
+
+                <tr>
+                    <td><span>3</span></td>
+                    <td><span>2 Gallons water</span></td>
+                    <td><span>User needs to drink 2 gallons of water everyday</span></td>
+                    <td><span>Sports Challenge</span></td>
+                    <td><span>01/10/2020</span></td>
+                    <td><span>02/10/2020</span></td>
+                    <td><button type="button" class="btn btn-primary" id="button">Accept</button></td>
+                    <td><button type="button" class="btn btn-danger" id="button">Leave</button></td>
+                </tr>
+
+
+               
+                
+
+            </tbody>
+        </table>
     </div>
-</div>
+</div>	
