@@ -77,12 +77,11 @@ app.use(function (req, res, next) {
 
 // Routes
 app.use('/', require('./routes/auth.js'));
-app.use('/',isAuth, require('./routes/user.js'));
-app.use('/',isAdmin, require('./routes/admin.js'));
-
-
+app.use('/',isAuth,require('./routes/user.js'));
+app.use('/',isAdmin,require('./routes/admin.js'),);
 
 app.use((req, res) => {
+  console.log("************No route***************");
   res.status(404).send({
     status: 404,
     Error: 'Page Not Found'

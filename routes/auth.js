@@ -9,12 +9,6 @@ const adminLoginController = require('../controllers/adminLoginController');
 const forgotPasswordController = require('../controllers/forgotPasswordController');
 const validationController = require('../controllers/validationController');
 const resetPasswordController = require('../controllers/resetPasswordController');
-const userGroupController = require('../controllers/userGroupController');
-const challengeManagement = require('../controllers/challengeManagement');
-const userChallengeController = require('../controllers/userChallengesController');
-
-
-
 
 /**
  * User Signup and login routes
