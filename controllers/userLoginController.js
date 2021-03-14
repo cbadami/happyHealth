@@ -57,7 +57,7 @@ exports.postUserLogin = async (req, res) => {
                 const validPassword = await bcrypt.compare(password, result[0]['password']);
                 if (validPassword){
                     req.session.userId = result[0]['userId'];
-                    res.redirect('userHome');
+                    res.redirect('home');
                 } else {
                     errors.push({
                         msg: 'Enter correct username or password'

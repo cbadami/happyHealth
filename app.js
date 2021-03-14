@@ -6,19 +6,19 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 // var MemoryStore = require('memorystore')(session)
 const cookieSession = require('cookie-session');
-const bodyParser =  require('body-parser');
+const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const path = require('path');
-const colors = require('colors')
+const colors = require('colors');
 
 
 const app = express();
 
 //.env setup
-dotenv.config({ path: '.env' })
+dotenv.config({ path: '.env' });
 
 // cookie parser
-app.use(cookieParser())
+app.use(cookieParser());
 
 // Passport Config
 // require('./config/passport')(passport);
@@ -28,7 +28,7 @@ app.use(cookieParser())
 // app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
 // app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 // app.use(express.static('public'))
-app.use('/static', express.static(__dirname + "/public"))
+app.use('/static', express.static(__dirname + "/public"));
 // Setting template engine
 app.use(expressLayouts);
 app.set('view options', {
@@ -57,7 +57,7 @@ app.use(cookieSession({
 
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}))
+}));
 
 // Passport middleware
 app.use(passport.initialize());
@@ -75,14 +75,16 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-app.use('/', require('./routes/router.js'));
+app.use('/',require('./routes/auth.js'))
+app.use('/', require('./routes/user.js'));
+app.use('/admin',require('./routes/admin.js'));
 
-app.use((req,res)=>{
+app.use((req, res) => {
   res.status(404).send({
     status: 404,
     Error: 'Page Not Found'
-  })
-})
+  });
+});
 
 const PORT = process.env.PORT || 3000;
 

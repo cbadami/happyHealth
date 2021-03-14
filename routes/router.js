@@ -126,6 +126,8 @@ router.get('/getAdminUserName/:userId', adminLoginController.getAdminUserName);
 router.get('/getUserTotalMetrics/:userId', adminLoginController.getUserTotalMetrics);
 // router.get('/CSVManagement', adminLoginController.getCSV);
 router.get('/editUserInfo/:userId', adminLoginController.getUserInfo);
+
+
 /**
  *  Admin user group management routes
  */
