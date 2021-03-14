@@ -66,18 +66,15 @@
 
             <div>
                 <!-- <h1> <b>Manage Users</b> </h1> -->
-                <h3>Challenge Name : <%= challengeData[0].challengeName %>
-                </h3>
-                <h5>Participant Type: <%= challengeData[0].participantType %>
-                </h5>
+                <h3>Challenge Name : <%= challengeData[0].challengeName %></h3>
             </div>
             
-            <form action="<%= challengeData[0].challengeId%>/addUser" method="POST">
+            <form action="<%= challengeData[0].challengeId%>" method="POST">
                 <div>
                     <label for="addUser"><strong>Select User: </strong> </label>
                     <select name="userId" class="form-control addUser">
                         <% for (var i=0; i < notJoinedUsers.length;i++) { %>
-                            <option value="<%= notJoinedUsers[i].userId %>">
+                            <option selected = "<%= notJoinedUsers[i].userId %>" value="<%= notJoinedUsers[i].userId %>">
                                 <%= notJoinedUsers[i].userName %>
                             </option>
                             <% } %>
@@ -109,7 +106,7 @@
                                 <%= joinedUsers[i].joinedDate%>
                             </td> -->
                             <td>
-                                <form action="<%= challengeData[0].challengeId%>/removeUser/<%= joinedUsers[i].userId%>" method="POST">
+                                <form action="/removeUser/<%= challengeData[0].challengeId%>/<%= joinedUsers[i].userId%>" method="POST">
                                     <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger">
                                         Remove</button>
                                 </form>
@@ -123,10 +120,12 @@
 
 
 </div>
+
 <script>
     const notJoinedUsers = "<%= notJoinedUsers[0].userName %>"
     console.log(notJoinedUsers,"-----------not Joined user");
 </script>
+
 <style>
     .addUser{
         width: 250px;

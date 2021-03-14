@@ -49,30 +49,16 @@
               document.getElementById("demo").innerHTML = formatted_date;
             </script>
             <div class="form-row">
-              <label for="username">Number of fruits eaten</label>
-              <input
-                type="number"
-                id="fruits"
-                name="fruits"
-                min="0"
-                class="form-control"
-                placeholder="0"
-                value="<%= typeof fruits != 'undefined' ? fruits : '' %>"
-              />
+              <label for="username">Number of Fruits Eaten</label>
+              <input type="number" id="fruits" name="fruits" min="0" class="form-control" placeholder="0"
+                value="<%= typeof fruits != 'undefined' ? fruits : '' %>" />
             </div>
             <div class="form-row">
-              <label for="password">Daily Goal</label>
-              <input
-                type="number"
-                id="fruitgoal"
-                name="fruitgoal"
-                min="0"
-                class="form-control"
-                placeholder="0"
-                value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>"
-              />
+              <label for="password">Personal Daily Goal</label>
+              <input type="number" id="fruitgoal" name="fruitgoal" min="0" class="form-control" placeholder="0"
+                value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>" />
             </div>
-            <div class="form-row">
+            <!-- <div class="form-row">
               <label for="password">Monthly Goal</label>
               <input
                 type="number"
@@ -83,16 +69,12 @@
                 placeholder="0"
                 value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>"
               />
-            </div>
+            </div> -->
             <div class="form-row"></div>
 
             <div class="form-row">
               <div class="col-lg-12">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  style="margin-top: 10px"
-                >
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px">
                   Update
                 </button>
               </div>

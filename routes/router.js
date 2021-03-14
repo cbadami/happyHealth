@@ -112,6 +112,11 @@ router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge)
 router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge)
 router.get('/getChallengeUsers/:challengeId', challengeManagement.getChallengeUsers);
+
+router.post('/getChallengeUsers/:challengeId' , challengeManagement.addUserToChallenge);
+router.post('/removeUser/:groupId/:userId', challengeManagement.removeUser )
+
+
 // router.get('/addUser', challengeManagement.addUser);
 
 
@@ -125,6 +130,9 @@ router.get('/deleteUser/:userId', adminLoginController.deleteUser);
 router.get('/getAdminUserName/:userId', adminLoginController.getAdminUserName);
 router.get('/getUserTotalMetrics/:userId', adminLoginController.getUserTotalMetrics);
 // router.get('/CSVManagement', adminLoginController.getCSV);
+router.get('/monthlyAnalytics',adminLoginController.monthly);
+router.get('/dailyAnalytics',adminLoginController.daily);
+router.get('/weekelyAnalytics',adminLoginController.weekely);
 router.get('/editUserInfo/:userId', adminLoginController.getUserInfo);
 
 
@@ -149,5 +157,10 @@ router.get('/addGroup', userGroupController.addGroup);
  */
 router.get('/adminAnalytics', adminLoginController.getAdminAnalytics);
 router.get('/adminAnalyticsOverAll', adminLoginController.getAdminAnalyticsOverAll);
+
+/**
+ * Admin user announcement routes
+ */
+router.get('/adminAnnouncements', adminLoginController.getAdminAnnouncements);
 
 module.exports = router;
