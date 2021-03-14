@@ -15,17 +15,6 @@ const userChallengeController = require('../controllers/userChallengesController
 
 
 
-
-/**
- * Sign up and login routes
- */
-router.get('/', userLoginController.getUserLogin);
-router.post('/', userLoginController.postUserLogin);
-router.get('/userHome', userHomeController.getUserHome);
-router.get('/userSignup', userSignupController.getSignup);
-router.post('/userSignup', userSignupController.postSignup);
-
-
 /**
  * Admin Home routes
  */

@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const path = require('path');
 const colors = require('colors');
+const {isAuth, isAdmin} = require('./middleware/auth.js');
 
 
 const app = express();
@@ -75,9 +76,11 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-app.use('/',require('./routes/auth.js'))
-app.use('/', require('./routes/user.js'));
-app.use('/admin',require('./routes/admin.js'));
+app.use('/', require('./routes/auth.js'));
+app.use('/',isAuth, require('./routes/user.js'));
+app.use('/',isAdmin, require('./routes/admin.js'));
+
+
 
 app.use((req, res) => {
   res.status(404).send({

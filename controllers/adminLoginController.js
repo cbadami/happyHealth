@@ -45,7 +45,9 @@ exports.postAdminLogin = async (req, res) => {
                 if(validPassword){
                     const userId = result[0]['userId'];
                     req.session.userId = userId;
-                    res.redirect('/adminHome');
+                    req.session.isLoggedIn = true;
+                    req.session.isAdmin = true;
+                    res.redirect('adminHome');
                     console.log('*****Admin Login successfully*****');
                 }else{
                     errors.push({

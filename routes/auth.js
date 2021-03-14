@@ -43,4 +43,11 @@ router.post('/resetPassword', resetPasswordController.postResetPassword);
  router.post('/adminLogin', adminLoginController.postAdminLogin);
 
 
+ /**
+  *  Log out route
+  */
+
+  router.get('/logout',userLoginController.getUserLogout)
+
+
 module.exports = router;
