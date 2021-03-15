@@ -8,10 +8,11 @@ const passwordController = require('../controllers/passwordController');
 /**
  * User Signup and login routes
  */
-router.get('/', authController.getUserLogin);
-router.post('/', authController.postUserLogin);
 router.get('/signup', userSignupController.getSignup);
 router.post('/signup', userSignupController.postSignup);
+router.get('/', authController.getUserLogin);
+router.post('/', authController.postUserLogin);
+
 
 /**
  * Admin login and home routes
