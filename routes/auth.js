@@ -1,47 +1,41 @@
 const express = require('express');
 const router = express.Router();
 
-
-const userLoginController = require('../controllers/userLoginController');
-const userHomeController = require('../controllers/userHomeController');
+const authController = require('../controllers/authController');
 const userSignupController = require('../controllers/userSignupController');
-const adminLoginController = require('../controllers/adminLoginController');
-const forgotPasswordController = require('../controllers/forgotPasswordController');
-const validationController = require('../controllers/validationController');
-const resetPasswordController = require('../controllers/resetPasswordController');
+const passwordController = require('../controllers/passwordController');
 
 /**
  * User Signup and login routes
  */
-router.get('/', userLoginController.getUserLogin);
-router.post('/', userLoginController.postUserLogin);
-router.get('/userSignup', userSignupController.getSignup);
-router.post('/userSignup', userSignupController.postSignup);
-
-
-/**
- * user forgot password routes
- */
-router.get('/forgotPassword', forgotPasswordController.getForgotPassword);
-router.post('/forgotPassword', forgotPasswordController.postForgotPassword);
-router.get('/validationPage', validationController.getValidation);
-router.post('/validationPage', validationController.postValidation);
-router.get('/resetPassword', resetPasswordController.getResetPassword);
-router.post('/resetPassword', resetPasswordController.postResetPassword);
-
+router.get('/', authController.getUserLogin);
+router.post('/', authController.postUserLogin);
+router.get('/signup', userSignupController.getSignup);
+router.post('/signup', userSignupController.postSignup);
 
 /**
  * Admin login and home routes
  */
- router.get('/adminLogin', adminLoginController.getAdminLogin);
- router.post('/adminLogin', adminLoginController.postAdminLogin);
+router.get('/adminLogin', authController.getAdminLogin);
+router.post('/adminLogin', authController.postAdminLogin);
 
 
- /**
-  *  Log out route
-  */
+/**
+ *  Log out route
+ */
 
-  router.get('/logout',userLoginController.getUserLogout)
+router.get('/logout', authController.getLogout);
+
+/**
+ *  Forgot Password routes
+ */
+router.get('/forgotPassword', passwordController.getForgotPassword);
+router.post('/forgotPassword', passwordController.postForgotPassword);
+router.get('/validationPage', passwordController.getValidation);
+router.post('/validationPage', passwordController.postValidation);
+router.get('/resetPassword', passwordController.getResetPassword);
+router.post('/resetPassword', passwordController.postResetPassword);
+
 
 
 module.exports = router;
