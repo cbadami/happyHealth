@@ -2,34 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 
-const userLoginController = require('../controllers/userLoginController');
-const userHomeController = require('../controllers/userHomeController');
-const userSignupController = require('../controllers/userSignupController');
-const adminLoginController = require('../controllers/adminLoginController');
-const forgotPasswordController = require('../controllers/forgotPasswordController');
-const validationController = require('../controllers/validationController');
-const resetPasswordController = require('../controllers/resetPasswordController');
-const userGroupController = require('../controllers/userGroupController');
-const challengeManagement = require('../controllers/challengeManagement');
-const userChallengeController = require('../controllers/userChallengesController');
 
+const userHomeController = require('../controllers/user/userHomeController')
+const userProfileController = require('../controllers/user/userProfileController')
+const userChallengeController = require('../controllers/user/userChallengeController')
+const userNotificationController = require('../controllers/user/userNotificationController')
 
 
 /**
- * Home route
+ * User home routes
  */
 router.get('/home', userHomeController.getUserHome);
 
-
-/**
- * User Home routes
- */
-router.get('/userProfile', userHomeController.getUserProfile);
-router.post('/userProfile', userHomeController.postUserProfile);
-router.get('/userInfo',userHomeController.getUserInfo);
-
-router.get('/userChallenges', userHomeController.getUserChallenges);
-router.get('/userMoreChallenges', userHomeController.getUserMoreChallenges);
 
 router.get('/userStep', userHomeController.getUserStep);
 router.post('/userStep', userHomeController.postUserStep);
@@ -49,29 +33,36 @@ router.post('/userFruits', userHomeController.postUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 router.post('/userVegetables', userHomeController.postUserVegetables);
 
-router.get('/notifications', userHomeController.getNotifications);
+
+/**
+ * User Profile routes
+ */
+ router.get('/userInfo',userProfileController.getUserInfo);
+ router.get('/userProfile', userProfileController.getUserProfile);
+ router.post('/userProfile', userProfileController.postUserProfile);
+
 
 
 /**
  * User Challenges
  */
 
+ router.get('/userChallenges', userChallengeController.getUserChallenges);
+ router.get('/userMoreChallenges', userChallengeController.getUserMoreChallenges);
  router.get('/activeChallenges', userChallengeController.getActiveChallenges);
  router.get('/availableChallenges', userChallengeController.getAvailableChallenges);
  router.get('/completedChallenges', userChallengeController.getCompletedChallenges);
  router.post('/challengeAccepted/:challengeId', userChallengeController.setChallengesAccept);
  router.get('/personalGoals', userChallengeController.getPersonalGoals);
- 
+
+
  /**
-  * User Groups 
+  * User Notification Controller
   */
- router.post('/userGroups/:groupId', userHomeController.joinGroup); // TO join Group
- router.get('/availableGroups', userHomeController.getAvailableGroups)
- router.get("/joinedGroups", userHomeController.getJoinedGroups);
- router.get('/createNewGroup', userHomeController.getCreateGroupPage);
- router.post('/createNewGroup', userHomeController.addNewUserGroup);
- router.post('/leaveGroup/:groupId', userHomeController.leaveGroup)
- router.get('/joinedUsers/:groupId', userHomeController.getJoinedUsers );
+ 
+router.get('/notifications', userNotificationController.getNotifications);
+
+
 
 
 module.exports = router;
