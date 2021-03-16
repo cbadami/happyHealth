@@ -231,5 +231,17 @@ CREATE TRIGGER before_user_update
 	date = DATE_FORMAT(NOW(), '%m/%d/%Y');
 
 
+--
+-- ********************************** Table structure for table announcementsTbl *************************
+--
+
+DROP TABLE IF EXISTS announcementsTbl;
+CREATE TABLE announcementsTbl (
+  userId int NOT NULL,
+  msgId int AUTO_INCREMENT,
+  msg varchar(500) DEFAULT NULL,
+  PRIMARY KEY (msgId),
+  FOREIGN KEY (userId) REFERENCES userTbl(userId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
