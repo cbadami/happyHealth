@@ -237,11 +237,18 @@ CREATE TRIGGER before_user_update
 
 DROP TABLE IF EXISTS announcementsTbl;
 CREATE TABLE announcementsTbl (
-  userId int NOT NULL,
-  msgId int AUTO_INCREMENT,
-  msg varchar(500) DEFAULT NULL,
-  PRIMARY KEY (msgId),
-  FOREIGN KEY (userId) REFERENCES userTbl(userId)
+  messageId int AUTO_INCREMENT,
+  title varchar(100) NOT NULL,
+  message varchar(500) DEFAULT NULL,
+  userId int DEFAULT NULL,
+  PRIMARY KEY (messageId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Sets the start number 3001 for announcements Table:
+ALTER TABLE announcementsTbl AUTO_INCREMENT=3001;
 
+--
+-- Dumping data for table announcementsTbl
+--
+INSERT INTO announcementsTbl(title,message,userId) VALUES('Title test','This is message',2);
+INSERT INTO announcementsTbl(title,message) VALUES('Everyone Title','This message for everyone');
