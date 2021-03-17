@@ -14,7 +14,7 @@ CREATE TABLE userTbl (
   password varchar(100) DEFAULT NULL,
   admin varchar(3) DEFAULT NULL,
   email varchar(25) DEFAULT NULL UNIQUE,
-  fullName varchar(25) DEFAULT NULL,
+  fullName varchar(25) DEFAULT '',
   gender varchar(12) DEFAULT NULL,
   dateOfBirth varchar(12) DEFAULT NULL,
   age int DEFAULT 0,

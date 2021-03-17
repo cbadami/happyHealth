@@ -10,8 +10,11 @@
                                 <img src="/static/assets/images/happyHealth/userIcon3.png" alt="image not found"
                                     width="170">
                                 <div class="mt-3">
-                                    <h4><%= result[0].fullName%></h4>
-                                    <p class="text-secondary mb-1">@<%= result[0].userName %></p>
+                                    <h4>
+                                        <%= result[0].fullName %>
+                                    </h4>
+                                    <p class="text-secondary mb-1">@<%= result[0].userName %>
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -59,21 +62,25 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">First Name:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= result[0].fullName.split(" ")[0]%>
+                                <% if(Boolean(result[0].fullName.split(' ')[0])) { %>
+                                <div class="col-sm-9 text-secondary"> 
+                                    <%= result[0].fullName.split(' ')[0] %>
                                 </div>
+                                <% } %>
                             </div>
                             <hr>
-                            <div class="row">
+                            <div class=" row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Last Name:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= result[0].fullName.split(" ")[1]%>
-                                </div>
+                                <% if(Boolean(result[0].fullName.split(' ')[1])) { %>
+                                    <div class="col-sm-9 text-secondary"> 
+                                        <%= result[0].fullName.split(' ')[1] %>
+                                    </div>
+                                    <% } %>
                             </div>
                             <hr>
-                            <div class="row">
+                            <div class=" row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Email:</h6>
                                 </div>
