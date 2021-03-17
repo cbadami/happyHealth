@@ -62,22 +62,18 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">First Name:</h6>
                                 </div>
-                                <% if(Boolean(result[0].fullName.split(' ')[0])) { %>
-                                <div class="col-sm-9 text-secondary"> 
+                                <div class="col-sm-9 text-secondary">
                                     <%= result[0].fullName.split(' ')[0] %>
                                 </div>
-                                <% } %>
                             </div>
                             <hr>
                             <div class=" row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Last Name:</h6>
                                 </div>
-                                <% if(Boolean(result[0].fullName.split(' ')[1])) { %>
                                     <div class="col-sm-9 text-secondary"> 
                                         <%= result[0].fullName.split(' ')[1] %>
                                     </div>
-                                    <% } %>
                             </div>
                             <hr>
                             <div class=" row">
