@@ -20,7 +20,7 @@ exports.postForgotPassword = (req, res) => {
     });
   }
   else {
-    
+
     const queryString = `SELECT * FROM happyhealth.usertbl WHERE email = '${email}' Limit 1 `;
     db.query(queryString, function (err, result) {
       console.log(`forgot password ${JSON.stringify(result)}`);
@@ -50,71 +50,79 @@ exports.postForgotPassword = (req, res) => {
 
 
 exports.getResetPassword = (req, res) => {
-    const userId = req.session.userId;
-    console.log(`under get reset password ${userId}`);
-    res.render('resetPassword',{layout:'layouts/mainLayout', title:'Reset Password'});
+  const userId = req.session.userId;
+  console.log(`under get reset password ${userId}`);
+  res.render('resetPassword', { layout: 'layouts/mainLayout', title: 'Reset Password' });
 
 };
 
 exports.postResetPassword = (req, res) => {
-    const userId = req.session.userId;
-    const { password, password2 } = req.body;
-    let errors = [];
-    let success_msg;
-    if (!password || !password2) {
-        errors.push({ msg: 'Please enter all fields' });
-    }
-    else {
+  const userId = req.session.userId;
+  const { password, password2 } = req.body;
+  let errors = [];
+  let success_msg;
+  if (!password || !password2) {
+    errors.push({ msg: 'Please enter all fields' });
+  }
+  else {
 
-        if (password.length > 15) {
-            errors.push({ msg: 'Password must be below 15 characters' });
-        }
-        else if (password.length < 8) {
-            errors.push({ msg: 'Password must be at least 8 characters' });
-        }
-        if (password != password2) {
-            errors.push({ msg: 'Passwords not matched' });
-        }
+    if (password.length > 15) {
+      errors.push({ msg: 'Password must be below 15 characters' });
     }
-
-    if (errors.length > 0) {
-        res.render('resetPassword',{layout:'layouts/mainLayout', title:'Reset Password',
-            errors,
-            password,
-            password2
-        });
+    else if (password.length < 8) {
+      errors.push({ msg: 'Password must be at least 8 characters' });
     }
-    else {
+    if (password != password2) {
+      errors.push({ msg: 'Passwords not matched' });
+    }
+  }
 
-        const updateQuery = `UPDATE happyhealth.usertbl
+  if (errors.length > 0) {
+    res.render('resetPassword', {
+      layout: 'layouts/mainLayout', title: 'Reset Password',
+      errors,
+      password,
+      password2
+    });
+  }
+  else {
+
+    const updateQuery = `UPDATE happyhealth.usertbl
             SET 
                 password = '${password}'
             WHERE
                 userId = '${userId}';`;
-        db.query(updateQuery, function (err, result) {
-            if (err) console.log(`${err}`);
-            console.log("1 record updated");
-            success_msg1 = 'Password changed sucessfully';
-            req.session.success_msg = success_msg1;
-            res.redirect('/');
-        });
-    }
+    db.query(updateQuery, function (err, result) {
+      if (err) console.log(`${err}`);
+      console.log("1 record updated");
+      success_msg1 = 'Password changed sucessfully';
+      req.session.success_msg = success_msg1;
+      res.redirect('/');
+    });
+  }
 
 };
 
 const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport')
 
 let generateCode;
 
 const sendEmail = (userEmail, generateCode) => {
 
-  const mailTransporter = nodemailer.createTransport({
-    service: 'gmail',
+  // const mailTransporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: 'happyhealthgdp@gmail.com',
+  //     pass: 'Health@890'
+  //   }
+  // });
+
+  const mailTransporter = nodemailer.createTransport(sendgridTransport({
     auth: {
-      user: 'happyhealthgdp@gmail.com',
-      pass: 'Happyhealth123'
+      api_key: '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'
     }
-  });
+  }))
   const email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
   const mailDetails = {
     from: 'happyhealthgdp@gmail.com',
