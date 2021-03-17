@@ -5,8 +5,6 @@ DROP DATABASE IF EXISTS happyHealth;
 CREATE DATABASE happyHealth;
 USE happyHealth;
 
-
-
 -- ********************************** Table structure for table userTbl *****************************
 --
 DROP TABLE IF EXISTS userTbl;
@@ -42,8 +40,7 @@ height,country,state) VALUES
 ('David','Davidbhai','No','Davidbhai@gmail.com','David Warner','Male','12/6/1991',34,142,131,62,'Canada','Manitoba'),
 ('Richard','Richard456','No','Richard456@gmail.com','Richard Hoot','Male','11/04/1999',28,123,129,63,'United States','Kansas'),
 ('Joseph','Joseph123','No','Joseph123@gmail.com','Joseph Thompson','Male','08/23/1995',29,101,93,67,'India','Maharastra'),
-('Thomas','Thomasedison','No','Thomasedison@gmail.com','Thomas Edison','Male','10/12/1986',25,131,121,64,'Canada','Nova Scotia'),
-('harish24680','harish1234','Yes','harish24680@gmail.com','harish thadka','male','11/04/1995',28,100,120,60,'India','Telangana');
+('Thomas','Thomasedison','No','Thomasedison@gmail.com','Thomas Edison','Male','10/12/1986',25,131,121,64,'Canada','Nova Scotia');
 
 
 --
@@ -64,7 +61,7 @@ CREATE TABLE groupTbl (
 ALTER TABLE groupTbl AUTO_INCREMENT=1001;
 
 --
--- Dumping data for table group
+-- Dumping data for table groupm
 --
 
 INSERT INTO groupTbl (groupName,creator,createdDate) VALUES 
@@ -196,6 +193,8 @@ CREATE TABLE userMetricsTbl (
   fruitGoal int DEFAULT 0,
   veggies int DEFAULT 0,
   veggieGoal int DEFAULT 0,
+  physicalActivityMinutes int DEFAULT 0,
+  physicalActivityGoal int DEFAULT 0,
   PRIMARY KEY (userId,date),
   FOREIGN KEY (userId) REFERENCES userTbl(userId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -205,20 +204,19 @@ CREATE TABLE userMetricsTbl (
 --
 
 INSERT INTO userMetricsTbl VALUES 
-(1,'12/20/2020',1000,50,2000,5,10,6,10,6,8,6,8,5,10),
-(2,'12/20/2020',1200,60,2000,7,10,8,10,5,8,6,8,9,10),
-(3,'12/20/2020',1100,70,2000,4,10,4,10,6,8,8,8,10,10),
-(4,'12/20/2020',1500,80,2000,10,10,6,10,9,8,10,8,3,10),
-(5,'12/20/2020',1900,90,2000,12,10,5,10,8,12,8,12,5,10),
-(6,'12/20/2020',1500,50,2000,6,10,9,10,5,8,5,8,10,10),
-(7,'12/20/2020',1700,60,2000,8,10,5,10,8,8,9,8,9,10),
-(8,'12/20/2020',600,70,2000,9,10,7,10,4,8,7,8,11,10),
-(9,'12/20/2020',1500,80,2000,5,10,8,10,7,8,5,8,6,10),
-(10,'12/20/2020',800,90,2000,10,10,5,10,7,8,7,8,8,10),
-(1,'03/05/2021',1000,50,2000,5,10,6,10,6,8,6,8,5,10),
-(2,'03/05/2021',1200,60,2000,7,10,8,10,5,8,6,8,9,10),
-(3,'03/05/2021',1100,70,2000,4,10,4,10,6,8,8,8,10,10),
-(4,'03/05/2021',1500,80,2000,10,10,6,10,9,8,10,8,3,10);
+(1,'12/20/2020',1000,50,2000,5,10,6,10,6,8,6,8,5,10,20,20),
+(2,'12/20/2020',1200,60,2000,7,10,8,10,5,8,6,8,9,10,10,20),
+(3,'12/20/2020',1100,70,2000,4,10,4,10,6,8,8,8,10,10,30,30),
+(4,'12/20/2020',1500,80,2000,10,10,6,10,9,8,10,8,3,10,25,25),
+(5,'12/20/2020',1900,90,2000,12,10,5,10,8,12,8,12,5,10,30,30),
+(6,'12/20/2020',1500,50,2000,6,10,9,10,5,8,5,8,10,10,40,40),
+(7,'12/20/2020',1700,60,2000,8,10,5,10,8,8,9,8,9,10,15,15),
+(8,'12/20/2020',600,70,2000,9,10,7,10,4,8,7,8,11,10,15,15),
+(9,'12/20/2020',1500,80,2000,5,10,8,10,7,8,5,8,6,10,15,15),
+(1,'03/05/2021',1000,50,2000,5,10,6,10,6,8,6,8,5,10,15,15),
+(2,'03/05/2021',1200,60,2000,7,10,8,10,5,8,6,8,9,10,15,15),
+(3,'03/05/2021',1100,70,2000,4,10,4,10,6,8,8,8,10,10,15,15),
+(4,'03/05/2021',1500,80,2000,10,10,6,10,9,8,10,8,3,10,15,15);
 
 --
 -- ********************************** Trigger befor insert into usertbl *************************
