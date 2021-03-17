@@ -48,8 +48,7 @@ router.post('/editChallenge/:cid', challengeManagement.updateChallenge);
 router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge);
 router.get('/getChallengeUsers/:challengeId', challengeManagement.getChallengeUsers);
 // router.get('/addUser', challengeManagement.addUser);
-
-
+router.post('/getChallengeUsers/:challengeId' , challengeManagement.addUserToChallenge);
 /**
  * Admin user analytics routes
  */
