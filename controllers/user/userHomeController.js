@@ -391,11 +391,10 @@ exports.getUserPhysicalActivity = (req, res) => {
             console.log(err);
         } else {
             console.log(result, '--------db user table result');
-                const {
+            const {
                 physicalActivityMinutes,
                 physicalActivityGoal
             } = result[0];
-            
             res.render('userViews/userPhysicalActivity', {
                 layout: 'layouts/userLayout',
                 title: 'User Physical Activity',
@@ -406,6 +405,7 @@ exports.getUserPhysicalActivity = (req, res) => {
     });
 
 };
+
 
 exports.postUserPhysicalActivity = (req, res) => {
     let userId = req.session.userId;
@@ -423,8 +423,8 @@ exports.postUserPhysicalActivity = (req, res) => {
             title: 'User Physical Activity'
         });
     }
-    var vegQuery = `UPDATE happyhealth.usermetricstbl SET physicalActivityMinutes = ${physicalActivityMinutes}, physicalActivityGoal = ${physicalActivityGoal} WHERE userId = ${userId};`;
-    db.query(activityQuery, function (err, result) {
+    var ppQuery = `UPDATE happyhealth.usermetricstbl SET physicalActivityMinutes = ${physicalActivityMinutes}, physicalActivityGoal = ${physicalActivityGoal} WHERE userId = ${userId};`;
+    db.query(ppQuery, function (err, result) {
         if (err) {
             console.log(err);
         } else {
@@ -433,4 +433,3 @@ exports.postUserPhysicalActivity = (req, res) => {
     });
 
 };
-
