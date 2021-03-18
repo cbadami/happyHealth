@@ -1,82 +1,43 @@
 <div class="app-main__inner">
   <section>
-    <div class="form-group">
-      <%- include ('../partials/messages') %>
-    </div>
-    <h2 class="d-flex justify-content-center py-3">Today's Goals</h2>
     <div class="container app-container-wrapper">
-      <div class="alert alert-warning text-center " id="alert_goal" role="alert">
-        <strong> Today's Goal is not yet set ! Set today Goal below.</strong>
-      </div>
-
-    <div class="row justify-content-center"> 
-      <h5 for="dateText"> &nbsp; <span id="demo"></span></h5>
-      <div class="col-lg-12 col-md-12">
-        <div class="row justify-content-center">
-        <div class="col-md-5">
-          <form method="POST">
-            <div class="col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <form method="POST" class="my-5" action="userStep">
             <div class="form-group">
-              <label for="password">Number of Steps:</label>
-              <input type="number" id="stepGoal" name="stepGoal" min="0" class="form-control" placeholder="0"
-                value="<%= typeof stepGoal != 'undefined' ? stepGoal : '' %>" />
-            </div>
-            <div class="co-md-6">
-              <button class="btn btn-primary">Lock Goal</button>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-row">
-              <label for="username">Percentage of goal attained so far:</label>
-              <input type="number" id="stepCount" min="0" name="stepCount" class="form-control"
-                oninput="stepConverter(this.id,this.value)" onchange="stepConverter(this.id,this.value)"
-                value="<%= typeof stepCount != 'undefined' ? stepCount : '' %>" />
+              <%- include ('../partials/messages') %>
+              <h2 class="d-flex justify-content-center py-3">Step Count</h2>
             </div>
             <div class="form-row">
-              <label for="username">Total Walking Distance (in Miles):</label>
-              <input type="number" id="stepDistance" min="0" name="stepDistance" placeholder="In miles"
-                class="form-control" oninput="stepConverter(this.id,this.value)"
-                onchange="stepConverter(this.id,this.value)"
-                value="<%= typeof stepDistance != 'undefined' ? stepDistance : '' %>" />
-
-              <script>
-                function stepConverter(source, valNum) {
-                  valNum = parseFloat(valNum);
-
-                  var inputGrams = document.getElementById("stepCount");
-                  var inputStones = document.getElementById("stepDistance");
-                  if (source == "stepCount") {
-                    inputStones.value = (valNum * 0.0005).toFixed(2);
-                  }
-                  if (source == "stepDistance") {
-                    inputGrams.value = (valNum * 2000).toFixed(2);
-                  }
-                }
-              </script>
+              <label for="dateText"> &nbsp; </label>
+              <p id="demo"></p>
+              <!-- <input  id="demo" class="form-control" /> -->
             </div>
-            <p>Note: Here 1 Mile = 2000 Steps on average</p>
-              <div class="col-lg-12">
-                <button type="submit" class="btn btn-md btn-primary" >
-                  Update<i class="fa fa-pen-alt"></i>
-                </button>
-              </div>
-          </div>
-          </form>
-          <div class="col-md-12">
-            <h4>The goal reached currently: <label id="goal_amount">10</label></h4>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  </div>
-  </section>
-</div>
-<script>
-  let d = new Date();
-              const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-              const dayNames =
-                ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            <script>
+              let d = new Date();
+              const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ];
+              const dayNames = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ];
               let formatted_date =
                 dayNames[d.getDay()] +
                 ", " +
@@ -85,5 +46,51 @@
                 d.getDate() +
                 ", " +
                 d.getFullYear();
-  document.getElementById("demo").innerHTML = formatted_date;
-</script>
+              document.getElementById("demo").innerHTML = formatted_date;
+            </script>
+
+            <div class="form-row">
+              <label for="username">Number of Steps</label>
+              <input
+                type="number"
+                id="stepCount"
+                min="0"
+                name="stepCount"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof stepCount != 'undefined' ? stepCount : '' %>"
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="password">Personal Daily Goal</label>
+              <input
+                type="number"
+                min="0"
+                id="stepGoal"
+                name="stepGoal"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof stepGoal != 'undefined' ? stepGoal : '' %>"
+              />
+            </div>
+
+            <div class="form-row"></div>
+
+            <div class="form-row">
+              <div class="col-lg-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="margin-top: 10px"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
