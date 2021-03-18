@@ -1,6 +1,6 @@
 module.exports.isAuth = (req, res, next) => {
-    console.log(JSON.stringify(req.path), "--------session");
-    console.log(req.session.isLoggedIn, "--------req isLogged In");
+    console.log(JSON.stringify(req.path), "--------User Auth path");
+    console.log(JSON.stringify(req.session), "--------User session");
     if (!req.session.isLoggedIn) {
         res.redirect('/');
         return;
@@ -9,10 +9,16 @@ module.exports.isAuth = (req, res, next) => {
 };
 
 module.exports.isAdmin = (req, res, next) => {
-    console.log(JSON.stringify(req.session), "--------req admin sesssion");
+    console.log(JSON.stringify(req.path),"----------Admin auth path");
+    console.log(JSON.stringify(req.session), "--------Admin sesssion");
     if (!req.session.isAdmin) {
-        res.redirect('/');
-        return;
+        if(req.session.isLoggedIn){
+            res.redirect('/error')
+        }else{
+            res.redirect('/logout');
+            return;
+        }
+
     }
     next();
 };

@@ -110,23 +110,20 @@ let generateCode;
 
 const sendEmail = (userEmail, generateCode) => {
 
-  // const mailTransporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   auth: {
-  //     user: 'happyhealthgdp@gmail.com',
-  //     pass: 'Health@890'
-  //   }
-  // });
-
-  const mailTransporter = nodemailer.createTransport(sendgridTransport({
+  const mailTransporter = nodemailer.createTransport({
+    service: 'gmail',
     auth: {
-      api_key: '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'
+      user: 'happyhealthgdp@gmail.com',
+      pass: 'Health@890'
     }
-  }))
+  });
+
+  
+
   const email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
   const mailDetails = {
     from: 'happyhealthgdp@gmail.com',
-    to: userEmail,
+    to: 'harishthadkaus@gmail.com',
     subject: 'Happy Health forgot Password!',
     html: email
   };

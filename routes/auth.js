@@ -22,10 +22,11 @@ router.post('/adminLogin', authController.postAdminLogin);
 
 
 /**
- *  Log out route
+ *  Log out and error route
  */
 
 router.get('/logout', authController.getLogout);
+router.get('/error',authController.getError);
 
 /**
  *  Forgot Password routes
@@ -36,6 +37,8 @@ router.get('/validationPage', passwordController.getValidation);
 router.post('/validationPage', passwordController.postValidation);
 router.get('/resetPassword', passwordController.getResetPassword);
 router.post('/resetPassword', passwordController.postResetPassword);
+
+
 
 
 

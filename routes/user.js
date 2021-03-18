@@ -41,8 +41,6 @@ router.post('/userVegetables', userHomeController.postUserVegetables);
  router.get('/userProfile', userProfileController.getUserProfile);
  router.post('/userProfile', userProfileController.postUserProfile);
 
-
-
 /**
  * User Challenges
  */
