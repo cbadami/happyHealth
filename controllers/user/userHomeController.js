@@ -164,7 +164,7 @@ exports.postUserSleep = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/userHome');
+            res.redirect('/home');
         }
     });
 
@@ -216,13 +216,14 @@ exports.postUserHydration = (req, res) => {
         });
         return
     }
-    var hydrationQuery = `UPDATE happyhealth.usermetricstbl
+    let hydrationQuery = `UPDATE happyhealth.usermetricstbl
         SET water = ${water}, waterGoal = ${waterGoal} WHERE userId = ${userId} ;`;
     db.query(hydrationQuery, function (err, result) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/userHome');
+            console.log("----------susscesfully updated db");
+            res.redirect('/home');
         }
     });
 };
@@ -276,7 +277,7 @@ exports.postUserTrack = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/userHome');
+            res.redirect('/home');
         }
     });
 
@@ -330,7 +331,7 @@ exports.postUserFruits = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/userHome');
+            res.redirect('/home');
         }
     });
 
@@ -382,7 +383,7 @@ exports.postUserVegetables = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/userHome');
+            res.redirect('/home');
         }
     });
 
