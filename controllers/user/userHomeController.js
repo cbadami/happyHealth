@@ -15,7 +15,8 @@ exports.getUserHome = (req, res) => {
                 water,
                 meTime,
                 fruits,
-                veggies
+                veggies,
+                activity
             } = result[0];
             res.render('userViews/userHome', {
                 layout: 'layouts/userLayout',
@@ -25,7 +26,9 @@ exports.getUserHome = (req, res) => {
                 water,
                 meTime,
                 fruits,
-                veggies
+                veggies,
+                activity
+                
             });
         }
     });
