@@ -407,4 +407,30 @@ exports.getUserPhysicalActivity = (req, res) => {
 
 };
 
+exports.postUserPhysicalActivity = (req, res) => {
+    let userId = req.session.userId;
+    const {
+        physicalActivityMinutes,
+        physicalActivityGoal
+    } = req.body;
+    console.log("-------post user Physical Activity controller");
+    let errors = [];
+    if (!physicalActivityMinutes || !physicalActivityGoal) {
+        errors.push('Please enter all fields');
+        console.log(errors, "----------------errros");
+        res.render('userViews/userPhysicalActivity', {
+            layout: 'layouts/userLayout',
+            title: 'User Physical Activity'
+        });
+    }
+    var vegQuery = `UPDATE happyhealth.usermetricstbl SET physicalActivityMinutes = ${physicalActivityMinutes}, physicalActivityGoal = ${physicalActivityGoal} WHERE userId = ${userId};`;
+    db.query(activityQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/home');
+        }
+    });
+
+};
 
