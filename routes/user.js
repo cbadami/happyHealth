@@ -33,6 +33,9 @@ router.post('/userFruits', userHomeController.postUserFruits);
 router.get('/userVegetables', userHomeController.getUserVegetables);
 router.post('/userVegetables', userHomeController.postUserVegetables);
 
+router.get('/userPhysicalActivity', userHomeController.getUserPhysicalActivity);
+router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity);
+
 
 /**
  * User Profile routes
