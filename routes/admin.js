@@ -49,6 +49,12 @@ router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge);
 router.get('/getChallengeUsers/:challengeId', challengeManagement.getChallengeUsers);
 // router.get('/addUser', challengeManagement.addUser);
 router.post('/getChallengeUsers/:challengeId' , challengeManagement.addUserToChallenge);
+router.post('/removeUser/:groupId/:userId', challengeManagement.removeUser )
+
+//TESTING
+router.get('/getAllChallengeUsers/:challengeId/:userId', challengeManagement.getChallengeUsersAdminSide)
+
+
 /**
  * Admin user analytics routes
  */
