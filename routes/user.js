@@ -48,6 +48,8 @@ router.post('/userVegetables', userHomeController.postUserVegetables);
  */
 
  router.get('/userChallenges', userChallengeController.getUserChallenges);
+ router.post('/joinChallenge/:challengeId', userChallengeController.joinChallenge )
+ router.post('/leaveChallenge/:challengeId', userChallengeController.leaveChallenge ) 
  router.get('/userMoreChallenges', userChallengeController.getUserMoreChallenges);
  router.get('/activeChallenges', userChallengeController.getActiveChallenges);
  router.get('/availableChallenges', userChallengeController.getAvailableChallenges);
