@@ -42,7 +42,15 @@ router.post('/userVegetables', userHomeController.postUserVegetables);
  router.post('/userProfile', userProfileController.postUserProfile);
 
 
+/**
+ * User Personal progres
+ */
 
+router.get('/userPersonalProgress',(req,res)=>{
+  res.status(400).send({
+    Message: "Not Implemented Yet"
+  })
+})
 /**
  * User Challenges
  */
