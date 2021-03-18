@@ -65,13 +65,14 @@
         <% } else { %>
 
             <div>
+
                 <!-- <h1> <b>Manage Users</b> </h1> -->
                 <h3>Challenge Name : <%= challengeData[0].challengeName %></h3>
             </div>
             
             <form action="<%= challengeData[0].challengeId%>" method="POST">
                 <div>
-                    <label for="addUser"><strong>Select User: </strong> </label>
+                    <label for="addUser"><strong>Invite User: </strong> </label>
                     <select name="userId" class="form-control addUser">
                         <% for (var i=0; i < notJoinedUsers.length;i++) { %>
                             <option selected = "<%= notJoinedUsers[i].userId %>" value="<%= notJoinedUsers[i].userId %>">
@@ -79,7 +80,7 @@
                             </option>
                             <% } %>
                     </select>
-                    <button type="submit" class="btn btn-primary">Add User</button>
+                    <button type="submit" class="btn btn-primary">Invite</button>
                 </div>
 
             </form>
@@ -89,7 +90,7 @@
                     <tr>
                         <th>Sl.No</th>
                         <th>Username</th>
-                        <!-- <th>Joined Date</th> -->
+                        <th>Status</th>
                         <th>Remove user</th>
                     </tr>
                 </thead>
@@ -102,13 +103,22 @@
                             <td>
                                 <%= joinedUsers[i].userName%>
                             </td>
-                            <!-- <td>
-                                <%= joinedUsers[i].joinedDate%>
-                            </td> -->
+                            <td>
+                        		   <% 	if( joinedUsers[i].accepted == 1) { %>
+											Joined 
+									<%   }else{ %>
+											Pending
+										<%  } %>
+                            </td>
                             <td>
                                 <form action="/removeUser/<%= challengeData[0].challengeId%>/<%= joinedUsers[i].userId%>" method="POST">
-                                    <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger">
-                                        Remove</button>
+                                 
+									<% 	if( joinedUsers[i].accepted ) { %>
+										<button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger">Remove</button>
+										<%   }else{ %>
+											<button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger"> Cancel Invitation</button>
+											<%  } %>
+									
                                 </form>
                             </td>
                         </tr>
