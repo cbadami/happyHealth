@@ -383,6 +383,28 @@ exports.postUserVegetables = (req, res) => {
 
 };
 
+exports.getUserPhysicalActivity = (req, res) => {
+    let userId = req.session.userId;
+    const stetpQuery = `Select physicalActivityMinutes,physicalActivityGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+                const {
+                physicalActivityMinutes,
+                physicalActivityGoal
+            } = result[0];
+            
+            res.render('userViews/userPhysicalActivity', {
+                layout: 'layouts/userLayout',
+                title: 'User Physical Activity',
+                physicalActivityMinutes,
+                physicalActivityGoal
+            });
+        }
+    });
 
+};
 
 
