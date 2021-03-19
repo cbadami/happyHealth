@@ -68,5 +68,6 @@ router.get('/adminAnalyticsOverAll', analyticsController.getAdminAnalyticsOverAl
  */
 
 router.get('/adminAnnouncements',announcementController.getAdminAnnouncements)
+router.post('/adminAnnouncements',announcementController.postAdminAnnouncements)
 
 module.exports = router;
