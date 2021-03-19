@@ -85,7 +85,6 @@
 		})
 	
 	function postUsers(){
-
 		// let ii =  document.getElementsByClassName("mul-select").item(0)
 		// console.log(ii, "=============> UI")
 
@@ -93,8 +92,20 @@
 		let users = m.replace(/(\r\n|\n|\r)/gm, " ").split(' ')
 		const filUsers = users.filter((user) => user !== "×");
 		console.log(filUsers,"=======> users after filtering");
-
-
 	}
+
+	$('option').mousedown(function(e) {
+    e.preventDefault();
+    var originalScrollTop = $(this).parent().scrollTop();
+    console.log(originalScrollTop);
+    $(this).prop('selected', $(this).prop('selected') ? false : true);
+    var self = this;
+    $(this).parent().focus();
+    setTimeout(function() {
+        $(self).parent().scrollTop(originalScrollTop);
+    }, 0);
+    
+    return false;
+});
 
 </script>
