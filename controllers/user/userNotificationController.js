@@ -1,25 +1,21 @@
 const db = require('../../database');
 
 exports.getNotifications = (req, res) => {
-    let messageId = req.session.messageId;
-    const nnQuery = `Select messageId, title, message, userId from happyhealth.announcementsTbl where messageId = ${messageId};`;
+    console.log("inside anouncements")
+    const userId = req.session.userId;
+    console.log(userId)
+
+    const nnQuery = `Select messageId, title, message, userId from happyhealth.announcementsTbl ;`;
     db.query(nnQuery, function (err, result) {
         if (err) {
-            console.log(err);
+            console.log(err, "======> error while getting announcments");
         } else {
             console.log(result, '-------displaying user notifictions-----');
-            const {
-                title,
-                message,
-                userId
-            } = result[0];
+
             res.render('userViews/notifications', {
                 layout: 'layouts/userLayout',
                 title: 'Announcements',
-                messageId,
-                title,
-                message,
-                userId
+                result
             });
         }
     });
