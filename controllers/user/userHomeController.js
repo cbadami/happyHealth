@@ -72,7 +72,7 @@ exports.postUserStep = (req, res) => {
         return
     }
     
-    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount} stepGoal = ${stepGoal} WHERE userId = ${userId} `;
+    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${stepGoal} WHERE userId = ${userId} `;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
