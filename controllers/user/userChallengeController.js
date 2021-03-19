@@ -9,7 +9,7 @@ exports.getUserChallenges = (req, res) => {
 	console.log(userId, '=========> current user');
 
 	let query = `SELECT challengetbl.challengeId, challengeName, challengeType ,challengeDescription, startDate, endDate ,  accepted FROM challengetbl LEFT JOIN (SELECT * FROM challengemembertbl  WHERE challengemembertbl.userId = ${userId}) AS challengemembertbl ON challengemembertbl.challengeId = challengetbl.challengeId;`;
-   
+    console.log('Get challenge query', query);
 
 	db.query(query, (err, result) => {
 		if (err) {
@@ -34,7 +34,9 @@ exports.joinChallenge = (req,res)=>{
 	let joinedDate = moment(new Date()).format('L').toString() ;
 	console.log(challengeId, userId,  typeof joinedDate);
 
-	let joinChallengeQuery = `UPDATE happyhealth.challengemembertbl SET joinedDate = ${joinedDate}, accepted = 1 WHERE challengeId = ${challengeId} and userId = ${userId} ;`
+	let joinChallengeQuery = `INSERT INTO happyhealth.challengemembertbl(challengeId, userId, joinedDate, accepted) VALUES (${challengeId}, ${userId}, '${joinedDate}', 1);`
+	console.log('Challenge join query', joinChallengeQuery);
+
 	
 	db.query(joinChallengeQuery, (err,result)=>{
 		if(err){
@@ -55,9 +57,10 @@ exports.leaveChallenge = (req,res)=>{
 
 	console.log(challengeId, userId,  typeof joinedDate);
 
-	let joinChallengeQuery = `UPDATE happyhealth.challengemembertbl SET joinedDate = ${joinedDate}, accepted = 0 WHERE challengeId = ${challengeId} and userId = ${userId} ;`
-	
-	db.query(joinChallengeQuery, (err,result)=>{
+	let query = `DELETE FROM happyhealth.challengemembertbl WHERE challengeId = ${challengeId} and userId = ${userId} ;`
+	console.log('leave join query', query);
+
+	db.query(query, (err,result)=>{
 		if(err){
 			console.log(err,"error while joining")
 		}else{
