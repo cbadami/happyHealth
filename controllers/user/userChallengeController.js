@@ -17,8 +17,8 @@ exports.getUserChallenges = (req, res) => {
 			console.log(result, '=========> result of user challenges');
 			res.render('userViews/userChallenges', {
 				layout: 'layouts/userLayout',
-				title: 'User Management',
-				result
+				result,
+				title: 'User Management'
 			});
 		}
 	});
@@ -100,6 +100,7 @@ exports.getActiveChallenges = (req, res) => {
 	//     }
 	// });
 };
+
 
 exports.getAvailableChallenges = (req, res) => {
 	const allAvailableChallenges = `Select * from happyhealth.challengetbl`;

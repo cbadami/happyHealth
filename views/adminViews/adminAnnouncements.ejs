@@ -1,14 +1,82 @@
 <div class="app-main__inner">
 
-    <section>
-        <form action ="/adminAnnouncements" method="post" >
-            <h2>Announcements</h2>
-            <br><br>
-                <label for="fname">Enter Message:</label>
-                <input type="text" id="fname" name="fname"><br><br>
-                <button class="button button1">Post Announcement</button>
-                <button class="button button2">Edit Announcement</button>
-                       </form>
-    </section>
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2><b>Announcements Management</b></h2>
+            </div>
+        </div>
+        <div class="app-main__inner">
+        <div class="form-row">
+            <div class="col-sm-6">
+                <h4><b>New Message Title:</b></h4>
+            </div>
+            <div class="col-sm-6">
+                <input id="title" type="text">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-6">
+                <h4><b>Write Message:</b></h4>
+            </div>
+            <div class="col-sm-6">
+                <input id="message" type="text">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-12">
+                <form action="/postAdminAnnouncements/" method="post">
+                    <input type="submit" id="PopoverCustomT-1" value="Post to Everyone"
+                        class="btn btn-sm btn-md btn-danger"></input>
+                </form>
+            </div>
+        </div>
+        <br>
+        </div>
+    </div>
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Message ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">User ID </th>
+                    <th scope="col" style="text-align:center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i < result.length;i++) { %>
+                    <tr>
+                        <th scope="row">
+                            <%= i+1 %>
+                        </th>
+                        <td>
+                            <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
+                            <%= result[i].messageId%>
+                                </a>
+                        </td>
+                        <td>
+                            <%= result[i].title%>
+                        </td>
+                        <td>
+                            <%= result[i].message%>
+                        </td>
+                        <td>
+                            <%= result[i].userId%>
+                        </td>
+                        <td>
+                            <form action="/deleteMsg/<%= result[i].messageId %>" method="post">
+                                <input type="submit" id="PopoverCustomT-1" value="Delete"
+                                    class="btn btn-sm btn-md btn-danger"></input>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
 
 </div>

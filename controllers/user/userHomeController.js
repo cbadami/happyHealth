@@ -28,7 +28,7 @@ exports.getUserHome = (req, res) => {
 
 exports.getUserStep = (req, res) => {
     let userId = req.session.userId;
-    const stetpQuery = `Select stepCount, stepDistance, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
+    const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
     db.query(stetpQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -37,7 +37,6 @@ exports.getUserStep = (req, res) => {
             //console.log("result "+result[0]);
             const {
                 stepCount,
-                stepDistance,
                 stepGoal
             } = result[0];
             //console.log("ddd   "+stepCount)
@@ -45,7 +44,6 @@ exports.getUserStep = (req, res) => {
                 layout: 'layouts/userLayout',
                 title: 'User Step',
                 stepCount,
-                stepDistance,
                 stepGoal
             });
         }
@@ -57,14 +55,13 @@ exports.postUserStep = (req, res) => {
     const userId = req.session.userId;
     const {
         stepCount,
-        stepDistance,
         stepGoal
     } = req.body;
     let errors = [];
 
 
-    if (!stepCount || !stepDistance || !stepGoal) {
-        console.log(`inside if statement ${stepCount}, ${stepDistance}`);
+    if (!stepCount ||  !stepGoal) {
+        console.log(`inside if statement ${stepCount}, `);
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userStep', {
@@ -74,28 +71,8 @@ exports.postUserStep = (req, res) => {
         });
         return
     }
-    const stetpQueryGet = `Select * from happyhealth.userSteptbl where UserId = ${userId};`;
-    db.query(stetpQueryGet, function (err, results) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(results, '--------Get User Steps For Day');
-            if (results[0] != null) {
-                console.log("Found Results");
-            } else {
-                var insrt_steps = `INSERT INTO happyHealth.userSteptbl (userId,date) VALUES  (${userId},'3/3/2021');`;
-                db.query(insrt_steps, function (err, result) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Value Inserted");
-                    }
-                });
-
-            }
-        }
-    });
-    var stepQuery = `UPDATE happyhealth.userSteptbl SET noofSteps = ${stepCount}, miles = ${stepDistance}, enterGoal = ${stepGoal} WHERE userId = ${userId} and date = '3/3/2021' ;`;
+    
+    var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${stepGoal} WHERE userId = ${userId} `;
     db.query(stepQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -288,14 +265,16 @@ exports.getUserFruits = (req, res) => {
             //console.log("result "+result[0]);
             const {
                 fruits,
-                fruitgoal
+                fruitgoal,
+                
             } = result[0];
             //console.log("ddd   "+fruits)
             res.render('userViews/userFruits', {
                 layout: 'layouts/userLayout',
                 title: 'User Fruits',
                 fruits,
-                fruitgoal
+                fruitgoal,
+                
             });
         }
     });
@@ -309,9 +288,9 @@ exports.postUserFruits = (req, res) => {
         fruits,
         fruitgoal
     } = req.body;
-    console.log("-------post user Fruits controller");
+    console.log("-------post user Fruits n veg controller");
     let errors = [];
-    if (!fruits || !fruitgoal) {
+    if (!fruits || !fruitgoal ) {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userFruits', {
@@ -340,6 +319,7 @@ exports.getUserVegetables = (req, res) => {
         } else {
             console.log(result, '--------db user table result');
             const {
+                
                 veggies,
                 veggieGoal
             } = result[0];
@@ -347,6 +327,7 @@ exports.getUserVegetables = (req, res) => {
             res.render('userViews/userVegetables', {
                 layout: 'layouts/userLayout',
                 title: 'User Vegetables',
+               
                 veggies,
                 veggieGoal
             });
@@ -359,12 +340,13 @@ exports.getUserVegetables = (req, res) => {
 exports.postUserVegetables = (req, res) => {
     let userId = req.session.userId;
     const {
+        
         veggies,
         veggieGoal
     } = req.body;
     console.log("-------post user Vegetables controller");
     let errors = [];
-    if (!veggies || !veggieGoal) {
+    if ( !veggies || !veggieGoal) {
         errors.push('Please enter all fields');
         console.log(errors, "----------------errros");
         res.render('userViews/userVegetables', {
@@ -429,6 +411,24 @@ exports.postUserPhysicalActivity = (req, res) => {
             console.log(err);
         } else {
             res.redirect('/home');
+        }
+    });
+
+};
+
+exports.getUserPersonalProgress = (req, res) => {
+    let userId = req.session.userId;
+    const stetpQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            res.render('userViews/userPersonalProgress', {
+                layout: 'layouts/userLayout',
+                title: 'User Personal Progress',
+                result
+            });
         }
     });
 

@@ -1,0 +1,95 @@
+<div class="app-main__inner">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2><b>Personal Progress</b></h2>
+            </div>
+        </div>
+    </div>
+
+    </br>
+    </br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col"> Date </th>
+                <th scope="col"> Step Count </th>
+                <th scope="col"> Step Target </th>
+                <th scope="col"> Sleep hours </th>
+                <th scope="col"> sleep Target</th>
+                <th scope="col"> Mindful minutes </th>
+                <th scope="col"> Required Target </th>
+                <th scope="col"> Water </th>
+                <th scope="col"> Water Target </th>
+                <th scope="col"> Vegetables </th>
+                <th scope="col"> Vegetables Goal</th>
+                <th scope="col"> Fruits </th>
+                <th scope="col"> Fruits Goal </th>
+                <th scope="col"> Physical Activity </th>
+                <th scope="col"> Physical Activity Goal </th>
+            </tr>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+            <% for(var i=0; i < result.length; i++) { %>
+
+                <tr>
+                    <th scope="row">
+                        <%= i+1 %>
+                    </th>
+                    <td>
+                        <%= result[i].date %>
+                    </td>
+                    <td>
+                        <%= result[i].stepCount %>
+                    </td>
+                    <td>
+                        <%= result[i].stepGoal %>
+                    </td>
+                    <td>
+                        <%= result[i].sleepHours %>
+                    </td>
+                    <td>
+                        <%= result[i].sleepGoal %>
+                    </td>
+                    <td>
+                        <%= result[i].meTime %>
+                    </td>
+                    <td>
+                        <%= result[i].meTimeGoal %>
+                    </td>
+                    <td>
+                        <%= result[i].water %>
+                    </td>
+                    <td>
+                        <%= result[i].waterGoal %>
+                    </td>
+                    <td>
+                        <%= result[i].veggies %>
+                    </td>
+                    <td>
+                        <%= result[i].veggieGoal %>
+                    </td>
+                    <td>
+                        <%= result[i].fruits %>
+                    </td>
+                    <td>
+                        <%= result[i].fruitGoal %>
+                    </td>
+                    <td>
+                        <%= result[i].physicalActivityMinutes %>
+                    </td>
+                    <td>
+                        <%= result[i].physicalActivityGoal %>
+                    </td>
+                </tr>
+             <% } %>
+
+        </tbody>
+        </tbody>
+    </table>
+
+</div>

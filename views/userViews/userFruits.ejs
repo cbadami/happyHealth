@@ -1,53 +1,30 @@
+<style>
+  .sub-entry {
+    width: 50%;
+    float: left;
+}
+</style>
 <div class="app-main__inner">
   <section>
     <div class="container app-container-wrapper">
       <div class="row justify-content-center">
-        <div class="col-lg-4">
+        <!-- <div class="col-lg-4"> -->
           <form method="POST" class="my-5">
+          
+<div class="sub-entry">
+  <div class="form-row">
             <div class="form-group">
               <%- include ('../partials/messages') %>
-              <h2 class="d-flex justify-content-center py-3">Fruit Consumed</h2>
-            </div>
-            <div class="form-row">
+              
+                <h2 class="d-flex justify-content-center py-3">
+                  Fruit Consumed
+                </h2>
+                <div class="form-row">
               <label for="dateTime"> &nbsp; </label>
               <p id="demo"></p>
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
-            <script>
-              let d = new Date();
-              const months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-              ];
-              const dayNames = [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-              ];
-              let formatted_date =
-                dayNames[d.getDay()] +
-                ", " +
-                months[d.getMonth()] +
-                " " +
-                d.getDate() +
-                ", " +
-                d.getFullYear();
-              document.getElementById("demo").innerHTML = formatted_date;
-            </script>
+            </div>
             <div class="form-row">
               <label for="username">Number of Fruits Eaten</label>
               <input type="number" id="fruits" name="fruits" min="0" class="form-control" placeholder="0"
@@ -70,18 +47,101 @@
                 value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>"
               />
             </div> -->
-            <div class="form-row"></div>
+            </div>
+          </div>
 
+
+          <div class="sub-entry">
+            <div class="main-content">
             <div class="form-row">
-              <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary" style="margin-top: 10px">
+                      <div class="form-group">
+                        <%- include ('../partials/messages') %>
+                          <h3 class="d-flex justify-content-center py-3">
+                            Vegetables Consumed
+                          </h3>
+                          <div class="form-row">
+                        <label for="dateTime"> &nbsp; </label>
+                        <p id="dem"></p>
+                        <!-- <input  id="demo" class="form-control" /> -->
+                      </div>
+                    </div>
+          
+                      <div class="form-row">
+                        <label for="username">Number of Vegetables Eaten</label>
+                        <input type="number" id="veggies" name="veggies" min="0" class="form-control" placeholder="0"
+                          value="<%= typeof veggies != 'undefined' ? veggies : '' %>" />
+                      </div>
+                      <div class="form-row">
+                        <label for="password">Personal Daily Goal</label>
+                        <input type="number" id="veggieGoal" name="veggieGoal" min="0" class="form-control" placeholder="0"
+                          value="<%= typeof veggieGoal != 'undefined' ? veggieGoal : '' %>" />
+                      </div>
+                      <!-- <div class="form-row">
+                        <label for="password">Monthly Goal</label>
+                        <input
+                          type="number"
+                          id="veggieGoal"
+                          name="veggieGoal"
+                          min="0"
+                          class="form-control"
+                          placeholder="0"
+                          value="<%= typeof veggieGoal != 'undefined' ? veggieGoal : '' %>"
+                        />
+                      </div> -->
+          
+                      
+                  </div>
+                  </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px; text-align: center; " >
                   Update
                 </button>
+                  </form>
+                  
+                        
+                          
+                        
+                      
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+          </div>
+          </section>
+          </div>
+          <script>
+            let d = new Date();
+            const months = [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ];
+            const dayNames = [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+            ];
+            let formatted_date =
+              dayNames[d.getDay()] +
+              ", " +
+              months[d.getMonth()] +
+              " " +
+              d.getDate() +
+              ", " +
+              d.getFullYear();
+            document.getElementById("demo").innerHTML = formatted_date;
+            document.getElementById("dem").innerHTML = formatted_date;
+          </script>
+                    

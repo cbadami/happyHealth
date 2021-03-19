@@ -153,7 +153,6 @@ CREATE TABLE userMetricsTbl (
   userId int NOT NULL,
   date varchar(12) NOT NULL,
   stepCount int DEFAULT 0,
-  stepDistance int DEFAULT 0,
   stepGoal int DEFAULT 0,
   sleepHours int DEFAULT 0,
   sleepGoal int DEFAULT 0,
@@ -176,19 +175,19 @@ CREATE TABLE userMetricsTbl (
 --
 
 INSERT INTO userMetricsTbl VALUES 
-(1,'12/20/2020',1000,50,2000,5,10,6,10,6,8,6,8,5,10,20,20),
-(2,'12/20/2020',1200,60,2000,7,10,8,10,5,8,6,8,9,10,10,20),
-(3,'12/20/2020',1100,70,2000,4,10,4,10,6,8,8,8,10,10,30,30),
-(4,'12/20/2020',1500,80,2000,10,10,6,10,9,8,10,8,3,10,25,25),
-(5,'12/20/2020',1900,90,2000,12,10,5,10,8,12,8,12,5,10,30,30),
-(6,'12/20/2020',1500,50,2000,6,10,9,10,5,8,5,8,10,10,40,40),
-(7,'12/20/2020',1700,60,2000,8,10,5,10,8,8,9,8,9,10,15,15),
-(8,'12/20/2020',600,70,2000,9,10,7,10,4,8,7,8,11,10,15,15),
-(9,'12/20/2020',1500,80,2000,5,10,8,10,7,8,5,8,6,10,15,15),
-(1,'03/05/2021',1000,50,2000,5,10,6,10,6,8,6,8,5,10,15,15),
-(2,'03/05/2021',1200,60,2000,7,10,8,10,5,8,6,8,9,10,15,15),
-(3,'03/05/2021',1100,70,2000,4,10,4,10,6,8,8,8,10,10,15,15),
-(4,'03/05/2021',1500,80,2000,10,10,6,10,9,8,10,8,3,10,15,15);
+(1,'12/20/2020',1000,2000,5,10,6,10,6,8,6,8,5,10,20,20),
+(2,'12/20/2020',1200,2000,7,10,8,10,5,8,6,8,9,10,10,20),
+(3,'12/20/2020',1100,2000,4,10,4,10,6,8,8,8,10,10,30,30),
+(4,'12/20/2020',1500,2000,10,10,6,10,9,8,10,8,3,10,25,25),
+(5,'12/20/2020',1900,2000,12,10,5,10,8,12,8,12,5,10,30,30),
+(6,'12/20/2020',1500,2000,6,10,9,10,5,8,5,8,10,10,40,40),
+(7,'12/20/2020',1700,2000,8,10,5,10,8,8,9,8,9,10,15,15),
+(8,'12/20/2020',600,2000,9,10,7,10,4,8,7,8,11,10,15,15),
+(9,'12/20/2020',1500,2000,5,10,8,10,7,8,5,8,6,10,15,15),
+(1,'03/05/2021',1000,2000,5,10,6,10,6,8,6,8,5,10,15,15),
+(2,'03/05/2021',1200,2000,7,10,8,10,5,8,6,8,9,10,15,15),
+(3,'03/05/2021',1100,2000,4,10,4,10,6,8,8,8,10,10,15,15),
+(4,'03/05/2021',1500,2000,10,10,6,10,9,8,10,8,3,10,15,15);
 
 --
 -- ********************************** Trigger befor insert into usertbl *************************
@@ -222,6 +221,10 @@ ALTER TABLE announcementsTbl AUTO_INCREMENT=3001;
 --
 INSERT INTO announcementsTbl(title,message,userId) VALUES('Title test','This is message',2);
 INSERT INTO announcementsTbl(title,message) VALUES('Everyone Title','This message for everyone');
+INSERT INTO announcementsTbl(title,message) VALUES('Hello!','Hello! Welcome to our health based application!');
+INSERT INTO announcementsTbl(title,message,userId) VALUES('Log Daily Goals','Hey! Kindly update your daily goals for better usage!',12);
+INSERT INTO announcementsTbl(title,message) VALUES('Drink Water','It is always good to drink more water during hotter days!');
+INSERT INTO announcementsTbl(title,message) VALUES('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.');
 
 
 

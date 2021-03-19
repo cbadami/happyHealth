@@ -1,30 +1,36 @@
 <div class="app-main__inner">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3 card" style="background-color: rgb(192, 247, 192);" onclick="location.href = '/userManagement';">
+            <div class="col-sm-3 card admin-card" style="background-color: rgb(192, 247, 192);" onclick="location.href = '/userManagement';">
                 <h4><b>User Management</b></h4>
-                <img src="/static/assets/images/happyHealth/groupIcon4.png" alt="admin_mgm" width="180" class="gif">
-                <button type="submit" class="btn btn-outline-secondary">Manage users</button>
+                <div class="admin-card-body">
+                    <img src="/static/assets/images/happyHealth/usermgmt.png" alt="admin_mgm">
+                    <button type="submit" class="btn btn-outline-secondary">Manage users</button>
+                </div>
             </div>
             <!-- <div class="col-sm-4 card" style="background-color: rgb(164, 164, 226);" onclick="location.href = '/groupManagement';">
                 <h4><b>Group Management</b></h4>
                 <img src="/static/gifs/group.gif" alt="admin_group" width="180" class="gif">
                 <button type="submit" class="btn btn-outline-secondary">Manage Groups</button>
             </div> -->
-            <div class="col-sm-3 card" style="background-color: rgb(146, 231, 247);"
+            <div class="col-sm-3 card admin-card" style="background-color: rgb(146, 231, 247);"
                 onclick="window.location.href = '/challengeManagement'">
 				<div>
-					<h4><b>Challenge Management</b></h4>
-					<img style="height: 130px;" width="40px" src="/static/assets/images/happyHealth/chMgmt.PNG" alt="admin_chg"  class="gif">
-					<button type="submit" class="btn btn-outline-secondary">Challenge Management</button>
+                    <h4><b>Challenge Management</b></h4>
+                    <div class="admin-card-body">
+                     <img src="/static/assets/images/happyHealth/challengemgmt.PNG" alt="admin_chg"  class="gif">
+					    <button type="submit" class="btn btn-outline-secondary">Manage Challenges</button>
+                    </div>
 				</div>
                
             </div>
 
-            <div class="col-sm-3 card" style="background-color: lightpink;" onclick="location.href = '/adminAnalytics';">
+            <div class="col-sm-3 card admin-card" style="background-color: lightpink;" onclick="location.href = '/adminAnalytics';">
                 <h4><b>Analytics</b></h4>
-                <img src="/static/assets/images/happyHealth/statistics.png" alt="admin_analytics" width="180" class="gif">
-                <button type="submit" class="btn btn-outline-secondary">User analytics</button>
+                <div class="admin-card-body">
+                  <img src="/static/assets/images/happyHealth/Analytics.png" alt="admin_analytics" width="180" class="gif">
+                    <button type="submit" class="btn btn-outline-secondary">User analytics</button>
+                </div>
             </div>
         </div>
     </div>
