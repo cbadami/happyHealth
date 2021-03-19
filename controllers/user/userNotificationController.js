@@ -23,33 +23,21 @@ exports.getNotifications = (req, res) => {
 };
 
 
-exports.postNotifications = (req, res) => {
-    let userId = req.session.userId;
-    const {
-        messageId,
-        title,
-        message
-    } = req.body;
-    console.log("-------post user Notification controller");
-    let errors = [];
-    if (!messageId || !title || !message) {
-        errors.push('Please enter all fields');
-        console.log(errors, "----------------errros");
-        res.render('userViews/notifications', {
-            layout: 'layouts/userLayout',
-            title: 'Announcements'
-        });
-    }
-    var ppQuery = `Delete FROM happyhealth.announcementstbl WHERE messageId = '${messageId}';`;
-    db.query(ppQuery, function (err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('userViews/notifications');
-        }
-    });
+// exports.postNotifications = (req, res) => {
+//     let userId = req.session.userId;
+//     console.log("-------post user Notification controller");
+//     let errors = [];
+//     if (errors) {
+//         errors.push('Please enter all fields');
+//         console.log(errors, "----------------errros");
+//         res.render('userViews/notifications', {
+//             layout: 'layouts/userLayout',
+//             title: 'Announcements'
+//         });
+//     }
 
-};
+
+// };
 
 // exports.getNotifications = (req, res) => {
 //     res.render('userViews/notifications', {
@@ -58,3 +46,36 @@ exports.postNotifications = (req, res) => {
 
 //     });
 // };
+
+exports.deleteMsg = (req, res) => {
+    let messageId = req.params.messageId;
+    console.log(messageId, "deleting msg")
+    const deleteQuery = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}'; `;
+    const deleteQuery2 = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}';`;
+    db.query(deleteQuery2, function (err) {
+        if (err) {
+            throw err;
+        }
+        console.log("****notifications delete2 executed started****");
+    });
+    db.query(deleteQuery, function (err) {
+        if (err) {
+            throw err;
+        } else {
+            res.redirect('userViews/notifications');
+        }
+        console.log("****delete executed started****");
+    });
+
+    // var ppQuery = `Delete * FROM happyhealth.announcementsTbl;`;
+    // db.query(ppQuery, function (err, result) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         res.redirect('userViews/notifications', {
+    //             layout: 'layouts/userLayout',
+    //             title: 'Announcements'
+    //         });
+    //     }
+    // });
+}
