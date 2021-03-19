@@ -256,7 +256,7 @@ exports.postUserTrack = (req, res) => {
 
 exports.getUserFruits = (req, res) => {
     let userId = req.session.userId;
-    const stetpQuery = `Select fruits,fruitgoal from happyhealth.usermetricstbl where UserId = ${userId};`;
+    const stetpQuery = `Select fruits,fruitgoal,veggies,veggieGoal from happyhealth.usermetricstbl where UserId = ${userId};`;
     db.query(stetpQuery, function (err, result) {
         if (err) {
             console.log(err);
@@ -266,6 +266,8 @@ exports.getUserFruits = (req, res) => {
             const {
                 fruits,
                 fruitgoal,
+                veggies,
+                veggieGoal
                 
             } = result[0];
             //console.log("ddd   "+fruits)
@@ -274,6 +276,8 @@ exports.getUserFruits = (req, res) => {
                 title: 'User Fruits',
                 fruits,
                 fruitgoal,
+                veggies,
+                veggieGoal
                 
             });
         }
@@ -285,6 +289,7 @@ exports.getUserFruits = (req, res) => {
 exports.postUserFruits = (req, res) => {
     let userId = req.session.userId;
     const {
+        veggies,veggieGoal,
         fruits,
         fruitgoal
     } = req.body;
@@ -298,8 +303,9 @@ exports.postUserFruits = (req, res) => {
             title: 'User Fruits'
         });
     }
+
     var fruitQuery = `UPDATE happyhealth.usermetricstbl
-        SET fruits = ${fruits}, fruitGoal = ${fruitgoal} WHERE userId = ${userId};`;
+        SET fruits = ${fruits}, fruitGoal = ${fruitgoal},veggies = ${veggies}, veggieGoal = ${veggieGoal} WHERE userId = ${userId};`;
     db.query(fruitQuery, function (err, result) {
         if (err) {
             console.log(err);
