@@ -1,25 +1,16 @@
-<style>
-  img {
-    margin: auto;
-  }
-</style>
-
 <div class="app-main__inner">
   <div class="container-fluid">
     <div class="row">
       <div
-        class="col-md-3 card"
+        class="col-sm-3 card user-card"
         style="background-color: hsla(0, 100%, 90%, 0.3)"
         onclick="location.href = '/userStep';"
       >
-        <div class="card-body">
-          <h4>Step Count</h4>
+        <h4>Step Count</h4>
+        <div class="user-card-body">
           <img
             src="/static/assets/images/happyHealth/stepp.png"
             alt="user_stat"
-            class="img"
-            width="150"
-            height="150"
           />
           <button type="submit" class="btn btn-outline-secondary">
             <b>Step Count: <%= stepCount %></b>
@@ -27,17 +18,15 @@
         </div>
       </div>
       <div
-        class="col-sm-3 card"
+        class="col-sm-3 card user-card"
         style="background-color: #c2dfff"
         onclick="location.href = '/userHydration';"
       >
-        <div class="card-body">
-          <h4>Water</h4>
+        <h4>Water</h4>
+        <div class="user-card-body">
           <img
             src="/static/assets/images/happyHealth/glassw.png"
             alt="user_stat"
-            width="150"
-            height="150"
           />
           <button type="submit" class="btn btn-outline-secondary">
             <b>Water Consumed:</b> <b><%= water %></b>
@@ -45,17 +34,15 @@
         </div>
       </div>
       <div
-        class="col-sm-3 card"
+        class="col-sm-3 card user-card"
         style="background-color: #d8dadb"
         onclick="location.href = '/userSleep';"
-      >
-        <div class="card-body">
-          <h4>Sleep Hours</h4>
+      > 
+        <h4>Sleep Hours</h4>
+        <div class="user-card-body">
           <img
             src="/static/assets/images/happyHealth/sleeping.png"
             alt="user_stat"
-            width="150"
-            height="150"
           />
 
           <button type="submit" class="btn btn-outline-secondary">
@@ -64,17 +51,15 @@
         </div>
       </div>
       <div
-        class="col-sm-3 card"
+        class="col-sm-3 card user-card"
         style="background-color: #ffd17a"
         onclick="location.href = '/userTrack';"
       >
-        <div class="card-body">
-          <h4>Mindful Minutes</h4>
+        <h4>Mindful Minutes</h4>
+        <div class="user-card-body">
           <img
             src="/static/assets/images/happyHealth/booko.png"
             alt="user_stat"
-            width="150"
-            height="150"
           />
           <button type="submit" class="btn btn-outline-secondary">
             <b>Mindful Minutes: <%= meTime %></b>
@@ -82,17 +67,15 @@
         </div>
       </div>
       <div
-        class="col-sm-3 card"
+        class="col-sm-3 card user-card"
         style="background-color: #e5ffcc"
         onclick="location.href = '/userFruits';"
       >
-        <div class="card-body">
-          <h4>Fruits</h4>
+        <h4>Fruits</h4>
+        <div class="user-card-body">
           <img
             src="/static/assets/images/happyHealth/fruits.png"
             alt="user_stat"
-            width="150"
-            height="150"
           />
 
           <button type="submit" class="btn btn-outline-secondary">
@@ -101,17 +84,15 @@
         </div>
       </div>
       <div
-        class="col-sm-3 card"
+        class="col-sm-3 card user-card"
         style="background-color: #98ff98"
         onclick="location.href = '/userVegetables';"
       >
-        <div class="card-body">
-          <h4>Vegetables</h4>
+        <h4>Vegetables</h4>
+        <div class="user-card-body">
           <img
             src="/static/assets/images/happyHealth/vegetable.png"
             alt="user_stat"
-            width="150"
-            height="150"
           />
 
           <button type="submit" class="btn btn-outline-secondary">
@@ -120,18 +101,16 @@
         </div>
       </div>
       <div
-        class="col-sm-3 card"
+        class="col-sm-3 card user-card"
         style="background-color: #ddafda"
         onclick="location.href = '/userPhysicalActivity';"
       >
-        <div class="card-body">
-          <h4>Physical Activity</h4>
+        <h4>Physical Activity</h4>
+        <div class="user-card-body">
           <img
             src="/static/assets/images/happyHealth/activity.png"
             alt="user_stat"
-            width="150"
-            height="150"
-          />
+            />
 
           <button type="submit" class="btn btn-outline-secondary">
             <b>Physical Activity: <%= physicalActivityMinutes %> </b>
