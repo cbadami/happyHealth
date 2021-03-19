@@ -57,9 +57,10 @@ exports.leaveChallenge = (req,res)=>{
 
 	console.log(challengeId, userId,  typeof joinedDate);
 
-	let joinChallengeQuery = `UPDATE happyhealth.challengemembertbl SET joinedDate = ${joinedDate}, accepted = 0 WHERE challengeId = ${challengeId} and userId = ${userId} ;`
-	
-	db.query(joinChallengeQuery, (err,result)=>{
+	let query = `DELETE FROM happyhealth.challengemembertbl WHERE challengeId = ${challengeId} and userId = ${userId} ;`
+	console.log('leave join query', query);
+
+	db.query(query, (err,result)=>{
 		if(err){
 			console.log(err,"error while joining")
 		}else{
