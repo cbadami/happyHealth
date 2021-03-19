@@ -1,54 +1,55 @@
 <div class="app-main__inner">
 
-  <div class="table-title">
-      <div class="row">
-          <div class="col-sm-6">
-              <h2><b>Announcements</b></h2>
-          </div>
-      </div>
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2><b>Announcements</b></h2>
+            </div>
+        </div>
     </div>
-  <div class="table-responsive">
+    <div class="table-responsive">
 
-      <table class="table">
-          <thead class="thead-dark">
-              <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Message ID</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Message</th>
-                  <th scope="col">Assigned To</th>
-                  <th scope="col" style="text-align:center">Actions</th>
-              </tr>
-          </thead>
-          <tbody>
-              <% for (var i=0; i < result.length;i++) { %>
-                  <tr>
-                      <th scope="row">
-                          <%= i+1 %>
-                      </th>
-                      <td>
-                        <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
-                              <%= result[i].messageId%>
-                          </a></td>
-                      <td>
-                          <%= result[i].title%>
-                      </td>
-                      <td>
-                          <%= result[i].message%>
-                      </td>
-                      <td>
-                        <%= result[i].userId%>
-                    </td>
-                      <td>
-                          <form action="deleteUser/<%= result[i].messageId%>" method="get">
-                              <button type="submit" id="PopoverCustomT-1"
-                                  class="btn btn-sm btn-md btn-danger">Delete</button>
-                          </form>
-                      </td>
-                  </tr>
-                  <% } %>
-          </tbody>
-      </table>
-  </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Message ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Assigned To</th>
+                    <th scope="col" style="text-align:center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i < result.length;i++) { %>
+                    <tr>
+                        <th scope="row">
+                            <%= i+1 %>
+                        </th>
+                        <td>
+                            <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
+                            <%= result[i].messageId%>
+                                </a>
+                        </td>
+                        <td>
+                            <%= result[i].title%>
+                        </td>
+                        <td>
+                            <%= result[i].message%>
+                        </td>
+                        <td>
+                            <%= result[i].userId%>
+                        </td>
+                        <td>
+                            <form action="/deleteMsg/<%= result[i].messageId %>" method="post">
+                                <input type="submit" id="PopoverCustomT-1"
+                                   value="Delete" class="btn btn-sm btn-md btn-danger"></input>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
 
 </div>
