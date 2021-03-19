@@ -8,7 +8,8 @@ exports.getUserChallenges = (req, res) => {
 	const userId = req.session.userId;
 	console.log(userId, '=========> current user');
 
-	let query = `SELECT userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  accepted FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId};`;
+	let query = `SELECT challengetbl.challengeId, challengeName, challengeType ,challengeDescription, startDate, endDate ,  accepted FROM challengetbl LEFT JOIN (SELECT * FROM challengemembertbl  WHERE challengemembertbl.userId = ${userId}) AS challengemembertbl ON challengemembertbl.challengeId = challengetbl.challengeId;`;
+   
 
 	db.query(query, (err, result) => {
 		if (err) {
@@ -17,8 +18,8 @@ exports.getUserChallenges = (req, res) => {
 			console.log(result, '=========> result of user challenges');
 			res.render('userViews/userChallenges', {
 				layout: 'layouts/userLayout',
-				title: 'User Management',
-				result
+				result,
+				title: 'User Management'
 			});
 		}
 	});
@@ -101,6 +102,7 @@ exports.getActiveChallenges = (req, res) => {
 	//     }
 	// });
 };
+
 
 exports.getAvailableChallenges = (req, res) => {
 	const allAvailableChallenges = `Select * from happyhealth.challengetbl`;
