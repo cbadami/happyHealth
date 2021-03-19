@@ -1,58 +1,54 @@
 <div class="app-main__inner">
-  <h2 class="d-flex justify-content-center py-3">Announcements</h2>
-  <section>
-    <div class="container app-container-wrapper">
-      <div class="row justify-content-center">
-        <div class="col-lg-4">
-          <div class="wrap">
-            <div class="search">
-              <input type="text" class="searchTerm" placeholder="Search Information">
-              <button type="submit" class="searchButton" style="margin-top: 0.4em;">
-                <i class="fa fa-search" ></i>
-              </button>
-            </div>
+
+  <div class="table-title">
+      <div class="row">
+          <div class="col-sm-6">
+              <h2><b>Announcements</b></h2>
           </div>
-          <div></div><br><br>
-          <b>Push Notifications:</b>					
-            <!--Rounded switch -->
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label></b><br><br>
-              <p>Water:               
-                <!--Rounded switch -->
-              <label class="switch">
-                  <input type="checkbox">
-                  <span class="slider round"></span>
-                </label></p>
-                <p>Workout:               
-                  <!--Rounded switch -->
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                  </label></p>
-              <b>App permisions:</b>
-              <!--Rounded switch -->
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label></p>
-              <p>Email:
-                <!--Rounded switch -->
-              <label class="switch">
-                  <input type="checkbox">
-                  <span class="slider round"></span>
-                </label></p>
-               <p>SMS:       
-                <!--Rounded switch -->
-              <label class="switch">
-                  <input type="checkbox">
-                  <span class="slider round"></span>
-                </label></p>
-                <br>
-          <br>
-        </div>
       </div>
     </div>
-  </section>
+  <div class="table-responsive">
+
+      <table class="table">
+          <thead class="thead-dark">
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Message ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Message</th>
+                  <th scope="col">Assigned To</th>
+                  <th scope="col" style="text-align:center">Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% for (var i=0; i < result.length;i++) { %>
+                  <tr>
+                      <th scope="row">
+                          <%= i+1 %>
+                      </th>
+                      <td>
+                        <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
+                              <%= result[i].messageId%>
+                          </a></td>
+                      <td>
+                          <%= result[i].tittle%>
+                      </td>
+                      <td>
+                          <%= result[i].message%>
+                      </td>
+                      <td>
+                        <%= result[i].userId%>
+                    </td>
+                      <td>
+                          <form action="deleteUser/<%= result[i].messageId%>" method="get">
+                              <button type="submit" id="PopoverCustomT-1"
+                                  class="btn btn-sm btn-md btn-danger">Delete</button>
+                          </form>
+                      </td>
+                  </tr>
+                  <% } %>
+          </tbody>
+      </table>
+  </div>
+
 </div>
