@@ -5505,6 +5505,28 @@ input[type="button"].btn-block {
     margin-bottom: 15px
 }
 
+/*
+Admin Dashboard card design
+*/
+/* Admin Dashboard/Home page Card Design*/
+.admin-card {
+    position: relative;
+    padding: 15px;
+}
+.admin-card h4 {
+    padding-top: 0;
+}
+.admin-card .admin-card-body {
+    position: absolute;
+    bottom: 0;
+    width: 88%;
+    height: 70%;
+}
+.admin-card .admin-card-body img {
+    height: 115px;
+    width: 115px;
+}
+
 @media (min-width: 576px) {
     .card-deck {
         flex-flow: row wrap;
