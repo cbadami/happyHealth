@@ -236,7 +236,7 @@ CREATE TABLE challengeTbl (
   challengeId int AUTO_INCREMENT ,
   challengeName varchar(50) DEFAULT NULL,
   challengeDescription varchar(100) DEFAULT NULL,
-  challengeType varchar(30) DEFAULT NULL,
+  challengeType varchar(200) DEFAULT NULL,
   startDate varchar(14) DEFAULT NULL,
   endDate varchar(14)  DEFAULT NULL,
   PRIMARY KEY (challengeId)
@@ -266,7 +266,7 @@ CREATE TABLE `challengemembertbl` (
   `challengeId` int NOT NULL,
   `userId` int NOT NULL,
   `joinedDate` varchar(12) DEFAULT NULL,
-  `accepted` boolean DEFAULT NULL,
+  `activeUser` boolean DEFAULT NULL,
   PRIMARY KEY (`invitationId`),
   FOREIGN KEY (`userId`) REFERENCES `usertbl` (`userId`),
   FOREIGN KEY (`challengeId`) REFERENCES `challengetbl` (`challengeId`) ON DELETE CASCADE
@@ -275,7 +275,7 @@ CREATE TABLE `challengemembertbl` (
 ALTER TABLE challengemembertbl AUTO_INCREMENT=100;
 
 
-INSERT INTO challengeMemberTbl ( challengeId, userId, joinedDate, accepted ) VALUES
+INSERT INTO challengeMemberTbl ( challengeId, userId, joinedDate, activeUser ) VALUES
 (2001, 1,'11/24/2020' , 1),
 (2001, 2,'10/24/2020',1),
 (2001, 3,'',0),

@@ -1,3 +1,10 @@
+
+    <style>
+        .mul-select{
+            width: 100%;
+        }
+    </style>
+
 <div class="app-main__inner">
 
     <div class="container-fluid col-md-8">
@@ -12,43 +19,39 @@
             </div>
 
             <div class="form-group">
-                <label for="adminChallengeType"> Challenge Type </label>
-                <select class="form-select" name="adminChallengeType">
+                <label for="challengeType"> Challenge Type </label>
+                <select class="form-select" name="challengeType" multiple >
 					<option value="Step Count">Step Count</option>
 					<option value="Sleep Hours">Sleep Hours</option>
 					<option value="Me Time">Me Time </option>
 					<option value="Water"> Water </option>
-					<option value="Fruits"> Fruits </option>
-					<option value="Veggies">Veggies</option>
+					<option value="Fruits & Veggies"> Fruits & Veggies </option>
+					<option value="Physical Activity">Physical Activity</option>
+
                 </select>
             </div>
 
-			<!-- <div class="form-group">
-				<label for="invitation">Invite Users</label>
-				<select name="userId" class="form-control addUser">
-						<option selected = "Abhi" value="Abhi">Abhi
-						</option>
-						<option selected = "Bobby" value="Bobby">Bobby
-						</option>
-						<option selected = "Charlie" value="Charlie">Charlie
-						</option>
-				</select>
-			</div>
-			 -->
-            <!-- <div class="form-group">
-                <label for="partcipantType"> Participant Type </label>
-                <select class="form-select" name="participantType">
-                    <option value="Group"> Group </option>
-                    <option value="Individual"> Individual </option>
-                </select>
-            </div> -->
-<!-- 
-            <div class="form-group">
-                <label>Participant Count</label>
-                <input type="number" name="participantCount" min="0" class="form-control" required>
-            </div> -->
 
 
+<!-- <form action="" method="POST">
+	<div>
+		<label for="addUser"><strong>Invite Users: </strong> </label>
+
+		<select name="userId" class="form-control addUser">
+			<% users.map(user=> { %>
+				<option id="UI" value="<%= user.userId %>">  <%= user.userName %>
+				</option>
+				<% }) %>
+		</select>
+		<select class="mul-select" multiple="true" name="userId" class="form-control addUser">
+			<% users.map(user=> { %>
+				<option id="UI" value="<%= user.userId %>">  <%= user.userName %> <%= user.userId %>
+				</option>
+				<% }) %>
+		</select>
+
+	</div>
+</form> -->
             <div class="form-group">
                 <label for="start">Start date:</label>
                 <input type="date" id="start" name="startDate" placeholder="2020-07-20">
@@ -59,10 +62,39 @@
                 <input type="date" id="end" name="endDate" placeholder="2020-07-22">
             </div>
 
+			<div class="form-group" hidden>
+
+			</div>
+
             <div>
-                <input type="submit" value="submit" class="btn btn-primary btn-sm">
+                <input type="submit" onclick="postUsers()" value="submit" class="btn btn-primary btn-sm">
             </div>
         </form>
     </div>
 
 </div>
+
+
+<script>
+	$(document).ready(function(){
+		$(".mul-select").select2({
+				placeholder: "Select Users", //placeholder
+				tags: true,
+				tokenSeparators: ['/',',',';'," "] 
+			});
+		})
+	
+	function postUsers(){
+
+		// let ii =  document.getElementsByClassName("mul-select").item(0)
+		// console.log(ii, "=============> UI")
+
+		let m = document.getElementsByClassName("select2-selection__rendered").item(0).innerText
+		let users = m.replace(/(\r\n|\n|\r)/gm, " ").split(' ')
+		const filUsers = users.filter((user) => user !== "×");
+		console.log(filUsers,"=======> users after filtering");
+
+
+	}
+
+</script>

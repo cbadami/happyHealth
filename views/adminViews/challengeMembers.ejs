@@ -104,7 +104,7 @@
                                 <%= joinedUsers[i].userName%>
                             </td>
                             <td>
-                        		   <% 	if( joinedUsers[i].accepted == 1) { %>
+                        		   <% 	if( joinedUsers[i].activeUser == 1) { %>
 											Joined 
 									<%   }else{ %>
 											Pending
@@ -113,7 +113,7 @@
                             <td>
                                 <form action="/removeUser/<%= challengeData[0].challengeId%>/<%= joinedUsers[i].userId%>" method="POST">
                                  
-									<% 	if( joinedUsers[i].accepted ) { %>
+									<% 	if( joinedUsers[i].activeUser ) { %>
 										<button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger">Remove</button>
 										<%   }else{ %>
 											<button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger"> Cancel Invitation</button>

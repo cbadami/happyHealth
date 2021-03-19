@@ -42,7 +42,7 @@ router.get('/deleteUser/:userId', userManagement.deleteUser);
 router.get('/challengeManagement', challengeManagement.getChallengeManagement);
 router.get('/addChallenge', challengeManagement.addChallenge);
 router.post('/addChallenge', challengeManagement.postChallenge);
-// router.get('/editChallenge/', challengeManagement.ed);
+// router.get('/happyhealth.challengetbl', challengeManagement.ed);
 router.get('/editChallenge/:cid', challengeManagement.editChallenge);
 router.post('/editChallenge/:cid', challengeManagement.updateChallenge);
 router.post('/deleteChallenge/:cid', challengeManagement.deleteChallenge);

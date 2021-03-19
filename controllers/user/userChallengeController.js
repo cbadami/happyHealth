@@ -8,7 +8,7 @@ exports.getUserChallenges = (req, res) => {
 	const userId = req.session.userId;
 	console.log(userId, '=========> current user');
 
-	let query = `SELECT userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  accepted FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId};`;
+	let query = `SELECT userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  activeUser FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId};`;
 
 	db.query(query, (err, result) => {
 		if (err) {
@@ -33,13 +33,13 @@ exports.joinChallenge = (req,res)=>{
 	let joinedDate = moment(new Date()).format('L').toString() ;
 	console.log(challengeId, userId,  typeof joinedDate);
 
-	let joinChallengeQuery = `UPDATE happyhealth.challengemembertbl SET joinedDate = ${joinedDate}, accepted = 1 WHERE challengeId = ${challengeId} and userId = ${userId} ;`
+	let joinChallengeQuery =  `UPDATE challengemembertbl set joinedDate = '${joinedDate}', activeUser=1 where challengeId = ${challengeId} and userId = ${userId};`
 	
 	db.query(joinChallengeQuery, (err,result)=>{
 		if(err){
 			console.log(err,"error while joining")
 		}else{
-			console.log(result, "joined Successfully");
+			console.log(result, "=============> joined Successfully");
 			res.redirect("/userChallenges")
 		}
 	})
@@ -50,17 +50,16 @@ exports.leaveChallenge = (req,res)=>{
 	console.log("*********** user leaving   *********")
 	let challengeId = req.params.challengeId;
 	let userId = req.session.userId;
-	let joinedDate = moment(new Date()).format('L').toString();
 
 	console.log(challengeId, userId,  typeof joinedDate);
 
-	let joinChallengeQuery = `UPDATE happyhealth.challengemembertbl SET joinedDate = ${joinedDate}, accepted = 0 WHERE challengeId = ${challengeId} and userId = ${userId} ;`
+	let joinChallengeQuery =	`delete from challengemembertbl where  challengeId = ${challengeId} and userId = ${userId};`
 	
 	db.query(joinChallengeQuery, (err,result)=>{
 		if(err){
-			console.log(err,"error while joining")
+			console.log(err,"======>error while leaving")
 		}else{
-			console.log(result, "joined Successfully");
+			console.log(result, "=============> left Successfully");
 			res.redirect("/userChallenges")
 		}
 	})
@@ -76,7 +75,7 @@ exports.getUserMoreChallenges = (req, res) => {
 };
 
 exports.setChallengesAccept = (req, res) => {
-	console.log('Set active');
+	console.log('Set activeUser');
 	const userId = req.session.userId;
 	res.render('userViews/challengeAccepted', {
 		layout: 'layouts/userLayout',
