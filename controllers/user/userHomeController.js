@@ -415,3 +415,21 @@ exports.postUserPhysicalActivity = (req, res) => {
     });
 
 };
+
+exports.getUserPersonalProgress = (req, res) => {
+    let userId = req.session.userId;
+    const stetpQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId};`;
+    db.query(stetpQuery, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result, '--------db user table result');
+            res.render('userViews/userPersonalProgress', {
+                layout: 'layouts/userLayout',
+                title: 'User Personal Progress',
+                result
+            });
+        }
+    });
+
+};
