@@ -221,6 +221,10 @@ ALTER TABLE announcementsTbl AUTO_INCREMENT=3001;
 --
 INSERT INTO announcementsTbl(title,message,userId) VALUES('Title test','This is message',2);
 INSERT INTO announcementsTbl(title,message) VALUES('Everyone Title','This message for everyone');
+INSERT INTO announcementsTbl(title,message) VALUES('Hello!','Hello! Welcome to our health based application!');
+INSERT INTO announcementsTbl(title,message,userId) VALUES('Log Daily Goals','Hey! Kindly update your daily goals for better usage!',12);
+INSERT INTO announcementsTbl(title,message) VALUES('Drink Water','It is always good to drink more water during hotter days!');
+INSERT INTO announcementsTbl(title,message) VALUES('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.');
 
 
 
