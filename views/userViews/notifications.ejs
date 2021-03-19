@@ -16,7 +16,6 @@
                     <th scope="col">Message ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Message</th>
-                    <th scope="col">Assigned To</th>
                     <th scope="col" style="text-align:center">Actions</th>
                 </tr>
             </thead>
@@ -36,9 +35,6 @@
                         </td>
                         <td>
                             <%= result[i].message%>
-                        </td>
-                        <td>
-                            <%= result[i].userId%>
                         </td>
                         <td>
                             <form action="/deleteMsg/<%= result[i].messageId %>" method="post">
