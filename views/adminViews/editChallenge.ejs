@@ -12,27 +12,42 @@
                     required></input>
             </div>
 
-            <div class="form-group">
-                <label for="challengeType"> Challenge Type </label>
-                <select class="form-select" name="challengeType" id="challengeId" selected="<%= result[0].challengeType %>">
-                    <option value="Step Count">Step Count</option>
+            <!-- <div class="form-group">
+                <label for="challengeType" > Challenge Type </label>
+					<select class="form-select" name="challengeType" multiple selected=<%= result[0].challengeType %> >
+					<option value="Step Count">Step Count</option>
 					<option value="Sleep Hours">Sleep Hours</option>
 					<option value="Me Time">Me Time </option>
 					<option value="Water"> Water </option>
 					<option value="Fruits & Veggies"> Fruits & Veggies </option>
 					<option value="Physical Activity">Physical Activity</option>
                 </select>
-            </div>
+            </div> -->
+
+			<div class="form-group">
+				<label for="challengeType" > Challenge Type </label>
+				<select id="metrics" class="mul-select col-md-6" multiple="true" name="challengeType" >
+					<option value="Step Count">Step Count</option>
+					<option value="Sleep Hours">Sleep Hours</option>
+					<option value="Mindful Minutes">Mindful Minutes </option>
+					<option value="Water"> Water </option>
+					<option value="Fruits & Veggies"> Fruits & Veggies </option>
+					<option value="Physical Activity">Physical Activity</option>
+				</select>
+
+				<span id="result"  hidden > </span> 
+				
+			</div>
 
 
             <div class="form-group">
                 <label for="start">Start date:</label>
-                <input type="date" id="startId" name="startDate" placeholder= "<%= result[0].startdate %>" >
+                <input type="date" id="startId" name="startDate" value= "'<%= result[0].startdate %>'" >
             </div>
 
             <div class="form-group">
                 <label for="start">End date:</label>
-                <input type="date" id="endId" name="endDate" placeholder="<%= result[0].endDate %>"  >
+                <input type="date" id="endId" name="endDate" value="<%= result[0].endDate %>"  >
             </div>
 
             <!-- <div class="form-group">
@@ -55,7 +70,38 @@
     
 
 </div>
-<script type="text/javascript">
+
+
+
+<script>
+	$(document).ready(function(){
+		$("#metrics").select2({
+				placeholder: "<%= result[0].challengeType %> ", //placeholder
+				tags: true,
+				tokenSeparators: ['/',',',';'," "],
+			});
+		})
+
+		function selectedItems(){
+				var spanresult = document.getElementById("result");
+				spanresult.value = "";
+				var x = document.getElementById("metrics");
+				for(var i = 0;i<x.options.length;i++){
+					if(x.options[i].selected === true){
+						spanresult.value += x.options[i].value+" ";
+						document.getElementById("result").innerHTML= spanresult.value;
+
+					}
+				}
+				if(document.getElementById("result").value == ""){
+					document.getElementById("result").innerHTML = "Please select atleast one. "
+				}
+			}
+
+</script>
+
+<!-- 
+<script>
     let startDate = "<%= result[0].startDate %>"
     console.log(startDate, "---------before");
     const [month, date, year] = startDate.split("/")
@@ -72,4 +118,5 @@
     console.log(challengeType,participantType,"------challenge participant type");
     $('#challengeId').val(challengeType)
     $('#participantId').val(participantType)
-</script>
+
+</script> -->
