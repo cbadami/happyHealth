@@ -8,7 +8,7 @@ exports.getUserChallenges = (req, res) => {
 	const userId = req.session.userId;
 	console.log(userId, '=========> current user');
 
-	let query = `SELECT userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  activeUser FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId};`;
+	let query = `SELECT userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  activeUser FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId} and archive =0;`;
 
 	db.query(query, (err, result) => {
 		if (err) {
@@ -33,7 +33,7 @@ exports.joinChallenge = (req,res)=>{
 	let joinedDate = moment(new Date()).format('L').toString() ;
 	console.log(challengeId, userId,  typeof joinedDate);
 
-	let joinChallengeQuery =  `UPDATE challengemembertbl set joinedDate = '${joinedDate}', activeUser=1 where challengeId = ${challengeId} and userId = ${userId};`
+	let joinChallengeQuery =  `UPDATE happyhealth.challengemembertbl set joinedDate = '${joinedDate}', activeUser=1, leftDate= '', archive=0 where challengeId = ${challengeId} and userId = ${userId};`
 	
 	db.query(joinChallengeQuery, (err,result)=>{
 		if(err){
@@ -50,10 +50,12 @@ exports.leaveChallenge = (req,res)=>{
 	console.log("*********** user leaving   *********")
 	let challengeId = req.params.challengeId;
 	let userId = req.session.userId;
+	let leftDate = moment(new Date()).format('L').toString() ;
+
 
 	console.log(challengeId, userId,  typeof joinedDate);
 
-	let joinChallengeQuery =	`delete from challengemembertbl where  challengeId = ${challengeId} and userId = ${userId};`
+	let joinChallengeQuery =	`UPDATE happyhealth.challengemembertbl set activeUser=0, leftDate= '${leftDate}', archive=1 where challengeId = ${challengeId} and userId = ${userId};`
 	
 	db.query(joinChallengeQuery, (err,result)=>{
 		if(err){

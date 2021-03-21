@@ -26,28 +26,30 @@
 
 			<div class="form-group">
 				<label for="challengeType" > Challenge Type </label>
-				<select id="metrics" class="mul-select col-md-6" multiple="true" name="challengeType" >
-					<option value="Step Count">Step Count</option>
+				<select id="metrics" class="mul-select col-md-6" multiple="true" name="challengeType" value="<%= result[0].challengeType %> " >
+					<option value="Step Count" >Step Count</option>
 					<option value="Sleep Hours">Sleep Hours</option>
 					<option value="Mindful Minutes">Mindful Minutes </option>
 					<option value="Water"> Water </option>
 					<option value="Fruits & Veggies"> Fruits & Veggies </option>
 					<option value="Physical Activity">Physical Activity</option>
 				</select>
+				<span id="result"> </span> 
 
-				<span id="result"  hidden > </span> 
-				
+				<input type="text" id="result" name="CT" value="<%= result[0].challengeType %>" hidden>
 			</div>
 
 
             <div class="form-group">
                 <label for="start">Start date:</label>
-                <input type="date" id="startId" name="startDate" value= "'<%= result[0].startdate %>'" >
+                <input type="date" id="startId" name="startDate" value= "<%= result[0].startDate %>"  placeholder="<%= result[0].startDate %>">
+				<input type="text" hidden name="SD" value="<%= result[0].startDate %>" >
             </div>
 
             <div class="form-group">
                 <label for="start">End date:</label>
                 <input type="date" id="endId" name="endDate" value="<%= result[0].endDate %>"  >
+				<input type="text" hidden name="ED" value="<%= result[0].endDate %>" >
             </div>
 
             <!-- <div class="form-group">
@@ -97,6 +99,9 @@
 					document.getElementById("result").innerHTML = "Please select atleast one. "
 				}
 			}
+
+
+
 
 </script>
 

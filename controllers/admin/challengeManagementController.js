@@ -16,21 +16,21 @@ exports.getChallengeManagement = (_req, res) => {
 };
 
 exports.addChallenge = (req, res) => {
+	console.log(req.body, '===============> ADD CHALLENGE DATA');
+	let { name, description, userId, startDate, endDate } = req.body;
 
-	let users = ''
-	const getUsers = `select userId, userName from usertbl;`
+	let users = '';
+	const getUsers = `select userId, userName from usertbl;`;
 
-	db.query(getUsers, (err,result)=>{
-		if(err){
-			console.log(err, "-------> error while getting users.")
-		}else{
-			console.log(result, "=======> users result")
+	db.query(getUsers, (err, result) => {
+		if (err) {
+			console.log(err, '-------> error while getting users.');
+		} else {
+			console.log(result, '=======> users result');
 			users = result;
-			res.render('adminViews/addChallenge', { layout: 'layouts/adminLayout' , users});
-
+			res.render('adminViews/addChallenge', { layout: 'layouts/adminLayout', users });
 		}
-	})
-
+	});
 };
 
 exports.editChallenge = (req, res) => {
@@ -47,20 +47,35 @@ exports.editChallenge = (req, res) => {
 };
 
 exports.updateChallenge = (req, res) => {
-	let cid = req.params.cid;	
-	let { name, description, challengeType, startDate, endDate } = req.body;
+	let cid = req.params.cid;
+	console.log(req.body, '==============> COMPLETE DATA');
+	let { name, description, challengeType, CT, startDate, SD, endDate, ED } = req.body;
 
-	challengeType = challengeType.toString();
+	console.log(startDate, '===============> StartDate');
+	console.log(SD, '===========> SD');
+
+	if (challengeType == undefined) {
+		challengeType = CT;
+	}
+
+	if (startDate == '') {
+		startDate = SD;
+	}
+
+	if (endDate == '') {
+		endDate = ED;
+	}
+
+	challengeType = challengeType;
 	startDate = moment(startDate).format('L');
 	endDate = moment(endDate).format('L');
 	console.log(name, description, challengeType, startDate, endDate, '----------updated values');
-
 
 	const updateQuery = `UPDATE happyhealth.challengetbl SET challengeName =  '${name}' , challengeDescription = '${description}', challengeType= '${challengeType}', startDate='${startDate}', endDate= '${endDate}' where challengeId = ${cid}`;
 	db.query(updateQuery, function (err, result) {
 		if (err) throw err;
 		else {
-			console.log(result,'=======>Successfully updated');
+			console.log(result, '=======>Successfully updated');
 			// return res.render('adminViews/challengeManagement', {result, layout: "layouts/adminLayout" })
 			res.redirect('/challengeManagement');
 		}
@@ -80,19 +95,48 @@ exports.deleteChallenge = (req, res) => {
 	});
 };
 
-exports.postChallenge = (req, res) => {
+exports.postChallenge =  (req, res) => {
 	console.log(req.body, '----------adding post challenge');
-	let { name, description, challengeType, startDate, endDate } = req.body;
+	let { name, description, challengeType, userId, startDate, endDate } = req.body;
 
 	challengeType = challengeType.toString();
 	startDate = moment(startDate).format('L');
 	endDate = moment(endDate).format('L');
 	console.log(name, description, challengeType, startDate, endDate, '----------dates');
 	const insert = `INSERT INTO happyhealth.challengetbl (challengeName, challengeDescription, challengeType , startDate, endDate) VALUES('${name}', '${description}', '${challengeType}' , '${startDate}', '${endDate}'); `;
-	db.query(insert, (err, results) => {
+
+	 db.query(insert, (err, result) => {
 		if (err) throw err;
 		else {
 			console.log('Successfully added challenge to db');
+		}
+	});
+
+	const getLastRow = `SELECT * FROM happyhealth.challengetbl ORDER BY challengeId DESC LIMIT 1;`;
+
+	db.query(getLastRow, (err, result) => {
+		if (err) {
+			console.log(err, '=====> unable to get last row');
+		} else {
+			lastAddedChallengeId = result[0].challengeId;
+
+			//What values to insert into challengemember table
+			let values = '';
+			for (let i = 0; i < userId.length; i++) {
+				values += `(${lastAddedChallengeId}, ${userId[i]}, 0, 0 ),`;
+			}
+			values = values.slice(0, -1);
+			console.log(values, '============> VALUES ');
+
+			// ADD USER INTO challengemembertbl
+			const addUsersQuery = `INSERT INTO happyhealth.challengemembertbl(challengeId, userId, activeUser, archive) values ${values}; `
+			db.query(addUsersQuery, (err,result)=>{
+				if(err){
+					console.log(err, "error while inviting users")
+				}else{
+					console.log(result, "=======> invited users")
+				}
+			});
 		}
 	});
 	res.redirect('/challengeManagement');
@@ -134,7 +178,7 @@ exports.postChallenge = (req, res) => {
 // 			});
 // 		}
 // 	});
-	
+
 // };
 
 exports.getChallengeUsers = async (req, res) => {
@@ -146,7 +190,7 @@ exports.getChallengeUsers = async (req, res) => {
 		if (err) {
 			console.log(err, '=======> error getChallengeUsers');
 		} else {
-			console.log(result , "============> result getChallengeUsers");
+			console.log(result, '============> result getChallengeUsers');
 			joinedUsers = result;
 		}
 	});
@@ -175,7 +219,6 @@ exports.getChallengeUsers = async (req, res) => {
 			});
 		}
 	});
-
 };
 
 exports.addUserToChallenge = (req, res) => {
