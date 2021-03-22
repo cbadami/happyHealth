@@ -37,10 +37,8 @@
                             <%= result[i].message%>
                         </td>
                         <td>
-                            <form action="/deleteMsg/<%= result[i].messageId %>" method="post">
                                 <input type="submit" id="PopoverCustomT-1"
-                                   value="Delete" class="btn btn-sm btn-md btn-danger"></input>
-                            </form>
+                                   value="dismiss" class="btn btn-sm btn-md btn-danger"></input>
                         </td>
                     </tr>
                     <% } %>

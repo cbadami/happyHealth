@@ -5,7 +5,7 @@ exports.getNotifications = (req, res) => {
     const userId = req.session.userId;
     console.log(userId)
 
-    const nnQuery = `Select messageId, title, message, userId from happyhealth.announcementsTbl ;`;
+    const nnQuery = `select * from announcementsTbl where (userId = 0) or (userId = ${userId}) order by messageId desc ;`
     db.query(nnQuery, function (err, result) {
         if (err) {
             console.log(err, "======> error while getting announcments");

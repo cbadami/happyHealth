@@ -96,6 +96,7 @@ exports.deleteChallenge = (req, res) => {
 };
 
 exports.postChallenge =  (req, res) => {
+
 	console.log(req.body, '----------adding post challenge');
 	let { name, description, challengeType, userId, startDate, endDate } = req.body;
 

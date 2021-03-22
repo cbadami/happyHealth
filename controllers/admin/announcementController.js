@@ -1,4 +1,5 @@
 const db = require('../../database');
+const moment = require('moment');
 
 
 exports.getAdminAnnouncements = (req, res) => {
@@ -6,7 +7,7 @@ exports.getAdminAnnouncements = (req, res) => {
     const messageId = req.session.messageId;
     console.log(messageId)
 
-    const aaQuery = `Select messageId, title, message, userId from happyhealth.announcementsTbl;`;
+    const aaQuery = `select * from announcementsTbl where archive=0 order by messageId desc`;
     db.query(aaQuery, function (err, result) {
         if (err) {
             console.log(err, "*****error while getting admin announcments*****");
@@ -41,7 +42,7 @@ exports.postAdminAnnouncements = (req, res) => {
             title: 'Announcements'
         });
     }
-    var aaQuery = `UPDATE happyhealth.announcementsTbl SET title = ${title}, message = ${message}, userId = ${userId} WHERE messageId = ${messageId};`;
+    var aaQuery = `UPDATE happyhealth.announcementsTbl SET title = '${title}', message = '${message}', userId = ${userId} WHERE messageId = ${messageId};`;
     db.query(aaQuery, function (error, result) {
         if (error) {
             console.log(error);
@@ -59,3 +60,69 @@ exports.postAdminAnnouncements = (req, res) => {
 //     });
 //     console.log('****getAdminAnnouncements executed successfully****');
 // };
+
+exports.getAdminNewAnnouncements = (req, res) => {
+
+     console.log("***** Page to create new announcements******")
+
+            res.render('adminViews/adminNewAnnouncements', {
+                layout: 'layouts/adminLayout',
+                title: 'Announcements',
+            });
+
+    // const aaQuery = `Insert (title, message, msgDate, userId) from happyhealth.announcementsTbl VALUES (${title}, ${message}, ${msgDate}, ${userId});`;
+    // db.query(aaQuery, function (err, result) {
+    //     if (err) {
+    //         console.log(err, "*****error while getting admin announcments*****");
+    //     } else {
+    //         console.log(result, '****getAdminAnnouncements executed successfully****');
+
+    //         res.render('adminViews/adminAnnouncements', {
+    //             layout: 'layouts/adminLayout',
+    //             title: 'Announcements',
+    //             result
+    //         });
+    //     }
+    // });
+
+};
+
+exports.postAnnouncement = (req,res)=>{
+    console.log(req.body, "posted announcement")
+
+    let title =req.body.title;
+    let description = req.body.description;
+	let postedDate = moment(new Date()).format('L');
+
+    console.log(title, description, postedDate, "==========> announcemnet data")
+
+    let postAnn = `INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES ("${title}", "${description}", 0, '${postedDate}', 0)`
+
+    db.query(postAnn,(err,result)=>{
+        if(err){
+            console.log(err, "=======> error while posting announcement")
+        }else{
+            console.log(result, "==========> Posted announcement")
+        }
+    })
+
+    res.redirect('/adminAnnouncements')
+}
+
+exports.deleteAnnouncement = (req,res)=>{
+    let aid = req.params.aid;
+    console.log(aid, "+============> deleting annoucnement")
+
+    let deleteAnnoun = `UPDATE happyhealth.announcementstbl set archive = 1 where messageId=${aid};`
+
+    db.query(deleteAnnoun, (err,result)=>{
+        if(err){
+            console.log(err, "===> error while deleting announcemtn")
+        }else{
+            console.log(result, "==========> deleted successfully")
+        }
+
+        res.redirect('/adminAnnouncements')
+
+    });
+}
