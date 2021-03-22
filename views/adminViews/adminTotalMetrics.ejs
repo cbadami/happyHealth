@@ -1,4 +1,3 @@
-
 <div class="app-main__inner">
     <div class="container">
         <div class="main-body">
@@ -13,19 +12,21 @@
                                     <h4>
                                         <%= result[0][0].fullName %>
                                     </h4>
-                                    
                                 </div>
-                            </div>                            
-                        </div>                        
+                            </div>
+                        </div>
                     </div>
-                </br>
+                    </br>
                     <div class="form-group">
                         <form action="/adminMetricsDate" method="POST">
-                            <label for="start">From date:</label>
-                            <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy" >
-                            <label for="start">To date:</label>
-                            <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" >
-                            <button type="submit" onclick="getData(document.getElementById(datepicker1), document.getElementById(datepicker2))" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get</button>
+                            <label for="start">From-date :</label>
+                            <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy">
+                            </br>
+                            <label for="start">To - date :</label>
+                            <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy">
+                            <button type="submit"
+                                onclick="getData(document.getElementById(datepicker1), document.getElementById(datepicker2))"
+                                id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get</button>
                         </form>
                     </div>
                 </div>
@@ -33,130 +34,115 @@
                     <div class="card mb-3" style="height:auto;">
                         <div class="card-body">
 
-                            
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">First Name:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].fullName.split(' ')[0] %>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class=" row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Last Name:</h6>
                                 </div>
-                                    <div class="col-sm-9 text-secondary"> 
-                                        <%= result[0][0].fullName.split(' ')[1] %>
-                                    </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0][0].fullName.split(' ')[1] %>
+                                </div>
                             </div>
                             <hr>
                             <div class=" row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Step Count:</h6>
+                                    <h6 class="mb-0">Today's Step Count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].stepCount%>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row">
+
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Total step count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].total%>
                                 </div>
+
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Sleep Count:</h6>
+                                    <h6 class="mb-0">Today's Sleep Count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].sleepHours%>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row">
+
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Total Sleep count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalSleep%>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Water consumed:</h6>
+                                    <h6 class="mb-0">Today's Water consumed:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].water%>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row">
+
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Total water consumed:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalWater%>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Mindful minutes:</h6>
+                                    <h6 class="mb-0">Today's Mindful minutes:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].meTime%>
                                 </div>
-                            </div>
-                            
-                            <hr>
-                            <div class="row">
+
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Total Mindful minutes</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalMe%>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Fruits count:</h6>
+                                    <h6 class="mb-0">Today's Fruits count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].fruits%>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row">
+
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Total Fruits count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalFruits%>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Vegetables count:</h6>
+                                    <h6 class="mb-0">Today's Vegetables count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].veggies%>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row">
+
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Total vegetables count:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalVeggies%>
                                 </div>
                             </div>
