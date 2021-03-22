@@ -59,6 +59,7 @@ router.get('/getAllChallengeUsers/:challengeId/:userId', challengeManagement.get
  * Admin user analytics routes
  */
 router.get('/getUserTotalMetrics/:userId', analyticsController.getUserTotalMetrics);
+router.post('/adminMetricsDate', analyticsController.getData);
 router.get('/adminAnalytics', analyticsController.getAdminAnalytics);
 router.get('/adminAnalyticsOverAll', analyticsController.getAdminAnalyticsOverAll);
 

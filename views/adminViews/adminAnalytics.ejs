@@ -55,26 +55,26 @@
 </div> -->
 <div class="w-100 p-3" style="background-color: #eee;">
     <h1> OverAll Statistics </h1>
-    <table class="table">
+    <table class="table table-responsive">
         <thead class="thead-dark">
             <tr>
             <tr>
-                <th scope="col">User ID</th>
-                <th scope="col">UserName </th>
-                <th scope="col">User Full Name</th>
-                <th scope="col"> Date </th>
-                <th scope="col"> Step Count </th>
-                <th scope="col"> Target step count </th>
-                <th scope="col"> Sleeping hours </th>
-                <th scope="col"> Target sleep hours </th>
-                <th scope="col"> Meditation time </th>
-                <th scope="col"> Target meditation time </th>
-                <th scope="col"> Water count </th>
-                <th scope="col"> Target water count </th>
-                <th scope="col">Vegetables count</th>                
-                <th scope="col"> Target Vegetables count</th>
-                <th scope="col"> Fruits count </th>
-                <th scope="col"> Target fruits count </th>
+                <th>#</th>
+                <th scope="col-md-1">UserName </th>
+                <th scope="col-md-1">Full Name</th>
+                <th scope="col-md-1"> Date </th>
+                <th scope="col-md-1"> Step # </th>
+                <th scope="col-md-1"> Target step # </th>
+                <th> Sleeping hours </th>
+                <th scope="col-md-1"> Target sleep hours </th>
+                <th scope="col-md-1"> Me time </th>
+                <th scope="col-md-1"> Target Me time </th>
+                <th scope="col-md-1"> Water</th>
+                <th scope="col-md-1"> Target water count </th>
+                <th scope="col-md-1"> Vegetables</th>
+                <th scope="col-md-1"> Target Vegetables</th>
+                <th scope="col-md-1"> Fruits </th>
+                <th scope="col-md-1">Target fruits</th>
             </tr>
             </tr>
         </thead>
@@ -83,52 +83,52 @@
             <% for(var i=0; i < obj.length; i++) { %>
 
             <tr>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].userId %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].UserName %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].fullName %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].date %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].stepCount %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].stepGoal %>
                 </td>
                 <td>
                     <%= obj[i].sleepHours %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].sleepGoal %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].meTime %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].meTimeGoal %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].water %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].waterGoal %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].veggies %>
-                </td>            
-                <td>
+                </td>
+                <td class="col-md-1">
                     <%= obj[i].veggieGoal %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].fruits %>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <%= obj[i].fruitGoal %>
                 </td>
             </tr>

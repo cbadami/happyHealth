@@ -1,97 +1,174 @@
+
 <div class="app-main__inner">
+    <div class="container">
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="height: auto;">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="/static/assets/images/happyHealth/userIcon3.png" alt="image not found"
+                                    width="170">
+                                <div class="mt-3">
+                                    <h4>
+                                        <%= result[0][0].fullName %>
+                                    </h4>
+                                    
+                                </div>
+                            </div>                            
+                        </div>                        
+                    </div>
+                </br>
+                    <div class="form-group">
+                        <form action="/adminMetricsDate" method="POST">
+                            <label for="start">From date:</label>
+                            <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy" >
+                            <label for="start">To date:</label>
+                            <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" >
+                            <button type="submit" onclick="getData(document.getElementById(datepicker1), document.getElementById(datepicker2))" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3" style="height:auto;">
+                        <div class="card-body">
 
-    <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for users"> -->
-    <!-- <h3 style="text-align: center;">User Management</h3> -->
-   
-    <div class="table-responsive">
-        
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    
-                    <th scope="col">UserID</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">Total step count</th>
-                    <th scope="col">Average step count</th> 
-                    <th scope="col">Total sleep count</th>
-                    <th scope="col">Average sleep count</th> 
-                    <th scope="col">Total meTime count</th>
-                    <th scope="col">Average meTime count</th> 
-                    <th scope="col">Total fruits count</th>
-                    <th scope="col">Average fruits count</th> 
-                    <th scope="col">Total vegetables count</th>
-                    <th scope="col">Average vegetables count</th>
-                    <th scope="col">Total water count</th>
-                    <th scope="col">Average water count</th> 
-                </tr>
-            </thead>
-            <tbody>
-                <% for (var i=0; i < result.length;i++) { %>
-                    <tr>
-                      
-                        <td>
-                            <%= result[i].userId%>
-                        </td>
-                        
-                        <td>
-                            <%= result[i].fullName%>
-                        </td>
+                            
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">First Name:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0][0].fullName.split(' ')[0] %>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class=" row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Last Name:</h6>
+                                </div>
+                                    <div class="col-sm-9 text-secondary"> 
+                                        <%= result[0][0].fullName.split(' ')[1] %>
+                                    </div>
+                            </div>
+                            <hr>
+                            <div class=" row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Step Count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0][0].stepCount%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Total step count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[1][0].total%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Sleep Count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0][0].sleepHours%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Total Sleep count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[1][0].totalSleep%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Water consumed:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0][0].water%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Total water consumed:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[1][0].totalWater%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mindful minutes:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0][0].meTime%>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Total Mindful minutes</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[1][0].totalMe%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Fruits count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0][0].fruits%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Total Fruits count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[1][0].totalFruits%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Vegetables count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0][0].veggies%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Total vegetables count:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[1][0].totalVeggies%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <td>
-                            <%= result[i].total%>
-                        </td>
-                       
-                        <td>
-                            <%= result[i].average%>
-                        </td>
-
-                        <td>
-                            <%= result[i].totalSleep%>
-                        </td>
-
-                        <td>
-                            <%= result[i].avgSleep%>
-                        </td>
-
-                        <td>
-                            <%= result[i].totalMe%>
-                        </td>
-
-                        <td>
-                            <%= result[i].avgMe%>
-                        </td>
-
-                        <td>
-                            <%= result[i].totalFruits%>
-                        </td>
-
-                        <td>
-                            <%= result[i].avgFruits%>
-                        </td>
-
-                        <td>
-                            <%= result[i].totalVeggies%>
-                        </td>
-
-                        <td>
-                            <%= result[i].avgVeggies%>
-                        </td>
-
-                        <td>
-                            <%= result[i].totalWater%>
-                        </td>
-
-                        <td>
-                            <%= result[i].avgWater%>
-                        </td>
-                        <!-- <td>
-                        <a href="">View</a>
-                    </td> -->
-                        
-                    </tr>
-                    <% } %>
-            </tbody>
-        </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-</div>
+    <style>
+        h6 {
+            font-weight: 500;
+        }
+    </style>

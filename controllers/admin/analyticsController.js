@@ -1,20 +1,90 @@
 const db = require('../../database');
+var mysql = require('mysql');
+const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
 
 exports.getUserTotalMetrics = (req, res) => {
 
     const userId = req.params.userId;
-    const allMetricsQuery = `SELECT usermetricstbl.userId, usertbl.fullName, SUM(DISTINCT usermetricstbl.stepCount) as total, AVG(DISTINCT usermetricstbl.stepCount) as average, SUM(DISTINCT usermetricstbl.sleepHours) as totalSleep, AVG(DISTINCT usermetricstbl.sleepHours) as avgSleep, SUM(DISTINCT usermetricstbl.meTime) as totalMe, AVG(DISTINCT usermetricstbl.meTime) as avgMe, SUM(DISTINCT usermetricstbl.fruits) as totalFruits, AVG(DISTINCT usermetricstbl.fruits) as avgFruits, SUM(DISTINCT usermetricstbl.veggies) as totalVeggies, AVG(DISTINCT usermetricstbl.veggies) as avgVeggies, SUM(DISTINCT usermetricstbl.water) as totalWater, AVG(DISTINCT usermetricstbl.water) as avgWater from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId  AND usertbl.userId = ${userId} group by usermetricstbl.userId`;
-    db.query(allMetricsQuery, function (err, result) {
+    const dayQuery = 
+    `SELECT usermetricstbl.userId, usertbl.fullName,
+    usermetricstbl.stepCount as stepCount,
+    usermetricstbl.sleepHours as sleepHours,                      
+    usermetricstbl.meTime as meTime, 
+    usermetricstbl.fruits as fruits,
+    usermetricstbl.veggies as veggies,
+    usermetricstbl.water as water
+    from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where
+    usermetricstbl.userId = ${userId} 
+    group by 
+    usermetricstbl.userId;`
+
+    const allMetricsQuery = 
+    `SELECT 
+    SUM( usermetricstbl.stepCount) as total,
+    SUM( usermetricstbl.sleepHours) as totalSleep,
+    SUM( usermetricstbl.meTime) as totalMe,
+    SUM( usermetricstbl.fruits) as totalFruits,
+    SUM( usermetricstbl.veggies) as totalVeggies,
+    SUM( usermetricstbl.water) as totalWater
+    from 
+    usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId
+    where
+    usermetricstbl.userId = ${userId} 
+    group by 
+    usermetricstbl.userId;`
+
+   
+    db1.query(dayQuery + allMetricsQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
-            console.log(`${JSON.stringify(result)}`, '------------db users result');
+            result = JSON.stringify(result);  
+            result = JSON.parse(result);
+            console.log(result[0][0], '------------db usermetricstbl result');
+            console.log(result[1][0], '------------db userstbl result');
             res.render('adminViews/adminTotalMetrics', {
                 layout: 'layouts/adminLayout',
-                title: 'User Management',
+                title: 'Admin Analytics',
                 result
             })
-            console.log('****getUserManagement executed successfully****');
+            console.log('****get Total metrics executed successfully****');
+        }
+    });
+}
+
+exports.getData = (req, res) => {
+
+    console.log(req.body);
+    const userId = req.body.userId;
+    const startDate = req.body.datepicker1;
+    const endDate = req.body.datepicker2;
+    console.log("startdate: ", startDate);
+    console.log("enddate: ", endDate);
+    console.log("userId: ",userId);
+    var query = 
+    `SELECT 
+    SUM( happyhealth.usermetricstbl.stepCount) as total,
+    SUM( happyhealth.usermetricstbl.sleepHours) as totalSleep,
+    SUM( happyhealth.usermetricstbl.meTime) as totalMe,
+    SUM( happyhealth.usermetricstbl.fruits) as totalFruits,
+    SUM( happyhealth.usermetricstbl.veggies) as totalVeggies,
+    SUM( happyhealth.usermetricstbl.water) as totalWater
+    from 
+    happyhealth.usermetricstbl
+    where
+    happyhealth.usermetricstbl.userId = ${userId};`
+
+              
+    db.query(query, function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            console.log("result: ",result)
+            res.render('adminViews/adminMetricsDate', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                result
+            })
         }
     });
 }
@@ -31,8 +101,6 @@ exports.monthly = (req, res) => {
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
-            //console.log(result);
-            //console.log("monthly");
             res.render('adminViews/monthlyAnalytics', {
                 layout: 'layouts/adminLayout',
                 title: 'Admin Analytics',
@@ -59,7 +127,7 @@ exports.daily = (req, res) => {
             res.render('adminViews/dailyAnalytics', {
                 layout: 'layouts/adminLayout',
                 title: 'Admin Analytics',
-                obj: result
+                //obj: result
             });
         }
     });
@@ -124,7 +192,7 @@ exports.getAdminAnalytics = (req, res) => {
                  usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
                  usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
                  usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
-                 from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId;`
+                 from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`
 
     db.query(query, function (err, result) {
         if (err) throw err;
