@@ -42,14 +42,14 @@
 
             <div class="form-group">
                 <label for="start">Start date:</label>
-                <input type="date" id="startId" name="startDate" value= "<%= result[0].startDate %>"  placeholder="<%= result[0].startDate %>">
-				<input type="text" hidden name="SD" value="<%= result[0].startDate %>" >
+                <input type="date"  id="startId" name="startDate" value= "<%= result[0].startDate %>"  placeholder="<%= result[0].startDate %>">
+				<input type="text" hidden name="SD" value="<%= result[0].startDate %>" > <span> <%= result[0].startDate %> </span>
             </div>
 
             <div class="form-group">
                 <label for="start">End date:</label>
                 <input type="date" id="endId" name="endDate" value="<%= result[0].endDate %>"  >
-				<input type="text" hidden name="ED" value="<%= result[0].endDate %>" >
+				<input type="text" hidden name="ED" value="<%= result[0].endDate %>" > <span> <%= result[0].endDate %> </span>
             </div>
 
 
@@ -65,6 +65,16 @@
                     <option value="Cardio Challenge"> Michael Jackson </option>
                 </select>
             </div> -->
+
+			<div id="line1">
+				<table border="1">
+				  <tr>
+					<td>
+					  <span id="a" name="endDate" value="<%= result[0].endDate %>" > </span><span id="b"> <input type="date"  value="<%= result[0].endDate %>" > </span>
+					</td>
+				  </tr>
+				</table>
+			  </div>
 
             <div>
                 <input type="submit" value="Update" class="btn btn-primary btn-sm">
@@ -127,3 +137,21 @@
     $('#participantId').val(participantType)
 
 </script> -->
+
+<style>
+	div#line1 span#a {
+  display: inline;
+}
+
+div#line1:hover span#a {
+  display: none;
+}
+
+div#line1 span#b {
+  display: none;
+}
+
+div#line1:hover span#b {
+  display: inline;
+}
+</style>

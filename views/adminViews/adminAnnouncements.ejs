@@ -2,37 +2,42 @@
 
     <div class="table-title">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <h2><b>Announcements Management</b></h2>
             </div>
-        </div>
-        <div class="app-main__inner">
-        <div class="form-row">
             <div class="col-sm-6">
-                <h4><b>New Message Title:</b></h4>
-            </div>
-            <div class="col-sm-6">
-                <input id="title" type="text">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-sm-6">
-                <h4><b>Write Message:</b></h4>
-            </div>
-            <div class="col-sm-6">
-                <input id="message" type="text">
+                <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/adminNewAnnouncements'">Create a New
+                  Announcement</button>
+                    </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col-sm-12">
-                <form action="/postAdminAnnouncements/" method="post">
-                    <input type="submit" id="PopoverCustomT-1" value="Post to Everyone"
-                        class="btn btn-sm btn-md btn-danger"></input>
-                </form>
+        <!-- <div class="app-main__inner">
+            <div class="form-row">
+                <div class="col-sm-6">
+                    <h4><b>New Message Title:</b></h4>
+                </div>
+                <div class="col-sm-6">
+                    <input id="title" type="text">
+                </div>
             </div>
-        </div>
-        <br>
-        </div>
+            <div class="form-row">
+                <div class="col-sm-6">
+                    <h4><b>Write Message:</b></h4>
+                </div>
+                <div class="col-sm-6">
+                    <input id="message" type="text">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-12">
+                    <form action="/postAdminAnnouncements" method="post">
+                        <input type="submit" id="PopoverCustomT-1" value="Post to Everyone"
+                            class="btn btn-sm btn-md btn-danger"></input>
+                    </form>
+                </div>
+            </div> -->
+            <!-- <br> -->
+        <!-- </div> -->
     </div>
     <div class="table-responsive">
 
@@ -40,10 +45,9 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Message ID</th>
+                    <th scope="col"> Date Created</th>
                     <th scope="col">Title</th>
                     <th scope="col">Message</th>
-                    <th scope="col">User ID </th>
                     <th scope="col" style="text-align:center">Actions</th>
                 </tr>
             </thead>
@@ -55,7 +59,7 @@
                         </th>
                         <td>
                             <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
-                            <%= result[i].messageId%>
+                            <%= result[i].msgDate%>
                                 </a>
                         </td>
                         <td>
@@ -65,10 +69,7 @@
                             <%= result[i].message%>
                         </td>
                         <td>
-                            <%= result[i].userId%>
-                        </td>
-                        <td>
-                            <form action="/deleteMsg/<%= result[i].messageId %>" method="post">
+                            <form action="/deleteAnnouncement/<%= result[i].messageId %>" method="post">
                                 <input type="submit" id="PopoverCustomT-1" value="Delete"
                                     class="btn btn-sm btn-md btn-danger"></input>
                             </form>

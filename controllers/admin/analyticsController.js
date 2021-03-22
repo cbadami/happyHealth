@@ -72,7 +72,7 @@ exports.getData = (req, res) => {
     from 
     happyhealth.usermetricstbl
     where
-    happyhealth.usermetricstbl.userId = ${userId};`
+    happyhealth.usermetricstbl.userId = 1;`
 
               
     db.query(query, function (err, result) {
