@@ -131,7 +131,7 @@ exports.getAdminAnalytics = (req, res) => {
         else {
             //console.log(result);
 
-            res.render('adminViews/adminAnalyticsOverAll', {
+            res.render('adminViews/adminAnalytics', {
                 layout: 'layouts/adminLayout',
                 title: 'Admin Analytics',
                 obj: result
