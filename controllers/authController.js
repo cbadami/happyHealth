@@ -1,8 +1,11 @@
 
 const db = require('../database');
-const bcrypt = require('bcryptjs');
+ const bcrypt = require('bcryptjs');
 
 exports.getUserLogin = (req, res) => {
+
+	console.log("=======> INSIDE USER LOGIN")
+
     let success_msg = req.session.success_msg;
     if (!success_msg) {
         res.render('userViews/userLogin', {
@@ -28,6 +31,9 @@ exports.postUserLogin = async (req, res) => {
         username,
         password
     } = req.body;
+
+	console.log(username, password, "==========> POSTING USER LOGIN")
+	
     let errors = [];
 
     if (!username || !password) {

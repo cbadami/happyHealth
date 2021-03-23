@@ -1,4 +1,6 @@
 const db = require('../database');
+const bcrypt = require('bcryptjs')
+
 
 exports.getForgotPassword = (req, res) => {
   res.render('forgotPassword', {
@@ -56,7 +58,8 @@ exports.getResetPassword = (req, res) => {
 
 };
 
-exports.postResetPassword = (req, res) => {
+exports.postResetPassword = async (req, res) => {
+	console.log(req.body, "================> POSTTING RESET PASSWORD")
   const userId = req.session.userId;
   const { password, password2 } = req.body;
   let errors = [];
@@ -87,9 +90,13 @@ exports.postResetPassword = (req, res) => {
   }
   else {
 
+	const hashPassword = await bcrypt.hash(password, 12);
+    console.log(hashPassword,"--------hashpassword");
+
+
     const updateQuery = `UPDATE happyhealth.usertbl
             SET 
-                password = '${password}'
+                password = '${hashPassword}'
             WHERE
                 userId = '${userId}';`;
     db.query(updateQuery, function (err, result) {
@@ -99,6 +106,9 @@ exports.postResetPassword = (req, res) => {
       req.session.success_msg = success_msg1;
       res.redirect('/');
     });
+
+
+
   }
 
 };
