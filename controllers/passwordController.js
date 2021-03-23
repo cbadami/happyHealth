@@ -59,7 +59,7 @@ exports.getResetPassword = (req, res) => {
 };
 
 exports.postResetPassword = async (req, res) => {
-	console.log(req.body, "================> POSTTING RESET PASSWORD")
+	// console.log(req.body, "================> POSTTING RESET PASSWORD")
   const userId = req.session.userId;
   const { password, password2 } = req.body;
   let errors = [];
@@ -114,38 +114,80 @@ exports.postResetPassword = async (req, res) => {
 };
 
 const nodemailer = require('nodemailer');
+const {google } = require('googleapis')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
 
-let generateCode;
+const CLIENT_ID = '74869696546-q4phjod112tfp5f57i0u90kp0orkmqrn.apps.googleusercontent.com';
+const CLEINT_SECRET = 'LL_KJ4R_0PMBWcZ6-Xc76zOE';
+const REDIRECT_URI='https://developers.google.com/oauthplayground';
+const REFRESH_TOKEN='1//04djp7_22d3OwCgYIARAAGAQSNgF-L9Ir9Q-ovOi_v3SYvdm3-caACvTGNZ8SsAF8VyKzenL-PX7svIxZaz2K0C0s1r4aI8KhDw'; 
 
-const sendEmail = (userEmail, generateCode) => {
+const oAuth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLEINT_SECRET,
+  REDIRECT_URI
+);
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-  const mailTransporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'happyhealthgdp@gmail.com',
-      pass: 'Health@890'
-    }
-  });
 
-  
+async function sendEmail( userEmail, generateCode ) {
 
-  const email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
-  const mailDetails = {
-    from: 'happyhealthgdp@gmail.com',
-    to: 'harishthadkaus@gmail.com',
-    subject: 'Happy Health forgot Password!',
-    html: email
-  };
+	console.log(typeof userEmail, typeof generateCode )
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
 
-  mailTransporter.sendMail(mailDetails, function (err, data) {
-    if (err) {
-      console.log('Error Occurs ' + err);
-    } else {
-      console.log('Email sent successfully');
-    }
-  });
-};
+    const transport = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: 'happyhealthgdp@gmail.com',
+        clientId: CLIENT_ID,
+        clientSecret: CLEINT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: accessToken,
+      },
+    });
+
+    const mailOptions = {
+      from: 'happyhealthgdp@gmail.com',
+      to: userEmail,
+      subject: 'OTP to reset your password',
+      text: `OTP to reset your account: ${generateCode}`,
+      html: `<p> Your OTP to reset your account: ${generateCode} </p>`,
+    };
+
+    const result = await transport.sendMail(mailOptions);
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
+// const sendEmail = (userEmail, generateCode) => {
+
+//   const mailTransporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user: 'happyhealthgdp@gmail.com',
+//       pass: 'Health@890'
+//     }
+//   });
+//   const email = "<h1>Happy Health</h1> <p>Your otp is " + generateCode + "  </p>";
+//   const mailDetails = {
+//     from: 'happyhealthgdp@gmail.com',
+//     to: 'srkvodnala547@gmail.com',
+//     subject: 'Happy Health forgot Password!',
+//     html: email
+//   };
+
+//   mailTransporter.sendMail(mailDetails, function (err, data) {
+//     if (err) {
+//       console.log('Error Occurs ' + err);
+//     } else {
+//       console.log('Email sent successfully');
+//     }
+//   });
+// };
 
 
 exports.getValidation = (req, res) => {

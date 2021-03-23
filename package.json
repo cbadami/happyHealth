@@ -29,6 +29,7 @@
     "fast-csv": "^4.3.6",
     "fix": "0.0.6",
     "fund": "^1.0.0",
+    "googleapis": "^68.0.0",
     "http-errors": "~1.6.3",
     "moment": "^2.29.1",
     "morgan": "~1.9.1",
