@@ -54,13 +54,18 @@ exports.getUserTotalMetrics = (req, res) => {
 
 exports.getData = (req, res) => {
 
-    console.log(req.body);
-    const userId = req.body.userId;
-    const startDate = req.body.datepicker1;
-    const endDate = req.body.datepicker2;
+
+    // console.log(req.query.datepicker1);
+    // console.log(req.query.datepicker2);
+    const user = req.params.userId;
+   
+    const startDate = req.query.datepicker1;
+    const endDate = req.query.datepicker2;
+    
     console.log("startdate: ", startDate);
     console.log("enddate: ", endDate);
-    console.log("userId: ",userId);
+    console.log("userId: ",user);
+    //console.log(req);
     var query = 
     `SELECT 
     SUM( happyhealth.usermetricstbl.stepCount) as total,
@@ -72,7 +77,11 @@ exports.getData = (req, res) => {
     from 
     happyhealth.usermetricstbl
     where
-    happyhealth.usermetricstbl.userId = 1;`
+    (happyhealth.usermetricstbl.userId = ${user}
+    AND
+    STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y")
+    BETWEEN
+    '${startDate}' AND '${endDate}');`
 
               
     db.query(query, function (err, result) {
