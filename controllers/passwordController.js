@@ -120,7 +120,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport')
 const CLIENT_ID = '74869696546-q4phjod112tfp5f57i0u90kp0orkmqrn.apps.googleusercontent.com';
 const CLEINT_SECRET = 'LL_KJ4R_0PMBWcZ6-Xc76zOE';
 const REDIRECT_URI='https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN='1//04djp7_22d3OwCgYIARAAGAQSNgF-L9Ir9Q-ovOi_v3SYvdm3-caACvTGNZ8SsAF8VyKzenL-PX7svIxZaz2K0C0s1r4aI8KhDw'; 
+const REFRESH_TOKEN='1//04SWNsbii4w3yCgYIARAAGAQSNgF-L9IrRUQSKqfnUUZDSrbJqk0OObc2E3HzZJPxVbNNIjvdm7V-LmFysWueLIVDvJjxQ5Ldzg'; 
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
@@ -129,18 +129,27 @@ const oAuth2Client = new google.auth.OAuth2(
 );
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
+console.log(oAuth2Client, "======> oAuth2Client")
+
 
 async function sendEmail( userEmail, generateCode ) {
 
-	console.log(typeof userEmail, typeof generateCode )
-  try {
-    const accessToken = await oAuth2Client.getAccessToken();
+	// let accessToken = await oAuth2Client.getAccessToken();
+	// console.log(accessToken,"=====> access token")
 
+
+
+	console.log(userEmail, generateCode , "=========> USER MAIL and code")
+
+  try {
+    let accessToken = await oAuth2Client.getAccessToken();
+	console.log(accessToken,"=====> access token")
     const transport = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         type: 'OAuth2',
         user: 'happyhealthgdp@gmail.com',
+		pass: 'happyhealthgdp123',
         clientId: CLIENT_ID,
         clientSecret: CLEINT_SECRET,
         refreshToken: REFRESH_TOKEN,
@@ -156,11 +165,19 @@ async function sendEmail( userEmail, generateCode ) {
       html: `<p> Your OTP to reset your account: ${generateCode} </p>`,
     };
 
-    const result = await transport.sendMail(mailOptions);
-    return result;
+	transport.sendMail(mailOptions,(err,result)=>{
+		if(err){
+			console.log(err, "=====> mail not sent")
+		}else{
+			console.log(result, "=======> mail sent")
+		}
+	});
+
+    // const result = await transport.sendMail(mailOptions);
+    // return result;
   } catch (error) {
-    return error;
-  }
+	console.log(error, "========> ERROR OCCUREDD")
+}
 }
 
 // const sendEmail = (userEmail, generateCode) => {
