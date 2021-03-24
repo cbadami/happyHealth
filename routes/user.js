@@ -36,6 +36,10 @@ router.post('/userVegetables', userHomeController.postUserVegetables);
 router.get('/userPhysicalActivity', userHomeController.getUserPhysicalActivity);
 router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity);
 
+/**
+ * Personal Progress
+ */
+
 
 /**
  * User Profile routes
