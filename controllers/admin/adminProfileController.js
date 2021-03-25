@@ -2,7 +2,7 @@
 const db = require('../../database');
 
 exports.getUserInfo = (req,res)=>{
-    const userId = req.params.userId;
+    const userId = req.session.userId;
     
 
     console.log(`**********  ${userId}   ***********`)
@@ -14,7 +14,7 @@ exports.getUserInfo = (req,res)=>{
             throw err;
         } else {
             console.log(result);
-            res.render('adminViews/editUserInfo', {
+            res.render('adminViews/adminInfo', {
                 layout: 'layouts/adminLayout',
                 title: 'User Profile',
                 result
@@ -25,7 +25,7 @@ exports.getUserInfo = (req,res)=>{
 };
 
 exports.getAdminUserName = (req, res) => {
-    const userId = req.params.userId;
+    const userId = req.session.userId;
 
     console.log(`**********  ${userId}   ***********`)
 
