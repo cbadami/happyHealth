@@ -1,0 +1,133 @@
+<div class="app-main__inner">
+    <div class="container">
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-12">
+                    <div class="card mb-3" style="height:auto;">
+                        <div class="card-body">
+                            <h3>Today Progress</h3>
+                            <hr>
+                            <div class=" row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Step Count</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].stepCount%>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Step Goal</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].stepGoal%>
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Sleep Count</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].sleepHours%>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Sleep Goal</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].sleepGoal%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Water consumed</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].water%>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Water Goal</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].waterGoal%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mindful minutes</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].meTime%>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mindful minutes Goal</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].meTimeGoal%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Fruits count:</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].fruits%>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Fruits Goal:</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].fruitGoal%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Vegetables count:</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].veggies%>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Vegetables Goal:</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].veggieGoal%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Physical Activity Minutes:</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].physicalActivityMinutes%>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Physical Activity Goal:</h6>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= result[0].physicalActivityGoal%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        h6 {
+            font-weight: 500;
+        }
+    </style>
