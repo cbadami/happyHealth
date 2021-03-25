@@ -19,9 +19,6 @@
                     <strong class="mr-auto">
                         <%= result[i].title%>
                     </strong>
-                    <strong class="text-muted">
-                        <%= result[i].msgDate%>
-                    </strong>
                     <form action="/dismissAnnouncement/<%= result[i].messageId %>" method="post">
                         <input type="submit" id="PopoverCustomT-1" value="Dismiss"
                             class="btn btn-sm btn-md btn-danger"></input>
@@ -31,6 +28,9 @@
                     <strong>
                         <%= result[i].message%>
                     </strong>
+                    <p class="text-secondary pull-right">
+                        <%= result[i].msgDate%>
+                    </p>
                 </div>
                 <br>
                 <% } %>
