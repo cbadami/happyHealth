@@ -69,7 +69,8 @@ router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity
   * User Progress
   */
 
- router.get('/userProgress', userProgressController.getUserProgress);
+ router.get('/userProgress', userProgressController.getTodayProgress);
+ router.get('/progress',userProgressController.getProgress);
 
  /**
   * User Notification Controller

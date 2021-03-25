@@ -2,6 +2,17 @@
     <div class="container">
         <div class="main-body">
             <div class="row gutters-sm">
+                <div class="form-group">
+                    <form action="/progress" method="GET">
+                        <label for="start">From-date :</label>
+                        <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy">
+    
+                        <label for="start">To - date :</label>
+                        <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy">
+                        <button type="submit" id="PopoverCustomT-1" class="btn btn-primary d-inline"
+                                >Get Progress</button> 
+                    </form>
+                </div>
                 <div class="col-md-12">
                     <div class="card mb-3" style="height:auto;">
                         <div class="card-body">

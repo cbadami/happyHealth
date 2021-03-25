@@ -35,7 +35,7 @@ let currentDate = moment(new Date()).format('L').toString();
 // };
 
 
-exports.getUserProgress = (req, res) => {
+exports.getTodayProgress = (req, res) => {
     const userId = req.session.userId;
 
     const metricQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId} and date = '${currentDate}';`;
@@ -46,10 +46,56 @@ exports.getUserProgress = (req, res) => {
             console.log(result, '--------db userMetrics table result');
             res.render('userViews/userProgress', {
                 layout: 'layouts/userLayout',
-                title: 'User Home',
+                title: 'User Progress',
                 result
             });
         }
 
+    });
+};
+
+exports.getProgress = (req, res) => {
+
+
+    console.log(req.query.datepicker1);
+    console.log(req.query.datepicker2);
+    const user = req.session.userId;
+
+    const startDate = req.query.datepicker1;
+    const endDate = req.query.datepicker2;
+
+    console.log("startdate: ", startDate);
+    console.log("enddate: ", endDate);
+    console.log("userId: ", user);
+    //console.log(req);
+    const metricSum =
+        `SELECT 
+    SUM( happyhealth.usermetricstbl.stepCount) as total,
+    SUM( happyhealth.usermetricstbl.sleepHours) as totalSleep,
+    SUM( happyhealth.usermetricstbl.meTime) as totalMe,
+    SUM( happyhealth.usermetricstbl.fruits) as totalFruits,
+    SUM( happyhealth.usermetricstbl.veggies) as totalVeggies,
+    SUM( happyhealth.usermetricstbl.water) as totalWater
+    from 
+    happyhealth.usermetricstbl
+    where
+    (happyhealth.usermetricstbl.userId = ${user}
+    AND
+    STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y")
+    BETWEEN
+    '${startDate}' AND '${endDate}');`;
+
+
+    db.query(metricSum, function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            console.log("****metric sum result**** ", result);
+            res.render('userViews/userProgressDate', {
+                layout: 'layouts/userLayout',
+                title: 'Custom Progress',
+                result
+            });
+        }
     });
 };
