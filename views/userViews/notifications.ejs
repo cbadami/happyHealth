@@ -22,15 +22,15 @@
                 <strong class="text-muted">
                     <%= result[i].msgDate%>
                 </strong>
-                <!-- <form action="/deleteNotifications/<%= result[i].aId %>" method="post">
-                    <input type="submit" id="PopoverCustomT-1" value="Dismiss"
-                        class="btn btn-sm btn-md btn-danger"></input>
+                <!-- <form action="/deleteAnnouncement" method="post">
+                    <input type="submit" value="Dismiss" id="PopoverCustomT-1" class="btn btn-sm btn-md btn-danger">
+                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
                 </form> -->
             </div>
             <div class="toast-body">
-                <strong>
-                    <%= result[i].message%>
-                </strong>
+                <%= result[i].message%>
             </div>
             <br>
             <% } %>
