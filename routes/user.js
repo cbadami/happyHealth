@@ -74,8 +74,8 @@ router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity
   */
  
 router.get('/notifications', userNotificationController.getNotifications);
-// router.post('/notifications', userNotificationController.postNotifications);
-router.post('/deleteMsg/:msgId', userNotificationController.deleteMsg);
+router.post('/notifications', userNotificationController.postNotifications);
+router.post('/deleteNotifications/:aId', userNotificationController.deleteNotifications);
 
 
 
