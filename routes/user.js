@@ -6,7 +6,9 @@ const router = express.Router();
 const userHomeController = require('../controllers/user/userHomeController')
 const userProfileController = require('../controllers/user/userProfileController')
 const userChallengeController = require('../controllers/user/userChallengeController')
+const userProgressController = require('../controllers/user/userProgressController')
 const userNotificationController = require('../controllers/user/userNotificationController')
+
 
 
 /**
@@ -42,11 +44,6 @@ router.get('/userPhysicalActivity', userHomeController.getUserPhysicalActivity);
 router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity);
 
 /**
- * Personal Progress
- */
-
-
-/**
  * User Profile routes
  */
  router.get('/userInfo',userProfileController.getUserInfo);
@@ -69,10 +66,10 @@ router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity
 
 
  /**
-  * User Personal Progress
+  * User Progress
   */
 
- router.get('/userPersonalProgress', userHomeController.getUserPersonalProgress);
+ router.get('/userProgress', userProgressController.getUserProgress);
 
  /**
   * User Notification Controller
