@@ -6,9 +6,7 @@
           <form method="POST" class="my-5" action="userHydration">
             <div class="form-group">
               <%- include ('../partials/messages') %>
-              <h2 class="d-flex justify-content-center py-3">
-                Water Intake
-              </h2>
+              <h2 class="d-flex justify-content-center py-3">Water Intake</h2>
             </div>
             <div class="form-row">
               <label for="dateText"> &nbsp; </label>
@@ -53,8 +51,15 @@
 
             <div class="form-row">
               <label for="username">Number of Ounces</label>
-              <input type="number" id="water" min="0" name="water" class="form-control" placeholder="0"
-                value="<%= typeof water != 'undefined' ? water : '' %>" />
+              <input
+                type="number"
+                id="water"
+                min="0"
+                name="water"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof water != 'undefined' ? water : '' %>"
+              />
             </div>
             <!-- <div class="form-row">
               <label>Ounces</label>
@@ -81,8 +86,15 @@
             </script> -->
             <div class="form-row">
               <label for="password">Personal Daily Goal</label>
-              <input type="number" min="0" id="waterGoal" name="waterGoal" class="form-control" placeholder="0"
-                value="<%= typeof waterGoal != 'undefined' ? waterGoal : '' %>" />
+              <input
+                type="number"
+                min="0"
+                id="waterGoal"
+                name="waterGoal"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof waterGoal != 'undefined' ? waterGoal : '' %>"
+              />
             </div>
             <!-- <div class="form-row">
               <label for="password">Monthly Goal</label>
@@ -101,7 +113,12 @@
 
             <div class="form-row">
               <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary" style="margin-top: 10px">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="margin-top: 10px"
+                  onclick="myFunction()"
+                >
                   Update
                 </button>
               </div>
@@ -112,3 +129,8 @@
     </div>
   </section>
 </div>
+<script>
+  function myFunction() {
+    alert("Updated Physical Activity");
+  }
+</script>
