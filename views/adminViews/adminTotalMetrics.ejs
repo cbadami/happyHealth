@@ -1,11 +1,4 @@
 <div class="app-main__inner">
-    <div class="table-title">
-        <div class="row">
-            <div class="col-sm-6">
-                <h2><b>User Metrics for <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date())   %></b></h2>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="main-body">
             <div class="row gutters-sm">
@@ -29,7 +22,7 @@
                             <label for="start">From-date :</label>
                             <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy">
                             </br>
-                            <label for="start">To-date :</label>
+                            <label for="start">To - date :</label>
                             <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy">
                             <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm"
                                     onclick="getData()">Get</button> 
@@ -58,14 +51,14 @@
                             <hr>
                             <div class=" row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Step Count:</h6>
+                                    <h6 class="mb-0">Today's Step Count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].stepCount%>
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Total step count to-date:</h6>
+                                    <h6 class="mb-0">Total step count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].total%>
@@ -75,14 +68,14 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Sleep Count:</h6>
+                                    <h6 class="mb-0">Today's Sleep Count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].sleepHours%>
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Total Sleep count to-date:</h6>
+                                    <h6 class="mb-0">Total Sleep count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalSleep%>
@@ -91,14 +84,14 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Water consumed:</h6>
+                                    <h6 class="mb-0">Today's Water consumed:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].water%>
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Total water consumed to-date:</h6>
+                                    <h6 class="mb-0">Total water consumed:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalWater%>
@@ -107,14 +100,14 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Mindful minutes:</h6>
+                                    <h6 class="mb-0">Today's Mindful minutes:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].meTime%>
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Total Mindful minutes to-date:</h6>
+                                    <h6 class="mb-0">Total Mindful minutes</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalMe%>
@@ -123,14 +116,14 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Fruits count:</h6>
+                                    <h6 class="mb-0">Today's Fruits count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].fruits%>
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Total Fruits count to-date:</h6>
+                                    <h6 class="mb-0">Total Fruits count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalFruits%>
@@ -139,33 +132,17 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Vegetables count:</h6>
+                                    <h6 class="mb-0">Today's Vegetables count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[0][0].veggies%>
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Total vegetables count to-date:</h6>
+                                    <h6 class="mb-0">Total vegetables count:</h6>
                                 </div>
                                 <div class="col-sm-3 text-secondary">
                                     <%= result[1][0].totalVeggies%>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">physical Activity Minutes:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0][0].physicalActivityMinutes%>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Total physical Activity Minutes to-date:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[1][0].totalphysicalActivityMinutes%>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,4 @@
 const db = require('../../database');
-const moment = require('moment');
 
 exports.getNotifications = (req, res) => {
     console.log("inside anouncements")
@@ -24,28 +23,21 @@ exports.getNotifications = (req, res) => {
 };
 
 
+// exports.postNotifications = (req, res) => {
+//     let userId = req.session.userId;
+//     console.log("-------post user Notification controller");
+//     let errors = [];
+//     if (errors) {
+//         errors.push('Please enter all fields');
+//         console.log(errors, "----------------errros");
+//         res.render('userViews/notifications', {
+//             layout: 'layouts/userLayout',
+//             title: 'Announcements'
+//         });
+//     }
 
-exports.postNotifications = (req,res)=>{
-    console.log(req.body, "posted notification")
 
-    let title =req.body.title;
-    let description = req.body.description;
-	let postedDate = moment(new Date()).format('L');
-
-    console.log(title, description, postedDate, "==========> user announcemnet data")
-
-    let postAnn = `INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES ("${title}", "${description}", 0, '${postedDate}', 0)`
-
-    db.query(postAnn,(err,result)=>{
-        if(err){
-            console.log(err, "=======> error while posting user announcement")
-        }else{
-            console.log(result, "==========> Posted user announcement")
-        }
-    })
-
-    res.redirect('userViews/notifications')
-}
+// };
 
 // exports.getNotifications = (req, res) => {
 //     res.render('userViews/notifications', {
@@ -55,41 +47,35 @@ exports.postNotifications = (req,res)=>{
 //     });
 // };
 
-exports.deleteNotifications = (req,res)=>{
-    let aid = req.params.aid;
-    console.log(aid, "+============> deleting annoucnement")
-
-    let deleteAnnoun = `UPDATE happyhealth.announcementstbl set archive = 1 where messageId=${aid};`
-
-    db.query(deleteAnnoun, (err,result)=>{
-        if(err){
-            console.log(err, "===> error while deleting announcemtn")
-        }else{
-            console.log(result, "==========> deleted successfully")
+exports.deleteMsg = (req, res) => {
+    let messageId = req.params.messageId;
+    console.log(messageId, "deleting msg")
+    const deleteQuery = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}'; `;
+    const deleteQuery2 = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}';`;
+    db.query(deleteQuery2, function (err) {
+        if (err) {
+            throw err;
         }
-
-        res.redirect('userViews/notifications')
-
+        console.log("****notifications delete2 executed started****");
     });
-}
+    db.query(deleteQuery, function (err) {
+        if (err) {
+            throw err;
+        } else {
+            res.redirect('userViews/notifications');
+        }
+        console.log("****delete executed started****");
+    });
 
-// exports.deleteMsg = (req, res) => {
-//     let messageId = req.params.messageId;
-//     console.log(messageId, "deleting msg")
-//     const deleteQuery = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}'; `;
-//     const deleteQuery2 = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}';`;
-//     db.query(deleteQuery2, function (err) {
-//         if (err) {
-//             throw err;
-//         }
-//         console.log("****notifications delete2 executed started****");
-//     });
-//     db.query(deleteQuery, function (err) {
-//         if (err) {
-//             throw err;
-//         } else {
-//             res.redirect('userViews/notifications');
-//         }
-//         console.log("****delete executed started****");
-//     });
-// }
+    // var ppQuery = `Delete * FROM happyhealth.announcementsTbl;`;
+    // db.query(ppQuery, function (err, result) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         res.redirect('userViews/notifications', {
+    //             layout: 'layouts/userLayout',
+    //             title: 'Announcements'
+    //         });
+    //     }
+    // });
+}
