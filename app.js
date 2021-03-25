@@ -11,6 +11,9 @@ const dotenv = require('dotenv');
 const path = require('path');
 const colors = require('colors');
 const {isAuth, isAdmin} = require('./middleware/auth.js');
+const cron = require('node-cron');
+
+
 
 
 const app = express();
@@ -87,6 +90,24 @@ app.use('/',isAdmin,require('./routes/admin.js'));
 //     Error: 'Page Not Found'
 //   });
 // });
+
+const db = require('./database')
+const moment = require('moment');
+let currentDate = moment(new Date()).format('L').toString();
+// Schedule tasks to be run on the server.
+cron.schedule('* * * * *', async function() {
+  console.log('running a task every minute');
+  const usersQuery = "SELECT userId FROM usertbl"
+  await db.query(usersQuery,(err,result)=>{
+    if(err){
+      console.log(err,"------error while users");
+    }
+    console.log(result,"-------result")
+  })
+
+  
+
+});
 
 const PORT = process.env.PORT || 3000;
 

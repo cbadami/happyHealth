@@ -1,6 +1,5 @@
 const db = require('../../database');
 var mysql = require('mysql');
-const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
 
 exports.getUserTotalMetrics = (req, res) => {
 
@@ -34,7 +33,7 @@ exports.getUserTotalMetrics = (req, res) => {
     usermetricstbl.userId;`
 
    
-    db1.query(dayQuery + allMetricsQuery, function (err, result) {
+    db.query(dayQuery + allMetricsQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
