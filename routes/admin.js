@@ -22,8 +22,8 @@ router.get('/adminHome', adminHomeController.getAdminHome);
 /**
  *  Admin Profile Controller
  */
-router.get('/getAdminUserName/:userId', adminProfileContorller.getAdminUserName);
-router.get('/editUserInfo/:userId', adminProfileContorller.getUserInfo);
+router.get('/adminProfile', adminProfileContorller.getAdminUserName);
+router.get('/adminInfo', adminProfileContorller.getUserInfo);
 
 
 /**

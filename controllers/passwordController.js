@@ -130,7 +130,7 @@ const oAuth2Client = new google.auth.OAuth2(
 );
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-console.log(oAuth2Client, "======> oAuth2Client")
+// console.log(oAuth2Client, "======> oAuth2Client")
 
 
 async function sendEmail( userEmail, generateCode ) {
