@@ -228,7 +228,7 @@ exports.addUserToChallenge = (req, res) => {
 	let joinedDate = moment(new Date()).format('L');
 	console.log(joinedDate);
 
-	let addUserQuery = `INSERT INTO happyhealth.challengemembertbl (userId, joinedDate, challengeId, activeUser ) VALUES( ${userId}, '' , ${challengeId} , 0); `;
+	let addUserQuery = `INSERT INTO happyhealth.challengemembertbl (userId, joinedDate, challengeId, activeUser, archive ) VALUES( ${userId}, '' , ${challengeId} , 0, 0); `;
 
 	db.query(addUserQuery, (err, result) => {
 		if (err) {
