@@ -94,7 +94,9 @@ exports.getProgress = (req, res) => {
             res.render('userViews/userProgressDate', {
                 layout: 'layouts/userLayout',
                 title: 'Custom Progress',
-                result
+                result,
+                startDate,
+                endDate
             });
         }
     });

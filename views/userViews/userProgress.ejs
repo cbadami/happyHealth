@@ -2,17 +2,21 @@
     <div class="container">
         <div class="main-body">
             <div class="row gutters-sm">
-                <div class="form-group">
+
+                <div class="form-group ml-5">
                     <form action="/progress" method="GET">
-                        <label for="start">From-date :</label>
-                        <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy">
-    
-                        <label for="start">To - date :</label>
-                        <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy">
-                        <button type="submit" id="PopoverCustomT-1" class="btn btn-primary d-inline"
-                                >Get Progress</button> 
+                        <label for="start" class="font-weight-bold">From:</label>
+                        <input type="date" class="m-2 date" id="datepicker1" name="datepicker1"
+                            placeholder="mm/dd/yyyy">
+
+                        <label for="start" class="font-weight-bold">To:</label>
+                        <input type="date" class="m-2 date" id="datepicker2" name="datepicker2"
+                            placeholder="mm/dd/yyyy">
+
+                        <button type="submit" id="PopoverCustomT-1" class="btn btn-info d-inline mb-1">Get Progress</button>
                     </form>
                 </div>
+
                 <div class="col-md-12">
                     <div class="card mb-3" style="height:auto;">
                         <div class="card-body">
@@ -137,8 +141,30 @@
             </div>
         </div>
     </div>
-    <style>
-        h6 {
-            font-weight: 500;
-        }
-    </style>
+</div>
+<style>
+    h6 {
+        font-weight: 500;
+    }
+
+    .date {
+        padding: .5rem .75rem;
+        font-size: 1rem;
+        line-height: 1.25;
+        color: #464a4c;
+        background-color: #fff;
+        background-image: none;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: .25rem;
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    }
+    #PopoverCustomT-1{
+        font-size: 1rem;
+    }
+</style>
