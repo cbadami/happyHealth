@@ -49,8 +49,8 @@
               document.getElementById("demo").innerHTML = formatted_date;
             </script>
 
-			<%= stepCount %>
-			
+            <%= stepCount %>
+
             <div class="form-row">
               <label for="username">Number of Steps</label>
               <input
@@ -85,6 +85,7 @@
                   type="submit"
                   class="btn btn-primary"
                   style="margin-top: 10px"
+                  onclick="myFunction()"
                 >
                   Update
                 </button>
@@ -96,3 +97,8 @@
     </div>
   </section>
 </div>
+<script>
+  function myFunction() {
+    alert("Updated Step Count Successfully");
+  }
+</script>
