@@ -22,7 +22,7 @@ router.get('/adminHome', adminHomeController.getAdminHome);
 /**
  *  Admin Profile Controller
  */
-router.get('/getAdminUserName', adminProfileContorller.getAdminUserName);
+router.get('/adminProfile', adminProfileContorller.getAdminUserName);
 router.get('/adminInfo', adminProfileContorller.getUserInfo);
 
 
