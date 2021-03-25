@@ -32,11 +32,11 @@
                             value="<%= typeof fruits != 'undefined' ? fruits : '' %>" />
                         </div>
                         <div class="form-row">
-                          <label for="password">Personal Daily Goal</label>
-                          <input type="number" id="fruitgoal" name="fruitgoal" min="0" class="form-control" placeholder="0"
+                          <label for="password">Personal Daily Goal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                          <input type="number" id="fruitgoal" name="fruitgoal" min="0" class="form-control"  placeholder="0"
                             value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>" />
                         </div>
-            <!-- <div class="form-row">
+             <!-- <div class="form-row">
               <label for="password">Monthly Goal</label>
               <input
                 type="number"
@@ -47,9 +47,10 @@
                 placeholder="0"
                 value="<%= typeof fruitgoal != 'undefined' ? fruitgoal : '' %>"
               />
-            </div> -->
-            </div>
-          </div>
+             </div> -->
+            
+             </div>
+             </div>
 
 
           <div class="sub-entry">
@@ -59,7 +60,7 @@
                 <div class="centered">
                       <div class="form-group">
                         <%- include ('../partials/messages') %>
-                          <h3 class="d-flex justify-content-center py-3">
+                          <h3 class="d-flex justify-content py-3">
                             Vegetables Consumed
                           </h3>
                           <div class="form-row">
@@ -111,11 +112,12 @@
 
           .centered {
             position: absolute;
-            top: 39%;
-            left: 70%;
+            top: 35%;
+            left: 75%;
             transform: translate(-50%, -50%);
             text-align: center;
           }
+          
           </style>
 
           <script>
