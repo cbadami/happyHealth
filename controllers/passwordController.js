@@ -115,7 +115,8 @@ exports.postResetPassword = async (req, res) => {
 
 const nodemailer = require('nodemailer');
 const {google } = require('googleapis')
-const sendgridTransport = require('nodemailer-sendgrid-transport')
+var sgTransport = require('nodemailer-sendgrid-transport');
+
 
 const CLIENT_ID = '74869696546-q4phjod112tfp5f57i0u90kp0orkmqrn.apps.googleusercontent.com';
 const CLEINT_SECRET = 'LL_KJ4R_0PMBWcZ6-Xc76zOE';
@@ -133,12 +134,6 @@ console.log(oAuth2Client, "======> oAuth2Client")
 
 
 async function sendEmail( userEmail, generateCode ) {
-
-	// let accessToken = await oAuth2Client.getAccessToken();
-	// console.log(accessToken,"=====> access token")
-
-
-
 	console.log(userEmail, generateCode , "=========> USER MAIL and code")
 
   try {

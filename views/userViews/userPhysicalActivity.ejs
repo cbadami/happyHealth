@@ -59,7 +59,7 @@
                 min="0"
                 class="form-control"
                 placeholder="0"
-                value="<%= typeof activity != 'undefined' ? physicalActivityMinutes : '' %>"
+                value="<%= typeof physicalActivityMinutes != 'undefined' ? physicalActivityMinutes : '' %>"
               />
             </div>
             <div class="form-row">
@@ -71,7 +71,7 @@
                 min="0"
                 class="form-control"
                 placeholder="0"
-                value="<%= typeof activityGoal != 'undefined' ? physicalActivityGoal : '' %>"
+                value="<%= typeof physicalActivityGoal != 'undefined' ? physicalActivityGoal : '' %>"
               />
             </div>
             <div class="form-row"></div>
@@ -82,7 +82,6 @@
                   type="submit"
                   class="btn btn-primary"
                   style="margin-top: 10px"
-                  onclick="myFunction()"
                 >
                   Update
                 </button>

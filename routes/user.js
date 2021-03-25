@@ -27,6 +27,11 @@ router.post('/userTrack', userHomeController.postUserTrack);
 router.get('/userHydration', userHomeController.getUserHydration);
 router.post('/userHydration', userHomeController.postUserHydration);
 
+router.get('/getFruitsVeggies', userHomeController.getFruitsVeggies)
+router.post('/postFruitsVeggies', userHomeController.postFruitsVeggies)
+
+
+
 router.get('/userFruits', userHomeController.getUserFruits);
 router.post('/userFruits', userHomeController.postUserFruits);
 
