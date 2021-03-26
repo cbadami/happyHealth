@@ -414,7 +414,12 @@ exports.postUserPhysicalActivity = (req, res) => {
 };
 
 exports.resetUserMetrics = async (req, res) => {
+	let currentDate = moment(new Date()).format('L').toString();
+
+	console.log(currentDate,  "=======> current Date")
 	cron.schedule('0 0 * * *', async () => {
+		console.log(currentDate,  "=======> current Date")
+
 		try{
 			console.log('running cron job at every day 12:am');
 
@@ -428,15 +433,16 @@ exports.resetUserMetrics = async (req, res) => {
 					let values = '';
 		
 					for (let i = 0; i < usersCount; i++) {
-						values += `(${users[i].userId},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0 ),`;
+						values += `(${users[i].userId},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0),`;
 					}
 		
-					console.log(values.slice(0, -1), '========> values to insert');
+					values = values.slice(0, -1)
+					//console.log(values, '========> values to insert');
 		
-					const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values}`;
+					const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
 					db.query(newValuesQuery, (err, result) => {
 						if (err) {
-							console.log(err, '============> error while reseting values');
+							console.log('============> error while reseting values or already inserted');
 						} else {
 							console.log(result, '===========> insert new values');
 						}
