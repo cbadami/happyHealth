@@ -1,5 +1,6 @@
 const db = require('../../database');
 const moment = require('moment');
+const cron = require('node-cron');
 
 let currentDate = moment(new Date()).format('L').toString();
 
@@ -333,18 +334,17 @@ exports.getFruitsVeggies = (req, res) => {
 
 exports.postFruitsVeggies = (req, res) => {
 	let userId = req.session.userId;
-	let { fruits, fruitgoal, veggies, veggieGoal }  =req.body;
+	let { fruits, fruitgoal, veggies, veggieGoal } = req.body;
 
-	let updateFV = `update happyhealth.usermetricstbl set fruits = ${fruits} , fruitGoal= ${fruitgoal} , veggies = ${veggies} , veggieGoal= ${veggieGoal} where userId =${userId} and date = '${currentDate}'; `
-	db.query(updateFV, (err, result)=>{
-		if(err){
-			console.log(err, "=====> error while updating fruits & veggies")
-		}else{
-			console.log(result, "===========> updated successfully");
-			res.redirect('/home')
+	let updateFV = `update happyhealth.usermetricstbl set fruits = ${fruits} , fruitGoal= ${fruitgoal} , veggies = ${veggies} , veggieGoal= ${veggieGoal} where userId =${userId} and date = '${currentDate}'; `;
+	db.query(updateFV, (err, result) => {
+		if (err) {
+			console.log(err, '=====> error while updating fruits & veggies');
+		} else {
+			console.log(result, '===========> updated successfully');
+			res.redirect('/home');
 		}
-	})
-
+	});
 };
 
 exports.postUserVegetables = (req, res) => {
@@ -379,7 +379,7 @@ exports.getUserPhysicalActivity = (req, res) => {
 		} else {
 			console.log(result, '-------- physical activity result');
 			const { physicalActivityMinutes, physicalActivityGoal } = result[0];
-			console.log( physicalActivityMinutes, physicalActivityGoal  ,"==========> PHYYYYYYYY")
+			console.log(physicalActivityMinutes, physicalActivityGoal, '==========> PHYYYYYYYY');
 			res.render('userViews/userPhysicalActivity', {
 				layout: 'layouts/userLayout',
 				title: 'User Physical Activity',
@@ -413,3 +413,16 @@ exports.postUserPhysicalActivity = (req, res) => {
 	});
 };
 
+exports.resetUserMetrics = (req, res) => {
+	console.log('running a task every minute');
+
+	// Schedule tasks to be run on the server.
+	// cron.schedule('* * * * * *', async function () {
+	// 	try {
+	// 		console.log('running a task every minute');
+	// 	} catch (err) {
+	// 		console.log(err, '============> error while runnning cron jobs');
+	// 	}
+	// });
+	
+};
