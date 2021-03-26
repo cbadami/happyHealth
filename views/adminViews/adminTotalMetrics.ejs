@@ -20,10 +20,10 @@
                     <div class="form-group">
                         <form action="/adminMetricsDate/<%= result[0][0].userId%>" method="GET">
                             <label for="start">From-date :</label>
-                            <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy">
+                            <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy" required>
                             </br>
                             <label for="start">To - date :</label>
-                            <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy">
+                            <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" required>
                             <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm"
                                     onclick="getData()">Get</button> 
                         </form>
