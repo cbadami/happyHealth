@@ -81,6 +81,13 @@ router.get('/notifications', userNotificationController.getNotifications);
 router.post('/dismissAnnouncement/:messageId', userNotificationController.dismissAnnouncement)
 
 
+/**
+ * Updating User metrics everyday with zeros
+ */
+
+ router.get('/resetJobs', userHomeController.resetUserMetrics)
+
+
 
 
 
