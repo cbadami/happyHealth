@@ -96,12 +96,8 @@ app.use('/', isAdmin, require('./routes/admin.js'));
 
 const userHomeController = require('./controllers/user/userHomeController')
 
-cron.schedule('0 12 * * *', () => {
-	userHomeController.resetUserMetrics();
-});
 
-
-
+userHomeController.resetUserMetrics();
 
 
 const db = require('./database');
