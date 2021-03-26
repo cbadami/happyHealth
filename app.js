@@ -10,11 +10,8 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const path = require('path');
 const colors = require('colors');
-const {isAuth, isAdmin} = require('./middleware/auth.js');
+const { isAuth, isAdmin } = require('./middleware/auth.js');
 const cron = require('node-cron');
-
-
-
 
 const app = express();
 
@@ -32,36 +29,39 @@ app.use(cookieParser());
 // app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
 // app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 // app.use(express.static('public'))
-app.use('/static', express.static(__dirname + "/public"));
+app.use('/static', express.static(__dirname + '/public'));
 // Setting template engine
 app.use(expressLayouts);
 app.set('view options', {
-  layout: false
+	layout: false,
 });
 app.set('view engine', 'ejs');
 
-app.use(express.static("views"));
+app.use(express.static('views'));
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 
 // accept url encoded
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+	bodyParser.urlencoded({
+		extended: true,
+	})
+);
 
-// accept json 
+// accept json
 app.use(bodyParser.json());
 
-
 // Cookie-session use
-app.use(cookieSession({
-  name: 'session',
-  keys: ['tobo!'],
+app.use(
+	cookieSession({
+		name: 'session',
+		keys: ['tobo!'],
 
-  // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}));
+		// Cookie Options
+		maxAge: 24 * 60 * 60 * 1000, // 24 hours
+	})
+);
 
 // Passport middleware
 app.use(passport.initialize());
@@ -72,16 +72,19 @@ app.use(flash());
 
 // Global variables
 app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  next();
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	next();
 });
 
 // Routes
 app.use('/', require('./routes/auth.js'));
-app.use('/',isAuth,require('./routes/user.js'));
-app.use('/',isAdmin,require('./routes/admin.js'));
+app.use('/', isAuth, require('./routes/user.js'));
+app.use('/', isAdmin, require('./routes/admin.js'));
+
+// app.get('/', userHomeController.resetUserMetrics)
+
 
 // app.get('/error',(req, res) => {
 //   console.log("************No route***************");
@@ -91,23 +94,22 @@ app.use('/',isAdmin,require('./routes/admin.js'));
 //   });
 // });
 
-const db = require('./database')
-const moment = require('moment');
-let currentDate = moment(new Date()).format('L').toString();
-// Schedule tasks to be run on the server.
-cron.schedule('* * * * *', async function() {
-  console.log('running a task every minute');
-  const usersQuery = "SELECT userId FROM usertbl"
-  await db.query(usersQuery,(err,result)=>{
-    if(err){
-      console.log(err,"------error while users");
-    }
-    console.log(result,"-------result")
-  })
+const userHomeController = require('./controllers/user/userHomeController')
 
-  
-
+cron.schedule('0 12 * * *', () => {
+	userHomeController.resetUserMetrics();
 });
+
+
+
+
+
+const db = require('./database');
+const moment = require('moment');
+const { json } = require('body-parser');
+let currentDate = moment(new Date()).format('L').toString();
+
+
 
 const PORT = process.env.PORT || 3000;
 
