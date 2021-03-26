@@ -58,16 +58,16 @@ exports.getData = (req, res) => {
     //console.log(req);
     var query =
         `SELECT 
-    SUM( happyhealth.usermetricstbl.stepCount) as total,
-    SUM( happyhealth.usermetricstbl.sleepHours) as totalSleep,
-    SUM( happyhealth.usermetricstbl.meTime) as totalMe,
-    SUM( happyhealth.usermetricstbl.fruits) as totalFruits,
-    SUM( happyhealth.usermetricstbl.veggies) as totalVeggies,
-    SUM( happyhealth.usermetricstbl.water) as totalWater
+    SUM( usermetricstbl.stepCount) as total,
+    SUM( usermetricstbl.sleepHours) as totalSleep,
+    SUM( usermetricstbl.meTime) as totalMe,
+    SUM( usermetricstbl.fruits) as totalFruits,
+    SUM( usermetricstbl.veggies) as totalVeggies,
+    SUM( usermetricstbl.water) as totalWater
     from 
-    happyhealth.usermetricstbl
+    usermetricstbl
     where
-    (happyhealth.usermetricstbl.userId = ${user}
+    (usermetricstbl.userId = ${user}
     AND
     STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y")
     BETWEEN
