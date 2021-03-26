@@ -416,13 +416,38 @@ exports.postUserPhysicalActivity = (req, res) => {
 exports.resetUserMetrics = (req, res) => {
 	console.log('running a task every minute');
 
-	// Schedule tasks to be run on the server.
-	// cron.schedule('* * * * * *', async function () {
-	// 	try {
-	// 		console.log('running a task every minute');
-	// 	} catch (err) {
-	// 		console.log(err, '============> error while runnning cron jobs');
-	// 	}
-	// });
-	
+//Schedule tasks to be run on the server.
+cron.schedule('0 12 * * *', async function () {
+	try {
+		// console.log('running a task every minute');
+		const usersQuery = 'SELECT userId FROM usertbl';
+		await db.query(usersQuery, (err, result) => {
+			if (err) {
+				console.log(err, '------error while users');
+			} else {
+				let usersCount = result.length;
+				let users = result;
+				let values = '';
+
+				for (let i = 0; i < usersCount; i++) {
+					values += `(${users[i].userId},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0 ),`;
+				}
+
+				console.log(values.slice(0, -1), '========> values to insert');
+
+				const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values}`;
+				db.query(newValuesQuery, (err, result) => {
+					if (err) {
+						console.log(err, '============> error while reseting values');
+					} else {
+						console.log(result, '===========> insert new values');
+					}
+				});
+			}
+		});
+	} catch (err) {
+		console.log(err, '============> error while runnning cron jobs');
+	}
+});
+
 };
