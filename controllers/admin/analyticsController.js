@@ -5,18 +5,33 @@ exports.getUserTotalMetrics = async (req, res) => {
 
     const userId = req.params.userId;
     const dayQuery =
-        `SELECT usermetricstbl.userId, usertbl.fullName, usermetricstbl.stepCount as stepCount, usermetricstbl.sleepHours as sleepHours, usermetricstbl.meTime as meTime, usermetricstbl.fruits as fruits, usermetricstbl.veggies as veggies, usermetricstbl.water as water from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
+        `SELECT usermetricstbl.userId,
+         usertbl.fullName, 
+         usermetricstbl.stepCount as stepCount,
+         usermetricstbl.sleepHours as sleepHours,
+         usermetricstbl.meTime as meTime, 
+         usermetricstbl.fruits as fruits, 
+         usermetricstbl.veggies as veggies, 
+         usermetricstbl.water as water 
+         from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId 
+         where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
 
     const allMetricsQuery =
-        `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
+        `SELECT SUM( usermetricstbl.stepCount) as total,
+         SUM( usermetricstbl.sleepHours) as totalSleep, 
+         SUM( usermetricstbl.meTime) as totalMe, 
+         SUM( usermetricstbl.fruits) as totalFruits,
+         SUM( usermetricstbl.veggies) as totalVeggies,
+         SUM( usermetricstbl.water) as totalWater 
+         from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId 
+         where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
 
 
     await db.query(dayQuery, async function (err, dayResult) {
         if (err) {
             throw err;
         }
-        // dayResult = JSON.stringify(dayResult);  
-        // dayResult = JSON.parse(dayResult);
+
         console.log(dayResult, "---------result");
         await db.query(allMetricsQuery, (err, allResult) => {
 
@@ -26,7 +41,7 @@ exports.getUserTotalMetrics = async (req, res) => {
             console.log(allResult, "----all result");
             let result = [1, 2];
             result[0] = dayResult;
-            result[1]= allResult;
+            result[1] = allResult;
             console.log(result[0][0], '------------db usermetricstbl result');
             console.log(result[1][0], '------------db userstbl result');
             res.render('adminViews/adminTotalMetrics', {
@@ -36,17 +51,11 @@ exports.getUserTotalMetrics = async (req, res) => {
             });
             console.log('****get Total metrics executed successfully****');
         });
-
-
-
     });
 };
 
 exports.getData = (req, res) => {
 
-
-    // console.log(req.query.datepicker1);
-    // console.log(req.query.datepicker2);
     const user = req.params.userId;
 
     const startDate = req.query.datepicker1;
@@ -55,7 +64,7 @@ exports.getData = (req, res) => {
     console.log("startdate: ", startDate);
     console.log("enddate: ", endDate);
     console.log("userId: ", user);
-    //console.log(req);
+
     var query =
         `SELECT 
     SUM( usermetricstbl.stepCount) as total,
@@ -121,12 +130,11 @@ exports.daily = (req, res) => {
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
-            //console.log(result);
-            //console.log("daily");
+
             res.render('adminViews/dailyAnalytics', {
                 layout: 'layouts/adminLayout',
                 title: 'Admin Analytics',
-                //obj: result
+
             });
         }
     });
@@ -144,8 +152,7 @@ exports.weekely = (req, res) => {
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
-            // console.log(result);
-            // console.log("monthly");
+
             res.render('adminViews/weekelyAnalytics', {
                 layout: 'layouts/adminLayout',
                 title: 'Admin Analytics',
@@ -155,35 +162,6 @@ exports.weekely = (req, res) => {
     });
 };
 
-// exports.getCSV = (req, res) => {
-
-
-//     //res.render("CSVManagement");
-
-
-//     db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
-
-//        const jsonData = JSON.parse(JSON.stringify(data));
-//        console.log("jsonData", jsonData);
-
-//        fastcsv
-//           .write(jsonData, { headers: true })
-//           .on("finish", function() {
-//              console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
-//            })
-//            .pipe(ws);
-
-
-//            res.render('adminViews/CSVManagement', {
-//             layout: 'layouts/adminLayout',
-//             title: 'Admin Analytics',
-//             obj: data
-//             });
-//         });
-
-
-
-// }
 
 exports.getAdminAnalytics = (req, res) => {
     var query = `select 
@@ -196,7 +174,6 @@ exports.getAdminAnalytics = (req, res) => {
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
-            //console.log(result);
 
             res.render('adminViews/adminAnalyticsOverAll', {
                 layout: 'layouts/adminLayout',
@@ -205,19 +182,11 @@ exports.getAdminAnalytics = (req, res) => {
             });
         }
     });
-    // res.render('adminViews/adminAnalytics'
-    // , {
-    //     layout: 'layouts/adminLayout',
-    //     title: 'Admin Analytics'
-    // }
-    // );
+
 };
 
 
 exports.getAdminAnalyticsOverAll = (req, res) => {
-
-    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
-
 
     var query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
                  usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
@@ -227,7 +196,6 @@ exports.getAdminAnalyticsOverAll = (req, res) => {
     db.query(query, function (err, result) {
         if (err) throw err;
         else {
-            //console.log(result);
 
             res.render('adminViews/adminAnalyticsOverAll', {
                 layout: 'layouts/adminLayout',
