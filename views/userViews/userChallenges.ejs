@@ -39,7 +39,7 @@
 
 						 <%   }else{ %>
 							<form action="/joinChallenge/<%= result[i].challengeId%>" method="POST" >
-								<input type="submit" value="Accept" class="btn btn-success" id="button"></input>
+								<input type="submit" value="Accept" class="btn btn-success" id="button" onclick="acceptedChallenge()"></input>
 							</form>
 
 						<%  } %>
@@ -53,8 +53,11 @@
 	</div>
 </div>
 <script>
+	function leftChallenge() {
+	  alert("Left Challenge");
+	}
 
-	function leftChallenge(){
+	function acceptChallenge(){
 	  alert("Accepted Challenge");
 	}
   </script>
