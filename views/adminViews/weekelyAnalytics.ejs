@@ -16,24 +16,27 @@
             </div>
             <div class="col-sm-1">
                 <form action="/dailyAnalytics" method="get">
-                    <button type="submit" onclick="daily()" id="PopoverCustomT" class="btn btn-primary pull-left">daily</button>
+                    <button type="submit" onclick="daily()" id="PopoverCustomT"
+                        class="btn btn-primary pull-left">daily</button>
                 </form>
             </div>
 
             <div class="col-sm-1">
                 <form action="/weekelyAnalytics" method="get">
-                    <button type="submit" onclick="weekely()" id="PopoverCustomT" class="btn btn-primary pull-left">weekely</button>
+                    <button type="submit" onclick="weekely()" id="PopoverCustomT"
+                        class="btn btn-primary pull-left">weekely</button>
                 </form>
             </div>
 
             <div class="col-sm-1">
                 <form action="/monthlyAnalytics" method="get">
-                    <button type="submit" onclick="monthly()" id="PopoverCustomT" class="btn btn-primary pull-left">Monthly</button>
+                    <button type="submit" onclick="monthly()" id="PopoverCustomT"
+                        class="btn btn-primary pull-left">Monthly</button>
                 </form>
             </div>
         </div>
     </div>
-    
+
     </br>
     </br>
     <table class="table">
@@ -48,11 +51,11 @@
                 <th scope="col"> Step Go </th>
                 <th scope="col"> Sleep hours </th>
                 <th scope="col"> Sleep Go </th>
-                <th scope="col"> Me time </th>
-                <th scope="col"> Me time Go </th>
-                <th scope="col"> Water  </th>
+                <th scope="col"> Mindful Minutes </th>
+                <th scope="col"> Mindful Minutes Go </th>
+                <th scope="col"> Water </th>
                 <th scope="col"> Water Go </th>
-                <th scope="col">Vegetables </th>                
+                <th scope="col">Vegetables </th>
                 <th scope="col"> Vegetables Go</th>
                 <th scope="col"> Fruits </th>
                 <th scope="col"> Fruits Go </th>
@@ -63,57 +66,59 @@
         <tbody>
             <% for(var i=0; i < obj.length; i++) { %>
 
-            <tr>
-                <td>
-                    <%= obj[i].userId %>
-                </td>
-                <td>
-                    <a href="/getUserTotalMetrics/<%= obj[i].userId%>"><%= obj[i].UserName %></a>
-                </td>
-                <td>
-                    <%= obj[i].fullName %>
-                </td>
-                <td>
-                    <%= obj[i].date %>
-                </td>
-                <td>
-                    <%= obj[i].stepCount %>
-                </td>
-                <td>
-                    <%= obj[i].stepGoal %>
-                </td>
-                <td>
-                    <%= obj[i].sleepHours %>
-                </td>
-                <td>
-                    <%= obj[i].sleepGoal %>
-                </td>
-                <td>
-                    <%= obj[i].meTime %>
-                </td>
-                <td>
-                    <%= obj[i].meTimeGoal %>
-                </td>
-                <td>
-                    <%= obj[i].water %>
-                </td>
-                <td>
-                    <%= obj[i].waterGoal %>
-                </td>
-                <td>
-                    <%= obj[i].veggies %>
-                </td>            
-                <td>
-                    <%= obj[i].veggieGoal %>
-                </td>
-                <td>
-                    <%= obj[i].fruits %>
-                </td>
-                <td>
-                    <%= obj[i].fruitGoal %>
-                </td>
-            </tr>
-            <% } %>
+                <tr>
+                    <td>
+                        <%= obj[i].userId %>
+                    </td>
+                    <td>
+                        <a href="/getUserTotalMetrics/<%= obj[i].userId%>">
+                            <%= obj[i].UserName %>
+                        </a>
+                    </td>
+                    <td>
+                        <%= obj[i].fullName %>
+                    </td>
+                    <td>
+                        <%= obj[i].date %>
+                    </td>
+                    <td>
+                        <%= obj[i].stepCount %>
+                    </td>
+                    <td>
+                        <%= obj[i].stepGoal %>
+                    </td>
+                    <td>
+                        <%= obj[i].sleepHours %>
+                    </td>
+                    <td>
+                        <%= obj[i].sleepGoal %>
+                    </td>
+                    <td>
+                        <%= obj[i].meTime %>
+                    </td>
+                    <td>
+                        <%= obj[i].meTimeGoal %>
+                    </td>
+                    <td>
+                        <%= obj[i].water %>
+                    </td>
+                    <td>
+                        <%= obj[i].waterGoal %>
+                    </td>
+                    <td>
+                        <%= obj[i].veggies %>
+                    </td>
+                    <td>
+                        <%= obj[i].veggieGoal %>
+                    </td>
+                    <td>
+                        <%= obj[i].fruits %>
+                    </td>
+                    <td>
+                        <%= obj[i].fruitGoal %>
+                    </td>
+                </tr>
+                <% } %>
 
         </tbody>
         </tbody>
@@ -121,7 +126,8 @@
 
 
     <form action="/CSVManagement" method="get">
-        <button type="submit" onclick= "getCSV()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get CSV for this week</button>
+        <button type="submit" onclick="getCSV()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get CSV for this
+            week</button>
     </form>
-    
+
 </div>
