@@ -78,7 +78,7 @@
 			  </div> -->
 
       <div>
-        <input type="submit" value="Update" class="btn btn-primary btn-sm">
+        <input type="submit" value="Update" class="btn btn-primary btn-sm" onclick="editedChallenge()">
       </div>
     </form>
   </div>
@@ -89,6 +89,9 @@
 
 
 <script>
+  function editedChallenge(){
+    alert("Challenge Edited");
+  }
   $(document).ready(function () {
     $("#metrics").select2({
       placeholder: "<%= result[0].challengeType %> ", //placeholder
