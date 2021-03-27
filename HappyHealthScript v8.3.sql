@@ -204,29 +204,27 @@ CREATE TRIGGER before_user_update
 -- ********************************** Table structure for table announcementsTbl *************************
 --
 
-DROP TABLE IF EXISTS announcementsTbl;
+
+drop table if exists announcementstbl;
 CREATE TABLE announcementsTbl (
   messageId int AUTO_INCREMENT,
   title varchar(100) NOT NULL,
   message varchar(500) DEFAULT NULL,
-  userId int DEFAULT NULL,
+  userId varchar(500) DEFAULT NULL,
+  msgDate varchar(20) DEFAULT NULL ,
+  archive boolean default null,
   PRIMARY KEY (messageId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Sets the start number 3001 for announcements Table:
 ALTER TABLE announcementsTbl AUTO_INCREMENT=3001;
 
---
--- Dumping data for table announcementsTbl
---
-INSERT INTO announcementsTbl(title,message,userId) VALUES('Title test','This is message',2);
-INSERT INTO announcementsTbl(title,message) VALUES('Everyone Title','This message for everyone');
-INSERT INTO announcementsTbl(title,message) VALUES('Hello!','Hello! Welcome to our health based application!');
-INSERT INTO announcementsTbl(title,message,userId) VALUES('Log Daily Goals','Hey! Kindly update your daily goals for better usage!',12);
-INSERT INTO announcementsTbl(title,message) VALUES('Drink Water','It is always good to drink more water during hotter days!');
-INSERT INTO announcementsTbl(title,message) VALUES('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.');
-
-
+INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES
+('Title test','This is message','1,2,3,4,5,6,7,8', '03/12/2021',0),
+('Everyone Title','This message for everyone','1,2,3,4,5,6,7,8','03/22/2021',0),
+('Hello!','Hello! Welcome to our health based application!','1,2,3,4,5,6,7,8','02/01/2021',1),
+('Log Daily Goals','Hey! Kindly update your daily goals for better usage!','1,2,3,4,5,6,7,8','01/21/2021',0),
+('Drink Water','It is always good to drink more water during hotter days!','1,2,3,4,5,6,7,8','03/21/2021',0),
+('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.','1,2,3,4,5,6,7,8','03/03/2021',1)
+;
 
 --
 -- ********************************** Table structure for table  challengeTbl  *************************
@@ -263,31 +261,33 @@ INSERT INTO
 -- ********************************** Table structure for table challengemembertbl  *************************
 --
 
-DROP TABLE IF exists challengemembertbl;
-CREATE TABLE `challengemembertbl` (
+DROP TABLE IF exists happyhealth.challengemembertbl;
+
+CREATE TABLE happyhealth.challengemembertbl (
   `invitationId` int NOT NULL AUTO_INCREMENT,
   `challengeId` int NOT NULL,
   `userId` int NOT NULL,
   `joinedDate` varchar(12) DEFAULT NULL,
+  `leftDate` varchar(12) DEFAULT NULL,
   `activeUser` boolean DEFAULT NULL,
+  `archive` boolean default NULL,
   PRIMARY KEY (`invitationId`),
   FOREIGN KEY (`userId`) REFERENCES `usertbl` (`userId`),
   FOREIGN KEY (`challengeId`) REFERENCES `challengetbl` (`challengeId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-ALTER TABLE challengemembertbl AUTO_INCREMENT=100;
+ALTER TABLE happyhealth.challengemembertbl AUTO_INCREMENT=100;
 
 
-INSERT INTO challengeMemberTbl ( challengeId, userId, joinedDate, activeUser ) VALUES
-(2001, 1,'11/24/2020' , 1),
-(2001, 2,'10/24/2020',1),
-(2001, 3,'',0),
-(2002, 1,'10/24/2018',1),
-(2002, 2,'10/24/2019',1),
-(2002, 3,'',0),
-(2002, 4,'11/24/2019',1),
-(2002, 5,'',0),
-(2002, 6,'11/24/2020',1);
-
+INSERT INTO happyhealth.challengeMemberTbl ( challengeId, userId, joinedDate, leftDate, activeUser , archive ) VALUES
+(2001, 1,'11/24/2020', '', 1, 0 ),
+(2001, 2,'', '' , 0, 0),
+(2002, 2,'10/24/2018', '', 1 , 0),
+(2003, 2,'10/24/2020', '10/26/2020', 0, 1),
+(2002, 1,'10/24/2018', '', 1 , 0),
+(2002, 3,'', '', 0, 0),
+(2002, 4,'11/24/2019','',1,0),
+(2002, 5,'','',0, 0),
+(2002, 6,'11/24/2020', '11/24/2020', 0, 1 );
 
 

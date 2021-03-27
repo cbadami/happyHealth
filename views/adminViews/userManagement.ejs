@@ -51,7 +51,7 @@
                         <th scope="row">
                             <%= i+1 %>
                         </th>
-                        <td><a href="/getAdminUserName/<%= result[i].userId%>">
+                        <td><a href="/userInfo/<%= result[i].userId%>">
                                 <%= result[i].userName%>
                             </a></td>
                         <td>
@@ -82,7 +82,7 @@
                             <!-- <div class=col-md-6> -->
                             <form action="deleteUser/<%= result[i].userId%>" method="get">
                                 <button type="submit" id="PopoverCustomT-1"
-                                    class="btn btn-sm btn-md btn-danger">Delete</button>
+                                    class="btn btn-sm btn-md btn-danger" onclick="deleteUser()">Delete</button>
                             </form>
                             <!-- </div>
                             </div> -->
@@ -94,3 +94,8 @@
     </div>
 
 </div>
+<script>
+    function deleteUser(){
+        alert("User Deleted");
+    }
+</script>

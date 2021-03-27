@@ -19,6 +19,30 @@ exports.getUserManagement = (req, res) => {
     });
 };
 
+
+exports.getUserInfo = (req, res) => {
+    const userId = req.params.userId;
+
+
+    console.log(`**********  ${userId}   ***********`);
+
+    const query = `SELECT * FROM happyhealth.usertbl where userId = ${userId};`;
+
+    db.query(query, function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            console.log(result);
+            res.render('adminViews/adminUserInfo', {
+                layout: 'layouts/adminLayout',
+                title: 'User Profile',
+                result
+            });
+            console.log('****getAdminUserName executed successfully****');
+        }
+    });
+};
+
 exports.editUser = (req, res) => {
     console.log("Get Edit data executed");
     const userId = req.params.userId;

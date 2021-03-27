@@ -9,41 +9,32 @@
     </div>
     <div class="table-responsive">
 
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Message ID</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Message</th>
-                    <th scope="col" style="text-align:center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (var i=0; i < result.length;i++) { %>
-                    <tr>
-                        <th scope="row">
-                            <%= i+1 %>
-                        </th>
-                        <td>
-                            <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
-                            <%= result[i].messageId%>
-                                </a>
-                        </td>
-                        <td>
-                            <%= result[i].title%>
-                        </td>
-                        <td>
-                            <%= result[i].message%>
-                        </td>
-                        <td>
-                                <input type="submit" id="PopoverCustomT-1"
-                                   value="dismiss" class="btn btn-sm btn-md btn-danger"></input>
-                        </td>
-                    </tr>
-                    <% } %>
-            </tbody>
-        </table>
+        <div class="table-body">
+            <% for (var i=0; i < result.length;i++) { %>
+                <div class="toast-header">
+                    <svg class=" rounded mr-2" width="10" height="10" xmlns="http://www.w3.org/2000/svg"
+                        preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                        <rect fill="#007aff" width="100%" height="100%" />
+                    </svg>
+                    <strong class="mr-auto">
+                        <%= result[i].title%>
+                    </strong>
+                    <form action="/dismissAnnouncement/<%= result[i].messageId %>" method="post">
+                        <input type="submit" id="PopoverCustomT-1" value="Dismiss"
+                            class="btn btn-sm btn-md btn-danger"></input>
+                    </form>
+                </div>
+                <div class="toast-body">
+                    <strong>
+                        <%= result[i].message%>
+                    </strong>
+                    <p class="text-secondary pull-right">
+                        <%= result[i].msgDate%>
+                    </p>
+                </div>
+                <br>
+                <% } %>
+        </div>
     </div>
 
 </div>

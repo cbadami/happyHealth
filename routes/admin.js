@@ -22,14 +22,15 @@ router.get('/adminHome', adminHomeController.getAdminHome);
 /**
  *  Admin Profile Controller
  */
-router.get('/getAdminUserName/:userId', adminProfileContorller.getAdminUserName);
-router.get('/editUserInfo/:userId', adminProfileContorller.getUserInfo);
+router.get('/adminProfile', adminProfileContorller.getAdminUserName);
+router.get('/adminInfo', adminProfileContorller.getUserInfo);
 
 
 /**
   * Admin user management routes
   */
 router.get('/userManagement', userManagement.getUserManagement);
+router.get('/userInfo/:userId', userManagement.getUserInfo);
 //router.get('/editUser/:userId', adminLoginController.editUser);
 router.post('/updateUser/:userId', userManagement.updateUser);
 router.get('/deleteUser/:userId', userManagement.deleteUser);

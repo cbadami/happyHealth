@@ -19,14 +19,12 @@
            $("#profileImage").click(function(e) {
     $("#imageUpload").click();
 });
-
 function fasterPreview( uploader ) {
     if ( uploader.files && uploader.files[0] ){
           $('#profileImage').attr('src', 
              window.URL.createObjectURL(uploader.files[0]) );
     }
 }
-
 $("#imageUpload").change(function(){
     fasterPreview( this );
 });
@@ -36,12 +34,10 @@ $("#imageUpload").change(function(){
 {
     display: none;
 }
-
 #profileImage
 {
     cursor: pointer;
 }
-
 #profile-container {
     width: 150px;
     height: 150px;
@@ -52,7 +48,6 @@ $("#imageUpload").change(function(){
     -o-border-radius: 50%;
     border-radius: 50%;
 }
-
 #profile-container img {
     width: 150px;
     height: 150px;
@@ -68,10 +63,10 @@ $("#imageUpload").change(function(){
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <form method="get" action="/userProfile">
+                                <!-- <form method="get" action="/adminProfile">
                                     <button class="btn btn-primary btn-lg btn-md btn-sm"><i class="fa fa-edit"></i> Edit
                                         Info</button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                     </div>
@@ -182,7 +177,7 @@ $("#imageUpload").change(function(){
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Height(inch):</h6>
+                                    <h6 class="mb-0">Height(inches):</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <%= result[0].height%>

@@ -120,7 +120,7 @@
     font-size: 20px;
   }
 
-  /Resize the wrap to see the search bar change!/
+  /* /Resize the wrap to see the search bar change!/ */
   .wrap{
     width: 30%;
     position: absolute;

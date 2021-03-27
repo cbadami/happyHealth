@@ -1,11 +1,15 @@
 const db = require('../../database');
 
+const moment = require('moment');
+
+
 exports.getNotifications = (req, res) => {
     console.log("inside anouncements")
     const userId = req.session.userId;
     console.log(userId)
 
-    const nnQuery = `select * from announcementsTbl where (userId = 0) or (userId = ${userId}) order by messageId desc ;`
+    const nnQuery = `SELECT * FROM happyhealth.announcementstbl where  userId like '%${userId}%' order by msgDate desc ;`
+
     db.query(nnQuery, function (err, result) {
         if (err) {
             console.log(err, "======> error while getting announcments");
@@ -19,8 +23,42 @@ exports.getNotifications = (req, res) => {
             });
         }
     });
-
 };
+
+exports.dismissAnnouncement = (req, res) => {
+    let userId = req.session.userId;
+    let msgId = req.params.messageId
+    console.log(msgId, "=======> dismiss user notification");
+
+
+    let diss = `SELECT userId FROM happyhealth.announcementstbl where messageId = ${msgId} and userId like '%${userId}%';`
+    db.query(diss, (err, resul) => {
+        if (err) {
+            console.log(err, "=======> error")
+        } else {
+            let users = resul[0].userId.split(',');
+            console.log(users, "======> before splitting")
+
+            var userIndex = users.indexOf(`${userId}`);
+            console.log(userIndex, "=========> user index")
+            users.splice(userIndex, 1);
+            let afterRemovingUser = users.toString();
+            console.log(afterRemovingUser, "========> after removing user")
+
+            const  annTable = `update happyhealth.announcementstbl set userId = "${afterRemovingUser}"  where messageId = ${msgId}`
+            db.query(annTable, (err,result)=>{
+                if(err){
+                    console.log(err, "error while updating new list")
+                }else{
+                    console.log(result, "=====> removed user from list")
+                    res.redirect('/notifications')
+                }
+            })
+            // res.redirect('notifications')
+        }
+    })
+    // res.redirect('/notifications')
+}
 
 
 // exports.postNotifications = (req, res) => {
@@ -35,8 +73,6 @@ exports.getNotifications = (req, res) => {
 //             title: 'Announcements'
 //         });
 //     }
-
-
 // };
 
 // exports.getNotifications = (req, res) => {
@@ -47,35 +83,39 @@ exports.getNotifications = (req, res) => {
 //     });
 // };
 
-exports.deleteMsg = (req, res) => {
-    let messageId = req.params.messageId;
-    console.log(messageId, "deleting msg")
-    const deleteQuery = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}'; `;
-    const deleteQuery2 = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}';`;
-    db.query(deleteQuery2, function (err) {
-        if (err) {
-            throw err;
-        }
-        console.log("****notifications delete2 executed started****");
-    });
-    db.query(deleteQuery, function (err) {
-        if (err) {
-            throw err;
-        } else {
-            res.redirect('userViews/notifications');
-        }
-        console.log("****delete executed started****");
-    });
+// exports.deleteMsg = (req, res) => {
+//     let messageId = req.params.messageId;
+//     console.log(messageId, "deleting msg")
+//     const deleteQuery = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}'; `;
+//     const deleteQuery2 = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}';`;
+//     db.query(deleteQuery2, function (err) {
+//         if (err) {
+//             throw err;
+//         }
+//         console.log("****notifications delete2 executed started****");
+//     });
+//     db.query(deleteQuery, function (err) {
+//         if (err) {
+//             throw err;
+//         } else {
+//             res.redirect('userViews/notifications');
+//         }
+//         console.log("****delete executed started****");
+//     });
 
-    // var ppQuery = `Delete * FROM happyhealth.announcementsTbl;`;
-    // db.query(ppQuery, function (err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         res.redirect('userViews/notifications', {
-    //             layout: 'layouts/userLayout',
-    //             title: 'Announcements'
-    //         });
-    //     }
-    // });
-}
+//     // var ppQuery = `Delete * FROM happyhealth.announcementsTbl;`;
+//     // db.query(ppQuery, function (err, result) {
+//     //     if (err) {
+//     //         console.log(err);
+//     //     } else {
+//     //         res.redirect('userViews/notifications', {
+//     //             layout: 'layouts/userLayout',
+//     //             title: 'Announcements'
+//     //         });
+//     //     }
+//     // });
+// }
+
+
+
+

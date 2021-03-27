@@ -3,7 +3,8 @@
     <div class="table-title">
         <div class="row">
             <div class="col-sm-6">
-                <h2><b>Announcements Management</b></h2>
+                <h2><b>Announcements </b></h2>
+                <br/>
             </div>
             <div class="col-sm-6">
                 <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/adminNewAnnouncements'">Create a New
@@ -38,8 +39,7 @@
             </div> -->
             <!-- <br> -->
         <!-- </div> -->
-    </div>
-    <div class="table-responsive">
+    <!-- <div class="table-responsive"> -->
 
         <table class="table">
             <thead class="thead-dark">
@@ -71,13 +71,18 @@
                         <td>
                             <form action="/deleteAnnouncement/<%= result[i].messageId %>" method="post">
                                 <input type="submit" id="PopoverCustomT-1" value="Delete"
-                                    class="btn btn-sm btn-md btn-danger"></input>
+                                    class="btn btn-sm btn-md btn-danger" onclick="announcmentRemoved()"></input>
                             </form>
                         </td>
                     </tr>
                     <% } %>
             </tbody>
         </table>
-    </div>
+    <!-- </div> -->
 
 </div>
+<script>
+    function announcementRemoved(){
+        alert("Announcement Removed");
+    }
+</script>

@@ -6,7 +6,9 @@ const router = express.Router();
 const userHomeController = require('../controllers/user/userHomeController')
 const userProfileController = require('../controllers/user/userProfileController')
 const userChallengeController = require('../controllers/user/userChallengeController')
+const userProgressController = require('../controllers/user/userProgressController')
 const userNotificationController = require('../controllers/user/userNotificationController')
+
 
 
 /**
@@ -27,6 +29,11 @@ router.post('/userTrack', userHomeController.postUserTrack);
 router.get('/userHydration', userHomeController.getUserHydration);
 router.post('/userHydration', userHomeController.postUserHydration);
 
+router.get('/getFruitsVeggies', userHomeController.getFruitsVeggies)
+router.post('/postFruitsVeggies', userHomeController.postFruitsVeggies)
+
+
+
 router.get('/userFruits', userHomeController.getUserFruits);
 router.post('/userFruits', userHomeController.postUserFruits);
 
@@ -35,11 +42,6 @@ router.post('/userVegetables', userHomeController.postUserVegetables);
 
 router.get('/userPhysicalActivity', userHomeController.getUserPhysicalActivity);
 router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity);
-
-/**
- * Personal Progress
- */
-
 
 /**
  * User Profile routes
@@ -64,10 +66,11 @@ router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity
 
 
  /**
-  * User Personal Progress
+  * User Progress
   */
 
- router.get('/userPersonalProgress', userHomeController.getUserPersonalProgress);
+ router.get('/userProgress', userProgressController.getTodayProgress);
+ router.get('/progress',userProgressController.getProgress);
 
  /**
   * User Notification Controller
@@ -75,7 +78,16 @@ router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity
  
 router.get('/notifications', userNotificationController.getNotifications);
 // router.post('/notifications', userNotificationController.postNotifications);
-router.post('/deleteMsg/:msgId', userNotificationController.deleteMsg);
+router.post('/dismissAnnouncement/:messageId', userNotificationController.dismissAnnouncement)
+
+
+/**
+ * Updating User metrics everyday with zeros
+ */
+
+ router.get('/resetJobs', userHomeController.resetUserMetrics)
+
+
 
 
 
