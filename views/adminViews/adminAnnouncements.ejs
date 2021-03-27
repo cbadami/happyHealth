@@ -71,7 +71,7 @@
                         <td>
                             <form action="/deleteAnnouncement/<%= result[i].messageId %>" method="post">
                                 <input type="submit" id="PopoverCustomT-1" value="Delete"
-                                    class="btn btn-sm btn-md btn-danger"></input>
+                                    class="btn btn-sm btn-md btn-danger" onclick="announcmentRemoved()"></input>
                             </form>
                         </td>
                     </tr>
@@ -81,3 +81,8 @@
     <!-- </div> -->
 
 </div>
+<script>
+    function announcementRemoved(){
+        alert("Announcement Removed");
+    }
+</script>
