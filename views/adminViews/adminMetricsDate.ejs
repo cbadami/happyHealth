@@ -11,7 +11,12 @@
                         <h6 class="mb-0">Step count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
-                        <%= result[0].total %>
+                        <%if(result[0].total == null) {%>
+                            <%= 0 %>
+                        <%}
+                        else {%>
+                            <%= result[0].total %>
+                        <%}%>   
                     </div>
                 </div>
                 <hr>
@@ -20,7 +25,12 @@
                         <h6 class="mb-0">Sleep count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
-                        <%= result[0].totalSleep %>
+                        <%if(result[0].totalSleep == null) {%>
+                            <%= 0 %>
+                        <%}
+                        else {%>
+                            <%= result[0].totalSleep %>
+                        <%}%>
                     </div>
                 </div>               
                 <hr>
@@ -29,7 +39,12 @@
                         <h6 class="mb-0">Water consumed:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
-                        <%= result[0].totalWater %>
+                        <%if(result[0].totalWater == null) {%>
+                            <%= 0 %>
+                        <%}
+                        else {%>
+                            <%= result[0].totalWater %>
+                        <%}%>
                     </div>
                 </div>
                               
@@ -39,7 +54,12 @@
                         <h6 class="mb-0">Mindful minutes:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
-                        <%= result[0].totalMe %>
+                        <%if(result[0].totalMe == null) {%>
+                            <%= 0 %>
+                        <%}
+                        else {%>
+                            <%= result[0].totalMe %>
+                        <%}%>
                     </div>
                 </div>
                 <hr>
@@ -48,7 +68,12 @@
                         <h6 class="mb-0">Fruits count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
-                        <%= result[0].totalFruits %>
+                        <%if(result[0].totalFruits == null) {%>
+                            <%= 0 %>
+                        <%}
+                        else {%>
+                            <%= result[0].totalFruits %>
+                        <%}%>
                     </div>
                 </div>
                 
@@ -58,7 +83,12 @@
                         <h6 class="mb-0">Vegetables count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
-                        <%= result[0].totalVeggies %>
+                        <%if(result[0].totalVeggies == null) {%>
+                            <%= 0 %>
+                        <%}
+                        else {%>
+                            <%= result[0].totalVeggies %>
+                        <%}%>
                     </div>
                 </div>
                 <hr>
@@ -67,7 +97,12 @@
                         <h6 class="mb-0">physical Activity Minutes:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
-                        <%= result[0].totalphysicalActivityMinutes %>
+                        <%if(result[0].totalphysicalActivityMinutes == null) {%>
+                            <%= 0 %>
+                        <%}
+                        else {%>
+                            <%= result[0].totalphysicalActivityMinutes %>
+                        <%}%>
                     </div>
                 </div>
                

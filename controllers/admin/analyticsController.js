@@ -1,6 +1,6 @@
 const db = require('../../database');
 var mysql = require('mysql');
-const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
+// const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
 
 exports.getUserTotalMetrics = (req, res) => {
 
@@ -14,8 +14,11 @@ exports.getUserTotalMetrics = (req, res) => {
     usermetricstbl.veggies as veggies,
     usermetricstbl.water as water,
     usermetricstbl.physicalActivityMinutes as physicalActivityMinutes
-    from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where
+    from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId 
+    where
     usermetricstbl.userId = ${userId} 
+    AND
+    DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate())
     group by 
     usermetricstbl.userId;`
 
@@ -36,7 +39,7 @@ exports.getUserTotalMetrics = (req, res) => {
     usermetricstbl.userId;`
 
    
-    db1.query(dayQuery + allMetricsQuery, function (err, result) {
+    db.query(dayQuery + allMetricsQuery, function (err, result) {
         if (err) {
             throw err;
         } else {
@@ -69,17 +72,17 @@ exports.getData = (req, res) => {
     //console.log(req);
     var query = 
     `SELECT 
-    SUM( happyhealth.usermetricstbl.stepCount) as total,
-    SUM( happyhealth.usermetricstbl.sleepHours) as totalSleep,
-    SUM( happyhealth.usermetricstbl.meTime) as totalMe,
-    SUM( happyhealth.usermetricstbl.fruits) as totalFruits,
-    SUM( happyhealth.usermetricstbl.veggies) as totalVeggies,
-    SUM( happyhealth.usermetricstbl.water) as totalWater,
-    SUM( happyhealth.usermetricstbl.physicalActivityMinutes) as totalphysicalActivityMinutes
+    SUM( usermetricstbl.stepCount) as total,
+    SUM( usermetricstbl.sleepHours) as totalSleep,
+    SUM( usermetricstbl.meTime) as totalMe,
+    SUM( usermetricstbl.fruits) as totalFruits,
+    SUM( usermetricstbl.veggies) as totalVeggies,
+    SUM( usermetricstbl.water) as totalWater,
+    SUM( usermetricstbl.physicalActivityMinutes) as totalphysicalActivityMinutes
     from 
-    happyhealth.usermetricstbl
+    usermetricstbl
     where
-    (happyhealth.usermetricstbl.userId = ${user}
+    (usermetricstbl.userId = ${user}
     AND
     STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y")
     BETWEEN
