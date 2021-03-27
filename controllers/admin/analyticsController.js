@@ -21,7 +21,8 @@ exports.getUserTotalMetrics = (req, res) => {
     usermetricstbl.meTime as meTime, 
     usermetricstbl.fruits as fruits,
     usermetricstbl.veggies as veggies,
-    usermetricstbl.water as water
+    usermetricstbl.water as water,
+    usermetricstbl.physicalActivityMinutes as physicalActivityMinutes
     from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where
     usermetricstbl.userId = ${userId} 
     group by 
@@ -34,7 +35,8 @@ exports.getUserTotalMetrics = (req, res) => {
     SUM( usermetricstbl.meTime) as totalMe,
     SUM( usermetricstbl.fruits) as totalFruits,
     SUM( usermetricstbl.veggies) as totalVeggies,
-    SUM( usermetricstbl.water) as totalWater
+    SUM( usermetricstbl.water) as totalWater,
+    SUM( usermetricstbl.physicalActivityMinutes) as totalphysicalActivityMinutes
     from 
     usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId
     where
@@ -63,8 +65,10 @@ exports.getUserTotalMetrics = (req, res) => {
 
 exports.getData = (req, res) => {
 
+    // console.log(req.query.datepicker1);
+    // console.log(req.query.datepicker2);
     const user = req.params.userId;
-   
+    
     const startDate = req.query.datepicker1;
     const endDate = req.query.datepicker2;
     
@@ -79,7 +83,8 @@ exports.getData = (req, res) => {
     SUM( happyhealth.usermetricstbl.meTime) as totalMe,
     SUM( happyhealth.usermetricstbl.fruits) as totalFruits,
     SUM( happyhealth.usermetricstbl.veggies) as totalVeggies,
-    SUM( happyhealth.usermetricstbl.water) as totalWater
+    SUM( happyhealth.usermetricstbl.water) as totalWater,
+    SUM( happyhealth.usermetricstbl.physicalActivityMinutes) as totalphysicalActivityMinutes
     from 
     happyhealth.usermetricstbl
     where
@@ -89,11 +94,13 @@ exports.getData = (req, res) => {
     BETWEEN
     '${startDate}' AND '${endDate}');`
 
-              
+    const obj = {datepicker1: startDate, datepicker2: endDate};
+    
     db.query(query, function (err, result) {
         if (err) {
             throw err;
         } else {
+            result.push(obj);
             console.log("result: ",result)
             res.render('adminViews/adminMetricsDate', {
                 layout: 'layouts/adminLayout',
@@ -131,7 +138,9 @@ exports.daily = (req, res) => {
                     usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
                     usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
                     usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
-                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal,
+                    usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal
+                 
                     from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`
 
     db.query(query, function (err, result) {
@@ -236,7 +245,8 @@ exports.getAdminAnalytics = (req, res) => {
                  usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
                  usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
                  usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
-                 usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                 usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, 
+                 usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal
                  from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`
 
     db.query(query, function (err, result) {
