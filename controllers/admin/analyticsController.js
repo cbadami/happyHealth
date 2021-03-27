@@ -1,8 +1,6 @@
 const db = require('../../database');
 var mysql = require('mysql');
-<<<<<<< HEAD
 // const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
-=======
 const fastcsv = require('fast-csv');
 const fs = require('fs');
 // var ws = fs.createWriteStream('./usermetrics_mysql_fastcsv.csv');
@@ -12,8 +10,7 @@ var app = express();
 
 app.use("/files", express.static(__dirname+"/files"));
 
-const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
->>>>>>> d0949d041d4150c3a8734a84f3b8dfa7ddc7901e
+// const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
 
 exports.getUserTotalMetrics = (req, res) => {
 
