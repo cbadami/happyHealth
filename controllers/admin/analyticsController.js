@@ -1,5 +1,14 @@
 const db = require('../../database');
 var mysql = require('mysql');
+const fastcsv = require('fast-csv');
+const fs = require('fs');
+// var ws = fs.createWriteStream('./usermetrics_mysql_fastcsv.csv');
+const path = require("path");
+var express = require('express');
+var app = express();
+
+app.use("/files", express.static(__dirname+"/files"));
+
 const db1 =  mysql.createConnection({host: '127.0.0.1',user: 'root',password: 'password',database: 'happyhealth',port: 3306, multipleStatements: true});
 
 exports.getUserTotalMetrics = (req, res) => {
@@ -54,9 +63,6 @@ exports.getUserTotalMetrics = (req, res) => {
 
 exports.getData = (req, res) => {
 
-
-    // console.log(req.query.datepicker1);
-    // console.log(req.query.datepicker2);
     const user = req.params.userId;
    
     const startDate = req.query.datepicker1;
@@ -165,35 +171,65 @@ exports.weekely = (req, res) => {
     });
 }
 
-// exports.getCSV = (req, res) => {
+exports.getCSV = (req, res) => {
 
-    
-//     //res.render("CSVManagement");
+   
+    db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
+   
+       const jsonData = JSON.parse(JSON.stringify(data));
+       console.log("jsonData", jsonData);
+   
+       var ws = fs.createWriteStream('files/usermetrics_mysql_fastcsv.csv');
 
-    
-//     db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
-    
-//        const jsonData = JSON.parse(JSON.stringify(data));
-//        console.log("jsonData", jsonData);
-     
-//        fastcsv
-//           .write(jsonData, { headers: true })
-//           .on("finish", function() {
-//              console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
-//            })
-//            .pipe(ws);
-
-
-//            res.render('adminViews/CSVManagement', {
-//             layout: 'layouts/adminLayout',
-//             title: 'Admin Analytics',
-//             obj: data
-//             });
-//         });
+       fastcsv
+          .write(jsonData, { headers: true })
+          .on("finish", function() {
+             console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
+             
+           })
+           .pipe(ws);
+           
+           
+           
 
 
         
-// }
+        // res.header('Content-Type', 'text/csv');
+        // res.attachment('usermetrics_mysql_fastcsv.csv');  
+        // res.sendFile(path.resolve('./usermetrics_mysql_fastcsv.csv')); 
+    
+    // path.join(__dirname, './', 'usermetrics_mysql_fastcsv.csv')    
+    // converter.json2csv(jsonData, (err, csv) =>{
+
+    //     if(err)
+    //         throw err;
+
+    //     console.log(csv);    
+    //     //res.header('Content-Type', 'text/csv');
+    //     res.attachment('data.csv');
+    //     res.send(csv);
+    // });
+          
+        //    const filePath = './usermetrics_mysql_fastcsv.csv';
+        //    res.header('Content-Type', 'text/csv');
+        //    res.attachment('data.cs'); 
+        //    res.send(filePath);
+           //res.download(filePath);
+           //res.download('./usermetrics_mysql_fastcsv.csv','usermetrics_mysql_fastcsv.csv');
+           
+           res.render('adminViews/CSVManagement', {
+            layout: 'layouts/adminLayout',
+            title: 'Admin Analytics',
+            obj: data
+            });
+
+            res.send("<a href=/files/usermetrics_mysql_fastcsv.csv download='usermetrics_mysql_fastcsv.csv' id='download-link'></a><script>document.getElementById('download-link').click();</script> ")
+                .on("finish",function(){
+                    console.log("finished downloading");
+                });
+        });
+  
+}
 
 exports.getAdminAnalytics = (req, res) => {
     var query = `select 
