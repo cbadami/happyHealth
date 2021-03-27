@@ -147,6 +147,27 @@ const { google } = require('googleapis');
 // }
 // }
 
+async function sendEmail(userEmail, generateCode) {
+	sgMail.setApiKey(API_KEY);
+
+	const message = {
+		to: userEmail,
+		from: 'happyhealthgdp@gmail.com',
+		subject: 'Happy Health reset account',
+		text: `OTP to reset your account: ${generateCode} `,
+		html: `<p> Your OTP to reset your account:  ${generateCode}</p>`,
+	};
+
+	sgMail
+		.send(message)
+		.then((respon) => {
+			console.log(respon);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
+
 
 
 exports.getValidation = (req, res) => {
