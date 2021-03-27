@@ -57,7 +57,7 @@
                     <div class="form-group">
                       <%- include ('../partials/messages') %>
                       <label for="state">State</label>
-                      <input class="form-control" id="state" name="state" placeholder="State"
+                      <input class="form-control" type="text" id="state" name="state" placeholder="State" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" 
                         value="<%= typeof state != 'undefined' ? state : '' %>">
                       <!-- <label>Note: <small>This data is optional and will be used internally by admins only.</small></label> -->
                     </div>
