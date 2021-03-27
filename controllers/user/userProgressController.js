@@ -75,8 +75,7 @@ exports.getProgress = (req, res) => {
     SUM( happyhealth.usermetricstbl.meTime) as totalMe,
     SUM( happyhealth.usermetricstbl.fruits) as totalFruits,
     SUM( happyhealth.usermetricstbl.veggies) as totalVeggies,
-    SUM( happyhealth.usermetricstbl.water) as totalWater
-    from 
+    SUM( happyhealth.usermetricstbl.water) as totalWater, SUM( happyhealth.usermetricstbl.physicalActivityMinutes) as totalPhysicalMinutes from 
     happyhealth.usermetricstbl
     where
     (happyhealth.usermetricstbl.userId = ${user}
