@@ -1,14 +1,14 @@
 <div class="app-main__inner">
 
-    <h2> Selected date range values </h2>
+    <h2> User metrics between <%= result[1].datepicker1 %> and <%= result[1].datepicker2 %> </h2>
 
     <div class="col-md-8">
         <div class="card mb-3" style="height:auto;">
             <div class="card-body">
-
+               
                 <div class=" row">
                     <div class="col-sm-8">
-                        <h6 class="mb-0">Total step count within the range:</h6>
+                        <h6 class="mb-0">Step count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
                         <%= result[0].total %>
@@ -17,26 +17,26 @@
                 <hr>
                 <div class=" row">
                     <div class="col-sm-8">
-                        <h6 class="mb-0">Total sleep count within the range:</h6>
+                        <h6 class="mb-0">Sleep count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
                         <%= result[0].totalSleep %>
                     </div>
-                </div>
+                </div>               
                 <hr>
                 <div class=" row">
                     <div class="col-sm-8">
-                        <h6 class="mb-0">Total water consumed within the range:</h6>
+                        <h6 class="mb-0">Water consumed:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
                         <%= result[0].totalWater %>
                     </div>
                 </div>
-
+                              
                 <hr>
                 <div class=" row">
                     <div class="col-sm-8">
-                        <h6 class="mb-0">Total Mindful minutes within the range:</h6>
+                        <h6 class="mb-0">Mindful minutes:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
                         <%= result[0].totalMe %>
@@ -45,23 +45,32 @@
                 <hr>
                 <div class=" row">
                     <div class="col-sm-8">
-                        <h6 class="mb-0">Total Fruit count within the range:</h6>
+                        <h6 class="mb-0">Fruits count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
                         <%= result[0].totalFruits %>
                     </div>
                 </div>
-
+                
                 <hr>
                 <div class=" row">
                     <div class="col-sm-8">
-                        <h6 class="mb-0">Total vegetables count within the range:</h6>
+                        <h6 class="mb-0">Vegetables count:</h6>
                     </div>
                     <div class="col-sm-3 text-secondary">
                         <%= result[0].totalVeggies %>
                     </div>
                 </div>
-
+                <hr>
+                <div class=" row">
+                    <div class="col-sm-8">
+                        <h6 class="mb-0">physical Activity Minutes:</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        <%= result[0].totalphysicalActivityMinutes %>
+                    </div>
+                </div>
+               
             </div>
         </div>
     </div>
