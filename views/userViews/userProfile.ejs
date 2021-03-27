@@ -68,7 +68,7 @@
                       <label for="lastName">Last Name</label>
                       <input type="text" value="<%= typeof lastName != 'undefined' ? lastName : '' %>"
                         class="form-control" id="last name" aria-describedby="userNameHelp" placeholder="Last Name"
-                        name="lastName">
+                        name="lastName" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" >
                     </div>
                     <div class="form-group">
                       <label for="username">Date of Birth</label>
