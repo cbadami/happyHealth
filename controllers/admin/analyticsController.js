@@ -1,14 +1,13 @@
 const db = require('../../database');
-var mysql = require('mysql');
 
 exports.getUserTotalMetrics = async (req, res) => {
 
     const userId = req.params.userId;
     const dayQuery =
-        `SELECT usermetricstbl.userId, usertbl.fullName, usermetricstbl.stepCount as stepCount, usermetricstbl.sleepHours as sleepHours, usermetricstbl.meTime as meTime, usermetricstbl.fruits as fruits, usermetricstbl.veggies as veggies, usermetricstbl.water as water from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
+        `SELECT usermetricstbl.userId, usertbl.fullName, usermetricstbl.stepCount as stepCount, usermetricstbl.sleepHours as sleepHours, usermetricstbl.meTime as meTime, usermetricstbl.fruits as fruits, usermetricstbl.veggies as veggies, usermetricstbl.water as water from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where usermetricstbl.userId = ${userId};`;
 
     const allMetricsQuery =
-        `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
+        `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater from usermetricstbl where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
 
 
     await db.query(dayQuery, async function (err, dayResult) {
