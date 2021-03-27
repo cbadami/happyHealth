@@ -101,6 +101,7 @@ exports.postResetPassword = async (req, res) => {
 const nodemailer = require('nodemailer');
 const sgMail = require('@sendgrid/mail');
 const { response } = require('express');
+const API_KEY = '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';
 
 const { google } = require('googleapis');
 
