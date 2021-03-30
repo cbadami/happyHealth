@@ -59,8 +59,8 @@ exports.postUserLogin = async (req, res) => {
             if (err) {
                 console.log(err, "-----while login");
             }
-            console.log(result,"-----------result");
-            if (result.length) {
+            console.log(result);
+            if (result.length > 0) {
                 const validPassword = await bcrypt.compare(password, result[0]['password']);
                 if (validPassword) {
                     req.session.userId = result[0]['userId'];
