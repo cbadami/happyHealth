@@ -8,6 +8,7 @@ const userManagement = require('../controllers/admin/userManagementController');
 const challengeManagement = require('../controllers/admin/challengeManagementController');
 const announcementController = require('../controllers/admin/announcementController.js');
 const analyticsController = require('../controllers/admin/analyticsController');
+const csvController = require('../controllers/admin/csvController')
 
 
 
@@ -62,8 +63,7 @@ router.get('/getAllChallengeUsers/:challengeId/:userId', challengeManagement.get
 router.get('/getUserTotalMetrics/:userId', analyticsController.getUserTotalMetrics);
 router.get('/adminMetricsDate/:userId', analyticsController.getData);
 router.get('/adminAnalytics', analyticsController.getAdminAnalytics);
-router.get('/adminAnalyticsOverAll', analyticsController.getAdminAnalyticsOverAll);
-// router.get('/CSVManagement', analyticsController.getCSV);
+router.get('/download', analyticsController.download);
 
 /**
  * Admin Announcement routes
