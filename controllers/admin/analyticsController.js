@@ -127,7 +127,7 @@ exports.download = (req, res) => {
 
         console.log(userMetrics);
 
-        const csvFields = ["userId",'UserName','fullName', 'date','stepCount', 'stepGoal'];
+        const csvFields = [];
         const csvParser = new CsvParser({ csvFields });
         const csvData = csvParser.parse(userMetrics);
 
