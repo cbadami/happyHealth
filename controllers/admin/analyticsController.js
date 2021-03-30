@@ -111,21 +111,23 @@ exports.download = (req, res) => {
     usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
     usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
     usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
-    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes 
+    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal 
     from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`;
 
     db.query(query, function (err, result) {
         if (err) throw err;
 
-        console.log(result, "------result");
+        // console.log(result, "------result");
 
         let userMetrics = [];
         result.forEach((r) => {
-            const { userId, date,stepCount, sleepCount } = r;
-            userMetrics.push({ userId,date, stepCount, sleepCount });
+            const { userId,UserName,fullName, date,stepCount, stepGoal,sleepHours,sleepGoal,meTime,meTimeGoal,water,waterGoal,veggies,veggieGoal,fruits,fruitGoal,physicalActivityMinutes,physicalActivityGoal} = r;
+            userMetrics.push({ userId,UserName,fullName, date,stepCount, stepGoal,sleepHours,sleepGoal,meTime,meTimeGoal,water,waterGoal,veggies,veggieGoal,fruits,fruitGoal,physicalActivityMinutes,physicalActivityGoal});
         });
 
-        const csvFields = ["userId", "date", "stepCount", "sleepCount"];
+        console.log(userMetrics);
+
+        const csvFields = ["userId",'UserName','fullName', 'date','stepCount', 'stepGoal'];
         const csvParser = new CsvParser({ csvFields });
         const csvData = csvParser.parse(userMetrics);
 
