@@ -476,7 +476,7 @@ exports.resetUserMetrics = async (req, res) => {
 			}
 			console.log('running cron job at every day 12:am');
 			const usersQuery = 'SELECT userId FROM usertbl';
-			await db.query(usersQuery, (err, result) => {
+			db.query(usersQuery, (err, result) => {
 				if (err) {
 					console.log(err, '------error while users');
 				} else {
