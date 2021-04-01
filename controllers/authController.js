@@ -60,7 +60,11 @@ exports.postUserLogin = async (req, res) => {
                 console.log(err, "-----while login");
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             console.log(result, "---------user login result");
+=======
+            console.log(result);
+>>>>>>> parent of 3c485e9 (Merge branch 'master' into prod)
 =======
             console.log(result);
 >>>>>>> parent of 3c485e9 (Merge branch 'master' into prod)
@@ -199,11 +203,17 @@ exports.getError = (req,res,next) =>{
     res.status(404).send({
         status: 404,
 <<<<<<< HEAD
+<<<<<<< HEAD
         Error: 'Page Not Found',
         Route: route
     });
     res.end();
 };
+=======
+        Error: 'Page Not Found'
+      });
+}
+>>>>>>> parent of 3c485e9 (Merge branch 'master' into prod)
 =======
         Error: 'Page Not Found'
       });
