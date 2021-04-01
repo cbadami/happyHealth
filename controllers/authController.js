@@ -1,10 +1,10 @@
 
 const db = require('../database');
- const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 exports.getUserLogin = (req, res) => {
 
-	console.log("=======> INSIDE USER LOGIN")
+    console.log("=======> INSIDE USER LOGIN");
 
     let success_msg = req.session.success_msg;
     if (!success_msg) {
@@ -32,8 +32,8 @@ exports.postUserLogin = async (req, res) => {
         password
     } = req.body;
 
-	console.log(username, password, "==========> POSTING USER LOGIN")
-	
+    console.log(username, password, "==========> POSTING USER LOGIN");
+
     let errors = [];
 
     if (!username || !password) {
@@ -59,7 +59,9 @@ exports.postUserLogin = async (req, res) => {
             if (err) {
                 console.log(err, "-----while login");
             }
-            console.log(result);
+
+            console.log(result, "---------user login result");
+
             if (result.length > 0) {
                 const validPassword = await bcrypt.compare(password, result[0]['password']);
                 if (validPassword) {
@@ -134,6 +136,7 @@ exports.postAdminLogin = async (req, res) => {
         const queryString = `SELECT * FROM happyhealth.usertbl WHERE userName = '${username}' and Admin = 'Yes'`;
 
         db.query(queryString, async function (err, result) {
+            console.log(result, "--------admin login result");
             if (result.length > 0) {
 
                 const validPassword = await bcrypt.compare(password, result[0]['password']);
@@ -177,23 +180,29 @@ exports.postAdminLogin = async (req, res) => {
 };
 
 
-exports.getLogout = (req,res,next) =>{
+exports.getLogout = (req, res, next) => {
     console.log("*********logout controller********");
-    if(req.session.isAdmin){
+    if (req.session.isAdmin) {
         req.session = null;
-        res.redirect('/adminLogin')
-        return
+        res.redirect('/adminLogin');
+        return;
     }
     req.session = null;
     res.redirect('/');
-    return
-}
+    return;
+};
 
-exports.getError = (req,res,next) =>{
-    console.log("****************Error controller")
-    console.log(req.path,"------path");
-    res.status(404).send({
+exports.getError = (req, res, next) => {
+    console.log("****************Error controller");
+    // console.log(req.path, "------path");
+    let route = req.session.errorPath;
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).send({
         status: 404,
-        Error: 'Page Not Found'
-      });
-}
+
+        Error: 'Page Not Found',
+        Route: route
+    });
+    res.end();
+};
+

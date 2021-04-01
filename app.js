@@ -96,16 +96,7 @@ app.use('/', isAdmin, require('./routes/admin.js'));
 
 const userHomeController = require('./controllers/user/userHomeController')
 
-
 userHomeController.resetUserMetrics();
-
-
-const db = require('./database');
-const moment = require('moment');
-const { json } = require('body-parser');
-let currentDate = moment(new Date()).format('L').toString();
-
-
 
 const PORT = process.env.PORT || 3000;
 

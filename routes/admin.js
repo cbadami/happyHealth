@@ -62,8 +62,7 @@ router.get('/getAllChallengeUsers/:challengeId/:userId', challengeManagement.get
 router.get('/getUserTotalMetrics/:userId', analyticsController.getUserTotalMetrics);
 router.get('/adminMetricsDate/:userId', analyticsController.getData);
 router.get('/adminAnalytics', analyticsController.getAdminAnalytics);
-router.get('/adminAnalyticsOverAll', analyticsController.getAdminAnalyticsOverAll);
-// router.get('/CSVManagement', analyticsController.getCSV);
+router.get('/download', analyticsController.download);
 
 /**
  * Admin Announcement routes
