@@ -1,5 +1,4 @@
 const db = require('../../database');
-const CsvParser = require("json2csv").Parser;
 
 exports.getUserTotalMetrics = async (req, res) => {
 
@@ -78,7 +77,102 @@ exports.getData = (req, res) => {
     });
 };
 
+exports.monthly = (req, res) => {
 
+    var query = `select 
+                    usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                    usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                    usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                    from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where MONTH(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = MONTH(curdate());`;
+
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        else {
+            res.render('adminViews/monthlyAnalytics', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                obj: result
+            });
+        }
+    });
+};
+
+exports.daily = (req, res) => {
+
+    var query = `select 
+                    usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                    usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                    usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                    from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`;
+
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        else {
+            //console.log(result);
+            //console.log("daily");
+            res.render('adminViews/dailyAnalytics', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                //obj: result
+            });
+        }
+    });
+};
+
+exports.weekely = (req, res) => {
+
+    var query = `select 
+                    usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                    usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                    usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                    from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where WEEK(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = WEEK(curdate());`;
+
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        else {
+            // console.log(result);
+            // console.log("monthly");
+            res.render('adminViews/weekelyAnalytics', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                obj: result
+            });
+        }
+    });
+};
+
+// exports.getCSV = (req, res) => {
+
+
+//     //res.render("CSVManagement");
+
+
+//     db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
+
+//        const jsonData = JSON.parse(JSON.stringify(data));
+//        console.log("jsonData", jsonData);
+
+//        fastcsv
+//           .write(jsonData, { headers: true })
+//           .on("finish", function() {
+//              console.log("Write to usermetrics_mysql_fastcsv.csv successfully!");
+//            })
+//            .pipe(ws);
+
+
+//            res.render('adminViews/CSVManagement', {
+//             layout: 'layouts/adminLayout',
+//             title: 'Admin Analytics',
+//             obj: data
+//             });
+//         });
+
+
+
+// }
 
 exports.getAdminAnalytics = (req, res) => {
     var query = `select 
@@ -100,42 +194,35 @@ exports.getAdminAnalytics = (req, res) => {
             });
         }
     });
+    // res.render('adminViews/adminAnalytics'
+    // , {
+    //     layout: 'layouts/adminLayout',
+    //     title: 'Admin Analytics'
+    // }
+    // );
 };
 
 
+exports.getAdminAnalyticsOverAll = (req, res) => {
 
-exports.download = (req, res) => {
+    //   var query = `SELECT userId,date,sleepHours,sleepGoal FROM happyhealth.usermetricstbl;`
 
 
-    let query = `select 
-    usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
-    usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
-    usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
-    usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal 
-    from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`;
+    var query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                 usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                 usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                 from usertbl inner join usermetricstbl where usertbl.userId =  usermetricstbl.userId;`;
 
     db.query(query, function (err, result) {
         if (err) throw err;
+        else {
+            //console.log(result);
 
-        // console.log(result, "------result");
-
-        let userMetrics = [];
-        result.forEach((r) => {
-            const { userId,UserName,fullName, date,stepCount, stepGoal,sleepHours,sleepGoal,meTime,meTimeGoal,water,waterGoal,veggies,veggieGoal,fruits,fruitGoal,physicalActivityMinutes,physicalActivityGoal} = r;
-            userMetrics.push({ userId,UserName,fullName, date,stepCount, stepGoal,sleepHours,sleepGoal,meTime,meTimeGoal,water,waterGoal,veggies,veggieGoal,fruits,fruitGoal,physicalActivityMinutes,physicalActivityGoal});
-        });
-
-        console.log(userMetrics);
-
-        const csvFields = [];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(userMetrics);
-
-        res.setHeader("Content-Type", "text/csv");
-        res.setHeader("Content-Disposition", "attachment; filename=tutorials.csv");
-
-        res.status(200).end(csvData);
-
+            res.render('adminViews/adminAnalyticsOverAll', {
+                layout: 'layouts/adminLayout',
+                title: 'Admin Analytics',
+                obj: result
+            });
+        }
     });
-
 };

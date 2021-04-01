@@ -7,11 +7,11 @@
       <div class="col-sm-6">
         <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/addChallenge'">Add New
           Challenge</button>
-      </div>
+            </div>
     </div>
   </div>
 
-
+  
 
   <table class="table">
     <thead class="thead-dark">
@@ -28,59 +28,49 @@
     </thead>
 
     <tbody>
-      <% for (var i=0; i < result.length; i++) { %>
-        <tr>
-          <th scope="row">
-            <%= i+1 %>
-          </th>
-          <td>
-            <a href="/getChallengeUsers/<%= result[i].challengeId %>">
-              <%= result[i].challengeName %>
-            </a>
-          </td>
-          <td>
-            <%= result[i].challengeDescription %>
-          </td>
-          <td>
-            <%= result[i].challengeType %>
-          </td>
-          <td>
-            <%= result[i].startDate %>
-          </td>
-          <td>
-            <%= result[i].endDate %>
-          </td>
-          <!-- <td><%= result[i].participantType %></td>
+      <% for (var i = 0; i < result.length; i++) { %>
+      <tr>
+        <th scope="row"><%= i+1 %></th>
+        <td>
+          <a href="/getChallengeUsers/<%= result[i].challengeId %>">
+            <%= result[i].challengeName %>
+          </a>
+        </td>
+        <td><%= result[i].challengeDescription %></td>
+        <td><%= result[i].challengeType %></td>
+        <td><%= result[i].startDate %></td>
+        <td><%= result[i].endDate %></td>
+        <!-- <td><%= result[i].participantType %></td>
         <td><%= result[i].participantCount %></td> -->
 
 
-          <td>
-            <form action="/editChallenge/<%= result[i].challengeId %>" method="get">
-              <a href="/editChallenge/<%= result[i].challengeId %>" class="btn btn-sm btn-md btn-info"> Edit </a>
-            </form>
-          </td>
+        <td>
+          <form action="/editChallenge/<%= result[i].challengeId %>" method="get">
+            <a href="/editChallenge/<%= result[i].challengeId %>" class="btn btn-sm btn-md btn-info" > Edit </a> 
+          </form> 
+        </td>
 
 
-          <td>
-            <form action="/deleteChallenge/<%= result[i].challengeId %>" method="post">
-              <input type="submit" onclick="startCount()" value="Delete" class="btn btn-sm btn-md  btn-danger"></input>
-            </form>
-          </td>
+        <td>
+          <form action="/deleteChallenge/<%= result[i].challengeId %>" method="post">
+            <input type="submit" onclick="startCount()" value="Delete" class="btn btn-sm btn-md  btn-danger"></input>
+          </form>
+        </td>
 
-          <script>
+        <script>
 
-            function startCount() {
-              alert("Challenge Deleted");
-              const desiredTimeInMilliSeconds = 200;
-              setTimeout(function () {
-                window.location = window.location;
-              }, desiredTimeInMilliSeconds)
-            }
+          function startCount() {
+            alert("Challenge Deleted");
+            const desiredTimeInMilliSeconds = 200;
+            setTimeout(function () {
+              window.location = window.location;
+            }, desiredTimeInMilliSeconds)
+          }
 
 
-          </script>
+        </script>
 
-        </tr>
-        <% } %>
+      </tr>
+      <% } %>
     </tbody>
   </table>
