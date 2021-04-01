@@ -59,7 +59,9 @@ exports.postUserLogin = async (req, res) => {
             if (err) {
                 console.log(err, "-----while login");
             }
+
             console.log(result, "---------user login result");
+
             if (result.length > 0) {
                 const validPassword = await bcrypt.compare(password, result[0]['password']);
                 if (validPassword) {
@@ -197,8 +199,10 @@ exports.getError = (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).send({
         status: 404,
+
         Error: 'Page Not Found',
         Route: route
     });
     res.end();
 };
+
