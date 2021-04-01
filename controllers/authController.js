@@ -59,15 +59,8 @@ exports.postUserLogin = async (req, res) => {
             if (err) {
                 console.log(err, "-----while login");
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
             console.log(result, "---------user login result");
-=======
-            console.log(result);
->>>>>>> parent of 3c485e9 (Merge branch 'master' into prod)
-=======
-            console.log(result);
->>>>>>> parent of 3c485e9 (Merge branch 'master' into prod)
+
             if (result.length > 0) {
                 const validPassword = await bcrypt.compare(password, result[0]['password']);
                 if (validPassword) {
@@ -202,20 +195,8 @@ exports.getError = (req,res,next) =>{
     console.log(req.path,"------path");
     res.status(404).send({
         status: 404,
-<<<<<<< HEAD
-<<<<<<< HEAD
         Error: 'Page Not Found',
         Route: route
     });
     res.end();
 };
-=======
-        Error: 'Page Not Found'
-      });
-}
->>>>>>> parent of 3c485e9 (Merge branch 'master' into prod)
-=======
-        Error: 'Page Not Found'
-      });
-}
->>>>>>> parent of 3c485e9 (Merge branch 'master' into prod)
