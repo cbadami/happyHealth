@@ -213,6 +213,7 @@ exports.getLogout = (req, res, next) => {
 exports.getError = (req, res, next) => {
     console.log("****************Error controller");
     console.log(req.path, "------path");
+    let route = req.path;
     res.status(404).send({
         status: 404,
         Error: 'Page Not Found',
