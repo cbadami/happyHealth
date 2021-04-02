@@ -50,6 +50,15 @@
                 d.getFullYear();
               document.getElementById("demo").innerHTML = formatted_date;
             </script>
+            <div class="form-group">
+              <label>Choose Level</label>
+              <%- include ('../partials/messages') %>
+              <select id="level" class="form-control" name="level">
+                <option value="Light">Light</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Intense">Intense</option>
+              </select>
+            </div>
             <div class="form-row">
               <label for="username">Physical Activity(In Minutes)</label>
               <input
