@@ -56,7 +56,7 @@ exports.getData = (req, res) => {
     console.log("userId: ", user);
     //console.log(req);
     var query =
-        `SELECT SUM( happyhealth.usermetricstbl.stepCount) as total, SUM( happyhealth.usermetricstbl.sleepHours) as totalSleep, SUM( happyhealth.usermetricstbl.meTime) as totalMe, SUM( happyhealth.usermetricstbl.fruits) as totalFruits, SUM( happyhealth.usermetricstbl.veggies) as totalVeggies, SUM( happyhealth.usermetricstbl.water) as totalWater, SUM( happyhealth.usermetricstbl.physicalActivityMinutes) as  totalphysicalActivityMinutes from happyhealth.usermetricstbl where (happyhealth.usermetricstbl.userId = ${user} AND STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y") BETWEEN '${startDate}' AND '${endDate}');`;
+        `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater, SUM( usermetricstbl.physicalActivityMinutes) as  totalphysicalActivityMinutes from usermetricstbl where (usermetricstbl.userId = ${user} AND STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y") BETWEEN '${startDate}' AND '${endDate}');`;
 
 
     db.query(query, function (err, result) {
