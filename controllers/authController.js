@@ -165,7 +165,7 @@ exports.postAdminLogin = async (req, res) => {
 				} else {
 					const queryString = `SELECT * FROM happyhealth.usertbl WHERE userName = '${username}' and Admin = 'Yes'`;
 
-					console.log('*****admin login db query started*******');
+					console.log('*****admin login conn.query started*******');
 
 					conn.query(queryString, async function (err, result) {
 						console.log('********Sucessfully Quered admin login*******');
