@@ -2,7 +2,7 @@
 const fs = require('fs');
 var mysql = require('mysql');
 
-eval(process.env.POOL_CONNECTION);
+eval(process.env.MYSQLCONNSTR_PoolConnection);
 
 // console.log(process.env.POOL_CONNECTION);
 
