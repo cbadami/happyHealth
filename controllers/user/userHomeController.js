@@ -429,9 +429,9 @@ exports.resetUserMetrics = async (req, res) => {
 						console.log(err, '--------delete error');
 					}
 					console.log(result, '--------result delete metrics');
-				});
+				});	
 			}
-				console.log('running cron job at every day 12:am');
+				// console.log('running cron job at every day 12:am');
 
 				const usersQuery = 'SELECT userId FROM usertbl';
 				await db.query(usersQuery, (err, result) => {
@@ -452,12 +452,11 @@ exports.resetUserMetrics = async (req, res) => {
 							if (err) {
 								console.log('============> error while reseting values or already inserted');
 							} else {
-								console.log(result, '===========> insert new values');
+								console.log(result, '===========> insert new values From local ');
 							}
 						});
 					}
 				});
-			
 		}
 	});
 
