@@ -2,13 +2,12 @@ const db = require('../../database');
 
 const moment = require('moment');
 
-
 exports.getUserChallenges = (req, res) => {
 	const userId = req.session.userId;
 	console.log(userId, '=========> current user');
 	let currentDate = moment(new Date()).format('L').toString();
 
-	console.log(currentDate)
+	console.log(currentDate);
 
 	let query = `SELECT userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  activeUser FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId} and archive =0;`;
 
@@ -21,21 +20,29 @@ exports.getUserChallenges = (req, res) => {
 			let present = [];
 			let previous = [];
 
+			//moment("04/06/2021").isSameOrBefore(currentDate)
+
 			for (let i = 0; i < result.length; i++) {
-				if (result[i].endDate >= currentDate) {
-					present.push(result[i]);
-				} else {
+				console.log(result[i].endDate, '=============> date of chall');
+
+				let eventDate = moment(result[i].endDate).format('L').toString();
+
+				console.log(eventDate, currentDate, '===========> event current date');
+				console.log(moment(eventDate).isBefore(currentDate));
+
+				if (moment(result[i].endDate).isBefore(currentDate)) {
 					previous.push(result[i]);
+				} else {
+					present.push(result[i]);
 				}
 			}
 
-			console.log(present,"=========> present ");
-			console.log(previous, "============> previous");
-
+			console.log(present, '=========> present ');
+			console.log(previous, '============> previous');
 
 			res.render('userViews/userChallenges', {
 				layout: 'layouts/userLayout',
-				result,
+				result: present,
 				title: 'User Management',
 			});
 		}
