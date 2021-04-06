@@ -1,65 +1,86 @@
 const db = require('../../database');
+const pooldb = require('../../pooldb');
 
 const moment = require('moment');
 
+// pooldb.getConnection((err1, conn) => {
+// 	if (err1) {
+// 		console.log(err1, '=====> error occured');
+// 	} else {
+
+// conn.release()
+// 	}
+// });
 
 exports.getNotifications = (req, res) => {
-    console.log("inside anouncements")
-    const userId = req.session.userId;
-    console.log(userId)
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			console.log('inside anouncements');
+			const userId = req.session.userId;
+			console.log(userId);
 
-    const nnQuery = `SELECT * FROM happyhealth.announcementstbl where  userId like '%${userId}%' order by msgDate desc ;`
+			const nnQuery = `SELECT * FROM happyhealth.announcementstbl where  userId like '%${userId}%' order by msgDate desc ;`;
 
-    db.query(nnQuery, function (err, result) {
-        if (err) {
-            console.log(err, "======> error while getting announcments");
-        } else {
-            console.log(result, '-------displaying user notifictions-----');
+			conn.query(nnQuery, function (err, result) {
+				if (err) {
+					console.log(err, '======> error while getting announcments');
+				} else {
+					console.log(result, '-------displaying user notifictions-----');
 
-            res.render('userViews/notifications', {
-                layout: 'layouts/userLayout',
-                title: 'Announcements',
-                result
-            });
-        }
-    });
+					res.render('userViews/notifications', {
+						layout: 'layouts/userLayout',
+						title: 'Announcements',
+						result,
+					});
+				}
+			});
+			conn.release();
+		}
+	});
 };
 
 exports.dismissAnnouncement = (req, res) => {
-    let userId = req.session.userId;
-    let msgId = req.params.messageId
-    console.log(msgId, "=======> dismiss user notification");
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			let userId = req.session.userId;
+			let msgId = req.params.messageId;
+			console.log(msgId, '=======> dismiss user notification');
 
+			let diss = `SELECT userId FROM happyhealth.announcementstbl where messageId = ${msgId} and userId like '%${userId}%';`;
+			conn.query(diss, (err, resul) => {
+				if (err) {
+					console.log(err, '=======> error');
+				} else {
+					let users = resul[0].userId.split(',');
+					console.log(users, '======> before splitting');
 
-    let diss = `SELECT userId FROM happyhealth.announcementstbl where messageId = ${msgId} and userId like '%${userId}%';`
-    db.query(diss, (err, resul) => {
-        if (err) {
-            console.log(err, "=======> error")
-        } else {
-            let users = resul[0].userId.split(',');
-            console.log(users, "======> before splitting")
+					var userIndex = users.indexOf(`${userId}`);
+					console.log(userIndex, '=========> user index');
+					users.splice(userIndex, 1);
+					let afterRemovingUser = users.toString();
+					console.log(afterRemovingUser, '========> after removing user');
 
-            var userIndex = users.indexOf(`${userId}`);
-            console.log(userIndex, "=========> user index")
-            users.splice(userIndex, 1);
-            let afterRemovingUser = users.toString();
-            console.log(afterRemovingUser, "========> after removing user")
-
-            const  annTable = `update happyhealth.announcementstbl set userId = "${afterRemovingUser}"  where messageId = ${msgId}`
-            db.query(annTable, (err,result)=>{
-                if(err){
-                    console.log(err, "error while updating new list")
-                }else{
-                    console.log(result, "=====> removed user from list")
-                    res.redirect('/notifications')
-                }
-            })
-            // res.redirect('notifications')
-        }
-    })
-    // res.redirect('/notifications')
-}
-
+					const annTable = `update happyhealth.announcementstbl set userId = "${afterRemovingUser}"  where messageId = ${msgId}`;
+					conn.query(annTable, (err, result) => {
+						if (err) {
+							console.log(err, 'error while updating new list');
+						} else {
+							console.log(result, '=====> removed user from list');
+							res.redirect('/notifications');
+						}
+					});
+					// res.redirect('notifications')
+				}
+			});
+			// res.redirect('/notifications')
+			conn.release();
+		}
+	});
+};
 
 // exports.postNotifications = (req, res) => {
 //     let userId = req.session.userId;
@@ -88,13 +109,13 @@ exports.dismissAnnouncement = (req, res) => {
 //     console.log(messageId, "deleting msg")
 //     const deleteQuery = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}'; `;
 //     const deleteQuery2 = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}';`;
-//     db.query(deleteQuery2, function (err) {
+//     conn.query(deleteQuery2, function (err) {
 //         if (err) {
 //             throw err;
 //         }
 //         console.log("****notifications delete2 executed started****");
 //     });
-//     db.query(deleteQuery, function (err) {
+//     conn.query(deleteQuery, function (err) {
 //         if (err) {
 //             throw err;
 //         } else {
@@ -104,7 +125,7 @@ exports.dismissAnnouncement = (req, res) => {
 //     });
 
 //     // var ppQuery = `Delete * FROM happyhealth.announcementsTbl;`;
-//     // db.query(ppQuery, function (err, result) {
+//     // conn.query(ppQuery, function (err, result) {
 //     //     if (err) {
 //     //         console.log(err);
 //     //     } else {
@@ -115,7 +136,3 @@ exports.dismissAnnouncement = (req, res) => {
 //     //     }
 //     // });
 // }
-
-
-
-
