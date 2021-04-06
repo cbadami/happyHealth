@@ -102,7 +102,6 @@ const nodemailer = require('nodemailer');
 const sgMail = require('@sendgrid/mail');
 const { response } = require('express');
 
-const API_KEY = "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";
 
 // const { google } = require('googleapis');
 
@@ -150,7 +149,7 @@ const API_KEY = "SG.22xRF-esRyqI6aSmrJVxvQ.6faPOprnper1zl7V5ZkBDc1YrVgIh61rQnm7S
 
 async function sendEmail(userEmail, generateCode) {
 	console.log(API_KEY , "=============> API KEY ..........")
-	sgMail.setApiKey(API_KEY);
+	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 	const message = {
 		to: userEmail,
