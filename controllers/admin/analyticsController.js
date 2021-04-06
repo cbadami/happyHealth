@@ -1,14 +1,13 @@
 const db = require('../../database');
-var mysql = require('mysql');
 
 exports.getUserTotalMetrics = async (req, res) => {
 
     const userId = req.params.userId;
     const dayQuery =
-        `SELECT usermetricstbl.userId, usertbl.fullName, usermetricstbl.stepCount as stepCount, usermetricstbl.sleepHours as sleepHours, usermetricstbl.meTime as meTime, usermetricstbl.fruits as fruits, usermetricstbl.veggies as veggies, usermetricstbl.water as water from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
+        `SELECT usermetricstbl.userId, usertbl.fullName, usermetricstbl.stepCount as stepCount, usermetricstbl.sleepHours as sleepHours, usermetricstbl.meTime as meTime, usermetricstbl.fruits as fruits, usermetricstbl.veggies as veggies, usermetricstbl.water as water, usermetricstbl.physicalActivityMinutes as physicalActivityMinutes from usertbl inner join usermetricstbl on usertbl.userId = usermetricstbl.userId where usermetricstbl.userId = ${userId};`;
 
     const allMetricsQuery =
-        `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
+        `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater, SUM(usermetricstbl.physicalActivityMinutes) as totalActivity from usermetricstbl where usermetricstbl.userId = ${userId} group by usermetricstbl.userId;`;
 
 
     await db.query(dayQuery, async function (err, dayResult) {
@@ -24,7 +23,7 @@ exports.getUserTotalMetrics = async (req, res) => {
                 console.log(err, "----all metrics error");
             }
             console.log(allResult, "----all result");
-            let result = [1,2];
+            let result = [[1],[2]];
             result[0] = dayResult;
             result[1] = allResult;
             console.log(result[0][0], '------------db usermetricstbl result');
@@ -57,7 +56,7 @@ exports.getData = (req, res) => {
     console.log("userId: ", user);
     //console.log(req);
     var query =
-        `SELECT SUM( happyhealth.usermetricstbl.stepCount) as total, SUM( happyhealth.usermetricstbl.sleepHours) as totalSleep, SUM( happyhealth.usermetricstbl.meTime) as totalMe, SUM( happyhealth.usermetricstbl.fruits) as totalFruits, SUM( happyhealth.usermetricstbl.veggies) as totalVeggies, SUM( happyhealth.usermetricstbl.water) as totalWater from happyhealth.usermetricstbl where (happyhealth.usermetricstbl.userId = ${user} AND STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y") BETWEEN '${startDate}' AND '${endDate}');`;
+        `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater, SUM( usermetricstbl.physicalActivityMinutes) as  totalphysicalActivityMinutes from usermetricstbl where (usermetricstbl.userId = ${user} AND STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y") BETWEEN '${startDate}' AND '${endDate}');`;
 
 
     db.query(query, function (err, result) {
@@ -180,7 +179,7 @@ exports.getAdminAnalytics = (req, res) => {
                  usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
                  usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
                  usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
-                 usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal 
+                 usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes 
                  from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`;
 
     db.query(query, function (err, result) {

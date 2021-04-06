@@ -99,14 +99,6 @@ const userHomeController = require('./controllers/user/userHomeController')
 
 userHomeController.resetUserMetrics();
 
-
-const db = require('./database');
-const moment = require('moment');
-const { json } = require('body-parser');
-let currentDate = moment(new Date()).format('L').toString();
-
-
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, console.log(`Successfully app running local at: `.yellow, `http://localhost:${PORT}`.cyan.underline));

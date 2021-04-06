@@ -101,9 +101,10 @@ exports.postResetPassword = async (req, res) => {
 const nodemailer = require('nodemailer');
 const sgMail = require('@sendgrid/mail');
 const { response } = require('express');
-const API_KEY = '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';
 
-const { google } = require('googleapis');
+const API_KEY = "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";
+
+// const { google } = require('googleapis');
 
 // async function sendEmail( userEmail, generateCode ) {
 // 	console.log(userEmail, generateCode , "=========> USER MAIL and code")
@@ -148,11 +149,12 @@ const { google } = require('googleapis');
 // }
 
 async function sendEmail(userEmail, generateCode) {
+	console.log(API_KEY , "=============> API KEY ..........")
 	sgMail.setApiKey(API_KEY);
 
 	const message = {
 		to: userEmail,
-		from: 'happyhealthgdp@gmail.com',
+		from: 'fitnestgdp@gmail.com',
 		subject: 'Happy Health reset account',
 		text: `OTP to reset your account: ${generateCode} `,
 		html: `<p> Your OTP to reset your account:  ${generateCode}</p>`,
@@ -161,10 +163,10 @@ async function sendEmail(userEmail, generateCode) {
 	sgMail
 		.send(message)
 		.then((respon) => {
-			console.log(respon);
+			console.log(respon, "========> sent");
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err, "=====> error while sending");
 		});
 }
 
