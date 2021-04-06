@@ -73,7 +73,7 @@
             <form action="<%= challengeData[0].challengeId%>" method="POST">
                 <div>
                     <label for="addUser"><strong>Invite User: </strong> </label>
-                    <select name="userId" class="form-control addUser">
+                    <select name="userId" class="form-control addUser" 	>
                         <% for (var i=0; i < notJoinedUsers.length;i++) { %>
                             <option selected = "<%= notJoinedUsers[i].userId %>" value="<%= notJoinedUsers[i].userId %>">
                                 <%= notJoinedUsers[i].userName %>
