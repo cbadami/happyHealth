@@ -8,6 +8,7 @@
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.4.2",
     "async": "^3.2.0",
     "audit": "0.0.6",
     "await": "^0.2.6",
@@ -36,6 +37,7 @@
     "mysql": "^2.18.1",
     "node-cron": "^3.0.0",
     "nodemailer": "^6.5.0",
+    "nodemailer-sendgrid": "^1.0.3",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "passport": "^0.4.1",
     "sql": "^0.78.0",
