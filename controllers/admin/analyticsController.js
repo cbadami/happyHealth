@@ -207,7 +207,7 @@ exports.weekely = (req, res) => {
 //     //res.render("CSVManagement");
 
 
-//     db.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
+//     conn.query("SELECT * FROM happyhealth.usermetricstbl", function(error, data, fields) {
 
 //        const jsonData = JSON.parse(JSON.stringify(data));
 //        console.log("jsonData", jsonData);
