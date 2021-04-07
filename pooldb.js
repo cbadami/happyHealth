@@ -4,7 +4,7 @@ var mysql = require('mysql');
 
 eval(process.env.MYSQLCONNSTR_PoolConnection);
 
-console.log(process.env.MYSQLCONNSTR_PoolConnection,"=========> poool");
+// console.log(process.env.MYSQLCONNSTR_PoolConnection,"=========> poool");
 
 // mysql.createConnection({multipleStatements: true});
 // pooldb.connect(function (err) {

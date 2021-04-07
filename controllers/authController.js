@@ -70,6 +70,7 @@ exports.postUserLogin = async (req, res) => {
 					console.log('*****User login DB Query Started**********\n');
 
 					conn.query(queryString, async function (err, result) {
+						conn.release();
 						console.log('********Sucessfully Quered user login*******');
 
 						if (err) {
@@ -110,7 +111,6 @@ exports.postUserLogin = async (req, res) => {
 							return;
 						}
 
-						conn.release();
 					});
 				}
 			} catch (err) {

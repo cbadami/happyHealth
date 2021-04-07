@@ -3,15 +3,6 @@ const pooldb = require('../../pooldb');
 const moment = require('moment');
 const cron = require('node-cron');
 
-// pooldb.getConnection((err1, conn) => {
-// 	if (err1) {
-// 		console.log(err1, '=====> error occured');
-// 	} else {
-
-// conn.release()
-// 	}
-// });
-
 let currentDate = moment(new Date()).format('L').toString();
 console.log(currentDate);
 
@@ -24,6 +15,7 @@ exports.getUserHome = (req, res) => {
 
 			const homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId} and date = '${currentDate}';`;
 			conn.query(homeQuery, function (err, result) {
+				conn.release();
 				if (err) {
 					console.log(err);
 				} else {
@@ -53,7 +45,7 @@ exports.getUserHome = (req, res) => {
 					});
 				}
 			});
-			conn.release();
+
 		}
 	});
 };
