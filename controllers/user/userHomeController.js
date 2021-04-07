@@ -13,6 +13,7 @@ const cron = require('node-cron');
 // });
 
 let currentDate = moment(new Date()).format('L').toString();
+console.log(currentDate);
 
 exports.getUserHome = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
@@ -26,50 +27,30 @@ exports.getUserHome = (req, res) => {
 				if (err) {
 					console.log(err);
 				} else {
-					console.log(result.length, '--------db userMetrics table result');
+					console.log(result[0], '--------db userMetrics table result');
+					const {
+						stepCount,
+						sleepHours,
+						water,
+						meTime,
+						fruits,
+						veggies,
+						physicalActivityMinutes,
+					} = result[0];
 
-					if (result.length === 0) {
-						const insertData = `INSERT INTO userMetricsTbl VALUES (${userId},'${currentDate}',0,0,0,0,0,0,0,0,0,0,0,0,0,0);`;
-						conn.query(insertData, (err, result) => {
-							if (err) {
-								console.log(err, '=======> error while updating empty data');
-							} else {
-								let stepCount = (sleepHours = water = meTime = fruits = veggies = physicalActivityMinutes = 0);
-								res.render('userViews/userHome', {
-									layout: 'layouts/userLayout',
-									title: 'User Home',
-									stepCount,
-									sleepHours,
-									water,
-									meTime,
-									fruits,
-									veggies,
-									physicalActivityMinutes,
-								});
-							}
-						});
-					} else {
-						const {
-							stepCount,
-							sleepHours,
-							water,
-							meTime,
-							fruits,
-							veggies,
-							physicalActivityMinutes,
-						} = result[0];
-						res.render('userViews/userHome', {
-							layout: 'layouts/userLayout',
-							title: 'User Home',
-							stepCount,
-							sleepHours,
-							water,
-							meTime,
-							fruits,
-							veggies,
-							physicalActivityMinutes,
-						});
-					}
+					console.log(stepCount, sleepHours, water, meTime, fruits, veggies, physicalActivityMinutes);
+
+					res.render('userViews/userHome', {
+						layout: 'layouts/userLayout',
+						title: 'User Home',
+						stepCount,
+						sleepHours,
+						water,
+						meTime,
+						fruits,
+						veggies,
+						physicalActivityMinutes,
+					});
 				}
 			});
 			conn.release();
@@ -661,6 +642,94 @@ exports.resetUserMetrics = async (req, res) => {
 			});
 
 			conn.release();
+		}
+	});
+};
+
+exports.updateUserMetricGoals = (req, res) => {
+	console.log('================================updating metrics');
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			try {
+				const checkCurrentDayMetrics = `SELECT * FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
+				conn.query(checkCurrentDayMetrics, async (err, result) => {
+					if (err) {
+						console.log(err, '=======> error occured');
+					} else {
+						if (result.length > 0) {
+							const deleteMetrics = `DELETE FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
+							conn.query(deleteMetrics, (err, result) => {
+								if (err) {
+									console.log(err, '--------delete error');
+								}
+								console.log(result, '--------result delete metrics');
+							});
+						}
+					}
+				});
+
+				let usersQuery = `SELECT GROUP_CONCAT(userId) as users FROM happyhealth.usertbl ;`;
+				conn.query(usersQuery, (err, result) => {
+					if (err) {
+						console.log(err, '=======> error while searching users.');
+					} else {
+						console.log(result[0].users, '=====> found users.');
+						let usersList = result[0].users;
+
+						console.log(usersList, '============================> user list');
+
+						let getRecentMetrics = `SELECT * FROM usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
+						conn.query(getRecentMetrics, (err2, result2) => {
+							if (err2) throw err;
+							else {
+								console.log(result2.length, '======> result2');
+
+								let values = '';
+
+								for (let i = 0; i < result2.length; i++) {
+									const {
+										userId,
+										stepGoal,
+										sleepGoal,
+										meTimeGoal,
+										waterGoal,
+										fruitGoal,
+										veggieGoal,
+										physicalActivityGoal,
+									} = result2[i];
+									console.log(
+										userId,
+										stepGoal,
+										sleepGoal,
+										meTimeGoal,
+										waterGoal,
+										fruitGoal,
+										veggieGoal,
+										physicalActivityGoal
+									);
+									values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
+								}
+								values = values.slice(0, -1);
+								// console.log(values,"====> values")
+								const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
+								conn.query(newValuesQuery, (err3, result3) => {
+									if (err3) {
+										console.log('============> error while inserting metrics');
+									} else {
+										console.log(result3, '===========> insert new values result3');
+										console.log('************Cron Job completed************');
+										// return;
+									}
+								});
+							}
+						});
+					}
+				});
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	});
 };

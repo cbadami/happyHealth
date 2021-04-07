@@ -16,8 +16,6 @@ exports.getUserLogin = (req, res) => {
 					title: 'User Login',
 				});
 				req.session.success_msg = null;
-				conn.release();
-
 				return;
 			} else {
 				res.render('userViews/userLogin', {
@@ -25,8 +23,6 @@ exports.getUserLogin = (req, res) => {
 					title: 'User Login',
 				});
 				req.session.success_msg = null;
-				conn.release();
-
 				return;
 			}
 		}

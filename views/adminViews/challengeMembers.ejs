@@ -73,14 +73,22 @@
             <form action="<%= challengeData[0].challengeId%>" method="POST">
                 <div>
                     <label for="addUser"><strong>Invite User: </strong> </label>
-                    <select name="userId" class="form-control addUser" 	>
+                   
+					<select name="userId" class="form-control addUser " multiple="true" 	>
                         <% for (var i=0; i < notJoinedUsers.length;i++) { %>
-                            <option selected = "<%= notJoinedUsers[i].userId %>" value="<%= notJoinedUsers[i].userId %>">
+                            <option value="<%= notJoinedUsers[i].userId %>">
                                 <%= notJoinedUsers[i].userName %>
                             </option>
                             <% } %>
+
+						<!-- <%	if(notJoinedUsers.length === 0){ %>
+								<option>
+								All Users are invited
+								</option>
+						<%	} %> -->
                     </select>
-                    <button type="submit" class="btn btn-primary">Invite</button>
+
+                    <button type="submit" id="Button" class="btn btn-primary">Invite</button>
                 </div>
 
             </form>
@@ -132,8 +140,71 @@
 </div>
 
 <script>
-    const notJoinedUsers = "<%= notJoinedUsers[0].userName %>"
-    console.log(notJoinedUsers,"-----------not Joined user");
+
+	// Demo using plain javascript
+var button = document.getElementById("Button");
+
+// Disable the button on initial page load
+if(notJoinedUsers.length === 0) {
+	//add event listener
+	clickBtn.addEventListener('click', function(event) {
+    button.disabled = true;
+});
+}else{
+	//add event listener
+	clickBtn.addEventListener('click', function(event) {
+    button.disabled = false;
+}
+
+
+
+    
+	function selectedItems(){
+				// GETTING USERS 
+				var userResult = document.getElementById("usersResult");
+				userResult.value = "";
+				var x = document.getElementById("users");
+				for(var i = 0;i<x.options.length;i++){
+					if(x.options[i].selected === true){
+						userResult.value += x.options[i].value+" ";
+						document.getElementById("usersResult").value= userResult.value;
+					}
+					console.log(userResult.value, "===========> ")
+				}
+			}
+
+			function selectedUsers(){
+				var userResult = document.getElementById("usersResult");
+				userResult.value = "";
+				var x = document.getElementById("users");
+				for(var i = 0;i<x.options.length;i++){
+					if(x.options[i].selected === true){
+						userResult.value += x.options[i].value+" ";
+						document.getElementById("usersResult").value= userResult.value;
+					}
+				}
+				// if(document.getElementById("usersResult").value == ""){
+				// 	document.getElementById("usersResult").innerHTML = "Please select atleast one. "
+				// }
+			}
+
+			$('option').mousedown(function(e) {
+    e.preventDefault();
+    var originalScrollTop = $(this).parent().scrollTop();
+    console.log(originalScrollTop);
+    $(this).prop('selected', $(this).prop('selected') ? false : true);
+    var self = this;
+    $(this).parent().focus();
+    setTimeout(function() {
+        $(self).parent().scrollTop(originalScrollTop);
+    }, 0);
+    
+    return false;
+});
+
+
+
+
 </script>
 
 <style>

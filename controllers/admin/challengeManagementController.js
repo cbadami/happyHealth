@@ -282,12 +282,21 @@ exports.addUserToChallenge = (req, res) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
+
 			let userId = req.body.userId;
 			let challengeId = req.params.challengeId;
 			let joinedDate = moment(new Date()).format('L');
-			console.log(joinedDate);
+			console.log(userId , challengeId );
 
-			let addUserQuery = `INSERT INTO happyhealth.challengemembertbl (userId, joinedDate, challengeId, activeUser, archive ) VALUES( ${userId}, '' , ${challengeId} , 0, 0); `;
+			let values = '';
+			for(let i=0;i<userId.length;i++) {
+				console.log( userId[i], "====> "  )
+				values += `(${userId[i]},"${joinedDate}",${challengeId},0,0),`
+			}
+			values = values.slice(0,-1);
+			console.log(values)
+
+			let addUserQuery = `INSERT INTO happyhealth.challengemembertbl (userId, joinedDate, challengeId, activeUser, archive ) VALUES ${values}; `;
 
 			conn.query(addUserQuery, (err, result) => {
 				if (err) {

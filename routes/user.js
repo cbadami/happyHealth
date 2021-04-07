@@ -86,6 +86,7 @@ router.post('/dismissAnnouncement/:messageId', userNotificationController.dismis
  */
 
  router.get('/resetJobs', userHomeController.resetUserMetrics)
+ router.get('/updateMetrics', userHomeController.updateUserMetricGoals)
 
 
 
