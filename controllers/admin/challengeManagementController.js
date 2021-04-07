@@ -269,6 +269,8 @@ exports.getChallengeUsers = (req, res) => {
 						notJoinedUsers,
 						challengeData,
 					});
+
+					console.log(notJoinedUsers.length, "========> not joined users")
 				}
 			});
 
