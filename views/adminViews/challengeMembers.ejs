@@ -81,14 +81,14 @@
                             </option>
                             <% } %>
 
-						<!-- <%	if(notJoinedUsers.length === 0){ %>
-								<option>
+						<%	if(notJoinedUsers.length === 0){ %>
+								<option disabled  >
 								All Users are invited
 								</option>
-						<%	} %> -->
+						<%	} %>
                     </select>
 
-                    <button type="submit" id="Button" class="btn btn-primary">Invite</button>
+                    <input type="submit" value="Invite" id="inviteBtn" class="btn btn-primary"></input>
                 </div>
 
             </form>
@@ -136,29 +136,27 @@
 
             <% } %>
 
+			<div>
+				<%= notJoinedUsers[0] %>
+			</div>
+
 
 </div>
 
 <script>
 
-	// Demo using plain javascript
-var button = document.getElementById("Button");
+// const notJoinedUsers = "<%= notJoinedUsers.length %>"
+// console.log( '<%= notJoinedUsers.length %>' === '0' ,"-----------not Joined user");
 
-// Disable the button on initial page load
-if(notJoinedUsers.length === 0) {
-	//add event listener
-	clickBtn.addEventListener('click', function(event) {
-    button.disabled = true;
-});
+var button = document.getElementById("inviteBtn");
+
+if('<%= notJoinedUsers.length %>' === '0') {
+		button.disabled = true;
 }else{
-	//add event listener
-	clickBtn.addEventListener('click', function(event) {
-    button.disabled = false;
+	button.disabled = false;
 }
 
 
-
-    
 	function selectedItems(){
 				// GETTING USERS 
 				var userResult = document.getElementById("usersResult");
@@ -200,7 +198,7 @@ if(notJoinedUsers.length === 0) {
     }, 0);
     
     return false;
-});
+}) ;
 
 
 
