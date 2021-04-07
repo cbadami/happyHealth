@@ -8,7 +8,7 @@
             <h4><b>New Message Title:</b></h4>
         </div>
         <div class="col-sm-6">
-            <input id="title" type="text" name="title" >
+            <input id="title" type="text" name="title"  required>
         </div>
     </div>
     <div class="form-row">
@@ -16,13 +16,24 @@
             <h4><b>Write Message:</b></h4>
         </div>
         <div class="col-sm-6">
-            <input id="message" type="text" name="description">
+            <input id="message" type="text" name="description" required>
         </div>
     </div>
     <div class="form-row">
+		
         <div class="col-sm-12">
-                <input type="submit" id="PopoverCustomT-1" value="Post to Everyone"
+                <input type="submit" id="PopoverCustomT-1" name="type" value="Send to Everyone"
                     class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+						<label for="selectUsers" >  </label>
+						<select id="users"  name="type" type="number" class="mul-select col-md-6" multiple="true">
+							<% users.map(user=> { %>
+								<option id="UI" value="<%= user.userId %>">  <%= user.userName %>
+								</option>
+								<% }) %>
+						</select>
+
+						<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals"
+						class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
         </div>
     </div>
 
@@ -34,4 +45,49 @@
     function published(){
         alert("Announcement Posted");
     }
+
+	function selectedItems(){
+
+	var userResult = document.getElementById("usersResult");
+				userResult.value = "";
+				var x = document.getElementById("users");
+				for(var i = 0;i<x.options.length;i++){
+					if(x.options[i].selected === true){
+						userResult.value += x.options[i].value+" ";
+						document.getElementById("usersResult").value= userResult.value;
+					}
+					console.log(userResult.value, "===========> ")
+				}
+			}
+
+			function selectedUsers(){
+				var userResult = document.getElementById("usersResult");
+				userResult.value = "";
+				var x = document.getElementById("users");
+				for(var i = 0;i<x.options.length;i++){
+					if(x.options[i].selected === true){
+						userResult.value += x.options[i].value+" ";
+						document.getElementById("usersResult").value= userResult.value;
+					}
+				}
+				// if(document.getElementById("usersResult").value == ""){
+				// 	document.getElementById("usersResult").innerHTML = "Please select atleast one. "
+				// }
+			}
+
+			$('option').mousedown(function(e) {
+    e.preventDefault();
+    var originalScrollTop = $(this).parent().scrollTop();
+    console.log(originalScrollTop);
+    $(this).prop('selected', $(this).prop('selected') ? false : true);
+    var self = this;
+    $(this).parent().focus();
+    setTimeout(function() {
+        $(self).parent().scrollTop(originalScrollTop);
+    }, 0);
+    
+    return false;
+});
+
+
 </script>
