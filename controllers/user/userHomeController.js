@@ -2,6 +2,7 @@
 const pooldb = require('../../pooldb');
 const moment = require('moment');
 const cron = require('node-cron');
+const { decodeBase64 } = require('bcryptjs');
 
 let currentDate = moment(new Date()).format('L').toString();
 console.log(currentDate);
@@ -15,35 +16,81 @@ exports.getUserHome = (req, res) => {
 
 			const homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId} and date = '${currentDate}';`;
 			conn.query(homeQuery, function (err, result) {
-				conn.release();
 				if (err) {
 					console.log(err);
 				} else {
-					console.log(result[0], '--------db userMetrics table result');
-					const {
-						stepCount,
-						sleepHours,
-						water,
-						meTime,
-						fruits,
-						veggies,
-						physicalActivityMinutes,
-					} = result[0];
+					if (!result) {
+						let insertQuery = `Insert into happyhealth.usermetricstbl(userId,date) values(${userId},'${currentDate}');`;
+						conn.query(insertQuery, function (err, result) {
+							if (err) {
+								console.log(err, "---------error inset query result");
+							}
+							conn.query(homeQuery, function (err, result) {
+								if (err) {
+									console.log(err, "_--------------aftere inseting select result");
+								}
+								console.log(result[0], '--------db userMetrics table result');
+								const {
+									stepCount,
+									sleepHours,
+									water,
+									meTime,
+									fruits,
+									veggies,
+									physicalActivityMinutes,
+								} = result[0];
 
-					console.log(stepCount, sleepHours, water, meTime, fruits, veggies, physicalActivityMinutes);
+								console.log(stepCount, sleepHours, water, meTime, fruits, veggies, physicalActivityMinutes);
 
-					res.render('userViews/userHome', {
-						layout: 'layouts/userLayout',
-						title: 'User Home',
-						stepCount,
-						sleepHours,
-						water,
-						meTime,
-						fruits,
-						veggies,
-						physicalActivityMinutes,
-					});
+								res.render('userViews/userHome', {
+									layout: 'layouts/userLayout',
+									title: 'User Home',
+									stepCount,
+									sleepHours,
+									water,
+									meTime,
+									fruits,
+									veggies,
+									physicalActivityMinutes,
+								});
+								conn.release();
+								return;
+
+							});
+
+						});
+					} else {
+
+						console.log(result[0], '--------db userMetrics table result');
+						const {
+							stepCount,
+							sleepHours,
+							water,
+							meTime,
+							fruits,
+							veggies,
+							physicalActivityMinutes,
+						} = result[0];
+
+						console.log(stepCount, sleepHours, water, meTime, fruits, veggies, physicalActivityMinutes);
+
+						res.render('userViews/userHome', {
+							layout: 'layouts/userLayout',
+							title: 'User Home',
+							stepCount,
+							sleepHours,
+							water,
+							meTime,
+							fruits,
+							veggies,
+							physicalActivityMinutes,
+						});
+						conn.release();
+						return;
+					}
+
 				}
+
 			});
 
 		}
