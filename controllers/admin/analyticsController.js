@@ -99,6 +99,16 @@ exports.getData = (req, res) => {
 
 exports.getAdminAnalytics = (req, res) => {
 
+    let currentDate = new Date().toLocaleDateString();
+    console.log(currentDate,"-------current date");
+
+    let [ m,d,y] = currentDate.split("/");
+    m = m.length == 1 ? "0"+m:m;
+    d = d.length == 1 ? "0"+d:d;
+    currentDate = [m,d,y].join('/');
+    console.log(currentDate,"---------cuurent date after formation");
+
+
     pooldb.getConnection((err1, conn) => {
         if (err1) {
             console.log(err1, '=====> error occured');
@@ -109,7 +119,7 @@ exports.getAdminAnalytics = (req, res) => {
             usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
             usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
             usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes 
-            from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`;
+            from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where usermetricstbl.date = '${currentDate}'`;
 
             conn.query(query, function (err, result) {
                 if (err) throw err;
