@@ -1,6 +1,47 @@
 <div class="app-main__inner">
 
-    <form action="/postAnnouncement" method="POST" >
+	<div class="container col-md-6"> 
+
+		<form action="/postAnnouncement" method="POST" >
+			<div class="form-group">
+		  <label>Announcement Title</label>
+		  <input  class="form-control"  id="title" type="text" name="title"  required>
+		</div>
+		<div class="form-group">
+		  <label> Description</label>
+		  <input  class="form-control"  id="message" type="text" name="description" required>
+		</div>
+
+		<div class="form-group">
+		<label for="selectUsers" >  </label>
+		<select id="users"  name="type" type="number" class="mul-select col-md-12" multiple="true">
+			<% users.map(user=> { %>
+				<option id="UI" value="<%= user.userId %>">  <%= user.userName %>
+				</option>
+				<% }) %>
+		</select>
+		</div>
+
+		<div class="btn-toolbar">
+
+			<input type="submit" id="PopoverCustomT-1" name="type" value="Send to Everyone"
+			class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+			<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+
+
+			<!-- <button type="button" id="btnSubmit" class="btn btn-primary btn-sm">Submit</button>
+			<button type="button" id="btnCancel" class="btn btn-primary btn-sm">Cancel</button> -->
+		  </div>
+
+	</form>
+
+	</div>
+
+
+
+
+
+    <!-- <form action="/postAnnouncement" method="POST" >
     
 
     <div class="form-row">
@@ -22,7 +63,7 @@
     <div class="form-row">
 		
         <div class="col-sm-12">
-                <input type="submit" id="PopoverCustomT-1" name="type" value="Send to Everyone"
+            <input type="submit" id="PopoverCustomT-1" name="type" value="Send to Everyone"
                     class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
 						<label for="selectUsers" >  </label>
 						<select id="users"  name="type" type="number" class="mul-select col-md-6" multiple="true">
@@ -32,12 +73,11 @@
 								<% }) %>
 						</select>
 
-						<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals"
-						class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+			<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
         </div>
     </div>
 
-</form>
+</form> -->
 
 </div>
 
