@@ -137,7 +137,7 @@ exports.getAdminIndividualAnnouncements = (req, res) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-			console.log('***** Page to create new announcements******');
+			console.log('***** Page to create individual announcements******');
 
 			const getUsers = `select userId, userName from usertbl;`;
 
