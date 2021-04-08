@@ -132,6 +132,29 @@ exports.getAdminNewAnnouncements = (req, res) => {
 	});
 };
 
+exports.getAdminIndividualAnnouncements = (req, res) => {
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			console.log('***** Page to create new announcements******');
+
+			const getUsers = `select userId, userName from usertbl;`;
+
+			conn.query(getUsers, (err, result) => {
+				if (err) {
+					console.log(err, '-------> error while getting users.');
+				} else {
+					console.log(result, '=======> users result');
+					users = result;
+					res.render('adminViews/adminIndividualAnnouncements', { layout: 'layouts/adminLayout', title: 'Announcements', users });
+				}
+			});
+			conn.release();
+		}
+	});
+};
+
 exports.postAnnouncement = (req, res) => {
 
 	pooldb.getConnection((err1, conn) => {
