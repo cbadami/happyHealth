@@ -582,153 +582,172 @@ exports.postUserPhysicalActivity = (req, res) => {
 	});
 };
 
-exports.resetUserMetrics = async (req, res) => {
-	pooldb.getConnection((err1, conn) => {
-		if (err1) {
-			console.log(err1, '=====> error occured');
-		} else {
-			let currentDate = moment(new Date()).format('L').toString();
-			let currDate = new Date();
 
-			// console.log(currentDate, '=======> current Date');
-			// const checkCurrentDayMetrics = `SELECT * FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
-			// conn.query(checkCurrentDayMetrics, async (err, result) => {
-			// 	if (err) {
-			// 		console.log(err, '=======> error occured');
-			// 	} else {
-			// 		if (result.length > 0) {
-			// 			const deleteMetrics = `DELETE FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
-			// 			conn.query(deleteMetrics, (err, result) => {
-			// 				if (err) {
-			// 					console.log(err, '--------delete error');
-			// 				}
-			// 				console.log(result, '--------result delete metrics');
-			// 			});
-			// 		}
-			// 			console.log('running cron job at every day 12:am');
-			// 			const usersQuery = 'SELECT userId FROM usertbl';
-			// 			conn.query(usersQuery, (err, result) => {
-			// 				if (err) {
-			// 					console.log(err, '------error while users');
-			// 				} else {
-			// 					let usersCount = result.length;
-			// 					let users = result;
-			// 					let values = '';
 
-			// 					for (let i = 0; i < usersCount; i++) {
-			// 						values += `(${users[i].userId},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0),`;
-			// 					}
-			// 					values = values.slice(0, -1);
-			// 					//console.log(values, '========> values to insert');
-			// 					const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
-			// 					conn.query(newValuesQuery, (err, result) => {
-			// 						if (err) {
-			// 							console.log('============> error while reseting values or already inserted');
-			// 						} else {
-			// 							console.log(result, '===========> insert new values');
-			// 						}
-			// 					});
-			// 				}
-			// 			});
+// console.log(currentDate, '=======> current Date');
+// const checkCurrentDayMetrics = `SELECT * FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
+// conn.query(checkCurrentDayMetrics, async (err, result) => {
+// 	if (err) {
+// 		console.log(err, '=======> error occured');
+// 	} else {
+// 		if (result.length > 0) {
+// 			const deleteMetrics = `DELETE FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
+// 			conn.query(deleteMetrics, (err, result) => {
+// 				if (err) {
+// 					console.log(err, '--------delete error');
+// 				}
+// 				console.log(result, '--------result delete metrics');
+// 			});
+// 		}
+// 			console.log('running cron job at every day 12:am');
+// 			const usersQuery = 'SELECT userId FROM usertbl';
+// 			conn.query(usersQuery, (err, result) => {
+// 				if (err) {
+// 					console.log(err, '------error while users');
+// 				} else {
+// 					let usersCount = result.length;
+// 					let users = result;
+// 					let values = '';
 
-			// 	}
-			// });
+// 					for (let i = 0; i < usersCount; i++) {
+// 						values += `(${users[i].userId},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0),`;
+// 					}
+// 					values = values.slice(0, -1);
+// 					//console.log(values, '========> values to insert');
+// 					const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
+// 					conn.query(newValuesQuery, (err, result) => {
+// 						if (err) {
+// 							console.log('============> error while reseting values or already inserted');
+// 						} else {
+// 							console.log(result, '===========> insert new values');
+// 						}
+// 					});
+// 				}
+// 			});
 
-			cron.schedule('0 0 * * *', async () => {
-				console.log('************Cron Job Started************');
-				console.log(currDate, '===========> current Date');
+// 	}
+// });
 
-				try {
+exports.resetUserMetrics = (req, res) => {
+
+	try {
+
+		cron.schedule('*/10 * * * *', async () => {
+			console.log("***********cron job started************")
+			pooldb.getConnection((err1, conn) => {
+				if (err1) {
+					console.log(err1, '=====> error occured');
+					return;
+				} else {
+
+					let currentDate = moment(new Date()).format('L').toString();
+					let currDate = new Date();
+					console.log('************Cron Job Started************');
+					console.log(currDate, '===========> current Date');
+
+
 					const checkCurrentDayMetrics = `SELECT * FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
 					conn.query(checkCurrentDayMetrics, async (err, result) => {
 						if (err) {
-							console.log(err, '=======> error occured');
+							console.log(err, '=======> check current day metrics error occured');
+							conn.release();
+							return;
 						} else {
 							if (result.length > 0) {
 								const deleteMetrics = `DELETE FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
 								conn.query(deleteMetrics, (err, result) => {
 									if (err) {
-										console.log(err, '--------delete error');
+										console.log(err, '------------delete metricd error');
+										conn.release();
+										return;
 									}
-									console.log(result, '--------result delete metrics');
+									console.log(result, '-------------result delete metrics');
+								});
+
+								let usersQuery = `SELECT GROUP_CONCAT(userId) as users FROM happyhealth.usertbl ;`;
+								conn.query(usersQuery, (err, result) => {
+									if (err) {
+										console.log(err, '=======> error while searching users.');
+										conn.release();
+										return;
+									} else {
+										console.log(result[0].users, '=====> found users.');
+										let usersList = result[0].users;
+
+										console.log(usersList, '============================> user list');
+
+										let getRecentMetrics = `SELECT * FROM happyhealth.usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
+										conn.query(getRecentMetrics, (err2, result2) => {
+											if (err2) {
+												console.log(err2, "---------get recent metrics");
+												conn.release();
+												return;
+											}
+											else {
+												console.log(result2.length, '======> result2');
+
+												let values = '';
+
+												for (let i = 0; i < result2.length; i++) {
+													const {
+														userId,
+														stepGoal,
+														sleepGoal,
+														meTimeGoal,
+														waterGoal,
+														fruitGoal,
+														veggieGoal,
+														physicalActivityGoal,
+													} = result2[i];
+													console.log(
+														userId,
+														stepGoal,
+														sleepGoal,
+														meTimeGoal,
+														waterGoal,
+														fruitGoal,
+														veggieGoal,
+														physicalActivityGoal
+													);
+													values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
+												}
+												values = values.slice(0, -1);
+												// console.log(values,"====> values")
+												const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
+												conn.query(newValuesQuery, (err3, result3) => {
+													if (err3) {
+														console.log('============> error while inserting metrics');
+														conn.release();
+														return;
+													} else {
+														console.log(result3, '===========> insert new values result3');
+														console.log('************Cron Job completed************');
+														// return;
+													}
+												});
+											}
+										});
+									}
 								});
 							}
 						}
 					});
 
-					let usersQuery = `SELECT GROUP_CONCAT(userId) as users FROM happyhealth.usertbl ;`;
-					conn.query(usersQuery, (err, result) => {
-						if (err) {
-							console.log(err, '=======> error while searching users.');
-						} else {
-							console.log(result[0].users, '=====> found users.');
-							let usersList = result[0].users;
-
-							console.log(usersList, '============================> user list');
-
-							let getRecentMetrics = `SELECT * FROM happyhealth.usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
-							conn.query(getRecentMetrics, (err2, result2) => {
-								if (err2) throw err;
-								else {
-									console.log(result2.length, '======> result2');
-
-									let values = '';
-
-									for (let i = 0; i < result2.length; i++) {
-										const {
-											userId,
-											stepGoal,
-											sleepGoal,
-											meTimeGoal,
-											waterGoal,
-											fruitGoal,
-											veggieGoal,
-											physicalActivityGoal,
-										} = result2[i];
-										console.log(
-											userId,
-											stepGoal,
-											sleepGoal,
-											meTimeGoal,
-											waterGoal,
-											fruitGoal,
-											veggieGoal,
-											physicalActivityGoal
-										);
-										values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
-									}
-									values = values.slice(0, -1);
-									// console.log(values,"====> values")
-									const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
-									conn.query(newValuesQuery, (err3, result3) => {
-										if (err3) {
-											console.log('============> error while inserting metrics');
-										} else {
-											console.log(result3, '===========> insert new values result3');
-											console.log('************Cron Job completed************');
-											// return;
-										}
-									});
-								}
-							});
-						}
-					});
-				} catch (err) {
-					console.log(err);
 				}
-
-
-
 			});
 
-			conn.release();
-		}
-	});
+
+
+		});
+	} catch (err) {
+		console.log(err, "-------------cron job error");
+	}
+
 };
 
 exports.updateUserMetricGoals = (req, res) => {
 	console.log('================================updating metrics');
-	console.log(currentDate,"----------current Dater")
+	console.log(currentDate, "----------current Dater");
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -765,8 +784,8 @@ exports.updateUserMetricGoals = (req, res) => {
 						let getRecentMetrics = `SELECT * FROM happyhealth.usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
 						//let getRecentMetrics = `SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));`
 						conn.query(getRecentMetrics, (err2, result2) => {
-							if (err2){
-								console.log(err2,"--------------------error while getting recent metrics")
+							if (err2) {
+								console.log(err2, "--------------------error while getting recent metrics");
 							}
 							else {
 								console.log(result2.length, '======> result2');
