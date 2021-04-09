@@ -1,223 +1,250 @@
-
-const db = require('../database');
+// const db = require('../database');
+const pooldb = require('../pooldb');
 const bcrypt = require('bcryptjs');
 
 exports.getUserLogin = (req, res) => {
+	pooldb.getConnection((err, conn) => {
+		if (err) {
+			console.log(err, '=====> error occured');
+		} else {
+			console.log('=======> INSIDE USER LOGIN');
 
-    console.log("=======> INSIDE USER LOGIN");
-
-    let success_msg = req.session.success_msg;
-    if (!success_msg) {
-        res.render('userViews/userLogin', {
-            layout: 'layouts/mainLayout',
-            title: 'User Login'
-        });
-        req.session.success_msg = null;
-        return;
-    } else {
-        res.render('userViews/userLogin', {
-            layout: 'layouts/mainLayout',
-            title: 'User Login'
-        });
-        req.session.success_msg = null;
-        return;
-    }
+			let success_msg = req.session.success_msg;
+			if (!success_msg) {
+				res.render('userViews/userLogin', {
+					layout: 'layouts/mainLayout',
+					title: 'User Login',
+				});
+				req.session.success_msg = null;
+				return;
+			} else {
+				res.render('userViews/userLogin', {
+					layout: 'layouts/mainLayout',
+					title: 'User Login',
+				});
+				req.session.success_msg = null;
+				return;
+			}
+		}
+	});
 };
 
+/////////////////////////////////////connection
+// pooldb.getConnection((err1, conn) => {
+// 	if (err1) {
+// 		console.log(err1, '=====> error occured');
+// 	} else {
+
+// 	}
+// });
 
 exports.postUserLogin = async (req, res) => {
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			try {
+				const { username, password } = req.body;
 
-    try {
+				console.log(username, '==========> POSTING USER LOGIN');
 
-        const {
-            username,
-            password
-        } = req.body;
+				let errors = [];
 
-        console.log(username, "==========> POSTING USER LOGIN");
+				if (!username || !password) {
+					errors.push({
+						msg: 'Please enter all fields',
+					});
+				}
 
-        let errors = [];
+				if (errors.length > 0) {
+					res.render('userViews/userLogin', {
+						layout: 'layouts/mainLayout',
+						title: 'User Login',
+						errors,
+						username,
+						password,
+					});
+				} else {
+					let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'`;
 
-        if (!username || !password) {
-            errors.push({
-                msg: 'Please enter all fields'
-            });
-        }
+					console.log('*****User login DB Query Started**********\n');
 
-        if (errors.length > 0) {
-            res.render('userViews/userLogin', {
-                layout: 'layouts/mainLayout',
-                title: 'User Login',
-                errors,
-                username,
-                password
-            });
-        } else {
+					conn.query(queryString, async function (err, result) {
+						conn.release();
+						console.log('********Sucessfully Quered user login*******');
 
-            let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'`;
+						if (err) {
+							console.log(err, '-----while login');
+						}
+						console.log(result, '---------user login result');
 
-            console.log("*****User login DB Query Started**********\n");
+						if (result.length > 0) {
+							const validPassword = await bcrypt.compare(password, result[0]['password']);
+							if (validPassword) {
+								req.session.userId = result[0]['userId'];
+								req.session.isLoggedIn = true;
+								res.redirect('home');
+							} else {
+								errors.push({
+									msg: 'Enter correct username or password',
+								});
+								res.render('userViews/userLogin', {
+									layout: 'layouts/mainLayout',
+									title: 'User Login',
+									errors,
+									username,
+									password,
+								});
+								return;
+							}
+						} else {
+							errors.push({
+								msg: 'Enter correct username or password',
+							});
+							res.render('userViews/userLogin', {
+								layout: 'layouts/mainLayout',
+								title: 'User Login',
+								errors,
+								username,
+								password,
+							});
+							return;
+						}
 
-            db.query(queryString, async function (err, result) {
-
-                console.log("********Sucessfully Quered user login*******")
-
-                if (err) {
-                    console.log(err, "-----while login");
-                }
-                console.log(result, "---------user login result");
-
-                if (result.length > 0) {
-                    const validPassword = await bcrypt.compare(password, result[0]['password']);
-                    if (validPassword) {
-                        req.session.userId = result[0]['userId'];
-                        req.session.isLoggedIn = true;
-                        res.redirect('home');
-                    } else {
-                        errors.push({
-                            msg: 'Enter correct username or password'
-                        });
-                        res.render('userViews/userLogin', {
-                            layout: 'layouts/mainLayout',
-                            title: 'User Login',
-                            errors,
-                            username,
-                            password
-                        });
-                        return;
-                    }
-
-
-                } else {
-                    errors.push({
-                        msg: 'Enter correct username or password'
-                    });
-                    res.render('userViews/userLogin', {
-                        layout: 'layouts/mainLayout',
-                        title: 'User Login',
-                        errors,
-                        username,
-                        password
-                    });
-                    return;
-                }
-
-            });
-
-        }
-
-    } catch (err) {
-        console.log(err, "------------User post login controller error.");
-    }
+					});
+				}
+			} catch (err) {
+				console.log(err, '------------User post login controller error.');
+			}
+		}
+	});
 };
 
-
 exports.getAdminLogin = (req, res) => {
-    res.render('adminViews/adminLogin', {
-        layout: 'layouts/mainLayout',
-        title: 'admin Login'
-    });
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			res.render('adminViews/adminLogin', {
+				layout: 'layouts/mainLayout',
+				title: 'admin Login',
+			});
+
+			conn.release();
+		}
+	});
 };
 
 exports.postAdminLogin = async (req, res) => {
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			try {
+				const { username, password } = req.body;
+				let errors = [];
 
+				if (!username || !password) {
+					errors.push({
+						msg: 'Please enter all fields',
+					});
+				}
 
-    try {
-        const {
-            username,
-            password
-        } = req.body;
-        let errors = [];
+				if (errors.length > 0) {
+					res.render('adminViews/adminLogin', {
+						layout: 'layouts/mainLayout',
+						title: 'admin Login',
+						errors,
+						username,
+						password,
+					});
+				} else {
+					const queryString = `SELECT * FROM happyhealth.usertbl WHERE userName = '${username}' and Admin = 'Yes'`;
 
-        if (!username || !password) {
-            errors.push({
-                msg: 'Please enter all fields'
-            });
-        }
+					console.log('*****admin login conn.query started*******');
 
-        if (errors.length > 0) {
-            res.render('adminViews/adminLogin', {
-                layout: 'layouts/mainLayout',
-                title: 'admin Login',
-                errors,
-                username,
-                password
-            });
-        } else {
-            const queryString = `SELECT * FROM happyhealth.usertbl WHERE userName = '${username}' and Admin = 'Yes'`;
+					conn.query(queryString, async function (err, result) {
+						console.log('********Sucessfully Quered admin login*******');
+						if (result.length > 0) {
+							const validPassword = await bcrypt.compare(password, result[0]['password']);
 
-            console.log("*****admin login db query started*******")
+							if (validPassword) {
+								const userId = result[0]['userId'];
+								req.session.userId = userId;
+								req.session.isLoggedIn = true;
+								req.session.isAdmin = true;
+								res.redirect('adminHome');
+								console.log('*****Admin Login successfully*****');
+							} else {
+								errors.push({
+									msg: 'Enter correct username or password',
+								});
+								res.render('adminViews/adminLogin', {
+									layout: 'layouts/mainLayout',
+									title: 'admin Login',
+									errors,
+									username,
+									password,
+								});
+							}
+						} else {
+							errors.push({
+								msg: 'Enter correct username or password',
+							});
+							res.render('adminViews/adminLogin', {
+								layout: 'layouts/mainLayout',
+								title: 'admin Login',
+								errors,
+								username,
+								password,
+							});
+						}
 
-            db.query(queryString, async function (err, result) {
-
-                console.log("********Sucessfully Quered admin login*******")
-                if (result.length > 0) {
-
-                    const validPassword = await bcrypt.compare(password, result[0]['password']);
-
-                    if (validPassword) {
-                        const userId = result[0]['userId'];
-                        req.session.userId = userId;
-                        req.session.isLoggedIn = true;
-                        req.session.isAdmin = true;
-                        res.redirect('adminHome');
-                        console.log('*****Admin Login successfully*****');
-                    } else {
-                        errors.push({
-                            msg: 'Enter correct username or password'
-                        });
-                        res.render('adminViews/adminLogin', {
-                            layout: 'layouts/mainLayout',
-                            title: 'admin Login',
-                            errors,
-                            username,
-                            password
-                        });
-                    }
-
-                } else {
-                    errors.push({
-                        msg: 'Enter correct username or password'
-                    });
-                    res.render('adminViews/adminLogin', {
-                        layout: 'layouts/mainLayout',
-                        title: 'admin Login',
-                        errors,
-                        username,
-                        password
-                    });
-                }
-
-            });
-
-        }
-
-    } catch (err) {
-        console.log(err, "----------------Admin post login controller error.");
-    }
+						conn.release();
+					});
+				}
+			} catch (err) {
+				console.log(err, '----------------Admin post login controller error.');
+			}
+		}
+	});
 };
 
-
 exports.getLogout = (req, res, next) => {
-    console.log("*********logout controller********");
-    if (req.session.isAdmin) {
-        req.session = null;
-        res.redirect('/adminLogin');
-        return;
-    }
-    req.session = null;
-    res.redirect('/');
-    return;
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			console.log('*********logout controller********');
+			if (req.session.isAdmin) {
+				req.session = null;
+				res.redirect('/adminLogin');
+				return;
+			}
+			req.session = null;
+			res.redirect('/');
+			conn.release();
+			return;
+		}
+	});
 };
 
 exports.getError = (req, res, next) => {
-    console.log("****************Error controller");
-    console.log(req.path, "------path");
-    let route = req.path;
-    res.status(404).send({
-        status: 404,
-        Error: 'Page Not Found',
-        Route: route
-    });
-    res.end();
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			console.log('****************Error controller');
+			console.log(req.path, '------path');
+			let route = req.path;
+			res.status(404).send({
+				status: 404,
+				Error: 'Page Not Found',
+				Route: route,
+			});
+			res.end();
+
+			conn.release();
+		}
+	});
 };

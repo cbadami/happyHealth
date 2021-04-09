@@ -1,5 +1,5 @@
 // Locally database connection:
-const fs = require('fs');
+/* const fs = require('fs');
 var mysql = require('mysql');
 
 eval(process.env.MYSQLCONNSTR_MyDBConnString);
@@ -11,19 +11,4 @@ db.connect(function (err) {
   console.log(`Successfully connected to your local MySQL server`.yellow);
 });
 
-module.exports = db;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = db; */

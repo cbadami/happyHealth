@@ -4,15 +4,19 @@
         <div class="row">
             <div class="col-sm-6">
                 <h2><b>Announcements </b></h2>
-                <br/>
+                <br />
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/adminNewAnnouncements'">Create a New
-                  Announcement</button>
-                    </div>
+                <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/adminNewAnnouncements'">Create a
+                    New
+                    Announcement</button>
+                &nbsp;
+                <!-- <button type="button" class="btn btn-primary pull-right"
+                    onclick="location.href = '/adminIndividualAnnouncements'">Announcement to Individuals</button> -->
             </div>
         </div>
-        <!-- <div class="app-main__inner">
+    </div>
+<!-- <div class="app-main__inner">
             <div class="form-row">
                 <div class="col-sm-6">
                     <h4><b>New Message Title:</b></h4>
@@ -37,52 +41,52 @@
                     </form>
                 </div>
             </div> -->
-            <!-- <br> -->
-        <!-- </div> -->
-    <!-- <div class="table-responsive"> -->
+<!-- <br> -->
+<!-- </div> -->
+<!-- <div class="table-responsive"> -->
 
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col"> Date Created</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Message</th>
-                    <th scope="col" style="text-align:center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (var i=0; i < result.length;i++) { %>
-                    <tr>
-                        <th scope="row">
-                            <%= i+1 %>
-                        </th>
-                        <td>
-                            <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
-                            <%= result[i].msgDate%>
-                                </a>
-                        </td>
-                        <td>
-                            <%= result[i].title%>
-                        </td>
-                        <td>
-                            <%= result[i].message%>
-                        </td>
-                        <td>
-                            <form action="/deleteAnnouncement/<%= result[i].messageId %>" method="post">
-                                <input type="submit" id="PopoverCustomT-1" value="Delete"
-                                    class="btn btn-sm btn-md btn-danger" onclick="announcmentRemoved()"></input>
-                            </form>
-                        </td>
-                    </tr>
-                    <% } %>
-            </tbody>
-        </table>
-    <!-- </div> -->
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"> Date Created</th>
+            <th scope="col">Title</th>
+            <th scope="col">Message</th>
+            <th scope="col" style="text-align:center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (var i=0; i < result.length;i++) { %>
+            <tr>
+                <th scope="row">
+                    <%= i+1 %>
+                </th>
+                <td>
+                    <!-- <a href="/getNotifications/<%= result[i].messageId%>"> -->
+                    <%= result[i].msgDate%>
+                        </a>
+                </td>
+                <td>
+                    <%= result[i].title%>
+                </td>
+                <td>
+                    <%= result[i].message%>
+                </td>
+                <td>
+                    <form action="/deleteAnnouncement/<%= result[i].messageId %>" method="post">
+                        <input type="submit" id="PopoverCustomT-1" value="Delete" class="btn btn-sm btn-md btn-danger"
+                            onclick="announcmentRemoved()"></input>
+                    </form>
+                </td>
+            </tr>
+            <% } %>
+    </tbody>
+</table>
+<!-- </div> -->
 
 </div>
 <script>
-    function announcementRemoved(){
+    function announcementRemoved() {
         alert("Announcement Removed");
     }
 </script>

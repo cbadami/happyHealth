@@ -67,20 +67,29 @@
             <div>
 
                 <!-- <h1> <b>Manage Users</b> </h1> -->
-                <h3>Challenge Name : <%= challengeData[0].challengeName %></h3>
+                <h3>Challenge Name : <%= challengeData[0].challengeName %>
+                </h3>
             </div>
-            
+
             <form action="<%= challengeData[0].challengeId%>" method="POST">
                 <div>
                     <label for="addUser"><strong>Invite User: </strong> </label>
-                    <select name="userId" class="form-control addUser">
+
+                    <select name="userId" class="form-control addUser " multiple="true">
                         <% for (var i=0; i < notJoinedUsers.length;i++) { %>
-                            <option selected = "<%= notJoinedUsers[i].userId %>" value="<%= notJoinedUsers[i].userId %>">
+                            <option value="<%= notJoinedUsers[i].userId %>">
                                 <%= notJoinedUsers[i].userName %>
                             </option>
                             <% } %>
+
+                                <% if(notJoinedUsers.length===0){ %>
+                                    <option disabled>
+                                        All Users are invited
+                                    </option>
+                                    <% } %>
                     </select>
-                    <button type="submit" class="btn btn-primary">Invite</button>
+
+                    <input type="submit" value="Invite" id="inviteBtn" class="btn btn-primary"></input>
                 </div>
 
             </form>
@@ -104,21 +113,25 @@
                                 <%= joinedUsers[i].userName%>
                             </td>
                             <td>
-                        		   <% 	if( joinedUsers[i].activeUser == 1) { %>
-											Joined 
-									<%   }else{ %>
-											Pending
-										<%  } %>
+                                <% if( joinedUsers[i].activeUser==1) { %>
+                                    Joined
+                                    <% }else{ %>
+                                        Pending
+                                        <% } %>
                             </td>
                             <td>
-                                <form action="/removeUser/<%= challengeData[0].challengeId%>/<%= joinedUsers[i].userId%>" method="POST">
-                                 
-									<% 	if( joinedUsers[i].activeUser ) { %>
-										<button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-danger">Remove</button>
-										<%   }else{ %>
-											<button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-warning">Cancel Invitation</button>
-											<%  } %>
-									
+                                <form
+                                    action="/removeUser/<%= challengeData[0].challengeId%>/<%= joinedUsers[i].userId%>"
+                                    method="POST">
+
+                                    <% if( joinedUsers[i].activeUser ) { %>
+                                        <button type="submit" id="PopoverCustomT-1"
+                                            class="btn btn-primary btn-danger">Remove</button>
+                                        <% }else{ %>
+                                            <button type="submit" id="PopoverCustomT-1"
+                                                class="btn btn-primary btn-warning">Cancel Invitation</button>
+                                            <% } %>
+
                                 </form>
                             </td>
                         </tr>
@@ -128,20 +141,82 @@
 
             <% } %>
 
+                <!-- <div>
+				<%= notJoinedUsers[0] %>
+			</div> -->
+
 
 </div>
 
 <script>
-    const notJoinedUsers = "<%= notJoinedUsers[0].userName %>"
-    console.log(notJoinedUsers,"-----------not Joined user");
+
+    // const notJoinedUsers = "<%= notJoinedUsers.length %>"
+    // console.log( '<%= notJoinedUsers.length %>' === '0' ,"-----------not Joined user");
+
+    var button = document.getElementById("inviteBtn");
+
+    if ('<%= notJoinedUsers.length %>' === '0') {
+        button.disabled = true;
+    } else {
+        button.disabled = false;
+    }
+
+
+    function selectedItems() {
+        // GETTING USERS 
+        var userResult = document.getElementById("usersResult");
+        userResult.value = "";
+        var x = document.getElementById("users");
+        for (var i = 0; i < x.options.length; i++) {
+            if (x.options[i].selected === true) {
+                userResult.value += x.options[i].value + " ";
+                document.getElementById("usersResult").value = userResult.value;
+            }
+            console.log(userResult.value, "===========> ")
+        }
+    }
+
+    function selectedUsers() {
+        var userResult = document.getElementById("usersResult");
+        userResult.value = "";
+        var x = document.getElementById("users");
+        for (var i = 0; i < x.options.length; i++) {
+            if (x.options[i].selected === true) {
+                userResult.value += x.options[i].value + " ";
+                document.getElementById("usersResult").value = userResult.value;
+            }
+        }
+        // if(document.getElementById("usersResult").value == ""){
+        // 	document.getElementById("usersResult").innerHTML = "Please select atleast one. "
+        // }
+    }
+
+    $('option').mousedown(function (e) {
+        e.preventDefault();
+        var originalScrollTop = $(this).parent().scrollTop();
+        console.log(originalScrollTop);
+        $(this).prop('selected', $(this).prop('selected') ? false : true);
+        var self = this;
+        $(this).parent().focus();
+        setTimeout(function () {
+            $(self).parent().scrollTop(originalScrollTop);
+        }, 0);
+
+        return false;
+    });
+
+
+
+
 </script>
 
 <style>
-    .addUser{
+    .addUser {
         width: 250px;
         display: inline-flex;
     }
-    .btn{
+
+    .btn {
         display: inline-flex;
     }
 </style>

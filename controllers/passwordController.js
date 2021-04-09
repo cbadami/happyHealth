@@ -1,14 +1,30 @@
-const db = require('../database');
+// const db = require('../database');
+const pooldb = require('../pooldb');
 const bcrypt = require('bcryptjs');
 
 exports.getForgotPassword = (req, res) => {
-	res.render('forgotPassword', {
-		layout: 'layouts/mainLayout',
-		title: 'Forgot Password',
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			res.render('forgotPassword', {
+				layout: 'layouts/mainLayout',
+				title: 'Forgot Password',
+			});
+			conn.release();
+		}
 	});
 };
 
 exports.postForgotPassword = (req, res) => {
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			conn.release();
+		}
+	});
+
 	const { email } = req.body;
 	let errors = [];
 	if (!email) {
@@ -23,7 +39,7 @@ exports.postForgotPassword = (req, res) => {
 		});
 	} else {
 		const queryString = `SELECT * FROM happyhealth.usertbl WHERE email = '${email}' Limit 1 `;
-		db.query(queryString, function (err, result) {
+		conn.query(queryString, function (err, result) {
 			console.log(`forgot password ${JSON.stringify(result)}`);
 			if (result.length > 0) {
 				console.log(`under forgot password page ${JSON.stringify(result[0].email)}`);
@@ -47,12 +63,28 @@ exports.postForgotPassword = (req, res) => {
 };
 
 exports.getResetPassword = (req, res) => {
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			conn.release();
+		}
+	});
+
 	const userId = req.session.userId;
 	console.log(`under get reset password ${userId}`);
 	res.render('resetPassword', { layout: 'layouts/mainLayout', title: 'Reset Password' });
 };
 
 exports.postResetPassword = async (req, res) => {
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			conn.release();
+		}
+	});
+
 	// console.log(req.body, "================> POSTTING RESET PASSWORD")
 	const userId = req.session.userId;
 	const { password, password2 } = req.body;
@@ -88,7 +120,7 @@ exports.postResetPassword = async (req, res) => {
                 password = '${hashPassword}'
             WHERE
                 userId = '${userId}';`;
-		db.query(updateQuery, function (err, result) {
+		conn.query(updateQuery, function (err, result) {
 			if (err) console.log(`${err}`);
 			console.log('1 record updated');
 			success_msg1 = 'Password changed sucessfully';
@@ -101,9 +133,8 @@ exports.postResetPassword = async (req, res) => {
 const nodemailer = require('nodemailer');
 const sgMail = require('@sendgrid/mail');
 const { response } = require('express');
-const API_KEY = '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';
 
-const { google } = require('googleapis');
+// const { google } = require('googleapis');
 
 // async function sendEmail( userEmail, generateCode ) {
 // 	console.log(userEmail, generateCode , "=========> USER MAIL and code")
@@ -148,11 +179,12 @@ const { google } = require('googleapis');
 // }
 
 async function sendEmail(userEmail, generateCode) {
-	sgMail.setApiKey(API_KEY);
+	console.log(API_KEY, '=============> API KEY ..........');
+	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 	const message = {
 		to: userEmail,
-		from: 'happyhealthgdp@gmail.com',
+		from: 'fitnestgdp@gmail.com',
 		subject: 'Happy Health reset account',
 		text: `OTP to reset your account: ${generateCode} `,
 		html: `<p> Your OTP to reset your account:  ${generateCode}</p>`,
@@ -161,56 +193,68 @@ async function sendEmail(userEmail, generateCode) {
 	sgMail
 		.send(message)
 		.then((respon) => {
-			console.log(respon);
+			console.log(respon, '========> sent');
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err, '=====> error while sending');
 		});
 }
 
-
-
 exports.getValidation = (req, res) => {
-	// const errors = req.errors;
-	const userId = req.session.userId;
-	const userEmail = req.session.userEmail;
-	console.log(`under get validation page ${userEmail}`);
-	generateCode = Math.floor((Math.random() + 1) * 100000);
-	console.log(`Generated code: ${generateCode}`);
-	sendEmail(userEmail, generateCode);
-	res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			// const errors = req.errors;
+			const userId = req.session.userId;
+			const userEmail = req.session.userEmail;
+			console.log(`under get validation page ${userEmail}`);
+			generateCode = Math.floor((Math.random() + 1) * 100000);
+			console.log(`Generated code: ${generateCode}`);
+			sendEmail(userEmail, generateCode);
+			res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
+			conn.release();
+		}
+	});
 };
 
 exports.postValidation = (req, res) => {
-	const userId = req.session.userId;
-	var userEmail = req.session.userEmail;
-	const code = req.body.code;
-	const resend = req.body.resend;
-
-	console.log(`under post validation page ${userId}`);
-	console.log(`under post validation page code: ${code}`);
-	console.log(`under post validation page resend: ${resend}`);
-	let errors = [];
-
-	if (resend == 'Resend') {
-		generateCode = Math.floor((Math.random() + 1) * 100000);
-		console.log(`Generated code: ${generateCode}`);
-		sendEmail(userEmail, generateCode);
-		res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
-	} else {
-		if (!code) {
-			errors.push({ msg: 'Enter verification code' });
-		} else if (code != generateCode) {
-			errors.push({ msg: 'Invalid verification code' });
-		}
-		if (errors.length > 0) {
-			res.render('validationPage', {
-				layout: 'layouts/mainLayout',
-				title: 'Validation User',
-				errors,
-			});
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
 		} else {
-			res.redirect('/resetPassword');
+			const userId = req.session.userId;
+			var userEmail = req.session.userEmail;
+			const code = req.body.code;
+			const resend = req.body.resend;
+
+			console.log(`under post validation page ${userId}`);
+			console.log(`under post validation page code: ${code}`);
+			console.log(`under post validation page resend: ${resend}`);
+			let errors = [];
+
+			if (resend == 'Resend') {
+				generateCode = Math.floor((Math.random() + 1) * 100000);
+				console.log(`Generated code: ${generateCode}`);
+				sendEmail(userEmail, generateCode);
+				res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
+			} else {
+				if (!code) {
+					errors.push({ msg: 'Enter verification code' });
+				} else if (code != generateCode) {
+					errors.push({ msg: 'Invalid verification code' });
+				}
+				if (errors.length > 0) {
+					res.render('validationPage', {
+						layout: 'layouts/mainLayout',
+						title: 'Validation User',
+						errors,
+					});
+				} else {
+					res.redirect('/resetPassword');
+				}
+			}
+			conn.release();
 		}
-	}
+	});
 };
