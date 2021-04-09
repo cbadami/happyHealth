@@ -7,6 +7,10 @@ const {
 } = require('bcryptjs');
 
 let currentDate = moment(new Date()).format('L').toString();
+const today = new Date()
+const yesterday = new Date(today)
+
+yesterday.setDate(yesterday.getDate() - 1)
 console.log(currentDate);
 
 
@@ -135,33 +139,30 @@ exports.getUserStep = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
+			console.log(yesterday.toDateString());
 			const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${currentDate}' `;
-			//const previousStepsQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${yesterday}' `;
+			const previousStepsQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${yesterday}' `;
 			conn.query(stetpQuery, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
 					console.log(result, '--------db user table result');
+					if (result[0].stepCount == 0) {
+						
+					} else {
+						
+					}
 					const {
 						stepCount,
 						stepGoal
 					} = result[0];
-					if (stepCount != 0) {
-						res.render('userViews/userStep', {
-							layout: 'layouts/userLayout',
-							title: 'User Step',
-							stepCount,
-							stepGoal,
-						});
-					} else {
-						res.render('userViews/userStep', {
-							layout: 'layouts/userLayout',
-							title: 'User Step',
-							stepCount,
-							stepGoal,
-						});
-					}
-
+					
+					res.render('userViews/userStep', {
+						layout: 'layouts/userLayout',
+						title: 'User Step',
+						stepCount,
+						stepGoal,
+					});
 				}
 			});
 			conn.release();
