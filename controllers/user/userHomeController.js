@@ -2,10 +2,13 @@
 const pooldb = require('../../pooldb');
 const moment = require('moment');
 const cron = require('node-cron');
-const { decodeBase64 } = require('bcryptjs');
+const {
+	decodeBase64
+} = require('bcryptjs');
 
 let currentDate = moment(new Date()).format('L').toString();
 console.log(currentDate);
+const yesterday = new Date(today).toDateString();
 
 exports.getUserHome = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
@@ -97,6 +100,35 @@ exports.getUserHome = (req, res) => {
 	});
 };
 
+exports.getPreviousUserSteps = (req, res) => {
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			let userId = req.session.userId;
+			const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${yesterday}' `;
+			conn.query(stetpQuery, function (err, result) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(result, '--------db user table result');
+					const {
+						stepCount,
+						stepGoal
+					} = result[0];
+					res.render('userViews/userStep', {
+						layout: 'layouts/userLayout',
+						title: 'User Step',
+						stepCount,
+						stepGoal,
+					});
+				}
+			});
+			conn.release();
+		}
+	});
+};
+
 exports.getUserStep = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
@@ -109,7 +141,10 @@ exports.getUserStep = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '--------db user table result');
-					const { stepCount, stepGoal } = result[0];
+					const {
+						stepCount,
+						stepGoal
+					} = result[0];
 					res.render('userViews/userStep', {
 						layout: 'layouts/userLayout',
 						title: 'User Step',
@@ -129,7 +164,10 @@ exports.postUserStep = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			const userId = req.session.userId;
-			const { stepCount, stepGoal } = req.body;
+			const {
+				stepCount,
+				stepGoal
+			} = req.body;
 			let errors = [];
 
 			if (!stepCount || !stepGoal) {
@@ -170,7 +208,10 @@ exports.getUserSleep = (req, res) => {
 				} else {
 					console.log(result, '--------db user table result');
 
-					var { sleepHours, sleepGoal } = result[0];
+					var {
+						sleepHours,
+						sleepGoal
+					} = result[0];
 
 					res.render('userViews/userSleep', {
 						layout: 'layouts/userLayout',
@@ -191,7 +232,10 @@ exports.postUserSleep = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { sleepHours, sleepGoal } = req.body;
+			const {
+				sleepHours,
+				sleepGoal
+			} = req.body;
 
 			console.log(`inside post user sleep: ${sleepHours}  ${sleepGoal}`);
 			let errors = [];
@@ -233,7 +277,10 @@ exports.getUserHydration = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '--------db user water result');
-					var { water, waterGoal } = result[0];
+					var {
+						water,
+						waterGoal
+					} = result[0];
 					console.log(water, waterGoal, '==============> water, watergoal');
 
 					res.render('userViews/userHydration', {
@@ -256,7 +303,10 @@ exports.postUserHydration = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { water, waterGoal } = req.body;
+			const {
+				water,
+				waterGoal
+			} = req.body;
 			console.log(`inside post user hyration`);
 			let errors = [];
 			if (!water || !waterGoal) {
@@ -299,7 +349,10 @@ exports.getUserTrack = (req, res) => {
 				} else {
 					console.log(result, '--------db user table result');
 
-					var { meTime, meTimeGoal } = result[0];
+					var {
+						meTime,
+						meTimeGoal
+					} = result[0];
 
 					res.render('userViews/userTrack', {
 						layout: 'layouts/userLayout',
@@ -320,7 +373,10 @@ exports.postUserTrack = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { meTime, meTimeGoal } = req.body;
+			const {
+				meTime,
+				meTimeGoal
+			} = req.body;
 			console.log(`inside post user track`);
 			let errors = [];
 			if (!meTime || !meTimeGoal) {
@@ -360,7 +416,12 @@ exports.getUserFruits = (req, res) => {
 				} else {
 					console.log(result, '--------db user table result');
 					//console.log("result "+result[0]);
-					const { fruits, fruitgoal, veggies, veggieGoal } = result[0];
+					const {
+						fruits,
+						fruitgoal,
+						veggies,
+						veggieGoal
+					} = result[0];
 					//console.log("ddd   "+fruits)
 					res.render('userViews/userFruits', {
 						layout: 'layouts/userLayout',
@@ -384,7 +445,12 @@ exports.postUserFruits = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { veggies, veggieGoal, fruits, fruitgoal } = req.body;
+			const {
+				veggies,
+				veggieGoal,
+				fruits,
+				fruitgoal
+			} = req.body;
 			console.log('-------post user Fruits n veg controller');
 			let errors = [];
 			if (!fruits || !fruitgoal) {
@@ -423,7 +489,10 @@ exports.getUserVegetables = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '--------db user table result');
-					const { veggies, veggieGoal } = result[0];
+					const {
+						veggies,
+						veggieGoal
+					} = result[0];
 					//console.log("ddd   "+veggies)
 					res.render('userViews/userVegetables', {
 						layout: 'layouts/userLayout',
@@ -452,7 +521,12 @@ exports.getFruitsVeggies = (req, res) => {
 					console.log(err, '======> error while getting fruits and veggies');
 				} else {
 					console.log(result, '=====> fruits veggies result');
-					const { fruits, fruitGoal, veggies, veggieGoal } = result[0];
+					const {
+						fruits,
+						fruitGoal,
+						veggies,
+						veggieGoal
+					} = result[0];
 					res.render('userViews/userFruitsVeggies', {
 						layout: 'layouts/userLayout',
 						title: ' Fruits & Vegetables',
@@ -475,7 +549,12 @@ exports.postFruitsVeggies = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			let { fruits, fruitgoal, veggies, veggieGoal } = req.body;
+			let {
+				fruits,
+				fruitgoal,
+				veggies,
+				veggieGoal
+			} = req.body;
 
 			let updateFV = `update happyhealth.usermetricstbl set fruits = ${fruits} , fruitGoal= ${fruitgoal} , veggies = ${veggies} , veggieGoal= ${veggieGoal} where userId =${userId} and date = '${currentDate}'; `;
 			conn.query(updateFV, (err, result) => {
@@ -498,7 +577,10 @@ exports.postUserVegetables = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { veggies, veggieGoal } = req.body;
+			const {
+				veggies,
+				veggieGoal
+			} = req.body;
 			console.log('-------post user Vegetables controller');
 			let errors = [];
 			if (!veggies || !veggieGoal) {
@@ -535,7 +617,10 @@ exports.getUserPhysicalActivity = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '-------- physical activity result');
-					const { physicalActivityMinutes, physicalActivityGoal } = result[0];
+					const {
+						physicalActivityMinutes,
+						physicalActivityGoal
+					} = result[0];
 					console.log(physicalActivityMinutes, physicalActivityGoal, '==========> PHYYYYYYYY');
 					res.render('userViews/userPhysicalActivity', {
 						layout: 'layouts/userLayout',
@@ -557,7 +642,10 @@ exports.postUserPhysicalActivity = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { physicalActivityMinutes, physicalActivityGoal } = req.body;
+			const {
+				physicalActivityMinutes,
+				physicalActivityGoal
+			} = req.body;
 			console.log('-------post user Physical Activity controller');
 			let errors = [];
 			if (!physicalActivityMinutes || !physicalActivityGoal) {
@@ -682,8 +770,7 @@ exports.resetUserMetrics = (req, res) => {
 												console.log(err2, "---------get recent metrics");
 												conn.release();
 												return;
-											}
-											else {
+											} else {
 												console.log(result2.length, '======> result2');
 
 												let values = '';
@@ -786,8 +873,7 @@ exports.updateUserMetricGoals = (req, res) => {
 						conn.query(getRecentMetrics, (err2, result2) => {
 							if (err2) {
 								console.log(err2, "--------------------error while getting recent metrics");
-							}
-							else {
+							} else {
 								console.log(result2.length, '======> result2');
 
 								let values = '';
