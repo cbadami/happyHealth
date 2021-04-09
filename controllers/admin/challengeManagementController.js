@@ -238,9 +238,11 @@ exports.getChallengeUsers = (req, res) => {
 			let joinedUsers = (notJoinedUsers = challengeData = '');
 
 			let joinedQuery = `SELECT challengemembertbl.userId, userName, challengemembertbl.challengeId, challengeName, activeUser FROM challengemembertbl INNER JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId INNER JOIN usertbl on challengemembertbl.userId=usertbl.userId WHERE challengemembertbl.challengeId=${challengeId};`;
-			conn.query(joinedQuery, (err, result) => {
+			await conn.query(joinedQuery, (err, result) => {
 				if (err) {
 					console.log(err, '=======> error getChallengeUsers');
+					conn.release();
+					return;
 				} else {
 					console.log(result, '============> result getChallengeUsers');
 					joinedUsers = result;
@@ -249,7 +251,11 @@ exports.getChallengeUsers = (req, res) => {
 
 			const notJoinedQuery = `SELECT userId, userName FROM happyhealth.usertbl where userId NOT IN (SELECT userId FROM happyhealth.challengemembertbl where challengeId=${challengeId});`;
 			await conn.query(notJoinedQuery, (err, result) => {
-				if (err) throw err;
+				if (err){
+					console.log(err,"-----------error")
+					conn.release();
+					return;
+				}
 				else {
 					console.log(result, '------------notUsersQuery result');
 					notJoinedUsers = result;
@@ -258,7 +264,11 @@ exports.getChallengeUsers = (req, res) => {
 
 			const challengeQuery = `select * from happyhealth.challengetbl where challengeId =${challengeId}`;
 			await conn.query(challengeQuery, (err, result) => {
-				if (err) throw err;
+				if (err){
+					console.log(err,"-----------error")
+					conn.release();
+					return;
+				}
 				else {
 					console.log(result, '------------challengeQuery result');
 					challengeData = result;
@@ -274,7 +284,6 @@ exports.getChallengeUsers = (req, res) => {
 				}
 			});
 
-			conn.release();
 		}
 	});
 };
