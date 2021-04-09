@@ -32,11 +32,11 @@ exports.postSignup = (req, res) => {
 			} else {
 				if (username.length > 12) {
 					errors.push({
-						msg: 'Username must be below 12 characters',
+						msg: 'Username must be between 6 and 12 characters',
 					});
 				} else if (username.length < 6) {
 					errors.push({
-						msg: 'Username must be atleast 6 characters',
+						msg: 'Username must be between 6 and 12 characters',
 					});
 				}
 
