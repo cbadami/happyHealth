@@ -632,7 +632,7 @@ exports.resetUserMetrics = (req, res) => {
 
 	try {
 
-		cron.schedule('*/10 * * * *', async () => {
+		cron.schedule('0 0 * * *', async () => {
 			console.log("***********cron job started************")
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
