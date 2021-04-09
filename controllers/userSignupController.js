@@ -42,11 +42,11 @@ exports.postSignup = (req, res) => {
 
 				if (password.length > 15) {
 					errors.push({
-						msg: 'Password must be below 15 characters',
+						msg: 'Password must be between 8 and 15 characters',
 					});
 				} else if (password.length < 8) {
 					errors.push({
-						msg: 'Password must be at least 8 characters',
+						msg: 'Password must be between 8 and 15 characters',
 					});
 				}
 
