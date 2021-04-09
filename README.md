@@ -158,7 +158,7 @@ This article is a technical onboarding document that can help you write your own
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
 - [Mindful Minutes UI Screens Web and Mobile](https://app.moqups.com/aMyjQCLOHf/view/page/a185eb5d5)
 - [Mindful Minutes (Cards Options)UI Screens Web and Mobile](https://app.moqups.com/LvkwMlzgnf/view/page/ad64222d5)
-- [Char Service](https://app.moqups.com/LvkwMlzgnf/view/page/a8ad3d5f7)
+- [Chat Service](https://app.moqups.com/LvkwMlzgnf/view/page/a8ad3d5f7)
 - Show your mind some love
 
 - Mental Fitness
