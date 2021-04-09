@@ -148,15 +148,15 @@ exports.getUserStep = (req, res) => {
 				} else {
 					console.log(result, '--------db user table result');
 					if (result[0].stepCount == 0) {
-						
+
 					} else {
-						
+
 					}
 					const {
 						stepCount,
 						stepGoal
 					} = result[0];
-					
+
 					res.render('userViews/userStep', {
 						layout: 'layouts/userLayout',
 						title: 'User Step',

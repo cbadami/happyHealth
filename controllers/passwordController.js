@@ -25,10 +25,14 @@ exports.postForgotPassword = (req, res) => {
 		}
 	});
 
-	const { email } = req.body;
+	const {
+		email
+	} = req.body;
 	let errors = [];
 	if (!email) {
-		errors.push({ msg: 'Please enter email id' });
+		errors.push({
+			msg: 'Please enter email id'
+		});
 	}
 	if (errors.length > 0) {
 		res.render('forgotPassword', {
@@ -50,7 +54,9 @@ exports.postForgotPassword = (req, res) => {
 				console.log(`--------- forgot page executed sucessfully`);
 				res.redirect('validationPage');
 			} else {
-				errors.push({ msg: 'Email id not registered' });
+				errors.push({
+					msg: 'Email id not registered'
+				});
 				res.render('forgotPassword', {
 					layout: 'layouts/mainLayout',
 					title: 'Forgot Password',
@@ -73,7 +79,10 @@ exports.getResetPassword = (req, res) => {
 
 	const userId = req.session.userId;
 	console.log(`under get reset password ${userId}`);
-	res.render('resetPassword', { layout: 'layouts/mainLayout', title: 'Reset Password' });
+	res.render('resetPassword', {
+		layout: 'layouts/mainLayout',
+		title: 'Reset Password'
+	});
 };
 
 exports.postResetPassword = async (req, res) => {
@@ -87,19 +96,30 @@ exports.postResetPassword = async (req, res) => {
 
 	// console.log(req.body, "================> POSTTING RESET PASSWORD")
 	const userId = req.session.userId;
-	const { password, password2 } = req.body;
+	const {
+		password,
+		password2
+	} = req.body;
 	let errors = [];
 	let success_msg;
 	if (!password || !password2) {
-		errors.push({ msg: 'Please enter all fields' });
+		errors.push({
+			msg: 'Please enter all fields'
+		});
 	} else {
 		if (password.length > 15) {
-			errors.push({ msg: 'Password must be below 15 characters' });
+			errors.push({
+				msg: 'Password must be below 15 characters'
+			});
 		} else if (password.length < 8) {
-			errors.push({ msg: 'Password must be at least 8 characters' });
+			errors.push({
+				msg: 'Password must be at least 8 characters'
+			});
 		}
 		if (password != password2) {
-			errors.push({ msg: 'Passwords not matched' });
+			errors.push({
+				msg: 'Passwords not matched'
+			});
 		}
 	}
 
@@ -132,7 +152,9 @@ exports.postResetPassword = async (req, res) => {
 
 const nodemailer = require('nodemailer');
 const sgMail = require('@sendgrid/mail');
-const { response } = require('express');
+const {
+	response
+} = require('express');
 
 // const { google } = require('googleapis');
 
@@ -212,7 +234,10 @@ exports.getValidation = (req, res) => {
 			generateCode = Math.floor((Math.random() + 1) * 100000);
 			console.log(`Generated code: ${generateCode}`);
 			sendEmail(userEmail, generateCode);
-			res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
+			res.render('validationPage', {
+				layout: 'layouts/mainLayout',
+				title: 'Validation User'
+			});
 			conn.release();
 		}
 	});
@@ -237,12 +262,19 @@ exports.postValidation = (req, res) => {
 				generateCode = Math.floor((Math.random() + 1) * 100000);
 				console.log(`Generated code: ${generateCode}`);
 				sendEmail(userEmail, generateCode);
-				res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
+				res.render('validationPage', {
+					layout: 'layouts/mainLayout',
+					title: 'Validation User'
+				});
 			} else {
 				if (!code) {
-					errors.push({ msg: 'Enter verification code' });
+					errors.push({
+						msg: 'Enter verification code'
+					});
 				} else if (code != generateCode) {
-					errors.push({ msg: 'Invalid verification code' });
+					errors.push({
+						msg: 'Invalid verification code'
+					});
 				}
 				if (errors.length > 0) {
 					res.render('validationPage', {

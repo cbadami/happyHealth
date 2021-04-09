@@ -22,7 +22,12 @@ exports.postSignup = (req, res) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-			const { username, email, password, password2 } = req.body;
+			const {
+				username,
+				email,
+				password,
+				password2
+			} = req.body;
 			let errors = [];
 			let success_msg;
 			if (!username || !email || !password || !password2) {
