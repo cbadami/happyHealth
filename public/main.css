@@ -2416,6 +2416,9 @@ pre code {
     .app-header .app-header__menu ul.header-menu.nav {
         flex-wrap: nowrap;
     }
+    .app-header .app-header__menu ul.header-menu.nav .nav-item p{
+        margin: 0;
+    }
     .table-responsive-lg {
         display: block;
         width: 100%;
@@ -11211,12 +11214,16 @@ button,
     color: #6c757d
 }
 
-.app-header .app-header__content .header-menu .nav-link i {
-    color: #adb5bd
-}
+.app-header .app-header__content .header-menu .nav-link {
+    color: #6c757d
+} 
 
 .app-header .app-header__content .header-menu .nav-link:hover {
     color: #212529
+}
+
+.app-header .app-header__content .header-menu .nav-item p {
+    margin: 0;
 }
 
 .app-header .app-header__content .app-header-right {
@@ -19947,6 +19954,8 @@ a.fc-more:hover {
         display: flex;
         order: 3
     }
+
+
 
     .app-header.header-text-light .app-header__menu>span .btn,
     .app-header.header-text-light .app-header__menu>.btn {
