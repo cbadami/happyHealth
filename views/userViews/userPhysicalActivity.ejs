@@ -83,6 +83,18 @@
                 value="<%= typeof physicalActivityGoal != 'undefined' ? physicalActivityGoal : '' %>"
               />
             </div>
+            <div class="form-group">
+              <label for="comments">Comments</label>
+              <input
+                type="text"
+                value="<%= typeof comments != 'undefined' ? comments : '' %>"
+                class="form-control"
+                id="comments"
+                aria-describedby="userNameHelp"
+                placeholder="Enter your comments"
+                name="comments"
+              />
+            </div>
             <div class="form-row"></div>
 
             <div class="form-row">
