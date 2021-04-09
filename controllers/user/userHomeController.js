@@ -8,7 +8,7 @@ const {
 
 let currentDate = moment(new Date()).format('L').toString();
 console.log(currentDate);
-const yesterday = new Date(today).toDateString();
+
 
 exports.getUserHome = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
@@ -136,6 +136,7 @@ exports.getUserStep = (req, res) => {
 		} else {
 			let userId = req.session.userId;
 			const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${currentDate}' `;
+			//const previousStepsQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${yesterday}' `;
 			conn.query(stetpQuery, function (err, result) {
 				if (err) {
 					console.log(err);
@@ -145,12 +146,22 @@ exports.getUserStep = (req, res) => {
 						stepCount,
 						stepGoal
 					} = result[0];
-					res.render('userViews/userStep', {
-						layout: 'layouts/userLayout',
-						title: 'User Step',
-						stepCount,
-						stepGoal,
-					});
+					if (stepCount != 0) {
+						res.render('userViews/userStep', {
+							layout: 'layouts/userLayout',
+							title: 'User Step',
+							stepCount,
+							stepGoal,
+						});
+					} else {
+						res.render('userViews/userStep', {
+							layout: 'layouts/userLayout',
+							title: 'User Step',
+							stepCount,
+							stepGoal,
+						});
+					}
+
 				}
 			});
 			conn.release();
