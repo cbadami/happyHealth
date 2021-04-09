@@ -19,7 +19,7 @@ exports.getUserHome = (req, res) => {
 				if (err) {
 					console.log(err);
 				} else {
-					if (!result) {
+					if (!result[0]) {
 						let insertQuery = `Insert into happyhealth.usermetricstbl(userId,date) values(${userId},'${currentDate}');`;
 						conn.query(insertQuery, function (err, result) {
 							if (err) {
@@ -29,7 +29,7 @@ exports.getUserHome = (req, res) => {
 								if (err) {
 									console.log(err, "_--------------aftere inseting select result");
 								}
-								console.log(result[0], '--------db userMetrics table result');
+								console.log(result[0], '--------db userMetrics table after inserting result');
 								const {
 									stepCount,
 									sleepHours,
@@ -666,7 +666,7 @@ exports.resetUserMetrics = async (req, res) => {
 
 							console.log(usersList, '============================> user list');
 
-							let getRecentMetrics = `SELECT * FROM usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
+							let getRecentMetrics = `SELECT * FROM happyhealth.usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
 							conn.query(getRecentMetrics, (err2, result2) => {
 								if (err2) throw err;
 								else {
@@ -728,6 +728,7 @@ exports.resetUserMetrics = async (req, res) => {
 
 exports.updateUserMetricGoals = (req, res) => {
 	console.log('================================updating metrics');
+	console.log(currentDate,"----------current Dater")
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -751,7 +752,7 @@ exports.updateUserMetricGoals = (req, res) => {
 					}
 				});
 
-				let usersQuery = `SELECT GROUP_CONCAT(userId) as users FROM happyhealth.usertbl ;`;
+				let usersQuery = `SELECT GROUP_CONCAT(userId) as users FROM happyhealth.usertbl;`;
 				conn.query(usersQuery, (err, result) => {
 					if (err) {
 						console.log(err, '=======> error while searching users.');
@@ -761,9 +762,12 @@ exports.updateUserMetricGoals = (req, res) => {
 
 						console.log(usersList, '============================> user list');
 
-						let getRecentMetrics = `SELECT * FROM usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
+						let getRecentMetrics = `SELECT * FROM happyhealth.usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
+						//let getRecentMetrics = `SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));`
 						conn.query(getRecentMetrics, (err2, result2) => {
-							if (err2) throw err;
+							if (err2){
+								console.log(err2,"--------------------error while getting recent metrics")
+							}
 							else {
 								console.log(result2.length, '======> result2');
 

@@ -149,13 +149,23 @@ exports.getAdminAnalytics = (req, res) => {
 
 exports.download = (req, res) => {
 
-    let query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal, usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal, usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where DAY(STR_TO_DATE(usermetricstbl.date, '%m/%d/%y')) = DAY(curdate());`;
+    console.log("****************download controller *********************")
+    let currentDate = new Date().toLocaleDateString();
+    console.log(currentDate,"-------current date");
+
+    let [ m,d,y] = currentDate.split("/");
+    m = m.length == 1 ? "0"+m:m;
+    d = d.length == 1 ? "0"+d:d;
+    currentDate = [m,d,y].join('/');
+    console.log(currentDate,"---------cuurent date after formation");
+
+    let query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal, usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal, usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where usermetricstbl.date='${currentDate}';`;
 
 
     pooldb.getConnection((err, conn) => {
 
         if (err) {
-            console.log(err, "----Error in connecting to databse");
+            console.log(err, "----------------Error in connecting to databse");
             return;
         }
 
@@ -163,11 +173,16 @@ exports.download = (req, res) => {
 
             conn.release();
             if (err) {
-                console.log(err, "----Error in querying to databse");
+                console.log(err, "-------------------Error in querying to databse");
                 return;
             };
 
-            console.log(result, "------result");
+            console.log(result, "-----------------------result");
+            if(result.length==0){
+                console.log("****************No data**************");
+                res.status(200).json({message: "No data"})
+                return;
+            }
 
             let userMetrics = [];
             result.forEach((r) => {

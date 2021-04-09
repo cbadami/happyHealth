@@ -81,8 +81,8 @@ exports.postSignup = (req, res) => {
 			const hashPassword = await bcrypt.hash(password, 12);
 
 			console.log(hashPassword, '--------hashpassword');
-			const insertQuery = `INSERT INTO  happyhealth.usertbl(userName,password,email) values(
-				'${username}','${hashPassword}','${email}');`;
+			const insertQuery = `INSERT INTO  happyhealth.usertbl(userName,password,email,admin) values(
+				'${username}','${hashPassword}','${email}','No');`;
 
 			conn.query(insertQuery, function (err, result) {
 				if (err) {
