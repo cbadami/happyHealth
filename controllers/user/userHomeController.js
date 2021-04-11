@@ -3,17 +3,18 @@ const pooldb = require('../../pooldb');
 const moment = require('moment');
 const cron = require('node-cron');
 
-let currentDate = new Date().toLocaleDateString();
-console.log(currentDate,"-------current date");
+// let currentDate = new Date().toLocaleDateString();
+// console.log(currentDate,"-------current date");
 
-let [ m,d,y] = currentDate.split("/");
-m = m.length == 1 ? "0"+m:m;
-d = d.length == 1 ? "0"+d:d;
-currentDate = [m,d,y].join('/');
-console.log(currentDate,"---------cuurent date after formation");
-let nd = parseInt(d)+1;
-let upcomingDate = [m,nd,y].join('/');
-console.log(upcomingDate , "========> next date")
+// let [ m,d,y] = currentDate.split("/");
+// m = m.length == 1 ? "0"+m:m;
+// d = d.length == 1 ? "0"+d:d;
+// currentDate = [m,d,y].join('/');
+// console.log(currentDate,"---------cuurent date after formation");
+
+let currentDate = moment().tz("America/Chicago").format('L');
+let upcomingDate  = moment().tz("America/Chicago").add(1,'days').format('L'); 
+console.log(currentDate, upcomingDate, "============> currentDate and NextDate")
 
 exports.getUserHome = (req, res) => {
 
