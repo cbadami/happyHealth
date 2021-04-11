@@ -11,6 +11,9 @@ m = m.length == 1 ? "0"+m:m;
 d = d.length == 1 ? "0"+d:d;
 currentDate = [m,d,y].join('/');
 console.log(currentDate,"---------cuurent date after formation");
+let nd = parseInt(d)+1;
+let upcomingDate = [m,nd,y].join('/');
+console.log(upcomingDate , "========> next date")
 
 exports.getUserHome = (req, res) => {
 
@@ -825,7 +828,7 @@ exports.updateUserMetricGoals = (req, res) => {
 										veggieGoal,
 										physicalActivityGoal
 									);
-									values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
+									values += `(${userId},"${upcomingDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
 								}
 								values = values.slice(0, -1);
 								// console.log(values,"====> values")
