@@ -407,17 +407,30 @@
   $('#country').val(country)
   // let age="Age";
 
-  function calAge() {
-    console.log(Date.parse(document.getElementById("dateText").value))
-    let dob = Date.parse(document.getElementById("dateText").value)
+//   function XcalAge() {
+//     console.log(Date.parse(document.getElementById("dateText").value))
+//     let dob = Date.parse(document.getElementById("dateText").value)
+// 	console.log(dob,"==> dob")
 
-    let diff = Date.now() - dob;
-    var ageDate = new Date(diff); // milliseconds from epoch
-    age = Math.abs(ageDate.getUTCFullYear() - 1970)
-    console.log(age);
-    document.getElementById("age").value = age
-    return age
-  }
+//     let diff = Date.now() - dob;
+//     var ageDate = new Date(diff); // milliseconds from epoch
+//     age = Math.abs(ageDate.getUTCFullYear() - 1970)
+//     console.log(age);
+//     document.getElementById("age").value = age
+//     return age
+//   }
+
+  function calAge() {		
+		let dob = document.getElementById("dateText").value		
+		var today = new Date();
+		var birthDate = new Date(dob)
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		document.getElementById("age").value = age
+	}
 
   function message() {
     alert("User Details Updated")
