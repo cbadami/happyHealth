@@ -8,31 +8,30 @@
               <h2 class="d-flex justify-content-center" ; style="color:green;"> Welcome User!</h2>
               <%- include ('../partials/messages') %>
             </div>
+            
             <div class="form-row">
               <label for="username">Username</label>
               <input type="text" id="username" name="username" class="form-control" placeholder="Username"
                 value="<%= typeof username != 'undefined' ? username : '' %>" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" placeholder="Password" id="pwd" class="masked" name="password"  
+              value="<%= typeof password != 'undefined' ? password : '' %>" />
 
 
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" placeholder="Password" id="pwd" class="masked" name="password"  
-                  value="<%= typeof password != 'undefined' ? password : '' %>" />
-    
-    
-                  <!-- <input id="pass_log_id" type="password" class="form-control" name="pass" value="<%= typeof password != 'undefined' ? password : '' %>">
-                <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="padding-left: 25em;"></span>
-                 -->
-                  <!-- <input type="password" id="password" name="password" class="form-control" placeholder="**************"
-                    value="<%= typeof password != 'undefined' ? password : '' %>" />
-                    <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span> -->
-                  
-                    
-                     <!-- <input type="password" id="passwd" name="passwd">
-                     <i class="fa fa-eye showpwd" onClick="showPwd('passwd', this)">   </i> -->
-    
-                </div>
-           
+              <!-- <input id="pass_log_id" type="password" class="form-control" name="pass" value="<%= typeof password != 'undefined' ? password : '' %>">
+            <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="padding-left: 25em;"></span>
+             -->
+              <!-- <input type="password" id="password" name="password" class="form-control" placeholder="**************"
+                value="<%= typeof password != 'undefined' ? password : '' %>" />
+                <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span> -->
+              
+                
+                 <!-- <input type="password" id="passwd" name="passwd">
+                 <i class="fa fa-eye showpwd" onClick="showPwd('passwd', this)">   </i> -->
+
+            </div>
             <div class="form-row justify-content-end">
               <a class="my-2" href="/forgotPassword">Forgot password?</a>
             </div>
@@ -56,14 +55,18 @@
   </section>
 </div>
 
-<script>
-  $(document).ready(function () {
-   $("#eye").click(function () {
-       if ($("#password").attr("type") === "password") {
-           $("#password").attr("type", "text");
-       } else {
-           $("#password").attr("type", "password");
-       }
-   });
+
+
+ <script>
+   $(document).ready(function () {
+    $("#eye").click(function () {
+        if ($("#password").attr("type") === "password") {
+            $("#password").attr("type", "text");
+        } else {
+            $("#password").attr("type", "password");
+        }
+    });
 });
-</script>
+ </script>
+
+ 
