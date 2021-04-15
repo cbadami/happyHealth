@@ -130,7 +130,10 @@
                 </div>
             </div>
             <div class="app-header__menu">
-                <ul class="header-menu nav">
+                <ul class="header-menu nav align-items-center"">
+                    <li class="nav-item" title="Profile">
+                        <p><%= userName %></p>
+                    </li>
                     <li class="nav-item">
                         <a href="/adminInfo" class="nav-link">
                             <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
@@ -152,8 +155,11 @@
                 <div class="app-header-center h2">
                     FitNest
                 </div>
-                <div class="app-header-right">
-                    <ul class="header-menu nav">
+                <div class="app-header-right ">
+                    <ul class="header-menu nav align-items-center"">
+                        <li class="nav-item" title="Profile">
+                            <p><%= userName %></p>
+                        </li>
                         <li class="nav-item">
                             <a href="/adminInfo" class="nav-link">
                                 <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>

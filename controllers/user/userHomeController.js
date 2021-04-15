@@ -18,6 +18,7 @@ console.log(currentDate, upcomingDate, "============> currentDate and NextDate")
 
 exports.getUserHome = (req, res) => {
 
+
 	console.log("**************GET USER HOME CONTROLLER*****************")
 	console.log(currentDate,"---------------------------current date");
 	pooldb.getConnection((err1, conn) => {
