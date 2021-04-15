@@ -11,12 +11,12 @@
             
             <div class="form-row">
               <label for="username">Username</label>
-              <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+              <input type="text" id="username" name="username" min ="6" class="form-control" placeholder="Username"
                 value="<%= typeof username != 'undefined' ? username : '' %>" />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" placeholder="Password" id="pwd" class="masked" name="password"  
+              <input type="password" class="form-control" placeholder="Password" id="pwd" min ="8" class="masked" name="password"  
               value="<%= typeof password != 'undefined' ? password : '' %>" />
 
 
