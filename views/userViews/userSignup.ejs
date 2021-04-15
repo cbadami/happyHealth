@@ -12,33 +12,43 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" id="name" name="username" pattern="[a-zA-Z0-9]+" class="form-control" placeholder="Username"
-                                aria-describedby="emailHelp"
-                                value="<%= typeof username != 'undefined' ? username : '' %>" title="Username should be alphanumeric" minlength="6" maxlength="12" required/>
+                            <input type="text" id="name" name="username" pattern="[a-zA-Z0-9]+" class="form-control"
+                                placeholder="Username" aria-describedby="emailHelp"
+                                value="<%= typeof username != 'undefined' ? username : '' %>"
+                                title="Username should be alphanumeric" minlength="6" maxlength="12" required />
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control" placeholder="Email id"
-                                aria-describedby="emailHelp" value="<%= typeof email != 'undefined' ? email : '' %>" maxlength="50" required/>
+                                aria-describedby="emailHelp" value="<%= typeof email != 'undefined' ? email : '' %>"
+                                maxlength="50" required />
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" class="form-control"
                                 placeholder="***************"
-                                value="<%= typeof password != 'undefined' ? password : '' %>" minlength="8" maxlength="15"required/>
+                                value="<%= typeof password != 'undefined' ? password : '' %>" minlength="8"
+                                maxlength="15"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="At least one uppercase letter, one lowercase letter, one number and one special character"
+                                required />
                         </div>
                         <div class="form-group">
                             <label for="password2">Confirm Password</label>
                             <input type="password" id="password2" name="password2" class="form-control"
                                 placeholder="***************"
-                                value="<%= typeof password2 != 'undefined' ? password2 : '' %>"minlength="8" maxlength="15" required/>
+                                value="<%= typeof password2 != 'undefined' ? password2 : '' %>" minlength="8"
+                                maxlength="15"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="At least one uppercase letter, one lowercase letter, one number and one special character"
+                                onkeyup='check();' required />
                         </div>
                         <div class="form-group">
                             <p>You already have an account? <a href="/">Sign In! </a> </p>
 
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button type="submit" id="btnSignUp" class="btn btn-primary btn-block">Register</button>
                         </div>
                     </form>
                 </div>
@@ -46,3 +56,22 @@
         </div>
     </section>
 </div>
+<script>
+    function check(){
+        console.log("****Check up Function******")
+        if (document.getElementById('password').value !==
+          document.getElementById('password2').value){
+              console.log("Inside if password check");
+            document.getElementById('password2').title="Password Not matched"
+            $("#btnSignUp").attr("disabled", "disabled");
+            $('#btnSignUp').css('cursor', 'not-allowed');
+          }else{
+            console.log("else if password check");
+            $("#btnSignUp").removeAttr("disabled");
+            $('#btnSignUp').css('cursor', 'pointer');
+          }
+
+          console.log("********end checkup function")
+
+    }
+</script>
