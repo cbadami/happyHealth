@@ -143,37 +143,40 @@ exports.getUserStep = (req, res) => {
 
 exports.postUserStep = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
-		if (err1) {
-			console.log(err1, '=====> error occured');
-		} else {
-			const userId = req.session.userId;
-			const { stepCount, stepGoal } = req.body;
-			let errors = [];
-
-			if (!stepCount || !stepGoal) {
-				console.log(`inside if statement ${stepCount}, `);
-				errors.push('Please enter all fields');
-				console.log(errors, '----------------errros');
-				res.render('userViews/userStep', {
-					layout: 'layouts/userLayout',
-					title: 'User Step',
-					errors,
-				});
-				return;
-			}
-
-			var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${stepGoal} WHERE userId = ${userId} and date = '${currentDate}' `;
-			conn.query(stepQuery, function (err, result) {
-				if (err) {
-					console.log(err);
-				} else {
-					res.redirect('/home');
-				}
+	if (err1) {
+		console.log(err1, '=====> error occured');
+	} else {
+		const userId = req.session.userId;
+		const { stepCount, stepGoal,datepicker1 } = req.body;
+		let errors = [];
+		var newdate= (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' +  datepicker1.split('-')[0];
+		console.log(newdate+"-----new")
+		if (!stepCount || !stepGoal ||!datepicker1) {
+			console.log(`inside if statement ${stepCount}, `);
+			errors.push('Please enter all fields');
+			console.log(errors, '----------------errros');
+			res.render('userViews/userStep', {
+				layout: 'layouts/userLayout',
+				title: 'User Step',
+				errors,
 			});
-			conn.release();
+			return;
 		}
-	});
+		console.log(datepicker1)
+		var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${stepGoal} WHERE userId = ${userId} and date = '${newdate}' `;
+		console.log(stepQuery)
+		conn.query(stepQuery, function (err, result) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.redirect('/home');
+			}
+		});
+		conn.release();
+	}
+});
 };
+
 
 exports.getUserSleep = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
