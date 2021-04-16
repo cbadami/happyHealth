@@ -12,7 +12,7 @@
 		  <input  class="form-control"  id="message" type="text" name="description" required>
 		</div>
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 		<label for="selectUsers" >  </label>
 		<select id="users"  name="type" type="number" class="mul-select col-md-12" multiple="true">
 			<% users.map(user=> { %>
@@ -20,18 +20,47 @@
 				</option>
 				<% }) %>
 		</select>
+		</div> -->
+
+		<div class="form-group">
+			<label for="selectUsers" >  </label>
+		<select name="users" id="users" type="number" class="select form-control mul-select col-md-12"   MULTIPLE size="4">
+			<option selected disabled value="---">---</option>
+			<% users.map(user=> { %>
+				<option id="UI" value="<%= user.userId %>">  <%= user.userName %>
+				</option>
+				<% }) %>
+		 </select>
+		 </div>
+		 <br />
+		 <!-- <input type="button" id="select_all" name="select_all" value="Select All"> -->
+
+		
+		<div class="btn-toolbar">
+			<input type="submit" id="select_all" name="select_all" value="Send to Everyone"
+			class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+			<input type="submit" id="select_indi" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger"></input>
+		</div>
+
+
+		<div class="form-group">
+			<label for="selectUsers" >  </label>
+			<select id="challenges"  name="challenge" type="number" class="mul-select col-md-12" multiple="true">
+				<% challenges.map(challenge=> { %>
+					<option id="UI" value="<%= challenge.challengeId %>">  <%= challenge.challengeName %>
+					</option>
+					<% }) %>
+			</select>
 		</div>
 
 		<div class="btn-toolbar">
+			<input type="submit" id="select_all_groups" name="select_all_groups" value="Send to All Groups "
+				class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+			<input type="submit" id="PopoverCustomT-1" value="Send Selected Groups" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+		</div>
 
-			<input type="submit" id="PopoverCustomT-1"  onClick="selectAll()" value="Send to Everyone"
-			class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
-			<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
 
-
-			<!-- <button type="button" id="btnSubmit" class="btn btn-primary btn-sm">Submit</button>
-			<button type="button" id="btnCancel" class="btn btn-primary btn-sm">Cancel</button> -->
-		  </div>
+			
 
 	</form>
 
@@ -129,17 +158,26 @@
     return false;
 });
 
+$('#select_all').click(function() {
+$('#users option').prop('selected', true);
+});
 
-function selectAll()
-    {
-    	options = document.getElementsByTagName("option");
-    	for ( i=0; i<options.length; i++)
-    	{
-    		options[i].selected = "true";
-    	}
+$('#select_all_groups').click(function() {
+$('#challenges option').prop('selected', true);
+});
 
-		document.getElementById()
-    }
+$(document).ready(function () {
+    $('#select_indi').click(function() {
+      check = $('option[disabled]:selected').length;
+      if(check == 3) {
+        alert("You must select an option from at least one dropdown");
+        return false;
+      }
+
+    });
+});
+
+
 
 
 </script>
