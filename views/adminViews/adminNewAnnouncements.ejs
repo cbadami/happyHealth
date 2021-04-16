@@ -24,7 +24,7 @@
 
 		<div class="btn-toolbar">
 
-			<input type="submit" id="PopoverCustomT-1" name="type" value="Send to Everyone"
+			<input type="submit" id="PopoverCustomT-1"  onClick="selectAll()" value="Send to Everyone"
 			class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
 			<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
 
@@ -128,6 +128,18 @@
     
     return false;
 });
+
+
+function selectAll()
+    {
+    	options = document.getElementsByTagName("option");
+    	for ( i=0; i<options.length; i++)
+    	{
+    		options[i].selected = "true";
+    	}
+
+		document.getElementById()
+    }
 
 
 </script>

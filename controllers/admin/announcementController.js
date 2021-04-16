@@ -108,7 +108,7 @@ exports.getAdminNewAnnouncements = (req, res) => {
 				} else {
 					console.log(result, '=======> users result');
 					users = result;
-					res.render('adminViews/adminNewAnnouncements', { layout: 'layouts/adminLayout',title: 'Announcements', users });
+					res.render('adminViews/adminNewAnnouncements', { layout: 'layouts/adminLayout', title: 'Announcements', users });
 				}
 			});
 
@@ -161,57 +161,73 @@ exports.postAnnouncement = (req, res) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-			
+
 			console.log(req.body, 'posted announcement');
 
 			let title = req.body.title;
 			let description = req.body.description;
 			let postedDate = moment(new Date()).format('L');
-
-			if(req.body.type === 'Post to Everyone'){
-				let usersQuery = `SELECT GROUP_CONCAT(userId) as users FROM happyhealth.usertbl ;`;
-				conn.query(usersQuery, (err, result) => {
-					if (err) {
-						console.log(err, '=======> error while searching users.');
-					} else {
-						console.log(result[0].users, '=====> found users.');
-						let usersList = result[0].users;
-
-						console.log(result, '============================> user list')
-	
-						let postAnn = `INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES ("${title}", "${description}", "${usersList}", '${postedDate}', 0)`;
-						
-						conn.query(postAnn, (err, result) => {
-							if (err) {
-								console.log(err, '======> error while sending');
-							} else {
-								console.log(result, '========> posted annoncement');
-							}
-						});
-					}
-				});
-				res.redirect('/adminAnnouncements');
-	
-			}else{
-				console.log(req.body.type, "============> posting individual announcemnt");
-
-				const usersList = req.body.type.toString();
-
-				let postAnn = `INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES ("${title}", "${description}", "${usersList}", '${postedDate}', 0)`;
-				conn.query(postAnn, (err, result) => {
-					if (err) {
-						console.log(err, '======> error while sending');
-					} else {
-						console.log(result, '========> posted annoncement');
-					}
-				});
-
-				res.redirect('/adminAnnouncements');
-			}
-
-
-
+			// console.log(req.body.type, "============> Type announcemnt");
 			
+			const usersList = req.body.type.toString();
+			let postAnn = `INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES ("${title}", "${description}", "${usersList}", '${postedDate}', 0)`;
+
+			conn.query(postAnn, (err, result) => {
+				if (err) {
+					console.log(err, '======> error while sending');
+				} else {
+					console.log(result, '========> posted annoncement');
+				}
+			});
+
+			res.redirect('/adminAnnouncements');
+
+			// if(req.body.type === 'Send to Everyone'){
+			// 	console.log(req.body.type, "============> posting group announcemnt");
+
+			// 	// let usersQuery = `SELECT GROUP_CONCAT(userId) as users FROM happyhealth.usertbl ;`;
+			// 	// conn.query(usersQuery, (err, result) => {
+			// 	// 	if (err) {
+			// 	// 		console.log(err, '=======> error while searching users.');
+			// 	// 	} else {
+			// 	// 		console.log(result[0].users, '=====> found users.');
+			// 	// 		let usersList = result[0].users;
+
+			// 	// 		console.log(result, '============================> user list')
+
+			// 	// 		let postAnn = `INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES ("${title}", "${description}", "${usersList}", '${postedDate}', 0)`;
+
+			// 	// 		conn.query(postAnn, (err, result) => {
+			// 	// 			if (err) {
+			// 	// 				console.log(err, '======> error while sending');
+			// 	// 			} else {
+			// 	// 				console.log(result, '========> posted annoncement');
+			// 	// 			}
+			// 	// 		});
+			// 	// 	}
+			// 	// });
+			// 	res.redirect('/adminAnnouncements');
+
+			// }else{
+			// 	console.log(req.body.type, "============> posting individual announcemnt");
+
+			// 	// const usersList = req.body.type.toString();
+
+			// 	// let postAnn = `INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES ("${title}", "${description}", "${usersList}", '${postedDate}', 0)`;
+			// 	// conn.query(postAnn, (err, result) => {
+			// 	// 	if (err) {
+			// 	// 		console.log(err, '======> error while sending');
+			// 	// 	} else {
+			// 	// 		console.log(result, '========> posted annoncement');
+			// 	// 	}
+			// 	// });
+
+			// 	res.redirect('/adminAnnouncements');
+			// }
+
+
+
+
 			conn.release();
 		}
 	});
