@@ -1,10 +1,11 @@
 module.exports.isAuth = (req, res, next) => {
-    console.log(JSON.stringify(req.path), "--------User Auth path");
-    console.log(JSON.stringify(req.session), "--------User session");
+    console.log(JSON.stringify(req.path), "---------------User Auth path");
+    console.log(JSON.stringify(req.session), "------------------User session");
     if (!req.session.isLoggedIn) {
         res.redirect('/');
         return;
     }
+    res.locals.userName = req.session.userName
     next();
 };
 

@@ -35,21 +35,12 @@ exports.postSignup = (req, res) => {
 					msg: 'Please enter all fields',
 				});
 			} else {
-				if (username.length > 12) {
+				if (username.length > 12 || username.length < 6) {
 					errors.push({
 						msg: 'Username must be between 6 and 12 characters',
 					});
-				} else if (username.length < 6) {
-					errors.push({
-						msg: 'Username must be between 6 and 12 characters',
-					});
-				}
-
-				if (password.length > 15) {
-					errors.push({
-						msg: 'Password must be between 8 and 15 characters',
-					});
-				} else if (password.length < 8) {
+				} 
+				if (password.length > 15 || password.length < 8) {
 					errors.push({
 						msg: 'Password must be between 8 and 15 characters',
 					});

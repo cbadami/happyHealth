@@ -81,6 +81,7 @@ exports.postUserLogin = async (req, res) => {
 						if (result.length > 0) {
 							const validPassword = await bcrypt.compare(password, result[0]['password']);
 							if (validPassword) {
+								req.session.userName = result[0]['userName'];
 								req.session.userId = result[0]['userId'];
 								req.session.isLoggedIn = true;
 								res.redirect('home');
@@ -170,6 +171,7 @@ exports.postAdminLogin = async (req, res) => {
 
 							if (validPassword) {
 								const userId = result[0]['userId'];
+								req.session.userName = result[0]['userName'];
 								req.session.userId = userId;
 								req.session.isLoggedIn = true;
 								req.session.isAdmin = true;

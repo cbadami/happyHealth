@@ -9,8 +9,10 @@
               <h2 class="d-flex justify-content-center py-3">Step Count</h2>
             </div>
             <div class="form-row">
-              <label for="dateText"> &nbsp; </label>
+              <label for="dateText"> Date</label>
               <p id="demo"></p>
+              <input type="date" class="date form-control" id="datepicker1" name="datepicker1"
+                            placeholder="mm/dd/yyyy" min='1899-01-01' max='2000-13-13'>
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
             <div class="form-row">
@@ -63,4 +65,18 @@
   function myFunction() {
     alert("Updated Step Count Successfully");
   }
+
+  var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("datepicker1").setAttribute("max", today);
 </script>
