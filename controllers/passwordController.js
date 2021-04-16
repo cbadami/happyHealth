@@ -22,50 +22,51 @@ exports.postForgotPassword = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			conn.release();
-		}
-	});
-
-	const {
-		email
-	} = req.body;
-	let errors = [];
-	if (!email) {
-		errors.push({
-			msg: 'Please enter email id'
-		});
-	}
-	if (errors.length > 0) {
-		res.render('forgotPassword', {
-			layout: 'layouts/mainLayout',
-			title: 'Forgot Password',
-			errors,
-			email,
-		});
-	} else {
-		const queryString = `SELECT * FROM happyhealth.usertbl WHERE email = '${email}' Limit 1 `;
-		conn.query(queryString, function (err, result) {
-			console.log(`forgot password ${JSON.stringify(result)}`);
-			if (result.length > 0) {
-				console.log(`under forgot password page ${JSON.stringify(result[0].email)}`);
-				const userId = result[0]['userId'];
-				const userEmail = result[0]['email'];
-				req.session.userId = userId;
-				req.session.userEmail = userEmail;
-				console.log(`--------- forgot page executed sucessfully`);
-				res.redirect('validationPage');
-			} else {
+			const {
+				email
+			} = req.body;
+			let errors = [];
+			if (!email) {
 				errors.push({
-					msg: 'Email id not registered'
+					msg: 'Please enter email id'
 				});
+			}
+			if (errors.length > 0) {
 				res.render('forgotPassword', {
 					layout: 'layouts/mainLayout',
 					title: 'Forgot Password',
 					errors,
 					email,
 				});
+			} else {
+				const queryString = `SELECT * FROM happyhealth.usertbl WHERE email = '${email}' Limit 1 `;
+				conn.query(queryString, function (err, result) {
+					console.log(`forgot password ${JSON.stringify(result)}`);
+					if (result.length > 0) {
+						console.log(`under forgot password page ${JSON.stringify(result[0].email)}`);
+						const userId = result[0]['userId'];
+						const userEmail = result[0]['email'];
+						req.session.userId = userId;
+						req.session.userEmail = userEmail;
+						console.log(`--------- forgot page executed sucessfully`);
+						res.redirect('validationPage');
+					} else {
+						errors.push({
+							msg: 'Email id not registered'
+						});
+						res.render('forgotPassword', {
+							layout: 'layouts/mainLayout',
+							title: 'Forgot Password',
+							errors,
+							email,
+						});
+					}
+				});
 			}
-		});
-	}
+		}
+	});
+
+	
 };
 
 exports.getResetPassword = (req, res) => {
@@ -74,27 +75,26 @@ exports.getResetPassword = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			conn.release();
+			const userId = req.session.userId;
+			console.log(`under get reset password ${userId}`);
+			res.render('resetPassword', {
+				layout: 'layouts/mainLayout',
+				title: 'Reset Password'
+			});
+		
 		}
 	});
 
-	const userId = req.session.userId;
-	console.log(`under get reset password ${userId}`);
-	res.render('resetPassword', {
-		layout: 'layouts/mainLayout',
-		title: 'Reset Password'
-	});
 };
 
-exports.postResetPassword = async (req, res) => {
-	pooldb.getConnection((err1, conn) => {
+exports.postResetPassword =  (req, res) => {
+	pooldb.getConnection( async (err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
 			conn.release();
-		}
-	});
 
-	// console.log(req.body, "================> POSTTING RESET PASSWORD")
+				// console.log(req.body, "================> POSTTING RESET PASSWORD")
 	const userId = req.session.userId;
 	const {
 		password,
@@ -148,6 +148,10 @@ exports.postResetPassword = async (req, res) => {
 			res.redirect('/');
 		});
 	}
+
+		}
+	});
+
 };
 
 const nodemailer = require('nodemailer');
@@ -201,12 +205,11 @@ const {
 // }
 
 async function sendEmail(userEmail, generateCode) {
-	console.log(API_KEY, '=============> API KEY ..........');
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 	const message = {
 		to: userEmail,
-		from: 'fitnestgdp@gmail.com',
+		from: 'fitnestgdp@outlook.com',
 		subject: 'Happy Health reset account',
 		text: `OTP to reset your account: ${generateCode} `,
 		html: `<p> Your OTP to reset your account:  ${generateCode}</p>`,
