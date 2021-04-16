@@ -1,7 +1,10 @@
 const db = require('../../database');
 const pooldb = require('../../pooldb');
+const moment = require('moment');
 
 exports.getUserInfo = (req, res) => {
+	currentDate = moment().tz('America/Chicago').format('L');
+
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -16,13 +19,26 @@ exports.getUserInfo = (req, res) => {
 				if (err) {
 					throw err;
 				} else {
-					console.log(result);
+					console.log(result[0]);
+					let { userId } = result[0];
+					let userGoals = `SELECT * FROM happyhealth.usermetricstbl where userId = ${userId} and date = "04/13/2021";`;
+					conn.query(userGoals, function (err, result2) {
+						if (err) {
+							console.log(err, '========> Errrrrr');
+						} else {
+							console.log(result2[0], '========> resssssssssss');
+							
+							let goal = result2[0];
 					res.render('userViews/userInfo', {
 						layout: 'layouts/userLayout',
 						title: 'User Profile',
 						result,
+						goal
 					});
 					console.log('****user Info executed successfully****');
+						}
+					});
+
 				}
 			});
 			conn.release();
@@ -56,7 +72,7 @@ exports.getUserProfile = (req, res) => {
 						country,
 						state,
 					} = result[0];
-					let [firstName, lastName] = fullName.split(' ');
+					let [firstName, lastName] = fullName.split(',');
 					console.log(
 						userName,
 						admin,
@@ -117,7 +133,7 @@ exports.postUserProfile = (req, res) => {
 				country,
 				state,
 			} = req.body;
-			let fullName = firstName + ' ' + lastName;
+			let fullName = firstName + ',' + lastName;
 			console.log(
 				fullName,
 				gender,
