@@ -228,4 +228,22 @@
   function myFunction() {
     alert("Updated User View");
   }
+
+  
+	function getAge(dateString) {
+		let d1 = document.getElementById()
+		
+		var today = new Date();
+		var birthDate = new Date(dateString);
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		return age;
+	}
+	
+	console.log('age: ' + getAge("1997/07/31"));
+	
+
 </script>
