@@ -12,22 +12,24 @@ const cron = require('node-cron');
 // currentDate = [m,d,y].join('/');
 // console.log(currentDate,"---------cuurent date after formation");
 
-let currentDate = moment().tz("America/Chicago").format('L');
-let upcomingDate  = moment().tz("America/Chicago").add(1,'days').format('L'); 
-console.log(currentDate, upcomingDate, "============> currentDate and NextDate")
+let currentDate = '';
+function getDate() {
+	currentDate = moment().tz('America/Chicago').format('L');
+	// let upcomingDate  = moment().tz("America/Chicago").add(1,'days').format('L');
+	console.log(currentDate, '============> currentDate');
+	return currentDate;
+}
 
 exports.getUserHome = (req, res) => {
-
-	console.log("**************GET USER HOME CONTROLLER*****************")
-	console.log(currentDate,"---------------------------current date");
+	console.log(getDate());
+	console.log('**************GET USER HOME CONTROLLER*****************');
+	console.log(currentDate, '---------------------------current date');
 	pooldb.getConnection((err1, conn) => {
-
-		
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
+			let userName = req.session.userName;
 			let userId = req.session.userId;
-
 			const homeQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId} and date = '${currentDate}';`;
 			conn.query(homeQuery, function (err, result) {
 				if (err) {
@@ -37,11 +39,11 @@ exports.getUserHome = (req, res) => {
 						let insertQuery = `Insert into happyhealth.usermetricstbl(userId,date) values(${userId},'${currentDate}');`;
 						conn.query(insertQuery, function (err, result) {
 							if (err) {
-								console.log(err, "---------error inset query result");
+								console.log(err, '---------error inset query result');
 							}
 							conn.query(homeQuery, function (err, result) {
 								if (err) {
-									console.log(err, "_--------------aftere inseting select result");
+									console.log(err, '_--------------aftere inseting select result');
 								}
 								console.log(result[0], '--------db userMetrics table after inserting result');
 								const {
@@ -54,11 +56,20 @@ exports.getUserHome = (req, res) => {
 									physicalActivityMinutes,
 								} = result[0];
 
-								console.log(stepCount, sleepHours, water, meTime, fruits, veggies, physicalActivityMinutes);
+								console.log(
+									stepCount,
+									sleepHours,
+									water,
+									meTime,
+									fruits,
+									veggies,
+									physicalActivityMinutes
+								);
 
 								res.render('userViews/userHome', {
 									layout: 'layouts/userLayout',
 									title: 'User Home',
+									userName: userName,
 									stepCount,
 									sleepHours,
 									water,
@@ -69,12 +80,9 @@ exports.getUserHome = (req, res) => {
 								});
 								conn.release();
 								return;
-
 							});
-
 						});
 					} else {
-
 						console.log(result[0], '--------db userMetrics table result');
 						const {
 							stepCount,
@@ -91,6 +99,7 @@ exports.getUserHome = (req, res) => {
 						res.render('userViews/userHome', {
 							layout: 'layouts/userLayout',
 							title: 'User Home',
+							userName: req.session.userName,
 							stepCount,
 							sleepHours,
 							water,
@@ -102,19 +111,16 @@ exports.getUserHome = (req, res) => {
 						conn.release();
 						return;
 					}
-
 				}
-
 			});
-
 		}
 	});
 };
 
 exports.getUserStep = (req, res) => {
-
-	console.log("**************GET USER STEP CONTROLLER*****************")
-	console.log(currentDate,"---------------------------current date");
+	getDate();
+	console.log('**************GET USER STEP CONTROLLER*****************');
+	console.log(currentDate, '---------------------------current date');
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -141,6 +147,7 @@ exports.getUserStep = (req, res) => {
 };
 
 exports.postUserStep = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -156,6 +163,7 @@ exports.postUserStep = (req, res) => {
 				res.render('userViews/userStep', {
 					layout: 'layouts/userLayout',
 					title: 'User Step',
+					userName: userName,
 					errors,
 				});
 				return;
@@ -175,6 +183,7 @@ exports.postUserStep = (req, res) => {
 };
 
 exports.getUserSleep = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -192,6 +201,7 @@ exports.getUserSleep = (req, res) => {
 					res.render('userViews/userSleep', {
 						layout: 'layouts/userLayout',
 						title: 'User Sleep',
+						userName: userName,
 						sleepHours,
 						sleepGoal,
 					});
@@ -203,6 +213,7 @@ exports.getUserSleep = (req, res) => {
 };
 
 exports.postUserSleep = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -219,6 +230,8 @@ exports.postUserSleep = (req, res) => {
 				res.render('userViews/userSleep', {
 					layout: 'layouts/userLayout',
 					title: 'User Sleep',
+					userName: userName,
+
 					errors,
 				});
 				return;
@@ -239,6 +252,7 @@ exports.postUserSleep = (req, res) => {
 };
 
 exports.getUserHydration = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -256,6 +270,7 @@ exports.getUserHydration = (req, res) => {
 					res.render('userViews/userHydration', {
 						layout: 'layouts/userLayout',
 						title: 'User Hydration',
+						userName: userName,
 						water,
 						waterGoal,
 					});
@@ -268,6 +283,7 @@ exports.getUserHydration = (req, res) => {
 };
 
 exports.postUserHydration = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -304,6 +320,7 @@ exports.postUserHydration = (req, res) => {
 };
 
 exports.getUserTrack = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -321,6 +338,7 @@ exports.getUserTrack = (req, res) => {
 					res.render('userViews/userTrack', {
 						layout: 'layouts/userLayout',
 						title: 'User Track',
+						userName: userName,
 						meTime,
 						meTimeGoal,
 					});
@@ -332,6 +350,7 @@ exports.getUserTrack = (req, res) => {
 };
 
 exports.postUserTrack = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -347,6 +366,8 @@ exports.postUserTrack = (req, res) => {
 				res.render('userViews/userTrack', {
 					layout: 'layouts/userLayout',
 					title: 'User Track',
+					userName: userName,
+
 				});
 			}
 			var stepQuery = `UPDATE happyhealth.usermetricstbl
@@ -365,6 +386,7 @@ exports.postUserTrack = (req, res) => {
 };
 
 exports.getUserFruits = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -382,6 +404,7 @@ exports.getUserFruits = (req, res) => {
 					res.render('userViews/userFruits', {
 						layout: 'layouts/userLayout',
 						title: 'User Fruits',
+						userName: userName,
 						fruits,
 						fruitgoal,
 						veggies,
@@ -396,6 +419,7 @@ exports.getUserFruits = (req, res) => {
 };
 
 exports.postUserFruits = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -429,6 +453,7 @@ exports.postUserFruits = (req, res) => {
 };
 
 exports.getUserVegetables = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -458,6 +483,7 @@ exports.getUserVegetables = (req, res) => {
 };
 
 exports.getFruitsVeggies = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -487,6 +513,8 @@ exports.getFruitsVeggies = (req, res) => {
 };
 
 exports.postFruitsVeggies = (req, res) => {
+	getDate();
+
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -510,6 +538,7 @@ exports.postFruitsVeggies = (req, res) => {
 };
 
 exports.postUserVegetables = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -541,6 +570,8 @@ exports.postUserVegetables = (req, res) => {
 };
 
 exports.getUserPhysicalActivity = (req, res) => {
+	getDate();
+
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -569,6 +600,8 @@ exports.getUserPhysicalActivity = (req, res) => {
 };
 
 exports.postUserPhysicalActivity = (req, res) => {
+	getDate();
+
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -598,8 +631,6 @@ exports.postUserPhysicalActivity = (req, res) => {
 		}
 	});
 };
-
-
 
 // console.log(currentDate, '=======> current Date');
 // const checkCurrentDayMetrics = `SELECT * FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
@@ -646,21 +677,17 @@ exports.postUserPhysicalActivity = (req, res) => {
 // });
 
 exports.resetUserMetrics = (req, res) => {
-
+	getDate();
 	try {
-
 		cron.schedule('0 0 * * *', async () => {
-			console.log("***********cron job started************")
+			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
 					console.log(err1, '=====> error occured');
 					return;
 				} else {
-
-					
 					console.log('************db connected successfully************');
 					console.log(currentDate, '=====================> current Date');
-
 
 					const checkCurrentDayMetrics = `SELECT * FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
 					conn.query(checkCurrentDayMetrics, async (err, result) => {
@@ -695,11 +722,10 @@ exports.resetUserMetrics = (req, res) => {
 										let getRecentMetrics = `SELECT * FROM happyhealth.usermetricstbl group by userId HAVING userId IN (${usersList}) order by str_to_date(date,'%m/%d/%Y');`;
 										conn.query(getRecentMetrics, (err2, result2) => {
 											if (err2) {
-												console.log(err2, "---------get recent metrics");
+												console.log(err2, '---------get recent metrics');
 												conn.release();
 												return;
-											}
-											else {
+											} else {
 												console.log(result2.length, '======> result2');
 
 												let values = '';
@@ -748,27 +774,22 @@ exports.resetUserMetrics = (req, res) => {
 							}
 						}
 					});
-
 				}
 			});
-
-
-
 		});
 	} catch (err) {
-		console.log(err, "-------------cron job error");
+		console.log(err, '-------------cron job error');
 	}
-
 };
 
 exports.updateUserMetricGoals = (req, res) => {
-	console.log('================================updating metrics');
-	console.log(currentDate, "----------current Dater");
+	let currentDate =  getDate();
+	console.log(typeof getDate(), '================================updating metrics');
+		console.log(currentDate, '----------current Dater');
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-
 			try {
 				const checkCurrentDayMetrics = `SELECT * FROM happyhealth.usermetricstbl where date = '${currentDate}';`;
 				conn.query(checkCurrentDayMetrics, async (err, result) => {
@@ -801,9 +822,8 @@ exports.updateUserMetricGoals = (req, res) => {
 						//let getRecentMetrics = `SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));`
 						conn.query(getRecentMetrics, (err2, result2) => {
 							if (err2) {
-								console.log(err2, "--------------------error while getting recent metrics");
-							}
-							else {
+								console.log(err2, '--------------------error while getting recent metrics');
+							} else {
 								console.log(result2.length, '======> result2');
 
 								let values = '';
@@ -829,7 +849,7 @@ exports.updateUserMetricGoals = (req, res) => {
 										veggieGoal,
 										physicalActivityGoal
 									);
-									values += `(${userId},"${upcomingDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
+									values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
 								}
 								values = values.slice(0, -1);
 								// console.log(values,"====> values")
@@ -842,7 +862,7 @@ exports.updateUserMetricGoals = (req, res) => {
 										console.log(result3, '===========> insert new values result3');
 										console.log('************Cron Job completed************');
 										res.status(200).json({
-											message: "User metrics updated Succesfully"
+											message: 'User metrics updated Succesfully',
 										});
 										return;
 									}
@@ -854,8 +874,6 @@ exports.updateUserMetricGoals = (req, res) => {
 			} catch (err) {
 				console.log(err);
 			}
-
-
 		}
 	});
 };
