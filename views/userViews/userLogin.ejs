@@ -11,15 +11,30 @@
             
             <div class="form-row">
               <label for="username">Username</label>
-              <input type="text" id="username" name="username" min ="6" class="form-control" placeholder="Username"
+              <input type="text" id="username" name="username" class="form-control" placeholder="Username"
                 value="<%= typeof username != 'undefined' ? username : '' %>" />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" placeholder="Password" id="pwd" min ="8" class="masked" name="password"  
+              <input type="password" class="form-control" placeholder="Password" id="pwd" class="masked" name="password"  
               value="<%= typeof password != 'undefined' ? password : '' %>" />
 
+             
 
+              <!-- <input type="password" class="form-control" placeholder="Password" id="myInput" class="masked" name="password"  
+              value="<%= typeof password != 'undefined' ? password : '' %>" />
+              <input type="checkbox" onclick="myFunction()">
+              Show Password -->
+
+
+          
+
+              <!-- <input type="password" class="form-control" placeholder="Password" id="myInput" class="masked" name="password"  
+              value="<%= typeof password != 'undefined' ? password : '' %>" />
+              <input type="checkbox" onclick="myFunction()">
+              Show Password -->
+
+<!-- 
               <!-- <input id="pass_log_id" type="password" class="form-control" name="pass" value="<%= typeof password != 'undefined' ? password : '' %>">
             <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="padding-left: 25em;"></span>
              -->
@@ -28,8 +43,8 @@
                 <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span> -->
               
                 
-                 <!-- <input type="password" id="passwd" name="passwd">
-                 <i class="fa fa-eye showpwd" onClick="showPwd('passwd', this)">   </i> -->
+                 <!-- < <input type="password" id="passwd" name="passwd">
+                 <i class="fa fa-eye showpwd" onClick="showPwd('passwd', this)">   </i>  -->
 
             </div>
             <div class="form-row justify-content-end">
@@ -55,6 +70,11 @@
   </section>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+ 
+
+
 
 
  <script>
@@ -69,4 +89,13 @@
 });
  </script>
 
- 
+ <!-- <script>
+  function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script> -->
