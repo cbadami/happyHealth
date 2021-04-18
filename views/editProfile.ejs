@@ -184,23 +184,24 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-
-            <div class="app-main__outer">
-                <div class="app-main__inner">
-
-                    <form action="/updateUser/<%= result[0].UserId%>" method="post">
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="validationDefaultUsername">Username</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                </div>
+                
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+                
+                        <form action="/updateUser/<%= result[0].UserId%>" method="post">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationDefaultUsername">Username</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="validationDefaultUsername" name="userName"
+                                            placeholder="Username" aria-describedby="inputGroupPrepend2"
+                                            value="<%= result[0].Username %>">
                                     </div>
-                                    <input type="text" class="form-control" id="validationDefaultUsername" name="userName"
-                                        placeholder="Username" aria-describedby="inputGroupPrepend2" value="<%= result[0].Username %>">
                                 </div>
-                            </div>
 
                             <!-- <div class="col-md-4 mb-3">
                                 <label for="validationDefault01">First name</label>
