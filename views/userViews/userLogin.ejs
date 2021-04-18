@@ -16,40 +16,10 @@
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <!-- <input type="password" class="form-control" placeholder="Password" id="pwd" class="masked" name="password"  
-              value="<%= typeof password != 'undefined' ? password : '' %>" /> -->
+              <input type="password" class="form-control" value=""<%= typeof password != 'undefined' ? password : '' %>"" id="pswrd">  
+              <input type="checkbox" onclick="toggleVisibility()"/>Show Password</br>
 
-              <input type="password" class="form-control" name="password" id="password" placeholder="Enter the password"  
-              value="<%= typeof password != 'undefined' ? password : '' %>" />
-                <!-- <i class="far fa-eye" id="togglePassword"></i> -->
-
-             
-
-              <!-- <input type="password" class="form-control" placeholder="Password" id="myInput" class="masked" name="password"  
-              value="<%= typeof password != 'undefined' ? password : '' %>" />
-              <input type="checkbox" onclick="myFunction()">
-              Show Password -->
-
-
-          
-
-              <!-- <input type="password" class="form-control" placeholder="Password" id="myInput" class="masked" name="password"  
-              value="<%= typeof password != 'undefined' ? password : '' %>" />
-              <input type="checkbox" onclick="myFunction()">
-              Show Password -->
-
-<!-- 
-              <!-- <input id="pass_log_id" type="password" class="form-control" name="pass" value="<%= typeof password != 'undefined' ? password : '' %>">
-            <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="padding-left: 25em;"></span>
-             -->
-              <!-- <input type="password" id="password" name="password" class="form-control" placeholder="**************"
-                value="<%= typeof password != 'undefined' ? password : '' %>" />
-                <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span> -->
-              
-                
-                 <!-- < <input type="password" id="passwd" name="passwd">
-                 <i class="fa fa-eye showpwd" onClick="showPwd('passwd', this)">   </i>  -->
-
+            
             </div>
             <div class="form-row justify-content-end">
               <a class="my-2" href="/forgotPassword">Forgot password?</a>
@@ -73,47 +43,18 @@
     </div>
   </section>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
 
 
-
-
- <!-- <script>
-   $(document).ready(function () {
-    $("#eye").click(function () {
-        if ($("#password").attr("type") === "password") {
-            $("#password").attr("type", "text");
-        } else {
-            $("#password").attr("type", "password");
-        }
-    });
-});
- </script> -->
-
- <!-- <script>
-  function myFunction() {
-    var x = document.getElementById("myInput");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
 </script> -->
-
-<script>
-const togglePassword = document.querySelector('#togglePassword');
-const password = document.querySelector('#password');
-togglePassword.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    // toggle the eye slash icon
-    this.classList.toggle('fa-eye-slash');
-});
-
-
-</script>
+<script>  
+  function toggleVisibility() {  
+    var getPasword = document.getElementById("pswrd");  
+    if (getPasword.type === "password") {  
+      getPasword.type = "text";  
+    } else {  
+      getPasword.type = "password";  
+    }  
+  }  
+  </script>  
