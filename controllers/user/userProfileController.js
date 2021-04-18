@@ -1,10 +1,17 @@
-const db = require('../../database');
+// const db = require('../../database');
 const pooldb = require('../../pooldb');
 const moment = require('moment');
 
-exports.getUserInfo = (req, res) => {
+let currentDate = '';
+function getDate() {
 	currentDate = moment().tz('America/Chicago').format('L');
+	// let upcomingDate  = moment().tz("America/Chicago").add(1,'days').format('L');
+	console.log(currentDate, '============> currentDate');
+	return currentDate;
+}
 
+exports.getUserInfo = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -20,22 +27,22 @@ exports.getUserInfo = (req, res) => {
 					throw err;
 				} else {
 					console.log(result[0]);
-					let { userId } = result[0];
-					let userGoals = `SELECT * FROM happyhealth.usermetricstbl where userId = ${userId} and date = "04/13/2021";`;
+					console.log(userId,currentDate,"----------before usermetrics query")
+					let userGoals = `SELECT * FROM happyhealth.usermetricstbl where userId = ${userId} and date='${currentDate}'`;
 					conn.query(userGoals, function (err, result2) {
 						if (err) {
 							console.log(err, '========> Errrrrr');
 						} else {
-							console.log(result2[0], '========> resssssssssss');
-							
+							console.log(result2, '========> resssssssssss');
+
 							let goal = result2[0];
-					res.render('userViews/userInfo', {
-						layout: 'layouts/userLayout',
-						title: 'User Profile',
-						result,
-						goal
-					});
-					console.log('****user Info executed successfully****');
+							res.render('userViews/userInfo', {
+								layout: 'layouts/userLayout',
+								title: 'User Profile',
+								result,
+								goal
+							});
+							console.log('****user Info executed successfully****');
 						}
 					});
 
