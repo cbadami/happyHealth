@@ -1,6 +1,7 @@
 const pooldb = require('../../pooldb');
 const moment = require('moment');
 const cron = require('node-cron');
+const { decodeBase64 } = require('bcryptjs');
 
 // let currentDate = new Date().toLocaleDateString();
 // console.log(currentDate,"-------current date");
@@ -20,7 +21,7 @@ function getDate() {
 }
 
 exports.getUserHome = (req, res) => {
-	getDate()	
+	getDate();
 	console.log(getDate());
 	console.log('**************GET USER HOME CONTROLLER*****************');
 	console.log(currentDate, '---------------------------current date');
@@ -117,31 +118,44 @@ exports.getUserHome = (req, res) => {
 	});
 };
 //let challengeId = req.params.challengeId;
-exports.getUserSteps = (req, res) => {
-	getDate();
-	let dateId = req.params.id;
-	console.log("finall in getusersteps "+dateId)
+exports.getUserStepByDate = (req, res) => {
+	let dateId = req.params.date;
+	console.log("finall in getUserStepByDate " + dateId);
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			var newdate= (dateId.split('-')[1]) + '/' + dateId.split('-')[2] + '/' +  dateId.split('-')[0];
+			var newdate = (dateId.split('-')[1]) + '/' + dateId.split('-')[2] + '/' + dateId.split('-')[0];
 			const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${newdate}' `;
 			conn.query(stetpQuery, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
-					console.log(result, '--------db user table result');
-					const { stepCount, stepGoal } = result[0];
-					// res.render('userViews/userStep', {
-					// 	layout: 'layouts/userLayout',
-					// 	title: 'User Step',
-					// 	stepCount,
-					// 	stepGoal,
-					// });
 
-					res.json({stepCount, stepGoal})
+					if (result.length == 0) {
+						console.log(result, '--------default return values result');
+						let insertQuery = `Insert into happyhealth.usermetricstbl(userId,date) values(${userId},'${newdate}');`;
+						conn.query(insertQuery, function (err, result) {
+							if (err) {
+								console.log(err, "--------error in inserting query");
+
+							} else {
+								console.log(result, "----------inserted query");
+								const stepCount = stepGoal = 0;
+								res.json({
+									stepCount, stepGoal
+								});
+							}
+						});
+
+					} else {
+						console.log(result, '--------db user table result');
+						const { stepCount, stepGoal } = result[0];
+						res.json({ stepCount, stepGoal });
+					}
+
+
 				}
 			});
 			conn.release();
@@ -179,40 +193,40 @@ exports.getUserStep = (req, res) => {
 };
 
 exports.postUserStep = (req, res) => {
-	getDate();
+
 	pooldb.getConnection((err1, conn) => {
-	if (err1) {
-		console.log(err1, '=====> error occured');
-	} else {
-		const userId = req.session.userId;
-		const { stepCount, stepGoal,datepicker1 } = req.body;
-		let errors = [];
-		var newdate= (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' +  datepicker1.split('-')[0];
-		console.log(newdate+"-----new")
-		if (!stepCount || !stepGoal ||!datepicker1) {
-			console.log(`inside if statement ${stepCount}, `);
-			errors.push('Please enter all fields');
-			console.log(errors, '----------------errros');
-			res.render('userViews/userStep', {
-				layout: 'layouts/userLayout',
-				title: 'User Step',
-				errors,
-			});
-			return;
-		}
-		console.log(datepicker1)
-		var stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${stepGoal} WHERE userId = ${userId} and date = '${newdate}' `;
-		console.log(stepQuery)
-		conn.query(stepQuery, function (err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				res.redirect('/home');
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			const userId = req.session.userId;
+			const { stepCount, stepGoal, datepicker1 } = req.body;
+			let errors = [];
+			var newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
+			console.log(newdate + "-----------------new");
+			if (!stepCount || !stepGoal || !datepicker1) {
+				console.log(`inside if statement ${stepCount}, `);
+				errors.push('Please enter all fields');
+				console.log(errors, '----------------errros');
+				res.render('userViews/userStep', {
+					layout: 'layouts/userLayout',
+					title: 'User Step',
+					errors,
+				});
+				return;
 			}
-		});
-		conn.release();
-	}
-});
+			console.log(datepicker1);
+			const stepQuery = `UPDATE happyhealth.usermetricstbl SET stepCount = ${stepCount}, stepGoal = ${stepGoal} WHERE userId = ${userId} and date = '${newdate}' `;
+			console.log(stepQuery);
+			conn.query(stepQuery, function (err, result) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.redirect('/home');
+				}
+			});
+			conn.release();
+		}
+	});
 };
 
 
@@ -814,9 +828,9 @@ exports.resetUserMetrics = (req, res) => {
 };
 
 exports.updateUserMetricGoals = (req, res) => {
-	let currentDate =  getDate();
+	let currentDate = getDate();
 	console.log(typeof getDate(), '================================updating metrics');
-		console.log(currentDate, '----------current Dater');
+	console.log(currentDate, '----------current Dater');
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
