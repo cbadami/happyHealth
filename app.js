@@ -106,10 +106,10 @@ app.use(function(req, res, next) {
 //   });
 // });
 
-const userHomeController = require('./controllers/user/userHomeController')
+const cronJob = require('./controllers/cronJob')
 
 
-userHomeController.resetUserMetrics();
+cronJob.resetUserMetrics();
 
 const PORT = process.env.PORT || 3000;
 

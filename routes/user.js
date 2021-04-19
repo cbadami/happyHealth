@@ -8,6 +8,7 @@ const userProfileController = require('../controllers/user/userProfileController
 const userChallengeController = require('../controllers/user/userChallengeController')
 const userProgressController = require('../controllers/user/userProgressController')
 const userNotificationController = require('../controllers/user/userNotificationController')
+const cronJob = require("../controllers/cronJob")
 
 
 
@@ -85,11 +86,6 @@ router.post('/dismissAnnouncement/:messageId', userNotificationController.dismis
  * Updating User metrics everyday with zeros
  */
 
- router.get('/resetJobs', userHomeController.resetUserMetrics)
+ router.get('/resetJobs', cronJob.resetUserMetrics)
  
-
-
-
-
-
 module.exports = router;
