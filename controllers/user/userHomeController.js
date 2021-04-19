@@ -236,7 +236,6 @@ exports.getUserSleep = (req, res) => {
 					res.render('userViews/userSleep', {
 						layout: 'layouts/userLayout',
 						title: 'User Sleep',
-						userName: userName,
 						sleepHours,
 						sleepGoal,
 					});
@@ -305,7 +304,6 @@ exports.getUserHydration = (req, res) => {
 					res.render('userViews/userHydration', {
 						layout: 'layouts/userLayout',
 						title: 'User Hydration',
-						userName: userName,
 						water,
 						waterGoal,
 					});
@@ -373,7 +371,6 @@ exports.getUserTrack = (req, res) => {
 					res.render('userViews/userTrack', {
 						layout: 'layouts/userLayout',
 						title: 'User Track',
-						userName: userName,
 						meTime,
 						meTimeGoal,
 					});
