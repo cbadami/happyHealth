@@ -209,7 +209,7 @@ async function sendEmail(userEmail, generateCode) {
 
 	const message = {
 		to: userEmail,
-		from: 'fitnestgdp@outlook.com',
+		from: 'fitnestgdp@outlook.com', // create mail address with wellhub app name
 		subject: 'WellHub reset account',
 		text: `OTP to reset your account: ${generateCode} `,
 		html: `<p> Your OTP to reset your account:  ${generateCode}</p>`,
