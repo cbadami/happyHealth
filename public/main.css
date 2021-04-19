@@ -11231,7 +11231,13 @@ button,
     display: flex;
     margin-left: auto
 }
-
+.app-header li.nav-item .badge {
+    position: absolute;
+    padding: 3px 1px;
+    font-size: 10px;
+    color: #fff;
+    margin-left: -4px;
+}
 .app-header .header-user-info>.widget-heading,
 .app-header .header-user-info>.widget-subheading {
     white-space: nowrap
