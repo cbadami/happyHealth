@@ -117,6 +117,38 @@ exports.getUserHome = (req, res) => {
 		}
 	});
 };
+//let challengeId = req.params.challengeId;
+exports.getUserSteps = (req, res) => {
+	getDate();
+	let dateId = req.params.id;
+	console.log("finall in getusersteps "+dateId)
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			let userId = req.session.userId;
+			var newdate= (dateId.split('-')[1]) + '/' + dateId.split('-')[2] + '/' +  dateId.split('-')[0];
+			const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${newdate}' `;
+			conn.query(stetpQuery, function (err, result) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(result, '--------db user table result');
+					const { stepCount, stepGoal } = result[0];
+					// res.render('userViews/userStep', {
+					// 	layout: 'layouts/userLayout',
+					// 	title: 'User Step',
+					// 	stepCount,
+					// 	stepGoal,
+					// });
+
+					res.json({stepCount, stepGoal})
+				}
+			});
+			conn.release();
+		}
+	});
+};
 
 exports.getUserStep = (req, res) => {
 	getDate();

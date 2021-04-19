@@ -16,7 +16,7 @@ const userNotificationController = require('../controllers/user/userNotification
  */
 router.get('/home', userHomeController.getUserHome);
 
-
+router.get('/userStep/:id', userHomeController.getUserSteps);
 router.get('/userStep', userHomeController.getUserStep);
 router.post('/userStep', userHomeController.postUserStep);
 

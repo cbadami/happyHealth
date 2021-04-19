@@ -80,4 +80,17 @@ var yyyy = today.getFullYear();
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("datepicker1").setAttribute("max", today);
 document.getElementById("datepicker1").value=today;
+
+$("#datepicker1").on("change",function(){
+  var id=document.getElementById("datepicker1").value;
+  $.ajax({
+        type: 'GET',
+        url: 'userStep/'+id,
+        success: function(result) {
+          document.getElementById("stepCount").value=result.stepCount;
+          document.getElementById("stepGoal").value=result.stepGoal;
+             //$('#champ').html(result);
+        }
+      });
+})
 </script>
