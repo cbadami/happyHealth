@@ -14,10 +14,10 @@
               <input type="text" id="username" name="username" class="form-control" placeholder="Username"
                 value="<%= typeof username != 'undefined' ? username : '' %>" />
             </div>
-            
+
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" name="password" value=""<%= typeof password != 'undefined' ? password : '' %>"" id="pswrd">  
+              <input type="password" class="form-control" name="password" value=""<%= typeof password != 'undefined' ? password : '' %>"" id="password">  
 		    <input type="checkbox" onclick="toggleVisibility()"/>Show Password</br>
 
             
@@ -51,7 +51,7 @@
 
 <script>  
   function toggleVisibility() {  
-    var getPasword = document.getElementById("pswrd");  
+    var getPasword = document.getElementById("password");  
     if (getPasword.type === "password") {  
       getPasword.type = "text";  
     } else {  

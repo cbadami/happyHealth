@@ -32,6 +32,7 @@
                                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                                 title="At least one uppercase letter, one lowercase letter, one number and one special character"
                                 required />
+                                <input type="checkbox" onclick="toggleVisibility()"/>Show Password</br>
                         </div>
                         <div class="form-group">
                             <label for="password2">Confirm Password</label>
@@ -42,6 +43,7 @@
                                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                                 title="At least one uppercase letter, one lowercase letter, one number and one special character"
                                 onkeyup='check();' required />
+                                <input type="checkbox" onclick="toggleVisibility2()"/>Show Password</br>
                         </div>
                         <div class="form-group">
                             <p>You already have an account? <a href="/">Sign In! </a> </p>
@@ -75,3 +77,27 @@
 
     }
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+<script>  
+  function toggleVisibility() {  
+    var getPasword = document.getElementById("password");  
+    if (getPasword.type === "password") {  
+      getPasword.type = "text";  
+    } else {  
+      getPasword.type = "password";  
+    }  
+  }  
+  </script>  
+
+<script>  
+    function toggleVisibility2() {  
+      var getPasword = document.getElementById("password2");  
+      if (getPasword.type === "password2") {  
+        getPasword.type = "text";  
+      } else {  
+        getPasword.type = "password2";  
+      }  
+    }  
+    </script>  
