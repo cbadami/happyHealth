@@ -27,7 +27,7 @@ exports.getNotifications = (req, res) => {
 				if (err) {
 					console.log(err, '======> error while getting announcments');
 				} else {
-					console.log(result, '-------displaying user notifictions-----');
+					// console.log(result, '-------displaying user notifictions-----');
 
 					res.render('userViews/notifications', {
 						layout: 'layouts/userLayout',
@@ -70,7 +70,17 @@ exports.dismissAnnouncement = (req, res) => {
 							console.log(err, 'error while updating new list');
 						} else {
 							console.log(result, '=====> removed user from list');
-							res.redirect('/notifications');
+
+							const anCoun = `SELECT count(*) as count FROM happyhealth.announcementstbl where  userId like '%${userId}%' ;`;
+							conn.query(anCoun, (err, countResult) => {
+								if (err) throw err;
+								else {
+									console.log(countResult[0].count, '=====> unread notifs');
+									req.session.annCount = countResult[0].count;
+									console.log(req.session.annCount, "==========> session cunt")
+									res.redirect('/notifications');
+								}
+							});
 						}
 					});
 					// res.redirect('notifications')
