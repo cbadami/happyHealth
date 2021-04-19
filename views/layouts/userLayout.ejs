@@ -305,6 +305,16 @@
 
             });
 
+            let notifyValue = 0;
+            if(notifyValue != 0){
+                $(".badge").removeClass("bg-secondary");
+                $(".badge").addClass("bg-danger");
+            } else {
+                $(".badge").removeClass("bg-danger");
+                $(".badge").addClass("bg-secondary");
+            }
+
+
         });
     </script>
 
