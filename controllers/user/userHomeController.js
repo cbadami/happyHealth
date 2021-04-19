@@ -1,4 +1,3 @@
-// const db = require('../../database');
 const pooldb = require('../../pooldb');
 const moment = require('moment');
 const cron = require('node-cron');
