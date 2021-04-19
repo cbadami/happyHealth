@@ -23,7 +23,7 @@
                 value="<%= typeof username != 'undefined' ? username : '' %>"
               />
             </div>
-            <div class="form-row">
+            <!-- <div class="form-row">
               <label for="password">Password</label>
               <input
                 type="password"
@@ -33,7 +33,14 @@
                 placeholder="**************"
                 value="<%= typeof password != 'undefined' ? password : '' %>"
               />
-            </div>
+            </div> -->
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" value=""<%= typeof password != 'undefined' ? password : '' %>"" id="pswrd">  
+		    <input type="checkbox" onclick="toggleVisibility()"/>Show Password</br>
+         </div>
+
+            
             <div class="form-row justify-content-end my-2">
               <a href="/forgotPassword">Forgot password?</a>
             </div>
@@ -51,3 +58,18 @@
     </div>
   </section>
 </div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+<script>  
+  function toggleVisibility() {  
+    var getPasword = document.getElementById("pswrd");  
+    if (getPasword.type === "password") {  
+      getPasword.type = "text";  
+    } else {  
+      getPasword.type = "password";  
+    }  
+  }  
+  </script>  
