@@ -15,14 +15,14 @@
                 value="<%= typeof username != 'undefined' ? username : '' %>" />
             </div>
 
-            <div class="form-group">
+            <div class="form-row">
               <label for="password">Password</label>
-              <input type="password" class="form-control" name="password" value=""<%= typeof password != 'undefined' ? password : '' %>"" id="password">  
-		    <input type="checkbox" onclick="toggleVisibility()"/>Show Password</br>
-
-            
+              <input type="password" class="form-control" name="password" value="<%= typeof password != 'undefined' ? password : '' %>" id="password">  
+              <input type="checkbox" onclick="toggleVisibility()"/>
+              <label for="password">Show Password</label> 
             </div>
             <div class="form-row justify-content-end">
+
               <a class="my-2" href="/forgotPassword">Forgot password?</a>
             </div>
             <div class="form-row">

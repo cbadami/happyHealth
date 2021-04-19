@@ -4,7 +4,6 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const userSignupController = require('../controllers/userSignupController');
 const passwordController = require('../controllers/passwordController');
-const userHomeController = require('../controllers/user/userHomeController')
 const cronJob = require("../controllers/cronJob");
 
 /**

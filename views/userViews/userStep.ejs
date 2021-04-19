@@ -12,13 +12,14 @@
               <label for="dateText"> Date</label>
               <p id="demo"></p>
               <input type="date" class="date form-control" id="datepicker1" name="datepicker1"
-                            placeholder="mm/dd/yyyy" min='1899-01-01' max='2000-13-13'>
+                            placeholder="mm/dd/yyyy" min='1899-01-01'>
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
             <div class="form-row">
               <label for="username">Number of Steps</label>
               <input
                 type="number"
+                step=any
                 id="stepCount"
                 min="0"
                 name="stepCount"
@@ -32,6 +33,7 @@
               <label for="password">Personal Daily Goal</label>
               <input
                 type="number"
+                step=any
                 min="0"
                 id="stepGoal"
                 name="stepGoal"

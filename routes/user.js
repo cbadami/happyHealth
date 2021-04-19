@@ -17,7 +17,7 @@ const cronJob = require("../controllers/cronJob")
  */
 router.get('/home', userHomeController.getUserHome);
 
-router.get('/userStep/:id', userHomeController.getUserSteps);
+router.get('/userStep/:date', userHomeController.getUserStepByDate);
 router.get('/userStep', userHomeController.getUserStep);
 router.post('/userStep', userHomeController.postUserStep);
 
