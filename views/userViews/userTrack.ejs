@@ -22,8 +22,7 @@
                             </div>
                         </div>  -->
             <div class="form-row">
-              <label for="dateText"> &nbsp; </label>
-              <p id="demo"></p>
+              <label for="dateText"> Date</label>
               <input type="date" class="date form-control" id="datepicker1" name="datepicker1"
                             placeholder="mm/dd/yyyy" min='1899-01-01'>
               
@@ -99,10 +98,10 @@
   document.getElementById("datepicker1").value=today;
   
   $("#datepicker1").on("change",function(){
-    var id=document.getElementById("datepicker1").value;
+    let date=document.getElementById("datepicker1").value;
     $.ajax({
           type: 'GET',
-          url: 'userTrack/'+id,
+          url: 'userTrack/'+date,
           success: function(result) {
             document.getElementById("meTime").value=result.meTime;
             document.getElementById("meTimeGoal").value=result.meTimeGoal;

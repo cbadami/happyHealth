@@ -33,17 +33,18 @@ router.get('/userHydration/:date', userHomeController.getUserHydrationByDate);
 router.get('/userHydration', userHomeController.getUserHydration);
 router.post('/userHydration', userHomeController.postUserHydration);
 
+router.get('/getFruitsVeggies/:date', userHomeController.getFruitsVeggiesByDate)
 router.get('/getFruitsVeggies', userHomeController.getFruitsVeggies)
 router.post('/postFruitsVeggies', userHomeController.postFruitsVeggies)
 
 
 
-router.get('/userFruits', userHomeController.getUserFruits);
-router.post('/userFruits', userHomeController.postUserFruits);
+// router.get('/userFruits', userHomeController.getUserFruits);
+// router.post('/userFruits', userHomeController.postUserFruits);
 
-router.get('/userVegetables', userHomeController.getUserVegetables);
-router.post('/userVegetables', userHomeController.postUserVegetables);
-
+// router.get('/userVegetables', userHomeController.getUserVegetables);
+// router.post('/userVegetables', userHomeController.postUserVegetables);
+router.get('/userPhysicalActivity/:date', userHomeController.getUserPhysicalActivityByDate);
 router.get('/userPhysicalActivity', userHomeController.getUserPhysicalActivity);
 router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity);
 
