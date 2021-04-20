@@ -175,13 +175,6 @@ exports.getAdminAnalytics = (req, res) => {
                     });
                 }
             });
-            // res.render('adminViews/adminAnalytics'
-            // , {
-            //     layout: 'layouts/adminLayout',
-            //     title: 'Admin Analytics'
-            // }
-            // );
-
 
             conn.release();
         }
