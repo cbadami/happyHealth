@@ -19,12 +19,15 @@
                     <strong class="mr-auto">
                         <%= result[i].title%>
                     </strong>
+					<a class="btn btn-sm btn-md btn-primary" data-toggle="collapse" href="#collapseExample<%= result[i].messageId %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+						view
+					  </a>
                     <form action="/dismissAnnouncement/<%= result[i].messageId %>" method="post">
                         <input type="submit" id="PopoverCustomT-1" value="Dismiss"
                             class="btn btn-sm btn-md btn-danger"></input>
                     </form>
                 </div>
-                <div class="toast-body">
+                <div class="toast-body collapse" id="collapseExample<%= result[i].messageId%>">
                     <strong>
                         <%= result[i].message%>
                     </strong>
