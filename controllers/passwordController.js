@@ -209,7 +209,7 @@ async function sendEmail(userEmail, generateCode) {
 	
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-	console.log(process.env.toJSON(), "+++++++++++++> sendgrid api")
+	console.log(process.env, "+++++++++++++> sendgrid api")
 
 	const message = {
 		to: userEmail,
