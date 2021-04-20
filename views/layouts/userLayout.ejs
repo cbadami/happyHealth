@@ -21,6 +21,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="static/dist/simple-notify.min.css" />
+    <script src="static/dist/simple-notify.min.js"></script>
     <style>
         .card {
             /* width: 150px; */
@@ -134,7 +136,9 @@
             <div class="app-header__menu">
                 <ul class="header-menu nav align-items-center">
                     <li class="nav-item" title="Profile">
-                        <p><%= userName %></p>
+                        <p>
+                            <%= userName %>
+                        </p>
                     </li>
                     <li class="nav-item" title="Profile">
                         <a href="javascript: window.location.href='/userProfile'" class="nav-link">
@@ -165,7 +169,9 @@
                 <div class="app-header-right">
                     <ul class="header-menu nav align-items-center">
                         <li class="nav-item" title="Profile">
-                            <p><%= userName %></p>
+                            <p>
+                                <%= userName %>
+                            </p>
                         </li>
                         <li class="nav-item">
                             <a href="javascript: window.location.href='/userInfo'" class="nav-link">
@@ -174,7 +180,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="javascript: window.location.href='/notifications'" class="nav-link">
-                                <i class="fa fa-bell fa-2x" aria-hidden="true"><span class="badge bg-secondary"><%= annCount %></span></i>
+                                <i class="fa fa-bell fa-2x" aria-hidden="true"><span class="badge bg-secondary">
+                                        <%= annCount %>
+                                    </span></i>
                             </a>
                         </li>
                         <li class="btn-group nav-item">
@@ -297,7 +305,7 @@
             $(".tabs-list li").click(function () {
                 var tabid = $(this).find("a").attr("href");
                 $(".tabs-list li,.tabs div.tab").removeClass(
-                "active"); // removing active class from tab
+                    "active"); // removing active class from tab
 
                 $(".tab").hide(); // hiding open tab
                 $(tabid).show(); // show tab
@@ -306,7 +314,7 @@
             });
 
             let notifyValue = 0;
-            if(notifyValue != 0){
+            if (notifyValue != 0) {
                 $(".badge").removeClass("bg-secondary");
                 $(".badge").addClass("bg-danger");
             } else {

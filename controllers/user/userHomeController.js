@@ -1,31 +1,26 @@
 const pooldb = require('../../pooldb');
-const moment = require('moment');
-const cron = require('node-cron');
-const { decodeBase64 } = require('bcryptjs');
 
-// let currentDate = new Date().toLocaleDateString();
-// console.log(currentDate,"-------current date");
-
-// let [ m,d,y] = currentDate.split("/");
-// m = m.length == 1 ? "0"+m:m;
-// d = d.length == 1 ? "0"+d:d;
-// currentDate = [m,d,y].join('/');
-// console.log(currentDate,"---------cuurent date after formation");
-
-let currentDate = '';
-function getDate() {
-	currentDate = moment().tz('America/Chicago').format('L');
-	// let upcomingDate  = moment().tz("America/Chicago").add(1,'days').format('L');
-	console.log(currentDate, '============> currentDate');
+function getCurrentDate() {
+	let currentDate = new Date().toLocaleDateString();
+	let [m, d, y] = currentDate.split("/");
+	m = m.length == 1 ? "0" + m : m;
+	d = d.length == 1 ? "0" + d : d;
+	currentDate = [m, d, y].join('/');
+	console.log(currentDate, "---------cuurent date after formation");
 	return currentDate;
 }
 
 exports.getUserHome = (req, res) => {
-	getDate();
-	console.log(getDate());
+	console.log(req.flash['title'], "------------------flash message");
 
-	console.log('**************GET USER HOME CONTROLLER*****************');
-	console.log(currentDate, '---------------------------current date');
+	let flashTitle = req.flash['title'];
+	let flashMessage = req.flash['message'];
+	req.flash['title'] = "";
+	req.flash['message'] = "";
+
+	req.flash['title'];
+	let currentDate = getCurrentDate();
+	console.log(currentDate, '**************GET USER HOME CONTROLLER*****************');
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -79,6 +74,8 @@ exports.getUserHome = (req, res) => {
 									fruits,
 									veggies,
 									physicalActivityMinutes,
+									flashTitle,
+									flashMessage
 								});
 								conn.release();
 								return;
@@ -109,6 +106,8 @@ exports.getUserHome = (req, res) => {
 							fruits,
 							veggies,
 							physicalActivityMinutes,
+							flashTitle,
+							flashMessage
 						});
 						conn.release();
 						return;
@@ -118,7 +117,7 @@ exports.getUserHome = (req, res) => {
 		}
 	});
 };
-//let challengeId = req.params.challengeId;
+
 exports.getUserStepByDate = (req, res) => {
 	let dateId = req.params.date;
 	console.log("finall in getUserStepByDate " + dateId);
@@ -165,7 +164,7 @@ exports.getUserStepByDate = (req, res) => {
 };
 
 exports.getUserStep = (req, res) => {
-	getDate();
+	let currentDate = getCurrentDate();
 	console.log('**************GET USER STEP CONTROLLER*****************');
 	console.log(currentDate, '---------------------------current date');
 	pooldb.getConnection((err1, conn) => {
@@ -222,6 +221,8 @@ exports.postUserStep = (req, res) => {
 				if (err) {
 					console.log(err);
 				} else {
+					req.flash['title'] = "Step Count";
+					req.flash['message'] = "Updated Metrics Sucessfully";
 					res.redirect('/home');
 				}
 			});
