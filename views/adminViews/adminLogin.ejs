@@ -3,25 +3,15 @@
     <div class="container app-container-wrapper">
       <div class="row justify-content-center">
         <div class="col-lg-4 my-5">
-          <form
-            action="/adminLogin"
-            method="POST"
-            class="form-container"
-          >
+          <form action="/adminLogin" method="POST" class="form-container">
             <div class="form-group">
-              <h2  style="color:green;">Welcome Administrator!</h2>
+              <h2 style="color:green;">Welcome Administrator!</h2>
               <%- include ('../partials/messages') %>
             </div>
             <div class="form-row">
               <label for="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                class="form-control"
-                placeholder="username"
-                value="<%= typeof username != 'undefined' ? username : '' %>"
-              />
+              <input type="text" id="username" name="username" class="form-control" placeholder="username"
+                value="<%= typeof username != 'undefined' ? username : '' %>" />
             </div>
             <!-- <div class="form-row">
               <label for="password">Password</label>
@@ -34,14 +24,20 @@
                 value="<%= typeof password != 'undefined' ? password : '' %>"
               />
             </div> -->
-            <div class="form-group">
+            <div class="form-row">
               <label for="password">Password</label>
-              <input type="password" class="form-control" name="password" value="<%= typeof password != 'undefined' ? password : '' %>" id="password">  
-		    <input type="checkbox" onclick="toggleVisibility()"/>&nbspShow Password</br>
-         </div>
+              <input type="password" class="form-control" name="password"
+                value="<%= typeof password != 'undefined' ? password : '' %>" id="password">
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="toggleVisibility()">
+              <label class="form-check-label" for="flexCheckDefault">
+                Show Password
+              </label>
+            </div>
 
-            
-            <div class="form-row justify-content-end my-2">
+
+            <div class="form-row justify-content-end mb-2">
               <a href="/forgotPassword">Forgot password?</a>
             </div>
             <div class="form-row">
@@ -63,13 +59,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
 
-<script>  
-  function toggleVisibility() {  
-    var getPasword = document.getElementById("password");  
-    if (getPasword.type === "password") {  
-      getPasword.type = "text";  
-    } else {  
-      getPasword.type = "password";  
-    }  
+<script>
+  function toggleVisibility() {
+    var getPasword = document.getElementById("password");
+    if (getPasword.type === "password") {
+      getPasword.type = "text";
+    } else {
+      getPasword.type = "password";
+    }
   }  
-  </script>  
+</script>
