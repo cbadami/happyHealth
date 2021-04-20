@@ -27,7 +27,7 @@
             </div>
             <div class="form-row">
               <label for="password">Personal Daily Goal</label>
-              <input type="number" id="fruitgoal" name="fruitgoal" min="0" class="form-control" placeholder="0"
+              <input type="number" id="fruitGoal" name="fruitgoal" min="0" class="form-control" placeholder="0"
                 value="<%= typeof fruitGoal != 'undefined' ? fruitGoal : '' %>" step="0.01" />
             </div>
 
@@ -80,7 +80,7 @@
       type: 'GET',
       url: 'getFruitsVeggies/' + date,
       success: function (result) {
-        console.log(result,"-----------------------")
+        console.log(result,"-----------------------result")
         document.getElementById("fruits").value = result.fruits;
         document.getElementById("fruitGoal").value = result.fruitGoal;
         document.getElementById("veggies").value = result.veggies;
