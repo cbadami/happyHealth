@@ -55,7 +55,8 @@ exports.getUserChallenges = (req, res) => {
 
 					res.render('userViews/userChallenges', {
 						layout: 'layouts/userLayout',
-						result: present,
+					 	present,
+						 previous,
 						title: 'User Management',
 					});
 				}

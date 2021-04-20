@@ -10,15 +10,15 @@
             </div>
             <div class="form-row">
               <label for="dateText"> Date</label>
-              <p id="demo"></p>
               <input type="date" class="date form-control" id="datepicker1" name="datepicker1"
-                            placeholder="mm/dd/yyyy" min='1899-01-01' max='2000-13-13'>
+                            placeholder="mm/dd/yyyy" min='1899-01-01'>
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
             <div class="form-row">
               <label for="username">Number of Steps</label>
               <input
                 type="number"
+                step="0.01"
                 id="stepCount"
                 min="0"
                 name="stepCount"
@@ -32,6 +32,7 @@
               <label for="password">Personal Daily Goal</label>
               <input
                 type="number"
+                step="0.01"
                 min="0"
                 id="stepGoal"
                 name="stepGoal"
@@ -49,7 +50,6 @@
                   type="submit"
                   class="btn btn-primary"
                   style="margin-top: 10px"
-                  onclick="myFunction()"
                 >
                   Update
                 </button>
@@ -62,14 +62,11 @@
   </section>
 </div>
 <script>
-  function myFunction() {
-    alert("Updated Step Count Successfully");
-  }
 
-  var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
+let today = new Date();
+let dd = today.getDate();
+let mm = today.getMonth()+1; //January is 0!
+let yyyy = today.getFullYear();
  if(dd<10){
         dd='0'+dd
     } 
@@ -79,4 +76,18 @@ var yyyy = today.getFullYear();
 
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("datepicker1").setAttribute("max", today);
+document.getElementById("datepicker1").value=today;
+
+$("#datepicker1").on("change",function(){
+  var id=document.getElementById("datepicker1").value;
+  $.ajax({
+        type: 'GET',
+        url: 'userStep/'+id,
+        success: function(result) {
+          document.getElementById("stepCount").value=result.stepCount;
+          document.getElementById("stepGoal").value=result.stepGoal;
+             //$('#champ').html(result);
+        }
+      });
+})
 </script>

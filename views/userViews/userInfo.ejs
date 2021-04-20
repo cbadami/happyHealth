@@ -1,29 +1,27 @@
 <style>
-	#imageUpload
-{
-display: none;
-}
+    #imageUpload {
+        display: none;
+    }
 
-#profileImage
-{
-cursor: pointer;
-}
+    #profileImage {
+        cursor: pointer;
+    }
 
-#profile-container {
-width: 150px;
-height: 150px;
-overflow: hidden;
--webkit-border-radius: 50%;
--moz-border-radius: 50%;
--ms-border-radius: 50%;
--o-border-radius: 50%;
-border-radius: 50%;
-}
+    #profile-container {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+    }
 
-#profile-container img {
-width: 150px;
-height: 150px;
-}
+    #profile-container img {
+        width: 150px;
+        height: 150px;
+    }
 </style>
 
 <br>
@@ -36,11 +34,12 @@ height: 150px;
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div id="profile-container">
-    
-   <image id="profileImage" src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png" />
-</div>
-                              
+                                <div id="profile-container">
+
+                                    <image id="profileImage"
+                                        src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png" />
+                                </div>
+
                                 <div class="mt-3">
                                     <h4>
                                         <%= result[0].fullName %>
@@ -60,67 +59,75 @@ height: 150px;
 
                     </div>
 
-					<div class="card">
-					<div class="card-body">
-						<div class="d-flex flex-column text-center">
+                    <div class="card text-center">
 
-							<div class="row justify-content-center">
-								<div class="mr-4">
-								  StepGoal
-								</div>
-								<div>
-									<%= goal.stepGoal %> 
-								</div>
-							</div>
 
-							<div class="row justify-content-center">
-								<div class="mr-4">
-									  Sleep Goal
-								</div>
-								<div>
-									<%= goal.sleepGoal %> 
-								</div>
-							</div>
+                        <div class="card-body ml-4">
 
-							<div class="row justify-content-center">
-								<div class="mr-4">
-									  meTime Goal
-								</div>
-								<div>
-									<%= goal.meTimeGoal %> 
-								</div>
-							</div>
+                            <div class="card-title">
+                                <!-- <span class="mb-0">Daily Goals</span> -->
+                                <h5 style="color: black;" class="text-capitalize">Daily Goals</h5>
+                            </div>
 
-							<div class="row justify-content-center">
-								<div class="mr-4">
-									  Water
-								</div>
-								<div>
-									<%= goal.waterGoal %> 
-								</div>
-							</div>
-						
-							<div class="row justify-content-center">
-								<div class="mr-4">
-									  Fruits
-								</div>
-								<div>
-									<%= goal.fruitGoal %> 
-								</div>
-							</div>
 
-							<div class="row justify-content-center">
-								<div class="mr-4">
-								  VeggieGoal
-								</div>
-								<div>
-									<%= goal.veggieGoal %> 
-								</div>
-							</div>
-							  	
-						</div>
-					</div>
-					</div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Step:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.stepGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Sleep:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.sleepGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">MindfulMinutes:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.meTimeGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Water:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.waterGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Fruits:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.fruitGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Veggies:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.veggieGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Physical Activity:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.physicalActivityGoal %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="col-md-8">
@@ -167,9 +174,9 @@ height: 150px;
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Last Name:</h6>
                                 </div>
-                                    <div class="col-sm-9 text-secondary"> 
-                                        <%= result[0].fullName.split(',')[1] %>
-                                    </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0].fullName.split(',')[1] %>
+                                </div>
                             </div>
                             <hr>
                             <div class=" row">

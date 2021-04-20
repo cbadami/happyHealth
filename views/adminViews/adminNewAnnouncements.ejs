@@ -6,13 +6,14 @@
 			<div class="form-group">
 		  <label>Announcement Title</label>
 		  <input  class="form-control"  id="title" type="text" name="title"  required>
+
 		</div>
 		<div class="form-group">
 		  <label> Description</label>
 		  <input  class="form-control"  id="message" type="text" name="description" required>
 		</div>
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 		<label for="selectUsers" >  </label>
 		<select id="users"  name="type" type="number" class="mul-select col-md-12" multiple="true">
 			<% users.map(user=> { %>
@@ -20,71 +21,64 @@
 				</option>
 				<% }) %>
 		</select>
+		</div> -->
+
+		<div class="form-group">
+			<label for="selectUsers" >  </label>
+		<select name="users" id="users" type="number" class="select form-control mul-select col-md-12"   MULTIPLE size="4">
+			
+			<% users.map(user=> { %>
+				<option id="UI" value="<%= user.userId %>">  <%= user.userName %>
+				</option>
+				<% }) %>
+		 </select>
+		 </div>
+		 <br />
+		 <!-- <input type="button" id="select_all" name="select_all" value="Select All"> -->
+
+		
+		<div class="btn-toolbar">
+			<input onclick="au()" type="submit" id="select_all" name="userType" value="Send to Everyone" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+			<input onclick="au()" type="submit" id="select_indi" name="userType" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger"></input>
+		</div>
+
+
+		<div class="form-group">
+			<label for="selectUsers" >  </label>
+			<select id="challenges"  name="challenge" type="number" class="mul-select col-md-12" multiple="true"  >
+				<% challenges.map(challenge=> { %>
+					<option id="UI" value="<%= challenge.challengeId %>">  <%= challenge.challengeName %>
+					</option>
+					<% }) %>
+			</select>
 		</div>
 
 		<div class="btn-toolbar">
+			<input onclick="ag()" type="submit" id="select_all_groups" name="userType" value="Send to All Groups" class="btn btn-sm btn-md btn-danger"></input>
+			<input onclick="ag()" type="submit" id="select_group" name="userType" value="Send Selected Groups" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
+		</div>
 
-			<input type="submit" id="PopoverCustomT-1" name="type" value="Send to Everyone"
-			class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
-			<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
 
-
-			<!-- <button type="button" id="btnSubmit" class="btn btn-primary btn-sm">Submit</button>
-			<button type="button" id="btnCancel" class="btn btn-primary btn-sm">Cancel</button> -->
-		  </div>
+			
 
 	</form>
 
 	</div>
 
-
-
-
-
-    <!-- <form action="/postAnnouncement" method="POST" >
-    
-
-    <div class="form-row">
-        <div class="col-sm-6">
-            <h4><b>New Message Title:</b></h4>
-        </div>
-        <div class="col-sm-6">
-            <input id="title" type="text" name="title"  required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="col-sm-6">
-            <h4><b>Write Message:</b></h4>
-        </div>
-        <div class="col-sm-6">
-            <input id="message" type="text" name="description" required>
-        </div>
-    </div>
-    <div class="form-row">
-		
-        <div class="col-sm-12">
-            <input type="submit" id="PopoverCustomT-1" name="type" value="Send to Everyone"
-                    class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
-						<label for="selectUsers" >  </label>
-						<select id="users"  name="type" type="number" class="mul-select col-md-6" multiple="true">
-							<% users.map(user=> { %>
-								<option id="UI" value="<%= user.userId %>">  <%= user.userName %>
-								</option>
-								<% }) %>
-						</select>
-
-			<input type="submit" id="PopoverCustomT-1" value="Send Selected Individuals" class="btn btn-sm btn-md btn-danger" onclick="published()"></input>
-        </div>
-    </div>
-
-</form> -->
-
 </div>
 
 <script>
-    function published(){
-        alert("Announcement Posted");
-    }
+
+	function ag(){
+		$("#users").attr("data-select", "false").find("option").prop("selected", false)
+	}
+
+	function au(){
+		$("#challenges").attr("data-select", "false").find("option").prop("selected", false)
+	}
+
+	console.log($("#users option:selected").index(), "========> indec of seelcted ");
+
 
 	function selectedItems(){
 
@@ -128,6 +122,39 @@
     
     return false;
 });
+
+$('#select_all').click(function() {
+$('#users option').prop('selected', true);
+});
+
+$('#select_all_groups').click(function() {
+$('#challenges option').prop('selected', true);
+});
+
+$(document).ready(function () {
+    $('#select_indi').click(function() {
+		var count = $("#mySelect :selected").length;
+      check = $("#users :selected").length;
+	  console.log(check, "======> check")
+      if(check == 0) {
+        alert("Please select atleast one user.");
+        return false;
+      }
+    });
+});
+
+$(document).ready(function () {
+    $('#select_group').click(function() {
+      check = $("#challenges :selected").length;
+	  console.log(check, "======> check")
+      if(check == 0) {
+        alert("Please select atleast one group.");
+        return false;
+      }
+    });
+});
+
+
 
 
 </script>

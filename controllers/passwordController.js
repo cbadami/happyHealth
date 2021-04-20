@@ -205,12 +205,16 @@ const {
 // }
 
 async function sendEmail(userEmail, generateCode) {
-	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+	console.log("********************** SEND GRID **********************************")
+	
+	sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
+
+	console.log(process.env, "+++++++++++++> sendgrid api")
 
 	const message = {
 		to: userEmail,
-		from: 'fitnestgdp@outlook.com',
-		subject: 'Happy Health reset account',
+		from: 'fitnestgdp@outlook.com', // create mail address with wellhub app name
+		subject: 'WellHub reset account',
 		text: `OTP to reset your account: ${generateCode} `,
 		html: `<p> Your OTP to reset your account:  ${generateCode}</p>`,
 	};

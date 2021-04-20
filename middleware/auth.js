@@ -6,6 +6,7 @@ module.exports.isAuth = (req, res, next) => {
         return;
     }
     res.locals.userName = req.session.userName
+	res.locals.annCount = req.session.annCount
     next();
 };
 

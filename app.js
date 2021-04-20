@@ -90,7 +90,7 @@ app.use('/', isAuth, require('./routes/user.js'));
 app.use('/', isAdmin, require('./routes/admin.js'));
 
 app.use(function(req, res, next) {
-	console.log(req.session, "========> req.session")
+	// console.log(req.session.toJSON(), "========> req.session")
 	// res.locals.user = req.session.userName;
 	next();
 });
@@ -106,10 +106,10 @@ app.use(function(req, res, next) {
 //   });
 // });
 
-const userHomeController = require('./controllers/user/userHomeController')
+const cronJob = require('./controllers/cronJob')
 
 
-userHomeController.resetUserMetrics();
+cronJob.resetUserMetrics();
 
 const PORT = process.env.PORT || 3000;
 
