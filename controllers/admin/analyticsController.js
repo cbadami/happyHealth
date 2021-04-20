@@ -105,10 +105,10 @@ exports.getDataForDate = (req, res) => {
         } else {
 
             const date = req.query.datepicker;
-           
+
 
             console.log("date: ", date);
-         
+
             var query =
                 `select 
                 usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
@@ -122,7 +122,7 @@ exports.getDataForDate = (req, res) => {
                 if (err) {
                     throw err;
                 } else {
-                    
+
                     console.log("result: -------------> Now", result);
                     res.render('adminViews/adminAnalyticsOverAllDate', {
                         layout: 'layouts/adminLayout',
@@ -141,15 +141,27 @@ exports.getDataForDate = (req, res) => {
 
 exports.getAdminAnalytics = (req, res) => {
 
-    let currentDate = new Date().toLocaleDateString();
-    console.log(currentDate, "-------current date");
 
-    let [m, d, y] = currentDate.split("/");
-    m = m.length == 1 ? "0" + m : m;
-    d = d.length == 1 ? "0" + d : d;
-    currentDate = [m, d, y].join('/');
-    console.log(currentDate, "---------cuurent date after formation");
+    let currentDate = req.query.datepicker;
 
+    console.log(currentDate, "------------------ query date");
+    if (!currentDate) {
+        currentDate = new Date().toLocaleDateString();
+        console.log(currentDate, "-------current date");
+
+        let [m, d, y] = currentDate.split("/");
+        m = m.length == 1 ? "0" + m : m;
+        d = d.length == 1 ? "0" + d : d;
+        currentDate = [m, d, y].join('/');
+        console.log(currentDate, "---------cuurent date after formation");
+    } else {
+        // 2021-04-19 04/20/2021
+
+        let [y, m, d] = currentDate.split('-');
+        currentDate = [m, d, y].join('/');
+        console.log(currentDate, "---------query date after formation");
+
+    }
 
     pooldb.getConnection((err1, conn) => {
         if (err1) {
@@ -168,10 +180,13 @@ exports.getAdminAnalytics = (req, res) => {
                 else {
                     //console.log(result);
 
+
+
                     res.render('adminViews/adminAnalyticsOverAll', {
                         layout: 'layouts/adminLayout',
                         title: 'Admin Analytics',
-                        obj: result
+                        obj: result,
+                        currentDate
                     });
                 }
             });
@@ -184,15 +199,26 @@ exports.getAdminAnalytics = (req, res) => {
 
 exports.download = (req, res) => {
 
-    console.log("****************download controller *********************")
-    let currentDate = new Date().toLocaleDateString();
-    console.log(currentDate, "-------current date");
+    let currentDate = req.query.datepicker;
 
-    let [m, d, y] = currentDate.split("/");
-    m = m.length == 1 ? "0" + m : m;
-    d = d.length == 1 ? "0" + d : d;
-    currentDate = [m, d, y].join('/');
-    console.log(currentDate, "---------cuurent date after formation");
+    console.log(currentDate, "------------------ query date");
+    if (!currentDate) {
+        currentDate = new Date().toLocaleDateString();
+        console.log(currentDate, "-------current date");
+
+        let [m, d, y] = currentDate.split("/");
+        m = m.length == 1 ? "0" + m : m;
+        d = d.length == 1 ? "0" + d : d;
+        currentDate = [m, d, y].join('/');
+        console.log(currentDate, "---------cuurent date after formation");
+    } else {
+        // 2021-04-19 04/20/2021
+
+        let [y, m, d] = currentDate.split('-');
+        currentDate = [m, d, y].join('/');
+        console.log(currentDate, "---------query date after formation");
+
+    }
 
     let query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal, usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal, usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where usermetricstbl.date='${currentDate}';`;
 
@@ -215,7 +241,7 @@ exports.download = (req, res) => {
             console.log(result, "-----------------------result");
             if (result.length == 0) {
                 console.log("****************No data**************");
-                res.status(200).json({ message: "No data" })
+                res.status(200).json({ message: "No data" });
                 return;
             }
 
