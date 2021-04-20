@@ -147,7 +147,7 @@
                     </li>
                     <li class="nav-item" title="Profile">
                         <a href="javascript: window.location.href='/userProfile'" class="nav-link">
-                            <i class="fa fa-bell fa-2x" aria-hidden="true"><span class="badge bg-secondary">4</span></i>
+                            <i class="fa fa-bell fa-2x" aria-hidden="true"><span class="badge bg-secondary"><%= annCount %></span></i>
                         </a>
                     </li>
                     <li class="btn-group nav-item">
@@ -312,8 +312,10 @@
                 $(this).addClass("active"); //  adding active class to clicked tab
 
             });
-
-            let notifyValue = 0;
+            
+            
+            let notifyValue = $(".badge").html();
+            //console.log("<%= annCount %> : "+ notifyValue);
             if (notifyValue != 0) {
                 $(".badge").removeClass("bg-secondary");
                 $(".badge").addClass("bg-danger");
