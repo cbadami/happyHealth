@@ -21,7 +21,7 @@ exports.getNotifications = (req, res) => {
 			const userId = req.session.userId;
 			console.log(userId);
 
-			const nnQuery = `SELECT * FROM happyhealth.announcementstbl where  userId like '%${userId}%' order by msgDate desc ;`;
+			const nnQuery = `SELECT * FROM happyhealth.announcementstbl where  userId like '%${userId}%' order by messageId desc ;`;
 
 			conn.query(nnQuery, function (err, result) {
 				if (err) {
