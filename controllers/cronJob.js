@@ -12,7 +12,7 @@ exports.resetUserMetrics = () => {
 	console.log(currentDate, '---------cuurent date after formation--------------');
 
 	try {
-		cron.schedule('00 03 * * *', async () => {
+		cron.schedule('10 03 * * *', async () => {
 			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
