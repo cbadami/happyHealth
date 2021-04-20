@@ -14,6 +14,7 @@ router.post('/signup', userSignupController.postSignup);
 router.get('/', authController.getUserLogin);
 router.post('/', authController.postUserLogin);
 router.get('/updateAllMetrics', cronJob.updateAllMetrics)
+router.get('/yesterdayUpdateMetrics', cronJob.yesterdayUpdateMetrics)
 
 
 /**
