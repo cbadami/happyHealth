@@ -12,7 +12,7 @@ exports.resetUserMetrics = () => {
 	console.log(currentDate, '---------cuurent date after formation--------------');
 
 	try {
-		cron.schedule('10 03 * * *', async () => {
+		cron.schedule('30 04 * * *', async () => {
 			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
@@ -62,6 +62,33 @@ exports.resetUserMetrics = () => {
 										} else {
 											console.log(result2.length, '======> result2');
 
+											let totalUsers = JSON.parse("[" + usersList + "]");
+											let preUserMet = [];
+											let noPreUserMet = [];
+
+											result2.map(rrr=>{
+												preUserMet.push(rrr.userId)
+											})
+
+											totalUsers.filter( element => {
+												if(preUserMet.includes(element) == false ){
+													noPreUserMet.push(element)
+												}
+											});
+
+											let va = '';
+											console.log(preUserMet, noPreUserMet, "============> pre User Metrics")
+											
+											if(noPreUserMet.length>0){
+												for(let i=0; i<noPreUserMet.length; i++){
+													va += `(${noPreUserMet[i]},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0),`;
+												}
+											}
+											
+											va = va.slice(0, -1);
+
+											console.log(va, "=============> va")
+
 											let values = '';
 
 											for (let i = 0; i < result2.length; i++) {
@@ -88,8 +115,12 @@ exports.resetUserMetrics = () => {
 												values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
 											}
 											values = values.slice(0, -1);
-											// console.log(values,"====> values")
+											 console.log(values+','+va,"====> combining 2")
+
+											values = values+','+va
+
 											const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
+											
 											conn.query(newValuesQuery, (err3, result3) => {
 												if (err3) {
 													console.log('============> error while inserting metrics');
@@ -106,6 +137,8 @@ exports.resetUserMetrics = () => {
 													// });
 												}
 											});
+
+
 										}
 									});
 								}
