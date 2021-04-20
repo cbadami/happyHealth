@@ -207,6 +207,8 @@ const {
 async function sendEmail(userEmail, generateCode) {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+	console.log(process.env.SENDGRID_API_KEY, "+++++++++++++> sendgrid api")
+
 	const message = {
 		to: userEmail,
 		from: 'fitnestgdp@outlook.com', // create mail address with wellhub app name
