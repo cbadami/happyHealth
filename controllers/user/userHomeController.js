@@ -687,8 +687,8 @@ exports.getUserPhysicalActivityByDate = (req, res) => {
 		} else {
 			let userId = req.session.userId;
 			var newdate = (dateId.split('-')[1]) + '/' + dateId.split('-')[2] + '/' + dateId.split('-')[0];
-			const stetpQuery = `Select stepCount, stepGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${newdate}' `;
-			conn.query(stetpQuery, function (err, result) {
+			const query = `Select physicalActivityMinutes, physicalActivityGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${newdate}' `;
+			conn.query(query, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -702,17 +702,17 @@ exports.getUserPhysicalActivityByDate = (req, res) => {
 
 							} else {
 								console.log(result, "----------inserted query");
-								const stepCount = stepGoal = 0;
+								const physicalActivityMinutes = physicalActivityGoal = 0;
 								res.json({
-									stepCount, stepGoal
+									physicalActivityMinutes, physicalActivityGoal
 								});
 							}
 						});
 
 					} else {
 						console.log(result, '--------db user table result');
-						const { stepCount, stepGoal } = result[0];
-						res.json({ stepCount, stepGoal });
+						const { physicalActivityMinutes, physicalActivityGoal } = result[0];
+						res.json({ physicalActivityMinutes, physicalActivityGoal });
 					}
 
 
@@ -724,8 +724,7 @@ exports.getUserPhysicalActivityByDate = (req, res) => {
 };
 
 exports.getUserPhysicalActivity = (req, res) => {
-	getDate();
-
+	let currentDate = getCurrentDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -754,14 +753,14 @@ exports.getUserPhysicalActivity = (req, res) => {
 };
 
 exports.postUserPhysicalActivity = (req, res) => {
-	getDate();
 
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { physicalActivityMinutes, physicalActivityGoal } = req.body;
+			const { physicalActivityMinutes, physicalActivityGoal,datepicker1 } = req.body;
+			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
 			console.log('-------post user Physical Activity controller');
 			let errors = [];
 			if (!physicalActivityMinutes || !physicalActivityGoal) {
@@ -772,11 +771,13 @@ exports.postUserPhysicalActivity = (req, res) => {
 					title: 'User Physical Activity',
 				});
 			}
-			var ppQuery = `UPDATE happyhealth.usermetricstbl SET physicalActivityMinutes = ${physicalActivityMinutes}, physicalActivityGoal = ${physicalActivityGoal} WHERE userId = ${userId} and date = '${currentDate}';`;
+			var ppQuery = `UPDATE happyhealth.usermetricstbl SET physicalActivityMinutes = ${physicalActivityMinutes}, physicalActivityGoal = ${physicalActivityGoal} WHERE userId = ${userId} and date = '${newdate}';`;
 			conn.query(ppQuery, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
+					req.flash['title'] = "Physical Activity";
+					req.flash['message'] = "Updated Metrics Sucessfully";
 					res.redirect('/home');
 				}
 			});
