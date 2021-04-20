@@ -60,17 +60,17 @@ exports.getData = (req, res) => {
 
             // console.log(req.query.datepicker1);
             // console.log(req.query.datepicker2);
-            const user = req.params.userId;
+            const userId = req.params.userId;
 
             const startDate = req.query.datepicker1;
             const endDate = req.query.datepicker2;
 
-            console.log("startdate: ", startDate);
+            console.log("startdate: -------------------> start date: ", startDate);
             console.log("enddate: ", endDate);
-            console.log("userId: ", user);
+            console.log("userId: ", userId);
             //console.log(req);
             var query =
-                `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater, SUM( usermetricstbl.physicalActivityMinutes) as  totalphysicalActivityMinutes from usermetricstbl where (usermetricstbl.userId = ${user} AND STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y") BETWEEN '${startDate}' AND '${endDate}');`;
+                `SELECT SUM( usermetricstbl.stepCount) as total, SUM( usermetricstbl.sleepHours) as totalSleep, SUM( usermetricstbl.meTime) as totalMe, SUM( usermetricstbl.fruits) as totalFruits, SUM( usermetricstbl.veggies) as totalVeggies, SUM( usermetricstbl.water) as totalWater, SUM( usermetricstbl.physicalActivityMinutes) as  totalphysicalActivityMinutes from usermetricstbl where (usermetricstbl.userId = ${userId} AND STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y") BETWEEN '${startDate}' AND '${endDate}');`;
 
 
             conn.query(query, function (err, result) {
@@ -85,7 +85,8 @@ exports.getData = (req, res) => {
                         title: 'Admin Analytics',
                         result,
                         startDate,
-                        endDate
+                        endDate,
+                        userId
                     });
                 }
             });
@@ -96,6 +97,47 @@ exports.getData = (req, res) => {
 
 };
 
+exports.getDataForDate = (req, res) => {
+
+    pooldb.getConnection((err1, conn) => {
+        if (err1) {
+            console.log(err1, '=====> error occured');
+        } else {
+
+            const date = req.query.datepicker;
+           
+
+            console.log("date: ", date);
+         
+            var query =
+                `select 
+                usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, 
+                usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal,
+                usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal,
+                usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes 
+                from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y") = '${date}'`;
+
+
+            conn.query(query, function (err, result) {
+                if (err) {
+                    throw err;
+                } else {
+                    
+                    console.log("result: -------------> Now", result);
+                    res.render('adminViews/adminAnalyticsOverAllDate', {
+                        layout: 'layouts/adminLayout',
+                        title: 'Admin Analytics',
+                        obj: result,
+                        date
+                    });
+                }
+            });
+
+            conn.release();
+        }
+    });
+
+};
 
 exports.getAdminAnalytics = (req, res) => {
 
