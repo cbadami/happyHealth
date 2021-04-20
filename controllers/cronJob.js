@@ -1,7 +1,7 @@
 const pooldb = require('../pooldb');
 const cron = require('node-cron');
 
-exports.resetUserMetrics = (req, res) => {
+exports.resetUserMetrics = () => {
 	let currentDate = new Date().toLocaleDateString();
 
 	let [m, d, y] = currentDate.split('/');
@@ -12,7 +12,7 @@ exports.resetUserMetrics = (req, res) => {
 	console.log(currentDate, '---------cuurent date after formation--------------');
 
 	try {
-		cron.schedule('55 18 * * *', async () => {
+		cron.schedule('17 19 * * *', async () => {
 			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
@@ -96,14 +96,14 @@ exports.resetUserMetrics = (req, res) => {
 													conn.release();
 													return;
 												} else {
+													conn.release();
+
 													console.log(result3, '===========> insert new values result3');
 													console.log('************Updated all metrics through CRON************');
-													res.status(200).json({
-														message: 'User metrics updated Succesfully',
-													});
-													return;
-													
-													// return;
+													//console.log(res, "=========> res stattttttttt")
+													// res.status(200).json({
+													// 	message: 'User metrics updated Succesfully  with cron job',
+													// });
 												}
 											});
 										}

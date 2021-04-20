@@ -19,7 +19,7 @@ exports.getAdminAnnouncements = (req, res) => {
 			console.log('***** Admin Announcements started ******');
 			const messageId = req.session.messageId;
 			console.log(messageId);
-			const aaQuery = `select * from announcementsTbl where archive=0 order by msgDate desc`;
+			const aaQuery = `select * from announcementsTbl where archive=0 order by messageId desc`;
 			conn.query(aaQuery, function (err, result) {
 				if (err) {
 					console.log(err, '*****error while getting admin announcments*****');
