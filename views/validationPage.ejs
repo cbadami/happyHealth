@@ -13,10 +13,12 @@
                         </div>
                         <div class="form-group">
                             <label for="code">Verification Code</label>
-                            <input type="password" id="code" name="code" class="form-control" placeholder="000000"
+                            <input type="text" id="code" name="code" class="form-control" placeholder="000000"
                                 value="<%= typeof code != 'undefined' ? code : '' %>" />
-
                         </div>
+
+
+
                         <div class="form-group">
                             <div id="countdown"></div>
                         </div>
@@ -25,6 +27,7 @@
                             <input type="time" class="form-control" id="exampleTimer">
                         </div> -->
                         <div class="form-group">
+							<input type="button" class="btn btn-danger" value="Cancel" onclick="location.href = '/';">
                             <input type="submit" class="btn btn-primary value="Submit" id="resend" name="resend">
                         </div>
 
@@ -33,6 +36,8 @@
             </div>
         </div>
     </section>
+
+</div>
     <script>
         // var timeleft = 600;
         // var downloadTimer = setInterval(function () {
@@ -81,4 +86,3 @@ function countdown( elementName, minutes, seconds )
 countdown( "countdown", 10, 0 );
 
     </script>
-</div>
