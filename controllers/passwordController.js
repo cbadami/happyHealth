@@ -207,7 +207,7 @@ const {
 async function sendEmail(userEmail, generateCode) {
 	console.log("********************** SEND GRID **********************************")
 	
-	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+	sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
 
 	console.log(process.env, "+++++++++++++> sendgrid api")
 
