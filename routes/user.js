@@ -25,6 +25,7 @@ router.get('/userSleep/:date', userHomeController.getUserSleepByDate);
 router.get('/userSleep', userHomeController.getUserSleep);
 router.post('/userSleep', userHomeController.postUserSleep);
 
+router.get('/userTrack/:date', userHomeController.getUserTrackByDate);
 router.get('/userTrack', userHomeController.getUserTrack);
 router.post('/userTrack', userHomeController.postUserTrack);
 

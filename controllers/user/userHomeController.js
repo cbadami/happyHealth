@@ -462,8 +462,53 @@ exports.postUserHydration = (req, res) => {
 	});
 };
 
+exports.getUserTrackByDate = (req, res) => {
+	let dateId = req.params.date;
+	console.log("finall in getUserStepByDate " + dateId);
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			let userId = req.session.userId;
+			var newdate = (dateId.split('-')[1]) + '/' + dateId.split('-')[2] + '/' + dateId.split('-')[0];
+			const stetpQuery = `Select meTime,meTimeGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${newdate}' `;
+			conn.query(stetpQuery, function (err, result) {
+				if (err) {
+					console.log(err);
+				} else {
+
+					if (result.length == 0) {
+						console.log(result, '--------default return values result');
+						let insertQuery = `Insert into happyhealth.usermetricstbl(userId,date) values(${userId},'${newdate}');`;
+						conn.query(insertQuery, function (err, result) {
+							if (err) {
+								console.log(err, "--------error in inserting query");
+
+							} else {
+								console.log(result, "----------inserted query");
+								const meTime = meTimeGoal = 0;
+								res.json({
+									meTime,meTimeGoal
+								});
+							}
+						});
+
+					} else {
+						console.log(result, '--------db user table result');
+						const { meTime,meTimeGoal } = result[0];
+						res.json({ meTime,meTimeGoal });
+					}
+
+
+				}
+			});
+			conn.release();
+		}
+	});
+};
+
 exports.getUserTrack = (req, res) => {
-	getDate();
+	let currentDate = getCurrentDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -476,7 +521,7 @@ exports.getUserTrack = (req, res) => {
 				} else {
 					console.log(result, '--------db user table result');
 
-					var { meTime, meTimeGoal } = result[0];
+					let { meTime, meTimeGoal } = result[0];
 
 					res.render('userViews/userTrack', {
 						layout: 'layouts/userLayout',
@@ -492,15 +537,16 @@ exports.getUserTrack = (req, res) => {
 };
 
 exports.postUserTrack = (req, res) => {
-	getDate();
+	
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { meTime, meTimeGoal } = req.body;
+			const { meTime, meTimeGoal,datepicker1 } = req.body;
 			console.log(`inside post user track`);
 			let errors = [];
+			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
 			if (!meTime || !meTimeGoal) {
 				console.log(`inside if statement ${meTime}`);
 				errors.push('Please enter all fields');
@@ -513,11 +559,13 @@ exports.postUserTrack = (req, res) => {
 				});
 			}
 			var stepQuery = `UPDATE happyhealth.usermetricstbl
-        SET meTime = ${meTime}, meTimeGoal = ${meTimeGoal} WHERE userId = ${userId} and date = '${currentDate}';`;
+        SET meTime = ${meTime}, meTimeGoal = ${meTimeGoal} WHERE userId = ${userId} and date = '${newdate}';`;
 			conn.query(stepQuery, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
+					req.flash['title'] = "Mindful Minutes";
+					req.flash['message'] = "Updated Metrics Sucessfully";
 					res.redirect('/home');
 				}
 			});
