@@ -12,7 +12,7 @@ exports.resetUserMetrics = () => {
 	console.log(currentDate, '---------cuurent date after formation--------------');
 
 	try {
-		cron.schedule('30 04 * * *', async () => {
+		cron.schedule('00 00 * * *', async () => {
 			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
@@ -41,6 +41,7 @@ exports.resetUserMetrics = () => {
 									console.log(result, '-------------result delete metrics');
 								});
 							}
+
 							let usersQuery = `SELECT GROUP_CONCAT(userId order by userId) as users FROM happyhealth.usertbl;`;
 							conn.query(usersQuery, (err, result) => {
 								if (err) {
