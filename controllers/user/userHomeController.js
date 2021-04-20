@@ -348,8 +348,53 @@ exports.postUserSleep = (req, res) => {
 	});
 };
 
+exports.getUserHydrationByDate = (req, res) => {
+	let dateId = req.params.date;
+	console.log("finall in getUserWaterByDate " + dateId);
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			let userId = req.session.userId;
+			var newdate = (dateId.split('-')[1]) + '/' + dateId.split('-')[2] + '/' + dateId.split('-')[0];
+			const waterQuery = `Select water, waterGoal from happyhealth.usermetricstbl where UserId = ${userId} and date = '${newdate}' `;
+			conn.query(waterQuery, function (err, result) {
+				if (err) {
+					console.log(err);
+				} else {
+
+					if (result.length == 0) {
+						console.log(result, '--------default return values result');
+						let insertQuery = `Insert into happyhealth.usermetricstbl(userId,date) values(${userId},'${newdate}');`;
+						conn.query(insertQuery, function (err, result) {
+							if (err) {
+								console.log(err, "--------error in inserting query");
+
+							} else {
+								console.log(result, "----------inserted query");
+								const water = waterGoal = 0;
+								res.json({
+									water, waterGoal
+								});
+							}
+						});
+
+					} else {
+						console.log(result, '--------db user table result');
+						const { water, waterGoal} = result[0];
+						res.json({ water, waterGoal });
+					}
+
+
+				}
+			});
+			conn.release();
+		}
+	});
+};
+
 exports.getUserHydration = (req, res) => {
-	getDate();
+	let currentDate = getCurrentDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -379,15 +424,15 @@ exports.getUserHydration = (req, res) => {
 };
 
 exports.postUserHydration = (req, res) => {
-	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { water, waterGoal } = req.body;
+			const { water, waterGoal, datepicker1 } = req.body;
 			console.log(`inside post user hyration`);
 			let errors = [];
+			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
 			if (!water || !waterGoal) {
 				console.log(`inside if statement ${water}`);
 				errors.push('Please enter all fields');
@@ -400,12 +445,14 @@ exports.postUserHydration = (req, res) => {
 				return;
 			}
 			let hydrationQuery = `UPDATE happyhealth.usermetricstbl
-				SET water = ${water}, waterGoal = ${waterGoal} WHERE userId = ${userId} and date = '${currentDate}' ;`;
+				SET water = ${water}, waterGoal = ${waterGoal} WHERE userId = ${userId} and date = '${newdate}' ;`;
 			conn.query(hydrationQuery, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
-					console.log('----------susscesfully updated db');
+					req.flash['title'] = "Water Consumed";
+					req.flash['message'] = "Updated Metrics Sucessfully";
+					console.log('----------susscesfully updated water db');
 					res.redirect('/home');
 				}
 			});

@@ -28,6 +28,7 @@ router.post('/userSleep', userHomeController.postUserSleep);
 router.get('/userTrack', userHomeController.getUserTrack);
 router.post('/userTrack', userHomeController.postUserTrack);
 
+router.get('/userHydration/:date', userHomeController.getUserHydrationByDate);
 router.get('/userHydration', userHomeController.getUserHydration);
 router.post('/userHydration', userHomeController.postUserHydration);
 
