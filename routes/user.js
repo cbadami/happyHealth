@@ -21,6 +21,7 @@ router.get('/userStep/:date', userHomeController.getUserStepByDate);
 router.get('/userStep', userHomeController.getUserStep);
 router.post('/userStep', userHomeController.postUserStep);
 
+router.get('/userSleep/:date', userHomeController.getUserSleepByDate);
 router.get('/userSleep', userHomeController.getUserSleep);
 router.post('/userSleep', userHomeController.postUserSleep);
 
