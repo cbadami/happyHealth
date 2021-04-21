@@ -51,8 +51,6 @@ exports.getNotifications = (req, res) => {
 
 					console.log(newN.length, "+=========> new ann lenght")
 
-					req.session.annCount = newN.length;
-
 
 					// const anCoun = `SELECT count(*) as count FROM happyhealth.announcementstbl where  userId like '%${userId}%' ;`;
 					// conn.query(anCoun, (err, countResult) => {
@@ -206,10 +204,11 @@ exports.viewNotification = (req, res) => {
 							console.log(err, 'error while updating new list');
 						} else {
 							console.log(result, '=====> removed user from list');
-
-
 						}
 					});
+
+					
+
 				}
 			});
 			conn.release();

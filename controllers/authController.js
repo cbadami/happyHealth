@@ -44,7 +44,10 @@ exports.postUserLogin = async (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			try {
-				const { username, password } = req.body;
+				
+				console.log(req.body, "============< req body")
+
+				const { userId, username, password } = req.body;
 
 				console.log(username, '==========> POSTING USER LOGIN');
 
@@ -65,9 +68,11 @@ exports.postUserLogin = async (req, res) => {
 						password,
 					});
 				} else {
-					let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'; SELECT count(*) as count FROM happyhealth.announcementstbl where  userId like '%2%' ;`;
 
-					console.log('*****User login DB Query Started**********\n');
+
+					let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'; `
+
+					console.log( username, userId, '*****User login DB Query Started**********\n');
 
 					conn.query(queryString, async function (err, result) {
 						conn.release();
@@ -77,18 +82,41 @@ exports.postUserLogin = async (req, res) => {
 							console.log(err, '-----while login');
 						}
 
-						let userResult = result[0];
-						let annCount = result[1];
 						console.log(result, '---------user login result');
+
+
+						let userResult = result;
 
 						if (userResult.length > 0) {
 							const validPassword = await bcrypt.compare(password, userResult[0]['password']);
 							if (validPassword) {
 								req.session.userName = userResult[0]['userName'];
 								req.session.userId = userResult[0]['userId'];
-								req.session.annCount = annCount[0].count
-								req.session.isLoggedIn = true;
-								res.redirect('home');
+
+								function getLastRecord()
+								{
+									return new Promise(function(resolve, reject) {
+										query_str = `SELECT count(*) as annCount FROM happyhealth.announcementstbl where  userId like '%${req.session.userId}%' ;`
+										conn.query(query_str, function (err, rows, fields) {
+											// Call reject on error states,
+											// call resolve with results
+											if (err) {
+												return reject(err);
+											}
+											resolve(rows);
+										});
+									});
+								}
+					
+								getLastRecord().then(function(rows) {
+									console.log(rows[0].annCount, "=====================> resolved data........")
+									req.session.annCount = rows[0].annCount;
+									req.session.isLoggedIn = true;
+
+									res.redirect('home');
+									// res.locals.annCount = req.session.annCount;
+								}).catch((err) => setImmediate(() => { throw err; })); 
+								// req.session.annCount = annCount[0].count
 							} else {
 								errors.push({
 									msg: 'Enter correct username or password',

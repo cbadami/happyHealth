@@ -7,6 +7,9 @@ module.exports.isAuth = (req, res, next) => {
     }
     res.locals.userName = req.session.userName
 	res.locals.annCount = req.session.annCount
+
+	// console.log(JSON.stringify(req.session), "------------------User session");
+
     next();
 };
 

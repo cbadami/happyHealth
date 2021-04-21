@@ -12,7 +12,7 @@ exports.resetUserMetrics = () => {
 	console.log(currentDate, '---------cuurent date after formation--------------');
 
 	try {
-		cron.schedule('00 18 * * *', async () => {
+		cron.schedule('57 17 * * *', async () => {
 			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
@@ -133,7 +133,7 @@ exports.resetUserMetrics = () => {
 													conn.release();
 
 													console.log(result3, '===========> insert new values result3');
-													console.log('************Updated all metrics through CRON************');
+													console.log( Date.now(), '************Updated all metrics through CRON************');
 													//console.log(res, "=========> res stattttttttt")
 													// res.status(200).json({
 													// 	message: 'User metrics updated Succesfully  with cron job',
