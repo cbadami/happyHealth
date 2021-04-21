@@ -6,9 +6,9 @@
           <form method="POST" class="my-5" action="postFruitsVeggies">
             <div class="form-group">
               <%- include ('../partials/messages') %>
-                <h2 class="d-flex justify-content-center py-3">
-                  Fruits & Veggies Consumed
-                </h2>
+              <h2 class="d-flex justify-content-center py-3">
+                Fruits & Veggies Consumed
+              </h2>
             </div>
             <div class="form-row">
               <label for="dateText"> Date</label>
@@ -58,7 +58,6 @@
   </section>
 </div>
 <script>
-
   let today = new Date();
   let dd = today.getDate();
   let mm = today.getMonth() + 1; //January is 0!
@@ -80,7 +79,7 @@
       type: 'GET',
       url: 'getFruitsVeggies/' + date,
       success: function (result) {
-        console.log(result,"-----------------------result")
+        console.log(result, "-----------------------result")
         document.getElementById("fruits").value = result.fruits;
         document.getElementById("fruitGoal").value = result.fruitGoal;
         document.getElementById("veggies").value = result.veggies;
