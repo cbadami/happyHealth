@@ -244,14 +244,54 @@ exports.download = (req, res) => {
             console.log(result, "-----------------------result");
             if (result.length == 0) {
                 console.log("****************No data**************");
-                res.status(200).json({ message: "No data" });
+                res.status(200).json({
+                    message: "No data"
+                });
                 return;
             }
 
             let userMetrics = [];
             result.forEach((r) => {
-                const { userId, UserName, fullName, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, veggies, veggieGoal, fruits, fruitGoal, physicalActivityMinutes, physicalActivityGoal } = r;
-                userMetrics.push({ userId, UserName, fullName, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, veggies, veggieGoal, fruits, fruitGoal, physicalActivityMinutes, physicalActivityGoal });
+                const {
+                    userId,
+                    UserName,
+                    fullName,
+                    date,
+                    stepCount,
+                    stepGoal,
+                    sleepHours,
+                    sleepGoal,
+                    meTime,
+                    meTimeGoal,
+                    water,
+                    waterGoal,
+                    veggies,
+                    veggieGoal,
+                    fruits,
+                    fruitGoal,
+                    physicalActivityMinutes,
+                    physicalActivityGoal
+                } = r;
+                userMetrics.push({
+                    userId,
+                    UserName,
+                    fullName,
+                    date,
+                    stepCount,
+                    stepGoal,
+                    sleepHours,
+                    sleepGoal,
+                    meTime,
+                    meTimeGoal,
+                    water,
+                    waterGoal,
+                    veggies,
+                    veggieGoal,
+                    fruits,
+                    fruitGoal,
+                    physicalActivityMinutes,
+                    physicalActivityGoal
+                });
             });
 
             const csvFields = ["userId", "date", "stepCount", "sleepCount"];
