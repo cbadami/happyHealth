@@ -55,7 +55,23 @@ exports.dismissAnnouncement = (req, res) => {
 				if (err) {
 					console.log(err, '=======> error');
 				} else {
+
+					console.log(resul,"==========> resul")
+					console.log(resul[0].length, "===============> seen users")
+
 					let users = resul[0].userId.split(',');
+					let seenUsers = [];
+
+					if(resul[0].seenUsers === undefined){
+							console.log(resul[0].seenUsers, "===============> seen users")
+					}else{
+						console.log("=========> dude there are no seen users.")
+
+
+					}
+
+					// let seenUsers = resul[0].seenUsers.split(',')
+
 					console.log(users, '======> before splitting');
 
 					var userIndex = users.indexOf(`${userId}`);
@@ -92,57 +108,9 @@ exports.dismissAnnouncement = (req, res) => {
 	});
 };
 
-// exports.postNotifications = (req, res) => {
-//     let userId = req.session.userId;
-//     console.log("-------post user Notification controller");
-//     let errors = [];
-//     if (errors) {
-//         errors.push('Please enter all fields');
-//         console.log(errors, "----------------errros");
-//         res.render('userViews/notifications', {
-//             layout: 'layouts/userLayout',
-//             title: 'Announcements'
-//         });
-//     }
-// };
+exports.viewNotification = (req,res)=>{
+	console.log("user is viewing ")
 
-// exports.getNotifications = (req, res) => {
-//     res.render('userViews/notifications', {
-//         layout: 'layouts/userLayout',
-//         title: 'User Management'
+	
 
-//     });
-// };
-
-// exports.deleteMsg = (req, res) => {
-//     let messageId = req.params.messageId;
-//     console.log(messageId, "deleting msg")
-//     const deleteQuery = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}'; `;
-//     const deleteQuery2 = `Delete * FROM happyhealth.announcementsTbl WHERE messageId = '${messageId}';`;
-//     conn.query(deleteQuery2, function (err) {
-//         if (err) {
-//             throw err;
-//         }
-//         console.log("****notifications delete2 executed started****");
-//     });
-//     conn.query(deleteQuery, function (err) {
-//         if (err) {
-//             throw err;
-//         } else {
-//             res.redirect('userViews/notifications');
-//         }
-//         console.log("****delete executed started****");
-//     });
-
-//     // var ppQuery = `Delete * FROM happyhealth.announcementsTbl;`;
-//     // conn.query(ppQuery, function (err, result) {
-//     //     if (err) {
-//     //         console.log(err);
-//     //     } else {
-//     //         res.redirect('userViews/notifications', {
-//     //             layout: 'layouts/userLayout',
-//     //             title: 'Announcements'
-//     //         });
-//     //     }
-//     // });
-// }
+}
