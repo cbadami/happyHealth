@@ -49,6 +49,8 @@ exports.getNotifications = (req, res) => {
 						}
 					});
 
+					console.log(newN.length, "+=========> new ann lenght")
+
 					req.session.annCount = newN.length;
 
 

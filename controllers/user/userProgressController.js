@@ -35,14 +35,11 @@ let currentDate = moment(new Date()).format('L').toString();
 // 	});
 // };
 
-
 exports.getTodayProgress = (req, res) => {
-
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-	
 			const userId = req.session.userId;
 
 			const metricQuery = `Select * from happyhealth.usermetricstbl where UserId = ${userId} and date = '${currentDate}';`;
@@ -51,18 +48,30 @@ exports.getTodayProgress = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '--------db userMetrics table result');
+
+					let u = result[0];
+					let stats = {
+						step: Math.round((u.stepCount / u.stepGoal) * 100 * 10) / 10,
+						sleep: Math.round((u.sleepHours / u.sleepGoal) * 100 * 10) / 10,
+						meTime: Math.round((u.meTime / u.meTimeGoal) * 100 * 10) / 10,
+						water: Math.round((u.water / u.waterGoal) * 100 * 10) / 10,
+						fruits: Math.round((u.fruits / u.fruitGoal) * 100 * 10) / 10,
+						veggies: Math.round((u.veggies / u.veggieGoal) * 100 * 10) / 10,
+						physical: Math.round((u.physicalActivityMinutes / u.physicalActivityGoal) * 100 * 10) / 10,
+					};
+					console.log(stats, '=========> stats');
+
 					res.render('userViews/userProgress', {
 						layout: 'layouts/userLayout',
 						title: 'User Progress',
-						result
+						result,
+						stats
 					});
 				}
-		
 			});
-	conn.release()
+			conn.release();
 		}
 	});
-
 };
 
 exports.getProgress = (req, res) => {
@@ -70,26 +79,34 @@ exports.getProgress = (req, res) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-	
 			console.log(req.query.datepicker1);
 			console.log(req.query.datepicker2);
 			const user = req.session.userId;
-		
+
 			const startDate = req.query.datepicker1;
 			const endDate = req.query.datepicker2;
-		
-			console.log("startdate: ", startDate);
-			console.log("enddate: ", endDate);
-			console.log("userId: ", user);
+
+			console.log('startdate: ', startDate);
+			console.log('enddate: ', endDate);
+			console.log('userId: ', user);
 			//console.log(req);
-			const metricSum =
-				`SELECT 
-			SUM( happyhealth.usermetricstbl.stepCount) as total,
-			SUM( happyhealth.usermetricstbl.sleepHours) as totalSleep,
-			SUM( happyhealth.usermetricstbl.meTime) as totalMe,
-			SUM( happyhealth.usermetricstbl.fruits) as totalFruits,
-			SUM( happyhealth.usermetricstbl.veggies) as totalVeggies,
-			SUM( happyhealth.usermetricstbl.water) as totalWater, SUM( happyhealth.usermetricstbl.physicalActivityMinutes) as totalPhysicalMinutes from 
+
+			const metricSum = `SELECT 
+			SUM( happyhealth.usermetricstbl.stepCount) as stepCount,
+			SUM( happyhealth.usermetricstbl.stepGoal) as stepGoal,
+			SUM( happyhealth.usermetricstbl.sleepHours) as sleepHours,
+			SUM( happyhealth.usermetricstbl.sleepGoal) as sleepGoal,
+			SUM( happyhealth.usermetricstbl.meTime) as meTime,
+			SUM( happyhealth.usermetricstbl.meTimeGoal) as meTimeGoal,
+			SUM( happyhealth.usermetricstbl.fruits) as fruits,
+			SUM( happyhealth.usermetricstbl.fruitGoal) as fruitGoal,
+			SUM( happyhealth.usermetricstbl.veggies) as veggies,
+			SUM( happyhealth.usermetricstbl.veggieGoal) as veggieGoal,
+			SUM( happyhealth.usermetricstbl.water) as water, 
+			SUM( happyhealth.usermetricstbl.waterGoal) as waterGoal,
+			SUM( happyhealth.usermetricstbl.physicalActivityMinutes) as physicalActivityMinutes ,
+			SUM( happyhealth.usermetricstbl.physicalActivityGoal) as physicalActivityGoal 
+			from 
 			happyhealth.usermetricstbl
 			where
 			(happyhealth.usermetricstbl.userId = ${user}
@@ -97,24 +114,37 @@ exports.getProgress = (req, res) => {
 			STR_TO_DATE(usermetricstbl.date, "%m/%d/%Y")
 			BETWEEN
 			'${startDate}' AND '${endDate}');`;
-		
-		
+
 			conn.query(metricSum, function (err, result) {
 				if (err) {
 					throw err;
 				} else {
-					console.log("****metric sum result**** ", result);
+					console.log('****metric sum result**** ', result);
+
+					let u = result[0];
+					let stats = {
+						step: Math.round((u.stepCount / u.stepGoal) * 100 * 10) / 10,
+						sleep: Math.round((u.sleepHours / u.sleepGoal) * 100 * 10) / 10,
+						meTime: Math.round((u.meTime / u.meTimeGoal) * 100 * 10) / 10,
+						water: Math.round((u.water / u.waterGoal) * 100 * 10) / 10,
+						fruits: Math.round((u.fruits / u.fruitGoal) * 100 * 10) / 10,
+						veggies: Math.round((u.veggies / u.veggieGoal) * 100 * 10) / 10,
+						physical: Math.round((u.physicalActivityMinutes / u.physicalActivityGoal) * 100 * 10) / 10,
+					};
+					console.log(stats, '=========>avg stats ');
+
+					
 					res.render('userViews/userProgressDate', {
 						layout: 'layouts/userLayout',
 						title: 'Custom Progress',
 						result,
+						stats,
 						startDate,
-						endDate
+						endDate,
 					});
 				}
 			});
-	conn.release()
+			conn.release();
 		}
 	});
-
 };
