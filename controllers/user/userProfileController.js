@@ -3,6 +3,7 @@ const pooldb = require('../../pooldb');
 const moment = require('moment');
 
 let currentDate = '';
+
 function getDate() {
 	currentDate = moment().tz('America/Chicago').format('L');
 	// let upcomingDate  = moment().tz("America/Chicago").add(1,'days').format('L');
@@ -27,7 +28,7 @@ exports.getUserInfo = (req, res) => {
 					throw err;
 				} else {
 					console.log(result[0]);
-					console.log(userId,currentDate,"----------before usermetrics query")
+					console.log(userId, currentDate, "----------before usermetrics query")
 					let userGoals = `SELECT * FROM happyhealth.usermetricstbl where userId = ${userId} and date='${currentDate}'`;
 					conn.query(userGoals, function (err, result2) {
 						if (err) {
