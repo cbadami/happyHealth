@@ -19,7 +19,7 @@
                     <strong class="mr-auto">
                         <%= result[i].title%>
                     </strong>
-					<a class="btn btn-sm btn-md btn-primary" data-toggle="collapse" href="#collapseExample<%= result[i].messageId %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+					<a class="btn btn-sm btn-md btn-primary" onclick="viewNotif('<%= result[i].messageId %>')" data-toggle="collapse" href="#collapseExample<%= result[i].messageId %>" role="button" aria-expanded="false" aria-controls="collapseExample">
 						view
 					  </a>
                     <form action="/dismissAnnouncement/<%= result[i].messageId %>" method="post">
@@ -41,3 +41,18 @@
     </div>
 
 </div>
+
+<script>
+	function viewNotif(id){
+		console.log(id, "clicked")
+		$.ajax({
+        type: 'post',
+        url: 'viewNotification/'+id,
+        // success: function(result) {
+        //   document.getElementById("stepCount").value=result.stepCount;
+        //   document.getElementById("stepGoal").value=result.stepGoal;
+        //      //$('#champ').html(result);
+        // }
+      });
+	}
+</script>

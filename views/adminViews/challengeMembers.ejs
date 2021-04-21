@@ -1,69 +1,5 @@
 <div class="app-main__inner">
 
-    <% if ( challengeData[0].participantType=='Group' ) { %>
-        <div>
-            <h1> <b>Manage Groups</b> </h1>
-            <h2>Challenge Name : <%= challengeData[0].challengeName %>
-            </h2>
-            <h3>Participant Type: <%= challengeData[0].participantType %>
-            </h3>
-
-        </div>
-
-        <form>
-            <label for="user"> Select Groups: </label>
-
-            <div class="form-group">
-                <select class="selectpicker form-control col-md-4">
-                    <option selected>Avengers</option>
-                    <option>Champions</option>
-                    <option>Legends</option>
-                    <option>Bosses</option>
-                    <option>Power Rangers</option>
-                    <option>Thunder Guys</option>
-                </select>
-
-            </div>
-            <input type="submit" value="Add"> </input>
-        </form>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Group Name</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Delta Blues</td>
-                    <td> <button type="button" class="btn btn-primary">Edit</button></td>
-                    <td> <button type="button" class="btn btn-danger">Delete</button></td>
-                </tr>
-
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Golden Archers</td>
-                    <td> <button type="button" class="btn btn-primary">Edit</button></td>
-                    <td> <button type="button" class="btn btn-danger">Delete</button></td>
-                </tr>
-
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Little Colonels</td>
-                    <td> <button type="button" class="btn btn-primary">Edit</button></td>
-                    <td> <button type="button" class="btn btn-danger">Delete</button></td>
-                </tr>
-
-            </tbody>
-        </table>
-
-        <% } else { %>
-
             <div>
 
                 <!-- <h1> <b>Manage Users</b> </h1> -->
@@ -75,13 +11,12 @@
                 <div>
                     <label for="addUser"><strong>Invite User: </strong> </label>
 
-                    <select name="userId" class="form-control addUser " multiple="true">
+                    <select name="userId" id="mySelect" onchange="refreshButtons()"  class="form-control addUser " multiple="true">
                         <% for (var i=0; i < notJoinedUsers.length;i++) { %>
-                            <option value="<%= notJoinedUsers[i].userId %>">
+                            <option  id = "notJoinedUSERS" value="<%= notJoinedUsers[i].userId %>">
                                 <%= notJoinedUsers[i].userName %>
                             </option>
                             <% } %>
-
                                 <% if(notJoinedUsers.length===0){ %>
                                     <option disabled>
                                         All Users are invited
@@ -89,7 +24,7 @@
                                     <% } %>
                     </select>
 
-                    <input type="submit" value="Invite" id="inviteBtn" class="btn btn-primary"></input>
+                    <input disabled type="submit" value="Invite" id="inviteBtn" class="btn btn-primary"></input>
                 </div>
 
             </form>
@@ -125,10 +60,10 @@
                                     method="POST">
 
                                     <% if( joinedUsers[i].activeUser ) { %>
-                                        <button type="submit" id="PopoverCustomT-1"
+                                        <button type="submit" id="mySelect" onclick="refreshButtons()"
                                             class="btn btn-primary btn-danger">Remove</button>
                                         <% }else{ %>
-                                            <button type="submit" id="PopoverCustomT-1"
+                                            <button type="submit" id="mySelect" onclick="refreshButtons()"
                                                 class="btn btn-primary btn-warning">Cancel Invitation</button>
                                             <% } %>
 
@@ -139,7 +74,6 @@
                 </tbody>
             </table>
 
-            <% } %>
 
                 <!-- <div>
 				<%= notJoinedUsers[0] %>
@@ -150,16 +84,28 @@
 
 <script>
 
-    // const notJoinedUsers = "<%= notJoinedUsers.length %>"
-    // console.log( '<%= notJoinedUsers.length %>' === '0' ,"-----------not Joined user");
 
-    var button = document.getElementById("inviteBtn");
+	var button = document.getElementById("inviteBtn");
+	if ('<%= notJoinedUsers.length %>' === '0') {
+		button.disabled = true;
+	} else {
+		button.disabled = false;
+	}
 
-    if ('<%= notJoinedUsers.length %>' === '0') {
-        button.disabled = true;
-    } else {
-        button.disabled = false;
-    }
+
+	function refreshButtons(){
+
+var x = document.getElementById("mySelect").selectedOptions.length;
+var button = document.getElementById("inviteBtn");
+
+  if (x === 0) {
+	  button.disabled = true;
+  } else {
+	  button.disabled = false;
+  }
+}
+
+
 
 
     function selectedItems() {
@@ -208,6 +154,8 @@
 
 
 
+
+
 </script>
 
 <style>
@@ -220,3 +168,4 @@
         display: inline-flex;
     }
 </style>
+

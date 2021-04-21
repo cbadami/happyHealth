@@ -82,6 +82,7 @@ router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity
   */
  
 router.get('/notifications', userNotificationController.getNotifications);
+router.post('/viewNotification/:messageId',userNotificationController.viewNotification )
 // router.post('/notifications', userNotificationController.postNotifications);
 router.post('/dismissAnnouncement/:messageId', userNotificationController.dismissAnnouncement)
 
