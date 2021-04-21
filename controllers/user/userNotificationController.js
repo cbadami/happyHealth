@@ -49,6 +49,20 @@ exports.getNotifications = (req, res) => {
 						}
 					});
 
+					req.session.annCount = newN.length;
+
+
+					// const anCoun = `SELECT count(*) as count FROM happyhealth.announcementstbl where  userId like '%${userId}%' ;`;
+					// conn.query(anCoun, (err, countResult) => {
+					// 	if (err) throw err;
+					// 	else {
+					// 		console.log(countResult[0].count, '=====> unread notifs');
+					// 		req.session.annCount = countResult[0].count;
+					// 		console.log(req.session.annCount, '==========> session cunt');
+					// 		res.redirect('/notifications');
+					// 	}
+					// });
+
 					res.render('userViews/notifications', {
 						layout: 'layouts/userLayout',
 						title: 'Announcements',
@@ -191,16 +205,7 @@ exports.viewNotification = (req, res) => {
 						} else {
 							console.log(result, '=====> removed user from list');
 
-							const anCoun = `SELECT count(*) as count FROM happyhealth.announcementstbl where  userId like '%${userId}%' ;`;
-							conn.query(anCoun, (err, countResult) => {
-								if (err) throw err;
-								else {
-									console.log(countResult[0].count, '=====> unread notifs');
-									req.session.annCount = countResult[0].count;
-									console.log(req.session.annCount, '==========> session cunt');
-									res.redirect('/notifications');
-								}
-							});
+
 						}
 					});
 				}

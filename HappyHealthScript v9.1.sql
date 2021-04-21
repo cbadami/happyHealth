@@ -222,19 +222,21 @@ CREATE TABLE announcementsTbl (
   title varchar(100) NOT NULL,
   message varchar(500) DEFAULT NULL,
   userId varchar(500) DEFAULT NULL,
+seenUsers varchar(500) DEFAULT NULL,
+
   msgDate varchar(20) DEFAULT NULL ,
   archive boolean default null,
   PRIMARY KEY (messageId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ALTER TABLE announcementsTbl AUTO_INCREMENT=3001;
 
-INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES
-('Title test','This is message','1,2,3,4,5,6,7,8', '03/12/2021',0),
-('Everyone Title','This message for everyone','1,2,3,4,5,6,7,8','03/22/2021',0),
-('Hello!','Hello! Welcome to our health based application!','1,2,3,4,5,6,7,8','02/01/2021',1),
-('Log Daily Goals','Hey! Kindly update your daily goals for better usage!','1,2,3,4,5,6,7,8','01/21/2021',0),
-('Drink Water','It is always good to drink more water during hotter days!','1,2,3,4,5,6,7,8','03/21/2021',0),
-('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.','1,2,3,4,5,6,7,8','03/03/2021',1)
+INSERT INTO announcementsTbl(title, message, userId, seenUsers, msgDate, archive) VALUES
+('Title test','This is message','1,2,3,4','5,6,7,8', '03/12/2021',0),
+('Everyone Title','This message for everyone','1,2,3,4,5,6,7,8','','03/22/2021',0),
+('Hello!','Hello! Welcome to our health based application!','4,5,6,7,8','1,2,3','02/01/2021',1),
+('Log Daily Goals','Hey! Kindly update your daily goals for better usage!','1,2,7,8','3,4,5,6','01/21/2021',0),
+('Drink Water','It is always good to drink more water during hotter days!','1,4,5,6,7,8','2,3','03/21/2021',0),
+('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.','1,2,3,4,5,6,7,8','','03/03/2021',1)
 ;
 
 --
