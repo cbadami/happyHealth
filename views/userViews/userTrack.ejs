@@ -10,38 +10,15 @@
                 Mindful Minutes
               </h2>
             </div>
-            <!-- <div class="form-row">
-                            <label for="username">Date:</label>
-                            Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ 
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' name="date" id="dateText"
-                                    value="<%= typeof date != 'undefined' ? date : '' %>" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>  -->
             <div class="form-row">
               <label for="dateText"> Date</label>
-              <input type="date" class="date form-control" id="datepicker1" name="datepicker1"
-                            placeholder="mm/dd/yyyy" min='1899-01-01'>
-              
-              <!-- <input  id="demo" class="form-control" /> -->
+              <input type="date" class="date form-control" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy"
+                min='1899-01-01'>
             </div>
-
-          
             <div class="form-row">
               <label for="username">Number of mindful minutes</label>
-              <input
-                type="number"
-                id="meTime"
-                name="meTime"
-                min="0"
-                step="0.01"
-                class="form-control"
-                placeholder="0"
-                value="<%= typeof meTime != 'undefined' ? meTime : '' %>"
-              />
+              <input type="number" id="meTime" name="meTime" min="0" step="0.01" class="form-control" placeholder="0"
+                value="<%= typeof meTime != 'undefined' ? meTime : '' %>" />
             </div>
             <div class="form-row">
               <label for="password">Personal Daily Goal</label>
@@ -56,22 +33,13 @@
                 value="<%= typeof meTimeGoal != 'undefined' ? meTimeGoal : '' %>"
               />
             </div>
-            <!-- <div class="form-row">
-                            <label for="password">Physical Activity</label>
-                            <input type="text" id="meTime" name="Physical Activity" class="form-control" value="Physical Activity"placeholder="Physical Activity"
-                                value="<%= typeof meTime != 'undefined' ? meTime : '' %>" />
-                        </div> -->
-            <div class="form-row"></div>
-
-            <div class="form-row">
-              <div class="col-lg-12">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  style="margin-top: 10px"
-                >
-                  Update
-                </button>
+          <div class="form-row"></div>
+          
+          <div class="form-row">
+            <div class="col-lg-12">
+              <button type="submit" class="btn btn-primary" style="margin-top: 10px">
+                Update
+              </button>
               </div>
             </div>
           </form>
