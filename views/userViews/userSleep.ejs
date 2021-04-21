@@ -8,23 +8,11 @@
               <%- include ('../partials/messages') %>
                 <h2 class="d-flex justify-content-center py-3">Sleep Hours</h2>
             </div>
-            <!-- <div class="form-row">
-                            <label for="username">Date:</label>
-                            Reference: https://eonasdan.github.io/bootstrap-datetimepicker/ 
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' name="date" id="dateText"
-                                    value="<%= typeof date != 'undefined' ? date : '' %>" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div> -->
             <div class="form-row">
               <label for="dateText"> Date</label>
               <p id="demo"></p>
-              <input type="date" class="date form-control" id="datepicker1" name="datepicker1"
-                            placeholder="mm/dd/yyyy" min='1899-01-01'>
-              <!-- <input  id="demo" class="form-control" /> -->
+              <input type="date" class="date form-control" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy"
+                min='1899-01-01'>
             </div>
 
             <div class="form-row">
@@ -36,23 +24,7 @@
               <label for="password">Personal Daily Goal</label>
               <input type="number" id="sleepGoal" min="0" step="0.01" name="sleepGoal" class="form-control"
                 placeholder="0" value="<%= typeof sleepGoal != 'undefined' ? sleepGoal : '' %>" />
-            </div>
-            <!-- </div>
-            <div class="form-row">
-              <label for="password">Monthly Goal</label>
-              <input
-                type="number"
-                id="sleepGoal"
-                min="0"
-                name="sleepGoal"
-                class="form-control"
-                placeholder="0"
-                value="<%= typeof sleepGoal != 'undefined' ? sleepGoal : '' %>"
-              />
-            </div> -->
-
-            <div class="form-row"></div>
-
+            </div><div class="form-row"></div>
             <div class="form-row">
               <div class="col-lg-12">
                 <button type="submit" class="btn btn-primary" style="margin-top: 10px">
@@ -84,15 +56,15 @@
   document.getElementById("datepicker1").value = today;
 
   $("#datepicker1").on("change", function () {
-    var date = document.getElementById("datepicker1").value;
-    $.ajax({
-      type: 'GET',
-      url: 'userSleep/' + date,
-      success: function (result) {
-        document.getElementById("sleepHours").value = result.sleepHours;
-        document.getElementById("sleepGoal").value = result.sleepGoal;
-        //$('#champ').html(result);
-      }
-    });
+      var date = document.getElementById("datepicker1").value;
+      $.ajax({
+        type: 'GET',
+        url: 'userSleep/' + date,
+        success: function (result) {
+          document.getElementById("sleepHours").value = result.sleepHours;
+          document.getElementById("sleepGoal").value = result.sleepGoal;
+          //$('#champ').html(result);
+        }
+      });
   })
 </script>
