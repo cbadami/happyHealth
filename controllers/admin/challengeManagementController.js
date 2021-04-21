@@ -1,6 +1,7 @@
 // const db = require('../../database');
 const pooldb = require('../../pooldb');
 const moment = require('moment');
+const sgMail = require('@sendgrid/mail');
 
 exports.getChallengeManagement = (_req, res) => {
 	pooldb.getConnection((err1, conn) => {
@@ -146,7 +147,39 @@ exports.postChallenge = (req, res) => {
 			challengeType = challengeType.toString();
 			startDate = moment(startDate).format('L');
 			endDate = moment(endDate).format('L');
-			console.log(name, description, challengeType, startDate, endDate, '----------dates');
+			let userIdString = userId.toString();
+
+			let mailUsers = `SELECT userId, email,admin FROM happyhealth.usertbl having userId in (${userIdString}) UNION  SELECT userId, email,admin FROM happyhealth.usertbl where admin = "yes";`;
+			conn.query(mailUsers, (err, result) => {
+				if (err) throw err;
+				else {
+					console.log(result, '====> retreived mail ids');
+
+
+					let userMailIds = [];
+					let adminMailIds = [];
+					result.map(res=>{
+						if(res.admin==="Yes") adminMailIds.push(res.email);
+						else userMailIds.push(res.email);
+					})
+
+					console.log(userMailIds, "======> user mails");
+					console.log(adminMailIds, "======> admin mails");
+
+					sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
+					const msg = {
+						to: userMailIds,
+						cc: adminMailIds,
+						from: 'fitnestgdp@outlook.com',
+						subject: `Well Hub New Challenge Invitation ${name}`,
+						text: `You've got a new inivtaion to ${name} below is the link to login to the applicaiton`,
+						html: `<h3>Hello from Well Hub!</h3> <br>  <p> You got an inivtaion to ${name} below is the link to login to the app</p> <br> <a href="https://cb-test-health-app-dev-test.azurewebsites.net/">Well hub Login </a> `,
+					};
+					sgMail.sendMultiple(msg);
+				}
+			});
+
+			// console.log(name, description, challengeType, startDate, endDate, '----------dates');
 			const insert = `INSERT INTO happyhealth.challengetbl (challengeName, challengeDescription, challengeType , startDate, endDate) VALUES('${name}', '${description}', '${challengeType}' , '${startDate}', '${endDate}'); `;
 
 			conn.query(insert, (err, result) => {
@@ -251,12 +284,11 @@ exports.getChallengeUsers = (req, res) => {
 
 			const notJoinedQuery = `SELECT userId, userName FROM happyhealth.usertbl where userId NOT IN (SELECT userId FROM happyhealth.challengemembertbl where challengeId=${challengeId});`;
 			await conn.query(notJoinedQuery, (err, result) => {
-				if (err){
-					console.log(err,"-----------error")
+				if (err) {
+					console.log(err, '-----------error');
 					conn.release();
 					return;
-				}
-				else {
+				} else {
 					console.log(result, '------------notUsersQuery result');
 					notJoinedUsers = result;
 				}
@@ -264,12 +296,11 @@ exports.getChallengeUsers = (req, res) => {
 
 			const challengeQuery = `select * from happyhealth.challengetbl where challengeId =${challengeId}`;
 			await conn.query(challengeQuery, (err, result) => {
-				if (err){
-					console.log(err,"-----------error")
+				if (err) {
+					console.log(err, '-----------error');
 					conn.release();
 					return;
-				}
-				else {
+				} else {
 					console.log(result, '------------challengeQuery result');
 					challengeData = result;
 					res.render('adminViews/challengeMembers', {
@@ -280,10 +311,9 @@ exports.getChallengeUsers = (req, res) => {
 						challengeData,
 					});
 
-					console.log(notJoinedUsers.length, "========> not joined users")
+					console.log(notJoinedUsers.length, '========> not joined users');
 				}
 			});
-
 		}
 	});
 };
@@ -293,19 +323,18 @@ exports.addUserToChallenge = (req, res) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-
 			let userId = req.body.userId;
 			let challengeId = req.params.challengeId;
 			let joinedDate = moment(new Date()).format('L');
-			console.log(userId , challengeId );
+			console.log(userId, challengeId);
 
 			let values = '';
-			for(let i=0;i<userId.length;i++) {
-				console.log( userId[i], "====> "  )
-				values += `(${userId[i]},"${joinedDate}",${challengeId},0,0),`
+			for (let i = 0; i < userId.length; i++) {
+				console.log(userId[i], '====> ');
+				values += `(${userId[i]},"${joinedDate}",${challengeId},0,0),`;
 			}
-			values = values.slice(0,-1);
-			console.log(values)
+			values = values.slice(0, -1);
+			console.log(values);
 
 			let addUserQuery = `INSERT INTO happyhealth.challengemembertbl (userId, joinedDate, challengeId, activeUser, archive ) VALUES ${values}; `;
 

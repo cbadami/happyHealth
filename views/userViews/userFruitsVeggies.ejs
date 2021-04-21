@@ -3,81 +3,50 @@
     <div class="container app-container-wrapper">
       <div class="row justify-content-center">
         <div class="col-lg-4">
-          <div class="form-group">
-            <%- include ('../partials/messages') %>
-            <h2 class="d-flex justify-content-center py-3">
-              Fruits & Veggies Consumed
-            </h2>
-          </div>
-          <div class="form-row">
-            <label for="dateText"> &nbsp; </label>
-            <p id="demo"></p>
-            <!-- <input  id="demo" class="form-control" /> -->
-          </div>
-          <script>
-            let d = new Date();
-            const months = [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ];
-            const dayNames = [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-            ];
-            let formatted_date =
-              dayNames[d.getDay()] +
-              ", " +
-              months[d.getMonth()] +
-              " " +
-              d.getDate() +
-              ", " +
-              d.getFullYear();
-            document.getElementById("demo").innerHTML = formatted_date;
-          </script>
-
           <form method="POST" class="my-5" action="postFruitsVeggies">
+            <div class="form-group">
+              <%- include ('../partials/messages') %>
+                <h2 class="d-flex justify-content-center py-3">
+                  Fruits & Veggies Consumed
+                </h2>
+            </div>
+            <div class="form-row">
+              <label for="dateText"> Date</label>
+              <input type="date" class="date form-control" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy"
+                min='1899-01-01'>
+
+              <!-- <input  id="demo" class="form-control" /> -->
+            </div>
+
+
+
             <div class="form-row">
               <label for="username">Number of Fruits Eaten</label>
               <input type="number" id="fruits" name="fruits" min="0" class="form-control" placeholder="0"
-                value="<%= typeof fruits != 'undefined' ? fruits : '' %>" />
+                value="<%= typeof fruits != 'undefined' ? fruits : '' %>" step="0.01" />
             </div>
             <div class="form-row">
               <label for="password">Personal Daily Goal</label>
-              <input type="number" id="fruitgoal" name="fruitgoal" min="0" class="form-control" placeholder="0"
-                value="<%= typeof fruitGoal != 'undefined' ? fruitGoal : '' %>" />
+              <input type="number" id="fruitGoal" name="fruitgoal" min="0" class="form-control" placeholder="0"
+                value="<%= typeof fruitGoal != 'undefined' ? fruitGoal : '' %>" step="0.01" />
             </div>
 
             <div class="form-row">
               <label for="username">Number of Vegetables Eaten</label>
               <input type="number" id="veggies" name="veggies" min="0" class="form-control" placeholder="0"
-                value="<%= typeof veggies != 'undefined' ? veggies : '' %>" />
+                value="<%= typeof veggies != 'undefined' ? veggies : '' %>" step="0.01" />
             </div>
             <div class="form-row">
               <label for="password">Personal Daily Goal</label>
               <input type="number" id="veggieGoal" name="veggieGoal" min="0" class="form-control" placeholder="0"
-                value="<%= typeof veggieGoal != 'undefined' ? veggieGoal : '' %>" />
+                value="<%= typeof veggieGoal != 'undefined' ? veggieGoal : '' %>" step="0.01" />
             </div>
 
             <div class="form-row"></div>
 
             <div class="form-row">
               <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary" style="margin-top: 10px" onclick="myFunction()">
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px">
                   Update
                 </button>
               </div>
@@ -89,7 +58,35 @@
   </section>
 </div>
 <script>
-  function myFunction() {
-    alert("Updated Fruits and Vegetables Successfully");
+
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1; //January is 0!
+  let yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd
   }
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("datepicker1").setAttribute("max", today);
+  document.getElementById("datepicker1").value = today;
+
+  $("#datepicker1").on("change", function () {
+    let date = document.getElementById("datepicker1").value;
+    $.ajax({
+      type: 'GET',
+      url: 'getFruitsVeggies/' + date,
+      success: function (result) {
+        console.log(result,"-----------------------result")
+        document.getElementById("fruits").value = result.fruits;
+        document.getElementById("fruitGoal").value = result.fruitGoal;
+        document.getElementById("veggies").value = result.veggies;
+        document.getElementById("veggieGoal").value = result.veggieGoal;
+        //$('#champ').html(result);
+      }
+    });
+  })
 </script>

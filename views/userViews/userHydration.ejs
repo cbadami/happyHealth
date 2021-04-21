@@ -9,78 +9,38 @@
               <h2 class="d-flex justify-content-center py-3">Water Intake</h2>
             </div>
             <div class="form-row">
-              <label for="dateText"> &nbsp; </label>
-              <p id="demo"></p>
+              <label for="dateText"> Date</label>
+              <input type="date" class="date form-control" id="datepicker1" name="datepicker1"
+                            placeholder="mm/dd/yyyy" min='1899-01-01'>
+              
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
-            <script>
-              let d = new Date();
-              const months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-              ];
-              const dayNames = [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-              ];
-              let formatted_date =
-                dayNames[d.getDay()] +
-                ", " +
-                months[d.getMonth()] +
-                " " +
-                d.getDate() +
-                ", " +
-                d.getFullYear();
-              document.getElementById("demo").innerHTML = formatted_date;
-            </script>
 
             <div class="form-row">
-              <label for="username">Number of Ounces</label>
-              <input type="number" id="water" min="0" name="water" class="form-control" placeholder="0"
-                value="<%= typeof water != 'undefined' ? water : '' %>" />
+              <label for="username">Number of Ounces:</label>
+              <input
+                type="number"
+                id="water"
+                step="0.01"
+                min="0"
+                name="water"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof water != 'undefined' ? water : '' %>"
+              />
             </div>
-            <!-- <div class="form-row">
-              <label>Ounces</label>
-              <input id="inputOunce" min="0" class="form-control" type="number" placeholder="0"
-                oninput="weightConverter(this.id,this.value)" onchange="weightConverter(this.id,this.value)"
-                value="<%= typeof inputOunce != 'undefined' ? inputOunce : '' %>" />
-            </div> -->
-            <!-- <script>
-              function weightConverter(source, valNum) {
-                valNum = parseFloat(valNum);
-
-
-                var inputGrams = document.getElementById("water");
-                var inputStones = document.getElementById("inputOunce");
-                if (source == "water") {
-
-                  inputStones.value = (valNum * 8).toFixed(2);
-                }
-                if (source == "inputOunce") {
-
-                  inputGrams.value = (valNum * 0.125).toFixed(2);
-                }
-              }
-            </script> -->
             <div class="form-row">
               <label for="password">Personal Daily Goal</label>
-              <input type="number" min="0" id="waterGoal" name="waterGoal" class="form-control" placeholder="0"
-                value="<%= typeof waterGoal != 'undefined' ? waterGoal : '' %>" />
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                id="waterGoal"
+                name="waterGoal"
+                class="form-control"
+                placeholder="0"
+                value="<%= typeof waterGoal != 'undefined' ? waterGoal : '' %>"
+              />
             </div>
             <!-- <div class="form-row">
               <label for="password">Monthly Goal</label>
@@ -99,7 +59,11 @@
 
             <div class="form-row">
               <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary" style="margin-top: 10px" onclick="myFunction()">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="margin-top: 10px"
+                >
                   Update
                 </button>
               </div>
@@ -111,7 +75,32 @@
   </section>
 </div>
 <script>
-  function myFunction() {
-    alert("Updated Water Intake Successfully");
-  }
-</script>
+
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //January is 0!
+  let yyyy = today.getFullYear();
+   if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+  
+  today = yyyy+'-'+mm+'-'+dd;
+  document.getElementById("datepicker1").setAttribute("max", today);
+  document.getElementById("datepicker1").value=today;
+  
+  $("#datepicker1").on("change",function(){
+    let date=document.getElementById("datepicker1").value;
+    $.ajax({
+          type: 'GET',
+          url: 'userHydration/'+date,
+          success: function(result) {
+            document.getElementById("water").value=result.water;
+            document.getElementById("waterGoal").value=result.waterGoal;
+               //$('#champ').html(result);
+          }
+        });
+  })
+  </script>

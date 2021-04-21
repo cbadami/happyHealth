@@ -1,3 +1,29 @@
+<style>
+    #imageUpload {
+        display: none;
+    }
+
+    #profileImage {
+        cursor: pointer;
+    }
+
+    #profile-container {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    #profile-container img {
+        width: 150px;
+        height: 150px;
+    }
+</style>
+
 <br>
 <div class="app-main__inner">
     <div class="container">
@@ -8,57 +34,12 @@
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div id="profile-container">
-    
-   <image id="profileImage" src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png" />
-</div>
-<!-- <i class="fa fa-edit"></i>
-<input id="imageUpload" type="file" 
-       name="profile_photo" placeholder="Photo" required="" capture> 
-       <script>
-           $("#profileImage").click(function(e) {
-    $("#imageUpload").click();
-});
+                                <div id="profile-container">
 
-function fasterPreview( uploader ) {
-    if ( uploader.files && uploader.files[0] ){
-          $('#profileImage').attr('src', 
-             window.URL.createObjectURL(uploader.files[0]) );
-    }
-}
+                                    <image id="profileImage"
+                                        src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png" />
+                                </div>
 
-$("#imageUpload").change(function(){
-    fasterPreview( this );
-});
-       </script> -->
-       <style>
-           #imageUpload
-{
-    display: none;
-}
-
-#profileImage
-{
-    cursor: pointer;
-}
-
-#profile-container {
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-}
-
-#profile-container img {
-    width: 150px;
-    height: 150px;
-}
-       </style>
-                              
                                 <div class="mt-3">
                                     <h4>
                                         <%= result[0].fullName %>
@@ -72,6 +53,78 @@ $("#imageUpload").change(function(){
                                     <button class="btn btn-primary btn-lg btn-md btn-sm"><i class="fa fa-edit"></i> Edit
                                         Info</button>
                                 </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="card text-center">
+
+
+                        <div class="card-body ml-4">
+
+                            <div class="card-title">
+                                <!-- <span class="mb-0">Daily Goals</span> -->
+                                <h5 style="color: black;" class="text-capitalize">Daily Goals</h5>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Step:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.stepGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Sleep:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.sleepGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">MindfulMinutes:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.meTimeGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Water:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.waterGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Fruits:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.fruitGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Veggies:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.veggieGoal %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 font-weight-bold">
+                                    <span class="mb-0">Physical Activity:</span>
+                                </div>
+                                <div class="col-sm-3 text-secondary">
+                                    <%= goal.physicalActivityGoal %>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -113,7 +166,7 @@ $("#imageUpload").change(function(){
                                     <h6 class="mb-0">First Name:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <%= result[0].fullName.split(' ')[0] %>
+                                    <%= result[0].fullName.split(',')[0] %>
                                 </div>
                             </div>
                             <hr>
@@ -121,9 +174,9 @@ $("#imageUpload").change(function(){
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Last Name:</h6>
                                 </div>
-                                    <div class="col-sm-9 text-secondary"> 
-                                        <%= result[0].fullName.split(' ')[1] %>
-                                    </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%= result[0].fullName.split(',')[1] %>
+                                </div>
                             </div>
                             <hr>
                             <div class=" row">

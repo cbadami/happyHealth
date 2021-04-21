@@ -63,6 +63,7 @@ router.get('/getUserTotalMetrics/:userId', analyticsController.getUserTotalMetri
 router.get('/adminMetricsDate/:userId', analyticsController.getData);
 router.get('/adminAnalytics', analyticsController.getAdminAnalytics);
 router.get('/download', analyticsController.download);
+router.get('/adminAnalyticsOverallDate',analyticsController.getDataForDate);
 // router.get('/CSVManagement', analyticsController.getCSV);
 
 /**

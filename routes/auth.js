@@ -4,7 +4,7 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const userSignupController = require('../controllers/userSignupController');
 const passwordController = require('../controllers/passwordController');
-const userHomeController = require('../controllers/user/userHomeController')
+const cronJob = require("../controllers/cronJob");
 
 /**
  * User Signup and login routes
@@ -13,7 +13,8 @@ router.get('/signup', userSignupController.getSignup);
 router.post('/signup', userSignupController.postSignup);
 router.get('/', authController.getUserLogin);
 router.post('/', authController.postUserLogin);
-router.get('/updateAllMetrics', userHomeController.updateUserMetricGoals)
+router.get('/updateAllMetrics', cronJob.updateAllMetrics)
+router.get('/yesterdayUpdateMetrics', cronJob.yesterdayUpdateMetrics)
 
 
 /**

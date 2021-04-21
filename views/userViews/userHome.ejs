@@ -1,7 +1,7 @@
 <div class="app-main__inner">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-3 card user-card" style="background-color: hsla(0, 100%, 90%, 0.3)"
+      <div class="col-sm-3 card user-card" style="background-color: hsla(0, 72%, 83%, 0.3)"
         onclick="location.href = '/userStep';">
         <h4>Step Count</h4>
         <div class="user-card-body">
@@ -11,19 +11,17 @@
           </button>
         </div>
       </div>
-      <div class="col-sm-3 card user-card" style="background-color: #c2dfff"
+      <div class="col-sm-3 card user-card" style="background-color: #b3d5fa"
         onclick="location.href = '/userHydration';">
         <h4>Water</h4>
         <div class="user-card-body">
           <img src="/static/assets/images/happyHealth/glassw.png" alt="user_stat" width="250" height="170" />
           <button type="submit" class="btn btn-outline-secondary">
-            <b>Water Consumed:</b> <b>
-              <%= water %>
-            </b>
+            <b>Water Consumed: <%= water %> </b>
           </button>
         </div>
       </div>
-      <div class="col-sm-3 card user-card" style="background-color: #d8dadb" onclick="location.href = '/userSleep';">
+      <div class="col-sm-3 card user-card" style="background-color: #babcbd" onclick="location.href = '/userSleep';">
         <h4>Sleep Hours</h4>
         <div class="user-card-body">
           <img src="/static/assets/images/happyHealth/sleeping.png" alt="user_stat" width="250" height="170" />
@@ -34,7 +32,7 @@
         </div>
       </div>
 
-      <div class="col-sm-3 card user-card" style="background-color: #ffd17a" onclick="location.href = '/userTrack';">
+      <div class="col-sm-3 card user-card" style="background-color: #f7ce82" onclick="location.href = '/userTrack';">
         <h4>Mindful Minutes</h4>
         <div class="user-card-body">
           <img src="/static/assets/images/happyHealth/booko.png" alt="user_stat" width="250" height="170" />
@@ -44,7 +42,7 @@
         </div>
       </div>
 
-      <div class="col-sm-3 card user-card" style="background-color: #eea8a8"
+      <div class="col-sm-3 card user-card" style="background-color: #f39a9a"
         onclick="location.href = '/getFruitsVeggies';">
         <h4>Fruits-Vegetables</h4>
         <div class="user-card-body">
@@ -59,11 +57,11 @@
         </div>
       </div>
 
-      <div class="col-sm-3 card user-card" style="background-color: #abf1a1"
+      <div class="col-sm-3 card user-card" style="background-color: #a6fa9a"
         onclick="location.href = '/userPhysicalActivity';">
         <h4>Physical Activity</h4>
         <div class="user-card-body">
-          <img src="/static/assets/images/happyHealth/skip.png" alt="user_stat" class="img" width="250" height="170" />
+          <img src="/static/assets/images/happyHealth/gym.png" alt="user_stat" class="img" width="250" height="170" />
           <!-- <img src="/static/assets/images/happyHealth/cycle.png" alt="user_stat" class="img" width="250" height="170" /> -->
 
           <button type="submit" class="btn btn-outline-secondary">
@@ -74,3 +72,18 @@
     </div>
   </div>
 </div>
+<script>
+  let flashTitle = "<%= flashTitle %>"
+  let flashMessage = "<%= flashMessage %>"
+
+  console.log(flashTitle, flashMessage, "--------------flash Title and message");
+  new Notify({
+    title: flashTitle,
+    text: flashMessage,
+    status: 'success',
+    autoclose: true,
+    autotimeout: 2000,
+    effect: 'slide',
+    position: 'top x-center'
+  })
+</script>

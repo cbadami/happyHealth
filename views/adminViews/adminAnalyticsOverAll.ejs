@@ -4,117 +4,214 @@
     <div class="table-title">
         <div class="row">
             <div class="col-sm-6">
-                <h2><b>User Metrics for <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' ,
-                            day: '2-digit' }).format(new Date()) %></b></h2>
+                <!-- <h2>User Metrics for <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' ,
+                            day: '2-digit' }).format(new Date()) %></h2> -->
+                <h2>Admin Analytics</h2>
                 <p style="color: rgb(156, 151, 151); font-size: small;">Note: Click a username for individual user
                     history
                 </p>
             </div>
-            <!-- <div class="col-sm-3">
-                <label for="start" class="font-weight-bold">From:</label>
-                <input type="date" class="m-2 date" id="datepicker1" name="datepicker1"
-                placeholder="mm/dd/yyyy">
-            </div> -->
+
             <div class="col-sm-6">
-                
-                <button type="button" class="btn btn-primary pull-right" onclick="location.href = '/download'">Download
-                    Report</button>
+
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <div class="d-flex flex-row">
+                <div class="mr-3">
+                    <!-- <label for="start" class="font-weight-bold">Date :</label> -->
+                    <input type="date" id="datepicker" class=" date" name="datepicker" placeholder="mm/dd/yyyy"
+                        required>
+
+                </div>
+
+                <div class="mr-3">
+                    <button type="button" id="get" class="btn btn-primary" onclick="getRoute()">Get</button>
+                </div>
+
+                <div>
+                    <button type="button" id="download" class="btn btn-info" onclick="downloadRoute()">Download
+                    </button>
+
+                </div>
             </div>
 
         </div>
     </div>
     <!-- </br> -->
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Username</th>
-                <th scope="col">Full Name</th>
-                <!-- <th scope="col"> Date </th> -->
-                <th scope="col">Step</th>
-                <!-- <th scope="col"> Step Go </th> -->
-                <th scope="col">Sleep</th>
-                <!-- <th scope="col"> sleep Go</th> -->
-                <th scope="col">Mindful</th>
-                <!-- <th scope="col"> Me time Go </th> -->
-                <th scope="col">Water</th>
-                <!-- <th scope="col"> Water Go </th> -->
-                <th scope="col">Vegetables</th>
-                <!-- <th scope="col"> Vegetables Go</th> -->
-                <th scope="col">Fruits</th>
-                <!-- <th scope="col"> Fruits Go </th> -->
-                <th scope="col">Physical Activity</th>
-            </tr>
-            </tr>
-        </thead>
-        <tbody>
-        <tbody>
-            <% for(var i=0; i < obj.length; i++) { %>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
-                    <td>
-                        <%= obj[i].userId %>
-                    </td>
-                    <td>
-                        <a href="/getUserTotalMetrics/<%= obj[i].userId%>">
-                            <%= obj[i].UserName %>
-                        </a>
-                    </td>
-                    <td>
-                        <%= obj[i].fullName %>
-                    </td>
-                    <!-- <td>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Full Name</th>
+                    <!-- <th scope="col"> Date </th> -->
+                    <th scope="col">Step</th>
+                    <!-- <th scope="col"> Step Go </th> -->
+                    <th scope="col">Sleep</th>
+                    <!-- <th scope="col"> sleep Go</th> -->
+                    <th scope="col">Mindful</th>
+                    <!-- <th scope="col"> Me time Go </th> -->
+                    <th scope="col">Water</th>
+                    <!-- <th scope="col"> Water Go </th> -->
+                    <th scope="col">Vegetables</th>
+                    <!-- <th scope="col"> Vegetables Go</th> -->
+                    <th scope="col">Fruits</th>
+                    <!-- <th scope="col"> Fruits Go </th> -->
+                    <th scope="col">Physical Activity</th>
+                </tr>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+                <% for(var i=0; i < obj.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= obj[i].userId %>
+                        </td>
+                        <td>
+                            <a href="/getUserTotalMetrics/<%= obj[i].userId%>">
+                                <%= obj[i].UserName %>
+                            </a>
+                        </td>
+                        <td>
+                            <%= obj[i].fullName %>
+                        </td>
+                        <!-- <td>
                     <%= obj[i].date %>
                 </td> -->
-                    <td>
-                        <%= obj[i].stepCount %>
-                    </td>
-                    <!-- <td>
+                        <td>
+                            <%= obj[i].stepCount %>
+                        </td>
+                        <!-- <td>
                     <%= obj[i].stepGoal %>
                 </td> -->
-                    <td>
-                        <%= obj[i].sleepHours %>
-                    </td>
-                    <!-- <td>
+                        <td>
+                            <%= obj[i].sleepHours %>
+                        </td>
+                        <!-- <td>
                     <%= obj[i].sleepGoal %>
                 </td> -->
-                    <td>
-                        <%= obj[i].meTime %>
-                    </td>
-                    <!-- <td>
+                        <td>
+                            <%= obj[i].meTime %>
+                        </td>
+                        <!-- <td>
                     <%= obj[i].meTimeGoal %>
                 </td> -->
-                    <td>
-                        <%= obj[i].water %>
-                    </td>
-                    <!-- <td>
+                        <td>
+                            <%= obj[i].water %>
+                        </td>
+                        <!-- <td>
                     <%= obj[i].waterGoal %>
                 </td> -->
-                    <td>
-                        <%= obj[i].veggies %>
-                    </td>
-                    <!-- <td>
+                        <td>
+                            <%= obj[i].veggies %>
+                        </td>
+                        <!-- <td>
                     <%= obj[i].veggieGoal %>
                 </td> -->
-                    <td>
-                        <%= obj[i].fruits %>
-                    </td>
-                    <!-- <td>
+                        <td>
+                            <%= obj[i].fruits %>
+                        </td>
+                        <!-- <td>
                     <%= obj[i].fruitGoal %>
                 </td> -->
-                    <td>
-                        <%= obj[i].physicalActivityMinutes %>
-                    </td>
-                </tr>
-                <% } %>
+                        <td>
+                            <%= obj[i].physicalActivityMinutes %>
+                        </td>
+                    </tr>
+                    <% } %>
 
-        </tbody>
-        </tbody>
-    </table>
+            </tbody>
+            </tbody>
+        </table>
+    </div>
 
 
-    <!-- <form action="/CSVManagement" method="get">
-    <button type="submit" onclick= "getCSV()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get CSV</button>
-</form> -->
 
 </div>
+<script>
+
+    let currentDate = "<%= currentDate %>"
+
+    console.log(currentDate, "-------before current date")
+    let [m, d, y] = currentDate.split('/');
+
+    let formatDate = y + '-' + m + '-' + d;
+    console.log(formatDate, "-------current date")
+
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datepicker").setAttribute("max", today);
+    document.getElementById("datepicker").value = formatDate;
+
+
+    function getRoute() {
+        let datepicker = document.getElementById("datepicker")
+        location.href = `/adminAnalytics?datepicker=${datepicker.value}`;
+    }
+
+    function downloadRoute() {
+        let datepicker = document.getElementById("datepicker")
+        location.href = `/download?datepicker=${datepicker.value}`;
+    }
+
+
+// $("#datepicker").on("change",function(){
+//   let datepicker = document.getElementById("datepicker")
+//   let get=document.getElementById("get");
+//   let download = document.getElementById("download")
+// //   console.log(get,download,"------------get download buttons")
+//   let route = `location.href='/adminAnalytics?datepicker=${datepicker.value}'`
+//   let downloadRoute = `location.href='/download?datepicker=${datepicker.value}'`
+//   console.log(route)
+//   get.setAttribute("onclick", route);
+//   download.setAttribute("onclick", downloadRoute);
+// })
+
+
+</script>
+
+
+
+
+
+<style>
+    .date {
+        padding: .5rem .75rem;
+        font-size: 1rem;
+        line-height: 1.25;
+        color: #464a4c;
+        background-color: #fff;
+        background-image: none;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: .25rem;
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    }
+
+    #PopoverCustomT-1 {
+        font-size: 1rem;
+    }
+</style>

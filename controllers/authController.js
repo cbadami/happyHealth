@@ -65,7 +65,7 @@ exports.postUserLogin = async (req, res) => {
 						password,
 					});
 				} else {
-					let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'`;
+					let queryString = `SELECT * FROM happyhealth.usertbl WHERE username = '${username}'; SELECT count(*) as count FROM happyhealth.announcementstbl where  userId like '%2%' ;`;
 
 					console.log('*****User login DB Query Started**********\n');
 
@@ -76,12 +76,17 @@ exports.postUserLogin = async (req, res) => {
 						if (err) {
 							console.log(err, '-----while login');
 						}
+
+						let userResult = result[0];
+						let annCount = result[1];
 						console.log(result, '---------user login result');
 
-						if (result.length > 0) {
-							const validPassword = await bcrypt.compare(password, result[0]['password']);
+						if (userResult.length > 0) {
+							const validPassword = await bcrypt.compare(password, userResult[0]['password']);
 							if (validPassword) {
-								req.session.userId = result[0]['userId'];
+								req.session.userName = userResult[0]['userName'];
+								req.session.userId = userResult[0]['userId'];
+								req.session.annCount = annCount[0].count
 								req.session.isLoggedIn = true;
 								res.redirect('home');
 							} else {
@@ -170,6 +175,7 @@ exports.postAdminLogin = async (req, res) => {
 
 							if (validPassword) {
 								const userId = result[0]['userId'];
+								req.session.userName = result[0]['userName'];
 								req.session.userId = userId;
 								req.session.isLoggedIn = true;
 								req.session.isAdmin = true;
