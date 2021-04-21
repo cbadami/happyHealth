@@ -16,16 +16,6 @@
                             placeholder="mm/dd/yyyy" min='1899-01-01'>
               <!-- <input  id="demo" class="form-control" /> -->
             </div>
-
-            <!-- <div class="form-group">
-              <label>Choose Level</label>
-              <%- include ('../partials/messages') %>
-              <select id="level" class="form-control" name="level">
-                <option value="Light">Light</option>
-                <option value="Moderate">Moderate</option>
-                <option value="Intense">Intense</option>
-              </select>
-            </div> -->
             <div class="form-row">
               <label for="username">Physical Activity(In Minutes)</label>
               <input
@@ -53,20 +43,7 @@
               />
             </div>
             <br />
-            <!-- <div class="form-group">
-              <label for="comments">Comments</label>
-              <input
-                type="text"
-                value="<%= typeof comments != 'undefined' ? comments : '' %>"
-                class="form-control"
-                id="comments"
-                aria-describedby="userNameHelp"
-                placeholder="Enter your comments"
-                name="comments"
-              />
-            </div> -->
             <div class="form-row"></div>
-
             <div class="form-row">
               <div class="col-lg-12">
                 <button
@@ -101,16 +78,16 @@
   document.getElementById("datepicker1").setAttribute("max", today);
   document.getElementById("datepicker1").value=today;
   
-  $("#datepicker1").on("change",function(){
-    let date=document.getElementById("datepicker1").value;
-    $.ajax({
-          type: 'GET',
-          url: 'userPhysicalActivity/'+date,
-          success: function(result) {
-            document.getElementById("physicalActivityMinutes").value=result.physicalActivityMinutes;
-            document.getElementById("physicalActivityGoal").value=result.physicalActivityGoal;
-               //$('#champ').html(result);
-          }
-        });
+  $("#datepicker1").on("change", function () {
+      let date = document.getElementById("datepicker1").value;
+      $.ajax({
+        type: 'GET',
+        url: 'userPhysicalActivity/' + date,
+        success: function (result) {
+          document.getElementById("physicalActivityMinutes").value = result.physicalActivityMinutes;
+          document.getElementById("physicalActivityGoal").value = result.physicalActivityGoal;
+          //$('#champ').html(result);
+        }
+      });
   })
   </script>
