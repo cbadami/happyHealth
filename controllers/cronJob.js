@@ -12,7 +12,7 @@ exports.resetUserMetrics = () => {
 	console.log(currentDate, '---------cuurent date after formation--------------');
 
 	try {
-		cron.schedule('00 02 * * *', async () => {
+		cron.schedule('00 18 * * *', async () => {
 			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
@@ -119,6 +119,8 @@ exports.resetUserMetrics = () => {
 											 console.log(values+','+va,"====> combining 2")
 
 											values = values+','+va
+											values = values.slice(0,-1)
+											console.log(values)
 
 											const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
 											
