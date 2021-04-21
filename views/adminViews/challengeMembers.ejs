@@ -24,7 +24,7 @@
                                     <% } %>
                     </select>
 
-                    <input disabled type="submit" value="Invite" id="inviteBtn" class="btn btn-primary"></input>
+                    <input  type="submit" value="Invite" id="inviteBtn" class="btn btn-primary"></input>
                 </div>
 
             </form>
@@ -83,20 +83,30 @@
 </div>
 
 <script>
+	
+var button = document.getElementById("inviteBtn");
+var x = document.getElementById("mySelect").selectedOptions.length;
+console.log(x, "======> count")
+if (x === 0) {
+	  button.disabled = true;
+}else {
+	  button.disabled = false;
+}
 
-
-	var button = document.getElementById("inviteBtn");
-	if ('<%= notJoinedUsers.length %>' === '0') {
-		button.disabled = true;
-	} else {
-		button.disabled = false;
-	}
+	// var button = document.getElementById("inviteBtn");
+	// if ('<%= notJoinedUsers.length %>' === '0') {
+	// 	button.disabled = true;
+	// } else {
+	// 	button.disabled = false;
+	// }
 
 
 	function refreshButtons(){
-
-var x = document.getElementById("mySelect").selectedOptions.length;
+		console.log("*******")
 var button = document.getElementById("inviteBtn");
+var x = document.getElementById("mySelect").selectedOptions.length;
+console.log(x, "======> count")
+
 
   if (x === 0) {
 	  button.disabled = true;
