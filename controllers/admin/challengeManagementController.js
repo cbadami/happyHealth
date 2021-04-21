@@ -3,6 +3,30 @@ const pooldb = require('../../pooldb');
 const moment = require('moment');
 const sgMail = require('@sendgrid/mail');
 
+// var chObj;
+// getChallengeName = async (challengeId)=> {
+// 	return new Promise((resolve,reject)=>{
+// 	pooldb.getConnection(async (err1, conn) => {
+// 		if (err1) {
+// 			console.log(err1, '=====> error occured');
+// 		} else {
+
+// 		let getChall = `SELECT * FROM happyhealth.challengetbl where challengeId = ${challengeId};`
+// 		await conn.query(getChall, (err, chresult)=>{
+// 			if(err){
+// 				console.log(err,"======> error while fetching challenge")
+// 			}else{
+// 				chObj = {challengeId,challengeName,challengeDescription,startDate,endDate }=chresult[0];
+
+// 				console.log(chObj, "===================> CHaLLENGE OBJECTTTTTTTTTTTTTTttt")
+// 				resolve(chObj)
+// 				return  chObj
+// 			}
+// 		})
+// 	}
+// })}
+// }
+
 exports.getChallengeManagement = (_req, res) => {
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
@@ -326,7 +350,9 @@ exports.addUserToChallenge = (req, res) => {
 			let userId = req.body.userId;
 			let challengeId = req.params.challengeId;
 			let joinedDate = moment(new Date()).format('L');
-			console.log(userId, challengeId);
+			console.log(userId, challengeId , "=============> user id and challengeId");
+			
+			let userIdString =  userId.toString();
 
 			let values = '';
 			for (let i = 0; i < userId.length; i++) {
@@ -342,10 +368,51 @@ exports.addUserToChallenge = (req, res) => {
 				if (err) {
 					console.log(err, '-------> error while adding user.');
 				} else {
-					console.log(result);
+					console.log(result, "==========================> ADDED USERS");
 					res.redirect(`/getChallengeUsers/${challengeId}`);
 				}
 			});
+
+			let getChall = `SELECT * FROM happyhealth.challengetbl where challengeId = ${challengeId};`
+			conn.query(getChall, async (err, chresult)=>{
+				if(err){
+					console.log(err,"======> error while fetching challenge")
+				}else{
+					let {challengeId,challengeName,challengeDescription,startDate,endDate }= await chresult[0];
+
+					 let mailUsers = `SELECT userId, email,admin FROM happyhealth.usertbl having userId in (${userIdString}) UNION  SELECT userId, email,admin FROM happyhealth.usertbl where admin = "yes";`;
+					 conn.query(mailUsers, (err, result) => {
+						 if (err) throw err;
+						 else {
+							 console.log(result, '====> retreived mail ids');
+		 
+		 
+							 let userMailIds = [];
+							 let adminMailIds = [];
+							 result.map(res=>{
+							 	if(res.admin==="Yes") adminMailIds.push(res.email);
+							 	else userMailIds.push(res.email);
+							 })
+		 
+							 console.log(userMailIds, "======> user mails");
+							 console.log(adminMailIds, "======> admin mails");
+		 
+							 sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
+							 const msg = {
+							 	to: userMailIds,
+							 	cc: adminMailIds,
+							 	from: 'fitnestgdp@outlook.com',
+							 	subject: `Well Hub Challenge Invitation ${challengeName}`,
+							 	text: `You've got a new inivtaion to ${challengeName} below is the link to login to the applicaiton`,
+							 	html: `<h3>Hello from Well Hub!</h3> <br>  <p> You got an inivtaion to ${challengeName} below is the link to login to the app</p> <br> <a href="https://cb-test-health-app-dev-test.azurewebsites.net/">Well hub Login </a> `,
+							 };
+							 sgMail.sendMultiple(msg);
+						 }
+					 });
+
+
+				}
+			})
 
 			conn.release();
 		}
