@@ -167,7 +167,7 @@ CREATE TABLE userMetricsTbl (
   physicalActivityMinutes Float DEFAULT 0,
   physicalActivityGoal Float DEFAULT 0,
   PRIMARY KEY (userId,date),
-  FOREIGN KEY (userId) REFERENCES userTbl(userId)
+  FOREIGN KEY (userId) REFERENCES userTbl(userId) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -216,7 +216,7 @@ CREATE TRIGGER before_user_update
 --
 
 
-drop table if exists announcementstbl;
+DROP TABLE IF EXISTS announcementstbl;
 CREATE TABLE announcementsTbl (
   messageId int AUTO_INCREMENT,
   title varchar(100) NOT NULL,
@@ -285,7 +285,7 @@ CREATE TABLE happyhealth.challengemembertbl (
   `activeUser` boolean DEFAULT NULL,
   `archive` boolean default NULL,
   PRIMARY KEY (`invitationId`),
-  FOREIGN KEY (`userId`) REFERENCES `usertbl` (`userId`),
+  FOREIGN KEY (`userId`) REFERENCES `usertbl` (`userId`) ON DELETE CASCADE,
   FOREIGN KEY (`challengeId`) REFERENCES `challengetbl` (`challengeId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
