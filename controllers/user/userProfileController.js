@@ -119,7 +119,7 @@ exports.postUserProfile = (req, res) => {
 			} = req.body;
 			let fullName = firstName + ' ' + lastName;
 			console.log(
-				fullName,
+				firstName + lastName,
 				gender,
 				dateOfBirth,
 				age,

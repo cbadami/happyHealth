@@ -28,7 +28,10 @@ exports.getUserTotalMetrics = (req, res) => {
                         console.log(err, "----all metrics error");
                     }
                     console.log(allResult, "----all result");
-                    let result = [[1], [2]];
+                    let result = [
+                        [1],
+                        [2]
+                    ];
                     result[0] = dayResult;
                     result[1] = allResult;
                     console.log(result[0][0], '------------db usermetricstbl result');
@@ -100,13 +103,13 @@ exports.getData = (req, res) => {
 exports.getAdminAnalytics = (req, res) => {
 
     let currentDate = new Date().toLocaleDateString();
-    console.log(currentDate,"-------current date");
+    console.log(currentDate, "-------current date");
 
-    let [ m,d,y] = currentDate.split("/");
-    m = m.length == 1 ? "0"+m:m;
-    d = d.length == 1 ? "0"+d:d;
-    currentDate = [m,d,y].join('/');
-    console.log(currentDate,"---------cuurent date after formation");
+    let [m, d, y] = currentDate.split("/");
+    m = m.length == 1 ? "0" + m : m;
+    d = d.length == 1 ? "0" + d : d;
+    currentDate = [m, d, y].join('/');
+    console.log(currentDate, "---------cuurent date after formation");
 
 
     pooldb.getConnection((err1, conn) => {
@@ -151,13 +154,13 @@ exports.download = (req, res) => {
 
     console.log("****************download controller *********************")
     let currentDate = new Date().toLocaleDateString();
-    console.log(currentDate,"-------current date");
+    console.log(currentDate, "-------current date");
 
-    let [ m,d,y] = currentDate.split("/");
-    m = m.length == 1 ? "0"+m:m;
-    d = d.length == 1 ? "0"+d:d;
-    currentDate = [m,d,y].join('/');
-    console.log(currentDate,"---------cuurent date after formation");
+    let [m, d, y] = currentDate.split("/");
+    m = m.length == 1 ? "0" + m : m;
+    d = d.length == 1 ? "0" + d : d;
+    currentDate = [m, d, y].join('/');
+    console.log(currentDate, "---------cuurent date after formation");
 
     let query = `select usertbl.userId,usertbl.UserName, usertbl.fullName, usermetricstbl.date, usermetricstbl.stepCount, usermetricstbl.stepGoal, usermetricstbl.sleepHours, usermetricstbl.sleepGoal, usermetricstbl.meTime, usermetricstbl.meTimeGoal, usermetricstbl.water, usermetricstbl.waterGoal, usermetricstbl.veggies, usermetricstbl.veggieGoal, usermetricstbl.fruits, usermetricstbl.fruitGoal, usermetricstbl.physicalActivityMinutes, usermetricstbl.physicalActivityGoal from usertbl inner join usermetricstbl on usertbl.userId =  usermetricstbl.userId where usermetricstbl.date='${currentDate}';`;
 
@@ -178,20 +181,62 @@ exports.download = (req, res) => {
             };
 
             console.log(result, "-----------------------result");
-            if(result.length==0){
+            if (result.length == 0) {
                 console.log("****************No data**************");
-                res.status(200).json({message: "No data"})
+                res.status(200).json({
+                    message: "No data"
+                })
                 return;
             }
 
             let userMetrics = [];
             result.forEach((r) => {
-                const { userId, UserName, fullName, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, veggies, veggieGoal, fruits, fruitGoal, physicalActivityMinutes, physicalActivityGoal } = r;
-                userMetrics.push({ userId,UserName,fullName, date,stepCount, stepGoal,sleepHours,sleepGoal,meTime,meTimeGoal,water,waterGoal,veggies,veggieGoal,fruits,fruitGoal,physicalActivityMinutes,physicalActivityGoal});
+                const {
+                    userId,
+                    UserName,
+                    fullName,
+                    date,
+                    stepCount,
+                    stepGoal,
+                    sleepHours,
+                    sleepGoal,
+                    meTime,
+                    meTimeGoal,
+                    water,
+                    waterGoal,
+                    veggies,
+                    veggieGoal,
+                    fruits,
+                    fruitGoal,
+                    physicalActivityMinutes,
+                    physicalActivityGoal
+                } = r;
+                userMetrics.push({
+                    userId,
+                    UserName,
+                    fullName,
+                    date,
+                    stepCount,
+                    stepGoal,
+                    sleepHours,
+                    sleepGoal,
+                    meTime,
+                    meTimeGoal,
+                    water,
+                    waterGoal,
+                    veggies,
+                    veggieGoal,
+                    fruits,
+                    fruitGoal,
+                    physicalActivityMinutes,
+                    physicalActivityGoal
+                });
             });
 
             const csvFields = ["userId", "date", "stepCount", "sleepCount"];
-            const csvParser = new CsvParser({ csvFields });
+            const csvParser = new CsvParser({
+                csvFields
+            });
             const csvData = csvParser.parse(userMetrics);
 
             res.setHeader("Content-Type", "text/csv");
@@ -204,4 +249,3 @@ exports.download = (req, res) => {
 
     });
 };
-
