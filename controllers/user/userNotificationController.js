@@ -21,18 +21,39 @@ exports.getNotifications = (req, res) => {
 			const userId = req.session.userId;
 			console.log(userId);
 
-			const nnQuery = `SELECT * FROM happyhealth.announcementstbl where  userId like '%${userId}%' order by messageId desc ;`;
+			const nnQuery = `SELECT * FROM happyhealth.announcementstbl where  userId like '%${userId}%'  or seenUsers like '%${userId}%' order by messageId desc ;`;
 
 			conn.query(nnQuery, function (err, result) {
 				if (err) {
 					console.log(err, '======> error while getting announcments');
 				} else {
-					// console.log(result, '-------displaying user notifictions-----');
+					console.log(result, '-------displaying user notifictions-----');
+
+					let ns = result;
+
+					let newN = [];
+					let oldN = [];
+					ns.map((n) => {
+						if(n.seenUsers != null ){
+							if (n.seenUsers.search(userId) != -1) {
+								oldN.push(n);
+							} else {
+								newN.push(n);
+							}
+						}else{
+							if (n.userId.search(userId) != -1) {
+								newN.push(n);
+							} else {
+								oldN.push(n);
+							}
+						}
+					});
 
 					res.render('userViews/notifications', {
 						layout: 'layouts/userLayout',
 						title: 'Announcements',
-						result,
+						newN,
+						oldN
 					});
 				}
 			});
@@ -50,37 +71,120 @@ exports.dismissAnnouncement = (req, res) => {
 			let msgId = req.params.messageId;
 			console.log(msgId, '=======> dismiss user notification');
 
-			let diss = `SELECT userId FROM happyhealth.announcementstbl where messageId = ${msgId} and userId like '%${userId}%';`;
+			let diss = `SELECT * FROM happyhealth.announcementstbl where messageId = ${msgId} and userId like '%${userId}%' or seenUsers like '%${userId}%';`;
 			conn.query(diss, (err, resul) => {
 				if (err) {
 					console.log(err, '=======> error');
 				} else {
+					console.log(resul, '==========> resul');
 
-					console.log(resul,"==========> resul")
-					console.log(resul[0].length, "===============> seen users")
+					var users, seenUsers
 
-					let users = resul[0].userId.split(',');
-					let seenUsers = [];
-
-					if(resul[0].seenUsers === undefined){
-							console.log(resul[0].seenUsers, "===============> seen users")
-					}else{
-						console.log("=========> dude there are no seen users.")
-
-
+					if(resul[0].userId != null) {
+						users = JSON.parse('[' + resul[0].userId + ']');
 					}
 
-					// let seenUsers = resul[0].seenUsers.split(',')
+					if(resul[0].seenUsers != null){
+						seenUsers = JSON.parse('[' + resul[0].seenUsers + ']');
+					}
 
+					console.log("UNSEEN: "+users, "SEEN: "+seenUsers, '======> before splitting');
+
+					var userIndex = users.indexOf(userId);
+					var seenIndex = seenUsers.indexOf(userId);
+					console.log(userIndex, '=========> user index');
+					console.log(seenIndex, '=========> user index');
+
+					if(userIndex != -1){
+						users.splice(userIndex, 1);
+					}
+
+					if(seenIndex != -1){
+						seenUsers.splice(seenIndex, 1);
+					}
+
+					console.log("UNSEEN: "+users, "SEEN: "+seenUsers, '======> SPLI');
+
+
+					users = users.toString();
+					seenUsers = seenUsers.toString();
+
+					console.log("UNSEEN: "+users, "SEEN: "+seenUsers, '======> AFTER SPLICING ');
+
+					const annTable = `update happyhealth.announcementstbl set userId = "${users}", seenUsers ="${seenUsers}"  where messageId = ${msgId}`;
+					conn.query(annTable, (err, result) => {
+						if (err) {
+							console.log(err, 'error while updating new list');
+						} else {
+							console.log(result, '=====> removed user from list');
+						}
+					});
+					// res.redirect('notifications')
+				}
+			});
+			res.redirect('/notifications')
+			conn.release();
+		}
+	});
+};
+
+exports.viewNotification = (req, res) => {
+	console.log('user is viewing ');
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			let userId = req.session.userId;
+			let msgId = req.params.messageId;
+			console.log(msgId, '=======> dismiss user notification');
+
+			let diss = `SELECT * FROM happyhealth.announcementstbl where messageId = ${msgId} and userId like '%${userId}%' or seenUsers like '%${userId}%';`;
+			conn.query(diss, (err, resul) => {
+				if (err) {
+					console.log(err, '=======> error');
+				} else {
+					console.log(resul, '==========> resul');
+
+
+
+					let users = JSON.parse('[' + resul[0].userId + ']');
+					let seenUsers = [];
 					console.log(users, '======> before splitting');
 
-					var userIndex = users.indexOf(`${userId}`);
+					var userIndex = users.indexOf(userId);
 					console.log(userIndex, '=========> user index');
-					users.splice(userIndex, 1);
-					let afterRemovingUser = users.toString();
-					console.log(afterRemovingUser, '========> after removing user');
 
-					const annTable = `update happyhealth.announcementstbl set userId = "${afterRemovingUser}"  where messageId = ${msgId}`;
+					if (userIndex == -1) {
+						users.splice(userIndex, 1);
+					}
+
+					if (resul[0].seenUsers != null) {
+						console.log(resul[0].seenUsers, '===============> seen users');
+						seenUsers = JSON.parse('[' + resul[0].seenUsers + ']');
+						seenUsers.push(userId);
+						seenUsers = seenUsers.filter(function (item, pos) {
+							return seenUsers.indexOf(item) == pos;
+						});
+						console.log(users, seenUsers, '===============>SEEEEE IF');
+					} else {
+						console.log(resul[0].seenUsers, '=========> dude there are no seen users.');
+						seenUsers.push(userId);
+						seenUsers = seenUsers.filter(function (item, pos) {
+							return seenUsers.indexOf(item) == pos;
+						});
+						console.log(users, seenUsers, '===============>SEEEEEEEEEEEE  ELSE');
+					}
+
+					users = users.toString();
+					seenUsers = seenUsers.toString();
+
+					console.log(
+						'UNSEEN: ' + users,
+						' SEEN: ' + seenUsers,
+						'========> after moving from one array to another.'
+					);
+
+					const annTable = `update happyhealth.announcementstbl set userId = "${users}" , seenUsers ="${seenUsers}"  where messageId = ${msgId}`;
 					conn.query(annTable, (err, result) => {
 						if (err) {
 							console.log(err, 'error while updating new list');
@@ -93,24 +197,15 @@ exports.dismissAnnouncement = (req, res) => {
 								else {
 									console.log(countResult[0].count, '=====> unread notifs');
 									req.session.annCount = countResult[0].count;
-									console.log(req.session.annCount, "==========> session cunt")
+									console.log(req.session.annCount, '==========> session cunt');
 									res.redirect('/notifications');
 								}
 							});
 						}
 					});
-					// res.redirect('notifications')
 				}
 			});
-			// res.redirect('/notifications')
 			conn.release();
 		}
 	});
 };
-
-exports.viewNotification = (req,res)=>{
-	console.log("user is viewing ")
-
-	
-
-}
