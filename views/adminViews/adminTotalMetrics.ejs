@@ -2,7 +2,8 @@
     <div class="table-title">
         <div class="row">
             <div class="col-sm-8">
-                <h2><b>User Metrics for <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date())   %></b></h2>
+                <h2 id="info">User Metrics for <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date())   %></h2>
+   
             </div>
         </div>
     </div>
@@ -26,11 +27,11 @@
                     </br>
                     <div class="form-group">
                         <form action="/adminMetricsDate/<%= result[0][0].userId%>" method="GET">
-                            <label for="start">From-date :</label>
-                            <input type="date" id="datepicker1" name="datepicker1" placeholder="mm/dd/yyyy" required>
+                            <label for="start" class="font-weight-bold">From date :</label>
+                            <input type="date" id="datepicker1" class="mb-2 date" name="datepicker1" placeholder="mm/dd/yyyy" required>
                             </br>
-                            <label for="start">To-date :</label>
-                            <input type="date" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" required>
+                            <label for="start" class="font-weight-bold">To date :</label>
+                            <input type="date" id="datepicker2" class="date" name="datepicker2" placeholder="mm/dd/yyyy" required>
                             <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm"
                                     onclick="getData()">Get</button> 
                         </form>

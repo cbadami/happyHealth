@@ -144,15 +144,22 @@ exports.getUserStepByDate = (req, res) => {
 								console.log(result, "----------inserted query");
 								const stepCount = stepGoal = 0;
 								res.json({
-									stepCount, stepGoal
+									stepCount,
+									stepGoal
 								});
 							}
 						});
 
 					} else {
 						console.log(result, '--------db user table result');
-						const { stepCount, stepGoal } = result[0];
-						res.json({ stepCount, stepGoal });
+						const {
+							stepCount,
+							stepGoal
+						} = result[0];
+						res.json({
+							stepCount,
+							stepGoal
+						});
 					}
 
 
@@ -178,7 +185,10 @@ exports.getUserStep = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '--------db user table result');
-					const { stepCount, stepGoal } = result[0];
+					const {
+						stepCount,
+						stepGoal
+					} = result[0];
 					res.render('userViews/userStep', {
 						layout: 'layouts/userLayout',
 						title: 'User Step',
@@ -199,7 +209,11 @@ exports.postUserStep = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			const userId = req.session.userId;
-			const { stepCount, stepGoal, datepicker1 } = req.body;
+			const {
+				stepCount,
+				stepGoal,
+				datepicker1
+			} = req.body;
 			let errors = [];
 			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
 			console.log(newdate + "-----------------new");
@@ -257,15 +271,22 @@ exports.getUserSleepByDate = (req, res) => {
 								console.log(result, "----------inserted query");
 								const sleepHours = sleepGoal = 0;
 								res.json({
-									sleepHours,sleepGoal
+									sleepHours,
+									sleepGoal
 								});
 							}
 						});
 
 					} else {
 						console.log(result, '--------db user table result');
-						const { sleepHours,sleepGoal } = result[0];
-						res.json({ sleepHours,sleepGoal});
+						const {
+							sleepHours,
+							sleepGoal
+						} = result[0];
+						res.json({
+							sleepHours,
+							sleepGoal
+						});
 					}
 
 
@@ -291,7 +312,10 @@ exports.getUserSleep = (req, res) => {
 				} else {
 					console.log(result, '--------db user table result');
 
-					var { sleepHours, sleepGoal } = result[0];
+					var {
+						sleepHours,
+						sleepGoal
+					} = result[0];
 
 					res.render('userViews/userSleep', {
 						layout: 'layouts/userLayout',
@@ -313,7 +337,11 @@ exports.postUserSleep = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { sleepHours, sleepGoal,datepicker1 } = req.body;
+			const {
+				sleepHours,
+				sleepGoal,
+				datepicker1
+			} = req.body;
 
 			console.log(`inside post user sleep: ${sleepHours}  ${sleepGoal}`);
 			let errors = [];
@@ -374,15 +402,22 @@ exports.getUserHydrationByDate = (req, res) => {
 								console.log(result, "----------inserted query");
 								const water = waterGoal = 0;
 								res.json({
-									water, waterGoal
+									water,
+									waterGoal
 								});
 							}
 						});
 
 					} else {
 						console.log(result, '--------db user table result');
-						const { water, waterGoal} = result[0];
-						res.json({ water, waterGoal });
+						const {
+							water,
+							waterGoal
+						} = result[0];
+						res.json({
+							water,
+							waterGoal
+						});
 					}
 
 
@@ -406,7 +441,10 @@ exports.getUserHydration = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '--------db user water result');
-					var { water, waterGoal } = result[0];
+					var {
+						water,
+						waterGoal
+					} = result[0];
 					console.log(water, waterGoal, '==============> water, watergoal');
 
 					res.render('userViews/userHydration', {
@@ -429,7 +467,11 @@ exports.postUserHydration = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { water, waterGoal, datepicker1 } = req.body;
+			const {
+				water,
+				waterGoal,
+				datepicker1
+			} = req.body;
 			console.log(`inside post user hyration`);
 			let errors = [];
 			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
@@ -488,15 +530,22 @@ exports.getUserTrackByDate = (req, res) => {
 								console.log(result, "----------inserted query");
 								const meTime = meTimeGoal = 0;
 								res.json({
-									meTime,meTimeGoal
+									meTime,
+									meTimeGoal
 								});
 							}
 						});
 
 					} else {
 						console.log(result, '--------db user table result');
-						const { meTime,meTimeGoal } = result[0];
-						res.json({ meTime,meTimeGoal });
+						const {
+							meTime,
+							meTimeGoal
+						} = result[0];
+						res.json({
+							meTime,
+							meTimeGoal
+						});
 					}
 
 
@@ -521,7 +570,10 @@ exports.getUserTrack = (req, res) => {
 				} else {
 					console.log(result, '--------db user table result');
 
-					let { meTime, meTimeGoal } = result[0];
+					let {
+						meTime,
+						meTimeGoal
+					} = result[0];
 
 					res.render('userViews/userTrack', {
 						layout: 'layouts/userLayout',
@@ -537,13 +589,17 @@ exports.getUserTrack = (req, res) => {
 };
 
 exports.postUserTrack = (req, res) => {
-	
+
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { meTime, meTimeGoal,datepicker1 } = req.body;
+			const {
+				meTime,
+				meTimeGoal,
+				datepicker1
+			} = req.body;
 			console.log(`inside post user track`);
 			let errors = [];
 			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
@@ -602,16 +658,29 @@ exports.getFruitsVeggiesByDate = (req, res) => {
 								console.log(result, "----------inserted query");
 								const fruits = fruitGoal = veggies = veggieGoal = 0;
 								res.json({
-									fruits, fruitGoal, veggies, veggieGoal
+									fruits,
+									fruitGoal,
+									veggies,
+									veggieGoal
 								});
 							}
 						});
 
 					} else {
 						console.log(result, '--------db user table result');
-						const { fruits, fruitGoal, veggies, veggieGoal } = result[0];
-						console.log(fruits, fruitGoal, veggies, veggieGoal,"-------printing");
-						res.json({ fruits, fruitGoal, veggies, veggieGoal});
+						const {
+							fruits,
+							fruitGoal,
+							veggies,
+							veggieGoal
+						} = result[0];
+						console.log(fruits, fruitGoal, veggies, veggieGoal, "-------printing");
+						res.json({
+							fruits,
+							fruitGoal,
+							veggies,
+							veggieGoal
+						});
 					}
 
 
@@ -635,7 +704,12 @@ exports.getFruitsVeggies = (req, res) => {
 					console.log(err, '======> error while getting fruits and veggies');
 				} else {
 					console.log(result, '=====> fruits veggies result');
-					const { fruits, fruitGoal, veggies, veggieGoal } = result[0];
+					const {
+						fruits,
+						fruitGoal,
+						veggies,
+						veggieGoal
+					} = result[0];
 					res.render('userViews/userFruitsVeggies', {
 						layout: 'layouts/userLayout',
 						title: ' Fruits & Vegetables',
@@ -659,7 +733,13 @@ exports.postFruitsVeggies = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			let { fruits, fruitgoal, veggies, veggieGoal, datepicker1 } = req.body;
+			let {
+				fruits,
+				fruitgoal,
+				veggies,
+				veggieGoal,
+				datepicker1
+			} = req.body;
 			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
 			let updateFV = `update happyhealth.usermetricstbl set fruits = ${fruits} , fruitGoal= ${fruitgoal} , veggies = ${veggies} , veggieGoal= ${veggieGoal} where userId =${userId} and date = '${newdate}'; `;
 			conn.query(updateFV, (err, result) => {
@@ -704,15 +784,22 @@ exports.getUserPhysicalActivityByDate = (req, res) => {
 								console.log(result, "----------inserted query");
 								const physicalActivityMinutes = physicalActivityGoal = 0;
 								res.json({
-									physicalActivityMinutes, physicalActivityGoal
+									physicalActivityMinutes,
+									physicalActivityGoal
 								});
 							}
 						});
 
 					} else {
 						console.log(result, '--------db user table result');
-						const { physicalActivityMinutes, physicalActivityGoal } = result[0];
-						res.json({ physicalActivityMinutes, physicalActivityGoal });
+						const {
+							physicalActivityMinutes,
+							physicalActivityGoal
+						} = result[0];
+						res.json({
+							physicalActivityMinutes,
+							physicalActivityGoal
+						});
 					}
 
 
@@ -736,7 +823,10 @@ exports.getUserPhysicalActivity = (req, res) => {
 					console.log(err);
 				} else {
 					console.log(result, '-------- physical activity result');
-					const { physicalActivityMinutes, physicalActivityGoal } = result[0];
+					const {
+						physicalActivityMinutes,
+						physicalActivityGoal
+					} = result[0];
 					console.log(physicalActivityMinutes, physicalActivityGoal, '==========> PHYYYYYYYY');
 					res.render('userViews/userPhysicalActivity', {
 						layout: 'layouts/userLayout',
@@ -759,7 +849,11 @@ exports.postUserPhysicalActivity = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			let userId = req.session.userId;
-			const { physicalActivityMinutes, physicalActivityGoal,datepicker1 } = req.body;
+			const {
+				physicalActivityMinutes,
+				physicalActivityGoal,
+				datepicker1
+			} = req.body;
 			let newdate = (datepicker1.split('-')[1]) + '/' + datepicker1.split('-')[2] + '/' + datepicker1.split('-')[0];
 			console.log('-------post user Physical Activity controller');
 			let errors = [];
@@ -786,4 +880,3 @@ exports.postUserPhysicalActivity = (req, res) => {
 		}
 	});
 };
-

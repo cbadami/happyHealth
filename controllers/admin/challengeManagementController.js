@@ -55,7 +55,13 @@ exports.addChallenge = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			console.log(req.body, '===============> ADD CHALLENGE DATA');
-			let { name, description, userId, startDate, endDate } = req.body;
+			let {
+				name,
+				description,
+				userId,
+				startDate,
+				endDate
+			} = req.body;
 
 			let users = '';
 			const getUsers = `select userId, userName from usertbl;`;
@@ -66,7 +72,10 @@ exports.addChallenge = (req, res) => {
 				} else {
 					console.log(result, '=======> users result');
 					users = result;
-					res.render('adminViews/addChallenge', { layout: 'layouts/adminLayout', users });
+					res.render('adminViews/addChallenge', {
+						layout: 'layouts/adminLayout',
+						users
+					});
 				}
 			});
 
@@ -87,7 +96,10 @@ exports.editChallenge = (req, res) => {
 				if (err) throw err;
 				else {
 					console.log(result);
-					return res.render('adminViews/editChallenge', { result, layout: 'layouts/adminLayout' });
+					return res.render('adminViews/editChallenge', {
+						result,
+						layout: 'layouts/adminLayout'
+					});
 				}
 			});
 			// conn.release();
@@ -102,7 +114,16 @@ exports.updateChallenge = (req, res) => {
 		} else {
 			let cid = req.params.cid;
 			console.log(req.body, '==============> COMPLETE DATA');
-			let { name, description, challengeType, CT, startDate, SD, endDate, ED } = req.body;
+			let {
+				name,
+				description,
+				challengeType,
+				CT,
+				startDate,
+				SD,
+				endDate,
+				ED
+			} = req.body;
 
 			console.log(startDate, '===============> StartDate');
 			console.log(SD, '===========> SD');
@@ -166,7 +187,14 @@ exports.postChallenge = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			console.log(req.body, '----------adding post challenge');
-			let { name, description, challengeType, userId, startDate, endDate } = req.body;
+			let {
+				name,
+				description,
+				challengeType,
+				userId,
+				startDate,
+				endDate
+			} = req.body;
 
 			challengeType = challengeType.toString();
 			startDate = moment(startDate).format('L');
@@ -182,8 +210,8 @@ exports.postChallenge = (req, res) => {
 
 					let userMailIds = [];
 					let adminMailIds = [];
-					result.map(res=>{
-						if(res.admin==="Yes") adminMailIds.push(res.email);
+					result.map(res => {
+						if (res.admin === "Yes") adminMailIds.push(res.email);
 						else userMailIds.push(res.email);
 					})
 

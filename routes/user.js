@@ -51,36 +51,36 @@ router.post('/userPhysicalActivity', userHomeController.postUserPhysicalActivity
 /**
  * User Profile routes
  */
- router.get('/userInfo',userProfileController.getUserInfo);
- router.get('/userProfile', userProfileController.getUserProfile);
- router.post('/userProfile', userProfileController.postUserProfile);
+router.get('/userInfo', userProfileController.getUserInfo);
+router.get('/userProfile', userProfileController.getUserProfile);
+router.post('/userProfile', userProfileController.postUserProfile);
 
 /**
  * User Challenges
  */
 
- router.get('/userChallenges', userChallengeController.getUserChallenges);
- router.post('/joinChallenge/:challengeId', userChallengeController.joinChallenge )
- router.post('/leaveChallenge/:challengeId', userChallengeController.leaveChallenge ) 
- router.get('/userMoreChallenges', userChallengeController.getUserMoreChallenges);
- router.get('/activeChallenges', userChallengeController.getActiveChallenges);
- router.get('/availableChallenges', userChallengeController.getAvailableChallenges);
- router.get('/completedChallenges', userChallengeController.getCompletedChallenges);
- router.post('/challengeAccepted/:challengeId', userChallengeController.setChallengesAccept);
- router.get('/personalGoals', userChallengeController.getPersonalGoals);
+router.get('/userChallenges', userChallengeController.getUserChallenges);
+router.post('/joinChallenge/:challengeId', userChallengeController.joinChallenge)
+router.post('/leaveChallenge/:challengeId', userChallengeController.leaveChallenge)
+router.get('/userMoreChallenges', userChallengeController.getUserMoreChallenges);
+router.get('/activeChallenges', userChallengeController.getActiveChallenges);
+router.get('/availableChallenges', userChallengeController.getAvailableChallenges);
+router.get('/completedChallenges', userChallengeController.getCompletedChallenges);
+router.post('/challengeAccepted/:challengeId', userChallengeController.setChallengesAccept);
+router.get('/personalGoals', userChallengeController.getPersonalGoals);
 
 
- /**
-  * User Progress
-  */
+/**
+ * User Progress
+ */
 
- router.get('/userProgress', userProgressController.getTodayProgress);
- router.get('/progress',userProgressController.getProgress);
+router.get('/userProgress', userProgressController.getTodayProgress);
+router.get('/progress', userProgressController.getProgress);
 
- /**
-  * User Notification Controller
-  */
- 
+/**
+ * User Notification Controller
+ */
+
 router.get('/notifications', userNotificationController.getNotifications);
 router.post('/viewNotification/:messageId',userNotificationController.viewNotification )
 // router.post('/notifications', userNotificationController.postNotifications);
@@ -91,6 +91,6 @@ router.post('/dismissAnnouncement/:messageId', userNotificationController.dismis
  * Updating User metrics everyday with zeros
  */
 
- router.get('/resetJobs', cronJob.resetUserMetrics)
- 
+router.get('/resetJobs', cronJob.resetUserMetrics)
+
 module.exports = router;
