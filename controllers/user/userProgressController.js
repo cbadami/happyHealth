@@ -50,14 +50,24 @@ exports.getTodayProgress = (req, res) => {
 					console.log(result, '--------db userMetrics table result');
 
 					let u = result[0];
-					let stats = {
+					let statsR = {
 						step: Math.round((u.stepCount / u.stepGoal) * 100 * 10) / 10,
-						sleep: Math.round((u.sleepHours / u.sleepGoal) * 100 * 10) / 10,
+						sleep:  Math.round((u.sleepHours / u.sleepGoal) * 100 * 10) / 10,
 						meTime: Math.round((u.meTime / u.meTimeGoal) * 100 * 10) / 10,
-						water: Math.round((u.water / u.waterGoal) * 100 * 10) / 10,
+						water:  Math.round((u.water / u.waterGoal) * 100 * 10) / 10,
 						fruits: Math.round((u.fruits / u.fruitGoal) * 100 * 10) / 10,
 						veggies: Math.round((u.veggies / u.veggieGoal) * 100 * 10) / 10,
 						physical: Math.round((u.physicalActivityMinutes / u.physicalActivityGoal) * 100 * 10) / 10,
+					};
+
+					let stats = {
+						step: isNaN(statsR.step) ? 0 : statsR.step  ,
+						sleep: isNaN(statsR.sleep) ? 0 : statsR.sleep,
+						meTime:isNaN(statsR.meTime) ? 0 :  statsR.meTime,
+						water: isNaN(statsR.water) ? 0 :statsR.water,
+						fruits:isNaN(statsR.fruits) ? 0 :  statsR.fruits,
+						veggies: isNaN(statsR.veggies) ? 0 : statsR.veggies,
+						physical: isNaN(statsR.physical) ? 0 : statsR.physical
 					};
 					console.log(stats, '=========> stats');
 
@@ -122,14 +132,24 @@ exports.getProgress = (req, res) => {
 					console.log('****metric sum result**** ', result);
 
 					let u = result[0];
-					let stats = {
+					let statsR = {
 						step: Math.round((u.stepCount / u.stepGoal) * 100 * 10) / 10,
-						sleep: Math.round((u.sleepHours / u.sleepGoal) * 100 * 10) / 10,
+						sleep:  Math.round((u.sleepHours / u.sleepGoal) * 100 * 10) / 10,
 						meTime: Math.round((u.meTime / u.meTimeGoal) * 100 * 10) / 10,
-						water: Math.round((u.water / u.waterGoal) * 100 * 10) / 10,
+						water:  Math.round((u.water / u.waterGoal) * 100 * 10) / 10,
 						fruits: Math.round((u.fruits / u.fruitGoal) * 100 * 10) / 10,
 						veggies: Math.round((u.veggies / u.veggieGoal) * 100 * 10) / 10,
 						physical: Math.round((u.physicalActivityMinutes / u.physicalActivityGoal) * 100 * 10) / 10,
+					};
+
+					let stats = {
+						step: isNaN(statsR.step) ? 0 : statsR.step  ,
+						sleep: isNaN(statsR.sleep) ? 0 : statsR.sleep,
+						meTime:isNaN(statsR.meTime) ? 0 :  statsR.meTime,
+						water: isNaN(statsR.water) ? 0 :statsR.water,
+						fruits:isNaN(statsR.fruits) ? 0 :  statsR.fruits,
+						veggies: isNaN(statsR.veggies) ? 0 : statsR.veggies,
+						physical: isNaN(statsR.physical) ? 0 : statsR.physical
 					};
 					console.log(stats, '=========>avg stats ');
 
