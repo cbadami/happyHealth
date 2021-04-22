@@ -80,7 +80,7 @@ exports.getUserProfile = (req, res) => {
 						country,
 						state,
 					} = result[0];
-					let [firstName, lastName] = fullName.split(',');
+					let [firstName, lastName] = fullName.split(' ');
 					console.log(
 						userName,
 						admin,
@@ -141,7 +141,7 @@ exports.postUserProfile = (req, res) => {
 				country,
 				state,
 			} = req.body;
-			let fullName = firstName + ',' + lastName;
+			let fullName = firstName + ' ' + lastName;
 			console.log(
 				firstName + lastName,
 				gender,
