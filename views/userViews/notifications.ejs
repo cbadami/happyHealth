@@ -19,9 +19,16 @@
                     <strong class="mr-auto">
                         <%= newN[i].title%>
                     </strong>
-					<a class="btn btn-sm btn-md btn-primary" onclick="viewNotif('<%= newN[i].messageId %>')" data-toggle="collapse" href="#collapseExample<%= newN[i].messageId %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <form class="mr-2">
+                        <a class="btn btn-sm btn-md btn-info" onclick="viewNotif('<%= newN[i].messageId %>')"
+                            data-toggle="collapse" href="#collapseExample<%= newN[i].messageId %>" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                            view
+                        </a>
+                    </form>
+                    <!-- <a class="btn btn-sm btn-md btn-primary" onclick="viewNotif('<%= newN[i].messageId %>')" data-toggle="collapse" href="#collapseExample<%= newN[i].messageId %>" role="button" aria-expanded="false" aria-controls="collapseExample">
 						view
-					  </a>
+					  </a> -->
                     <form action="/dismissAnnouncement/<%= newN[i].messageId %>" method="post">
                         <input type="submit" id="PopoverCustomT-1" value="Dismiss"
                             class="btn btn-sm btn-md btn-danger"></input>
@@ -40,8 +47,15 @@
         </div>
     </div>
 
-	<div class="table-responsive">
-<h1>Old Announcements</h1>
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2><b>Old Announcements</b></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
         <div class="table-body">
             <% for (var i=0; i < oldN.length;i++) { %>
                 <div class="toast-header">
@@ -52,9 +66,14 @@
                     <strong class="mr-auto">
                         <%= oldN[i].title%>
                     </strong>
-					<a class="btn btn-sm btn-md btn-primary" onclick="viewNotif('<%= oldN[i].messageId %>')" data-toggle="collapse" href="#collapseExample<%= oldN[i].messageId %>" role="button" aria-expanded="false" aria-controls="collapseExample">
-						view
-					  </a>
+                    <form class="mr-2">
+                        <a class="btn btn-sm btn-md btn-info" onclick="viewNotif('<%= oldN[i].messageId %>')"
+                            data-toggle="collapse" href="#collapseExample<%= oldN[i].messageId %>" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                            view
+                        </a>
+                    </form>
+
                     <form action="/dismissAnnouncement/<%= oldN[i].messageId %>" method="post">
                         <input type="submit" id="PopoverCustomT-1" value="Dismiss"
                             class="btn btn-sm btn-md btn-danger"></input>
@@ -76,16 +95,16 @@
 </div>
 
 <script>
-	function viewNotif(id){
-		console.log(id, "clicked")
-		$.ajax({
-        type: 'post',
-        url: 'viewNotification/'+id,
-        // success: function(result) {
-        //   document.getElementById("stepCount").value=result.stepCount;
-        //   document.getElementById("stepGoal").value=result.stepGoal;
-        //      //$('#champ').html(result);
-        // }
-      });
-	}
+    function viewNotif(id) {
+        console.log(id, "clicked")
+        $.ajax({
+            type: 'post',
+            url: 'viewNotification/' + id,
+            // success: function(result) {
+            //   document.getElementById("stepCount").value=result.stepCount;
+            //   document.getElementById("stepGoal").value=result.stepGoal;
+            //      //$('#champ').html(result);
+            // }
+        });
+    }
 </script>

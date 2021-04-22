@@ -40,7 +40,7 @@
                                 </div>
 
                                 <div class="mt-3">
-                                    <h4>
+                                    <h4 class="text-capitalize">
                                         <%= result[0].fullName %>
                                     </h4>
                                     <p class="text-secondary mb-1">@<%= result[0].userName %>
@@ -136,8 +136,8 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">First Name:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= result[0].fullName.split(',')[0] %>
+                                <div class="col-sm-9 text-secondary text-capitalize">
+                                    <%= result[0].fullName.split(' ')[0] %>
                                 </div>
                             </div>
                             <hr>
@@ -145,8 +145,8 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Last Name:</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= result[0].fullName.split(',')[1] %>
+                                <div class="col-sm-9 text-secondary text-capitalize">
+                                    <%= result[0].fullName.split(' ')[1] %>
                                 </div>
                             </div>
                             <hr>

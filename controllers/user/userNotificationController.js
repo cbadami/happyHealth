@@ -1,16 +1,4 @@
-const db = require('../../database');
 const pooldb = require('../../pooldb');
-
-const moment = require('moment');
-
-// pooldb.getConnection((err1, conn) => {
-// 	if (err1) {
-// 		console.log(err1, '=====> error occured');
-// 	} else {
-
-// conn.release()
-// 	}
-// });
 
 exports.getNotifications = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
