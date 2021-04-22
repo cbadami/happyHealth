@@ -152,7 +152,7 @@ exports.dismissAnnouncement = (req, res) => {
 };
 
 exports.viewNotification = (req, res) => {
-	console.log('user is viewing ');
+	console.log('---------------user is viewing ');
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -231,8 +231,9 @@ exports.viewNotification = (req, res) => {
 							getUnreadAnn().then(function(rows) {
 								console.log(rows[0].annCount, "=====================> resolved data........")
 								req.session.annCount = rows[0].annCount;
-								res.locals.annCount =req.session.annCount;
-								console.log("DEcreasing the anncount")
+								res.redirect('/notifications')
+								// res.locals.annCount = req.session.annCount;
+								console.log(res.locals.annCount , "DEcreasing the anncount")
 							}).catch((err) => setImmediate(() => { throw err; })); 
 
 
