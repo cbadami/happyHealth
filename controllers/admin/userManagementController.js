@@ -120,23 +120,23 @@ exports.deleteUser = (req, res) => {
 			console.log('****delete executed started****');
 			const userId = req.params.userId;
 			console.log(userId);
-			const deleteQuery = `Delete FROM happyhealth.USERtbl WHERE UserId = '${userId}'; `;
+			const deleteQuery = `Delete FROM happyhealth.USERtbl WHERE UserId = ${userId}; `;
 			// const deleteQuery1 = `Delete FROM happyhealth.groupmembertbl WHERE UserId = '${userId}';`;
-			const deleteQuery2 = `Delete FROM happyhealth.usermetricstbl WHERE UserId = '${userId}';`;
-			conn.query(deleteQuery2, function (err) {
+			// const deleteQuery2 = `Delete FROM happyhealth.usermetricstbl WHERE UserId = '${userId}';`;
+			conn.query(deleteQuery, function (err) {
 				if (err) {
 					throw err;
 				}
 				console.log('****delete2 executed started****');
 			});
-			conn.query(deleteQuery, function (err) {
-				if (err) {
-					throw err;
-				} else {
-					res.redirect('/userManagement');
-				}
-				console.log('****delete executed started****');
-			});
+			// conn.query(deleteQuery, function (err) {
+			// 	if (err) {
+			// 		throw err;
+			// 	} else {
+			// 		res.redirect('/userManagement');
+			// 	}
+			// 	console.log('****delete executed started****');
+			// });
 			conn.release();
 		}
 	});

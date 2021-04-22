@@ -41,6 +41,7 @@ exports.getAdminHome = (req, res) => {
 									conn.release();
 									return;
 								} else {
+									console.log(resultNoMetUsers,"-----------------result no metric users(lenivalu)")
 									if (resultNoMetUsers.length == 0) {
 										console.log('User metrics already created in db.=');
 										console.log(resultNoMetUsers, 'All users updated their metrics for today...');
