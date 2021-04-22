@@ -127,6 +127,7 @@ exports.deleteUser = (req, res) => {
 				if (err) {
 					throw err;
 				}
+				res.redirect('/userManagement');
 				console.log('****delete2 executed started****');
 			});
 			// conn.query(deleteQuery, function (err) {
