@@ -159,36 +159,6 @@ exports.postUserProfile = (req, res) => {
 			const [year, month, date] = dateOfBirth.split('-');
 			dateOfBirth = month + '/' + date + '/' + year;
 			let errors = [];
-			if (
-				!fullName ||
-				!gender ||
-				!dateOfBirth ||
-				!age ||
-				!email ||
-				!currentWeight ||
-				!desiredWeight ||
-				!height ||
-				!country ||
-				!state
-			) {
-				errors.push('Please enter all fields');
-				res.render('userViews/userProfile', {
-					layout: 'layouts/userLayout',
-					title: 'User Profile',
-					fullName,
-					email,
-					fullName,
-					gender,
-					dateOfBirth,
-					age,
-					currentWeight,
-					desiredWeight,
-					height,
-					country,
-					state,
-					errors,
-				});
-			}
 			const profileQuery = `UPDATE happyhealth.usertbl
 			SET email = '${email}', fullName = '${fullName}',gender='${gender}',dateOfBirth='${dateOfBirth}',age='${age}',
 			currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'
