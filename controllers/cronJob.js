@@ -12,7 +12,7 @@ exports.resetUserMetrics = () => {
 	console.log(currentDate, '---------cuurent date after formation--------------');
 
 	try {
-		cron.schedule('00 01 * * *', async () => {
+		cron.schedule('00 02 * * *', async () => {
 			console.log('***********cron job started************');
 			pooldb.getConnection((err1, conn) => {
 				if (err1) {
@@ -62,68 +62,76 @@ exports.resetUserMetrics = () => {
 											return;
 										} else {
 											console.log(result2.length, '======> result2');
-
-											let totalUsers = JSON.parse("[" + usersList + "]");
-											let preUserMet = [];
-											let noPreUserMet = [];
-
-											result2.map(rrr=>{
-												preUserMet.push(rrr.userId)
-											})
-
-											totalUsers.filter( element => {
-												if(preUserMet.includes(element) == false ){
-													noPreUserMet.push(element)
+											let values = ''
+											if (result2.length <= 0) {
+												console.log('==========> NO PREVIOS DATA');
+												let totalUsers = JSON.parse('[' + usersList + ']');
+												for (let i = 0; i < totalUsers.length; i++) {
+													values += `(${totalUsers[i]},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0),`;
 												}
-											});
+												values = values.slice(0, -1);
+											} else {
+												let totalUsers = JSON.parse('[' + usersList + ']');
+												let preUserMet = [];
+												let noPreUserMet = [];
 
-											let va = '';
-											console.log(preUserMet, noPreUserMet, "============> pre User Metrics")
-											
-											if(noPreUserMet.length>0){
-												for(let i=0; i<noPreUserMet.length; i++){
-													va += `(${noPreUserMet[i]},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0),`;
+												result2.map((rrr) => {
+													preUserMet.push(rrr.userId);
+												});
+
+												totalUsers.filter((element) => {
+													if (preUserMet.includes(element) == false) {
+														noPreUserMet.push(element);
+													}
+												});
+
+												let va = '';
+												console.log(preUserMet, noPreUserMet, '============> pre User Metrics');
+
+												if (noPreUserMet.length > 0) {
+													for (let i = 0; i < noPreUserMet.length; i++) {
+														va += `(${noPreUserMet[i]},"${currentDate}",0,0,0,0,0,0,0,0,0,0,0,0,0,0),`;
+													}
 												}
+
+												va = va.slice(0, -1);
+
+												console.log(va, '=============> va');
+
+												values = '';
+
+												for (let i = 0; i < result2.length; i++) {
+													const {
+														userId,
+														stepGoal,
+														sleepGoal,
+														meTimeGoal,
+														waterGoal,
+														fruitGoal,
+														veggieGoal,
+														physicalActivityGoal,
+													} = result2[i];
+													console.log(
+														userId,
+														stepGoal,
+														sleepGoal,
+														meTimeGoal,
+														waterGoal,
+														fruitGoal,
+														veggieGoal,
+														physicalActivityGoal
+													);
+													values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
+												}
+												values = values.slice(0, -1);
+												console.log(values + ',' + va, '====> combining 2');
+
+												values = values + ',' + va;
+												console.log(values);
 											}
-											
-											va = va.slice(0, -1);
-
-											console.log(va, "=============> va")
-
-											let values = '';
-
-											for (let i = 0; i < result2.length; i++) {
-												const {
-													userId,
-													stepGoal,
-													sleepGoal,
-													meTimeGoal,
-													waterGoal,
-													fruitGoal,
-													veggieGoal,
-													physicalActivityGoal,
-												} = result2[i];
-												console.log(
-													userId,
-													stepGoal,
-													sleepGoal,
-													meTimeGoal,
-													waterGoal,
-													fruitGoal,
-													veggieGoal,
-													physicalActivityGoal
-												);
-												values += `(${userId},"${currentDate}",0,${stepGoal},0,${sleepGoal},0,${meTimeGoal},0,${waterGoal},0,${fruitGoal},0,${veggieGoal},0,${physicalActivityGoal}),`;
-											}
-											values = values.slice(0, -1);
-											 console.log(values+','+va,"====> combining 2")
-
-											values = values+','+va
-											values = values.slice(0,-1)
-											console.log(values)
-
+											console.log(values, "========> before insertion");
 											const newValuesQuery = `INSERT INTO happyhealth.usermetricstbl (userId, date, stepCount, stepGoal, sleepHours, sleepGoal, meTime, meTimeGoal, water, waterGoal, fruits, fruitGoal, veggies, veggieGoal, physicalActivityMinutes, physicalActivityGoal) values ${values};`;
-											
+
 											conn.query(newValuesQuery, (err3, result3) => {
 												if (err3) {
 													console.log('============> error while inserting metrics');
@@ -133,15 +141,16 @@ exports.resetUserMetrics = () => {
 													conn.release();
 
 													console.log(result3, '===========> insert new values result3');
-													console.log( Date.now(), '************Updated all metrics through CRON************');
+													console.log(
+														Date.now(),
+														'************Updated all metrics through CRON************'
+													);
 													//console.log(res, "=========> res stattttttttt")
 													// res.status(200).json({
 													// 	message: 'User metrics updated Succesfully  with cron job',
 													// });
 												}
 											});
-
-
 										}
 									});
 								}
@@ -157,7 +166,6 @@ exports.resetUserMetrics = () => {
 };
 
 exports.updateAllMetrics = (req, res) => {
-
 	let currentDate = new Date().toLocaleDateString();
 
 	let [m, d, y] = currentDate.split('/');
@@ -254,10 +262,10 @@ exports.updateAllMetrics = (req, res) => {
 												console.log(result3, '===========> insert new values result3');
 												console.log('************Cron Job completed************');
 												console.log('************Updated all metrics************');
-													res.status(200).json({
-														message: 'User metrics updated Succesfully',
-													});
-													return;
+												res.status(200).json({
+													message: 'User metrics updated Succesfully',
+												});
+												return;
 												// return;
 											}
 										});
@@ -272,18 +280,14 @@ exports.updateAllMetrics = (req, res) => {
 	} catch (err) {
 		console.log(err);
 	}
-
-
 };
 
-
 exports.yesterdayUpdateMetrics = (req, res) => {
-
 	let da = new Date();
-	
-	let timestamp = da.setDate(da.getDate() - 1)
-	console.log(timestamp, "=======> yes")
-	let currentDate = new Date(timestamp).toLocaleDateString(); 
+
+	let timestamp = da.setDate(da.getDate() - 1);
+	console.log(timestamp, '=======> yes');
+	let currentDate = new Date(timestamp).toLocaleDateString();
 
 	let [m, d, y] = currentDate.split('/');
 	m = m.length == 1 ? '0' + m : m;
@@ -291,7 +295,6 @@ exports.yesterdayUpdateMetrics = (req, res) => {
 	currentDate = [m, d, y].join('/');
 
 	console.log(currentDate, '---------cuurent date after formation--------------');
-
 
 	try {
 		console.log('*********** UPDATING LOCALLYYY************');
@@ -380,10 +383,10 @@ exports.yesterdayUpdateMetrics = (req, res) => {
 												console.log(result3, '===========> insert new values result3');
 												console.log('************Cron Job completed************');
 												console.log('************Updated all metrics************');
-													res.status(200).json({
-														message: 'User metrics updated Succesfully',
-													});
-													return;
+												res.status(200).json({
+													message: 'User metrics updated Succesfully',
+												});
+												return;
 												// return;
 											}
 										});
@@ -398,6 +401,4 @@ exports.yesterdayUpdateMetrics = (req, res) => {
 	} catch (err) {
 		console.log(err);
 	}
-
-
 };
