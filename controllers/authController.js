@@ -93,7 +93,7 @@ exports.postUserLogin = async (req, res) => {
 								req.session.userName = userResult[0]['userName'];
 								req.session.userId = userResult[0]['userId'];
 
-								function getLastRecord()
+								function getUnreadAnn()
 								{
 									return new Promise(function(resolve, reject) {
 										query_str = `SELECT count(*) as annCount FROM happyhealth.announcementstbl where  userId like '%${req.session.userId}%' ;`
@@ -108,7 +108,7 @@ exports.postUserLogin = async (req, res) => {
 									});
 								}
 					
-								getLastRecord().then(function(rows) {
+								getUnreadAnn().then(function(rows) {
 									console.log(rows[0].annCount, "=====================> resolved data........")
 									req.session.annCount = rows[0].annCount;
 									req.session.isLoggedIn = true;

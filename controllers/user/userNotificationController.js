@@ -131,6 +131,27 @@ exports.dismissAnnouncement = (req, res) => {
 							console.log(err, 'error while updating new list');
 						} else {
 							console.log(result, '=====> removed user from list');
+
+
+							function getUnreadAnn()
+							{
+								return new Promise(function(resolve, reject) {
+									query_str = `SELECT count(*) as annCount FROM happyhealth.announcementstbl where  userId like '%${req.session.userId}%' ;`
+									conn.query(query_str, function (err, rows, fields) {
+										if (err) {
+											return reject(err);
+										}
+										resolve(rows);
+									});
+								});
+							}
+				
+							getUnreadAnn().then(function(rows) {
+								console.log(rows[0].annCount, "=====================> resolved data........")
+								req.session.annCount = rows[0].annCount;
+								res.locals.annCount =req.session.annCount;
+							}).catch((err) => setImmediate(() => { throw err; })); 
+
 						}
 					});
 					// res.redirect('notifications')
@@ -168,9 +189,10 @@ exports.viewNotification = (req, res) => {
 					var userIndex = users.indexOf(userId);
 					console.log(userIndex, '=========> user index');
 
-					if (userIndex == -1) {
+					if (userIndex != -1) {
 						users.splice(userIndex, 1);
 					}
+					console.log(users, 'After splicing************8')
 
 					if (resul[0].seenUsers != null) {
 						console.log(resul[0].seenUsers, '===============> seen users');
@@ -204,6 +226,28 @@ exports.viewNotification = (req, res) => {
 							console.log(err, 'error while updating new list');
 						} else {
 							console.log(result, '=====> removed user from list');
+
+							function getUnreadAnn()
+							{
+								return new Promise(function(resolve, reject) {
+									query_str = `SELECT count(*) as annCount FROM happyhealth.announcementstbl where  userId like '%${req.session.userId}%' ;`
+									conn.query(query_str, function (err, rows, fields) {
+										if (err) {
+											return reject(err);
+										}
+										resolve(rows);
+									});
+								});
+							}
+				
+							getUnreadAnn().then(function(rows) {
+								console.log(rows[0].annCount, "=====================> resolved data........")
+								req.session.annCount = rows[0].annCount;
+								res.locals.annCount =req.session.annCount;
+								console.log("DEcreasing the anncount")
+							}).catch((err) => setImmediate(() => { throw err; })); 
+
+
 						}
 					});
 

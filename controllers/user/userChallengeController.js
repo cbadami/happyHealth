@@ -13,7 +13,7 @@ exports.getUserChallenges = (req, res) => {
 
 			console.log(currentDate);
 
-			let query = `SELECT userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  activeUser FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId} and archive =0;`;
+			let query = `	 userId, challengetbl.challengeId, challengeName, challengeType , challengeDescription, startDate, endDate ,  activeUser FROM challengemembertbl JOIN challengetbl ON challengemembertbl.challengeId = challengetbl.challengeId WHERE challengemembertbl.userId = ${userId} and archive =0;`;
 
 			conn.query(query, (err, result) => {
 				if (err) {
