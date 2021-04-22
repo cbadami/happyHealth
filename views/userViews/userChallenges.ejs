@@ -109,6 +109,53 @@
 					<% }%>
 				</table>
 	</div>
+
+	
+	<div class="table-responsive">
+		<h2>Left Challenges</h2>
+	
+		<% if(leftChallenges.length<=0 ){ %>
+			<h6> There are no Left challenges</h6>
+			<% }else{ %>
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Sl.No</th>
+							<th scope="col">Name</th>
+							<th scope="col">Description</th>
+							<th scope="col">Metrics</th>
+							<th scope="col">Start Date</th>
+							<th scope="col">End Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% for( let i=0; i < leftChallenges.length; i++ ) { %>
+							<tr>
+								<td scope="row">
+									<%= i+1 %>
+								</td>
+								<td>
+									<%= leftChallenges[i].challengeName %>
+								</td>
+								<td>
+									<%= leftChallenges[i].challengeDescription %>
+								</td>
+								<td>
+									<%= leftChallenges[i].challengeType %>
+								</td>
+								<td>
+									<%= leftChallenges[i].startDate %>
+								</td>
+								<td>
+									<%= leftChallenges[i].endDate %>
+								</td>
+							</tr>
+							<% } %>
+					</tbody>
+	
+					<% }%>
+				</table>
+	</div>
 	</div>
 	<script>
 		function leftChallenge() {

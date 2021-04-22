@@ -41,15 +41,29 @@ exports.getUserChallenges = (req, res) => {
 						}
 					}
 
-					console.log(present, '=========> present ');
-					console.log(previous, '============> previous');
+					const leftChalls = `select * from challengetbl where challengeId in (SELECT challengeId FROM happyhealth.challengemembertbl where userId =${userId} and leftDate != '' );`
+					conn.query(leftChalls, (err, leftChallenges) => {
+						if(err){
+							console.log(err, "===> error while getting left challenges")
+						}else{
+							console.log(leftChallenges, "====> these are left challenges")
+
+
+							console.log(present, '=========> present ');
+						console.log(previous, '============> previous');
 
 					res.render('userViews/userChallenges', {
 						layout: 'layouts/userLayout',
 					 	present,
 						 previous,
+						 leftChallenges, 
 						title: 'User Management',
 					});
+						}
+					})
+
+
+					
 				}
 			});
 
