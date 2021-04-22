@@ -27,7 +27,7 @@
       <div class="form-group">
         <label for="challengeType"> Challenge Type </label>
         <select id="metrics" class="mul-select col-md-6" multiple="true" name="challengeType"
-          value="<%= result[0].challengeType %> ">
+          value="<%= result[0].challengeType %> " required>
           <option value="Step Count">Step Count</option>
           <option value="Sleep Hours">Sleep Hours</option>
           <option value="Mindful Minutes">Mindful Minutes </option>
@@ -43,13 +43,13 @@
 
       <div class="form-group">
         <label for="start">Start date:</label>
-        <input type="date" id="startId" name="startDate">
+        <input type="date" id="startId" name="startDate" required>
         </span>
       </div>
 
       <div class="form-group">
         <label for="start">End date:</label>
-        <input type="date" id="endId" name="endDate">
+        <input type="date" id="endId" name="endDate" required>
         </span>
       </div>
 
@@ -89,9 +89,6 @@
 
 
 <script>
-  function editedChallenge(){
-    alert("Challenge Edited");
-  }
   $(document).ready(function () {
     $("#metrics").select2({
       placeholder: "<%= result[0].challengeType %> ", //placeholder
