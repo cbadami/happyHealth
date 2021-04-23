@@ -7,22 +7,25 @@ exports.getUserLogin = (req, res) => {
 		if (err) {
 			console.log(err, '=====> error occured');
 		} else {
-			console.log('=======> INSIDE USER LOGIN');
+			console.log(JSON.stringify(req.session),'=======> INSIDE USER LOGIN');
 
 			let success_msg = req.session.success_msg;
+			
 			if (!success_msg) {
+				req.session.success_msg = null;
 				res.render('userViews/userLogin', {
 					layout: 'layouts/mainLayout',
 					title: 'User Login',
 				});
-				req.session.success_msg = null;
 				return;
 			} else {
+				req.session.success_msg = null;
 				res.render('userViews/userLogin', {
 					layout: 'layouts/mainLayout',
 					title: 'User Login',
+					success_msg
 				});
-				req.session.success_msg = null;
+				
 				return;
 			}
 		}

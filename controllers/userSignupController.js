@@ -115,7 +115,7 @@ exports.postSignup = (req, res) => {
 					}
 				} else {
 					console.log('******User registered Sucessfully********');
-					success_msg = 'Register sucessful';
+					success_msg = 'Register sucessful!';
 					req.session.success_msg = success_msg;
 					res.redirect('/');
 				}
