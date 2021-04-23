@@ -221,13 +221,15 @@ exports.postChallenge = (req, res) => {
 					sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
 					const msg = {
 						to: userMailIds,
-						cc: adminMailIds,
+						bcc: adminMailIds,
 						from: 'fitnestgdp@outlook.com',
 						subject: `Well Hub New Challenge Invitation ${name}`,
 						text: `You've got a new inivtaion to ${name} below is the link to login to the applicaiton`,
 						html: `<h3>Hello from Well Hub!</h3> <br>  <p> You got an inivtaion to ${name} below is the link to login to the app</p> <br> <a href="https://cb-test-health-app-dev-test.azurewebsites.net/">Well hub Login </a> `,
 					};
-					sgMail.sendMultiple(msg);
+					sgMail.sendMultiple(msg).then(success => {
+						console.log(success, "==> sent")
+					}).catch(notsent => {notsent, "==> not sent"});
 				}
 			});
 
