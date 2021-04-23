@@ -32,6 +32,12 @@ app.use(cookieParser());
 app.use('/static', express.static(__dirname + '/public'));
 // Setting template engine
 app.use(expressLayouts);
+
+
+
+// console.log(app.locals,"========> username from res.locals")
+
+
 app.set('view options', {
 	layout: false,
 });
@@ -83,6 +89,12 @@ app.use('/', require('./routes/auth.js'));
 app.use('/', isAuth, require('./routes/user.js'));
 app.use('/', isAdmin, require('./routes/admin.js'));
 
+app.use(function(req, res, next) {
+	// console.log(req.session.toJSON(), "========> req.session")
+	// res.locals.user = req.session.userName;
+	next();
+});
+
 // app.get('/', userHomeController.resetUserMetrics)
 
 
@@ -94,10 +106,10 @@ app.use('/', isAdmin, require('./routes/admin.js'));
 //   });
 // });
 
-const userHomeController = require('./controllers/user/userHomeController')
+const cronJob = require('./controllers/cronJob')
 
 
-userHomeController.resetUserMetrics();
+cronJob.resetUserMetrics();
 
 const PORT = process.env.PORT || 3000;
 

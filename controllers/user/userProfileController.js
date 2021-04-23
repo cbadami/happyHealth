@@ -1,7 +1,18 @@
-const db = require('../../database');
+// const db = require('../../database');
 const pooldb = require('../../pooldb');
+const moment = require('moment');
+
+let currentDate = '';
+
+function getDate() {
+	currentDate = moment().tz('America/Chicago').format('L');
+	// let upcomingDate  = moment().tz("America/Chicago").add(1,'days').format('L');
+	console.log(currentDate, '============> currentDate');
+	return currentDate;
+}
 
 exports.getUserInfo = (req, res) => {
+	getDate();
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
@@ -16,13 +27,26 @@ exports.getUserInfo = (req, res) => {
 				if (err) {
 					throw err;
 				} else {
-					console.log(result);
-					res.render('userViews/userInfo', {
-						layout: 'layouts/userLayout',
-						title: 'User Profile',
-						result,
+					console.log(result[0]);
+					console.log(userId, currentDate, "----------before usermetrics query")
+					let userGoals = `SELECT * FROM happyhealth.usermetricstbl where userId = ${userId} and date='${currentDate}'`;
+					conn.query(userGoals, function (err, result2) {
+						if (err) {
+							console.log(err, '========> Errrrrr');
+						} else {
+							console.log(result2, '========> resssssssssss');
+
+							let goal = result2[0];
+							res.render('userViews/userInfo', {
+								layout: 'layouts/userLayout',
+								title: 'User Profile',
+								result,
+								goal
+							});
+							console.log('****user Info executed successfully****');
+						}
 					});
-					console.log('****user Info executed successfully****');
+
 				}
 			});
 			conn.release();
@@ -119,7 +143,7 @@ exports.postUserProfile = (req, res) => {
 			} = req.body;
 			let fullName = firstName + ' ' + lastName;
 			console.log(
-				fullName,
+				firstName + lastName,
 				gender,
 				dateOfBirth,
 				age,
@@ -135,36 +159,6 @@ exports.postUserProfile = (req, res) => {
 			const [year, month, date] = dateOfBirth.split('-');
 			dateOfBirth = month + '/' + date + '/' + year;
 			let errors = [];
-			if (
-				!fullName ||
-				!gender ||
-				!dateOfBirth ||
-				!age ||
-				!email ||
-				!currentWeight ||
-				!desiredWeight ||
-				!height ||
-				!country ||
-				!state
-			) {
-				errors.push('Please enter all fields');
-				res.render('userViews/userProfile', {
-					layout: 'layouts/userLayout',
-					title: 'User Profile',
-					fullName,
-					email,
-					fullName,
-					gender,
-					dateOfBirth,
-					age,
-					currentWeight,
-					desiredWeight,
-					height,
-					country,
-					state,
-					errors,
-				});
-			}
 			const profileQuery = `UPDATE happyhealth.usertbl
 			SET email = '${email}', fullName = '${fullName}',gender='${gender}',dateOfBirth='${dateOfBirth}',age='${age}',
 			currentWeight='${currentWeight}',desiredWeight='${desiredWeight}',height='${height}',country='${country}',state='${state}'

@@ -68,7 +68,9 @@
                     <%= obj[i].userId %>
                 </td>
                 <td>
-                    <a href="/getUserTotalMetrics/<%= obj[i].userId%>"><%= obj[i].UserName %></a>
+                    <a href="/getUserTotalMetrics/<%= obj[i].userId%>">
+                        <%= obj[i].UserName %>
+                    </a>
                 </td>
                 <td>
                     <%= obj[i].fullName %>
@@ -121,7 +123,8 @@
 
 
     <form action="/CSVManagement" method="get">
-        <button id="csvDaily" type="submit" onclick= "getCSVDaily()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get CSV For Today</button>
+        <button id="csvDaily" type="submit" onclick="getCSVDaily()" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Get
+            CSV For Today</button>
     </form>
     
 </div>

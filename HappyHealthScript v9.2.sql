@@ -14,7 +14,7 @@ CREATE TABLE userTbl (
   password varchar(100) DEFAULT NULL,
   admin varchar(3) DEFAULT NULL,
   email varchar(25) DEFAULT NULL UNIQUE,
-  fullName varchar(25) DEFAULT '',
+  fullName varchar(35) DEFAULT '',
   gender varchar(12) DEFAULT NULL,
   dateOfBirth varchar(12) DEFAULT NULL,
   age int DEFAULT 0,
@@ -32,15 +32,15 @@ CREATE TABLE userTbl (
 
 INSERT INTO userTbl (userName,password,admin,email,fullName,gender,dateOfBirth,age,currentWeight,desiredWeight,
 height,country,state) VALUES 
-('James234','Bond12345','No','james234@gmail.com','James Bond','Male','10/04/1993',29,136,134,66,'United States','Missouri'),
-('William','$2a$12$26RTgB.XNe39rWRIasRx0u0mPzvZP82jZK4cUBkDOFk1kkahJyVvK','Yes','William123@gmail.com','William Shakespeare','Male','11/24/1994',26,112,110,68,'India','Telangana'),
-('John234','John234','No','John234@gmail.com','John Daniel','Male','9/4/1995',31,125,128,61,'Canada','Alberta'),
-('Robert123','Robert123','No','Robert123@gmail.com','Robert Cart','Male','10/04/1996',27,134,138,66,'United States','Arizona'),
-('Michael','Micky','No','Micky@gmail.com','Michael Jackson','Male','01/12/1997',25,102,108,67,'India','Andhra Pradesh'),
-('David','Davidbhai','No','Davidbhai@gmail.com','David Warner','Male','12/6/1991',34,142,131,62,'Canada','Manitoba'),
-('Richard','Richard456','No','Richard456@gmail.com','Richard Hoot','Male','11/04/1999',28,123,129,63,'United States','Kansas'),
-('Joseph','Joseph123','No','Joseph123@gmail.com','Joseph Thompson','Male','08/23/1995',29,101,93,67,'India','Maharastra'),
-('Thomas','Thomasedison','No','Thomasedison@gmail.com','Thomas Edison','Male','10/12/1986',25,131,121,64,'Canada','Nova Scotia');
+('James234','$2a$12$iteBZhHvib.4uqRqyV.IIeZekIrfiJeMGbmnNySiawSslkmQm4qAy','No','james234@gmail.com','James Bond','Male','10/4/1993','29','136','134','66','United States','Missouri'),
+('William','$2a$12$26RTgB.XNe39rWRIasRx0u0mPzvZP82jZK4cUBkDOFk1kkahJyVvK','Yes','William123@gmail.com','William Shakespeare','Male','11/24/1994','26','112','110','68','India','Telangana'),
+('John234','$2a$12$39nHpdZX3zir79zX42yVAOAVwRTfh6P04cF/qzVsxO6F5hDelc/AW','No','John234@gmail.com','John Daniel','Male','9/4/1995','31','125','128','61','Canada','Alberta'),
+('srkvodnala','$2a$12$HVvjnfIjMu0TOyV8Q23Vb.8yGebqjtfU5/vBvCykdfBSzH5L7WYxi','No','srkrao547@gmail.com','','NULL','NULL','0','0','0','0','NULL','NULL'),
+('cbtest','$2a$12$W64ML.XtQo4whuM4PpfGzu6EIpruYmHN.uj.cAekNifrXnjZeE.LO','No','cbtest@cbtest.com','','NULL','NULL','0','0','0','0','NULL','NULL'),
+('navyadev','$2a$12$oRdo2Y65AV7aw7LMrv7q1.awJ3q9RRXR4gXox2j79GMgMOko40ZIe','No','S538339@nwmissouri.edu','Navya Devineni','Female','4/26/1997','23','0','0','0','United States','Missouri');
+-- Bond12345
+-- William123
+-- John2345
 
 
 --
@@ -152,22 +152,22 @@ DROP TABLE IF EXISTS userMetricsTbl;
 CREATE TABLE userMetricsTbl (
   userId int NOT NULL,
   date varchar(12) NOT NULL,
-  stepCount int DEFAULT 0,
-  stepGoal int DEFAULT 0,
-  sleepHours int DEFAULT 0,
-  sleepGoal int DEFAULT 0,
-  meTime int DEFAULT 0,
-  meTimeGoal int DEFAULT 0,
-  water int DEFAULT 0,
-  waterGoal int DEFAULT 0,
-  fruits int DEFAULT 0,
-  fruitGoal int DEFAULT 0,
-  veggies int DEFAULT 0,
-  veggieGoal int DEFAULT 0,
-  physicalActivityMinutes int DEFAULT 0,
-  physicalActivityGoal int DEFAULT 0,
+  stepCount Float DEFAULT 0,
+  stepGoal Float DEFAULT 0,
+  sleepHours Float DEFAULT 0,
+  sleepGoal Float DEFAULT 0,
+  meTime Float DEFAULT 0,
+  meTimeGoal Float DEFAULT 0,
+  water Float DEFAULT 0,
+  waterGoal Float DEFAULT 0,
+  fruits Float DEFAULT 0,
+  fruitGoal Float DEFAULT 0,
+  veggies Float DEFAULT 0,
+  veggieGoal Float DEFAULT 0,
+  physicalActivityMinutes Float DEFAULT 0,
+  physicalActivityGoal Float DEFAULT 0,
   PRIMARY KEY (userId,date),
-  FOREIGN KEY (userId) REFERENCES userTbl(userId)
+  FOREIGN KEY (userId) REFERENCES userTbl(userId) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -175,19 +175,30 @@ CREATE TABLE userMetricsTbl (
 --
 
 INSERT INTO userMetricsTbl VALUES 
-(1,'12/20/2020',1000,2000,5,10,6,10,6,8,6,8,5,10,20,20),
-(2,'12/20/2020',1200,2000,7,10,8,10,5,8,6,8,9,10,10,20),
-(3,'12/20/2020',1100,2000,4,10,4,10,6,8,8,8,10,10,30,30),
-(4,'12/20/2020',1500,2000,10,10,6,10,9,8,10,8,3,10,25,25),
-(5,'12/20/2020',1900,2000,12,10,5,10,8,12,8,12,5,10,30,30),
-(6,'12/20/2020',1500,2000,6,10,9,10,5,8,5,8,10,10,40,40),
-(7,'12/20/2020',1700,2000,8,10,5,10,8,8,9,8,9,10,15,15),
-(8,'12/20/2020',600,2000,9,10,7,10,4,8,7,8,11,10,15,15),
-(9,'12/20/2020',1500,2000,5,10,8,10,7,8,5,8,6,10,15,15),
-(1,'03/05/2021',1000,2000,5,10,6,10,6,8,6,8,5,10,15,15),
-(2,'03/05/2021',1200,2000,7,10,8,10,5,8,6,8,9,10,15,15),
-(3,'03/05/2021',1100,2000,4,10,4,10,6,8,8,8,10,10,15,15),
-(4,'03/05/2021',1500,2000,10,10,6,10,9,8,10,8,3,10,15,15);
+(1,'04/05/2021',1000,2000,5,10,6,10,6,8,6,8,5,10,20,20),
+(1,'04/06/2021',1000,2000,5,10,6,10,6,8,6,8,5,10,20,20),
+(1,'04/07/2021',1000,2000,5,10,6,10,6,8,6,8,5,10,20,20),
+(1,'04/08/2021',1001,2001,5,10,6,10,6,8,6,8,5,10,20,20),
+(2,'04/05/2021',1200,2000,7,10,8,10,5,8,6,8,9,10,10,20),
+(2,'04/06/2021',1200,2000,7,10,8,10,5,8,6,8,9,10,10,20),
+(2,'04/07/2021',1200,2000,7,10,8,10,5,8,6,8,9,10,10,20),
+(2,'04/08/2021',1201,2001,7,10,8,10,5,8,6,8,9,10,10,20),
+(3,'04/05/2021',1100,2000,4,10,4,10,6,8,8,8,10,10,30,30),
+(3,'04/06/2021',1100,2000,4,10,4,10,6,8,8,8,10,10,30,30),
+(3,'04/07/2021',1100,2000,4,10,4,10,6,8,8,8,10,10,30,30),
+(3,'04/08/2021',1101,2001,4,10,4,10,6,8,8,8,10,10,30,30),
+(4,'04/05/2021',1500,2000,10,10,6,10,9,8,10,8,3,10,25,25),
+(4,'04/06/2021',1500,2000,10,10,6,10,9,8,10,8,3,10,25,25),
+(4,'04/07/2021',1500,2000,10,10,6,10,9,8,10,8,3,10,25,25),
+(4,'04/08/2021',1501,2001,10,10,6,10,9,8,10,8,3,10,25,25),
+(5,'04/05/2021',1900,2000,12,10,5,10,8,12,8,12,5,10,30,30),
+(5,'04/06/2021',1900,2000,12,10,5,10,8,12,8,12,5,10,30,30),
+(5,'04/07/2021',1900,2000,12,10,5,10,8,12,8,12,5,10,30,30),
+(5,'04/08/2021',1901,2001,12,10,5,10,8,12,8,12,5,10,30,30),
+(6,'04/05/2021',1500,2000,6,10,9,10,5,8,5,8,10,10,40,40),
+(6,'04/06/2021',1500,2000,6,10,9,10,5,8,5,8,10,10,40,40),
+(6,'04/07/2021',1500,2000,6,10,9,10,5,8,5,8,10,10,40,40),
+(6,'04/08/2021',1501,2001,6,10,9,10,5,8,5,8,10,10,40,40);
 
 --
 -- ********************************** Trigger befor insert into usertbl *************************
@@ -205,25 +216,27 @@ CREATE TRIGGER before_user_update
 --
 
 
-drop table if exists announcementstbl;
+DROP TABLE IF EXISTS announcementstbl;
 CREATE TABLE announcementsTbl (
   messageId int AUTO_INCREMENT,
   title varchar(100) NOT NULL,
   message varchar(500) DEFAULT NULL,
   userId varchar(500) DEFAULT NULL,
+seenUsers varchar(500) DEFAULT NULL,
+
   msgDate varchar(20) DEFAULT NULL ,
   archive boolean default null,
   PRIMARY KEY (messageId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ALTER TABLE announcementsTbl AUTO_INCREMENT=3001;
 
-INSERT INTO announcementsTbl(title, message, userId, msgDate, archive) VALUES
-('Title test','This is message','1,2,3,4,5,6,7,8', '03/12/2021',0),
-('Everyone Title','This message for everyone','1,2,3,4,5,6,7,8','03/22/2021',0),
-('Hello!','Hello! Welcome to our health based application!','1,2,3,4,5,6,7,8','02/01/2021',1),
-('Log Daily Goals','Hey! Kindly update your daily goals for better usage!','1,2,3,4,5,6,7,8','01/21/2021',0),
-('Drink Water','It is always good to drink more water during hotter days!','1,2,3,4,5,6,7,8','03/21/2021',0),
-('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.','1,2,3,4,5,6,7,8','03/03/2021',1)
+INSERT INTO announcementsTbl(title, message, userId, seenUsers, msgDate, archive) VALUES
+('Title test','This is message','1,2,3,4','5,6,7,8', '03/12/2021',0),
+('Everyone Title','This message for everyone','1,2,3,4,5,6,7,8','','03/22/2021',0),
+('Hello!','Hello! Welcome to our health based application!','4,5,6,7,8','1,2,3','02/01/2021',1),
+('Log Daily Goals','Hey! Kindly update your daily goals for better usage!','1,2,7,8','3,4,5,6','01/21/2021',0),
+('Drink Water','It is always good to drink more water during hotter days!','1,4,5,6,7,8','2,3','03/21/2021',0),
+('Alpha Release','We are doing our Alpha release in a bit, looking forward to constructive reviews to the development team.','1,2,3,4,5,6,7,8','','03/03/2021',1)
 ;
 
 --
@@ -252,7 +265,7 @@ ALTER TABLE challengeTbl AUTO_INCREMENT=2001;
 
 INSERT INTO
  challengeTbl ( `challengeName`, `challengeDescription`, `challengeType`, `startDate`, `endDate`) VALUES 
-('Run 2 Miles', 'User needs to run 2 miles a day throughout the week', 'Step Count', '09/21/2020','09/28/2020'),
+('Walk 2000 Steps', 'User needs to walk 2000 steps a day throughout the week', 'Step Count', '09/21/2020','09/28/2020'),
 ('Only veg', 'User needs to eat only veg', 'Veggies', '01/11/2020','02/11/2020'),
 ('2 Gallons water', 'User needs to drink 2 gallons of water everyday','Water','01/10/2020', '02/10/2020');
 
@@ -272,14 +285,14 @@ CREATE TABLE happyhealth.challengemembertbl (
   `activeUser` boolean DEFAULT NULL,
   `archive` boolean default NULL,
   PRIMARY KEY (`invitationId`),
-  FOREIGN KEY (`userId`) REFERENCES `usertbl` (`userId`),
+  FOREIGN KEY (`userId`) REFERENCES `usertbl` (`userId`) ON DELETE CASCADE,
   FOREIGN KEY (`challengeId`) REFERENCES `challengetbl` (`challengeId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 ALTER TABLE happyhealth.challengemembertbl AUTO_INCREMENT=100;
 
 
-INSERT INTO happyhealth.challengeMemberTbl ( challengeId, userId, joinedDate, leftDate, activeUser , archive ) VALUES
+/* INSERT INTO happyhealth.challengeMemberTbl ( challengeId, userId, joinedDate, leftDate, activeUser , archive ) VALUES
 (2001, 1,'11/24/2020', '', 1, 0 ),
 (2001, 2,'', '' , 0, 0),
 (2002, 2,'10/24/2018', '', 1 , 0),
@@ -288,6 +301,6 @@ INSERT INTO happyhealth.challengeMemberTbl ( challengeId, userId, joinedDate, le
 (2002, 3,'', '', 0, 0),
 (2002, 4,'11/24/2019','',1,0),
 (2002, 5,'','',0, 0),
-(2002, 6,'11/24/2020', '11/24/2020', 0, 1 );
+(2002, 6,'11/24/2020', '11/24/2020', 0, 1 ); */
 
 

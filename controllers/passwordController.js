@@ -22,44 +22,51 @@ exports.postForgotPassword = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			conn.release();
-		}
-	});
-
-	const { email } = req.body;
-	let errors = [];
-	if (!email) {
-		errors.push({ msg: 'Please enter email id' });
-	}
-	if (errors.length > 0) {
-		res.render('forgotPassword', {
-			layout: 'layouts/mainLayout',
-			title: 'Forgot Password',
-			errors,
-			email,
-		});
-	} else {
-		const queryString = `SELECT * FROM happyhealth.usertbl WHERE email = '${email}' Limit 1 `;
-		conn.query(queryString, function (err, result) {
-			console.log(`forgot password ${JSON.stringify(result)}`);
-			if (result.length > 0) {
-				console.log(`under forgot password page ${JSON.stringify(result[0].email)}`);
-				const userId = result[0]['userId'];
-				const userEmail = result[0]['email'];
-				req.session.userId = userId;
-				req.session.userEmail = userEmail;
-				console.log(`--------- forgot page executed sucessfully`);
-				res.redirect('validationPage');
-			} else {
-				errors.push({ msg: 'Email id not registered' });
+			const {
+				email
+			} = req.body;
+			let errors = [];
+			if (!email) {
+				errors.push({
+					msg: 'Please enter email id'
+				});
+			}
+			if (errors.length > 0) {
 				res.render('forgotPassword', {
 					layout: 'layouts/mainLayout',
 					title: 'Forgot Password',
 					errors,
 					email,
 				});
+			} else {
+				const queryString = `SELECT * FROM happyhealth.usertbl WHERE email = '${email}' Limit 1 `;
+				conn.query(queryString, function (err, result) {
+					console.log(`forgot password ${JSON.stringify(result)}`);
+					if (result.length > 0) {
+						console.log(`under forgot password page ${JSON.stringify(result[0].email)}`);
+						const userId = result[0]['userId'];
+						const userEmail = result[0]['email'];
+						req.session.userId = userId;
+						req.session.userEmail = userEmail;
+						console.log(`--------- forgot page executed sucessfully`);
+						res.redirect('validationPage');
+					} else {
+						errors.push({
+							msg: 'Email id not registered'
+						});
+						res.render('forgotPassword', {
+							layout: 'layouts/mainLayout',
+							title: 'Forgot Password',
+							errors,
+							email,
+						});
+					}
+				});
 			}
-		});
-	}
+		}
+	});
+
+	
 };
 
 exports.getResetPassword = (req, res) => {
@@ -68,38 +75,51 @@ exports.getResetPassword = (req, res) => {
 			console.log(err1, '=====> error occured');
 		} else {
 			conn.release();
+			const userId = req.session.userId;
+			console.log(`under get reset password ${userId}`);
+			res.render('resetPassword', {
+				layout: 'layouts/mainLayout',
+				title: 'Reset Password'
+			});
+		
 		}
 	});
 
-	const userId = req.session.userId;
-	console.log(`under get reset password ${userId}`);
-	res.render('resetPassword', { layout: 'layouts/mainLayout', title: 'Reset Password' });
 };
 
-exports.postResetPassword = async (req, res) => {
-	pooldb.getConnection((err1, conn) => {
+exports.postResetPassword =  (req, res) => {
+	pooldb.getConnection( async (err1, conn) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
 			conn.release();
-		}
-	});
 
-	// console.log(req.body, "================> POSTTING RESET PASSWORD")
+				// console.log(req.body, "================> POSTTING RESET PASSWORD")
 	const userId = req.session.userId;
-	const { password, password2 } = req.body;
+	const {
+		password,
+		password2
+	} = req.body;
 	let errors = [];
 	let success_msg;
 	if (!password || !password2) {
-		errors.push({ msg: 'Please enter all fields' });
+		errors.push({
+			msg: 'Please enter all fields'
+		});
 	} else {
 		if (password.length > 15) {
-			errors.push({ msg: 'Password must be below 15 characters' });
+			errors.push({
+				msg: 'Password must be below 15 characters'
+			});
 		} else if (password.length < 8) {
-			errors.push({ msg: 'Password must be at least 8 characters' });
+			errors.push({
+				msg: 'Password must be at least 8 characters'
+			});
 		}
 		if (password != password2) {
-			errors.push({ msg: 'Passwords not matched' });
+			errors.push({
+				msg: 'Passwords not matched'
+			});
 		}
 	}
 
@@ -128,11 +148,17 @@ exports.postResetPassword = async (req, res) => {
 			res.redirect('/');
 		});
 	}
+
+		}
+	});
+
 };
 
 const nodemailer = require('nodemailer');
 const sgMail = require('@sendgrid/mail');
-const { response } = require('express');
+const {
+	response
+} = require('express');
 
 // const { google } = require('googleapis');
 
@@ -179,13 +205,16 @@ const { response } = require('express');
 // }
 
 async function sendEmail(userEmail, generateCode) {
-	console.log(API_KEY, '=============> API KEY ..........');
-	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+	console.log("********************** SEND GRID **********************************")
+	
+	sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
+
+	console.log(process.env, "+++++++++++++> sendgrid api")
 
 	const message = {
 		to: userEmail,
-		from: 'fitnestgdp@gmail.com',
-		subject: 'Happy Health reset account',
+		from: 'fitnestgdp@outlook.com', // create mail address with wellhub app name
+		subject: 'WellHub reset account',
 		text: `OTP to reset your account: ${generateCode} `,
 		html: `<p> Your OTP to reset your account:  ${generateCode}</p>`,
 	};
@@ -212,7 +241,10 @@ exports.getValidation = (req, res) => {
 			generateCode = Math.floor((Math.random() + 1) * 100000);
 			console.log(`Generated code: ${generateCode}`);
 			sendEmail(userEmail, generateCode);
-			res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
+			res.render('validationPage', {
+				layout: 'layouts/mainLayout',
+				title: 'Validation User'
+			});
 			conn.release();
 		}
 	});
@@ -237,12 +269,19 @@ exports.postValidation = (req, res) => {
 				generateCode = Math.floor((Math.random() + 1) * 100000);
 				console.log(`Generated code: ${generateCode}`);
 				sendEmail(userEmail, generateCode);
-				res.render('validationPage', { layout: 'layouts/mainLayout', title: 'Validation User' });
+				res.render('validationPage', {
+					layout: 'layouts/mainLayout',
+					title: 'Validation User'
+				});
 			} else {
 				if (!code) {
-					errors.push({ msg: 'Enter verification code' });
+					errors.push({
+						msg: 'Enter verification code'
+					});
 				} else if (code != generateCode) {
-					errors.push({ msg: 'Invalid verification code' });
+					errors.push({
+						msg: 'Invalid verification code'
+					});
 				}
 				if (errors.length > 0) {
 					res.render('validationPage', {

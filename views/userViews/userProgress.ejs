@@ -1,171 +1,303 @@
 <div class="app-main__inner">
-    <div class="container">
-        <div class="main-body">
-            <div class="row gutters-sm">
+	<div class="container">
+		<div class="main-body">
+			<div class="row gutters-sm">
+				<div class="form-group ml-5">
+					<!-- <h3>Select a range:</h3> -->
+					<form action="/progress" method="GET">
+						<label for="start" class="font-weight-bold">From:</label>
+						<input
+							type="date"
+							onchange="myFunction()"
+							class="m-2 date"
+							id="datepicker1"
+							name="datepicker1"
+							placeholder="mm/dd/yyyy"
+							required
+						/>
 
-                <div class="form-group ml-5">
-                    <h3>Select a range:</h3>
-                    <form action="/progress" method="GET">
-                        <label for="start" class="font-weight-bold">From:</label>
-                        <input type="date" class="m-2 date" id="datepicker1" name="datepicker1"
-                            placeholder="mm/dd/yyyy">
+						<label for="start" class="font-weight-bold">To:</label>
+						<input
+							type="date"
+							class="m-2 date"
+							onchange="myFunction()"
+							id="datepicker2"
+							name="datepicker2"
+							placeholder="mm/dd/yyyy"
+							required
+						/>
 
-                        <label for="start" class="font-weight-bold">To:</label>
-                        <input type="date" class="m-2 date" id="datepicker2" name="datepicker2"
-                            placeholder="mm/dd/yyyy">
+						<button type="submit" id="PopoverCustomT-1" class="btn btn-info d-inline mb-1">
+							Get Progress
+						</button>
+					</form>
+				</div>
 
-                        <button type="submit" id="PopoverCustomT-1" class="btn btn-info d-inline mb-1">Get Progress</button>
-                    </form>
-                </div>
+				<div class="col-md-12">
+					<div class="card mb-3" style="height: auto">
+						<div class="card-body">
+							<h3>Today Progress</h3>
+							<hr />
+							<div class="row">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Step Count</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].stepCount%></div>
 
-                <div class="col-md-12">
-                    <div class="card mb-3" style="height:auto;">
-                        <div class="card-body">
-                            <h3>Today Progress</h3>
-                            <hr>
-                            <div class=" row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Step Count</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].stepCount%>
-                                </div>
+								<div class="col-sm-3">
+									<h6 class="mb-0">Step Goal</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].stepGoal%></div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Sleep Count</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].sleepHours%></div>
 
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Step Goal</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].stepGoal%>
-                                </div>
+								<div class="col-sm-3">
+									<h6 class="mb-0">Sleep Goal</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].sleepGoal%></div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Water consumed</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].water%></div>
 
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Sleep Count</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].sleepHours%>
-                                </div>
+								<div class="col-sm-3">
+									<h6 class="mb-0">Water Goal</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].waterGoal%></div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Mindful minutes</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].meTime%></div>
 
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Sleep Goal</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].sleepGoal%>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Water consumed</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].water%>
-                                </div>
+								<div class="col-sm-3">
+									<h6 class="mb-0">Mindful minutes Goal</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].meTimeGoal%></div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Fruits count:</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].fruits%></div>
 
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Water Goal</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].waterGoal%>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Mindful minutes</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].meTime%>
-                                </div>
+								<div class="col-sm-3">
+									<h6 class="mb-0">Fruits Goal:</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].fruitGoal%></div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Vegetables count:</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].veggies%></div>
 
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Mindful minutes Goal</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].meTimeGoal%>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Fruits count:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].fruits%>
-                                </div>
+								<div class="col-sm-3">
+									<h6 class="mb-0">Vegetables Goal:</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].veggieGoal%></div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Physical Activity Minutes:</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].physicalActivityMinutes%></div>
 
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Fruits Goal:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].fruitGoal%>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Vegetables count:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].veggies%>
-                                </div>
+								<div class="col-sm-3">
+									<h6 class="mb-0">Physical Activity Goal:</h6>
+								</div>
+								<div class="col-sm-3 text-secondary"><%= result[0].physicalActivityGoal%></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Vegetables Goal:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].veggieGoal%>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Physical Activity Minutes:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].physicalActivityMinutes%>
-                                </div>
+				<div class="col-md-12">
+					<div class="card mb-3" style="height: auto">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="step"> Step Count </label>
+								<div class="progress">
+									<div
+										class="progress-bar step"
+										id="step"
+										role="progressbar"
+										style="width: <%= stats.step%>%"
+										aria-valuenow="60"
+										aria-valuemin="0"
+										aria-valuemax="100"
+									>
+										<%= stats.step %> %
+									</div>
+								</div>
+							</div>
 
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Physical Activity Goal:</h6>
-                                </div>
-                                <div class="col-sm-3 text-secondary">
-                                    <%= result[0].physicalActivityGoal%>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+							<div class="form-group">
+								<label for="step"> Sleep Count </label>
+								<div class="progress">
+									<div
+										class="progress-bar step"
+										id="sleep"
+										role="progressbar"
+										style="width: <%= stats.sleep%>%"
+										aria-valuenow="60"
+										aria-valuemin="0"
+										aria-valuemax="100"
+									>
+										<%= stats.sleep %> %
+									</div>
+								</div>
+							</div>
 
-                </div>
-            </div>
-        </div>
-    </div>
+							<div class="form-group">
+								<label for="step"> Mindful Minutes </label>
+								<div class="progress">
+									<div
+										class="progress-bar step"
+										id="sleep"
+										role="progressbar"
+										style="width: <%= stats.meTime%>%"
+										aria-valuenow="60"
+										aria-valuemin="0"
+										aria-valuemax="100"
+									>
+										<%= stats.meTime %> %
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="step"> Water </label>
+								<div class="progress">
+									<div
+										class="progress-bar step"
+										id="sleep"
+										role="progressbar"
+										style="width: <%= stats.water%>%"
+										aria-valuenow="60"
+										aria-valuemin="0"
+										aria-valuemax="100"
+									>
+										<%= stats.water %> %
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="step"> Fruits </label>
+								<div class="progress">
+									<div
+										class="progress-bar step"
+										id="sleep"
+										role="progressbar"
+										style="width: <%= stats.fruits%>%"
+										aria-valuenow="60"
+										aria-valuemin="0"
+										aria-valuemax="100"
+									>
+										<%= stats.fruits %> %
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="step"> Veggies </label>
+								<div class="progress">
+									<div
+										class="progress-bar step"
+										id="sleep"
+										role="progressbar"
+										style="width: <%= stats.veggies%>%"
+										aria-valuenow="60"
+										aria-valuemin="0"
+										aria-valuemax="100"
+									>
+										<%= stats.veggies %> %
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="step"> Physical Activity </label>
+								<div class="progress">
+									<div
+										class="progress-bar step"
+										id="sleep"
+										role="progressbar"
+										style="width: <%= stats.physical%>%"
+										aria-valuenow="60"
+										aria-valuemin="0"
+										aria-valuemax="100"
+									>
+										<%= stats.physical %> %
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <style>
-    h6 {
-        font-weight: 500;
-    }
+	h6 {
+		font-weight: 500;
+	}
 
-    .date {
-        padding: .5rem .75rem;
-        font-size: 1rem;
-        line-height: 1.25;
-        color: #464a4c;
-        background-color: #fff;
-        background-image: none;
-        -webkit-background-clip: padding-box;
-        background-clip: padding-box;
-        border: 1px solid rgba(0, 0, 0, .15);
-        border-radius: .25rem;
-        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-    }
-    #PopoverCustomT-1{
-        font-size: 1rem;
-    }
+	.date {
+		padding: 0.5rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.25;
+		color: #464a4c;
+		background-color: #fff;
+		background-image: none;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		border-radius: 0.25rem;
+		-webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+		transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+		-o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+	}
+	#PopoverCustomT-1 {
+		font-size: 1rem;
+	}
 </style>
+
+<script>
+	function myFunction() {
+		var todayDate = new Date().toISOString().slice(0, 10);
+
+		var date1 = document.getElementById('datepicker1').value;
+		var dateOne = new Date(date1).toISOString().slice(0, 10);
+		var date2 = document.getElementById('datepicker2').value;
+
+		console.log(dateOne);
+
+		console.log(new Date(date1).getTime(), '==========> date1');
+		console.log(new Date(todayDate).getTime(), '==========> today date');
+
+		if (
+			new Date(date1).getTime() > new Date(todayDate).getTime() ||
+			new Date(date2).getTime() > new Date(todayDate).getTime()
+		) {
+			console.log('Select a date smaller than today');
+		}
+	}
+</script>

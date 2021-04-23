@@ -1,56 +1,79 @@
-# happyHealth
+# WellHub
 
 ##### This repo is created to implement progressive web app
 
 #### Hosted App link:
+
 - Dev link: https://cb-test-health-app-dev-test.azurewebsites.net/
 - Production link: https://cb-test-health-app.azurewebsites.net/
 
 ## Setup app in local machine
+
 ### Prerequisites
-Following must be downloaded, installed, and configured according to the product directions:  
-1. Node.js (comes with npm)  
-1. Git version control system  
-1. VS Code light-weight, cross-platform code editor or other IDE  
+
+Following must be downloaded, installed, and configured according to the product directions:
+
+1. Node.js (comes with npm)
+1. Git version control system
+1. VS Code light-weight, cross-platform code editor or other IDE
 1. MySQL workbench
+
 ### Clone the repo to local machine
+
 ```
 git clone https://github.com/cbadami/happyHealth.git
 ```
+
 ### Local database Setup
+
 #### Database creation:
+
 - Open latest version of happyhealthScript.sql in Mysql workbench and run script (It creates database and tables in workbench).
+
 #### .env setup:
+
 - Create .env file in root directory
 - Copy data from .env-example to .env file
 - Enter your Local SQL username and password
+
 ### Install dependencies
-``` 
+
+```
 npm install
 ```
+
 ```
 npm install --dev
 ```
+
 ### To start the app
+
 ```
 npm start
 ```
+
 ### To run app in development
+
 ```
 npm run dev
 ```
 
 ### Instructions to merge branch:
+
 ```
 git checkout prod
 git merge master
 git push origin prod
 git checkout master
 ```
+
 ## Useful Resources:
+
 - https://expressjs.com/2x/guide.html
 - https://www.voidcanvas.com/make-console-log-output-colorful-and-stylish-in-browser-node/
+
 ### GitHub branch commands:
+
 - https://gist.github.com/nanusdad/7e516743e5e709073f7e
 - https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
 - https://stackoverflow.com/questions/26751970/how-to-push-changes-from-one-branch-to-another
@@ -155,32 +178,34 @@ This article is a technical onboarding document that can help you write your own
 - [Mobile UI](https://xd.adobe.com/view/64cbfb4c-2c05-40eb-5c30-bae44fa3b9d4-12fa/screen/fab92490-6d21-4829-9a52-9728726feba3)
 
 - [History UI Screens](https://app.moqups.com/aMyjQCLOHf/view/page/a477474a4)
-[For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
+  [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design_UI_and_Themes)
 - [Mindful Minutes UI Screens Web and Mobile](https://app.moqups.com/aMyjQCLOHf/view/page/a185eb5d5)
 - [Mindful Minutes (Cards Options)UI Screens Web and Mobile](https://app.moqups.com/LvkwMlzgnf/view/page/ad64222d5)
+- [Chat Service](https://app.moqups.com/LvkwMlzgnf/view/page/a8ad3d5f7)
 - Show your mind some love
 
 - Mental Fitness
-	- Radical Self-Compassion(Tara Brach)
-	- The Confidence Series()
-	- Gratitude(Tamara Levitt)
-	- Creative Living Beyond Fear(Elizabeth Gilbert)
-	- Breaking Bad Habits(Dr. Judson Brewer)
-	- Discovering Happiness(Shawn Achor)
+
+  - Radical Self-Compassion(Tara Brach)
+  - The Confidence Series()
+  - Gratitude(Tamara Levitt)
+  - Creative Living Beyond Fear(Elizabeth Gilbert)
+  - Breaking Bad Habits(Dr. Judson Brewer)
+  - Discovering Happiness(Shawn Achor)
 
 - Sleep Stories
 
-- Music 
-	- Lake os Stars
-	- Skellig
-	- Alignment
-	- I am Home
+- Music
+  - Lake os Stars
+  - Skellig
+  - Alignment
+  - I am Home
 - Quick & Easy
-	- Calming Anxiety
-	- How are you feeling
-	- Mindful Walking
-	- Calm Light
-	- Deep Concentration
+  - Calming Anxiety
+  - How are you feeling
+  - Mindful Walking
+  - Calm Light
+  - Deep Concentration
 - Love and Relationships
 
 ### Design Data

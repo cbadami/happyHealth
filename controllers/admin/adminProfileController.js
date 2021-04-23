@@ -25,7 +25,7 @@ exports.getUserInfo = (req, res) => {
 			});
 			conn.release();
 		}
-	}); 
+	});
 };
 
 

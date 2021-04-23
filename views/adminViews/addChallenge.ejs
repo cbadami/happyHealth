@@ -33,7 +33,7 @@
 
 			<div class="form-group input-group ">
 				<label for="challengeType" > Challenge Type </label>
-				<select id="metrics" class="mul-select col-md-6" multiple="true" name="challengeType" >
+				<select id="metrics" class="mul-select col-md-6" multiple="true" name="challengeType" required>
 					<option value="Step Count">Step Count</option>
 					<option value="Sleep Hours">Sleep Hours</option>
 					<option value="Mindful Minutes">Mindful Minutes </option>
@@ -50,7 +50,7 @@
 
 			<div class="form-group input-group ">
 				<label for="inviteUsers" > Invite Users </label>
-				<select id="users" name="userId" class="mul-select col-md-6" multiple="true">
+				<select id="users" name="userId" class="mul-select col-md-6" multiple="true" required>
 					<% users.map(user=> { %>
 						<option id="UI" value="<%= user.userId %>">  <%= user.userName %>
 						</option>
@@ -81,12 +81,12 @@
 
             <div class="form-group">
                 <label for="start">Start date:</label>
-                <input type="date" id="start" name="startDate" placeholder="2020-07-20">
+                <input type="date" id="start" name="startDate" required>
             </div>
 
             <div class="form-group">
                 <label for="start">End date:</label>
-                <input type="date" id="end" name="endDate" placeholder="2020-07-22">
+                <input type="date" id="end" name="endDate" required>
             </div>
 
 			<div class="form-group" hidden>

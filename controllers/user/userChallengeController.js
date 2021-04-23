@@ -2,15 +2,6 @@
 const pooldb = require('../../pooldb');
 const moment = require('moment');
 
-// pooldb.getConnection((err1, conn) => {
-// 	if (err1) {
-// 		console.log(err1, '=====> error occured');
-// 	} else {
-
-// conn.release()
-// 	}
-// });
-
 exports.getUserChallenges = (req, res) => {
 	pooldb.getConnection((err1, conn) => {
 		if (err1) {
@@ -50,14 +41,29 @@ exports.getUserChallenges = (req, res) => {
 						}
 					}
 
-					console.log(present, '=========> present ');
-					console.log(previous, '============> previous');
+					const leftChalls = `select * from challengetbl where challengeId in (SELECT challengeId FROM happyhealth.challengemembertbl where userId =${userId} and leftDate != '' );`
+					conn.query(leftChalls, (err, leftChallenges) => {
+						if(err){
+							console.log(err, "===> error while getting left challenges")
+						}else{
+							console.log(leftChallenges, "====> these are left challenges")
+
+
+							console.log(present, '=========> present ');
+						console.log(previous, '============> previous');
 
 					res.render('userViews/userChallenges', {
 						layout: 'layouts/userLayout',
-						result: present,
+					 	present,
+						 previous,
+						 leftChallenges, 
 						title: 'User Management',
 					});
+						}
+					})
+
+
+					
 				}
 			});
 
@@ -160,18 +166,7 @@ exports.getActiveChallenges = (req, res) => {
 				layout: 'layouts/userLayout',
 				title: 'Active Challenges',
 			});
-			// const allGroupsQuery = `SELECT * FROM happyhealth.groupTbl`;
-
-			// conn.query(allGroupsQuery, function (err, result) {
-			//     if (err) {
-			//         throw err;
-			//     } else {
-			//         console.log(result, "------------db group result");
-			//         res.render('userViews/activeChallenges', {layout: 'layouts/userLayout', title: 'Active Challenges', result });
-			//         console.log("***************getGroup executed successfully******************");
-			//     }
-			// });
-
+			
 			conn.release();
 		}
 	});

@@ -14,14 +14,14 @@
                       <label for="firstName">First Name</label>
                       <input type="text" value="<%= typeof firstName != 'undefined' ? firstName : '' %>"
                         class="form-control" id="first name" aria-describedby="userNameHelp" placeholder="First Name"
-                        name="firstName" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" >
+                        name="firstName" required>
                     </div>
                     <div class="form-group">
                       <label for="userName">Gender</label>
                       <div class="form-check">
                         <%- include ('../partials/messages') %>
                         <input class="form-check-input" type="radio" name="gender" id="Gender-0" value="Male"
-                          <%=gender=='Male' ? 'checked' : '' %>>
+                          <%=gender=='Male' ? 'checked' : '' %> required>
                         <label class="form-check-label" for="Gender-0">Male</label>
                       </div>
                       <div class="form-check-inline">
@@ -57,8 +57,8 @@
                     <div class="form-group">
                       <%- include ('../partials/messages') %>
                       <label for="state">State</label>
-                      <input class="form-control" type="text" id="state" name="state" placeholder="State" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" 
-                        value="<%= typeof state != 'undefined' ? state : '' %>">
+                      <input class="form-control" type="text" id="state" name="state" placeholder="State" 
+                        value="<%= typeof state != 'undefined' ? state : '' %>" required>
                       <!-- <label>Note: <small>This data is optional and will be used internally by admins only.</small></label> -->
                     </div>
 
@@ -68,13 +68,13 @@
                       <label for="lastName">Last Name</label>
                       <input type="text" value="<%= typeof lastName != 'undefined' ? lastName : '' %>"
                         class="form-control" id="last name" aria-describedby="userNameHelp" placeholder="Last Name"
-                        name="lastName" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" >
+                        name="lastName" required >
                     </div>
                     <div class="form-group">
                       <label for="username">Date of Birth</label>
                       <%- include ('../partials/messages') %>
                       <input type="date" name="dateOfBirth" id="dateText" placeholder="mm/dd/yyyy"
-                        onchange="calAge()" />
+                        onchange="calAge()" required/>
                     </div>
                     <div class="form-group">
                       <label for="age">Age</label>
@@ -90,7 +90,7 @@
                     <div class="form-group">
                       <label>Country</label>
                       <%- include ('../partials/messages') %>
-                      <select id="country" class="form-control" name="country">
+                      <select id="country" class="form-control" name="country" required>
                         <!-- <option value="<%= country %>"><%= country %></option> -->
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Aland Islands">Aland Islands</option>
@@ -361,7 +361,7 @@
           </div>
           <div class="col-md-12">
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-check-circle" onclick="updated()"></i>
+              <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-check-circle" ></i>
                 Update</button>
 
             </div>
@@ -371,11 +371,6 @@
     </form>
   </div>
 </div>
-<script>
-  function updated(){
-    alert("The profile has been updated");
-  }
-</script>
 <style>
   .card {
     position: relative;
@@ -407,17 +402,30 @@
   $('#country').val(country)
   // let age="Age";
 
-  function calAge() {
-    console.log(Date.parse(document.getElementById("dateText").value))
-    let dob = Date.parse(document.getElementById("dateText").value)
+//   function XcalAge() {
+//     console.log(Date.parse(document.getElementById("dateText").value))
+//     let dob = Date.parse(document.getElementById("dateText").value)
+// 	console.log(dob,"==> dob")
 
-    let diff = Date.now() - dob;
-    var ageDate = new Date(diff); // milliseconds from epoch
-    age = Math.abs(ageDate.getUTCFullYear() - 1970)
-    console.log(age);
-    document.getElementById("age").value = age
-    return age
-  }
+//     let diff = Date.now() - dob;
+//     var ageDate = new Date(diff); // milliseconds from epoch
+//     age = Math.abs(ageDate.getUTCFullYear() - 1970)
+//     console.log(age);
+//     document.getElementById("age").value = age
+//     return age
+//   }
+
+  function calAge() {		
+		let dob = document.getElementById("dateText").value		
+		var today = new Date();
+		var birthDate = new Date(dob)
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		document.getElementById("age").value = age
+	}
 
   function message() {
     alert("User Details Updated")
@@ -426,34 +434,4 @@
 
   let countries = '';
 
-  // async getCountriesAndStates(){
-  //   await axios.get('https://www.universal-tutorial.com/api/getaccesstoken', {
-  //     headers: {
-  //       "Accept": "application/json",
-  //       "api-token": "251EU2VmhHl6dG7ARglhFpWFubQ9jWq41rsSnx_F0ZnN0TdQW-TdUqeva2DaFLRLGK0",
-  //       "user-email": "happyhealthgdp@gmail.com"
-  //     }
-  //   })
-  //     .then((res) => {
-  //       // console.log(res,"-------response");
-  //       let auth_token = res.data.auth_token;
-  //       console.log(auth_token, "-----------auth_token");
-  //       axios.get('https://www.universal-tutorial.com/api/countries/', {
-  //         headers: {
-  //           "Authorization": `Bearer ${auth_token}`,
-  //           "Accept": "application/json"
-  //         }
-  //       })
-  //         .then((res) => {
-  //           console.log(res.data, "------response data");
-  //         })
-  //         .catch((err) => {
-  //           console.log(err, "--------getting countries error");
-  //         })
-  //     })
-  //     .catch((err) => {
-  //       console.log(err, "--------error");
-  //     })
-
-  // }
 </script>

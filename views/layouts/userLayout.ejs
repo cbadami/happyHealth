@@ -21,10 +21,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="static/dist/simple-notify.min.css" />
+    <script src="static/dist/simple-notify.min.js"></script>
     <style>
         .card {
             /* width: 150px; */
-           
+
             border-radius: 20px;
             box-shadow: 5px 5px 5px;
             margin: 10px 15px;
@@ -132,10 +134,20 @@
                 </div>
             </div>
             <div class="app-header__menu">
-                <ul class="header-menu nav">
+                <ul class="header-menu nav align-items-center">
                     <li class="nav-item" title="Profile">
-                        <a href="javascript: window.location.href='/userProfile'" class="nav-link">
+                        <p>
+                            <%= userName %>
+                        </p>
+                    </li>
+                    <li class="nav-item" title="Profile">
+                        <a href="javascript: window.location.href='/userInfo'" class="nav-link">
                             <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" title="notifications">
+                        <a href="javascript: window.location.href='/notifications'" class="nav-link">
+                            <i class="fa fa-bell fa-2x" aria-hidden="true"><span class="badge bg-secondary"><%= annCount %></span></i>
                         </a>
                     </li>
                     <li class="btn-group nav-item">
@@ -152,13 +164,25 @@
                     </form> -->
                 </div>
                 <div class="app-header-center h2">
-                    FitNest
+                    WellHub
                 </div>
                 <div class="app-header-right">
-                    <ul class="header-menu nav">
+                    <ul class="header-menu nav align-items-center">
+                        <li class="nav-item" title="Profile">
+                            <p>
+                                <%= userName %>
+                            </p>
+                        </li>
                         <li class="nav-item">
                             <a href="javascript: window.location.href='/userInfo'" class="nav-link">
                                 <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript: window.location.href='/notifications'" class="nav-link">
+                                <i class="fa fa-bell fa-2x" aria-hidden="true"><span class="badge bg-secondary">
+                                        <%= annCount %>
+                                    </span></i>
                             </a>
                         </li>
                         <li class="btn-group nav-item">
@@ -222,8 +246,8 @@
                                 <a href="javascript: window.location.href='userProgress'" class="mm-active">
                                     <i class="fa fa-line-chart" aria-hidden="true"></i>
                                     <span>Progress</span>
-                                </a> 
-                            </li> 
+                                </a>
+                            </li>
                             <!-- <li>
                                 <a href="javascript: window.location.href='/availableGroups'" class="mm-active">
                                     <i class="fa fa-users" aria-hidden="true"></i>
@@ -261,7 +285,7 @@
         <div class="app-wrapper-footer">
             <div class="app-footer">
                 <div class="copyright text-center bg-white py-4">
-                    <i class="fa fa-copyright"></i> Copyright 2020, made by FitNest
+                    <i class="fa fa-copyright"></i> Copyright 2020, made by WellHub
                 </div>
 
             </div>
@@ -280,18 +304,28 @@
 
             $(".tabs-list li").click(function () {
                 var tabid = $(this).find("a").attr("href");
-                $(".tabs-list li,.tabs div.tab").removeClass("active");   // removing active class from tab
+                $(".tabs-list li,.tabs div.tab").removeClass(
+                    "active"); // removing active class from tab
 
-                $(".tab").hide();   // hiding open tab
-                $(tabid).show();    // show tab
+                $(".tab").hide(); // hiding open tab
+                $(tabid).show(); // show tab
                 $(this).addClass("active"); //  adding active class to clicked tab
 
             });
+            
+            
+            let notifyValue = $(".badge").html();
+            //console.log("<%= annCount %> : "+ notifyValue);
+            if (notifyValue != 0) {
+                $(".badge").removeClass("bg-secondary");
+                $(".badge").addClass("bg-danger");
+            } else {
+                $(".badge").removeClass("bg-danger");
+                $(".badge").addClass("bg-secondary");
+            }
+
 
         });
-
-
-
     </script>
 
     <script type="text/javascript" src="static/assets/scripts/main.js"></script>

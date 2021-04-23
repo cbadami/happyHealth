@@ -22,7 +22,12 @@ exports.postSignup = (req, res) => {
 		if (err1) {
 			console.log(err1, '=====> error occured');
 		} else {
-			const { username, email, password, password2 } = req.body;
+			const {
+				username,
+				email,
+				password,
+				password2
+			} = req.body;
 			let errors = [];
 			let success_msg;
 			if (!username || !email || !password || !password2) {
@@ -30,23 +35,14 @@ exports.postSignup = (req, res) => {
 					msg: 'Please enter all fields',
 				});
 			} else {
-				if (username.length > 12) {
+				if (username.length > 12 || username.length < 6) {
 					errors.push({
-						msg: 'Username must be below 12 characters',
+						msg: 'Username must be between 6 and 12 characters',
 					});
-				} else if (username.length < 6) {
+				} 
+				if (password.length > 15 || password.length < 8) {
 					errors.push({
-						msg: 'Username must be atleast 6 characters',
-					});
-				}
-
-				if (password.length > 15) {
-					errors.push({
-						msg: 'Password must be below 15 characters',
-					});
-				} else if (password.length < 8) {
-					errors.push({
-						msg: 'Password must be at least 8 characters',
+						msg: 'Password must be between 8 and 15 characters',
 					});
 				}
 
@@ -119,7 +115,7 @@ exports.postSignup = (req, res) => {
 					}
 				} else {
 					console.log('******User registered Sucessfully********');
-					success_msg = 'Register sucessful';
+					success_msg = 'Register sucessful!';
 					req.session.success_msg = success_msg;
 					res.redirect('/');
 				}

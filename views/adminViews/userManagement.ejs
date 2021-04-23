@@ -34,14 +34,14 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Username</th>
                     <th scope="col">Full Name</th>
                     <th scope="col">Email</th>
                     <!-- <th scope="col">Password</th> -->
                     <!-- <th scope="col">Challenges</th> -->
                     <!-- <th scope="col">Profile</th> -->
-                    <th scope="col" style="text-align:center">Actions</th>
+                    <!-- <th scope="col" style="text-align:center">Actions</th> -->
 
                 </tr>
             </thead>
@@ -49,7 +49,7 @@
                 <% for (var i=0; i < result.length;i++) { %>
                     <tr>
                         <th scope="row">
-                            <%= i+1 %>
+                            <%= result[i].userId %>
                         </th>
                         <td><a href="/userInfo/<%= result[i].userId%>">
                                 <%= result[i].userName%>
@@ -71,7 +71,7 @@
                                 <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
                             </form>
                         </td> -->
-                        <td>
+                        <!-- <td> -->
                             <!-- <div class=row> -->
                             <!-- <div class=col-md-6>
                                     <form action="editUserInfo/<%= result[i].userId%>" method="get">
@@ -80,13 +80,13 @@
                                     </form>
                                 </div> -->
                             <!-- <div class=col-md-6> -->
-                            <form action="deleteUser/<%= result[i].userId%>" method="get">
+                            <!-- <form action="deleteUser/<%= result[i].userId%>" method="get">
                                 <button type="submit" id="PopoverCustomT-1"
                                     class="btn btn-sm btn-md btn-danger" onclick="deleteUser()">Delete</button>
-                            </form>
+                            </form> -->
                             <!-- </div>
                             </div> -->
-                        </td>
+                        <!-- </td> -->
                     </tr>
                     <% } %>
             </tbody>
