@@ -138,6 +138,8 @@ exports.dismissAnnouncement = (req, res) => {
 								console.log(rows[0].annCount, "=====================> resolved data........")
 								req.session.annCount = rows[0].annCount;
 								res.locals.annCount =req.session.annCount;
+								res.redirect('/notifications')
+
 							}).catch((err) => setImmediate(() => { throw err; })); 
 
 						}
@@ -145,7 +147,7 @@ exports.dismissAnnouncement = (req, res) => {
 					// res.redirect('notifications')
 				}
 			});
-			res.redirect('/notifications')
+			// res.redirect('/notifications')
 			conn.release();
 		}
 	});
