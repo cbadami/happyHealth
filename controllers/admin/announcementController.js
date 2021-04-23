@@ -257,18 +257,37 @@ exports.postAnnouncement = (req, res) => {
 							} else {
 								console.log(result, '========> posted annoncement');
 
-								sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
-								const msg = {
-									to: userMailIds,
-									bcc: adminMailIds,
-									from: 'fitnestgdp@outlook.com',
-									subject: `Well hub announcement`,
-									text: `You've got a new inivtaion to  below is the link to login to the applicaiton`,
-									html: `<h3>${title}</h2> <br>  <p> ${description}</p> <br> <a href="https://cb-test-health-app-dev-test.azurewebsites.net/">Well hub Login </a> `,
-								};
-								sgMail.sendMultiple(msg).then(success => {
-									console.log(success, "==> sent")
-								}).catch(notsent => {notsent, "==> not sent"});
+								let mailUsers = `SELECT userId, email,admin FROM happyhealth.usertbl having userId in (${usersList}) UNION  SELECT userId, email,admin FROM happyhealth.usertbl where admin = "yes";`;
+								conn.query(mailUsers, (err, result) => {
+									if (err) throw err;
+									else {
+										console.log(result, '====> retreived mail ids');
+					
+					
+										let userMailIds = [];
+										let adminMailIds = [];
+										result.map(res=>{
+											if(res.admin==="Yes") adminMailIds.push(res.email);
+											else userMailIds.push(res.email);
+										})
+					
+										console.log(userMailIds, "======> user mails");
+										console.log(adminMailIds, "======> admin mails");
+					
+										sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
+										const msg = {
+											to: userMailIds,
+											bcc: adminMailIds,
+											from: 'fitnestgdp@outlook.com',
+											subject: `Well hub announcement`,
+											text: `You've got a new inivtaion to  below is the link to login to the applicaiton`,
+											html: `<h3>${title}</h2> <br>  <p> ${description}</p> <br> <a href="https://cb-test-health-app-dev-test.azurewebsites.net/">Well hub Login </a> `,
+										};
+										sgMail.sendMultiple(msg).then(success => {
+											console.log(success, "==> sent")
+										}).catch(notsent => {notsent, "==> not sent"});
+									}
+								});		
 							}
 						});
 		
