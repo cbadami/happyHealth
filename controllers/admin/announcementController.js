@@ -389,3 +389,81 @@ exports.editAnnouncement = (req, res) => {
 	});
 };
 
+exports.updateAnnouncement = (req, res) => {
+
+	console.log("+++++++++++++++++++++++++++++++++++++++++++++++")
+	pooldb.getConnection((err1, conn) => {
+		if (err1) {
+			console.log(err1, '=====> error occured');
+		} else {
+			let aid = req.params.aid;
+			let userList = req.body.userId;
+			console.log(aid, userList, '===> Send invitations');
+
+			let annQueryy = `SELECT * FROM happyhealth.announcementstbl where messageId = ${aid};`;
+			conn.query(annQueryy, (err, annResult) => {
+				if (err) {
+					console.log(err, '==> error while retrieiving annouement');
+				} else {
+					console.log(annResult, '====> this is the annocunemnt');
+					let previousUsers = annResult[0].userId;
+					let title = annResult[0].title;
+					let message = annResult[0].message;
+
+					let addUserAnnQuery = `UPDATE happyhealth.announcementstbl SET userId = CONCAT(userId, ',${userList}') WHERE messageId = ${aid};`;
+					if (previousUsers.length === 0 || previousUsers.length === null) {
+						addUserAnnQuery = `UPDATE happyhealth.announcementstbl SET userId = CONCAT(userId, '${userList}') WHERE messageId = ${aid};`;
+					}
+
+					conn.query(addUserAnnQuery, (err, inviteUsersRes) => {
+						if (err) {
+							console.log(err, '===> updated announcements table..');
+						} else {
+							console.log(inviteUsersRes, '=====> added announcements ');
+							res.redirect(`/editAnnouncement/${aid}`);
+
+						}
+					});
+
+					let mailUsers = `SELECT userId, email,admin FROM happyhealth.usertbl having userId in (${userList}) UNION  SELECT userId, email,admin FROM happyhealth.usertbl where admin = "yes";`;
+					conn.query(mailUsers, (err, result) => {
+						if (err) throw err;
+						else {
+							console.log(result, '====> retreived mail ids');
+
+							let userMailIds = [];
+							let adminMailIds = [];
+							result.map((res) => {
+								if (res.admin === 'Yes') adminMailIds.push(res.email);
+								else userMailIds.push(res.email);
+							});
+
+							console.log(userMailIds, '======> user mails');
+							if(userMailIds.length === 0){
+								userMailIds = adminMailIds
+							}
+							console.log(adminMailIds, '======> admin mails');
+
+							sgMail.setApiKey(process.env.CUSTOMCONNSTR_SENDGRID_API_KEY);
+							const msg = {
+								to: userMailIds,
+								from: 'fitnestgdp@outlook.com',
+								subject: `Well hub announcement`,
+								text: `You've got a new inivtaion to  below is the link to login to the applicaiton`,
+								html: `<h3>${title}</h2> <br>  <p> ${message}</p> <br> <a href="https://cb-test-health-app-dev-test.azurewebsites.net/">Well hub Login </a> `,
+							};
+							sgMail
+								.sendMultiple(msg)
+								.then((success) => {
+									console.log(success, '==> sent');
+								})
+								.catch((notsent) => {
+									notsent, '==> not sent';
+								});
+						}
+					});
+				}
+			});
+		}
+	});
+};
