@@ -75,6 +75,9 @@ router.post('/adminAnnouncements',announcementController.postAdminAnnouncements)
 router.get('/adminNewAnnouncements',announcementController.getAdminNewAnnouncements)
 router.post('/postAnnouncement',announcementController.postAnnouncement)
 router.post('/deleteAnnouncement/:aid',announcementController.deleteAnnouncement)
+router.get('/editAnnouncement/:aid',announcementController.editAnnouncement )
+router.post('/editAnnouncement/:aid',announcementController.updateAnnouncement )
+
 
 // router.post('/adminNewAnnouncements',announcementController.postAdminNewAnnouncements)
 

@@ -1,0 +1,81 @@
+<div class="app-main__inner">
+	<div>
+		<h3>Title : <%= announcementResult[0].title %></h3>
+		<h3>Description: <%= announcementResult[0].message %></h3>
+	</div>
+
+	<form action="<%= announcementResult[0].messageId%>" method="POST">
+        <div>
+            <label for="addUser"><strong>Select User to Send an annoucement.</strong> </label>
+
+            <select name="userId" id="mySelect" onchange="refreshButtons()" class="form-control addUser "
+                multiple="true" required>
+                <% for (var i=0; i < notSentResult.length;i++) { %>
+                    <option id="notJoinedUSERS" value="<%= notSentResult[i].userId %>">
+                        <%= notSentResult[i].userName %>
+                    </option>
+                    <% } %>
+                        <% if(notSentResult.length===0){ %>
+                            <option disabled>
+                                Sent to all users
+                            </option>
+                            <% } %>
+            </select>
+            <% if(notSentResult.length===0){ %>
+                <input type="submit" value="Send" id="inviteBtn" class="btn btn-primary" disabled></input>
+                <% }else{ %>
+            <input type="submit" value="Send" id="inviteBtn" class="btn btn-primary"></input>
+            <% } %>
+        </div>
+
+    </form>
+
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>userId</th>
+				<th>Username</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for (var i=0; i < sentResult.length;i++) { %>
+			<tr>
+				<th scope="row"> <%= sentResult[i].userId %> </th>
+				<td><%= sentResult[i].userName %></td>
+			</tr>
+			<% } %>
+		</tbody>
+
+	</table>
+
+</div>
+
+<script>
+
+
+$('option').mousedown(function (e) {
+        e.preventDefault();
+        var originalScrollTop = $(this).parent().scrollTop();
+        console.log(originalScrollTop);
+        $(this).prop('selected', $(this).prop('selected') ? false : true);
+        var self = this;
+        $(this).parent().focus();
+        setTimeout(function () {
+            $(self).parent().scrollTop(originalScrollTop);
+        }, 0);
+
+        return false;
+    });
+
+</script>
+
+<style>
+	.addUser {
+		width: 250px;
+		display: inline-flex;
+	}
+
+	.btn {
+		display: inline-flex;
+	}
+</style>
