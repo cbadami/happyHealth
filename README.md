@@ -7,6 +7,12 @@
 - Dev link: https://cb-test-health-app-dev-test.azurewebsites.net/
 - Production link: https://cb-test-health-app.azurewebsites.net/
 - Video Demonstration Link: https://use.vg/qx4Zzc
+- Presentation Link: https://github.com/cbadami/happyHealth/blob/master/documentation/presentation.md
+
+*Download [MP4 Video File](https://github.com/cbadami/happyHealth/blob/master/documentation/GDP-final-demo.mp4)*
+
+*Download [PPT File](https://github.com/cbadami/happyHealth/blob/master/documentation/Well_Hub.pptx)*
+
 ## Setup app in local machine
 
 ### Prerequisites
@@ -80,7 +86,7 @@ git checkout master
 
 ## App Design Architecture:
 
-![](https://github.com/annie0sc/gdp_health_app/blob/master/design-architecture/App%20Design%20Architecture.PNG)
+![](https://github.com/cbadami/happyHealth/blob/master/documentation/Arch.JPG?raw=True)
 
 ## Tasks we did as part of Agile
 
@@ -216,7 +222,7 @@ Design data complies with the app requirements to facilitate secure data transac
 
 #### ER diagram:
 
-![image](https://github.com/annie0sc/gdp-happy-health/blob/master/Design%20Data/Updated/ER%20diagram/HAPPY_HEALTH_ERD.png)
+![image](https://github.com/cbadami/happyHealth/blob/master/documentation/er-diagram.png?raw=True)
 
 [For more updates](https://github.com/annie0sc/gdp-happy-health/tree/master/Design%20Data)
 
